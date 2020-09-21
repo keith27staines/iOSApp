@@ -25,6 +25,49 @@ public enum TrackEventType: String {
     case projectApplyBack
     case projectApplyPreview
     case projectApplySubmit
+    
+    case candidate_uc_onboarding_started
+    case candidate_uc_onboarding_cancelled
+    case candidate_uc_onboarding_converted
+    
+    case candidate_uc_register_user_started
+    case candidate_uc_register_user_cancelled
+    case candidate_uc_register_user_converted
+    
+    case candidate_uc_allow_location_user_started
+    case candidate_uc_allow_location_cancelled
+    case candidate_uc_allow_location_converted
+    
+    case candidate_uc_allow_notifications_user_started
+    case candidate_uc_allow_notifications_cancelled
+    case candidate_uc_allow_notifications_converted
+    
+    case candidate_uc_recommendation_deeplink_started
+    case candidate_uc_recommendation_deeplink_cancelled
+    case candidate_uc_recommendation_deeplink_converted
+    
+    case candidate_uc_offer_deeplink_started
+    case candidate_uc_offer_deeplink_cancelled
+    case candidate_uc_offer_deeplink_converted
+    
+    case candidate_uc_recommendation_pushNotification_started
+    case candidate_uc_recommendation_pushNotification_cancelled
+    case candidate_uc_recommendation_pushNotification_converted
+    
+    case candidate_uc_apply_started
+    case candidate_uc_apply_cancelled
+    case candidate_uc_apply_converted
+    
+    case candidate_uc_projectApply_started
+    case candidate_uc_projectAply_cancelled
+    case candidate_uc_projectApply_converted
+    
+    case candidate_uc_offer_started
+    case candidate_uc_offer_cancelled
+    case candidate_uc_offer_converted
+    case candidate_uc_offer_candidateWithdrew
+    
+    
 }
 
 public struct TrackingEvent {

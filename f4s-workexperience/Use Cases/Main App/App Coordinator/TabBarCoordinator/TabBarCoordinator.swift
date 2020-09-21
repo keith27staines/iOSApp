@@ -9,12 +9,13 @@ import WorkfinderRecommendationsList
 import WorkfinderCompanyDetailsUseCase
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
+    var parentCoordinator: Coordinating?
+    var appCoordinator: AppCoordinatorProtocol?
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let interestsRepository: F4SSelectedInterestsRepositoryProtocol
     
-    var parentCoordinator: Coordinating?
     let uuid: UUID = UUID()
     let navigationRouter: NavigationRoutingProtocol?
     weak var rootViewController: UIViewController!
@@ -25,11 +26,12 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     var drawerController: DrawerController?
     var shouldAskOperatingSystemToAllowLocation = false
     
-    required init(parent: Coordinating?,
+    required init(parent: AppCoordinatorProtocol?,
                   navigationRouter: NavigationRoutingProtocol,
                   inject: CoreInjectionProtocol,
                   companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
                   interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
+        self.appCoordinator = parent
         self.parentCoordinator = parent
         self.navigationRouter = navigationRouter
         self.injected = inject
@@ -238,6 +240,7 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         case applicationsCoordinator.navigationRouter.navigationController:
             log.track(TrackingEvent.makeTabTap(tab: .applications))
         case recommendationsCoordinator.navigationRouter.navigationController:
+            appCoordinator?.requestPushNotifications(from: viewController)
             log.track(TrackingEvent.makeTabTap(tab: .recommendations))
         default:
             fatalError("unknown coordinator")

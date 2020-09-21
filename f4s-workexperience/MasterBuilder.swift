@@ -12,7 +12,7 @@ import WorkfinderVersionCheck
 import UIKit
 
 class MasterBuilder: TabbarCoordinatorFactoryProtocol {
-    func makeTabBarCoordinator(parent: Coordinating,
+    func makeTabBarCoordinator(parent: AppCoordinatorProtocol,
                                router: NavigationRoutingProtocol,
                                inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol {
         return TabBarCoordinator(
@@ -24,14 +24,11 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
-    let registrar: RemoteNotificationsRegistrarProtocol
     let apnsEnvironment: String = Config.apnsEnv
     let environment: EnvironmentType = Config.environment
     var baseUrlString: String { return Config.workfinderApiBase }
     
-    init(registrar: RemoteNotificationsRegistrarProtocol,
-         launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        self.registrar = registrar
+    init(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
         self.launchOptions = launchOptions
         self.log = F4SLog()
         self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: Config.workfinderApiBase)
@@ -96,16 +93,16 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }()
     
     func buildAppCoordinator() -> AppCoordinatorProtocol {
-        return  AppCoordinator(registrar: registrar,
-                              navigationRouter: rootNavigationRouter,
-                              inject: injection,
-                              deviceRegistrar: log,
-                              companyCoordinatorFactory: companyCoordinatorFactory,
-                              hostsProvider: hostsProvider,
-                              localStore: localStore,
-                              onboardingCoordinatorFactory: onboardingCoordinatorFactory,
-                              tabBarCoordinatorFactory: self,
-                              window: self.window)
+        return  AppCoordinator(
+            navigationRouter: rootNavigationRouter,
+            inject: injection,
+            deviceRegistrar: nil,
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            hostsProvider: hostsProvider,
+            localStore: localStore,
+            onboardingCoordinatorFactory: onboardingCoordinatorFactory,
+            tabBarCoordinatorFactory: self,
+            window: self.window)
     }
     
     lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {

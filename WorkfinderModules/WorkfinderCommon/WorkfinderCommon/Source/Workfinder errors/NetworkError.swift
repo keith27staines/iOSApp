@@ -69,7 +69,7 @@ public enum WorkfinderErrorType {
     
     public var description: String {
         switch self {
-        case .error: return "An unexpected error has occurred. We are looking into it."
+        case .error(let nsError): return "An unexpected error has occurred. We are looking into it.\n\(nsError.localizedDescription)\(nsError.userInfo))"
         case .notImplementedYet: return "Not implemented"
         case .invalidUrl(let url): return "The url \(url) is invalid"
         case .deserialization(let error): return error.localizedDescription
@@ -138,34 +138,6 @@ public class WorkfinderError: Error {
             ]
         )
     }
-    
-    /*
-     NSURLErrorCannotFindHost = -1003,
-
-     NSURLErrorCannotConnectToHost = -1004,
-
-     NSURLErrorNetworkConnectionLost = -1005,
-
-     NSURLErrorDNSLookupFailed = -1006,
-
-     NSURLErrorHTTPTooManyRedirects = -1007,
-
-     NSURLErrorResourceUnavailable = -1008,
-
-     NSURLErrorNotConnectedToInternet = -1009,
-
-     NSURLErrorRedirectToNonExistentLocation = -1010,
-
-     NSURLErrorInternationalRoamingOff = -1018,
-
-     NSURLErrorCallIsActive = -1019,
-
-     NSURLErrorDataNotAllowed = -1020,
-
-     NSURLErrorSecureConnectionFailed = -1200,
-
-     NSURLErrorCannotLoadFromNetwork = -2000,
-     */
     
     public init(from nsError: NSError,
                 attempting: String? = nil,

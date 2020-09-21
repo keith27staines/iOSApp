@@ -96,13 +96,3 @@ extension TabBarViewController {
         reachability = nil
     }
 }
-
-// MARK: - Api Calls
-
-extension TabBarViewController: RatePlacementProtocol {
-    internal func dismissRateController() { }
-}
-
-protocol RatePlacementProtocol: class {
-    func dismissRateController()
-}

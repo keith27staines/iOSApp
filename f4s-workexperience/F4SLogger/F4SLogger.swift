@@ -68,17 +68,6 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     }
 }
 
-extension F4SLog : DeviceRegisteringProtocol  {
-    public func registerDevice(token: Data) {
-        // Mixpanel is currently the origin of push notifications
-        mixPanel.people.addPushDeviceToken(token)
-        
-        // deviceTokenString is needed for debugging/testing with push notification app,
-        // so it is a good idea to print it out here
-        print("Device token string = \(token.map { String(format: "%02x", $0) }.joined())")
-    }
-}
-
 extension F4SLog : F4SAnalytics {
     
     public func track(_ event: TrackingEvent) {
@@ -92,12 +81,6 @@ extension F4SLog : F4SAnalytics {
         if let vendorUuid = UIDevice.current.identifierForVendor?.uuidString {
             mixpanelProperties["device_id"] = vendorUuid
         }
-        mixPanel.track(event: event.name, properties: mixpanelProperties)
-        print()
-        print("###############################################################")
-        print("track \(event.name) with properties \(mixpanelProperties)")
-        print("###############################################################")
-        print()
     }
     
     public func screen(_ name: ScreenName) {

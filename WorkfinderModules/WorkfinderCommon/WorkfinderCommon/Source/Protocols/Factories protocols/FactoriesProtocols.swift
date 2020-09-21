@@ -2,7 +2,7 @@
 import Foundation
 
 public protocol TabbarCoordinatorFactoryProtocol {
-    func makeTabBarCoordinator(parent: Coordinating,
+    func makeTabBarCoordinator(parent: AppCoordinatorProtocol,
     router: NavigationRoutingProtocol,
     inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol
 }

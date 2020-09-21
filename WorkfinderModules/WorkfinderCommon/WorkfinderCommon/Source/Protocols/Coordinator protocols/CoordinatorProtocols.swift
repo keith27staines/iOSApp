@@ -19,10 +19,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func handleRemoteNotification(userInfo: [AnyHashable: Any])
     func handleDeepLinkUrl(url: URL) -> Bool
     func registerDevice(token: Data)
-}
-
-public protocol RemoteNotificationsRegistrarProtocol {
-    func registerForRemoteNotifications()
+    func requestPushNotifications(from viewController: UIViewController)
 }
 
 public protocol OnboardingCoordinatorDelegate : class {

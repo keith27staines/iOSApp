@@ -13,7 +13,6 @@
 		FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E5CFA224E1B5700615B4F /* LocalStore.swift */; };
 		FC1243E32344AEA30007BA95 /* ScreenNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1243E22344AEA30007BA95 /* ScreenNames.swift */; };
 		FC12B10322F3415300C33410 /* JsonDateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */; };
-		FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC14E44B2341E36B005D7541 /* MockUIApplication.swift */; };
 		FC18C5B824C18E9A006D017D /* ProjectJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18C5B724C18E99006D017D /* ProjectJson.swift */; };
 		FC18C5BA24C18EBB006D017D /* ProjectTypeJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18C5B924C18EBB006D017D /* ProjectTypeJson.swift */; };
 		FC18C5BC24C18ED1006D017D /* ProjectJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18C5BB24C18ED1006D017D /* ProjectJsonTests.swift */; };
@@ -134,7 +133,6 @@
 		FC1243E22344AEA30007BA95 /* ScreenNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNames.swift; sourceTree = "<group>"; };
 		FC12B10022F3415200C33410 /* JsonDateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtension.swift; sourceTree = "<group>"; };
 		FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDateFormatterExtensionTests.swift; sourceTree = "<group>"; };
-		FC14E44B2341E36B005D7541 /* MockUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
 		FC177FCC2306A4010068C2F7 /* F4SHoursTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SHoursTypeTests.swift; sourceTree = "<group>"; };
 		FC18C5B724C18E99006D017D /* ProjectJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectJson.swift; sourceTree = "<group>"; };
 		FC18C5B924C18EBB006D017D /* ProjectTypeJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypeJson.swift; sourceTree = "<group>"; };
@@ -549,7 +547,6 @@
 		FCFE450C2250BA4B00C38436 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				FC14E44B2341E36B005D7541 /* MockUIApplication.swift */,
 				FCFE450D2250BA6700C38436 /* MockLocalStore.swift */,
 				FC8F957B233BA6710027BE02 /* MockCoordinators.swift */,
 				FC8F9577233BA6710027BE02 /* MockNavigationRouter.swift */,
@@ -725,7 +722,6 @@
 				FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */,
 				FC426EFC232FA274004F8A3E /* Document upload protocols.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
-				FC14E44C2341E36B005D7541 /* MockUIApplication.swift in Sources */,
 				FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */,
 				FCCA4E2B2456DADD00DFA696 /* Candidate.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,

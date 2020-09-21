@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let localStore = LocalStore()
         LocalStoreMigrationsRunner().run(localStore: localStore)
         UIApplication.shared.applicationIconBadgeNumber = 0
-        masterBuilder = MasterBuilder(registrar: application, launchOptions: launchOptions)
+        masterBuilder = MasterBuilder(launchOptions: launchOptions)
         window = masterBuilder.window
         startApp()
         return true

@@ -9,13 +9,12 @@ import WorkfinderOnboardingUseCase
 import GoogleMaps
 import GooglePlaces
 
-extension UIApplication : RemoteNotificationsRegistrarProtocol {}
+extension UIApplication {}
 
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
     var window: UIWindow
     var injected: CoreInjectionProtocol
-    var registrar: RemoteNotificationsRegistrarProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
     var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol?
@@ -24,7 +23,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
-    let deviceRegistrar: DeviceRegisteringProtocol
+    let deviceRegistrar: DeviceRegisteringProtocol?
 
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: Candidate { return injected.userRepository.loadCandidate() }
@@ -33,10 +32,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol
     
-    public init(registrar: RemoteNotificationsRegistrarProtocol,
-                navigationRouter: NavigationRoutingProtocol,
+    public init(navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                deviceRegistrar: DeviceRegisteringProtocol,
+                deviceRegistrar: DeviceRegisteringProtocol?,
                 companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
                 hostsProvider: HostsProviderProtocol,
                 localStore: LocalStorageProtocol,
@@ -45,7 +43,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 window: UIWindow) {
         
         self.window = window
-        self.registrar = registrar
         self.injected = inject
         self.deepLinkDispatcher = DeepLinkDispatcher()
         self.companyCoordinatorFactory = companyCoordinatorFactory
@@ -68,7 +65,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             self.startOnboarding()
             if self.launchOptions?[.remoteNotification] != nil {
                 self.startTabBarCoordinator()
-                self.userNotificationService.authorize()
             }
         }
     }
@@ -90,13 +86,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         navigationRouter.dismiss(animated: false, completion: nil)
         removeChildCoordinator(onboardingCoordinator)
         startTabBarCoordinator()
-        userNotificationService.authorize()
     }
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.uuid = userUuid
         logStartupInformation(userId: userUuid)
-        registrar.registerForRemoteNotifications()
         databaseDownloadManager.start()
     }
     
@@ -114,6 +108,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     func showApplications() { tabBarCoordinator?.showApplications() }
     
     func showSearch() { tabBarCoordinator?.showSearch() }
+    
+    func requestPushNotifications(from viewController: UIViewController) {
+        userNotificationService.authorize(from: viewController)
+    }
     
     lazy var recommendationService: RecommendationsServiceProtocol = {
         let service = RecommendationsService(networkConfig: injected.networkConfig)
@@ -206,7 +204,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
 extension AppCoordinator : DeviceRegisteringProtocol {
     func registerDevice(token: Data) {
-        deviceRegistrar.registerDevice(token: token)
+        deviceRegistrar?.registerDevice(token: token)
     }
 }
 

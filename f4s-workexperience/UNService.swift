@@ -14,20 +14,67 @@ class UNService : NSObject {
     weak var appCoordinator: AppCoordinatorProtocol!
     let center = UNUserNotificationCenter.current()
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
+    var permissionHasBeenRequested = false
     
     init(appCoordinator: AppCoordinatorProtocol) {
         self.appCoordinator = appCoordinator
         super.init()
         center.delegate = self
     }
+    
+    func authorize(from viewController: UIViewController) {
+        center.getNotificationSettings(completionHandler: { (settings) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch settings.authorizationStatus {
+                case .notDetermined:
+                    guard self.permissionHasBeenRequested == false else { return }
+                    self.permissionHasBeenRequested = true
+                    self.suggestEnableRecommendations(from: viewController)
+                case .denied:
+                    guard self.permissionHasBeenRequested == false else { return }
+                    self.permissionHasBeenRequested = true
+                    self.directUserToSettings(from: viewController)
+                case .authorized, .provisional, .ephemeral:
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        })
+    }
+    
+    private func suggestEnableRecommendations(from viewController: UIViewController) {
+        let alertController = UIAlertController (title: "Would you like to receive notifications when you have new recommendations?", message: "We recommend positions matched to you", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let settingsAction = UIAlertAction(title: "Enable notifications", style: .default) { (_) -> Void in
+            
 
-    func authorize() {
-        center.requestAuthorization(options: [.alert,.badge, .sound]) { isAuthorized, _ in
-            guard isAuthorized else { return }
-            DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
+            self.center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] isAuthorized, _ in
+                guard let self = self, isAuthorized else { return }
+                DispatchQueue.main.async { UIApplication.shared.registerForRemoteNotifications() }
+                self.permissionHasBeenRequested = true
             }
         }
+        alertController.addAction(settingsAction)
+        viewController.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func directUserToSettings(from viewController: UIViewController) {
+        let alertController = UIAlertController (title: "You haven't enabled notifications", message: "Notifications will alert immediately you when we have a new recommendation matched to you. You can enable notifications for Workfinder in settings", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard
+                let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+                UIApplication.shared.canOpenURL(settingsUrl) else { return }
+                UIApplication.shared.open(settingsUrl) { (success) in }
+        }
+        alertController.addAction(settingsAction)
+        viewController.present(alertController, animated: true, completion: nil)
     }
     
     func updateTabBarBadgeNumbers() {

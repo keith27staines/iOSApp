@@ -4,6 +4,13 @@ public protocol DeviceRegisteringProtocol {
     func registerDevice(token: Data)
 }
 
+public extension DeviceRegisteringProtocol {
+    /// ueful for debugging/testing with push notification app
+    func tokenToString(token: Data) -> String {
+        return token.map { String(format: "%02x", $0) }.joined()
+    }
+}
+
 public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {
     func updateIdentity()
 }
