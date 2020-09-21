@@ -65,7 +65,7 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
 
     public func track(_ event: TrackingEvent) {
         let notNilProperties = event.additionalProperties ?? [:]
-        analyticsItems.append(AnalyticsItem(type: .track, name: event.name, properties: notNilProperties))
+        analyticsItems.append(AnalyticsItem(type: .track, name: event.type.name, properties: notNilProperties))
     }
     
     public func screen(_ name: ScreenName) {

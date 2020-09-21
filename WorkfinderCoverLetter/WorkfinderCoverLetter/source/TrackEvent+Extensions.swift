@@ -15,6 +15,15 @@ enum CoverLetterEventType {
         case .questionClosed: return "projectApplyBack"
         }
     }
+    
+    var trackEventType: TrackEventType {
+        switch self {
+        case .letterPreview: return .projectApplyPreview
+        case .letterEditor: return .projectApplyEdit
+        case .questionOpened(_): return .projectApplyNext
+        case .questionClosed(_): return .projectApplyBack
+        }
+    }
 }
 
 extension TrackingEvent {
@@ -28,6 +37,6 @@ extension TrackingEvent {
         default:
             break
         }
-        return TrackingEvent(name: type.name, additionalProperties: properties)
+        return TrackingEvent(type: type.trackEventType, additionalProperties: properties)
     }
 }
