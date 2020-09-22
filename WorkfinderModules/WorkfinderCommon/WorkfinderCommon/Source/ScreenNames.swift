@@ -1,3 +1,4 @@
+
 public typealias TrackEventProperty = [String: Any]
 
 public enum ScreenName: String {
@@ -55,13 +56,13 @@ public enum TrackEventType {
     case uc_recommendation_pushNotification_cancel
     case uc_recommendation_pushNotification_convert
     
-    case uc_apply_start
-    case uc_apply_cancel
-    case uc_apply_convert
+    case uc_apply_start(ApplicationSource)
+    case uc_apply_cancel(ApplicationSource)
+    case uc_apply_convert(ApplicationSource)
     
-    case uc_projectApply_start
-    case uc_projectAply_cancel
-    case uc_projectApply_convert
+    case uc_projectApply_start(ApplicationSource)
+    case uc_projectAply_cancel(ApplicationSource)
+    case uc_projectApply_convert(ApplicationSource)
     
     case uc_offer_start
     case uc_offer_cancel
