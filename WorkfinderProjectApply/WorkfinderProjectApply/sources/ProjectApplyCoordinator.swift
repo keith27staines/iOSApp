@@ -32,7 +32,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     var delegate: ProjectApplyCoordinatorDelegate?
     var projectType: String = ""
     var log: F4SAnalytics { injected.log }
-    
+    let applicationSource: ApplicationSource
     lazy public var errorHandler: ErrorHandlerProtocol = {
         ErrorHandler(
             navigationRouter: self.newNavigationRouter,
@@ -45,9 +45,11 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
         projectUuid: F4SUUID,
+        applicationSource: ApplicationSource,
         navigateToSearch: (() -> Void)?,
         navigateToApplications: (() -> Void)?) {
         self.delegate = parent
+        self.applicationSource = applicationSource
         self.navigateToSearch = navigateToSearch
         self.navigateToApplications = navigateToApplications
         self.projectUuid = projectUuid
@@ -112,6 +114,8 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         projectType = projectPresenter?.projectName ?? ""
         let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
         log.track(TrackingEvent(type: .projectApplyStart, additionalProperties: properties))
+        #warning("uncomment next line")
+        //log.track(TrackingEvent(type: .uc_projectApply_start(applicationSource)))
         startCoverLetterFlow()
     }
     

@@ -34,13 +34,14 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         
     weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
-    public func processProjectViewRequest(_ projectUuid: F4SUUID?) {
+    public func processProjectViewRequest(_ projectUuid: F4SUUID?, applicationSource: ApplicationSource) {
         guard let projectUuid = projectUuid else { return }
         let projectApplyCoordinator = ProjectApplyCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
             projectUuid: projectUuid,
+            applicationSource: applicationSource,
             navigateToSearch: navigateToSearch,
             navigateToApplications: navigateToApplications)
         addChildCoordinator(projectApplyCoordinator)

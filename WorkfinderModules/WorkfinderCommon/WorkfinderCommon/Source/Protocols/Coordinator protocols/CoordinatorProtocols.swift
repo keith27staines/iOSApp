@@ -11,11 +11,12 @@ import Foundation
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
-    func showRecommendation(uuid: F4SUUID?)
-    func showProject(uuid: F4SUUID?)
+    func showRecommendation(uuid: F4SUUID?, applicationSource: ApplicationSource)
+    func showProject(uuid: F4SUUID?, applicationSource: ApplicationSource)
     func showApplications()
     func showSearch()
     func updateBadges()
+    func handleDeeplink(info: DeeplinkDispatchInfo)
     func handleRemoteNotification(userInfo: [AnyHashable: Any])
     func handleDeepLinkUrl(url: URL) -> Bool
     func registerDevice(token: Data)
@@ -42,7 +43,7 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func showSearch()
     func navigateToRecommendations()
     func dispatchRecommendationToSearchTab(uuid: F4SUUID)
-    func dispatchProjectViewRequest(_ projectUuid: F4SUUID)
+    func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: ApplicationSource)
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)

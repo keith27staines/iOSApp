@@ -12,7 +12,7 @@ import GooglePlaces
 extension UIApplication {}
 
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
-
+    
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
@@ -23,8 +23,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
-    let deviceRegistrar: DeviceRegisteringProtocol?
-
+    var deviceRegistrar: DeviceRegisteringProtocol?
+    
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: Candidate { return injected.userRepository.loadCandidate() }
     var databaseDownloadManager: F4SCompanyDownloadManagerProtocol { return injected.companyDownloadFileManager }
@@ -51,7 +51,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.deviceRegistrar = deviceRegistrar
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
-
+        
         super.init(parent:nil, navigationRouter: navigationRouter)
         self.injected.appCoordinator = self
         userNotificationService = UNService(appCoordinator: self)
@@ -66,6 +66,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             if self.launchOptions?[.remoteNotification] != nil {
                 self.startTabBarCoordinator()
             }
+            UIApplication.shared.registerForRemoteNotifications()
         }
     }
     
@@ -118,21 +119,38 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         return service
     }()
     
-    func showProject(uuid: F4SUUID?) {
+    func handleDeeplink(info: DeeplinkDispatchInfo) {
+        let applicationSource = ApplicationSource(source: info.source)
+        switch info.objectType {
+        case .application:
+            break
+        case .recommendation:
+            switch info.action {
+            case .list:
+                showRecommendation(uuid: nil, applicationSource: applicationSource)
+            case .view(let uuid):
+                showRecommendation(uuid: uuid, applicationSource: applicationSource)
+            }
+        case .project:
+            break
+        }
+    }
+    
+    func showProject(uuid: F4SUUID?, applicationSource: ApplicationSource) {
         guard let uuid = uuid else { return }
         if let tabBarCoordinator = self.tabBarCoordinator {
-            tabBarCoordinator.dispatchProjectViewRequest(uuid)
+            tabBarCoordinator.dispatchProjectViewRequest(uuid, applicationSource: applicationSource)
             return
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-            self?.showProject(uuid: uuid)
+            self?.showProject(uuid: uuid, applicationSource: applicationSource)
         }
     }
-
-    func showRecommendation(uuid: F4SUUID?) {
+    
+    func showRecommendation(uuid: F4SUUID?, applicationSource: ApplicationSource) {
         guard let tabBarCoordinator = tabBarCoordinator else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-                self?.showRecommendation(uuid: uuid)
+                self?.showRecommendation(uuid: uuid, applicationSource: applicationSource)
             }
             return
         }
@@ -145,7 +163,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             switch result {
             case .success(let recommendation):
                 if let projectUuid = recommendation.project?.uuid {
-                    self.showProject(uuid: projectUuid)
+                    self.showProject(uuid: projectUuid, applicationSource: applicationSource)
                 } else {
                     tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
                 }
@@ -156,7 +174,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                     self.signIn() { loggedIn in
                         switch loggedIn {
                         case true:
-                            self.showRecommendation(uuid: uuid)
+                            self.showRecommendation(uuid: uuid, applicationSource: applicationSource)
                         case false:
                             return
                         }
@@ -164,7 +182,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 default:
                     guard workfinderError.retry else { return }
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                        self.showRecommendation(uuid: uuid)
+                        self.showRecommendation(uuid: uuid, applicationSource: applicationSource)
                     }
                 }
             }
@@ -204,7 +222,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
 extension AppCoordinator : DeviceRegisteringProtocol {
     func registerDevice(token: Data) {
-        deviceRegistrar?.registerDevice(token: token)
+        #warning("Delete return, uncomment following lines")
+        return
+//        deviceRegistrar = DeviceRegistrar(userRepository: injected.userRepository)
+//        deviceRegistrar?.registerDevice(token: token)
     }
 }
 
@@ -237,3 +258,5 @@ extension AppCoordinator {
         return true
     }
 }
+
+

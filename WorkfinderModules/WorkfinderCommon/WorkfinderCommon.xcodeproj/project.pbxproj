@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53C76059251B6F9A0072281E /* DeeplinkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C76058251B6F9A0072281E /* DeeplinkInfo.swift */; };
+		53C7605D251B704B0072281E /* DeeplinkInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */; };
 		53DFFDF22518BAF2006A975D /* ApplicationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFFDF12518BAF2006A975D /* ApplicationSource.swift */; };
 		FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B866233277080034A60E /* CoordinatorProtocols.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
@@ -125,6 +127,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53C76058251B6F9A0072281E /* DeeplinkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfo.swift; sourceTree = "<group>"; };
+		53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfoTests.swift; sourceTree = "<group>"; };
 		53DFFDF12518BAF2006A975D /* ApplicationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSource.swift; sourceTree = "<group>"; };
 		FC04B866233277080034A60E /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -395,6 +399,7 @@
 				FCA91E852234044C007ED308 /* Supporting files */,
 				FC69EBA82481371C00901A2B /* GlobalNotifications.swift */,
 				53DFFDF12518BAF2006A975D /* ApplicationSource.swift */,
+				53C76058251B6F9A0072281E /* DeeplinkInfo.swift */,
 			);
 			path = WorkfinderCommon;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FCEE3EF5249A645A0034C226 /* CandidateTests.swift */,
 				FC3C701C24ADF96E004869D0 /* AssociationJsonTests.swift */,
+				53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -702,6 +708,7 @@
 				FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */,
 				FC6A0B2924F7800400053DF7 /* RecommendationsListItem.swift in Sources */,
 				FC53D6DC2323BA4300A339ED /* F4SCompanyRepository.swift in Sources */,
+				53C76059251B6F9A0072281E /* DeeplinkInfo.swift in Sources */,
 				FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */,
 				FCDB073A2286F7870053347F /* UserRepository.swift in Sources */,
 				FC32FD432265E4C800740F0C /* WorkfinderContentType.swift in Sources */,
@@ -772,6 +779,7 @@
 				FC7FF7CC249A405900F9093B /* WorkfinderCommonStructsTests.swift in Sources */,
 				FC7FF7D0249A40F300F9093B /* WorkAvailabilityWindowTests.swift in Sources */,
 				FC7FF7CF249A409600F9093B /* F4SJsonValueTests.swift in Sources */,
+				53C7605D251B704B0072281E /* DeeplinkInfoTests.swift in Sources */,
 				FC7FF7BF249A3F3A00F9093B /* F4SDateHelperTests.swift in Sources */,
 				FC3C701D24ADF96E004869D0 /* AssociationJsonTests.swift in Sources */,
 				FC7FF7C2249A3F5900F9093B /* RequestVerbTests.swift in Sources */,

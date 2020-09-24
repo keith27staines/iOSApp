@@ -27,92 +27,93 @@ public enum TrackEventType {
     case projectApplyBack
     case projectApplyPreview
     case projectApplySubmit
-    
-    case uc_onboarding_start
-    case uc_onboarding_cancel
-    case uc_onboarding_convert
-    
-    case uc_register_user_start
-    case uc_register_user_cancel
-    case uc_register_user_convert
-    
-    case uc_allow_location_user_start
-    case uc_allow_location_cancel
-    case uc_allow_location_convert
-    
-    case uc_allow_notifications_user_start
-    case uc_allow_notifications_cancel
-    case uc_allow_notifications_convert
-    
-    case uc_recommendation_deeplink_start
-    case uc_recommendation_deeplink_cancel
-    case uc_recommendation_deeplink_convert
-    
-    case uc_offer_deeplink_start
-    case uc_offer_deeplink_cancel
-    case uc_offer_deeplink_convert
-    
-    case uc_recommendation_pushNotification_start
-    case uc_recommendation_pushNotification_cancel
-    case uc_recommendation_pushNotification_convert
-    
-    case uc_apply_start(ApplicationSource)
-    case uc_apply_cancel(ApplicationSource)
-    case uc_apply_convert(ApplicationSource)
-    
-    case uc_projectApply_start(ApplicationSource)
-    case uc_projectAply_cancel(ApplicationSource)
-    case uc_projectApply_convert(ApplicationSource)
-    
-    case uc_offer_start
-    case uc_offer_cancel
-    case uc_offer_convert
-    case uc_offer_withdraw
+    #warning("uncomment all case .uic_ lines")
+//    case uc_onboarding_start
+//    case uc_onboarding_cancel
+//    case uc_onboarding_convert
+//
+//    case uc_register_user_start
+//    case uc_register_user_cancel
+//    case uc_register_user_convert
+//
+//    case uc_allow_location_user_start
+//    case uc_allow_location_cancel
+//    case uc_allow_location_convert
+//
+//    case uc_allow_notifications_user_start
+//    case uc_allow_notifications_cancel
+//    case uc_allow_notifications_convert
+//
+//    case uc_recommendation_deeplink_start
+//    case uc_recommendation_deeplink_cancel
+//    case uc_recommendation_deeplink_convert
+//
+//    case uc_offer_deeplink_start
+//    case uc_offer_deeplink_cancel
+//    case uc_offer_deeplink_convert
+//
+//    case uc_recommendation_pushNotification_start
+//    case uc_recommendation_pushNotification_cancel
+//    case uc_recommendation_pushNotification_convert
+//
+//    case uc_apply_start(ApplicationSource)
+//    case uc_apply_cancel(ApplicationSource)
+//    case uc_apply_convert(ApplicationSource)
+//
+//    case uc_projectApply_start(ApplicationSource)
+//    case uc_projectAply_cancel(ApplicationSource)
+//    case uc_projectApply_convert(ApplicationSource)
+//
+//    case uc_offer_start
+//    case uc_offer_cancel
+//    case uc_offer_convert
+//    case uc_offer_withdraw
     
     var name: String {
-    
+        #warning("uncomment all case .uic_ lines")
         switch self {
     
-        case .uc_onboarding_start: return "candidate_uc_onboarding_start"
-        case .uc_onboarding_cancel: return  "candidate_uc_onboarding_cancel"
-        case .uc_onboarding_convert: return  "candidate_uc_onboarding_convert"
-            
-        case .uc_register_user_start: return  "candidate_uc_register_user_start"
-        case .uc_register_user_cancel: return  "candidate_uc_register_user_cancel"
-        case .uc_register_user_convert: return  "candidate_uc_register_user_convert"
-            
-        case .uc_allow_location_user_start: return  "candidate_uc_allow_location_user_start"
-        case .uc_allow_location_cancel: return  "candidate_uc_allow_location_cancel"
-        case .uc_allow_location_convert: return  "candidate_uc_allow_location_convert"
-            
-        case .uc_allow_notifications_user_start: return  "candidate_uc_allow_notifications_user_start"
-        case .uc_allow_notifications_cancel: return  "candidate_uc_allow_notifications_cancel"
-        case .uc_allow_notifications_convert: return  "candidate_uc_allow_notifications_convert"
-            
-        case .uc_recommendation_deeplink_start: return  "candidate_uc_recommendation_deeplink_start"
-        case .uc_recommendation_deeplink_cancel: return  "candidate_uc_recommendation_deeplink_cancel"
-        case .uc_recommendation_deeplink_convert: return  "candidate_uc_recommendation_deeplink_convert"
-            
-        case .uc_offer_deeplink_start: return  "candidate_uc_offer_deeplink_start"
-        case .uc_offer_deeplink_cancel: return  "candidate_uc_offer_deeplink_cancel"
-        case .uc_offer_deeplink_convert: return  "candidate_uc_offer_deeplink_convert"
-            
-        case .uc_recommendation_pushNotification_start: return  "candidate_uc_recommendation_pushNotification_start"
-        case .uc_recommendation_pushNotification_cancel: return  "candidate_uc_recommendation_pushNotification_cancel"
-        case .uc_recommendation_pushNotification_convert: return  "candidate_uc_recommendation_pushNotification_convert"
-            
-        case .uc_apply_start: return  "candidate_uc_apply_start"
-        case .uc_apply_cancel: return  "candidate_uc_apply_cancel"
-        case .uc_apply_convert: return  "candidate_uc_apply_convert"
-            
-        case .uc_projectApply_start: return  "candidate_uc_projectApply_start"
-        case .uc_projectAply_cancel: return  "candidate_uc_projectAply_cancel"
-        case .uc_projectApply_convert: return  "candidate_uc_projectApply_convert"
-            
-        case .uc_offer_start: return  "candidate_uc_offer_start"
-        case .uc_offer_cancel: return  "candidate_uc_offer_cancel"
-        case .uc_offer_convert: return  "candidate_uc_offer_convert"
-        case .uc_offer_withdraw: return  "candidate_uc_offer_withdraw"
+//        case .uc_onboarding_start: return "candidate_uc_onboarding_start"
+//        case .uc_onboarding_cancel: return  "candidate_uc_onboarding_cancel"
+//        case .uc_onboarding_convert: return  "candidate_uc_onboarding_convert"
+//            
+//        case .uc_register_user_start: return  "candidate_uc_register_user_start"
+//        case .uc_register_user_cancel: return  "candidate_uc_register_user_cancel"
+//        case .uc_register_user_convert: return  "candidate_uc_register_user_convert"
+//            
+//        case .uc_allow_location_user_start: return  "candidate_uc_allow_location_user_start"
+//        case .uc_allow_location_cancel: return  "candidate_uc_allow_location_cancel"
+//        case .uc_allow_location_convert: return  "candidate_uc_allow_location_convert"
+//            
+//        case .uc_allow_notifications_user_start: return  "candidate_uc_allow_notifications_user_start"
+//        case .uc_allow_notifications_cancel: return  "candidate_uc_allow_notifications_cancel"
+//        case .uc_allow_notifications_convert: return  "candidate_uc_allow_notifications_convert"
+//            
+//        case .uc_recommendation_deeplink_start: return  "candidate_uc_recommendation_deeplink_start"
+//        case .uc_recommendation_deeplink_cancel: return  "candidate_uc_recommendation_deeplink_cancel"
+//        case .uc_recommendation_deeplink_convert: return  "candidate_uc_recommendation_deeplink_convert"
+//            
+//        case .uc_offer_deeplink_start: return  "candidate_uc_offer_deeplink_start"
+//        case .uc_offer_deeplink_cancel: return  "candidate_uc_offer_deeplink_cancel"
+//        case .uc_offer_deeplink_convert: return  "candidate_uc_offer_deeplink_convert"
+//            
+//        case .uc_recommendation_pushNotification_start: return  "candidate_uc_recommendation_pushNotification_start"
+//        case .uc_recommendation_pushNotification_cancel: return  "candidate_uc_recommendation_pushNotification_cancel"
+//        case .uc_recommendation_pushNotification_convert: return  "candidate_uc_recommendation_pushNotification_convert"
+//            
+//        case .uc_apply_start: return  "candidate_uc_apply_start"
+//        case .uc_apply_cancel: return  "candidate_uc_apply_cancel"
+//        case .uc_apply_convert: return  "candidate_uc_apply_convert"
+//            
+//        case .uc_projectApply_start: return  "candidate_uc_projectApply_start"
+//        case .uc_projectAply_cancel: return  "candidate_uc_projectAply_cancel"
+//        case .uc_projectApply_convert: return  "candidate_uc_projectApply_convert"
+//            
+//        case .uc_offer_start: return  "candidate_uc_offer_start"
+//        case .uc_offer_cancel: return  "candidate_uc_offer_cancel"
+//        case .uc_offer_convert: return  "candidate_uc_offer_convert"
+//        case .uc_offer_withdraw: return  "candidate_uc_offer_withdraw"
+        
         case .firstUse: return "firstUse"
         case .appOpen: return "appOpen"
         case .tabTap: return "tabTap"
@@ -139,10 +140,5 @@ public struct TrackingEvent {
         self.type = type
         self.additionalProperties = additionalProperties
     }
-    
-//    public init(name: String, additionalProperties: [String:Any]? = nil) {
-//        self.name = name
-//        self.additionalProperties = additionalProperties
-//    }
     
 }

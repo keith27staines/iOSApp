@@ -2,7 +2,7 @@
 public struct RecommendationsListItem: Codable, Hashable {
     public var uuid: F4SUUID?
     public var user: F4SUUID?
-    public var associationUuid: F4SUUID?
+    public var association: ExpandedAssociation?
     public var createdAt: String?
     public var sentAt: String?
     public var confidence: Double?
@@ -13,7 +13,7 @@ public struct RecommendationsListItem: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case uuid
         case user
-        case associationUuid = "association"
+        case association
         case project
         case createdAt = "created_at"
         case sentAt = "sent_at"
@@ -26,7 +26,7 @@ public struct RecommendationsListItem: Codable, Hashable {
         public var isRemote: Bool?
         public var duration: String?
         public var type: ProjectType?
-        public var association: Association?
+        public var association: ExpandedAssociation?
         
         enum CodingKeys: String, CodingKey {
             case uuid
@@ -42,36 +42,37 @@ public struct RecommendationsListItem: Codable, Hashable {
             public var name: String?
         }
         
-        public struct Association: Codable, Equatable, Hashable {
-            public var uuid: F4SUUID?
-            public var title: String?
-            public var host: Host?
-            public var location: Location?
-            
-            public struct Host: Codable, Equatable, Hashable {
-                public var uuid: F4SUUID?
-                public var photoUrl: String?
-                public var fullName: String?
-                enum CodingKeys: String, CodingKey {
-                    case uuid
-                    case fullName = "full_name"
-                }
-            }
-            
-            public struct Location: Codable, Equatable, Hashable {
-                public var company: Company?
-                public struct Company: Codable, Equatable, Hashable  {
-                    public var name: String?
-                    public var logo: String?
-                }
-            }
-        }
-        
         public struct Activity: Codable, Equatable, Hashable {
             public var uuid: F4SUUID?
             public var name: String?
         }
+        
     }
     
+}
+
+public struct ExpandedAssociation: Codable, Equatable, Hashable {
+    public var uuid: F4SUUID?
+    public var title: String?
+    public var host: Host?
+    public var location: Location?
+    
+    public struct Host: Codable, Equatable, Hashable {
+        public var uuid: F4SUUID?
+        public var photoUrl: String?
+        public var fullName: String?
+        enum CodingKeys: String, CodingKey {
+            case uuid
+            case fullName = "full_name"
+        }
+    }
+    
+    public struct Location: Codable, Equatable, Hashable {
+        public var company: Company?
+        public struct Company: Codable, Equatable, Hashable  {
+            public var name: String?
+            public var logo: String?
+        }
+    }
 }
 
