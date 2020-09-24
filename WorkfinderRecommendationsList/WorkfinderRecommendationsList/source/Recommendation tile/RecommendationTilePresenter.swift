@@ -21,9 +21,9 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     let row: Int
     weak var parentPresenter: RecommendationsPresenter?
     let recommendation: RecommendationsListItem
-    var companyName: String? { recommendation.project?.association?.location?.company?.name }
-    var hostName: String? { recommendation.project?.association?.host?.fullName }
-    var hostRole: String? { recommendation.project?.association?.title }
+    var companyName: String? { recommendation.association?.location?.company?.name }
+    var hostName: String? { recommendation.association?.host?.fullName }
+    var hostRole: String? { recommendation.association?.title }
 
     var defaultImage: UIImage? {
         UIImage.imageWithFirstLetter(
@@ -31,7 +31,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
             backgroundColor: WorkfinderColors.primaryColor,
             width: 70)
     }
-    var companyLogoUrlString: String? { recommendation.project?.association?.location?.company?.logo }
+    var companyLogoUrlString: String? { recommendation.association?.location?.company?.logo }
     var downloadedImage: UIImage?
     var companyImage: UIImage? { downloadedImage ?? defaultImage }
     var imageService: SmallImageServiceProtocol = SmallImageService()
