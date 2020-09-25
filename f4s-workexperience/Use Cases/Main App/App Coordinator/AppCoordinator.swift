@@ -54,7 +54,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         
         super.init(parent:nil, navigationRouter: navigationRouter)
         self.injected.appCoordinator = self
-        userNotificationService = UNService(appCoordinator: self)
+        userNotificationService = UNService(appCoordinator: self, userRepository: injected.userRepository)
     }
     
     override func start() {
@@ -66,7 +66,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             if self.launchOptions?[.remoteNotification] != nil {
                 self.startTabBarCoordinator()
             }
-            UIApplication.shared.registerForRemoteNotifications()
+            if let _ = self.injected.userRepository.loadUser().uuid {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
         }
     }
     
