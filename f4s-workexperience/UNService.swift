@@ -45,24 +45,22 @@ class UNService : NSObject {
     }
     
     private func suggestEnableRecommendations(from viewController: UIViewController) {
-        #warning("Delete return, uncomment following lines")
-        return
-//        let alertController = UIAlertController (title: "Would you like to receive notifications when you have new recommendations?", message: "We recommend positions matched to you", preferredStyle: .alert)
-//        
-//        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
-//        alertController.addAction(cancelAction)
-//        
-//        let settingsAction = UIAlertAction(title: "Enable notifications", style: .default) { (_) -> Void in
-//            
-//
-//            self.center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] isAuthorized, _ in
-//                guard let self = self, isAuthorized else { return }
-//                DispatchQueue.main.async { UIApplication.shared.registerForRemoteNotifications() }
-//                self.permissionHasBeenRequested = true
-//            }
-//        }
-//        alertController.addAction(settingsAction)
-//        viewController.present(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController (title: "Would you like to receive notifications when you have new recommendations?", message: "We recommend positions matched to you", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let settingsAction = UIAlertAction(title: "Enable notifications", style: .default) { (_) -> Void in
+            
+
+            self.center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] isAuthorized, _ in
+                guard let self = self, isAuthorized else { return }
+                DispatchQueue.main.async { UIApplication.shared.registerForRemoteNotifications() }
+                self.permissionHasBeenRequested = true
+            }
+        }
+        alertController.addAction(settingsAction)
+        viewController.present(alertController, animated: true, completion: nil)
     }
     
     private func directUserToSettings(from viewController: UIViewController) {

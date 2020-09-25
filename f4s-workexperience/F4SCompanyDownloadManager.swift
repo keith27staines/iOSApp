@@ -115,8 +115,8 @@ public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerPro
         let urlString: String
         switch Config.environment {
         case .staging:
-            //urlString = "https://api-workfinder-com-develop.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
-            urlString =   "https://api-workfinder-com-release.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
+            urlString = "https://api-workfinder-com-develop.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
+            //urlString =   "https://api-workfinder-com-release.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
         case .production:
             urlString = "https://api-workfinder-com-master.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
         }

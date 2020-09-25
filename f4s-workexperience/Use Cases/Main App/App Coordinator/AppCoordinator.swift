@@ -222,10 +222,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
 extension AppCoordinator : DeviceRegisteringProtocol {
     func registerDevice(token: Data) {
-        #warning("Delete return, uncomment following lines")
-        return
-//        deviceRegistrar = DeviceRegistrar(userRepository: injected.userRepository)
-//        deviceRegistrar?.registerDevice(token: token)
+        deviceRegistrar = DeviceRegistrar(userRepository: injected.userRepository)
+        deviceRegistrar?.registerDevice(token: token)
     }
 }
 
