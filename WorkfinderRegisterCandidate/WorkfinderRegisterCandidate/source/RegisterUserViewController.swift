@@ -45,9 +45,9 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         password.textfield.nextResponderField = nil
         bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
-        if hidesBackButton {
+        //if hidesBackButton {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWorkflow))
-        }
+        //}
     }
     
     @objc func cancelWorkflow() {

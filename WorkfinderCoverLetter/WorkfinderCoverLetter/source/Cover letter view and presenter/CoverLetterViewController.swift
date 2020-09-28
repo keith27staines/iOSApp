@@ -71,6 +71,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        messageHandler.hideLoadingOverlay()
         presenter.onViewDidAppear()
     }
     

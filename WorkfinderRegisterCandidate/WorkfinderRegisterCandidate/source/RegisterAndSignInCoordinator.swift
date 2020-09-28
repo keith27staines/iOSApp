@@ -29,10 +29,12 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     }
     
     public override func start() {
+        injected.log.track(TrackingEvent(type: .uc_register_user_start))
         presentRegisterUserViewController(hideBackButton)
     }
     
     func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
+        injected.log.track(TrackingEvent(type: .uc_register_user_convert))
         injected.log.updateIdentity()
         if let previous = firstViewController?.previousViewController {
             // for pushed vcs
@@ -46,6 +48,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     }
     
     func onRegisterAndSignInCancelled() {
+        injected.log.track(TrackingEvent(type: .uc_register_user_cancel))
         (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onRegisterAndSignInCancelled()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }

@@ -202,6 +202,7 @@ extension ApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
 extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
     
     public func onRegisterAndSignInCancelled() {
+        navigationRouter.pop(animated: true)
         // Nothing to do, the register screens
         // have been poppped and that is all there is to it
     }
