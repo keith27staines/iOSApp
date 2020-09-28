@@ -64,6 +64,7 @@ public enum TrackEventType {
     case uc_apply_cancel(ApplicationSource)
     case uc_apply_convert(ApplicationSource)
 
+    // project apply events logged
     case uc_projectApply_start(ApplicationSource)
     case uc_projectAply_cancel(ApplicationSource)
     case uc_projectApply_convert(ApplicationSource)
