@@ -44,7 +44,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         
         self.window = window
         self.injected = inject
-        self.deepLinkDispatcher = DeepLinkDispatcher()
+        self.deepLinkDispatcher = DeepLinkDispatcher(log: inject.log)
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.hostsProvider = hostsProvider
         self.localStore = localStore

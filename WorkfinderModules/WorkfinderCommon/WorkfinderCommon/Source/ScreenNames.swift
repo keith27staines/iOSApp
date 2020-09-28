@@ -33,10 +33,12 @@ public enum TrackEventType {
     case uc_onboarding_cancel
     case uc_onboarding_convert
 
+    // register user events logged
     case uc_register_user_start
     case uc_register_user_cancel
     case uc_register_user_convert
 
+    // location events logged
     case uc_allow_location_user_start
     case uc_allow_location_cancel
     case uc_allow_location_convert
@@ -45,6 +47,7 @@ public enum TrackEventType {
     case uc_allow_notifications_cancel
     case uc_allow_notifications_convert
 
+    // recommendation deeplink events tracked
     case uc_recommendation_deeplink_start
     case uc_recommendation_deeplink_cancel
     case uc_recommendation_deeplink_convert
