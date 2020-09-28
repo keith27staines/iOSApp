@@ -16,11 +16,13 @@ class OnboardingCoordinatorFactory : OnboardingCoordinatorFactoryProtocol {
     }
     
     func makeOnboardingCoordinator(parent: Coordinating?,
-                                   navigationRouter: NavigationRoutingProtocol) -> OnboardingCoordinatorProtocol {
+                                   navigationRouter: NavigationRoutingProtocol,
+                                   log: F4SAnalytics) -> OnboardingCoordinatorProtocol {
         return OnboardingCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
-            localStore: localStore)
+            localStore: localStore,
+            log: log)
     }
 }
 

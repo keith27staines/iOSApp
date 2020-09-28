@@ -114,8 +114,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         projectType = projectPresenter?.projectName ?? ""
         let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
         log.track(TrackingEvent(type: .projectApplyStart, additionalProperties: properties))
-        #warning("uncomment next line")
-        //log.track(TrackingEvent(type: .uc_projectApply_start(applicationSource)))
+        log.track(TrackingEvent(type: .uc_projectApply_start(applicationSource)))
         startCoverLetterFlow()
     }
     

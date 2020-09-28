@@ -18,12 +18,16 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
         }
     }
     
+    let log: F4SAnalytics
+    
     let localStore: LocalStorageProtocol
 
     public init(parent: Coordinating?,
                 navigationRouter: NavigationRoutingProtocol,
-                localStore: LocalStorageProtocol) {
+                localStore: LocalStorageProtocol,
+                log: F4SAnalytics) {
         self.localStore = localStore
+        self.log = log
         super.init(parent: parent, navigationRouter: navigationRouter)
     }
     
@@ -32,7 +36,7 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
             self.onboardingDidFinish?(self)
             return
         }
-        
+        log.track(TrackingEvent(type: .uc_onboarding_start))
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
         onboardingViewController.hideOnboardingControls = !isFirstLaunch
@@ -40,6 +44,7 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
             guard let self = self else { return }
             self.delegate?.shouldEnableLocation(enable)
             LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
+            self.log.track(TrackingEvent(type: .uc_onboarding_convert))
             self.onboardingDidFinish?(self)
         }
         onboardingViewController.modalPresentationStyle = .fullScreen
