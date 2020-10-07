@@ -8,7 +8,9 @@ public protocol TabbarCoordinatorFactoryProtocol {
 }
 
 public protocol OnboardingCoordinatorFactoryProtocol {
-    func makeOnboardingCoordinator(parent: Coordinating?,
-    navigationRouter: NavigationRoutingProtocol) -> OnboardingCoordinatorProtocol
+    func makeOnboardingCoordinator(
+        parent: Coordinating?,
+        navigationRouter: NavigationRoutingProtocol,
+        log: F4SAnalytics) -> OnboardingCoordinatorProtocol
 }
 

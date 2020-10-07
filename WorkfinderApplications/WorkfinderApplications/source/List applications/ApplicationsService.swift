@@ -85,6 +85,7 @@ extension ApplicationState {
         case "offered": self = .offerMade
         case "accepted": self = .offerAccepted
         case "withdrawn": self = .candidateWithdrew
+        case "cancelled": self = .cancelled
         default: self = .unknown
         }
     }

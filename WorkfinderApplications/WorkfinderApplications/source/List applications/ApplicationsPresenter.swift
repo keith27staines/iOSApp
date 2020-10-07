@@ -67,6 +67,7 @@ class ApplicationsPresenter {
         case .offerAccepted: action = .viewOffer
         case .candidateWithdrew: action = .viewOffer
         case .expired: action = .viewApplication
+        case .cancelled: action = .viewOffer
         case .unknown: action = .viewApplication
         }
         coordinator?.performAction(action, for: application)

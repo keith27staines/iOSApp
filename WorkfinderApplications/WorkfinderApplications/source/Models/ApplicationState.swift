@@ -22,6 +22,7 @@ enum ApplicationState: String, Codable {
     case offerMade = "offered"
     case offerAccepted = "accepted"
     case candidateWithdrew = "withdrawn"
+    case cancelled
     case unknown
     
     var capsuleColor: UIColor {
@@ -34,6 +35,7 @@ enum ApplicationState: String, Codable {
         case .offerMade: return WorkfinderColors.primaryColor
         case .offerAccepted: return WorkfinderColors.primaryColor
         case .candidateWithdrew: return UIColor(red: 72, green: 39, blue: 128)
+        case .cancelled: return UIColor(red: 72, green: 39, blue: 128)
         case .unknown: return UIColor(red: 255, green: 0, blue: 0, alpha: 0.8)
         }
     }
@@ -48,6 +50,7 @@ enum ApplicationState: String, Codable {
         case .offerAccepted: return NSLocalizedString("Offer accepted", comment: "")
         case .applicationDeclined: return NSLocalizedString("Application declined", comment: "")
         case .candidateWithdrew: return NSLocalizedString("Withdrawn", comment: "")
+        case .cancelled: return NSLocalizedString("Cancelled", comment: "")
         case .unknown: return NSLocalizedString("Status unknown", comment: "")
         }
     }
@@ -68,6 +71,8 @@ enum ApplicationState: String, Codable {
             return [.viewApplication, .viewOffer]
         case .candidateWithdrew:
             return [.viewApplication, .viewOffer]
+        case .cancelled:
+            return [.viewOffer]
         }
     }
     
@@ -87,6 +92,8 @@ enum ApplicationState: String, Codable {
             return NSLocalizedString("Congratulations you accepted this offer", comment: "")
         case .candidateWithdrew:
             return NSLocalizedString("You declined the offer of a placement", comment: "")
+        case .cancelled:
+            return NSLocalizedString("The host has cancelled this offer", comment: "")
         case .unknown:
             return NSLocalizedString("Unable to obtain the status of this application", comment: "")
         }

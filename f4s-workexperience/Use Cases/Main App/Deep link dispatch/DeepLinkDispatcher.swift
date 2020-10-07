@@ -2,8 +2,10 @@
 import WorkfinderCommon
 
 class DeepLinkDispatcher {
+    let log: F4SAnalytics
     
-    init() {
+    init(log: F4SAnalytics) {
+        self.log = log
     }
     
     func dispatchDeepLink(_ url: URL, with coordinator: AppCoordinatorProtocol) {
@@ -19,8 +21,12 @@ class DeepLinkDispatcher {
     func dispatch(objectType: String, uuid: F4SUUID?, with coordinator: AppCoordinatorProtocol) {
         switch objectType {
         case "recommendations":
+            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_start))
+            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_convert))
             coordinator.showRecommendation(uuid: uuid, applicationSource: .deeplink)
         case "projects":
+            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_start))
+            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_convert))
             coordinator.showProject(uuid: uuid, applicationSource: .deeplink)
         case "placement":
             break

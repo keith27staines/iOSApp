@@ -114,8 +114,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         projectType = projectPresenter?.projectName ?? ""
         let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
         log.track(TrackingEvent(type: .projectApplyStart, additionalProperties: properties))
-        #warning("uncomment next line")
-        //log.track(TrackingEvent(type: .uc_projectApply_start(applicationSource)))
+        log.track(TrackingEvent(type: .uc_projectApply_start(applicationSource)))
         startCoverLetterFlow()
     }
     
@@ -128,7 +127,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func onCoverLetterWorkflowCancelled() {
-        // nothing to do here
+        log.track(TrackingEvent(type: .uc_projectApply_cancel(applicationSource)))
     }
     
     func submitApplication(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
@@ -151,6 +150,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
             messageHandler.hideLoadingOverlay()
             switch result {
             case .success(let placement):
+                self.log.track(TrackingEvent(type: .uc_onboarding_convert))
                 self.onApplicationSubmitted(placement: placement)
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {

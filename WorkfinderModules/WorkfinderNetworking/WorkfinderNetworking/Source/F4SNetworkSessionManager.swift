@@ -43,8 +43,7 @@ public class F4SNetworkSessionManager: F4SNetworkSessionManagerProtocol {
         let headers: [String : String] = [
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Platform": "iOS",
-            "App-Version": appVersion
+            "User-Agent": "Workfinder \(appVersion)/iOS"
         ]
         return headers
     }

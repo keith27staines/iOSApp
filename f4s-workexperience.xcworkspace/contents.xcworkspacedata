@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/keith/WorkfinderLTD/workfinder/ios/iOSApp/UsecaseTrackingEvents">
-   </FileRef>
-   <FileRef
       location = "group:ErrorHandlingUI/ErrorHandlingUI.xcodeproj">
    </FileRef>
    <FileRef

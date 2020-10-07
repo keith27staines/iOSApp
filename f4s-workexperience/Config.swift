@@ -5,8 +5,8 @@ public struct Config {
     #if STAGING
     // Development & testing config
     public static let environmentName = "STAGING"
-    public static var workfinderApiBase = "https://release.workfinder.com/v3/"
-    //public static var workfinderApiBase = "https://develop.workfinder.com/v3/"
+    //public static var workfinderApiBase = "https://release.workfinder.com/v3/"
+    public static var workfinderApiBase = "https://develop.workfinder.com/v3/"
     #else
     // Default to production (live) config
     public static let environmentName = "PRODUCTION"

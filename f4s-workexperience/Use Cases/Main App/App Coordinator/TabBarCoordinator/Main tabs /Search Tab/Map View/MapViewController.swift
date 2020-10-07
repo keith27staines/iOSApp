@@ -46,11 +46,7 @@ class MapViewController: UIViewController {
         self.view.addSubview(searchView)
         searchView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 40, left: sideMargin, bottom: 0, right: 0))
         let bottomConstraint: NSLayoutConstraint
-        if #available(iOS 11.0, *) {
-            bottomConstraint = searchView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
-        } else {
-            bottomConstraint = searchView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -80)
-        }
+        bottomConstraint = searchView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         bottomConstraint.priority = .required
         bottomConstraint.isActive = true
         return searchView
@@ -385,6 +381,7 @@ extension MapViewController {
         mapView.delegate = self
         locationManager = makeLocationManager()
         if shouldRequestAuthorization {
+            log?.track(TrackingEvent(type: .uc_allow_location_user_start))
             locationManager?.requestWhenInUseAuthorization()
             allowLocationUpdate = true
         }
@@ -574,21 +571,19 @@ extension MapViewController: CLLocationManagerDelegate {
 
         switch status {
             
-        case .authorizedWhenInUse:
+        case .authorizedWhenInUse, .authorizedAlways:
             locationManager!.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
             allowLocationUpdate = true
+            if shouldRequestAuthorization {
+                log?.track(TrackingEvent(type: .uc_allow_location_convert))
+            }
             
-        case .denied:
+        case .denied, .restricted:
             mapView.isMyLocationEnabled = false
-            
-        case .authorizedAlways:
-            locationManager!.startUpdatingLocation()
-            mapView.isMyLocationEnabled = true
-            allowLocationUpdate = true
-            
-        case .restricted:
-            mapView.isMyLocationEnabled = false
+            if shouldRequestAuthorization {
+                log?.track(TrackingEvent(type: .uc_allow_location_cancel))
+            }
             
         case .notDetermined:
             break
@@ -907,11 +902,6 @@ extension MapViewController : SearchViewDelegate {
             print("Display person: \(item.matchOnText)")
         case .searchingCompany:
             return
-//            guard
-//                let uuid = item.uuidString,
-//                let company = DatabaseOperations.sharedInstance.companyWithUUID(uuid) else { return }
-//            log?.track(event: .mapSearchShowCompanyTap, properties: nil)
-//            coordinator?.showDetail(company: company, originScreen: ScreenName.companySearch)
         }
         searchView.minimizeSearchUI()
     }
