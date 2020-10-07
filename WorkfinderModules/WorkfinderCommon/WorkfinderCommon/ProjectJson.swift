@@ -5,6 +5,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var association: F4SUUID?
     public var isPaid: Bool?
     public var candidateQuantity: String?
+    public var additionalComments: String?
     public var isRemote: Bool?
     public var duration: String?
     
@@ -15,6 +16,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
         case isPaid = "is_paid"
         case candidateQuantity = "candidate_quantity"
         case isRemote = "is_remote"
+        case additionalComments = "additional_comments"
         case duration
     }
 }

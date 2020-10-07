@@ -25,6 +25,8 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case aboutCompany
         case aboutPlacementSectionHeading
         case aboutPlacement
+        case additionalCommentsHeading
+        case additionalComments
         case skillsHeading
         case skillsYouWillGain
         case keyActivitiesSectionHeading
@@ -44,6 +46,8 @@ class ProjectPresenter: ProjectPresenterProtocol {
             case .aboutCompany: return aboutIdentifier
             case .aboutPlacementSectionHeading: return sectionHeadingIdentifier
             case .aboutPlacement: return aboutIdentifier
+            case .additionalCommentsHeading: return sectionHeadingIdentifier
+            case .additionalComments: return aboutIdentifier
             case .skillsHeading: return sectionHeadingIdentifier
             case .skillsYouWillGain: return "capsule"
             case .keyActivitiesSectionHeading: return sectionHeadingIdentifier
@@ -72,6 +76,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
     var projectName: String? { projectType?.name }
     var companyName: String? { company?.name }
     var companyLogoUrl: String? { company?.logo }
+    var additionalRequirements: String? { detail.project?.additionalComments }
     var skills: [String] { projectType?.skillsAcquired ?? [] }
     private var activities: [String] { projectType?.candidateActivities ?? [] }
     
@@ -119,6 +124,8 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutCompany: return 1
         case .aboutPlacementSectionHeading: return 1
         case .aboutPlacement: return 1
+        case .additionalCommentsHeading: return 1
+        case .additionalComments: return 1
         case .skillsHeading: return 1
         case .skillsYouWillGain: return skills.count
         case .keyActivitiesSectionHeading: return 1
@@ -176,6 +183,10 @@ class ProjectPresenter: ProjectPresenterProtocol {
             return SectionHeadingPresenter(title: "About \(projectName ?? "Project")")
         case .aboutPlacement:
             return AboutPresenter(text: projectType?.description ?? "No description available")
+        case .additionalCommentsHeading:
+            return SectionHeadingPresenter(title: "Additional requirements")
+        case .additionalComments:
+            return AboutPresenter(text: additionalRequirements ?? "")
         case .skillsHeading:
             return SectionHeadingPresenter(title: "Skills you will gain")
         case .skillsYouWillGain:

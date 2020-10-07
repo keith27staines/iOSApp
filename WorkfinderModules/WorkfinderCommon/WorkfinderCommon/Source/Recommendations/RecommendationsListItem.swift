@@ -26,6 +26,7 @@ public struct RecommendationsListItem: Codable, Hashable {
         public var isRemote: Bool?
         public var duration: String?
         public var type: ProjectType?
+        public var additionalComments: String?
         public var association: ExpandedAssociation?
         
         enum CodingKeys: String, CodingKey {
@@ -34,6 +35,7 @@ public struct RecommendationsListItem: Codable, Hashable {
             case isRemote = "is_remote"
             case duration
             case type
+            case additionalComments = "additional_comments"
             case association
         }
         
