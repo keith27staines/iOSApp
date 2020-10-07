@@ -44,8 +44,6 @@
 		53BA73D924B0946300B06421 /* KSGMAnimatedClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73D824B0946300B06421 /* KSGMAnimatedClusterRenderer.swift */; };
 		53BA73DB24B0961D00B06421 /* KSClusterImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73DA24B0961D00B06421 /* KSClusterImageFactory.swift */; };
 		53BA73DF24B1F3D200B06421 /* KSClusteringAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA73DE24B1F3D200B06421 /* KSClusteringAlgorithm.swift */; };
-		53C76061251B95260072281E /* json in Resources */ = {isa = PBXBuildFile; fileRef = 53C76060251B95260072281E /* json */; };
-		53C76064251B96EE0072281E /* prettyJson in Resources */ = {isa = PBXBuildFile; fileRef = 53C76063251B96EE0072281E /* prettyJson */; };
 		53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C760D6251C845B0072281E /* DeviceRegistrar.swift */; };
 		799C96B7E6F564EADBEF1AFB /* Pods_f4s_workexperienceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB15162F0A1B8298B159D38 /* Pods_f4s_workexperienceTests.framework */; };
 		C9C7302B49E1B7EF625802B5 /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBDC6E5F710813F9107483D /* Pods_f4s_workexperience.framework */; };
@@ -260,8 +258,6 @@
 		53BA73D824B0946300B06421 /* KSGMAnimatedClusterRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSGMAnimatedClusterRenderer.swift; sourceTree = "<group>"; };
 		53BA73DA24B0961D00B06421 /* KSClusterImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSClusterImageFactory.swift; sourceTree = "<group>"; };
 		53BA73DE24B1F3D200B06421 /* KSClusteringAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KSClusteringAlgorithm.swift; sourceTree = "<group>"; };
-		53C76060251B95260072281E /* json */ = {isa = PBXFileReference; lastKnownFileType = text; path = json; sourceTree = "<group>"; };
-		53C76063251B96EE0072281E /* prettyJson */ = {isa = PBXFileReference; lastKnownFileType = text; path = prettyJson; sourceTree = "<group>"; };
 		53C760D6251C845B0072281E /* DeviceRegistrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrar.swift; sourceTree = "<group>"; };
 		590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.releasef4slive.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.releasef4slive.xcconfig"; sourceTree = "<group>"; };
 		5EDAD0D218CD01AA5D5D2DD5 /* Pods-f4s-workexperienceTests.debugf4s.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.debugf4s.xcconfig"; path = "Pods/Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.debugf4s.xcconfig"; sourceTree = "<group>"; };
@@ -440,8 +436,6 @@
 		40E78E0A1DD31A86000A3776 = {
 			isa = PBXGroup;
 			children = (
-				53C76063251B96EE0072281E /* prettyJson */,
-				53C76060251B95260072281E /* json */,
 				FCA4E2A92492438200BE87FC /* apple-app-site-association */,
 				FCC85DC124515F2F00BC600E /* Top level files */,
 				40E78E151DD31A86000A3776 /* f4s-workexperience */,
@@ -1150,14 +1144,12 @@
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
 				FC0B6B392323D5D600A1867D /* Uploads.xcassets in Resources */,
-				53C76064251B96EE0072281E /* prettyJson in Resources */,
 				FCC5EBB61F449C310085CE15 /* README.md in Resources */,
 				FC681C011F57473D0077BECA /* Podfile.lock in Resources */,
 				40C1A4F31DDEF2F6000F80AA /* AutoCompleteTableViewCell.xib in Resources */,
 				40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */,
 				40A5CF3A1DED6F8D000007AB /* InterestsView.storyboard in Resources */,
 				40E78E951DD391F3000A3776 /* MapView.storyboard in Resources */,
-				53C76061251B95260072281E /* json in Resources */,
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
