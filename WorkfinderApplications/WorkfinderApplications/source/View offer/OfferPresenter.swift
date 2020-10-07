@@ -9,6 +9,7 @@ protocol OfferPresenterProtocol {
     var screenTitle: String { get }
     var stateDescription: String? { get }
     var logoUrl: String? { get }
+    var offerState: OfferState? { get }
     func onViewDidLoad(view: WorkfinderViewControllerProtocol)
     func loadData(completion: @escaping (Error?) -> Void)
     func numberOfSections() -> Int

@@ -127,7 +127,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func onCoverLetterWorkflowCancelled() {
-        log.track(TrackingEvent(type: .uc_projectAply_cancel(applicationSource)))
+        log.track(TrackingEvent(type: .uc_projectApply_cancel(applicationSource)))
     }
     
     func submitApplication(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {

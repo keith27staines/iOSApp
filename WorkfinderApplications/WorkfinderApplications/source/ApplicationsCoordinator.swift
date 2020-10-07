@@ -15,6 +15,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     var applications = [Application]()
     var networkConfig: NetworkConfig { injected.networkConfig }
+    var log: F4SAnalytics { injected.log }
     
     lazy var applicationsViewController: UIViewController = {
         let service = ApplicationsService(networkConfig: networkConfig)
@@ -49,10 +50,35 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     }
     
     func showOfferViewer(for application: Application) {
+        log.track(TrackingEvent(type: .uc_offer_start))
         let offerService = OfferService(networkConfig: networkConfig)
         let presenter = OfferPresenter(coordinator: self, application: application, offerService: offerService)
         let vc = OfferViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
+    }
+    
+    var offerAwaitingDecision = false
+    var offerDecisionMade = false
+    
+    func offerAwaitingDecisionViewed() {
+        offerAwaitingDecision = true
+        log.track(TrackingEvent(type: .uc_offer_start))
+    }
+    
+    func offerAccepted() {
+        log.track(TrackingEvent(type: .uc_offer_convert))
+        offerDecisionMade = true
+    }
+    
+    func offerDeclined() {
+        log.track(TrackingEvent(type: .uc_offer_withdraw))
+        offerDecisionMade = true
+    }
+    
+    func offerScreenCancelled() {
+        if offerAwaitingDecision && !offerDecisionMade {
+            log.track(TrackingEvent(type: .uc_offer_cancel))
+        }
     }
     
     func showApplicationDetailViewer(for application: Application) {

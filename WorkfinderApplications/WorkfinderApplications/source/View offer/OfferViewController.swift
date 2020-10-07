@@ -7,6 +7,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     weak var coordinator: ApplicationsCoordinator?
     let presenter: OfferPresenterProtocol
     lazy var messageHandler = UserMessageHandler(presenter: self)
+    var acceptDecisionMade = false
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -47,6 +48,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
         presenter.onTapAccept { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
+            self.coordinator?.offerAccepted()
             self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.handleTapAccept()
             }
@@ -85,6 +87,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     func declineWithReason(_ reason: WithdrawReason, otherText: String? = nil) {
         presenter.onTapDeclineWithReason(reason, otherText: otherText) { [weak self] (optionalError) in
             guard let self = self else { return }
+            self.coordinator?.offerDeclined()
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.declineWithReason(reason)
@@ -139,6 +142,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
                 retryHandler: self.loadData)
+            self.coordinator?.offerAwaitingDecision = self.presenter.offerState == OfferState.hostOfferOpen
         }
     }
     

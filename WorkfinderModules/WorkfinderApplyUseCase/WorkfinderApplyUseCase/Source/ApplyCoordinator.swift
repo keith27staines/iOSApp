@@ -31,8 +31,9 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     lazy var draftPlacementLogic: DraftPlacementPreparer = {
         return DraftPlacementPreparer()
     }()
-
+    var log: F4SAnalytics { injected.log }
     var picklistsDictionary: PicklistsDictionary?
+    var applicationSource: ApplicationSource = .searchTab
     
     public var coverLetterPrimaryButtonText: String {
         let candidate = injected.userRepository.loadCandidate()
@@ -99,6 +100,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     
     override public func start() {
         super.start()
+        log.track(TrackingEvent(type: .uc_apply_start(.searchTab)))
         startDateOfBirthIfNecessary()
     }
     
@@ -142,7 +144,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     public func coverLetterDidCancel() {
-        // Nothing to do
+        log.track(TrackingEvent(type: .uc_apply_cancel(applicationSource)))
     }
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
@@ -163,8 +165,13 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             draft: draft,
             navigationController: navigationController,
             messageHandler: messageHandler,
-            onSuccess: self.addSupportingDocument,
-            onCancel: { self.cancelButtonWasTapped(sender: self) })
+            onSuccess: { placementUuid in
+                self.log.track(TrackingEvent(type: .uc_apply_convert(self.applicationSource)))
+                self.addSupportingDocument(placementUuid)
+            },
+            onCancel: {
+                self.cancelButtonWasTapped(sender: self)
+            })
         applicationSubmitter?.submitApplication()
     }
     
