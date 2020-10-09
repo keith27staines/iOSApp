@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,11 +16,14 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="7fm-Cs-eG4">
-                                <rect key="frame" x="117.5" y="80" width="140" height="206"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_image" translatesAutoresizingMaskIntoConstraints="NO" id="rOo-1f-G0z">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="7fm-Cs-eG4">
+                                <rect key="frame" x="137" y="104" width="140" height="206"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="206" id="Byz-Mw-ICG"/>
                                     <constraint firstAttribute="width" constant="140" id="VJ0-zH-Xc2"/>
@@ -32,17 +33,21 @@
                         <color key="backgroundColor" red="0.10196078431372549" green="0.6588235294117647" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7fm-Cs-eG4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="H09-XJ-axg"/>
-                            <constraint firstItem="7fm-Cs-eG4" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="60" id="je7-ff-3ZO"/>
+                            <constraint firstItem="rOo-1f-G0z" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="HV7-lf-P8a"/>
+                            <constraint firstAttribute="trailing" secondItem="rOo-1f-G0z" secondAttribute="trailing" id="Plm-Lq-Jhb"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="rOo-1f-G0z" secondAttribute="bottom" id="cBl-dZ-NKE"/>
+                            <constraint firstItem="rOo-1f-G0z" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="xTj-n0-5It"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="tEO-fi-OGs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="50.724637681159422" y="374.33035714285711"/>
         </scene>
     </scenes>
     <resources>
+        <image name="launch_screen_image" width="418" height="667"/>
         <image name="logo" width="169" height="205"/>
     </resources>
 </document>

@@ -36,7 +36,6 @@ class OnboardingViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor = splashColor
         adjustNavigationBar()
     }
     
@@ -52,36 +51,13 @@ extension OnboardingViewController {
     }
 
     func setUpButtons() {
-
-        let enableLocationText = NSLocalizedString("Enable location to find opportunities", comment: "")
-        let enterLocationText = NSLocalizedString("Enter location manually", comment: "")
         enableLocationButton.isHidden = hideOnboardingControls
         enterLocationButton.isHidden = hideOnboardingControls
-        
-        enableLocationButton.setTitle(enableLocationText, for: .normal)
-        enterLocationButton.setTitle(enterLocationText, for: .normal)
-        let skinner = Skinner()
-        skinner.apply(buttonSkin: skin?.primaryButtonSkin, to: enableLocationButton)
-        skinner.apply(buttonSkin: skin?.ghostButtonSkin, to: enterLocationButton)
-    }
-
-    func setupLabels() {
-        let descriptionText = NSLocalizedString("Helping you find work", comment: "")
-        let font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle)
-        descriptionLabel.attributedText = NSAttributedString(
-            string: descriptionText,
-            attributes: [
-                NSAttributedString.Key.font: font,
-                NSAttributedString.Key.foregroundColor: UIColor.white
-            ])
     }
 
     func setupAppearance() {
         styleNavigationController()
-        view.backgroundColor = RGBA.workfinderGreen.uiColor
-        view.layoutSubviews()
         setUpButtons()
-        setupLabels()
         setNeedsStatusBarAppearanceUpdate()
     }
     
