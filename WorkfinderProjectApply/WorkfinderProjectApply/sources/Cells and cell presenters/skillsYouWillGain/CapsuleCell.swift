@@ -18,8 +18,9 @@ class CapsuleCell: PresentableCell {
         view.layer.borderColor = UIColor.darkGray.cgColor
         view.addSubview(label)
         view.layer.masksToBounds = true
-        view.heightAnchor.constraint(equalToConstant: radius * 2).isActive = true
-        label.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: radius, bottom: 0, right: radius))
+        // view.heightAnchor.constraint(equalToConstant: radius * 2).isActive = true
+        label.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: radius, bottom: 0, right: radius))
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return view
     }()
     

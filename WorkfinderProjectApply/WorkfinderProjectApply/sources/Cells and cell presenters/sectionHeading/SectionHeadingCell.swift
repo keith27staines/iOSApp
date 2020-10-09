@@ -5,6 +5,8 @@ class SectionHeadingCell: PresentableCell {
     
     lazy var label: UILabel = {
         let label = UILabel()
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
         Style.sectionHeading.text.applyTo(label: label)
         return label
     }()

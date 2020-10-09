@@ -88,6 +88,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
                     self.loadData()
                 }
             )
+            self.refreshFromPresenter()
         }
     }
     
@@ -191,7 +192,6 @@ extension ProjectViewController: UICollectionViewDataSource {
         cell.parentWidth = collectionView.frame.width 
         cell.refreshFromPresenter(cellPresenter)
         let collectionViewCell = cell as! UICollectionViewCell
-        collectionViewCell.layoutIfNeeded()
         return collectionViewCell
     }
 }

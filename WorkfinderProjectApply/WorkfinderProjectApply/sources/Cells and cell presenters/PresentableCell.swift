@@ -4,6 +4,7 @@ import UIKit
 protocol PresentableCellProtocol: AnyObject {
     var parentWidth: CGFloat { get set }
     func refreshFromPresenter(_ presenter: CellPresenterProtocol)
+    func setNeedsLayout()
 }
 
 class PresentableCell: UICollectionViewCell, PresentableCellProtocol {
@@ -26,6 +27,7 @@ class PresentableCell: UICollectionViewCell, PresentableCellProtocol {
     
     func configureViews() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor)
         widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 1)
         widthConstraint.priority = UILayoutPriority(900)
         widthConstraint.isActive = false

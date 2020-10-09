@@ -7,6 +7,10 @@ class ProjectHeaderCell: PresentableCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        let height = label.heightAnchor.constraint(equalToConstant: 50)
+        height.priority = .defaultLow
+        height.isActive = true
         return label
     }()
     

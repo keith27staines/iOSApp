@@ -178,15 +178,15 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutCompanySectionHeading:
             return SectionHeadingPresenter(title: "About \(companyName ?? "Company")")
         case .aboutCompany:
-            return AboutPresenter(text: company?.description ?? "No description available")
+            return AboutPresenter(text: company?.description, defaultText: "No description available")
         case .aboutPlacementSectionHeading:
             return SectionHeadingPresenter(title: "About \(projectName ?? "Project")")
         case .aboutPlacement:
-            return AboutPresenter(text: projectType?.description ?? "No description available")
+            return AboutPresenter(text: projectType?.description, defaultText: "No description available")
         case .additionalCommentsHeading:
             return SectionHeadingPresenter(title: "Additional requirements")
         case .additionalComments:
-            return AboutPresenter(text: additionalRequirements ?? "")
+            return AboutPresenter(text: additionalRequirements, defaultText: "There are no additional requirements.")
         case .skillsHeading:
             return SectionHeadingPresenter(title: "Skills you will gain")
         case .skillsYouWillGain:
@@ -198,7 +198,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutYouSectionHeading:
             return SectionHeadingPresenter(title: "About you")
         case .aboutYou:
-            return AboutPresenter(text: detail.projectType?.aboutCandidate ?? "No candidate qualities were specifed")
+            return AboutPresenter(text: detail.projectType?.aboutCandidate, defaultText: "No candidate qualities are specifed")
         case .projectContactSectionheading:
             return SectionHeadingPresenter(title: "Project contact")
         case .projectContact:
