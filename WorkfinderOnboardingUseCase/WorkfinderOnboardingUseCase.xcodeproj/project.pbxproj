@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53ABAB5B2530465500F96B15 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53ABAB5A2530465500F96B15 /* WorkfinderRegisterCandidate.framework */; };
 		FCF4B61A232BC090001340DF /* WorkfinderOnboardingUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF4B610232BC090001340DF /* WorkfinderOnboardingUseCase.framework */; };
 		FCF4B61F232BC090001340DF /* WorkfinderOnboardingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4B61E232BC090001340DF /* WorkfinderOnboardingUseCaseTests.swift */; };
 		FCF4B621232BC090001340DF /* WorkfinderOnboardingUseCase.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF4B613232BC090001340DF /* WorkfinderOnboardingUseCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53ABAB5A2530465500F96B15 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC20C459232BFC200006178E /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF4B610232BC090001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF4B613232BC090001340DF /* WorkfinderOnboardingUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderOnboardingUseCase.h; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			files = (
 				FCF4B64D232BC33B001340DF /* WorkfinderUI.framework in Frameworks */,
 				FCF4B64A232BC315001340DF /* WorkfinderCoordinators.framework in Frameworks */,
+				53ABAB5B2530465500F96B15 /* WorkfinderRegisterCandidate.framework in Frameworks */,
 				FCF4B62C232BC0BD001340DF /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +115,7 @@
 		FCF4B62A232BC0BD001340DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53ABAB5A2530465500F96B15 /* WorkfinderRegisterCandidate.framework */,
 				FC20C459232BFC200006178E /* WorkfinderServices.framework */,
 				FCF4B64C232BC33B001340DF /* WorkfinderUI.framework */,
 				FCF4B649232BC315001340DF /* WorkfinderCoordinators.framework */,
