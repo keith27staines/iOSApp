@@ -62,7 +62,9 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     }()
     
     lazy var rootNavigationController: UINavigationController = {
-        return UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
+        let navigationController = UINavigationController(rootViewController: AppCoordinatorBackgroundViewController())
+        navigationController.setNavigationBarHidden(true, animated: false)
+        return navigationController
     }()
     
     lazy var rootNavigationRouter: NavigationRoutingProtocol = {

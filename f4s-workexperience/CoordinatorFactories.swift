@@ -6,9 +6,8 @@ import WorkfinderAppLogic
 import WorkfinderUI
 import WorkfinderOnboardingUseCase
 
-
-
 class OnboardingCoordinatorFactory : OnboardingCoordinatorFactoryProtocol {
+    
     
     let localStore: LocalStorageProtocol
     public init(localStore: LocalStorageProtocol) {
@@ -17,12 +16,14 @@ class OnboardingCoordinatorFactory : OnboardingCoordinatorFactoryProtocol {
     
     func makeOnboardingCoordinator(parent: Coordinating?,
                                    navigationRouter: NavigationRoutingProtocol,
+                                   inject: CoreInjectionProtocol,
                                    log: F4SAnalytics) -> OnboardingCoordinatorProtocol {
         return OnboardingCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
             localStore: localStore,
-            log: log)
+            log: log,
+            inject: inject)
     }
 }
 

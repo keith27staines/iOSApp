@@ -11,6 +11,7 @@ public protocol OnboardingCoordinatorFactoryProtocol {
     func makeOnboardingCoordinator(
         parent: Coordinating?,
         navigationRouter: NavigationRoutingProtocol,
+        inject: CoreInjectionProtocol,
         log: F4SAnalytics) -> OnboardingCoordinatorProtocol
 }
 

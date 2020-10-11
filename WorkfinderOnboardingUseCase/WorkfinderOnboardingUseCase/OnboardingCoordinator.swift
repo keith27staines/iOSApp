@@ -1,22 +1,20 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 import WorkfinderCoordinators
+import WorkfinderRegisterCandidate
 
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderOnboardingUseCase")
 
-public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinatorProtocol {
+public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, OnboardingCoordinatorProtocol {
     
     weak public var delegate: OnboardingCoordinatorDelegate?
     weak var onboardingViewController: OnboardingViewController?
     
     public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
     
-    public var isFirstLaunch: Bool = true {
-        didSet {
-            onboardingViewController?.hideOnboardingControls = !isFirstLaunch
-        }
-    }
+    public var isFirstLaunch: Bool = true
     
     let log: F4SAnalytics
     
@@ -25,10 +23,11 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
     public init(parent: Coordinating?,
                 navigationRouter: NavigationRoutingProtocol,
                 localStore: LocalStorageProtocol,
-                log: F4SAnalytics) {
+                log: F4SAnalytics,
+                inject: CoreInjectionProtocol) {
         self.localStore = localStore
         self.log = log
-        super.init(parent: parent, navigationRouter: navigationRouter)
+        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     public override func start() {
@@ -40,6 +39,7 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
         onboardingViewController.hideOnboardingControls = !isFirstLaunch
+        onboardingViewController.coordinator = self
         onboardingViewController.shouldEnableLocation = { [weak self] enable in
             guard let self = self else { return }
             self.delegate?.shouldEnableLocation(enable)
@@ -47,8 +47,22 @@ public class OnboardingCoordinator : NavigationCoordinator, OnboardingCoordinato
             self.log.track(TrackingEvent(type: .uc_onboarding_convert))
             self.onboardingDidFinish?(self)
         }
+        onboardingViewController.isLoggedIn = injected.userRepository.loadUser().candidateUuid != nil
         onboardingViewController.modalPresentationStyle = .fullScreen
+        onboardingViewController.coordinator = self
         navigationRouter.present(onboardingViewController, animated: false, completion: nil)
+    }
+    
+    func loginButtonTapped(viewController: UIViewController) {
+        let loginHandler = LoginHandler(
+            parentCoordinator: self,
+            navigationRouter: navigationRouter,
+            mainWindow: UIApplication.shared.windows.first,
+            coreInjection: injected)
+        loginHandler.startLoginWorkflow { [weak self] (isLoggedIn) in
+            guard let self = self else { return }
+            self.onboardingViewController?.isLoggedIn = isLoggedIn
+        }
     }
     
 }

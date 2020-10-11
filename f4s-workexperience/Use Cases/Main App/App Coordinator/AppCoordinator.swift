@@ -6,6 +6,7 @@ import WorkfinderCoordinators
 import WorkfinderUserDetailsUseCase
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderOnboardingUseCase
+import WorkfinderRegisterCandidate
 import GoogleMaps
 import GooglePlaces
 
@@ -71,7 +72,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func startOnboarding() {
-        let onboardingCoordinator = onboardingCoordinatorFactory.makeOnboardingCoordinator(parent: self, navigationRouter: navigationRouter, log: log)
+        let onboardingCoordinator = onboardingCoordinatorFactory.makeOnboardingCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            log: log)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
         onboardingCoordinator.delegate = self

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53D804EB2532DC6E005EF096 /* LoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D804EA2532DC6E005EF096 /* LoginHandler.swift */; };
 		FC0E562224CBF43E004FDDFF /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0E561824CBF43E004FDDFF /* WorkfinderRegisterCandidate.framework */; };
 		FC0E562724CBF43E004FDDFF /* WorkfinderRegisterCandidateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E562624CBF43E004FDDFF /* WorkfinderRegisterCandidateTests.swift */; };
 		FC0E562924CBF43E004FDDFF /* WorkfinderRegisterCandidate.h in Headers */ = {isa = PBXBuildFile; fileRef = FC0E561B24CBF43E004FDDFF /* WorkfinderRegisterCandidate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53D804EA2532DC6E005EF096 /* LoginHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandler.swift; sourceTree = "<group>"; };
 		FC0E561824CBF43E004FDDFF /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0E561B24CBF43E004FDDFF /* WorkfinderRegisterCandidate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderRegisterCandidate.h; sourceTree = "<group>"; };
 		FC0E561C24CBF43E004FDDFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		FC0E564C24CBF517004FDDFF /* source */ = {
 			isa = PBXGroup;
 			children = (
+				53D804EA2532DC6E005EF096 /* LoginHandler.swift */,
 				FC0E564D24CBF59C004FDDFF /* RegisterAndSignInCoordinator.swift */,
 				FC0E564F24CBF5CA004FDDFF /* RegisterAndSignInUserBasePresenter.swift */,
 				FC0E565124CBF5D3004FDDFF /* RegisterAndSignInBaseViewController.swift */,
@@ -276,6 +279,7 @@
 				FC0E566424CBF61F004FDDFF /* PhoneNumberValidator.swift in Sources */,
 				FC0E566024CBF60C004FDDFF /* NextHideToolbar.swift in Sources */,
 				FC0E564E24CBF59C004FDDFF /* RegisterAndSignInCoordinator.swift in Sources */,
+				53D804EB2532DC6E005EF096 /* LoginHandler.swift in Sources */,
 				FC0E565024CBF5CA004FDDFF /* RegisterAndSignInUserBasePresenter.swift in Sources */,
 				FC0E566224CBF615004FDDFF /* HTTPErrorJson.swift in Sources */,
 				FC0E565224CBF5D3004FDDFF /* RegisterAndSignInBaseViewController.swift in Sources */,

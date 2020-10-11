@@ -12,7 +12,6 @@
         <!--Onboarding View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="OnboardingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="OnboardingViewController" customModule="WorkfinderOnboardingUseCase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -22,13 +21,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_image" translatesAutoresizingMaskIntoConstraints="NO" id="6nq-bb-BTe" userLabel="BackgroundImageView">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_image" translatesAutoresizingMaskIntoConstraints="NO" id="6nq-bb-BTe" userLabel="BackgroundImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4J-om-ZhR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-tZ-QZi">
                                 <rect key="frame" x="117.5" y="80" width="140" height="180"/>
                                 <constraints>
@@ -53,7 +48,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="enableLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJd-bq-IN7"/>
+                                                    <action selector="enableLocationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJd-bq-IN7"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5T-pH-WH3">
@@ -64,7 +59,7 @@
                                                     <color key="titleColor" red="0.10196078431372549" green="0.6588235294117647" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="enterLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UB9-Ku-Fk6"/>
+                                                    <action selector="enterLocationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UB9-Ku-Fk6"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -89,6 +84,9 @@
                                                 <state key="normal" title="Log in here">
                                                     <color key="titleColor" systemColor="systemGreenColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SFf-4S-jv0"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAp-K9-Xpb">
                                                 <rect key="frame" x="267.5" y="0.0" width="22.5" height="50"/>
@@ -111,7 +109,6 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6nq-bb-BTe" secondAttribute="bottom" id="0ac-vc-S9P"/>
-                            <constraint firstItem="g4J-om-ZhR" firstAttribute="top" secondItem="6nq-bb-BTe" secondAttribute="top" id="2fF-mr-8rC"/>
                             <constraint firstAttribute="trailing" secondItem="6nq-bb-BTe" secondAttribute="trailing" id="DG0-xB-s4k"/>
                             <constraint firstItem="6nq-bb-BTe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="MsY-Tq-ycG"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S2d-6B-Ejd"/>
@@ -119,13 +116,10 @@
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="42.5" id="aPk-fn-7pz"/>
                             <constraint firstItem="b61-9y-s8U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eQu-gf-pdo"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="top" secondItem="b61-9y-s8U" secondAttribute="bottom" constant="50" id="ezE-gZ-aBX"/>
-                            <constraint firstItem="g4J-om-ZhR" firstAttribute="trailing" secondItem="6nq-bb-BTe" secondAttribute="trailing" id="lfe-PD-X07"/>
                             <constraint firstItem="b61-9y-s8U" firstAttribute="top" secondItem="lQB-tZ-QZi" secondAttribute="bottom" constant="25" id="m3I-kr-oNf"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="mNS-l8-omf"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pzb-6G-cUc"/>
-                            <constraint firstItem="g4J-om-ZhR" firstAttribute="bottom" secondItem="6nq-bb-BTe" secondAttribute="bottom" id="siG-y8-56V"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Y5G-c6-CtJ" secondAttribute="bottom" constant="50" id="yEi-bK-qkh"/>
-                            <constraint firstItem="g4J-om-ZhR" firstAttribute="leading" secondItem="6nq-bb-BTe" secondAttribute="leading" id="zTb-6k-Vch"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cd7-uI-7iy"/>
@@ -133,8 +127,11 @@
                         <outlet property="descriptionLabel" destination="b61-9y-s8U" id="4Yz-Pq-JVq"/>
                         <outlet property="enableLocationButton" destination="A7Q-nn-dEQ" id="1LL-l8-tOR"/>
                         <outlet property="enterLocationButton" destination="Z5T-pH-WH3" id="iIE-7H-UiJ"/>
+                        <outlet property="loginButton" destination="qrJ-Te-Jyo" id="3fI-1Y-XQW"/>
+                        <outlet property="loginLabel" destination="0Iu-8f-0Mx" id="saj-zo-sUo"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1431.2" y="264.91754122938534"/>
         </scene>
@@ -142,9 +139,6 @@
     <resources>
         <image name="logo" width="169" height="205"/>
         <image name="onboarding_image" width="418" height="667"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

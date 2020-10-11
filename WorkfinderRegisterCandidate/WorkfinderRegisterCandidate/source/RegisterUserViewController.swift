@@ -17,6 +17,7 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesBackButton = hidesBackButton
     }
     
@@ -45,9 +46,7 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         password.textfield.nextResponderField = nil
         bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
-        //if hidesBackButton {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWorkflow))
-        //}
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWorkflow))
     }
     
     @objc func cancelWorkflow() {

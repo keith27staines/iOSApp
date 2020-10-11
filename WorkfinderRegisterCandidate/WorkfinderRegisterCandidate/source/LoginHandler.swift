@@ -2,7 +2,6 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
-import WorkfinderRegisterCandidate
 import WorkfinderCoordinators
 
 public class LoginHandler: CoreInjectionNavigationCoordinator {
@@ -11,7 +10,7 @@ public class LoginHandler: CoreInjectionNavigationCoordinator {
     var completion: ((Bool) -> Void)?
     var registerCoordinator: RegisterAndSignInCoordinator?
     
-    init(parentCoordinator: Coordinating,
+    public init(parentCoordinator: Coordinating,
          navigationRouter: NavigationRoutingProtocol,
          mainWindow: UIWindow?,
          coreInjection: CoreInjectionProtocol
