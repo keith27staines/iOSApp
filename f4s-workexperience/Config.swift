@@ -16,7 +16,6 @@ public struct Config {
     #endif
     
     public static var environment: EnvironmentType {
-        print(environmentName)
         switch environmentName {
         case "DEVELOP":
             return EnvironmentType.develop
