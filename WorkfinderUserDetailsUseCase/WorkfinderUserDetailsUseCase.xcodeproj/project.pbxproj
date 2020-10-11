@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -180,7 +180,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = Founders4Schools;
+				ORGANIZATIONNAME = Workfinder;
 				TargetAttributes = {
 					FC93DBF0231FB92D00F1CE23 = {
 						CreatedOnToolsVersion = 10.2;
@@ -192,7 +192,7 @@
 				};
 			};
 			buildConfigurationList = FC93DBEB231FB92D00F1CE23 /* Build configuration list for PBXProject "WorkfinderUserDetailsUseCase" */;
-			compatibilityVersion = "Xcode 11.4";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (

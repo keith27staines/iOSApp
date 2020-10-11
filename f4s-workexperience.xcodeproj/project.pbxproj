@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1070,10 +1070,10 @@
 		40E78E0B1DD31A86000A3776 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = F4S;
+				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = Founders4Schools;
+				ORGANIZATIONNAME = Workfinder;
 				TargetAttributes = {
 					40E78E121DD31A86000A3776 = {
 						CreatedOnToolsVersion = 8.1;
@@ -1106,7 +1106,7 @@
 				};
 			};
 			buildConfigurationList = 40E78E0E1DD31A86000A3776 /* Build configuration list for PBXProject "f4s-workexperience" */;
-			compatibilityVersion = "Xcode 11.4";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1671,7 +1671,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				NAME_FOR_ENVIRONMENT = Staging;
+				NAME_FOR_ENVIRONMENT = Develop;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
