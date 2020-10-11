@@ -1,55 +1,47 @@
-//
-//  F4S.xcconfig
-//  f4s-workexperience
-//
-//  Created by Timea Tivadar on 11/14/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
-
 
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-IPHONEOS_DEPLOYMENT_TARGET = 9.0
+IPHONEOS_DEPLOYMENT_TARGET = 12.0
 SDKROOT = iphoneos
 VALID_ARCHS = arm64 armv7 armv7s
 
-ONLY_ACTIVE_ARCH_DebugF4SLive = NO
-ONLY_ACTIVE_ARCH_ReleaseF4SLive = NO
-ONLY_ACTIVE_ARCH_DebugF4S = NO
-ONLY_ACTIVE_ARCH_ReleaseF4S = NO
+ONLY_ACTIVE_ARCH_DebugDevelop = YES
+ONLY_ACTIVE_ARCH_DebugStaging = YES
+ONLY_ACTIVE_ARCH_DebugLive = YES
+ONLY_ACTIVE_ARCH_ReleaseStaging = NO
+ONLY_ACTIVE_ARCH_ReleaseLive = NO
 ONLY_ACTIVE_ARCH = $(ONLY_ACTIVE_ARCH_$(CONFIGURATION))
 
-OTHER_SWIFT_FLAGS_DebugF4S = -DSTAGING $(inherited)
-OTHER_SWIFT_FLAGS_ReleaseF4S = -DSTAGING $(inherited)
-OTHER_SWIFT_FLAGS_DebugF4Live = -DPRODUCTION $(inherited)
-OTHER_SWIFT_FLAGS_ReleaseF4SLive = -DPRODUCTION $(inherited)
+OTHER_SWIFT_FLAGS_DebugDevelop = -DDEVELOP $(inherited)
+OTHER_SWIFT_FLAGS_DebugStaging = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS_ReleaseStaging = -DSTAGING $(inherited)
+OTHER_SWIFT_FLAGS_DebugLive = -DPRODUCTION $(inherited)
+OTHER_SWIFT_FLAGS_ReleaseLive = -DPRODUCTION $(inherited)
 OTHER_SWIFT_FLAGS = $(OTHER_SWIFT_FLAGS_$(CONFIGURATION))
 
-CODE_SIGN_ENTITLEMENTS_DebugF4SLive = f4s-workexperience/Config/F4SDevelopment.entitlements
-CODE_SIGN_ENTITLEMENTS_ReleaseF4SLive = f4s-workexperience/Config/F4SDistribution.entitlements
-CODE_SIGN_ENTITLEMENTS_DebugF4S = f4s-workexperience/Config/F4SDevelopment.entitlements
-CODE_SIGN_ENTITLEMENTS_ReleaseF4S = f4s-workexperience/Config/F4SDistribution.entitlements
+CODE_SIGN_ENTITLEMENTS_DebugDevelop = f4s-workexperience/Config/DebugDevelop.entitlements
+CODE_SIGN_ENTITLEMENTS_DebugStaging = f4s-workexperience/Config/DebugStaging.entitlements
+CODE_SIGN_ENTITLEMENTS_ReleaseStaging = f4s-workexperience/Config/ReleaseStaging.entitlements
+CODE_SIGN_ENTITLEMENTS_DebugLive = f4s-workexperience/Config/DebugLive.entitlements
+CODE_SIGN_ENTITLEMENTS_ReleaseLive = f4s-workexperience/Config/ReleaseLive.entitlements
 CODE_SIGN_ENTITLEMENTS = $(CODE_SIGN_ENTITLEMENTS_$(CONFIGURATION))
 
-PRODUCT_BUNDLE_IDENTIFIER_DebugF4SLive = com.f4s.workexperience.f4s
-PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4SLive = com.f4s.workexperience.f4s
-PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s
-PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_DebugDevelop = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_DebugStaging = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseStaging = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_DebugLive = com.f4s.workexperience.f4s
+PRODUCT_BUNDLE_IDENTIFIER_ReleaseLive = com.f4s.workexperience.f4s
 PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_$(CONFIGURATION))
 
-DEVELOPMENT_TEAM_DebugF4SLive = YB7C23CK6Q
-DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q
-DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q
-DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q
+DEVELOPMENT_TEAM_DebugDevelop = YB7C23CK6Q
+DEVELOPMENT_TEAM_DebugStaging = YB7C23CK6Q
+DEVELOPMENT_TEAM_ReleaseStaging = YB7C23CK6Q
+DEVELOPMENT_TEAM_DebugLive = YB7C23CK6Q
+DEVELOPMENT_TEAM_ReleaseLive = YB7C23CK6Q
 DEVELOPMENT_TEAM = $(DEVELOPMENT_TEAM_$(CONFIGURATION))
 
-CODE_SIGN_IDENTITY_DebugF4SLive = iPhone Developer
-CODE_SIGN_IDENTITY_ReleaseF4SLive = iPhone Distribution
-CODE_SIGN_IDENTITY_DebugF4S = iPhone Developer
-CODE_SIGN_IDENTITY_ReleaseF4S = iPhone Distribution
+CODE_SIGN_IDENTITY_DebugDevelop = iPhone Developer
+CODE_SIGN_IDENTITY_DebugStaging = iPhone Developer
+CODE_SIGN_IDENTITY_ReleaseStaging = iPhone Distribution
+CODE_SIGN_IDENTITY_DebugLive = iPhone Developer
+CODE_SIGN_IDENTITY_ReleaseLive = iPhone Distribution
 CODE_SIGN_IDENTITY = $(CODE_SIGN_IDENTITY_$(CONFIGURATION))
-
-PRODUCT_BUNDLE_IDENTIFIER_DebugF4SLive = com.f4s.workexperience.f4s
-PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4SLive = com.f4s.workexperience.f4s
-PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s
-PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s
-PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_$(CONFIGURATION))

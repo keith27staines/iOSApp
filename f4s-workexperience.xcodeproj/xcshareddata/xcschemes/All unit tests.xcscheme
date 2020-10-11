@@ -51,7 +51,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "DebugF4S"
+      buildConfiguration = "DebugDevelop"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "NO"
@@ -374,7 +374,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "DebugF4S"
+      buildConfiguration = "DebugDevelop"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -399,7 +399,7 @@
       </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "DebugF4S"
+      buildConfiguration = "DebugDevelop"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -416,10 +416,10 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "DebugF4S">
+      buildConfiguration = "DebugDevelop">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "ReleaseF4S"
+      buildConfiguration = "DebugDevelop"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
