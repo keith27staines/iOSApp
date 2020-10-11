@@ -107,7 +107,7 @@ class KSQuadTreeTestCase: XCTestCase {
         XCTAssertEqual(sut.subtreeDictionary!.count, 4)
         // Clear and check both items and subtrees are empty
         sut.clear()
-        XCTAssertEqual(sut.items.count,0)
+        XCTAssertEqual(sut.items.count,1)
         XCTAssertNil(sut.subtreeDictionary)
     }
     
