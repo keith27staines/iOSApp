@@ -1416,7 +1416,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		201458B71E1BA9B900DBC9BD /* DebugF4SLive */ = {
+		201458B71E1BA9B900DBC9BD /* DebugLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -1480,9 +1480,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = DebugF4SLive;
+			name = DebugLive;
 		};
-		201458B81E1BA9B900DBC9BD /* DebugF4SLive */ = {
+		201458B81E1BA9B900DBC9BD /* DebugLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C8235BD4A169F7DD6BA6996 /* Pods-f4s-workexperience.debugf4slive.xcconfig */;
 			buildSettings = {
@@ -1517,9 +1517,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = DebugF4SLive;
+			name = DebugLive;
 		};
-		201458BB1E1BA9C400DBC9BD /* ReleaseF4SLive */ = {
+		201458BB1E1BA9C400DBC9BD /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -1578,9 +1578,9 @@
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = ReleaseF4SLive;
+			name = ReleaseLive;
 		};
-		201458BC1E1BA9C400DBC9BD /* ReleaseF4SLive */ = {
+		201458BC1E1BA9C400DBC9BD /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 590A4AE101882A503C247BC5 /* Pods-f4s-workexperience.releasef4slive.xcconfig */;
 			buildSettings = {
@@ -1615,9 +1615,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = ReleaseF4SLive;
+			name = ReleaseLive;
 		};
-		40D53C841E30EA2900D7AA32 /* DebugF4S */ = {
+		40D53C841E30EA2900D7AA32 /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -1681,9 +1681,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = DebugF4S;
+			name = DebugDevelop;
 		};
-		40D53C851E30EA2900D7AA32 /* DebugF4S */ = {
+		40D53C851E30EA2900D7AA32 /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */;
 			buildSettings = {
@@ -1717,9 +1717,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = DebugF4S;
+			name = DebugDevelop;
 		};
-		40D53C881E30EA6E00D7AA32 /* ReleaseF4S */ = {
+		40D53C881E30EA6E00D7AA32 /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
 			buildSettings = {
@@ -1778,9 +1778,9 @@
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = ReleaseF4S;
+			name = ReleaseStaging;
 		};
-		40D53C891E30EA6E00D7AA32 /* ReleaseF4S */ = {
+		40D53C891E30EA6E00D7AA32 /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 698B16C1DEA4421DE6C2C9D6 /* Pods-f4s-workexperience.releasef4s.xcconfig */;
 			buildSettings = {
@@ -1814,9 +1814,111 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = ReleaseF4S;
+			name = ReleaseStaging;
 		};
-		FCFBD00D2250D69700A9361D /* DebugF4S */ = {
+		538476292532F07800E3B888 /* DebugStaging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20B1281F1DDA1D5B00CE3F1F /* f4s-workexperience.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				NAME_FOR_ENVIRONMENT = Staging;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = DebugStaging;
+		};
+		5384762A2532F07800E3B888 /* DebugStaging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C244124FAD6DA2320378A05F /* Pods-f4s-workexperience.debugf4s.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.staging;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_DebugF4SLive = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4S = YB7C23CK6Q;
+				DEVELOPMENT_TEAM_ReleaseF4SLive = YB7C23CK6Q;
+				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.1.9;
+				NAME_FOR_ENVIRONMENT = Staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
+				PRODUCT_BUNDLE_IDENTIFIER_ReleaseF4S = com.f4s.workexperience.f4s;
+				PRODUCT_NAME = Workfinder;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/f4s-workexperience/f4s-workexperience-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = DebugStaging;
+		};
+		5384762B2532F07800E3B888 /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5EDAD0D218CD01AA5D5D2DD5 /* Pods-f4s-workexperienceTests.debugf4s.xcconfig */;
 			buildSettings = {
@@ -1890,9 +1992,85 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 			};
-			name = DebugF4S;
+			name = DebugStaging;
 		};
-		FCFBD00E2250D69700A9361D /* DebugF4SLive */ = {
+		FCFBD00D2250D69700A9361D /* DebugDevelop */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EDAD0D218CD01AA5D5D2DD5 /* Pods-f4s-workexperienceTests.debugf4s.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "f4s-workexperienceTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.f4s.f4s-workexperienceTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
+			};
+			name = DebugDevelop;
+		};
+		FCFBD00E2250D69700A9361D /* DebugLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A8C2B2FDB72FFFD854511B24 /* Pods-f4s-workexperienceTests.debugf4slive.xcconfig */;
 			buildSettings = {
@@ -1966,9 +2144,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 			};
-			name = DebugF4SLive;
+			name = DebugLive;
 		};
-		FCFBD00F2250D69700A9361D /* ReleaseF4S */ = {
+		FCFBD00F2250D69700A9361D /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D01AFAF1CC1AF1F3203880BF /* Pods-f4s-workexperienceTests.releasef4s.xcconfig */;
 			buildSettings = {
@@ -2036,9 +2214,9 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = ReleaseF4S;
+			name = ReleaseStaging;
 		};
-		FCFBD0102250D69700A9361D /* ReleaseF4SLive */ = {
+		FCFBD0102250D69700A9361D /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0022DD3F6308590A19CBCF7B /* Pods-f4s-workexperienceTests.releasef4slive.xcconfig */;
 			buildSettings = {
@@ -2106,7 +2284,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfinder.app/Workfinder";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = ReleaseF4SLive;
+			name = ReleaseLive;
 		};
 /* End XCBuildConfiguration section */
 
@@ -2114,35 +2292,38 @@
 		40E78E0E1DD31A86000A3776 /* Build configuration list for PBXProject "f4s-workexperience" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				40D53C841E30EA2900D7AA32 /* DebugF4S */,
-				201458B71E1BA9B900DBC9BD /* DebugF4SLive */,
-				40D53C881E30EA6E00D7AA32 /* ReleaseF4S */,
-				201458BB1E1BA9C400DBC9BD /* ReleaseF4SLive */,
+				40D53C841E30EA2900D7AA32 /* DebugDevelop */,
+				538476292532F07800E3B888 /* DebugStaging */,
+				201458B71E1BA9B900DBC9BD /* DebugLive */,
+				40D53C881E30EA6E00D7AA32 /* ReleaseStaging */,
+				201458BB1E1BA9C400DBC9BD /* ReleaseLive */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = ReleaseF4S;
+			defaultConfigurationName = ReleaseLive;
 		};
 		40E78E3B1DD31A86000A3776 /* Build configuration list for PBXNativeTarget "f4s-workexperience" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				40D53C851E30EA2900D7AA32 /* DebugF4S */,
-				201458B81E1BA9B900DBC9BD /* DebugF4SLive */,
-				40D53C891E30EA6E00D7AA32 /* ReleaseF4S */,
-				201458BC1E1BA9C400DBC9BD /* ReleaseF4SLive */,
+				40D53C851E30EA2900D7AA32 /* DebugDevelop */,
+				5384762A2532F07800E3B888 /* DebugStaging */,
+				201458B81E1BA9B900DBC9BD /* DebugLive */,
+				40D53C891E30EA6E00D7AA32 /* ReleaseStaging */,
+				201458BC1E1BA9C400DBC9BD /* ReleaseLive */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = ReleaseF4S;
+			defaultConfigurationName = ReleaseLive;
 		};
 		FCFBD0112250D69700A9361D /* Build configuration list for PBXNativeTarget "f4s-workexperienceTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FCFBD00D2250D69700A9361D /* DebugF4S */,
-				FCFBD00E2250D69700A9361D /* DebugF4SLive */,
-				FCFBD00F2250D69700A9361D /* ReleaseF4S */,
-				FCFBD0102250D69700A9361D /* ReleaseF4SLive */,
+				FCFBD00D2250D69700A9361D /* DebugDevelop */,
+				5384762B2532F07800E3B888 /* DebugStaging */,
+				FCFBD00E2250D69700A9361D /* DebugLive */,
+				FCFBD00F2250D69700A9361D /* ReleaseStaging */,
+				FCFBD0102250D69700A9361D /* ReleaseLive */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = ReleaseF4S;
+			defaultConfigurationName = ReleaseLive;
 		};
 /* End XCConfigurationList section */
 	};

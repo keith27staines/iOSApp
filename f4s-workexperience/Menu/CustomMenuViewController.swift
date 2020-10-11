@@ -275,6 +275,8 @@ extension CustomMenuViewController {
         }
         var environmentString: String
         switch Config.environmentName {
+        case "DEVELOP":
+            environmentString = "DEVELOP"
         case "STAGING":
             environmentString = "STAGING"
         case "PRODUCTION":

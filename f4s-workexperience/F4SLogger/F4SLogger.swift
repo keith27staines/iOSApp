@@ -46,12 +46,17 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         switch environment {
         case .production: Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
         case .staging: Mixpanel.initialize(token: "416fe88ddb1b0375acaf5cb6c1d998ec")
+        case .develop: Mixpanel.initialize(token: "416fe88ddb1b0375acaf5cb6c1d998ec")
         }
     }
     
     func startBugsnag(for environment: EnvironmentType) {
         let bugsnagConfiguration: BugsnagConfiguration
         switch environment {
+        case .develop:
+            bugsnagConfiguration = BugsnagConfiguration("e965364f05c37d903a6aa3f34498cc3f")
+            bugsnagConfiguration.releaseStage = "develop"
+            assert(bugsnagConfiguration.apiKey == "e965364f05c37d903a6aa3f34498cc3f", "Wrong api key")
         case .staging:
             bugsnagConfiguration = BugsnagConfiguration("e965364f05c37d903a6aa3f34498cc3f")
             bugsnagConfiguration.releaseStage = "staging"

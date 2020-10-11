@@ -97,7 +97,6 @@ public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerPro
     
     private func beginCompanyFileDownloadIfNecessary() {
         guard companyFileDownloadService?.isDownloading == false else { return }
-        //guard isCompanyDownloadFileStale() == true else { return }
         beginCompanyFileDownload()
     }
     
@@ -114,9 +113,10 @@ public class F4SCompanyDownloadManager  : NSObject, F4SCompanyDownloadManagerPro
     var companyFileDownloadFromUrl: URL {
         let urlString: String
         switch Config.environment {
-        case .staging:
+        case .develop:
             urlString = "https://api-workfinder-com-develop.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
-            //urlString =   "https://api-workfinder-com-release.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
+        case .staging:
+            urlString =   "https://api-workfinder-com-release.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
         case .production:
             urlString = "https://api-workfinder-com-master.s3.eu-west-2.amazonaws.com/company-locations.jsonl.xz"
         }
