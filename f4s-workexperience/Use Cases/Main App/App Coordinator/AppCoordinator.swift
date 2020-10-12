@@ -229,7 +229,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
 
 extension AppCoordinator : DeviceRegisteringProtocol {
     func registerDevice(token: Data) {
-        deviceRegistrar = DeviceRegistrar(userRepository: injected.userRepository)
+        deviceRegistrar = DeviceRegistrar(
+            userRepository: injected.userRepository,
+            environmentType: Config.environment,
+            log: log
+        )
         deviceRegistrar?.registerDevice(token: token)
     }
 }

@@ -88,6 +88,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.textColor = UIColor.darkText
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.text = NSLocalizedString(mode.screenHeadingText, comment: "")
         return label
@@ -132,6 +133,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let fieldName = NSLocalizedString("Email address", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
+        textField.textColor = UIColor.darkText
         textField.returnKeyType = .next
         textField.keyboardType = .emailAddress
         textField.textContentType = .username
@@ -146,6 +148,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let fieldName = NSLocalizedString("Parent or guardian email", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
+        textField.textColor = UIColor.darkText
         textField.returnKeyType = .next
         textField.keyboardType = .emailAddress
         textField.textContentType = .emailAddress
@@ -160,6 +163,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let fieldName = NSLocalizedString("First and last name", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
+        textField.textColor = UIColor.darkText
         textField.returnKeyType = .next
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
@@ -174,6 +178,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let fieldName = NSLocalizedString("nickname", comment: "The user's preferred short name")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
+        textField.textColor = UIColor.darkText
         textField.returnKeyType = .next
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
@@ -188,6 +193,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let fieldName = NSLocalizedString("Phone number", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
+        textField.textColor = UIColor.darkText
         textField.keyboardType = .phonePad
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -205,6 +211,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         } else {
             stack.textfield.textContentType = .password
         }
+        stack.textfield.textColor = UIColor.darkText
         stack.textfield.autocapitalizationType = .none
         stack.textfield.autocorrectionType = .no
         stack.textfield.returnKeyType = .done
@@ -215,6 +222,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     
     lazy var passwordInstructionLabel: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor.darkText
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
         label.text = "Passwords must be at least 8 characters and contain a mixture of lower and upper case characters and numbers"
@@ -248,6 +256,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let label = UILabel()
         label.text = NSLocalizedString("Forgotten password?", comment: "")
         label.font = self.linkFont
+        label.textColor = UIColor.darkText
         label.textAlignment = .right
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
@@ -417,6 +426,7 @@ extension RegisterAndSignInBaseViewController {
 
     func makeSwitchLabel(text: String) -> UILabel {
         let label = UILabel()
+        label.textColor = UIColor.darkText
         label.numberOfLines = 2
         label.attributedText = makeAttributedText(text: text, linkText: nil)
         return label
@@ -424,6 +434,7 @@ extension RegisterAndSignInBaseViewController {
     
     func makeSwitchLinkLabel(text: String, linkText: String, selector: Selector) -> UILabel {
         let label = UILabel()
+        label.textColor = UIColor.darkText
         label.isUserInteractionEnabled = true
         label.numberOfLines = 2
         label.attributedText = makeAttributedText(text: text, linkText: linkText)

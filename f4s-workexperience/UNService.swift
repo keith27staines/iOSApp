@@ -3,11 +3,6 @@ import Foundation
 import UserNotifications
 import WorkfinderCommon
 
-enum NotificationType: String {
-    case other
-    case recommendation
-}
-
 class UNService : NSObject {
     
     private let didDeclineKey: String = "didDeclineRemoteNotifications"
@@ -94,38 +89,34 @@ class UNService : NSObject {
         }
         let state = UIApplication.shared.applicationState
         if state == .background  || state == .inactive{
-            dispatchToBestDestination(notificationData: notification)
+            dispatchToBestDestination(pushNotification: notification)
         } else if state == .active {
             // do nothing
         }
     }
     
-    func dispatchToBestDestination(notificationData: PushNotification) {
-        switch notificationData.type {
-        case NotificationType.recommendation:
-            appCoordinator.showRecommendation(uuid: nil, applicationSource: .pushNotification)
-        case NotificationType.other:
-            appCoordinator.showRecommendation(uuid: nil, applicationSource: .none)
-        }
+    func dispatchToBestDestination(pushNotification: PushNotification) {
+//        switch notificationData.type {
+//        case NotificationType.recommendation:
+//            appCoordinator.showRecommendation(uuid: nil, applicationSource: .pushNotification)
+//        case NotificationType.other:
+//            appCoordinator.showRecommendation(uuid: nil, applicationSource: .none)
+//        }
     }
 }
 
 struct PushNotification {
-    var type: NotificationType
+    var text: String?
+    var objectType: String?
+    var objectId:  F4SUUID?
+    var action: String?
     
     init?(userInfo: [AnyHashable:Any]) {
         guard let _ = userInfo["aps"] as? [AnyHashable: Any] else { return nil }
-        let typeString = userInfo["type"] as? String ?? "other"
-        guard let notificationType = NotificationType(rawValue: typeString) else { return nil }
-        self.type = notificationType
+        objectType = userInfo["object_type"] as? String
+        objectId = userInfo["object_id"] as? String
+        action = userInfo["action"] as? String
     }
-    
-    func extractNotificationType(userInfo:[AnyHashable: Any]) -> NotificationType? {
-        guard let typeString = userInfo["type"] as? String,
-            let notificationType = NotificationType(rawValue: typeString) else { return nil }
-        return notificationType
-    }
-    
 }
 
 extension UNService : UNUserNotificationCenterDelegate {
@@ -134,7 +125,8 @@ extension UNService : UNUserNotificationCenterDelegate {
     // 1. The application was not previously running but has been instantiated by the user tapping a notification
     // 2. The application was running in the background and the user tapped a notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Remote notification received with app in BACKGROUND: \(#function)")
+        guard response.actionIdentifier != UNNotificationDismissActionIdentifier else { return }
+        print("User tapped remote notification: \(#function)")
         let userInfo = response.notification.request.content.userInfo
         handleRemoteNotification(userInfo: userInfo)
         completionHandler()

@@ -33,9 +33,9 @@ enum RegisterAndSignInMode {
     var switchModeActionText: String {
         switch self {
         case .register:
-            return NSLocalizedString("Log in here", comment: "log in with your existing account here")
+            return NSLocalizedString("Or log in here", comment: "log in with your existing account here")
         case .signIn:
-            return NSLocalizedString("Register here", comment: "register for your user account here")
+            return NSLocalizedString("Or register here", comment: "register for your user account here")
         }
     }
     
