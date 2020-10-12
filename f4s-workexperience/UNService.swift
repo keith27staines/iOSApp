@@ -11,13 +11,15 @@ enum NotificationType: String {
 class UNService : NSObject {
     
     private let didDeclineKey: String = "didDeclineRemoteNotifications"
+    private let userRepository: UserRepositoryProtocol
     weak var appCoordinator: AppCoordinatorProtocol!
     let center = UNUserNotificationCenter.current()
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
     var permissionHasBeenRequested = false
     
-    init(appCoordinator: AppCoordinatorProtocol) {
+    init(appCoordinator: AppCoordinatorProtocol, userRepository: UserRepositoryProtocol) {
         self.appCoordinator = appCoordinator
+        self.userRepository = userRepository
         super.init()
         center.delegate = self
     }
@@ -45,24 +47,23 @@ class UNService : NSObject {
     }
     
     private func suggestEnableRecommendations(from viewController: UIViewController) {
-        #warning("Delete return, uncomment following lines")
-        return
-//        let alertController = UIAlertController (title: "Would you like to receive notifications when you have new recommendations?", message: "We recommend positions matched to you", preferredStyle: .alert)
-//        
-//        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
-//        alertController.addAction(cancelAction)
-//        
-//        let settingsAction = UIAlertAction(title: "Enable notifications", style: .default) { (_) -> Void in
-//            
-//
-//            self.center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] isAuthorized, _ in
-//                guard let self = self, isAuthorized else { return }
-//                DispatchQueue.main.async { UIApplication.shared.registerForRemoteNotifications() }
-//                self.permissionHasBeenRequested = true
-//            }
-//        }
-//        alertController.addAction(settingsAction)
-//        viewController.present(alertController, animated: true, completion: nil)
+        guard let _ = userRepository.loadUser().uuid else { return }
+        let alertController = UIAlertController (title: "Would you like to receive notifications when you have new recommendations?", message: "We recommend positions matched to you", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let settingsAction = UIAlertAction(title: "Enable notifications", style: .default) { (_) -> Void in
+            
+
+            self.center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] isAuthorized, _ in
+                guard let self = self, isAuthorized else { return }
+                DispatchQueue.main.async { UIApplication.shared.registerForRemoteNotifications() }
+                self.permissionHasBeenRequested = true
+            }
+        }
+        alertController.addAction(settingsAction)
+        viewController.present(alertController, animated: true, completion: nil)
     }
     
     private func directUserToSettings(from viewController: UIViewController) {
@@ -84,6 +85,7 @@ class UNService : NSObject {
     }
 
     func handleRemoteNotification(userInfo: [AnyHashable: Any]) {
+        print(userInfo)
         updateTabBarBadgeNumbers() // Always take the opportunity to do this if there is UI to show it
         guard let notification = PushNotification(userInfo: userInfo) else {
             log.debug("Unrecognised notification. UserInfo: \(userInfo.debugDescription)",
