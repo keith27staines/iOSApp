@@ -7,8 +7,8 @@ public enum ApplicationSource: String {
     case recommendationsTab
     case other
     
-    public init(source: DeeplinkDispatchInfo.Source) {
-        switch source {
+    public init(deeplinkSource: DeeplinkDispatchInfo.Source) {
+        switch deeplinkSource {
         case .deeplink:
             self = .deeplink
         case .pushNotification:

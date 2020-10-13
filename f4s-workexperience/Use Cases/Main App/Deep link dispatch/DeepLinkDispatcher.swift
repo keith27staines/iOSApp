@@ -3,59 +3,34 @@ import WorkfinderCommon
 
 class DeepLinkDispatcher {
     let log: F4SAnalytics
+    weak var coordinator: AppCoordinatorProtocol?
     
-    init(log: F4SAnalytics) {
+    init(log: F4SAnalytics, coordinator: AppCoordinatorProtocol) {
         self.log = log
+        self.coordinator = coordinator
     }
     
-    func dispatchDeepLink(_ url: URL, with coordinator: AppCoordinatorProtocol) {
+    func dispatch(info: DeeplinkDispatchInfo) {
         DispatchQueue.main.async { [weak self] in
-            guard
-                let self = self,
-                let components = self.deeplinkUrlToDispatch(url: url)
-                else { return }
-            self.dispatch(objectType: components.0, uuid: components.1, with: coordinator)
+            guard let self = self, let coordinator = self.coordinator else { return }
+            let source = ApplicationSource(deeplinkSource: info.source)
+            let log = self.log
+            
+            switch info.objectType {
+            case .recommendation:
+                switch info.source {
+                case .deeplink:
+                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_start))
+                    coordinator.showRecommendation(uuid: info.objectId, applicationSource: source)
+                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_convert))
+                case .pushNotification:
+                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_pushNotification_start))
+                    coordinator.showRecommendation(uuid: info.objectId, applicationSource: source)
+                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_pushNotification_convert))
+                }
+            case .placement:
+                coordinator.showApplications(uuid: info.objectId)
+            }
         }
-    }
-    
-    func dispatch(objectType: String, uuid: F4SUUID?, with coordinator: AppCoordinatorProtocol) {
-        switch objectType {
-        case "recommendations":
-            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_start))
-            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_convert))
-            coordinator.showRecommendation(uuid: uuid, applicationSource: .deeplink)
-        case "projects":
-            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_start))
-            log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_convert))
-            coordinator.showProject(uuid: uuid, applicationSource: .deeplink)
-        case "placement":
-            break
-        default:
-            break
-        }
-    }
-
-    func deeplinkUrlToDispatch(url: URL) -> (String, String?)? {
-        if let placementUuid = placementViewRequestUuid(url: url) {
-            return ("placement", placementUuid)
-        }
-        guard
-            let path = URLComponents(url: url, resolvingAgainstBaseURL: true)?.path.split(separator: "/")
-            else { return nil }
-        guard let firstPathComponent = path.first else { return nil }
-        if path.count == 1 { return (String(firstPathComponent), nil) }
-        let secondPathComponent = String(path[1])
-        return (String(firstPathComponent), secondPathComponent)
-    }
-    
-    func placementViewRequestUuid(url: URL) -> F4SUUID? {
-        let prefix = "?placement="
-        guard
-            let path = url.absoluteString.removingPercentEncoding,
-            let index: String.Index = path.index(of: prefix)
-        else { return nil }
-        let offset = path.index(index, offsetBy: prefix.count)
-        let uuid = path[offset...]
-        return String(uuid)
     }
 }

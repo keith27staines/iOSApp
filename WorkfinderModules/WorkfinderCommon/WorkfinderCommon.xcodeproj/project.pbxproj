@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53022184253591C800C01B10 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53022183253591C800C01B10 /* PushNotification.swift */; };
 		53C76059251B6F9A0072281E /* DeeplinkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C76058251B6F9A0072281E /* DeeplinkInfo.swift */; };
 		53C7605D251B704B0072281E /* DeeplinkInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */; };
 		53DFFDF22518BAF2006A975D /* ApplicationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFFDF12518BAF2006A975D /* ApplicationSource.swift */; };
@@ -127,6 +128,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53022183253591C800C01B10 /* PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		53C76058251B6F9A0072281E /* DeeplinkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfo.swift; sourceTree = "<group>"; };
 		53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfoTests.swift; sourceTree = "<group>"; };
 		53DFFDF12518BAF2006A975D /* ApplicationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSource.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				FCC85DC9245184A200BC600E /* Picklist */,
 				FC473E8C2451CCF1004CEA17 /* TemplateModel.swift */,
 				FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */,
+				53022183253591C800C01B10 /* PushNotification.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53022184253591C800C01B10 /* PushNotification.swift in Sources */,
 				FCE5191622493B4C00B550C9 /* String+Extensions.swift in Sources */,
 				FC8F957C233BA6710027BE02 /* MockCoordinators.swift in Sources */,
 				FC24F9132333CA88005C0A08 /* RequestVerb.swift in Sources */,

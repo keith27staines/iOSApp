@@ -74,69 +74,30 @@ class UNService : NSObject {
         alertController.addAction(settingsAction)
         viewController.present(alertController, animated: true, completion: nil)
     }
-    
-    func updateTabBarBadgeNumbers() {
-        appCoordinator?.updateBadges()
-    }
-
-    func handleRemoteNotification(userInfo: [AnyHashable: Any]) {
-        print(userInfo)
-        updateTabBarBadgeNumbers() // Always take the opportunity to do this if there is UI to show it
-        guard let notification = PushNotification(userInfo: userInfo) else {
-            log.debug("Unrecognised notification. UserInfo: \(userInfo.debugDescription)",
-                functionName: #function, fileName: #file, lineNumber: #line)
-            return
-        }
-        let state = UIApplication.shared.applicationState
-        if state == .background  || state == .inactive{
-            dispatchToBestDestination(pushNotification: notification)
-        } else if state == .active {
-            // do nothing
-        }
-    }
-    
-    func dispatchToBestDestination(pushNotification: PushNotification) {
-//        switch notificationData.type {
-//        case NotificationType.recommendation:
-//            appCoordinator.showRecommendation(uuid: nil, applicationSource: .pushNotification)
-//        case NotificationType.other:
-//            appCoordinator.showRecommendation(uuid: nil, applicationSource: .none)
-//        }
-    }
-}
-
-struct PushNotification {
-    var text: String?
-    var objectType: String?
-    var objectId:  F4SUUID?
-    var action: String?
-    
-    init?(userInfo: [AnyHashable:Any]) {
-        guard let _ = userInfo["aps"] as? [AnyHashable: Any] else { return nil }
-        objectType = userInfo["object_type"] as? String
-        objectId = userInfo["object_id"] as? String
-        action = userInfo["action"] as? String
-    }
 }
 
 extension UNService : UNUserNotificationCenterDelegate {
 
-    // This method is called when:
-    // 1. The application was not previously running but has been instantiated by the user tapping a notification
-    // 2. The application was running in the background and the user tapped a notification
+    // This method is called when the user taps a notification banner
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         guard response.actionIdentifier != UNNotificationDismissActionIdentifier else { return }
         print("User tapped remote notification: \(#function)")
         let userInfo = response.notification.request.content.userInfo
-        handleRemoteNotification(userInfo: userInfo)
+        let pushNotification = PushNotification(userInfo: userInfo)
+        appCoordinator.handlePushNotification(pushNotification)
         completionHandler()
     }
     
-    // This method is called when the app is in the foreground
+    /// This method is where the app decides what to do if a notification is received while the app is in the
+    /// foreground. The approaches here is just to call the completion handler to tell iOS to show the notification
+    /// banner to the user, update badges and play a sound.
+    /// In this approach, the handling of the notification is deferred until the user taps the banner
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Remote notification received with app in FOREGROUND: \(#function)")
-        let userInfo = notification.request.content.userInfo
-        handleRemoteNotification(userInfo: userInfo)
-        completionHandler([.badge, .sound])
+//        let userInfo = notification.request.content.userInfo
+//        let pushNotification = PushNotification(userInfo: userInfo)
+//        appCoordinator.handlePushNotification(pushNotification)
+        completionHandler([.badge, .sound, .alert])
     }
+    
 }

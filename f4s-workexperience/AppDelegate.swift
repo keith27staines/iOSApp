@@ -81,7 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("Remote notification called: \(#function)")
         DispatchQueue.main.async { [ weak self] in
-            self?.appCoordinator.handleRemoteNotification(userInfo: userInfo)
+            guard let pushNotification = PushNotification(userInfo: userInfo) else { return
+            }
+            self?.appCoordinator.handlePushNotification(pushNotification)
             completionHandler(UIBackgroundFetchResult.newData)
         }
     }

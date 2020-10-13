@@ -13,12 +13,11 @@ public protocol AppCoordinatorProtocol : Coordinating {
     var log: F4SAnalyticsAndDebugging { get }
     func showRecommendation(uuid: F4SUUID?, applicationSource: ApplicationSource)
     func showProject(uuid: F4SUUID?, applicationSource: ApplicationSource)
-    func showApplications()
+    func showApplications(uuid: F4SUUID?)
     func showSearch()
     func updateBadges()
-    func handleDeeplink(info: DeeplinkDispatchInfo)
-    func handleRemoteNotification(userInfo: [AnyHashable: Any])
     func handleDeepLinkUrl(url: URL) -> Bool
+    func handlePushNotification(_ pushNotification: PushNotification?)
     func registerDevice(token: Data)
     func requestPushNotifications(from viewController: UIViewController)
 }
@@ -39,7 +38,7 @@ public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordi
 }
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    func showApplications()
+    func showApplications(uuid: F4SUUID?)
     func showSearch()
     func navigateToRecommendations()
     func dispatchRecommendationToSearchTab(uuid: F4SUUID)

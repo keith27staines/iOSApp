@@ -23,7 +23,7 @@ extension CoreInjectionNavigationCoordinator: CompanyCoordinatorParentProtocol {
     }
     
     public func showApplications() {
-        injected.appCoordinator?.showApplications()
+        injected.appCoordinator?.showApplications(uuid: nil)
     }
     
     public func showSearch() {

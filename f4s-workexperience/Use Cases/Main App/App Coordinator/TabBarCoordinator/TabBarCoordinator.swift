@@ -219,7 +219,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         parentCtrl.present(navigationController, animated: true, completion: nil)
     }
     
-    func showApplications() {
+    func showApplications(uuid: F4SUUID?) {
         navigateToApplications()
     }
     

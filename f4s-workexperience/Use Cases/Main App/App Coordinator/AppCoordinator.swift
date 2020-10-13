@@ -13,14 +13,14 @@ import GooglePlaces
 extension UIApplication {}
 
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
-    
+
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
     var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol?
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
-    let deepLinkDispatcher: DeepLinkDispatcher
+    var deepLinkDispatcher: DeepLinkDispatcher?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
@@ -45,15 +45,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         
         self.window = window
         self.injected = inject
-        self.deepLinkDispatcher = DeepLinkDispatcher(log: inject.log)
         self.companyCoordinatorFactory = companyCoordinatorFactory
         self.hostsProvider = hostsProvider
         self.localStore = localStore
         self.deviceRegistrar = deviceRegistrar
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
-        
         super.init(parent:nil, navigationRouter: navigationRouter)
+        self.deepLinkDispatcher = DeepLinkDispatcher(log: inject.log, coordinator: self)
         self.injected.appCoordinator = self
         userNotificationService = UNService(appCoordinator: self, userRepository: injected.userRepository)
     }
@@ -113,7 +112,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         tabBarCoordinator.start()
     }
     
-    func showApplications() { tabBarCoordinator?.showApplications() }
+    func showApplications(uuid: F4SUUID?) { tabBarCoordinator?.showApplications(uuid: uuid) }
     
     func showSearch() { tabBarCoordinator?.showSearch() }
     
@@ -125,23 +124,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         let service = RecommendationsService(networkConfig: injected.networkConfig)
         return service
     }()
-    
-    func handleDeeplink(info: DeeplinkDispatchInfo) {
-        let applicationSource = ApplicationSource(source: info.source)
-        switch info.objectType {
-        case .application:
-            break
-        case .recommendation:
-            switch info.action {
-            case .list:
-                showRecommendation(uuid: nil, applicationSource: applicationSource)
-            case .view(let uuid):
-                showRecommendation(uuid: uuid, applicationSource: applicationSource)
-            }
-        case .project:
-            break
-        }
-    }
     
     func showProject(uuid: F4SUUID?, applicationSource: ApplicationSource) {
         guard let uuid = uuid else { return }
@@ -222,9 +204,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     func updateBadges() { tabBarCoordinator?.updateBadges() }
     
-    func handleRemoteNotification(userInfo: [AnyHashable : Any]) {
-        userNotificationService.handleRemoteNotification(userInfo: userInfo)
-    }
 }
 
 extension AppCoordinator : DeviceRegisteringProtocol {
@@ -262,10 +241,25 @@ extension AppCoordinator : OnboardingCoordinatorDelegate {
 }
 
 extension AppCoordinator {
+    
+    func handlePushNotification(_ pushNotification: PushNotification?) {
+        guard
+            let pushNotification = pushNotification,
+            let deepLinkInfo = DeeplinkDispatchInfo(pushNotification: pushNotification),
+            let dispatcher = deepLinkDispatcher
+        else { return }
+        dispatcher.dispatch(info: deepLinkInfo)
+    }
+    
     func handleDeepLinkUrl(url: URL) -> Bool {
-        deepLinkDispatcher.dispatchDeepLink(url, with: self)
+        guard
+            let deeplinkInfo = DeeplinkDispatchInfo(deeplinkUrl: url),
+            let dispatcher = deepLinkDispatcher
+        else { return false }
+        dispatcher.dispatch(info: deeplinkInfo)
         return true
     }
+
 }
 
 
