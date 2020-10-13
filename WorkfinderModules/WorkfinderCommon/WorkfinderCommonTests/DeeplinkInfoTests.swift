@@ -5,9 +5,11 @@ import WorkfinderCommon
 class DeeplinkInfoTests: XCTestCase {
 
     func test_initialise() {
-        var sut = DeeplinkDispatchInfo(source: .deeplink, objectType: .application, action: .open("UUID"))
-        XCTAssertEqual(sut.objectType, .application)
+        let sut = DeeplinkDispatchInfo(source: .deeplink, objectType: .placement, objectId: "1234", action: .open)
+        XCTAssertEqual(sut.objectType, .placement)
         XCTAssertEqual(sut.source, .deeplink)
+        XCTAssertEqual(sut.objectId, "1234")
+        XCTAssertEqual(sut.action, .open)
     }
 
 }
