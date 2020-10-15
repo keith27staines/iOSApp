@@ -48,10 +48,17 @@ public class UnderlineView: UIView {
                         leading: self.leadingAnchor,
                         bottom: self.bottomAnchor,
                         trailing: nil)
-        lineView.heightAnchor.constraint(equalToConstant: 2).isActive = true
+
+        underlineHeight.isActive = true
         valueConstraint = lineView.widthAnchor.constraint(equalToConstant: 1)
         valueConstraint.isActive = true
     }
+    
+    lazy var underlineHeight: NSLayoutConstraint = {
+        let constraint = lineView.heightAnchor.constraint(equalToConstant: 2)
+        constraint.priority = .defaultHigh
+        return constraint
+    }()
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

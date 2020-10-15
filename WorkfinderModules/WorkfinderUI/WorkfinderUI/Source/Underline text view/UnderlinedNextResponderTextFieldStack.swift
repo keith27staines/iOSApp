@@ -14,7 +14,7 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
         let textField = NextResponderTextField()
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.addTarget(self, action: #selector(_textChanged), for: .editingChanged)
-        textField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        textField.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
         return textField
     }()
     
@@ -54,7 +54,6 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
         ])
         stack.axis = .horizontal
         stack.spacing = 4
-        stack.distribution = .fillProportionally
         return stack
     }()
     

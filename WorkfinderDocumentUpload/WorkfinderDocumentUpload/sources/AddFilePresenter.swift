@@ -72,7 +72,7 @@ class AddFilePresenter: AddFilePresenterProtocol {
     var view: AddFileViewControllerProtocol?
     let screenTitle: String = "Supporting documents"
     let heading: String = "Stand out from the crowd!"
-    let subheading1: String = "Add your CV or any supporting document to make it easier for companies to choose you."
+    let subheading1: String = "Applications that have a supporting CV or portfolio attached are much more likely to receive an offer."
     let subheading2: String = "We accept one PDF or Word document only"
     var fractionComplete: Float?
     
