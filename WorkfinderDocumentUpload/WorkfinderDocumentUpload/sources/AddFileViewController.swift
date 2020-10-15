@@ -20,6 +20,8 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
         subheading2.text = presenter.subheading2
         let state = presenter.state
         addFileButton.setTitle(state.addButtonTitle, for: .normal)
+        addFileButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        addFileButton.titleLabel?.minimumScaleFactor = 0.7
         primaryButton.setTitle(state.primaryButtonTitle, for: .normal)
         secondaryButton.setTitle(state.secondaryButtonTitle, for: .normal)
         addFileButton.isEnabled = state.addButtonIsEnabled
