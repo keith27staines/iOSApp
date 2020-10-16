@@ -57,10 +57,6 @@ class SideDrawerLogosTableviewCell: SideDrawerTableViewCell {
 }
 
 class SideDrawerTableViewHeaderCell: SideDrawerTableViewCell {
-    override func commonSetup() {
-        super.commonSetup()
-    }
-    
 }
 
 class SideDrawerTableViewCell: TableViewCell {

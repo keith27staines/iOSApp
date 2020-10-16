@@ -161,9 +161,9 @@ class ProjectPresenter: ProjectPresenterProtocol {
                 text: locationString)
             case 1:
                 let isPaid = detail.project?.isPaid ?? false
-                let text = isPaid ? "This is a paid work placement at £6-8 p/h depending on age" : "This is an unpaid project"
+                let text = isPaid ? "This is a paid work placement at £6.45-8.21 p/h depending on age" : "This is a voluntary project."
                 return ProjectBulletPointsPresenter(
-                    title: "Paid or unpaid?",
+                    title: "Salary",
                     text: text)
             case 2:
                 let defaultText = "2 weeks"

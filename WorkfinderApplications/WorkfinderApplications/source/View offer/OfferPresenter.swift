@@ -121,6 +121,8 @@ class OfferPresenter: OfferPresenterProtocol {
             return OfferDetailCellInfo(firstLine: "Host contact", secondLine: hostContact)
         case .email:
             return OfferDetailCellInfo(firstLine: "Email", secondLine: email)
+//        case .salary:
+//            return OfferDetailCellInfo(firstLine: "Salary", secondLine: <#T##String?#>)
         case .location:
             return OfferDetailCellInfo(firstLine: "Location", secondLine: location)
         case .notes:
@@ -136,6 +138,7 @@ class OfferPresenter: OfferPresenterProtocol {
         case .company: coordinator?.showCompany(application: application)
         case .host: coordinator?.showCompanyHost(application: application)
         case .email: break
+        // case .salary: break
         case .location: break
         case .notes: break
         }
@@ -149,6 +152,7 @@ class OfferPresenter: OfferPresenterProtocol {
         case .company: return .disclosureIndicator
         case .host: return .disclosureIndicator
         case .email: return .none
+        //case .salary: return .none
         case .location: return .none
         case .notes: return .none
         }
@@ -161,6 +165,7 @@ fileprivate enum OfferTableRowType: Int, CaseIterable {
     case company
     case host
     case email
+    //case salary
     case location
     case notes
 }
