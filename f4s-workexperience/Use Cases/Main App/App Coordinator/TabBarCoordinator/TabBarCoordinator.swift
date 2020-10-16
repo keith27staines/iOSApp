@@ -48,8 +48,28 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         navigateToMostAppropriateInitialTab()
     }
     
+    private var recommendationsService: RecommendationsServiceProtocol?
     public func navigateToMostAppropriateInitialTab() {
-        navigateToMap()
+        guard injected.userRepository.loadUser().candidateUuid != nil else {
+            navigateToMap()
+            return
+        }
+        recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)
+        recommendationsService?.fetchRecommendations { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let recommendations):
+                if recommendations.count == 0 {
+                    self.navigateToMap()
+                } else {
+                    self.navigateToRecommendations()
+                    self.appCoordinator?.requestPushNotifications(from:self.topNavigationController)
+                }
+            case .failure(_):
+                self.navigateToMap()
+            }
+        }
+        
     }
     
     public func updateBadges() {
@@ -190,6 +210,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
         let leftSideMenuViewController = SideMenuViewController()
         leftSideMenuViewController.tabBarCoordinator = self
+        leftSideMenuViewController.appCoordinator = appCoordinator
         leftSideMenuViewController.log = injected.log
 
         let leftSideNavController = UINavigationController(rootViewController: leftSideMenuViewController)

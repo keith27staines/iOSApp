@@ -11,6 +11,7 @@ import Foundation
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
+    func signIn(completion: @escaping (Bool) -> Void)
     func showRecommendation(uuid: F4SUUID?, applicationSource: ApplicationSource)
     func showProject(uuid: F4SUUID?, applicationSource: ApplicationSource)
     func showApplications(uuid: F4SUUID?)
