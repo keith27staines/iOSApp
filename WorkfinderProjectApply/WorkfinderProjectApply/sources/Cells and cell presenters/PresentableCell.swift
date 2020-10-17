@@ -7,7 +7,7 @@ protocol PresentableCellProtocol: AnyObject {
     func setNeedsLayout()
 }
 
-class PresentableCell: UICollectionViewCell, PresentableCellProtocol {
+class PresentableCell: UITableViewCell, PresentableCellProtocol {
     var widthConstraint: NSLayoutConstraint!
     
     func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
@@ -33,8 +33,8 @@ class PresentableCell: UICollectionViewCell, PresentableCellProtocol {
         widthConstraint.isActive = false
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
     }
     

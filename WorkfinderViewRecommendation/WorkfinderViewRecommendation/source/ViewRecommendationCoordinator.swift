@@ -7,7 +7,7 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     
     let recommendationUuid: F4SUUID
     
-    /// tuple containing this coordinator, the recommended Workplace and the recommended association  uuid
+    /// Tuple containing this coordinator, the recommended Workplace and the recommended association  uuid
     var onSuccess: (ViewRecommendationCoordinator, Workplace, F4SUUID) -> Void
     var onCancel: (ViewRecommendationCoordinator) -> Void
     

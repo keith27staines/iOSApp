@@ -27,8 +27,8 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case aboutPlacement
         case additionalCommentsHeading
         case additionalComments
-        case skillsHeading
-        case skillsYouWillGain
+//        case skillsHeading
+//        case skillsYouWillGain
         case keyActivitiesSectionHeading
         case keyActivities
         case aboutYouSectionHeading
@@ -48,8 +48,8 @@ class ProjectPresenter: ProjectPresenterProtocol {
             case .aboutPlacement: return aboutIdentifier
             case .additionalCommentsHeading: return sectionHeadingIdentifier
             case .additionalComments: return aboutIdentifier
-            case .skillsHeading: return sectionHeadingIdentifier
-            case .skillsYouWillGain: return "capsule"
+//            case .skillsHeading: return sectionHeadingIdentifier
+//            case .skillsYouWillGain: return "capsule"
             case .keyActivitiesSectionHeading: return sectionHeadingIdentifier
             case .keyActivities: return "keyActivities"
             case .aboutYouSectionHeading: return sectionHeadingIdentifier
@@ -126,8 +126,8 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutPlacement: return 1
         case .additionalCommentsHeading: return 1
         case .additionalComments: return 1
-        case .skillsHeading: return 1
-        case .skillsYouWillGain: return skills.count
+//        case .skillsHeading: return 1
+//        case .skillsYouWillGain: return skills.count
         case .keyActivitiesSectionHeading: return 1
         case .keyActivities: return activities.count
         case .aboutYouSectionHeading: return 1
@@ -187,10 +187,10 @@ class ProjectPresenter: ProjectPresenterProtocol {
             return SectionHeadingPresenter(title: "Additional requirements")
         case .additionalComments:
             return AboutPresenter(text: additionalRequirements, defaultText: "There are no additional requirements.")
-        case .skillsHeading:
-            return SectionHeadingPresenter(title: "Skills you will gain")
-        case .skillsYouWillGain:
-            return CapsulePresenter(text: skills[indexPath.row])
+//        case .skillsHeading:
+//            return SectionHeadingPresenter(title: "Skills you will gain")
+//        case .skillsYouWillGain:
+//            return CapsulePresenter(text: skills[indexPath.row])
         case .keyActivitiesSectionHeading:
             return SectionHeadingPresenter(title: "Key activities")
         case .keyActivities:
