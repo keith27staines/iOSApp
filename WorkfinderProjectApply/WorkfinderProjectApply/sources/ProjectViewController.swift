@@ -94,6 +94,8 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     
     func refreshFromPresenter() {
         tableView.reloadData()
+        tableView.beginUpdates()
+        tableView.endUpdates()
         tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         companyLogo.load(
             companyName: presenter.companyName ?? "",
@@ -119,11 +121,9 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }
     
     lazy var tableView: UITableView = {
-        let frame = CGRect(x: 0, y: 0, width: 360, height: 2000)
         let view = UITableView()
         view.backgroundColor = UIColor.white
         view.dataSource = self
-        view.delegate = self
         view.estimatedRowHeight = UITableView.automaticDimension
         view.rowHeight = UITableView.automaticDimension
         view.estimatedSectionHeaderHeight = UITableView.automaticDimension
@@ -131,6 +131,8 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
         view.estimatedSectionFooterHeight = UITableView.automaticDimension
         view.sectionFooterHeight = UITableView.automaticDimension
         view.separatorStyle = .none
+        view.allowsSelection = false
+        view.delegate = self
         registerCellsForReuse(view: view)
         return view
     }()
@@ -144,8 +146,8 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
                       forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectBulletPoints))
         view.register(AboutCell.self,
                       forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.aboutCompany))
-//        view.register(CapsuleCell.self,
-//                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.skillsYouWillGain))
+        view.register(CapsuleCollectionCell.self,
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.skillsYouWillGain))
         view.register(KeyActivityCell.self,
                       forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.keyActivities))
         view.register(AboutCell.self,
@@ -196,27 +198,18 @@ extension ProjectViewController: UITableViewDataSource {
             else {
             return UITableViewCell()
         }
-        cell.parentWidth = max((tableView.frame.width - 2),300)
-        cell.refreshFromPresenter(cellPresenter)
+        cell.refreshFromPresenter(cellPresenter, width: tableView.frame.width)
         let tableViewCell = cell as! UITableViewCell
+        tableViewCell.invalidateIntrinsicContentSize()
         return tableViewCell
     }
 }
 
 extension ProjectViewController: UITableViewDelegate {
-    
-}
-
-extension ProjectViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
-
 
 class ExpandedTouchButton: UIButton {
 

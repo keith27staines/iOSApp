@@ -13,7 +13,7 @@ class SectionHeadingCell: PresentableCell {
         return label
     }()
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? SectionHeadingPresenterProtocol else { return }
         label.text = presenter.title
     }

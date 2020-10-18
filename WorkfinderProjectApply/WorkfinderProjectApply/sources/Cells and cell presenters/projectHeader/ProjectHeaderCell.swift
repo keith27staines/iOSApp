@@ -14,7 +14,7 @@ class ProjectHeaderCell: PresentableCell {
         return label
     }()
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? ProjectHeaderPresenterProtocol else { return }
         label.attributedText = presenter.attributedTitle
     }

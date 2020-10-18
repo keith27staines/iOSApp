@@ -45,7 +45,7 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
         return stack
     }()
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? ProjectBulletPointsPresenterProtocol else { return }
         title.text = presenter.title
         bulletText.text = presenter.text

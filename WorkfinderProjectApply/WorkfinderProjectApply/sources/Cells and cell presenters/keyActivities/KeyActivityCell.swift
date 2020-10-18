@@ -32,7 +32,7 @@ class KeyActivityCell: SimpleTextCell {
         return stack
     }()
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? KeyActivityPresenterProtocol else { return }
         bulletText.text = presenter.text
     }
