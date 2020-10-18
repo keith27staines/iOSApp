@@ -127,7 +127,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .additionalCommentsHeading: return 1
         case .additionalComments: return 1
         case .skillsHeading: return 1
-        case .skillsYouWillGain: return skills.count
+        case .skillsYouWillGain: return 1
         case .keyActivitiesSectionHeading: return 1
         case .keyActivities: return activities.count
         case .aboutYouSectionHeading: return 1
@@ -190,7 +190,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .skillsHeading:
             return SectionHeadingPresenter(title: "Skills you will gain")
         case .skillsYouWillGain:
-            return CapsulePresenter(text: skills[indexPath.row])
+            return CapsuleCollectionPresenter(strings: skills)
         case .keyActivitiesSectionHeading:
             return SectionHeadingPresenter(title: "Key activities")
         case .keyActivities:

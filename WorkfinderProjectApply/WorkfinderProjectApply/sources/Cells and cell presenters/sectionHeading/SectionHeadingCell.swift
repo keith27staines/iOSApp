@@ -6,12 +6,14 @@ class SectionHeadingCell: PresentableCell {
     lazy var label: UILabel = {
         let label = UILabel()
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
+        let height = label.heightAnchor.constraint(greaterThanOrEqualToConstant: 20)
+        height.priority = .defaultHigh
+        height.isActive = true
         Style.sectionHeading.text.applyTo(label: label)
         return label
     }()
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? SectionHeadingPresenterProtocol else { return }
         label.text = presenter.title
     }

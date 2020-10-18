@@ -11,7 +11,7 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
         return label
     }()
     
-    lazy var text: UILabel = {
+    lazy var bulletText: UILabel = {
         let label = UILabel()
         Style.body.text.applyTo(label: label)
         label.numberOfLines = 0
@@ -20,7 +20,7 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
         return label
     }()
     
-    lazy var bullet: UILabel = {
+    lazy var bulletPoint: UILabel = {
         let label = UILabel()
         label.text = "\u{2022}"
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -32,8 +32,8 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
     
     lazy var bulletPointStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            bullet,
-            text
+            bulletPoint,
+            bulletText
         ])
         stack.axis = .horizontal
         stack.alignment = .firstBaseline
@@ -45,10 +45,10 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
         return stack
     }()
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? ProjectBulletPointsPresenterProtocol else { return }
         title.text = presenter.title
-        text.text = presenter.text
+        bulletText.text = presenter.text
     }
     
     override func configureViews() {

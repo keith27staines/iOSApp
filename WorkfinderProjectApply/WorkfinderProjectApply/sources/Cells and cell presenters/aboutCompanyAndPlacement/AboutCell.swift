@@ -3,7 +3,7 @@ import UIKit
 
 class AboutCell: SimpleTextCell {
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? AboutPresenterProtocol else { return }
         Style.body.text.applyTo(label: label)
         label.text = presenter.text

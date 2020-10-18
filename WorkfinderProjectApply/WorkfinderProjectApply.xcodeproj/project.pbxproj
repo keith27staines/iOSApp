@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5397E0E8253B8C510009EFAC /* CapsuleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */; };
+		5397E0E9253B8C510009EFAC /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E7253B8C500009EFAC /* CapsuleView.swift */; };
+		5397E0F1253B8E0F0009EFAC /* CapsuleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */; };
 		FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */; };
 		FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */; };
 		FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */; };
@@ -23,8 +26,7 @@
 		FC42486D24C608CB00831D9F /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42486C24C608CB00831D9F /* Styling.swift */; };
 		FC48066B24C8094200018C10 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48066A24C8094200018C10 /* SuccessViewController.swift */; };
 		FC70C9DB24DC7F27007DF84D /* WorkfinderDocumentUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC70C9DA24DC7F27007DF84D /* WorkfinderDocumentUpload.framework */; };
-		FC9B676A24C464170091A556 /* CapsuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676924C464170091A556 /* CapsuleCell.swift */; };
-		FC9B676C24C464260091A556 /* CapsulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676B24C464260091A556 /* CapsulePresenter.swift */; };
+		FC9B676C24C464260091A556 /* CapsuleCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676B24C464260091A556 /* CapsuleCollectionPresenter.swift */; };
 		FC9B676E24C464540091A556 /* KeyActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676D24C464540091A556 /* KeyActivityCell.swift */; };
 		FC9B677024C464630091A556 /* KeyActivityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B676F24C464630091A556 /* KeyActivityPresenter.swift */; };
 		FC9B677224C4648E0091A556 /* ProjectContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B677124C4648E0091A556 /* ProjectContactCell.swift */; };
@@ -56,6 +58,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleCollectionView.swift; sourceTree = "<group>"; };
+		5397E0E7253B8C500009EFAC /* CapsuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
+		5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCollectionCell.swift; sourceTree = "<group>"; };
 		FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
@@ -72,8 +77,7 @@
 		FC42486C24C608CB00831D9F /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		FC48066A24C8094200018C10 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		FC70C9DA24DC7F27007DF84D /* WorkfinderDocumentUpload.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUpload.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC9B676924C464170091A556 /* CapsuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCell.swift; sourceTree = "<group>"; };
-		FC9B676B24C464260091A556 /* CapsulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsulePresenter.swift; sourceTree = "<group>"; };
+		FC9B676B24C464260091A556 /* CapsuleCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCollectionPresenter.swift; sourceTree = "<group>"; };
 		FC9B676D24C464540091A556 /* KeyActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyActivityCell.swift; sourceTree = "<group>"; };
 		FC9B676F24C464630091A556 /* KeyActivityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyActivityPresenter.swift; sourceTree = "<group>"; };
 		FC9B677124C4648E0091A556 /* ProjectContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectContactCell.swift; sourceTree = "<group>"; };
@@ -197,8 +201,10 @@
 			isa = PBXGroup;
 			children = (
 				FC9B677A24C47CE80091A556 /* SkillsSectionHeaderCell.swift */,
-				FC9B676924C464170091A556 /* CapsuleCell.swift */,
-				FC9B676B24C464260091A556 /* CapsulePresenter.swift */,
+				5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */,
+				5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */,
+				5397E0E7253B8C500009EFAC /* CapsuleView.swift */,
+				FC9B676B24C464260091A556 /* CapsuleCollectionPresenter.swift */,
 			);
 			path = skillsYouWillGain;
 			sourceTree = "<group>";
@@ -411,19 +417,21 @@
 				FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */,
 				FC9B677224C4648E0091A556 /* ProjectContactCell.swift in Sources */,
 				FC15D79324C45CA300543E6F /* AboutPresenter.swift in Sources */,
+				5397E0F1253B8E0F0009EFAC /* CapsuleCollectionCell.swift in Sources */,
+				5397E0E9253B8C510009EFAC /* CapsuleView.swift in Sources */,
 				FC15D78F24C45C2A00543E6F /* ProjectBulletPointPresenter.swift in Sources */,
 				FC15D77A24C41AAA00543E6F /* ProjectHeaderCell.swift in Sources */,
 				FC15D78524C459DD00543E6F /* CellPresenterProtocol.swift in Sources */,
 				FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */,
-				FC9B676C24C464260091A556 /* CapsulePresenter.swift in Sources */,
+				FC9B676C24C464260091A556 /* CapsuleCollectionPresenter.swift in Sources */,
 				FC15D78124C41CDB00543E6F /* PresentableCell.swift in Sources */,
 				FC9B677824C4790F0091A556 /* SectionHeadingPresenter.swift in Sources */,
 				FC15D78D24C45C1800543E6F /* ProjectBulletPointCell.swift in Sources */,
 				FC9B677624C478ED0091A556 /* SectionHeadingCell.swift in Sources */,
 				FC9B677B24C47CE80091A556 /* SkillsSectionHeaderCell.swift in Sources */,
-				FC9B676A24C464170091A556 /* CapsuleCell.swift in Sources */,
 				FC9B677424C464AE0091A556 /* ProjectContactPresenter.swift in Sources */,
 				FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */,
+				5397E0E8253B8C510009EFAC /* CapsuleCollectionView.swift in Sources */,
 				FC42486D24C608CB00831D9F /* Styling.swift in Sources */,
 				FC15D79124C45C9300543E6F /* AboutCell.swift in Sources */,
 				FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */,

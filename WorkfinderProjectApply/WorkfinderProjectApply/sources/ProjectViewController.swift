@@ -93,7 +93,10 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }
     
     func refreshFromPresenter() {
-        collectionView.reloadData()
+        tableView.reloadData()
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         companyLogo.load(
             companyName: presenter.companyName ?? "",
             urlString: presenter.companyLogoUrl,
@@ -117,34 +120,40 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
         
     }
     
-    lazy var collectionView: UICollectionView = {
-        let layout = LeftAlignedFlowLayout()
-        let frame = CGRect(x: 0, y: 0, width: 360, height: 100)
-        let view = UICollectionView(frame: frame, collectionViewLayout: layout)
+    lazy var tableView: UITableView = {
+        let view = UITableView()
         view.backgroundColor = UIColor.white
         view.dataSource = self
+        view.estimatedRowHeight = UITableView.automaticDimension
+        view.rowHeight = UITableView.automaticDimension
+        view.estimatedSectionHeaderHeight = UITableView.automaticDimension
+        view.sectionHeaderHeight = UITableView.automaticDimension
+        view.estimatedSectionFooterHeight = UITableView.automaticDimension
+        view.sectionFooterHeight = UITableView.automaticDimension
+        view.separatorStyle = .none
+        view.allowsSelection = false
         view.delegate = self
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         registerCellsForReuse(view: view)
         return view
     }()
     
-    func registerCellsForReuse(view: UICollectionView) {
-        view.register(SectionHeadingCell.self, forCellWithReuseIdentifier: presenter.reuseIdentifierForSection(.aboutCompanySectionHeading))
+    func registerCellsForReuse(view: UITableView) {
+        
+        view.register(SectionHeadingCell.self, forCellReuseIdentifier: presenter.reuseIdentifierForSection(.aboutCompanySectionHeading))
         view.register(ProjectHeaderCell.self,
-                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectHeader))
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectHeader))
         view.register(ProjectBulletPointWithTitleCell.self,
-                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectBulletPoints))
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectBulletPoints))
         view.register(AboutCell.self,
-                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.aboutCompany))
-        view.register(CapsuleCell.self,
-                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.skillsYouWillGain))
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.aboutCompany))
+        view.register(CapsuleCollectionCell.self,
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.skillsYouWillGain))
         view.register(KeyActivityCell.self,
-                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.keyActivities))
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.keyActivities))
         view.register(AboutCell.self,
-                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.aboutYou))
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.aboutYou))
         view.register(ProjectContactCell.self,
-                      forCellWithReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectContact))
+                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectContact))
 
     }
     
@@ -152,14 +161,14 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
         view.backgroundColor = UIColor.white
         view.addSubview(banner)
         view.addSubview(applyNowButton)
-        view.addSubview(collectionView)
+        view.addSubview(tableView)
         view.addSubview(companyLogo)
         let guide = view.safeAreaLayoutGuide
         banner.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
-        collectionView.anchor(top: banner.bottomAnchor, leading: guide.leadingAnchor, bottom: applyNowButton.topAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        tableView.anchor(top: banner.bottomAnchor, leading: guide.leadingAnchor, bottom: applyNowButton.topAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         applyNowButton.anchor(top: nil, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20))
         companyLogo.anchor(top: banner.bottomAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: -companyLogoSide/2, left: 20, bottom: 0, right: 0))
-        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
     }
     
     init(coordinator: ProjectApplyCoordinator, presenter: ProjectPresenter) {
@@ -171,45 +180,36 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-extension ProjectViewController: UICollectionViewDataSource {
+extension ProjectViewController: UITableViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         presenter.numberOfSections()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.numberOfItemsInSection(section)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cellPresenter = presenter.presenterForIndexPath(indexPath),
             let reuseIdentifier = presenter.reuseIdentifierForSection(indexPath.section),
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PresentableCellProtocol
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? PresentableCellProtocol
             else {
-            return UICollectionViewCell()
+            return UITableViewCell()
         }
-        cell.parentWidth = collectionView.frame.width 
-        cell.refreshFromPresenter(cellPresenter)
-        let collectionViewCell = cell as! UICollectionViewCell
-        return collectionViewCell
+        cell.refreshFromPresenter(cellPresenter, width: tableView.frame.width)
+        let tableViewCell = cell as! UITableViewCell
+        tableViewCell.invalidateIntrinsicContentSize()
+        return tableViewCell
     }
 }
 
-extension ProjectViewController: UICollectionViewDelegate {
-    
-}
-
-extension ProjectViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+extension ProjectViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
-
 
 class ExpandedTouchButton: UIButton {
 

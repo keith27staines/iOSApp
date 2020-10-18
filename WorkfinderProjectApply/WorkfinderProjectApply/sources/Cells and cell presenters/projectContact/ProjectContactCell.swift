@@ -6,7 +6,7 @@ class ProjectContactCell: PresentableCell {
 
     var linkedInLink: String?
     
-    override func refreshFromPresenter(_ presenter: CellPresenterProtocol) {
+    override func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
         guard let presenter = presenter as? ProjectContactPresenterProtocol else { return }
         name.text = presenter.name
         title.text = presenter.title
