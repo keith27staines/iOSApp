@@ -10,14 +10,12 @@ class CapsuleCollectionView: UIView {
     private var arrangedCapsules: [CapsuleView] = []
     private var addedConstraints = [NSLayoutConstraint]()
     private var frameWidth: CGFloat = 300
-    private var heightConstant: CGFloat = 0
     private var x: CGFloat = 0
     
     func reload(strings: [String], width: CGFloat) {
         frameWidth = width
         clear()
         addCapsules(strings: strings)
-        activateCapsuleConstraints()
         invalidateIntrinsicContentSize()
     }
     
@@ -30,18 +28,15 @@ class CapsuleCollectionView: UIView {
             capsule.translatesAutoresizingMaskIntoConstraints = false
             arrangeCapsule(capsule)
         }
-        activateCapsuleConstraints()
-        invalidateIntrinsicContentSize()
-    }
-    
-    private func activateCapsuleConstraints() {
+        if let lastCapule = arrangedCapsules.last {
+            addedConstraints.append(bottomAnchor.constraint(equalTo: lastCapule.bottomAnchor, constant: minimumVerticalSpacing))
+        }
         NSLayoutConstraint.activate(addedConstraints)
-        height.constant = heightConstant
+        invalidateIntrinsicContentSize()
     }
     
     func clear() {
         x = 0
-        heightConstant = 0
         removeAllCapsulesFromSuperview()
         capsules = []
         arrangedCapsules = []
@@ -72,7 +67,6 @@ class CapsuleCollectionView: UIView {
         addedConstraints.append(capsule.leadingAnchor.constraint(equalTo: leadingAnchor))
         addedConstraints.append(capsule.topAnchor.constraint(equalTo: last.bottomAnchor, constant: minimumVerticalSpacing))
         x = capsule.intrinsicContentSize.width + minimumHorizontalSpacing
-        heightConstant += capsule.intrinsicContentSize.height
     }
     
     func arrangeCapsuleToCurrentRow(_ capsule: CapsuleView) {
@@ -89,14 +83,11 @@ class CapsuleCollectionView: UIView {
         addedConstraints.append(capsule.leadingAnchor.constraint(equalTo: leadingAnchor))
         addedConstraints.append(capsule.topAnchor.constraint(equalTo: topAnchor))
         x += capsule.intrinsicContentSize.width + minimumHorizontalSpacing
-        heightConstant = capsule.intrinsicContentSize.height + minimumVerticalSpacing
     }
     
     private func removeAllCapsulesFromSuperview() {
         capsules.forEach { (capsule) in capsule.removeFromSuperview() }
     }
-    
-    var height: NSLayoutConstraint!
     
     init(capsuleRadius: CGFloat = 23, minimumHorizontalSpacing: CGFloat = 10, minimumVerticalSpacing: CGFloat = 10) {
         self.radius = capsuleRadius
@@ -104,13 +95,8 @@ class CapsuleCollectionView: UIView {
         self.minimumHorizontalSpacing = minimumHorizontalSpacing
         super.init(frame: CGRect.zero)
         self.backgroundColor = UIColor.white
-        height = heightAnchor.constraint(equalToConstant: 1)
-        height.priority = .defaultHigh
-        height.isActive = true
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
 }
