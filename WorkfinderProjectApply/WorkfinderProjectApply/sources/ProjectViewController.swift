@@ -94,13 +94,21 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     
     func refreshFromPresenter() {
         tableView.reloadData()
-        tableView.beginUpdates()
-        tableView.endUpdates()
         tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         companyLogo.load(
             companyName: presenter.companyName ?? "",
             urlString: presenter.companyLogoUrl,
             completion: nil)
+        applyNowButton.isEnabled = presenter.status == "open"
+        showClosedForApplicationMessageIfNecessary(status: presenter.status)
+    }
+    
+    func showClosedForApplicationMessageIfNecessary(status: String?) {
+        guard let status = status, status != "open" else { return }
+        let alert = UIAlertController(title: "Project \(status)" , message: "This project is not currently accepting applications", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +125,6 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
             return
         }
         coordinator?.onTapApply()
-        
     }
     
     lazy var tableView: UITableView = {

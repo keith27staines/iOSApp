@@ -21,8 +21,10 @@ public struct RecommendationsListItem: Codable, Hashable {
     }
     
     public struct Project: Codable, Equatable, Hashable {
+        
         public var uuid: F4SUUID?
         public var isPaid: Bool?
+        public var status: String?
         public var isRemote: Bool?
         public var duration: String?
         public var type: ProjectType?
@@ -33,6 +35,7 @@ public struct RecommendationsListItem: Codable, Hashable {
             case uuid
             case isPaid = "is_paid"
             case isRemote = "is_remote"
+            case status
             case duration
             case type
             case additionalComments = "additional_comments"

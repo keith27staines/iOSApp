@@ -7,6 +7,8 @@ protocol ProjectPresenterProtocol {
     var companyName: String? { get }
     var companyLogoUrl: String? { get }
     var projectName: String? { get }
+    var status: String? {get }
+    var isOpenForApplication: Bool { get }
     func loadData(completion: @escaping (Error?) -> Void)
     func onViewDidLoad(view: ProjectViewProtocol)
     func numberOfSections() -> Int
@@ -79,6 +81,14 @@ class ProjectPresenter: ProjectPresenterProtocol {
     var additionalRequirements: String? { detail.project?.additionalComments }
     var skills: [String] { projectType?.skillsAcquired ?? [] }
     private var activities: [String] { projectType?.candidateActivities ?? [] }
+    
+    var isOpenForApplication: Bool {
+        detail.project?.status == "open" ? true : false
+    }
+    
+    var status: String? {
+        detail.project?.status
+    }
     
     init(coordinator: ProjectApplyCoordinator,
          projectUuid: F4SUUID,

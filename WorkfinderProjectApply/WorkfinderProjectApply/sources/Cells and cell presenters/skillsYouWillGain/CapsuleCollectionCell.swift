@@ -17,5 +17,8 @@ class CapsuleCollectionCell: PresentableCell {
         super.configureViews()
         contentView.addSubview(capsuleCollectionView)
         capsuleCollectionView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        let height = contentView.heightAnchor.constraint(equalToConstant: 0)
+        height.priority = .defaultLow
+        height.isActive = true
     }
 }

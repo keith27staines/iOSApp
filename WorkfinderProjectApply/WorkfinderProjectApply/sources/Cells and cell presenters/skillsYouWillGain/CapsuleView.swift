@@ -29,14 +29,16 @@ class CapsuleView: UIView {
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         widthAnchor.constraint(equalTo: label.widthAnchor, constant: 2 * radius).isActive = true
-        heightAnchor.constraint(equalToConstant: 2 * radius).isActive = true
+        let height = heightAnchor.constraint(equalToConstant: 2 * radius)
+        height.priority = .defaultHigh
+        height.isActive = true
         layoutSubviews()
         layer.masksToBounds = true
         layer.cornerRadius = radius
         layer.borderWidth = 1
         layer.borderColor = UIColor.darkGray.cgColor
         widthAnchor.constraint(equalToConstant: intrinsicContentSize.width).isActive = true
-        heightAnchor.constraint(equalToConstant: intrinsicContentSize.height).isActive = true
+
     }
     
     override var intrinsicContentSize: CGSize {
