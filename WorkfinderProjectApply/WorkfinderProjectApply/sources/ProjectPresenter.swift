@@ -74,13 +74,14 @@ class ProjectPresenter: ProjectPresenterProtocol {
     private var company: CompanyJson? { detail.associationDetail?.company }
     private var association: AssociationDetail? { detail.associationDetail }
     private var host: Host? { detail.associationDetail?.host }
-    private var projectType: ProjectTypeJson? { detail.projectType }
-    var projectName: String? { projectType?.name }
+    private var projectType: String? { detail.projectType }
+    private var project: ProjectJson? { detail.project }
+    var projectName: String? { project?.name }
     var companyName: String? { company?.name }
     var companyLogoUrl: String? { company?.logo }
     var additionalRequirements: String? { detail.project?.additionalComments }
-    var skills: [String] { projectType?.skillsAcquired ?? [] }
-    private var activities: [String] { projectType?.candidateActivities ?? [] }
+    var skills: [String] { project?.skillsAcquired ?? [] }
+    private var activities: [String] { project?.candidateActivities ?? [] }
     
     var isOpenForApplication: Bool {
         detail.project?.status == "open" ? true : false
@@ -192,7 +193,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutPlacementSectionHeading:
             return SectionHeadingPresenter(title: "About \(projectName ?? "Project")")
         case .aboutPlacement:
-            return AboutPresenter(text: projectType?.description, defaultText: "No description available")
+            return AboutPresenter(text: project?.description, defaultText: "No description available")
         case .additionalCommentsHeading:
             return SectionHeadingPresenter(title: "Additional requirements")
         case .additionalComments:
@@ -208,7 +209,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutYouSectionHeading:
             return SectionHeadingPresenter(title: "About you")
         case .aboutYou:
-            return AboutPresenter(text: detail.projectType?.aboutCandidate, defaultText: "No candidate qualities are specifed")
+            return AboutPresenter(text: detail.project?.aboutCandidate, defaultText: "No candidate qualities are specifed")
         case .projectContactSectionheading:
             return SectionHeadingPresenter(title: "Project contact")
         case .projectContact:

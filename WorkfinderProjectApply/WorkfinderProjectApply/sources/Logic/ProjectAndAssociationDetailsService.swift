@@ -63,32 +63,9 @@ class ProjectAndAssociationDetailsService: ProjectAndAssociationDetailsServicePr
     
     private func onAssociationDetailLoaded(associationDetail: AssociationDetail) {
         projectAndAssociationDetail.associationDetail = associationDetail
-        guard let projectTypeUuid = projectAndAssociationDetail.project?.type else {
-            return
-        }
-        loadProjectType(uuid: projectTypeUuid)
-    }
-    
-    private func loadProjectType(uuid: F4SUUID) {
-        projectService.fetchProjectType(uuid: uuid) { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let projectType):
-                self.onProjectTypeLoaded(projectType)
-            case .failure(let error):
-                guard (error as? WorkfinderError)?.retry == true else {
-                    self.completion?(Result<ProjectAndAssociationDetail, Error>.failure(error))
-                    return
-                }
-                self.loadProjectType(uuid: uuid)
-            }
-        }
-    }
-    
-    private func onProjectTypeLoaded(_ projectType: ProjectTypeJson) {
-        projectAndAssociationDetail.projectType = projectType
         completion?(Result<ProjectAndAssociationDetail, Error>.success(projectAndAssociationDetail))
     }
+
     
 }
 
