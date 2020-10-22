@@ -75,7 +75,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     func startCoverLetterFlow() {
         let candidate = UserRepository().loadCandidate()
         let associationDetail = projectPresenter?.detail.associationDetail
-        let projectTitle = projectPresenter?.detail.projectType?.name
+        let projectTitle = projectPresenter?.detail.project?.name
         guard
             let companyName = associationDetail?.company?.name,
             let hostName = associationDetail?.host?.displayName

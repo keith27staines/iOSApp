@@ -37,7 +37,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var imageService: SmallImageServiceProtocol = SmallImageService()
     var isProject: Bool { recommendation.project != nil }
     var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
-    var projectTitle: String?  { isProject ? recommendation.project?.type?.name : nil }
+    var projectTitle: String?  { isProject ? recommendation.project?.name : nil }
     
     func loadImage() {
         imageService.fetchImage(

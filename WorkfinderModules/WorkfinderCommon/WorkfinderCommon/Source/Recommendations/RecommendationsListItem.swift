@@ -21,18 +21,21 @@ public struct RecommendationsListItem: Codable, Hashable {
     }
     
     public struct Project: Codable, Equatable, Hashable {
-        
         public var uuid: F4SUUID?
+        public var name: String?
+        public var description: String?
         public var isPaid: Bool?
         public var status: String?
         public var isRemote: Bool?
         public var duration: String?
-        public var type: ProjectType?
+        public var type: F4SUUID?
         public var additionalComments: String?
         public var association: ExpandedAssociation?
         
         enum CodingKeys: String, CodingKey {
             case uuid
+            case name
+            case description
             case isPaid = "is_paid"
             case isRemote = "is_remote"
             case status
@@ -40,11 +43,6 @@ public struct RecommendationsListItem: Codable, Hashable {
             case type
             case additionalComments = "additional_comments"
             case association
-        }
-        
-        public struct ProjectType: Codable, Equatable, Hashable {
-            public var uuid: F4SUUID?
-            public var name: String?
         }
         
         public struct Activity: Codable, Equatable, Hashable {
@@ -64,10 +62,11 @@ public struct ExpandedAssociation: Codable, Equatable, Hashable {
     
     public struct Host: Codable, Equatable, Hashable {
         public var uuid: F4SUUID?
-        public var photoUrl: String?
+        public var photo: String?
         public var fullName: String?
         enum CodingKeys: String, CodingKey {
             case uuid
+            case photo
             case fullName = "full_name"
         }
     }
