@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FCA13FC724BC7F060009C30F"
-               BuildableName = "WorkfinderProjectApply.framework"
-               BlueprintName = "WorkfinderProjectApply"
-               ReferencedContainer = "container:WorkfinderProjectApply.xcodeproj">
+               BlueprintIdentifier = "FC9B331824BEB47100C075CE"
+               BuildableName = "WorkfinderCoverLetter.framework"
+               BlueprintName = "WorkfinderCoverLetter"
+               ReferencedContainer = "container:WorkfinderCoverLetter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,25 +26,12 @@
       buildConfiguration = "DebugDevelop"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FCA13FD024BC7F060009C30F"
-               BuildableName = "WorkfinderProjectApplyTests.xctest"
-               BlueprintName = "WorkfinderProjectApplyTests"
-               ReferencedContainer = "container:WorkfinderProjectApply.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "DebugDevelop"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -55,7 +42,7 @@
       allowLocationSimulation = "YES">
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "ReleaseLive"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -63,18 +50,18 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FCA13FC724BC7F060009C30F"
-            BuildableName = "WorkfinderProjectApply.framework"
-            BlueprintName = "WorkfinderProjectApply"
-            ReferencedContainer = "container:WorkfinderProjectApply.xcodeproj">
+            BlueprintIdentifier = "FC9B331824BEB47100C075CE"
+            BuildableName = "WorkfinderCoverLetter.framework"
+            BlueprintName = "WorkfinderCoverLetter"
+            ReferencedContainer = "container:WorkfinderCoverLetter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "DebugDevelop">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "ReleaseLive"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
