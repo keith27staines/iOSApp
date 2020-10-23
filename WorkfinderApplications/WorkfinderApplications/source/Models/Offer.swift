@@ -14,4 +14,5 @@ struct Offer {
     var reasonWithdrawn: WithdrawReason?
     var offerNotes: String?
     var isRemote: Bool?
+    var salary: String?
 }

@@ -40,7 +40,8 @@ class OfferService: OfferServiceProtocol{
                     logoUrl: json.association?.location?.company?.logo,
                     reasonWithdrawn: nil,
                     offerNotes: json.offer_notes,
-                    isRemote: json.is_remote)
+                    isRemote: json.is_remote,
+                    salary: json.salary)
                 completion(Result<Offer,Error>.success(offer))
             case .failure(let error):
                 completion(Result<Offer,Error>.failure(error))
