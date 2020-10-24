@@ -153,7 +153,7 @@ class MapViewController: UIViewController {
         _ = searchView
         guard let companyFileDownloadManager = self.companyFileDownloadManager else { return }
         companyFileDownloadManager.registerObserver(self)
-        
+        view.isUserInteractionEnabled = true
         adjustAppeareance()
         setupMap()
         setupReachability(nil, useClosures: true)
@@ -170,6 +170,14 @@ class MapViewController: UIViewController {
         displayRefineSearchLabelAnimated()
     }
     
+    var discoveryView: DiscoveryView?
+    func addDiscoveryView() {
+        guard self.discoveryView == nil else { return }
+        let discoveryView = DiscoveryView()
+        self.view.addSubview(discoveryView)
+        self.discoveryView = discoveryView
+    }
+    
     var hasMovedToBestPosition: Bool = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -179,6 +187,7 @@ class MapViewController: UIViewController {
             moveCameraToBestPosition()
             hasMovedToBestPosition = true
         }
+        addDiscoveryView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -356,9 +365,9 @@ extension MapViewController {
     func displayRefineSearchLabelAnimated() {
         let interestsCount = allInterestsSet.count
         if self.refineSearchLabel.isHidden && interestsCount == 0 {
-            self.refineLabelContainerView.isHidden = false
+            //self.refineLabelContainerView.isHidden = false
             self.setupSlideInAnimation(transitionType.slideIn, completionDelegate: self)
-            self.refineSearchLabel.isHidden = false
+            //self.refineSearchLabel.isHidden = false
         }
     }
     
