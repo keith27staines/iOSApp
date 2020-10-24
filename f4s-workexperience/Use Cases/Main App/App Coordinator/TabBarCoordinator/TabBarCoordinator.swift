@@ -257,9 +257,13 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 extension TabBarCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let log = injected.log
+        drawerController!.openDrawerGestureModeMask = .all
+        drawerController!.closeDrawerGestureModeMask = .all
         switch viewController {
         case searchCoordinator.navigationRouter.navigationController:
             log.track(TrackingEvent.makeTabTap(tab: .search))
+            drawerController!.openDrawerGestureModeMask = .bezelPanningCenterView
+            drawerController!.closeDrawerGestureModeMask = .all
         case applicationsCoordinator.navigationRouter.navigationController:
             log.track(TrackingEvent.makeTabTap(tab: .applications))
         case recommendationsCoordinator.navigationRouter.navigationController:
