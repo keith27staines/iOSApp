@@ -16,6 +16,7 @@ import WorkfinderUI
 enum ApplicationState: String, Codable {
     case applied
     case expired
+    case contactingHost = "contacting"
     case viewedByHost = "viewed"
     case applicationDeclined = "declined"
     case savedByHost = "saved"
@@ -29,6 +30,7 @@ enum ApplicationState: String, Codable {
         switch self {
         case .applied: return UIColor(red: 66, green: 191, blue: 235)
         case .expired: return UIColor(red: 72, green: 39, blue: 128)
+        case .contactingHost: return UIColor(red: 66, green: 191, blue: 235)
         case .viewedByHost: return UIColor(red: 66, green: 191, blue: 235)
         case .savedByHost: return UIColor(red: 255, green: 198, blue: 44)
         case .applicationDeclined: return UIColor(red: 72, green: 39, blue: 128)
@@ -44,6 +46,7 @@ enum ApplicationState: String, Codable {
         switch self {
         case .applied: return NSLocalizedString("Application submitted", comment: "")
         case .expired: return NSLocalizedString("Application expired", comment: "")
+        case .contactingHost: return NSLocalizedString("Contacting host", comment: "")
         case .viewedByHost: return NSLocalizedString("Application viewed", comment: "")
         case .savedByHost: return NSLocalizedString("Application viewed", comment: "")
         case .offerMade: return NSLocalizedString("Offer made", comment: "")
@@ -61,7 +64,7 @@ enum ApplicationState: String, Codable {
             return [.viewApplication]
         case .expired:
             return [.viewApplication]
-        case .viewedByHost, .savedByHost:
+        case .contactingHost, .viewedByHost, .savedByHost:
             return [.viewApplication]
         case .applicationDeclined:
             return [.viewApplication]
@@ -82,6 +85,8 @@ enum ApplicationState: String, Codable {
             return NSLocalizedString("You have submitted your application", comment: "")
         case .expired:
             return NSLocalizedString("This application has expired", comment: "")
+        case .contactingHost:
+            return NSLocalizedString("We are contacting the host", comment: "")
         case .viewedByHost, .savedByHost:
             return NSLocalizedString("The host has viewed your application", comment: "")
         case .applicationDeclined:

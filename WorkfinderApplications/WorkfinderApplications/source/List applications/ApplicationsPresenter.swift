@@ -60,6 +60,7 @@ class ApplicationsPresenter {
         let action: ApplicationAction
         switch application.state {
         case .applied: action = .viewApplication
+        case .contactingHost: action = .viewApplication
         case .viewedByHost: action = .viewApplication
         case .savedByHost: action = .viewApplication
         case .applicationDeclined: action = .viewApplication
