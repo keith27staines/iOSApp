@@ -27,7 +27,7 @@ public class LoginHandler: CoreInjectionNavigationCoordinator {
             parent: self,
             navigationRouter: newNavigationRouter,
             inject: injected,
-            hideBackButton: true
+            firstScreenHidesBackButton: true
         )
         addChildCoordinator(coordinator)
         switch screenOrder {

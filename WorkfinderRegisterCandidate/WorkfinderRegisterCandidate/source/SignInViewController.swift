@@ -5,14 +5,15 @@ import WorkfinderUI
 
 class SignInViewController: RegisterAndSignInBaseViewController {
     
-    init(presenter: RegisterAndSignInPresenterProtocol) {
-        super.init(mode: .signIn, presenter: presenter)
+    init(presenter: RegisterAndSignInPresenterProtocol, hidesBackButton: Bool) {
+        super.init(mode: .signIn, presenter: presenter, hidesBackButton: hidesBackButton)
         title = mode.screenTitle
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     override func configureViews() {
+        super.configureViews()
         fieldStack.addArrangedSubview(email)
         fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)

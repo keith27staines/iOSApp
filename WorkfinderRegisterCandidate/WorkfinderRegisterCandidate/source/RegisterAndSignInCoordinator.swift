@@ -19,14 +19,15 @@ public protocol RegisterAndSignInCoordinatorParent: Coordinating {
 }
 
 public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, RegisterAndSignInCoordinatorProtocol {
-    let hideBackButton: Bool
+    let firstScreenHidesBackButton: Bool
     var firstViewController:UIViewController?
-    
+    var screenOrder: SignInScreenOrder = .registerThenLogin
+
     public init(parent: RegisterAndSignInCoordinatorParent?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                hideBackButton: Bool) {
-        self.hideBackButton = hideBackButton
+                firstScreenHidesBackButton: Bool) {
+        self.firstScreenHidesBackButton = firstScreenHidesBackButton
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -36,12 +37,14 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     
     public func startLoginFirst() {
         injected.log.track(TrackingEvent(type: .uc_register_user_start))
+        screenOrder = .loginThenRegister
         presentSignInUserViewController()
     }
     
     func startRegisterFirst() {
         injected.log.track(TrackingEvent(type: .uc_register_user_start))
-        presentRegisterUserViewController(hideBackButton)
+        screenOrder = .registerThenLogin
+        presentRegisterUserViewController()
     }
     
     func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
@@ -74,7 +77,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         }
     }
     
-    func presentRegisterUserViewController(_ hideBackButton: Bool) {
+    func presentRegisterUserViewController() {
         let userRepository = injected.userRepository
         let candidate = userRepository.loadCandidate()
         guard candidate.uuid == nil else {
@@ -91,7 +94,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
             coordinator: self,
             userRepository: userRepository,
             registerUserLogic: registerUserLogic)
-        
+        let hideBackButton = screenOrder == .registerThenLogin && firstScreenHidesBackButton
         let vc = RegisterUserViewController(presenter: presenter, hidesBackButton: hideBackButton)
         firstViewController = vc
         navigationRouter.push(viewController: vc, animated: true)
@@ -109,8 +112,8 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
             coordinator: self,
             userRepository: userRepository,
             registerUserLogic: registerUserLogic)
-        
-        let vc = SignInViewController(presenter: presenter)
+        let hideBackButton = screenOrder == .loginThenRegister && firstScreenHidesBackButton
+        let vc = SignInViewController(presenter: presenter, hidesBackButton: hideBackButton)
         navigationRouter.push(viewController: vc, animated: true)
     }
 }

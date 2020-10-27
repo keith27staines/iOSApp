@@ -52,7 +52,7 @@ public class ErrorHandler: ErrorHandlerProtocol, Coordinating {
             parent: self,
             navigationRouter: navigationRouter,
             inject: coreInjection,
-            hideBackButton: false)
+            firstScreenHidesBackButton: false)
         addChildCoordinator(register)
         register.start()
     }
