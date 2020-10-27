@@ -9,6 +9,8 @@ protocol RegisterAndSignInCoordinatorProtocol {
     func switchMode(_ mode: RegisterAndSignInMode)
     func onUserRegisteredAndCandidateCreated(pop: Bool)
     func onRegisterAndSignInCancelled()
+    func startRegisterFirst()
+    func startLoginFirst()
 }
 
 public protocol RegisterAndSignInCoordinatorParent: Coordinating {
@@ -29,6 +31,15 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     }
     
     public override func start() {
+        startRegisterFirst()
+    }
+    
+    public func startLoginFirst() {
+        injected.log.track(TrackingEvent(type: .uc_register_user_start))
+        presentSignInUserViewController()
+    }
+    
+    func startRegisterFirst() {
         injected.log.track(TrackingEvent(type: .uc_register_user_start))
         presentRegisterUserViewController(hideBackButton)
     }
