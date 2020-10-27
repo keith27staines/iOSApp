@@ -59,7 +59,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
             navigationRouter: navigationRouter,
             mainWindow: UIApplication.shared.windows.first,
             coreInjection: injected)
-        loginHandler.startLoginWorkflow { [weak self] (isLoggedIn) in
+        loginHandler.startLoginWorkflow(screenOrder: .loginThenRegister) { [weak self] (isLoggedIn) in
             guard let self = self else { return }
             self.onboardingViewController?.isLoggedIn = isLoggedIn
         }
