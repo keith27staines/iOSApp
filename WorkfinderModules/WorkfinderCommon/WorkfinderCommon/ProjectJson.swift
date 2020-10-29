@@ -14,6 +14,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var additionalComments: String?
     public var isRemote: Bool?
     public var duration: String?
+    public var startDate: String?
     
     enum CodingKeys: String, CodingKey {
         case uuid
@@ -30,5 +31,6 @@ public struct ProjectJson: Codable, Equatable, Hashable {
         case isRemote = "is_remote"
         case additionalComments = "additional_comments"
         case duration
+        case startDate = "start_date"
     }
 }
