@@ -123,6 +123,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var switchModeLabel: UILabel = {
         let label = UILabel()
         label.text = mode.switchModeLabelText
+        label.textColor = UIColor.darkText
         label.textAlignment = .right
         label.font = self.linkFont
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)

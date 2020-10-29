@@ -70,10 +70,20 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     func switchMode(_ mode: RegisterAndSignInMode) {
         switch mode {
         case .register:
-            navigationRouter.pop(animated: true)
-            break
+            switch screenOrder {
+            case .loginThenRegister:
+                presentRegisterUserViewController()
+            case .registerThenLogin:
+                navigationRouter.pop(animated: true)
+            }
         case .signIn:
-            presentSignInUserViewController()
+            switch screenOrder {
+            case .loginThenRegister:
+                navigationRouter.pop(animated: true)
+            case .registerThenLogin:
+                presentSignInUserViewController()
+                
+            }
         }
     }
     

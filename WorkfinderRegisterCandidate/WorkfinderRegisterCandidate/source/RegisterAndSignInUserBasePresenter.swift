@@ -179,7 +179,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     }
     
     let _emailValidator: (String) -> UnderlineView.State = { string in
-        // return string.isEmail() ? .good : .bad
         let trimmed = string.trimmingCharacters(in: .whitespaces)
         guard trimmed.count > 0 else { return .empty }
         return trimmed.isEmail() ? .good : .bad

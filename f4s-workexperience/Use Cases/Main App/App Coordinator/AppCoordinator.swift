@@ -160,7 +160,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 guard let workfinderError = error as? WorkfinderError else { return }
                 switch workfinderError.code {
                 case 401:
-                    self.signIn(screenOrder: .registerThenLogin) { loggedIn in
+                    self.signIn(screenOrder: .loginThenRegister) { loggedIn in
                         switch loggedIn {
                         case true:
                             self.showRecommendation(uuid: uuid, applicationSource: applicationSource)

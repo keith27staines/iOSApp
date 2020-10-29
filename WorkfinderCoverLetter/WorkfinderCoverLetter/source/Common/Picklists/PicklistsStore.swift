@@ -64,6 +64,7 @@ class PicklistsStore: PicklistsStoreProtocol {
                  .project,
                  .duration,
                  .skills,
+                 .strongestSkills,
                  .attributes:
                 lists[type] = Picklist(type: type, networkConfig: networkConfig)
             case .institutions:
