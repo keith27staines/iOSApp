@@ -130,7 +130,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         guard let section = Section(rawValue: section) else { return 0 }
         switch section {
         case .projectHeader: return 1
-        case .projectBulletPoints: return 3
+        case .projectBulletPoints: return 4
         case .aboutCompanySectionHeading: return 1
         case .aboutCompany: return 1
         case .aboutPlacementSectionHeading: return 1
@@ -183,6 +183,14 @@ class ProjectPresenter: ProjectPresenterProtocol {
                 return ProjectBulletPointsPresenter(
                     title: "Duration",
                     text: text)
+            case 3:
+                guard
+                    let workfinderDateString = detail.project?.startDate,
+                    let date = Date.workfinderDateStringToDate(workfinderDateString)
+                else {
+                    return ProjectBulletPointsPresenter(title: "Start date", text: "unspecified")
+                }
+                return ProjectBulletPointsPresenter(title: "Start date", text: date.workfinderDateString)
             default:
                 return nil
             }
