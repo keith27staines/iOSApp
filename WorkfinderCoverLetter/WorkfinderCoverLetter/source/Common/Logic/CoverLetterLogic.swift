@@ -150,12 +150,12 @@ class CoverLetterLogic {
     }
     
     func additionalInformationPicklists() -> [PicklistProtocol] {
-        let skillsPicklist = allPicklistsDictionary[.skills]
+        let skillsPicklist = allPicklistsDictionary[.strongestSkills]
         let attributesPicklist = allPicklistsDictionary[.attributes]
-        let skillsAreIncludedInLetter: Bool = picklistsReferencedByTemplate()[.skills] != nil
+        let skillsAreIncludedInLetter: Bool = picklistsReferencedByTemplate()[.strongestSkills] != nil
         let attributesAreIncludedInLetter: Bool = picklistsReferencedByTemplate()[.attributes] != nil
         var additionalPicklists = PicklistsDictionary()
-        if !skillsAreIncludedInLetter { additionalPicklists[.skills] = skillsPicklist }
+        if !skillsAreIncludedInLetter { additionalPicklists[.strongestSkills] = skillsPicklist }
         if !attributesAreIncludedInLetter { additionalPicklists[.attributes] = attributesPicklist }
         return ([PicklistProtocol](additionalPicklists.values)).sorted(by: { (p1, p2) -> Bool in
             p1.type.rawValue < p2.type.rawValue

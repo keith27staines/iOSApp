@@ -118,6 +118,7 @@ public class Picklist: PicklistProtocol {
         case .duration: return "(Please select your preferred duration)"
         case .attributes: return "(Please select up to three from our list)"
         case .skills: return "(Choose up three employment skills you are hoping to acquire through this placement)"
+        case .strongestSkills: return "(Choose up three employment skills you are hoping to acquire through this placement)"
         }
     }
 }

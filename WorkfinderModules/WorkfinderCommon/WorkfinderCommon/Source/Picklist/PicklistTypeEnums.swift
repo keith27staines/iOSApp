@@ -35,6 +35,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     case experience
     case attributes
     case skills
+    case strongestSkills
     
     public var providerType: ProviderType {
         switch self {
@@ -45,7 +46,8 @@ public enum PicklistType: Int, CaseIterable, Codable {
              .project,
              .duration,
              .attributes,
-             .skills: return .network
+             .skills,
+             .strongestSkills: return .network
         case .motivation,
              .experience: return .clientTextField
         case .availabilityPeriod: return .clientAvailabilityPeriod
@@ -73,6 +75,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .experience: return false
         case .attributes: return true
         case .skills: return true
+        case .strongestSkills: return true
         }
     }
         
@@ -88,13 +91,15 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .duration: return "placement-durations/"
         case .experience: return ""
         case .attributes: return "placement-attributes/"
-        case .skills: return "placement-skills/"
+        case .skills: return "placement-attributes/"
+        case .strongestSkills: return "placement-skills/"
         }
     }
     
     public var title: String {
         switch self {
         case .skills: return "skills"
+        case .strongestSkills: return "your skills"
         case .attributes: return "attributes"
         case .institutions: return "university"
         case .year: return "year of study"
@@ -111,6 +116,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     public var questionTitle: String {
         switch self {
         case .skills:               return "What three skills would you like to develop?"
+        case .strongestSkills:      return "What are your three strongest skills?"
         case .attributes:           return "What are your three best attributes?"
         case .institutions:         return "What is the name of your university?"
         case .year:                 return "What is your year of study?"
@@ -126,7 +132,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     
     public var maxItems: Int {
         switch self {
-        case .skills, .attributes: return 3
+        case .strongestSkills, .attributes: return 3
         case .availabilityPeriod: return 2
         default: return 1
         }
@@ -142,7 +148,9 @@ public enum PicklistType: Int, CaseIterable, Codable {
     public var userInstruction: String {
         switch self {
         case .skills:
-            return NSLocalizedString("Choose up to three employment skills you are hoping to acquire through this Work Experience placement", comment: "")
+            return NSLocalizedString("Choose up to three employment skills you are hoping to acquire through this placement", comment: "")
+        case .strongestSkills:
+            return NSLocalizedString("Choose up to three skills which you believe to be your strongest", comment: "")
         case .attributes:
             return NSLocalizedString("Select up to three personal attributes that describe you", comment: "")
         case .institutions:
@@ -169,6 +177,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     public var otherEditorTitle: String {
         switch self {
         case .skills: return ""
+        case .strongestSkills: return ""
         case .attributes: return ""
         case .institutions: return "Other institution"
         case .year: return "Other year"
@@ -185,6 +194,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     public var otherFieldPlaceholderText: String {
         switch self {
         case .skills: return ""
+        case .strongestSkills: return ""
         case .attributes: return ""
         case .institutions: return ""
         case .year: return ""
@@ -202,6 +212,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
         let things: String
         switch self {
         case .skills: things = ""
+        case .strongestSkills: things = ""
         case .attributes: things = ""
         case .institutions: things = "educational institutions"
         case .year: things = "study years"
@@ -219,6 +230,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     public var textBlockEditorTitle: String {
         switch self {
         case .skills: return ""
+        case .strongestSkills: return ""
         case .attributes: return ""
         case .institutions: return ""
         case .year: return ""
@@ -235,6 +247,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     public var textblockGuidance: String {
         switch self {
         case .skills: return ""
+        case .strongestSkills: return ""
         case .attributes: return ""
         case .institutions: return ""
         case .year: return ""
@@ -251,6 +264,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     public var textblockPlaceholder: String {
         switch self {
         case .skills: return ""
+        case .strongestSkills: return ""
         case .attributes: return ""
         case .institutions: return ""
         case .year: return ""
@@ -278,7 +292,8 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .duration:             return "duration"
         case .experience:           return "experience"
         case .attributes:           return "attribute"
-        case .skills:               return "skill"
+        case .skills:               return "skills"
+        case .strongestSkills:      return "strongestSkills"
         }
     }
 }

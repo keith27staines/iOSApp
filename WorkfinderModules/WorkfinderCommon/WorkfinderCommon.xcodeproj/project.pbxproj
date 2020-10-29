@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53022184253591C800C01B10 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53022183253591C800C01B10 /* PushNotification.swift */; };
+		53A23DF2254844AE00BB21B7 /* SignInScreenOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */; };
 		53C76059251B6F9A0072281E /* DeeplinkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C76058251B6F9A0072281E /* DeeplinkInfo.swift */; };
 		53C7605D251B704B0072281E /* DeeplinkInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */; };
 		53DFFDF22518BAF2006A975D /* ApplicationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFFDF12518BAF2006A975D /* ApplicationSource.swift */; };
@@ -128,6 +129,7 @@
 
 /* Begin PBXFileReference section */
 		53022183253591C800C01B10 /* PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
+		53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenOrder.swift; sourceTree = "<group>"; };
 		53C76058251B6F9A0072281E /* DeeplinkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfo.swift; sourceTree = "<group>"; };
 		53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfoTests.swift; sourceTree = "<group>"; };
 		53DFFDF12518BAF2006A975D /* ApplicationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSource.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				FC69EBA82481371C00901A2B /* GlobalNotifications.swift */,
 				53DFFDF12518BAF2006A975D /* ApplicationSource.swift */,
 				53C76058251B6F9A0072281E /* DeeplinkInfo.swift */,
+				53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */,
 			);
 			path = WorkfinderCommon;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				FCDB073A2286F7870053347F /* UserRepository.swift in Sources */,
 				FC32FD432265E4C800740F0C /* WorkfinderContentType.swift in Sources */,
 				FC426EFE232FAC6C004F8A3E /* F4SNetworkSessionManagerProtocol.swift in Sources */,
+				53A23DF2254844AE00BB21B7 /* SignInScreenOrder.swift in Sources */,
 				FC22438F232F9E750073C9B1 /* F4SCompanyDatabaseMetaData.swift in Sources */,
 				FC340B0B24531C590003B521 /* ServerListTypealiases.swift in Sources */,
 				FCE51937224948E400B550C9 /* F4SAvailabilityPeriod.swift in Sources */,

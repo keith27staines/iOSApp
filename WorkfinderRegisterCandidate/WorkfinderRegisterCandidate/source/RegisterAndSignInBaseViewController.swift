@@ -9,6 +9,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let linkFont = WorkfinderFonts.body2
     let mode: RegisterAndSignInMode
+    let hidesBackButton: Bool
+    
     @objc var switchMode: (() -> Void)?
     @objc var onTapPrimaryButton: (() -> Void)?
     
@@ -29,7 +31,12 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     }
     
     func updatePresenter() { fatalError("Must override") }
-    func configureViews() { fatalError("Must override")}
+    
+    func configureViews() {
+        if hidesBackButton {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWorkflow))
+        }
+    }
     
     func configureNavigationBar() {
         navigationItem.title = mode.screenTitle
@@ -38,10 +45,15 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         styleNavigationController()
     }
     
-    init(mode: RegisterAndSignInMode, presenter: RegisterAndSignInPresenterProtocol) {
+    init(mode: RegisterAndSignInMode, presenter: RegisterAndSignInPresenterProtocol, hidesBackButton: Bool) {
+        self.hidesBackButton = hidesBackButton
         self.mode = mode
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    @objc func cancelWorkflow() {
+        presenter.cancelWorkflow()
     }
         
     override func viewDidLoad() {
@@ -111,6 +123,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var switchModeLabel: UILabel = {
         let label = UILabel()
         label.text = mode.switchModeLabelText
+        label.textColor = UIColor.darkText
         label.textAlignment = .right
         label.font = self.linkFont
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)

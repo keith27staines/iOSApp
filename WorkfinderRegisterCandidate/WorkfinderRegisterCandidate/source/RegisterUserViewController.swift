@@ -5,11 +5,8 @@ import WorkfinderUI
 
 class RegisterUserViewController: RegisterAndSignInBaseViewController {
     
-    let hidesBackButton: Bool
-    
     init(presenter: RegisterAndSignInPresenterProtocol, hidesBackButton: Bool) {
-        self.hidesBackButton = hidesBackButton
-        super.init(mode: .register, presenter: presenter)
+        super.init(mode: .register, presenter: presenter, hidesBackButton: hidesBackButton)
         title = mode.screenTitle
     }
     
@@ -22,6 +19,7 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     }
     
     override func configureViews() {
+        super.configureViews()
         fieldStack.addArrangedSubview(email)
         let showGuardianEmail = presenter.isGuardianEmailRequired
         if showGuardianEmail {
@@ -46,11 +44,6 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         password.textfield.nextResponderField = nil
         bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelWorkflow))
-    }
-    
-    @objc func cancelWorkflow() {
-        presenter.cancelWorkflow()
     }
     
     @objc func register() {

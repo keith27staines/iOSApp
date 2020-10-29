@@ -273,7 +273,7 @@ class CustomMenuViewController: UIViewController, UITableViewDataSource, UITable
             switch isLoggedIn {
             case true: break
             case false:
-                appCoordinator.signIn() {[weak self] (isSignedIn) in
+                appCoordinator.signIn(screenOrder: .loginThenRegister) {[weak self] (isSignedIn) in
                     guard let self = self else { return }
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
                 }

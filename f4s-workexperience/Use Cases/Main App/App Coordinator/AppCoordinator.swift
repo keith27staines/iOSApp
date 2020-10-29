@@ -160,7 +160,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 guard let workfinderError = error as? WorkfinderError else { return }
                 switch workfinderError.code {
                 case 401:
-                    self.signIn() { loggedIn in
+                    self.signIn(screenOrder: .loginThenRegister) { loggedIn in
                         switch loggedIn {
                         case true:
                             self.showRecommendation(uuid: uuid, applicationSource: applicationSource)
@@ -187,7 +187,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         )
     }()
     
-    func signIn(completion: @escaping (Bool) -> Void) {
+    func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void) {
         let loginCoordinator = LoginHandler(
             parentCoordinator: self,
             navigationRouter: self.navigationRouter,
@@ -195,7 +195,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             coreInjection: self.injected
         )
         addChildCoordinator(loginCoordinator)
-        loginHandler.startLoginWorkflow { [weak self] (loggedIn) in
+        loginHandler.startLoginWorkflow(screenOrder: screenOrder) { [weak self] (loggedIn) in
             guard let self = self else { return }
             self.removeChildCoordinator(loginCoordinator)
             completion(loggedIn)

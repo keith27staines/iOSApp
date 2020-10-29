@@ -47,6 +47,7 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
     func showPicklist(_ picklist: PicklistProtocol) {
         switch picklist.type {
         case .skills,
+             .strongestSkills,
              .attributes,
              .year,
              .subject,

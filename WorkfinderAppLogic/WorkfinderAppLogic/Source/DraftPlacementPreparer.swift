@@ -55,6 +55,10 @@ public class DraftPlacementPreparer {
                 draft.skills = selectedItems?.compactMap({ (item) -> F4SUUID? in
                     return item.uuid
                 })
+            case .strongestSkills:
+                draft.strongestSkills = selectedItems?.compactMap({ (item) -> F4SUUID? in
+                    return item.uuid
+                })
             case .availabilityPeriod:
                 let lower = selectedItems?[0].value
                 let upper = selectedItems?[1].value

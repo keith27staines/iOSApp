@@ -18,18 +18,24 @@ public class LoginHandler: CoreInjectionNavigationCoordinator {
         self.mainWindow = mainWindow
         super.init(parent: parentCoordinator, navigationRouter: navigationRouter, inject: coreInjection)
     }
+
     
-    public func startLoginWorkflow(completion: @escaping (Bool) -> Void) {
+    public func startLoginWorkflow(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void) {
         self.completion = completion
         self.loginWindow.makeKeyAndVisible()
         let coordinator = RegisterAndSignInCoordinator(
             parent: self,
             navigationRouter: newNavigationRouter,
             inject: injected,
-            hideBackButton: true
+            firstScreenHidesBackButton: true
         )
         addChildCoordinator(coordinator)
-        coordinator.start()
+        switch screenOrder {
+        case .loginThenRegister:
+            coordinator.startLoginFirst()
+        case .registerThenLogin:
+            coordinator.startRegisterFirst()
+        }
     }
     
     func complete(signedIn: Bool) {
