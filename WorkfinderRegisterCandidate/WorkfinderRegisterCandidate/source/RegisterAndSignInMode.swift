@@ -8,7 +8,7 @@ enum RegisterAndSignInMode {
         case .register:
             return NSLocalizedString("Register", comment: "")
         case .signIn:
-            return NSLocalizedString("Log in", comment: "")
+            return NSLocalizedString("Sign in", comment: "")
         }
     }
     
