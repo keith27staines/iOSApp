@@ -45,7 +45,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     func startMixpanel(for environment: EnvironmentType) {
         switch environment {
         case .production: Mixpanel.initialize(token: "611e14d8691f7e2dfbb7d5313b212b29")
-        case .staging: Mixpanel.initialize(token: "416fe88ddb1b0375acaf5cb6c1d998ec")
+        case .staging: Mixpanel.initialize(token: "cbba1c1eba2a6ad2bef0356f19396cd0")
         case .develop: Mixpanel.initialize(token: "416fe88ddb1b0375acaf5cb6c1d998ec")
         }
     }
