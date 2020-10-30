@@ -67,8 +67,8 @@ extension OnboardingViewController {
     func setUpButtons() {
         enableLocationButton.isHidden = hideOnboardingControls
         enterLocationButton.isHidden = hideOnboardingControls
-        enableLocationButton.layer.cornerRadius = 12
-        enterLocationButton.layer.cornerRadius = 12
+        enableLocationButton.layer.cornerRadius = 8
+        enterLocationButton.layer.cornerRadius = 8
         enableLocationButton.layer.masksToBounds = true
         enterLocationButton.layer.masksToBounds = true
     }
