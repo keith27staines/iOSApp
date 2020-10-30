@@ -32,13 +32,13 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y5G-c6-CtJ">
-                                <rect key="frame" x="42.5" y="426" width="290" height="191"/>
+                                <rect key="frame" x="20" y="426" width="335" height="191"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rHw-Zm-LmS">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="110"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="110"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7Q-nn-dEQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="290" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="45"/>
                                                 <color key="backgroundColor" red="0.28235294117647058" green="0.14901960784313725" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="shO-pb-7jy"/>
@@ -52,9 +52,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5T-pH-WH3">
-                                                <rect key="frame" x="0.0" y="65" width="290" height="45"/>
+                                                <rect key="frame" x="0.0" y="65" width="335" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <state key="normal" title="Enter location manually">
                                                     <color key="titleColor" red="0.10196078431372549" green="0.6588235294117647" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -68,16 +68,20 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="62a-Gl-GNl">
-                                        <rect key="frame" x="0.0" y="141" width="290" height="50"/>
+                                        <rect key="frame" x="0.0" y="118" width="335" height="73"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TS2-Dn-3wH">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="73"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Iu-8f-0Mx">
-                                                <rect key="frame" x="0.0" y="16" width="175.5" height="18"/>
+                                                <rect key="frame" x="38" y="27.5" width="175.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrJ-Te-Jyo">
-                                                <rect key="frame" x="183.5" y="15" width="76" height="20"/>
+                                                <rect key="frame" x="221.5" y="26.5" width="76" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="zA1-87-jxB"/>
                                                 </constraints>
@@ -89,10 +93,13 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAp-K9-Xpb">
-                                                <rect key="frame" x="267.5" y="0.0" width="22.5" height="50"/>
+                                                <rect key="frame" x="305.5" y="11.5" width="29.5" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="hAp-K9-Xpb" firstAttribute="width" secondItem="TS2-Dn-3wH" secondAttribute="width" id="aTf-G2-gDd"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -113,12 +120,13 @@
                             <constraint firstItem="6nq-bb-BTe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="MsY-Tq-ycG"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S2d-6B-Ejd"/>
                             <constraint firstItem="6nq-bb-BTe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WQk-no-de8"/>
-                            <constraint firstItem="Y5G-c6-CtJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="42.5" id="aPk-fn-7pz"/>
+                            <constraint firstItem="Y5G-c6-CtJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="aPk-fn-7pz"/>
                             <constraint firstItem="b61-9y-s8U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eQu-gf-pdo"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="top" secondItem="b61-9y-s8U" secondAttribute="bottom" constant="50" id="ezE-gZ-aBX"/>
                             <constraint firstItem="b61-9y-s8U" firstAttribute="top" secondItem="lQB-tZ-QZi" secondAttribute="bottom" constant="25" id="m3I-kr-oNf"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="mNS-l8-omf"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pzb-6G-cUc"/>
+                            <constraint firstItem="Y5G-c6-CtJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vC7-jm-bjk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Y5G-c6-CtJ" secondAttribute="bottom" constant="50" id="yEi-bK-qkh"/>
                         </constraints>
                     </view>
