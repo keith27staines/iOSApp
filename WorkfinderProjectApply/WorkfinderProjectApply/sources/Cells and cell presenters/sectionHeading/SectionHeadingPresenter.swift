@@ -5,7 +5,10 @@ protocol SectionHeadingPresenterProtocol: CellPresenterProtocol {
 
 class SectionHeadingPresenter: SectionHeadingPresenterProtocol {
     let title: String
-    init(title: String) {
+    var isHidden: Bool
+    init(title: String, isHidden: Bool = false) {
         self.title = title
+        self.isHidden = isHidden
+        
     }
 }

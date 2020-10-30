@@ -6,7 +6,9 @@ protocol KeyActivityPresenterProtocol: CellPresenterProtocol {
 
 class KeyActivityPresenter: KeyActivityPresenterProtocol {
     let text: String?
-    init(activity: String?) {
+    var isHidden: Bool
+    init(activity: String?, isHidden: Bool = false) {
         self.text = activity
+        self.isHidden = isHidden
     }
 }

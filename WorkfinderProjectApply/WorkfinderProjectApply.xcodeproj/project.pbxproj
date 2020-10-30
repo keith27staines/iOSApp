@@ -10,6 +10,7 @@
 		5397E0E8253B8C510009EFAC /* CapsuleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */; };
 		5397E0E9253B8C510009EFAC /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E7253B8C500009EFAC /* CapsuleView.swift */; };
 		5397E0F1253B8E0F0009EFAC /* CapsuleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */; };
+		53E63EB1254BE38300E9601C /* ZeroHeightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E63EB0254BE38300E9601C /* ZeroHeightTableViewCell.swift */; };
 		FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */; };
 		FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */; };
 		FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */; };
@@ -61,6 +62,7 @@
 		5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleCollectionView.swift; sourceTree = "<group>"; };
 		5397E0E7253B8C500009EFAC /* CapsuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
 		5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCollectionCell.swift; sourceTree = "<group>"; };
+		53E63EB0254BE38300E9601C /* ZeroHeightTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeroHeightTableViewCell.swift; sourceTree = "<group>"; };
 		FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */,
 				FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */,
 				FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */,
+				53E63EB0254BE38300E9601C /* ZeroHeightTableViewCell.swift */,
 				FC42486C24C608CB00831D9F /* Styling.swift */,
 				FC15D78224C4597000543E6F /* Cells and cell presenters */,
 				FC48066924C8091000018C10 /* success screen */,
@@ -426,6 +429,7 @@
 				FC9B676C24C464260091A556 /* CapsuleCollectionPresenter.swift in Sources */,
 				FC15D78124C41CDB00543E6F /* PresentableCell.swift in Sources */,
 				FC9B677824C4790F0091A556 /* SectionHeadingPresenter.swift in Sources */,
+				53E63EB1254BE38300E9601C /* ZeroHeightTableViewCell.swift in Sources */,
 				FC15D78D24C45C1800543E6F /* ProjectBulletPointCell.swift in Sources */,
 				FC9B677624C478ED0091A556 /* SectionHeadingCell.swift in Sources */,
 				FC9B677B24C47CE80091A556 /* SkillsSectionHeaderCell.swift in Sources */,

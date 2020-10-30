@@ -8,18 +8,19 @@ protocol ProjectPresenterProtocol {
     var companyLogoUrl: String? { get }
     var projectName: String? { get }
     var status: String? {get }
+    var reuseIdentifierForCollapsedRow: String { get }
     var isOpenForApplication: Bool { get }
     func loadData(completion: @escaping (Error?) -> Void)
     func onViewDidLoad(view: ProjectViewProtocol)
     func numberOfSections() -> Int
     func numberOfItemsInSection(_ section: Int) -> Int
     func presenterForIndexPath(_ indexPath: IndexPath) -> CellPresenterProtocol?
-    func reuseIdentifierForSection(_ section: Int) -> String?
-    func reuseIdentifierForSection(_ section: ProjectPresenter.Section) -> String
+    func reuseIdentifierForIndexPath(_ indexPath: IndexPath) -> String?
+    func isHiddenRow(indexPath: IndexPath) -> Bool
 }
 
 class ProjectPresenter: ProjectPresenterProtocol {
-
+    
     enum Section: Int, CaseIterable {
         case projectHeader
         case projectBulletPoints
@@ -61,7 +62,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
             }
         }
     }
-    
+    var reuseIdentifierForCollapsedRow: String { "collapsed" }
     weak var coordinator: ProjectApplyCoordinator?
     weak var view: ProjectViewProtocol?
     let projectUuid: F4SUUID
@@ -115,13 +116,17 @@ class ProjectPresenter: ProjectPresenterProtocol {
         }
     }
     
-    func reuseIdentifierForSection(_ section: Int) -> String? {
-        guard let section = Section(rawValue: section) else { return nil }
-        return reuseIdentifierForSection(section)
+    func reuseIdentifierForIndexPath(_ indexPath: IndexPath) -> String? {
+        guard
+            let section = Section(rawValue: indexPath.section),
+            !isHiddenRow(indexPath: indexPath)
+        else { return reuseIdentifierForCollapsedRow }
+
+        return section.reuseIdentifer
     }
     
-    func reuseIdentifierForSection(_ section: Section) -> String {
-        return section.reuseIdentifer
+    func isHiddenRow(indexPath: IndexPath) -> Bool {
+        presenterForIndexPath(indexPath)?.isHidden ?? true
     }
     
     func numberOfSections() -> Int  { Section.allCases.count }
@@ -188,7 +193,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
                     let workfinderDateString = detail.project?.startDate,
                     let date = Date.workfinderDateStringToDate(workfinderDateString)
                 else {
-                    return ProjectBulletPointsPresenter(title: "Start date", text: "unspecified")
+                    return ProjectBulletPointsPresenter(title: "", text: "", isHidden: true)
                 }
                 return ProjectBulletPointsPresenter(title: "Start date", text: date.workfinderDateString)
             default:
@@ -217,7 +222,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutYouSectionHeading:
             return SectionHeadingPresenter(title: "About you")
         case .aboutYou:
-            return AboutPresenter(text: detail.project?.aboutCandidate, defaultText: "No candidate qualities are specifed")
+            return AboutPresenter(text: detail.project?.aboutCandidate, defaultText: "No candidate qualities are specified")
         case .projectContactSectionheading:
             return SectionHeadingPresenter(title: "Project contact")
         case .projectContact:

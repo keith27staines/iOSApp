@@ -6,8 +6,9 @@ protocol AboutPresenterProtocol: CellPresenterProtocol {
 class AboutPresenter: AboutPresenterProtocol {
 
     let text: String
-    
-    init(text: String?, defaultText: String) {
+    var isHidden: Bool
+    init(text: String?, defaultText: String, isHidden: Bool = false) {
+        self.isHidden = isHidden
         guard let text = text, !text.isEmpty else {
             self.text = defaultText
             return

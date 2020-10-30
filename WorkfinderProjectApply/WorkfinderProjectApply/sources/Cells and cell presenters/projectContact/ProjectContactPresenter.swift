@@ -16,13 +16,15 @@ class ProjectContactPresenter: ProjectContactPresenterProtocol {
     let information: String?
     let title: String?
     let linkedIn: String?
+    var isHidden: Bool
     
-    init(host: Host?, role: String?) {
+    init(host: Host?, role: String?, isHidden: Bool = false) {
         photo = host?.photoUrlString
         name = host?.displayName
         information = host?.description
         self.title = role
         linkedIn = host?.linkedinUrlString
+        self.isHidden = isHidden
     }
     
 }

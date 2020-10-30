@@ -9,7 +9,7 @@ protocol PresentableCellProtocol: AnyObject {
 class PresentableCell: UITableViewCell, PresentableCellProtocol {
     
     func refreshFromPresenter(_ presenter: CellPresenterProtocol, width: CGFloat) {
-        // Should override
+    
     }
     
     func configureViews() {

@@ -86,6 +86,7 @@ extension F4SLog : F4SAnalytics {
         if let vendorUuid = UIDevice.current.identifierForVendor?.uuidString {
             mixpanelProperties["device_id"] = vendorUuid
         }
+        mixPanel.track(event: event.type.name, properties: mixpanelProperties)
     }
     
     public func screen(_ name: ScreenName) {

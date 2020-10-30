@@ -145,23 +145,22 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }()
     
     func registerCellsForReuse(view: UITableView) {
-        
-        view.register(SectionHeadingCell.self, forCellReuseIdentifier: presenter.reuseIdentifierForSection(.aboutCompanySectionHeading))
+        view.register(SectionHeadingCell.self, forCellReuseIdentifier: ProjectPresenter.Section.aboutCompanySectionHeading.reuseIdentifer)
         view.register(ProjectHeaderCell.self,
-                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectHeader))
+                      forCellReuseIdentifier:ProjectPresenter.Section.projectHeader.reuseIdentifer)
         view.register(ProjectBulletPointWithTitleCell.self,
-                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectBulletPoints))
+                      forCellReuseIdentifier:ProjectPresenter.Section.projectBulletPoints.reuseIdentifer)
         view.register(AboutCell.self,
-                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.aboutCompany))
+                      forCellReuseIdentifier:ProjectPresenter.Section.aboutCompany.reuseIdentifer)
         view.register(CapsuleCollectionCell.self,
-                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.skillsYouWillGain))
+                      forCellReuseIdentifier:ProjectPresenter.Section.skillsYouWillGain.reuseIdentifer)
         view.register(KeyActivityCell.self,
-                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.keyActivities))
+                      forCellReuseIdentifier:ProjectPresenter.Section.keyActivities.reuseIdentifer)
         view.register(AboutCell.self,
-                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.aboutYou))
+                      forCellReuseIdentifier:ProjectPresenter.Section.aboutYou.reuseIdentifer)
         view.register(ProjectContactCell.self,
-                      forCellReuseIdentifier:presenter.reuseIdentifierForSection(ProjectPresenter.Section.projectContact))
-
+                      forCellReuseIdentifier:ProjectPresenter.Section.projectContact.reuseIdentifer)
+        view.register(ZeroHeightTableViewCell.self, forCellReuseIdentifier: presenter.reuseIdentifierForCollapsedRow)
     }
     
     func configureViews() {
@@ -200,7 +199,7 @@ extension ProjectViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cellPresenter = presenter.presenterForIndexPath(indexPath),
-            let reuseIdentifier = presenter.reuseIdentifierForSection(indexPath.section),
+            let reuseIdentifier = presenter.reuseIdentifierForIndexPath(indexPath),
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? PresentableCellProtocol
             else {
             return UITableViewCell()
@@ -214,7 +213,7 @@ extension ProjectViewController: UITableViewDataSource {
 
 extension ProjectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        presenter.isHiddenRow(indexPath: indexPath) ? 0 : UITableView.automaticDimension
     }
 }
 

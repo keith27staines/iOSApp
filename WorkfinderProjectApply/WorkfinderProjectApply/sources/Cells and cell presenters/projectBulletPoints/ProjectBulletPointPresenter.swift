@@ -7,8 +7,10 @@ protocol ProjectBulletPointsPresenterProtocol: CellPresenterProtocol {
 class ProjectBulletPointsPresenter: ProjectBulletPointsPresenterProtocol {
     let title: String
     let text: String
-    init(title: String, text: String) {
+    var isHidden: Bool
+    init(title: String, text: String, isHidden: Bool = false) {
         self.title = title
         self.text = text
+        self.isHidden = isHidden
     }
 }

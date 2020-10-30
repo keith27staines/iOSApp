@@ -75,7 +75,7 @@ public enum TrackEventType {
     case uc_offer_convert
     case uc_offer_withdraw
     
-    var name: String {
+    public var name: String {
    
         switch self {
     

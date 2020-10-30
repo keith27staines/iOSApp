@@ -9,6 +9,7 @@ class ProjectHeaderPresenter: ProjectHeaderPresenterProtocol {
     
     private let companyName: String
     private let projectName: String
+    var isHidden: Bool
     
     lazy var attributedTitle: NSAttributedString = {
         var attributes = Style.projectHeading.text.attributes
@@ -20,9 +21,10 @@ class ProjectHeaderPresenter: ProjectHeaderPresenterProtocol {
         return concatenated
     }()
     
-    init(companyName: String?, projectName: String?) {
+    init(companyName: String?, projectName: String?, isHidden: Bool = false) {
         self.companyName = companyName ?? ""
         self.projectName = projectName ?? ""
+        self.isHidden = isHidden
     }
     
 }
