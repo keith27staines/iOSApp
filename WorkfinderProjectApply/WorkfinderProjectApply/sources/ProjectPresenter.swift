@@ -182,7 +182,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
                     title: "Salary",
                     text: text)
             case 2:
-                let defaultText = "2 weeks"
+                let defaultText = "80 hours"
                 var text = detail.project?.duration ?? defaultText
                 if text.isEmpty { text = defaultText }
                 return ProjectBulletPointsPresenter(
