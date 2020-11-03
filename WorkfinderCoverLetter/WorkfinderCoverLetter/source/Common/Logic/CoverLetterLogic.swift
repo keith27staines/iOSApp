@@ -137,6 +137,10 @@ class CoverLetterLogic {
         return first
     }
     
+    func picklistHavingTitle(title: String) -> PicklistProtocol? {
+        return allPicklists().first { (picklist) -> Bool in picklist.type.title == title }
+    }
+    
     func sortedCoverLetterPicklists() -> [PicklistProtocol] {
         ([PicklistProtocol](picklistsReferencedByTemplate().values)).sorted(by: { (p1, p2) -> Bool in
             p1.type.rawValue < p2.type.rawValue

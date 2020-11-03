@@ -52,7 +52,11 @@ public class TemplateRenderer: TemplateRendererProtocol {
             let nsRange = NSRange(range, in: parser.templateString)
             guard let value = keyValues[name] else {
                 let color = UIColor.systemOrange
-                let attributes = [NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]
+                let attributes = [
+                    NSAttributedString.Key.foregroundColor : color,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+                    NSAttributedString.Key.coverLetterField: name
+                ] as [NSAttributedString.Key : Any]
                 renderedString.setAttributes(attributes, range: nsRange)
                 let suffixRange = NSRange(location: nsRange.location + nsRange.length-2, length: 2)
                 let prefixRange = NSRange(location: nsRange.location, length: 2)
@@ -65,10 +69,19 @@ public class TemplateRenderer: TemplateRendererProtocol {
             guard let replacementText = value else { continue }
             let replacementAttributedText = replacementText
             let color = UIColor.systemGreen
-            renderedString.setAttributes([NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)], range: nsRange)
+            let attributes = [
+                NSAttributedString.Key.foregroundColor : color,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+                NSAttributedString.Key.coverLetterField: name
+            ] as [NSAttributedString.Key : Any]
+            renderedString.setAttributes(attributes, range: nsRange)
             renderedString.replaceCharacters(in: nsRange, with: replacementAttributedText)
 
         }
         return renderedString
     }
+}
+
+extension NSAttributedString.Key {
+    static let coverLetterField = NSAttributedString.Key(rawValue: "coverLetterField")
 }

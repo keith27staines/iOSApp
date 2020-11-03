@@ -19,8 +19,12 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     
     func onDidCancel() { coordinator?.onCoverLetterDismiss() }
     
-    func onDidTapSelectOptionsButton() {
+    func onDidTapShowQuestionsList() {
         coordinator?.onCoverLetterTapEdit()
+    }
+    
+    func onDidTapField(name: String) {
+        coordinator?.onCoverLetterTapField(name: name)
     }
     
     func onViewDidAppear() {

@@ -24,12 +24,13 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
-    func onLetterEditorTapPrimaryButton()   {}
-    func onLetterEditorDismiss()            {}
-    func onCoverLetterTapPrimaryButton()    {}
-    func onCoverLetterDismiss()             {}
-    func onCoverLetterTapEdit()             {}
-    func onLetterEditorDidUpdate()          {}
+    func onLetterEditorTapPrimaryButton()       {}
+    func onLetterEditorDismiss()                {}
+    func onCoverLetterTapPrimaryButton()        {}
+    func onCoverLetterDismiss()                 {}
+    func onCoverLetterTapEdit()                 {}
+    func onLetterEditorDidUpdate()              {}
+    func onCoverLetterTapField(name: String)    {}
     
     func finishWorkflow(cancelled: Bool) {
         logic.save()

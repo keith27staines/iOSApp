@@ -24,7 +24,8 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     lazy var coverLetterTextView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .left
-        textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapShowEditor)))
+        let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(didTapShowEditor))
+        textView.addGestureRecognizer(tapRecogniser)
         return textView
     }()
     
@@ -45,11 +46,34 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     lazy var editButton: EditApplicationLetterButton = {
         let button = EditApplicationLetterButton()
-        button.addTarget(self, action: #selector(didTapShowEditor), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapShowQuestionList), for: .touchUpInside)
         return button
     }()
     
-    @objc func didTapShowEditor() { presenter.onDidTapSelectOptionsButton() }
+    @objc func didTapShowQuestionList() {
+        presenter.onDidTapShowQuestionsList()
+    }
+    
+    @objc func didTapShowEditor(sender: UITapGestureRecognizer) {
+        // location of tap in coverLetterTextView coordinates taking the inset into account
+        var location = sender.location(in: coverLetterTextView)
+        location.x -= coverLetterTextView.textContainerInset.left;
+        location.y -= coverLetterTextView.textContainerInset.top;
+        
+        // character index at tap location
+        let layoutManager = coverLetterTextView.layoutManager
+        let characterIndex = layoutManager.characterIndex(for: location, in: coverLetterTextView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        // if index is valid then do something.
+        guard characterIndex < coverLetterTextView.textStorage.length,
+              let fieldName = coverLetterTextView.attributedText?.attribute(NSAttributedString.Key.coverLetterField, at: characterIndex, effectiveRange: nil) as? String
+        else {
+            presenter.onDidTapShowQuestionsList()
+            return
+        }
+        presenter.onDidTapField(name: fieldName)
+    }
+    
     @objc func didCancel() { presenter.onDidCancel() }
     @objc func didTapPrimaryButton() {
         messageHandler.showLightLoadingOverlay(view)
@@ -132,4 +156,3 @@ extension CoverLetterViewController {
         pageStack.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12).isActive = true
     }
 }
-

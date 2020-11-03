@@ -34,6 +34,11 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
         letterEditorViewController = vc
         navigationRouter.push(viewController: vc, animated: true)
     }
+    
+    override func onCoverLetterTapField(name: String) {
+        guard let picklist = logic.picklistHavingTitle(title: name) else { return }
+        showPicklist(picklist)
+    }
 
     override func onCoverLetterDismiss() {
         finishWorkflow(cancelled: true)
