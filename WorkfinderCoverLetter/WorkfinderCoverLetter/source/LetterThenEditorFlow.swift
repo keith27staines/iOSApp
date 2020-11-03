@@ -37,7 +37,20 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
     
     override func onCoverLetterTapField(name: String) {
         guard let picklist = logic.picklistHavingTitle(title: name) else { return }
-        showPicklist(picklist)
+        if picklist.isLoaded {
+            showPicklist(picklist)
+            return
+        }
+        (picklist as? Picklist)?.fetchItems(completion: { [weak self] (_, result) in
+            switch result {
+            
+            case .success(_):
+                self?.showPicklist(picklist)
+            case .failure(_):
+                break
+            }
+            
+        })
     }
 
     override func onCoverLetterDismiss() {
