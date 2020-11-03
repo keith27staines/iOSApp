@@ -208,9 +208,13 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutPlacement:
             return AboutPresenter(text: project?.description, defaultText: "No description available")
         case .additionalCommentsHeading:
-            return SectionHeadingPresenter(title: "Additional requirements")
+            let presenter = SectionHeadingPresenter(title: "Additional requirements")
+            presenter.isHidden = hideAdditionalRequirements
+            return presenter
         case .additionalComments:
-            return AboutPresenter(text: additionalRequirements, defaultText: "There are no additional requirements.")
+            let presenter = AboutPresenter(text: additionalRequirements, defaultText: "There are no additional requirements.")
+            presenter.isHidden = hideAdditionalRequirements
+            return presenter
         case .skillsHeading:
             return SectionHeadingPresenter(title: "Skills you will gain")
         case .skillsYouWillGain:
@@ -228,5 +232,10 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .projectContact:
             return ProjectContactPresenter(host: host, role: association?.title)
         }
+    }
+    
+    private var hideAdditionalRequirements: Bool {
+        guard let text = additionalRequirements, !text.isEmpty else { return true }
+        return false
     }
 }
