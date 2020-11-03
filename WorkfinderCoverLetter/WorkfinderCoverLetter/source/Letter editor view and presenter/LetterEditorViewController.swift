@@ -15,6 +15,7 @@ class LetterEditorViewController: UIViewController {
     func refresh() {
         presenter.onViewWillRefresh()
         tableView.reloadData()
+        toggleShowAllQuestionsButton.setTitle(self.presenter.textForToggleAllQuestionsButton, for: .normal)
         if let error = presenter.consistencyError {
             switch error.errorType {
             case .custom(let title, description: let description):
@@ -45,6 +46,7 @@ class LetterEditorViewController: UIViewController {
         tableView.register(SectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         tableView.register(SectionFooterCell.self, forHeaderFooterViewReuseIdentifier: "footer")
         tableView.sectionFooterHeight = UITableView.automaticDimension
+        tableView.tableFooterView = self.toggleShowAllQuestionsButton
         return tableView
     }()
     
@@ -101,7 +103,22 @@ class LetterEditorViewController: UIViewController {
                 self.loadData()
             }
             self.refresh()
+            self.toggleShowAllQuestionsButton.setTitle(self.presenter.textForToggleAllQuestionsButton, for: .normal)
         }
+    }
+    
+    lazy var toggleShowAllQuestionsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = WorkfinderColors.primaryColor
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.addTarget(self, action: #selector(toggleShowAllQuestions), for: .touchUpInside)
+        button.frame.size = CGSize(width: 0, height: 55)
+        return button
+    }()
+    
+    @objc func toggleShowAllQuestions() {
+        presenter.toggleShowAllQuestions()
+        refresh()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -153,7 +170,7 @@ extension LetterEditorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? SectionHeaderCell else { return UITableViewHeaderFooterView() }
-        let headerStrings = presenter.headingsForSection(section)
+        let headerStrings = presenter.headingForSection(section)
         cell.configure(headline: headerStrings.0, subheadline: headerStrings.1)
         return cell
     }

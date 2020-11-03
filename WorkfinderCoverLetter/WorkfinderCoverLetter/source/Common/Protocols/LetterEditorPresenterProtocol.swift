@@ -4,6 +4,8 @@ import WorkfinderCoordinators
 
 protocol LetterEditorPresenterProtocol {
     var consistencyError: WorkfinderError? { get }
+    var textForToggleAllQuestionsButton: String? { get }
+    func toggleShowAllQuestions()
     func onViewDidLoad(view: LetterEditorViewController)
     func onViewDidAppear()
     func onViewWillRefresh()
@@ -14,5 +16,5 @@ protocol LetterEditorPresenterProtocol {
     func numberOfRowsInSection(_ section: Int) -> Int
     func picklist(for indexPath: IndexPath) -> PicklistProtocol
     func showPicklist(_ picklist: PicklistProtocol)
-    func headingsForSection(_ section: Int) -> (String, String)
+    func headingForSection(_ section: Int) -> (String, String)
 }

@@ -47,6 +47,16 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     func onViewWillRefresh() {
         consistencyCheck()
     }
+    
+    var isDisplayingAllQuestions: Bool = false
+    var textForToggleAllQuestionsButton: String? {
+        let isHidingQuestions = logic.shouldHideAnsweredQuestions
+        return isHidingQuestions ? "Show all questions" : "Hide answered questions"
+    }
+    func toggleShowAllQuestions() {
+        isDisplayingAllQuestions.toggle()
+        logic.shouldHideAnsweredQuestions.toggle()
+    }
 
     func picklist(for indexPath: IndexPath) -> PicklistProtocol {
         switch indexPath.section {
@@ -69,12 +79,14 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         additionalInformationPicklists.count == 0 ? 1 : 2
     }
     
-    func headingsForSection(_ section: Int) -> (String, String) {
+    func headingForSection(_ section: Int) -> (String, String) {
         switch section {
         case 0:
             return ("Please provide all the information required to complete your cover letter", "(fields in this section are required)")
-        default:
+        case 1:
             return ("The below fields are optional but could help in finding you relevant role matches", "")
+        default:
+            return ("","")
         }
     }
 

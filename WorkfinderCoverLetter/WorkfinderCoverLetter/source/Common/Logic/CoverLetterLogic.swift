@@ -14,8 +14,8 @@ class CoverLetterLogic {
     let fixedFieldValues: [String:String?]
     var embeddedFieldNames = [String]()
     var templateService: TemplateProviderProtocol
-    
     var isLetterComplete: Bool { renderer?.isComplete ?? false }
+    var shouldHideAnsweredQuestions: Bool = true
     
     lazy var allPicklistsDictionary: PicklistsDictionary = {
         let picklists = picklistsStore.load()
@@ -145,8 +145,15 @@ class CoverLetterLogic {
     
     func nonOptionalSortedCoverLetterPicklists() -> [PicklistProtocol] {
         sortedCoverLetterPicklists().filter { (picklist) -> Bool in
-            !(picklist.type.isPresentationOptionalWhenPopulated && picklist.isPopulated)
+            shouldShowPicklist(picklist)
         }
+    }
+    
+    func shouldShowPicklist(_ picklist: PicklistProtocol) -> Bool {
+        if !picklist.type.isPresentationOptionalWhenPopulated { return true }
+        if !picklist.isPopulated { return true }
+        if !shouldHideAnsweredQuestions { return true }
+        return false
     }
     
     func additionalInformationPicklists() -> [PicklistProtocol] {
