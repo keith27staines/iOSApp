@@ -69,7 +69,6 @@ class DateOfBirthCollectorViewController: UIViewController {
         configureNavigationBar()
         configureViews()
         dateOfBirth = nil
-        textField.becomeFirstResponder()
         let now = Date()
         datePicker.date = Calendar.current.date(byAdding: .year, value: -18, to: now) ?? now
         datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -150, to: now) ?? now
@@ -128,6 +127,9 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(onDateChosen), for: .valueChanged)
         return datePicker
