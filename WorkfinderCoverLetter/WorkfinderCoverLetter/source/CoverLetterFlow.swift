@@ -14,6 +14,8 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
     let logic: CoverLetterLogic
     
+    var editorCompletion: ((Error?) -> Void)?
+    
     init(parent: CoverLetterParentCoordinatorProtocol?,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
@@ -30,7 +32,9 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
     func onCoverLetterDismiss()                 {}
     func onCoverLetterTapEdit()                 {}
     func onLetterEditorDidUpdate()              {}
-    func onCoverLetterTapField(name: String)    {}
+    func onCoverLetterTapField(
+        name: String,
+        completion: @escaping (Error?) -> Void) {}
     
     func finishWorkflow(cancelled: Bool) {
         logic.save()
@@ -45,7 +49,8 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
         
     }
 
-    func showPicklist(_ picklist: PicklistProtocol) {
+    func showPicklist(_ picklist: PicklistProtocol, completion: ((Error?) -> Void)? ) {
+        editorCompletion = completion
         switch picklist.type {
         case .skills,
              .strongestSkills,
@@ -121,6 +126,7 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
     func picklistDidClose() {
         picklistsDidUpdate?(logic.allPicklistsDictionary)
         letterEditorViewController?.refresh()
+        editorCompletion?(nil)
     }
 }
 

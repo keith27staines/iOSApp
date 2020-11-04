@@ -3,6 +3,7 @@ import Foundation
 import WorkfinderCommon
 
 class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
+    
     let log: F4SAnalytics
     var coordinator: CoverletterCoordinatorProtocol?
     let logic: CoverLetterLogic
@@ -23,8 +24,13 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
         coordinator?.onCoverLetterTapEdit()
     }
     
-    func onDidTapField(name: String) {
-        coordinator?.onCoverLetterTapField(name: name)
+    func onDidTapField(name: String, completion: @escaping (Error?) -> Void) {
+        coordinator?.onCoverLetterTapField(name: name) { [weak self] error in
+            guard let self = self else { return }
+            self.logic.updateLetterDisplayStrings()
+            self.view?.refreshFromPresenter()
+            completion(error)
+        }
     }
     
     func onViewDidAppear() {

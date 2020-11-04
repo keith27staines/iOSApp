@@ -12,7 +12,7 @@ protocol CoverLetterViewPresenterProtocol {
     func onViewDidAppear()
     func loadData(completion: @escaping (Error?) -> Void)
     func onDidTapShowQuestionsList()
-    func onDidTapField(name: String)
+    func onDidTapField(name: String, completion: @escaping (Error?)->Void)
     func onDidCancel()
     func onDidTapPrimaryButton()
 }

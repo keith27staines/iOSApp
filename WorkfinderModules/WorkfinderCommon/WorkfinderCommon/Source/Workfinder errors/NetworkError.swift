@@ -50,7 +50,7 @@ public enum WorkfinderErrorType {
             default: return "Server error" + code
             }
         case .networkConnectivity: return "Cannot contact server" + code
-        case .custom(let title,_): return title + code
+        case .custom(let title,_): return title
         }
     }
     
@@ -110,7 +110,8 @@ public typealias HTTPStatusCode = Int
 public class WorkfinderError: Error {
 
     public let errorType: WorkfinderErrorType
-    public var retry: Bool { errorType.retry }
+    public private (set) var _retry: Bool? = nil
+    public var retry: Bool { _retry ?? errorType.retry }
     public var retryHandler: (() -> Void)?
 
     public var underlyingError: NSError?
@@ -156,8 +157,9 @@ public class WorkfinderError: Error {
         self.retryHandler = retryHandler
     }
     
-    public init(title: String, description: String) {
+    public init(title: String, description: String, canRetry: Bool? = nil) {
         errorType = WorkfinderErrorType.custom(title: title, description: description)
+        _retry = canRetry
     }
     
     public convenience init?(request: URLRequest,

@@ -35,21 +35,25 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    override func onCoverLetterTapField(name: String) {
-        guard let picklist = logic.picklistHavingTitle(title: name) else { return }
+    override func onCoverLetterTapField(name: String, completion: @escaping (Error?) -> Void) {
+        guard let picklist = logic.picklistHavingTitle(title: name)
+        else {
+            let error = WorkfinderError(title: "Not editable", description: "The \"\(name)\" field cannot be edited", canRetry: false)
+            completion(error)
+            return
+        }
         if picklist.isLoaded {
-            showPicklist(picklist)
+            showPicklist(picklist, completion: completion)
+            completion(nil)
             return
         }
         (picklist as? Picklist)?.fetchItems(completion: { [weak self] (_, result) in
             switch result {
-            
             case .success(_):
-                self?.showPicklist(picklist)
-            case .failure(_):
-                break
+                self?.showPicklist(picklist, completion: completion)
+            case .failure(let error):
+                completion(error)
             }
-            
         })
     }
 

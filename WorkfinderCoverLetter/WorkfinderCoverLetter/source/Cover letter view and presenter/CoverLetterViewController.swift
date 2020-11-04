@@ -55,23 +55,19 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     }
     
     @objc func didTapShowEditor(sender: UITapGestureRecognizer) {
-        // location of tap in coverLetterTextView coordinates taking the inset into account
-        var location = sender.location(in: coverLetterTextView)
-        location.x -= coverLetterTextView.textContainerInset.left;
-        location.y -= coverLetterTextView.textContainerInset.top;
-        
-        // character index at tap location
-        let layoutManager = coverLetterTextView.layoutManager
-        let characterIndex = layoutManager.characterIndex(for: location, in: coverLetterTextView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        
-        // if index is valid then do something.
-        guard characterIndex < coverLetterTextView.textStorage.length,
-              let fieldName = coverLetterTextView.attributedText?.attribute(NSAttributedString.Key.coverLetterField, at: characterIndex, effectiveRange: nil) as? String
+        guard let fieldName = fieldNameFromTapGesture(sender: sender)
         else {
-            presenter.onDidTapShowQuestionsList()
+            didTapShowQuestionList()
             return
         }
-        presenter.onDidTapField(name: fieldName)
+        showEditorForTappedFieldName(fieldName)
+    }
+    
+    func showEditorForTappedFieldName(_ fieldName: String) {
+        showLoadingIndicator()
+        presenter.onDidTapField(name: fieldName) { [weak self] (optionalError) in
+            self?.handleAsynchronousReturn(optionalError, retryHandler: nil)
+        }
     }
     
     @objc func didCancel() { presenter.onDidCancel() }
@@ -101,18 +97,12 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     func loadData() {
         showLoadingIndicator()
         presenter.loadData() { [weak self] optionalError in
-            guard let self = self else { return }
-            self.refreshFromPresenter()
-            self.hideLoadingIndicator()
-            self.messageHandler.displayOptionalErrorIfNotNil(
-                optionalError,
-                retryHandler: self.loadData)
+            self?.handleAsynchronousReturn(optionalError, retryHandler: self?.loadData)
         }
     }
 
-    @objc func onBackTapped() {
-        presenter.onDidCancel()
-    }
+    @objc func onBackTapped() { presenter.onDidCancel() }
+    
     lazy var messageHandler = UserMessageHandler(presenter: self)
     
     func showLoadingIndicator() {
@@ -155,4 +145,27 @@ extension CoverLetterViewController {
         pageStack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12).isActive = true
         pageStack.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12).isActive = true
     }
+    
+    func fieldNameFromTapGesture(sender: UITapGestureRecognizer) -> String? {
+        var location = sender.location(in: coverLetterTextView)
+        location.x -= coverLetterTextView.textContainerInset.left;
+        location.y -= coverLetterTextView.textContainerInset.top;
+        let characterIndex = coverLetterTextView.layoutManager.characterIndex(for: location, in: coverLetterTextView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        guard
+            characterIndex < coverLetterTextView.textStorage.length,
+            let fieldName = coverLetterTextView.attributedText?.attribute(NSAttributedString.Key.coverLetterField, at: characterIndex, effectiveRange: nil) as? String
+        else {
+           return nil
+        }
+        return fieldName
+    }
+    
+    func handleAsynchronousReturn(_ optionalError: Error?, retryHandler: (()->Void)?) {
+        refreshFromPresenter()
+        hideLoadingIndicator()
+        messageHandler.displayOptionalErrorIfNotNil(
+            optionalError,
+            retryHandler: retryHandler)
+    }
 }
+

@@ -41,7 +41,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         showingPicklist = picklist
         log.track(TrackingEvent.event(type: .questionOpened(picklist.type), flow: logic.flowType))
         appearanceCount -= 1
-        coordinator?.showPicklist(picklist)
+        coordinator?.showPicklist(picklist, completion: nil)
     }
     
     func onViewWillRefresh() {
