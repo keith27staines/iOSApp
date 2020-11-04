@@ -57,6 +57,7 @@ public struct Placement: Codable {
     public var personalAttributes: [F4SUUID]?
     public var skills: [F4SUUID?]?
     public var strongestSkills: [F4SUUID]?
+    public var supportingLink: String?
     
     public init() {
     }
@@ -84,5 +85,6 @@ public struct Placement: Codable {
         case personalAttributes = "attributes"
         case skills = "employment_skills"
         case strongestSkills = "strongest_skills"
+        case supportingLink = "supporting_link"
     }
 }

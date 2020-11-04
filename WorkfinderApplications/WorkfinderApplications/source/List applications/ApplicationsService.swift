@@ -60,16 +60,7 @@ extension Application {
         self.coverLetterString = json.cover_letter ?? ""
     }
 }
-/*
- PENDING = "pending"
- EXPIRED = "expired"
- VIEWED = "viewed"
- DECLINED = "declined"
- SAVED = "saved"
- OFFERED = "offered"
- ACCEPTED = "accepted"
- WITHDRAWN = "withdrawn"
- */
+
 extension ApplicationState {
     init(string: String?) {
         guard let string = string else {
@@ -103,6 +94,7 @@ struct ExpandedAssociationPlacementJson: Codable {
     var offer_notes: String?
     var is_remote: Bool?
     var salary: String?
+    var supporting_link: String?
     
     struct Association: Codable {
         var uuid: F4SUUID?
