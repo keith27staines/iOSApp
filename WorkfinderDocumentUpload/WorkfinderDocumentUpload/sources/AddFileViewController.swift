@@ -34,7 +34,7 @@ class AddFileViewController: UIViewController, AddFileViewControllerProtocol {
     }
     
     lazy var imageView: UIImageView = {
-        let image = UIImage(named: "")
+        let image = UIImage(named: "document_upload")
         let imageView = UIImageView(image: image)
         imageView.heightAnchor.constraint(equalToConstant: 81).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 81).isActive = true
