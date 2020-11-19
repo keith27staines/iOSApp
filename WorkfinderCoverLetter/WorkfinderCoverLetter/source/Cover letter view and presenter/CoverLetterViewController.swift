@@ -97,6 +97,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
             presenter.fieldConsistencyError,
             cancelHandler: { [weak self] in
                 self?.refreshFromPresenter()
+                self?.hideLoadingIndicator()
             },
             retryHandler: nil)
     }
