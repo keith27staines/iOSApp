@@ -75,7 +75,6 @@ class CoverLetterLogic {
     }
     
     func updateLetterDisplayStrings() {
-        let _ = consistencyCheck()
         guard let renderer = renderer else { return }
         var fieldValues = [String: String]()
         allPicklistsDictionary.forEach { (keyValue) in

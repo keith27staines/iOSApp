@@ -71,6 +71,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     }
     
     @objc func didCancel() { presenter.onDidCancel() }
+    
     @objc func didTapPrimaryButton() {
         messageHandler.showLightLoadingOverlay(view)
         presenter.onDidTapPrimaryButton()
@@ -92,6 +93,12 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         presenter.onViewDidAppear()
+        messageHandler.displayOptionalErrorIfNotNil(
+            presenter.fieldConsistencyError,
+            cancelHandler: { [weak self] in
+                self?.refreshFromPresenter()
+            },
+            retryHandler: nil)
     }
     
     func loadData() {
