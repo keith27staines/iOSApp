@@ -41,7 +41,7 @@ public class FetchCandidateService: WorkfinderService, FetchCandidateServiceProt
     }
 }
 
-public class UpdateCandidateService: WorkfinderService {
+public class UpdateCandidateService: WorkfinderService, UpdateCandidateServiceProtocol {
     
     public func update(candidate: Candidate, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
         do {

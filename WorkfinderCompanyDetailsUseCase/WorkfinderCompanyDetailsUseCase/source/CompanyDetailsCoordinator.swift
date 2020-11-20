@@ -100,6 +100,7 @@ extension CompanyDetailsCoordinator {
         guard let _ = workplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
+            updateCandidateService:UpdateCandidateService(networkConfig: injected.networkConfig),
             applyService: applyService,
             workplace: workplace,
             association: hostLocationAssociation,

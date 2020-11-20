@@ -99,13 +99,17 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
                 self?.refreshFromPresenter()
                 self?.hideLoadingIndicator()
             },
-            retryHandler: nil)
+            retryHandler: nil
+        )
+        if !isLoading { hideLoadingIndicator() }
     }
-    
+    var isLoading = false
     func loadData() {
+        isLoading = true
         showLoadingIndicator()
         presenter.loadData() { [weak self] optionalError in
             self?.handleAsynchronousReturn(optionalError, retryHandler: self?.loadData)
+            self?.isLoading = false
         }
     }
 

@@ -62,12 +62,13 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
     }
     
     override func onLetterEditorTapPrimaryButton() {
-        logic.save()
+        onLetterEditorDismiss()
         navigationRouter.pop(animated: true)
     }
     
     override func onLetterEditorDismiss() {
         logic.save()
+        self.coverLetterViewController?.messageHandler.hideLoadingOverlay()
     }
     
     override func onLetterEditorDidUpdate() {

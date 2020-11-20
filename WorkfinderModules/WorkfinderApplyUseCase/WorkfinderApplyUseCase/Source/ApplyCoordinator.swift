@@ -78,7 +78,9 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     
     let association: HostAssociationJson
     let workplace: Workplace
+    let updateCandidateService: UpdateCandidateServiceProtocol
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
+                updateCandidateService: UpdateCandidateServiceProtocol,
                 applyService: PostPlacementServiceProtocol,
                 workplace: Workplace,
                 association: HostAssociationJson,
@@ -89,6 +91,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
                 interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
+        self.updateCandidateService = updateCandidateService
         self.environment = environment
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.interestsRepository = interestsRepository
@@ -105,14 +108,14 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }
     
     func startDateOfBirthIfNecessary() {
-        guard let dateOfBirth = userRepository.loadCandidate().dateOfBirth,
-            let dateString = Date.workfinderDateStringToDate(dateOfBirth)
+        guard let dateOfBirthString = userRepository.loadCandidate().dateOfBirth,
+            let dob = Date.workfinderDateStringToDate(dateOfBirthString)
             else {
             let dobVC = DateOfBirthCollectorViewController(coordinator: self)
             navigationRouter.push(viewController: dobVC, animated: true)
             return
         }
-        onDidSelectDataOfBirth(date: dateString)
+        onDidSelectDataOfBirth(date: dob)
     }
     
     func startCoverLetterCoordinator(candidateAge: Int) {
@@ -302,6 +305,12 @@ extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
         var candidate = userRepository.loadCandidate()
         candidate.dateOfBirth = date.workfinderDateString
         userRepository.save(candidate: candidate)
+        if candidate.uuid != nil {
+            // persist the candidate's dob to the server
+            updateCandidateService.update(candidate: candidate) { (result) in
+        
+            }
+        }
         startCoverLetterCoordinator(candidateAge: candidate.age() ?? 0)
     }
 }
