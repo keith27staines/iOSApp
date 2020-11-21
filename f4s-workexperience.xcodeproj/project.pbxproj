@@ -34,6 +34,7 @@
 		535F7AE32544A091002D1B52 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F7ADF2544A091002D1B52 /* TabContentView.swift */; };
 		535F7AE42544A091002D1B52 /* TabSwitchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F7AE02544A091002D1B52 /* TabSwitchingView.swift */; };
 		53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C760D6251C845B0072281E /* DeviceRegistrar.swift */; };
+		53D94B592569D61400A2127C /* f4s-workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */; };
 		7DE4F9A693FA8C0A98C6A08D /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7DD6E9CDC56B84FEA51BE6 /* Pods_f4s_workexperience.framework */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B861233271FE0034A60E /* MasterBuilder.swift */; };
@@ -72,9 +73,6 @@
 		FC70C9D724DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC72219F20FE248400F10953 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219B20FE248400F10953 /* Appfile */; };
 		FC7221A020FE248400F10953 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = FC72219C20FE248400F10953 /* Fastfile */; };
-		FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */; };
-		FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F552416299B00AD6317 /* PinRepositoryTests.swift */; };
-		FC771F592416299B00AD6317 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771F562416299B00AD6317 /* Common.swift */; };
 		FC7B63E424652FD2006AC0C6 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */; };
 		FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8E303920F4A60B006059DE /* F4SLogger.swift */; };
 		FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5723202B8F00F1CE23 /* Config.swift */; };
@@ -109,9 +107,6 @@
 		FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */; };
 		FCC5EBB61F449C310085CE15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FCC5EBB51F449C310085CE15 /* README.md */; };
 		FCCFC7CF224D2C110060F7EC /* LocalStoreMigrationsRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFC7CE224D2C110060F7EC /* LocalStoreMigrationsRunner.swift */; };
-		FCE7665024B4B78C007C4D4C /* KSClusterTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */; };
-		FCE7665124B4B78C007C4D4C /* KSClusterManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */; };
-		FCE7665224B4B78C007C4D4C /* KSPinTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */; };
 		FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -198,6 +193,8 @@
 		53C3C51925333731002AFD98 /* DebugStaging.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugStaging.entitlements; path = Config/DebugStaging.entitlements; sourceTree = "<group>"; };
 		53C3C51A25333731002AFD98 /* ReleaseStaging.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = ReleaseStaging.entitlements; path = Config/ReleaseStaging.entitlements; sourceTree = "<group>"; };
 		53C760D6251C845B0072281E /* DeviceRegistrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrar.swift; sourceTree = "<group>"; };
+		53D94B572569D61300A2127C /* f4s-workexperienceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "f4s-workexperienceTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "f4s-workexperienceTests.swift"; sourceTree = "<group>"; };
 		92EEC1B2F42AE23C370D87A1 /* Pods-f4s-workexperience.debugdevelop.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.debugdevelop.xcconfig"; path = "Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.debugdevelop.xcconfig"; sourceTree = "<group>"; };
 		A763C746C3A8C64064FFD78F /* Pods-f4s-workexperienceTests.debugstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.debugstaging.xcconfig"; path = "Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.debugstaging.xcconfig"; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -237,9 +234,6 @@
 		FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUpload.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC72219B20FE248400F10953 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		FC72219C20FE248400F10953 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
-		FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinDownloadFileParserTests.swift; sourceTree = "<group>"; };
-		FC771F552416299B00AD6317 /* PinRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinRepositoryTests.swift; sourceTree = "<group>"; };
-		FC771F562416299B00AD6317 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		FC79314720226D440034D201 /* ReleaseLive.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = ReleaseLive.entitlements; path = Config/ReleaseLive.entitlements; sourceTree = "<group>"; };
 		FC7B63E324652FD2006AC0C6 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		FC8E303920F4A60B006059DE /* F4SLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogger.swift; sourceTree = "<group>"; };
@@ -269,9 +263,6 @@
 		FCC1DF5A232505640074D5C1 /* CompanyCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCoordinatorFactory.swift; sourceTree = "<group>"; };
 		FCC5EBB51F449C310085CE15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FCCFC7CE224D2C110060F7EC /* LocalStoreMigrationsRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreMigrationsRunner.swift; sourceTree = "<group>"; };
-		FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSClusterTestCase.swift; sourceTree = "<group>"; };
-		FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSClusterManagerTestCase.swift; sourceTree = "<group>"; };
-		FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSPinTestCase.swift; sourceTree = "<group>"; };
 		FCEE5E1D2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorBackgroundViewController.swift; sourceTree = "<group>"; };
 		FCF4B651232BC49A001340DF /* WorkfinderOnboardingUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderOnboardingUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCFBD0062250D69700A9361D /* f4s-workexperienceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "f4s-workexperienceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -598,13 +589,6 @@
 			path = HiddenDebugScreen;
 			sourceTree = "<group>";
 		};
-		FC3F3921222931630046F8F8 /* Coordinator tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Coordinator tests";
-			sourceTree = "<group>";
-		};
 		FC459CE8249615F900D6CE46 /* Deep link dispatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,16 +625,6 @@
 				FC72219C20FE248400F10953 /* Fastfile */,
 			);
 			path = fastlane;
-			sourceTree = "<group>";
-		};
-		FC771F532416297900AD6317 /* CompanyFileParserTests */ = {
-			isa = PBXGroup;
-			children = (
-				FC771F542416299A00AD6317 /* PinDownloadFileParserTests.swift */,
-				FC771F552416299B00AD6317 /* PinRepositoryTests.swift */,
-				FC771F562416299B00AD6317 /* Common.swift */,
-			);
-			path = CompanyFileParserTests;
 			sourceTree = "<group>";
 		};
 		FCA53B931FE115E1009F6DB0 /* Force app update */ = {
@@ -694,33 +668,14 @@
 			name = "Top level files";
 			sourceTree = "<group>";
 		};
-		FCE7664C24B4B76C007C4D4C /* KSClusterManagerTests */ = {
-			isa = PBXGroup;
-			children = (
-				FCE7664E24B4B78B007C4D4C /* KSClusterManagerTestCase.swift */,
-				FCE7664D24B4B78B007C4D4C /* KSClusterTestCase.swift */,
-				FCE7664F24B4B78C007C4D4C /* KSPinTestCase.swift */,
-			);
-			path = KSClusterManagerTests;
-			sourceTree = "<group>";
-		};
 		FCFBD0072250D69700A9361D /* f4s-workexperienceTests */ = {
 			isa = PBXGroup;
 			children = (
-				FCFE450F2250CAD600C38436 /* Workfinder main module tests */,
 				FCFBD00A2250D69700A9361D /* Info.plist */,
+				53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */,
+				53D94B572569D61300A2127C /* f4s-workexperienceTests-Bridging-Header.h */,
 			);
 			path = "f4s-workexperienceTests";
-			sourceTree = "<group>";
-		};
-		FCFE450F2250CAD600C38436 /* Workfinder main module tests */ = {
-			isa = PBXGroup;
-			children = (
-				FCE7664C24B4B76C007C4D4C /* KSClusterManagerTests */,
-				FC771F532416297900AD6317 /* CompanyFileParserTests */,
-				FC3F3921222931630046F8F8 /* Coordinator tests */,
-			);
-			path = "Workfinder main module tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -800,7 +755,7 @@
 					};
 					FCFBD0052250D69700A9361D = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1220;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 40E78E121DD31A86000A3776;
 					};
@@ -975,12 +930,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC771F592416299B00AD6317 /* Common.swift in Sources */,
-				FC771F572416299B00AD6317 /* PinDownloadFileParserTests.swift in Sources */,
-				FCE7665024B4B78C007C4D4C /* KSClusterTestCase.swift in Sources */,
-				FCE7665224B4B78C007C4D4C /* KSPinTestCase.swift in Sources */,
-				FC771F582416299B00AD6317 /* PinRepositoryTests.swift in Sources */,
-				FCE7665124B4B78C007C4D4C /* KSClusterManagerTestCase.swift in Sources */,
+				53D94B592569D61400A2127C /* f4s-workexperienceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1568,6 +1518,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "f4s-workexperienceTests/f4s-workexperienceTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1644,6 +1595,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "f4s-workexperienceTests/f4s-workexperienceTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1720,6 +1672,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "f4s-workexperienceTests/f4s-workexperienceTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1789,6 +1742,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "f4s-workexperienceTests/f4s-workexperienceTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1859,6 +1813,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "f4s-workexperienceTests/f4s-workexperienceTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
