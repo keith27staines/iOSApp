@@ -28,7 +28,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: Candidate { return injected.userRepository.loadCandidate() }
-    var databaseDownloadManager: F4SCompanyDownloadManagerProtocol { return injected.companyDownloadFileManager }
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol
@@ -98,7 +97,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.uuid = userUuid
         logStartupInformation(userId: userUuid)
-        databaseDownloadManager.start()
     }
     
     private func startTabBarCoordinator() {

@@ -34,7 +34,6 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     var workplacePresenter: WorkplacePresenter!
     var workplace: Workplace
     var recommendedAssociationUuid: F4SUUID?
-    var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
 
@@ -47,12 +46,10 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
-        interestsRepository: F4SSelectedInterestsRepositoryProtocol,
         applyService: PostPlacementServiceProtocol,
         associationsProvider: AssociationsServiceProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)) {
         self.environment = environment
-        self.interestsRepository = interestsRepository
         self.workplace = workplace
         self.recommendedAssociationUuid = recommendedAssociationUuid
         self.applyService = applyService
@@ -107,8 +104,7 @@ extension CompanyDetailsCoordinator {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
-            environment: environment,
-            interestsRepository: interestsRepository)
+            environment: environment)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
     }

@@ -23,11 +23,9 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     var coverletterCoordinator: CoverLetterFlow?
     var rootViewController: UIViewController?
     let environment: EnvironmentType
-    var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let startingViewController: UIViewController!
     let applyService: PostPlacementServiceProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
-    lazy var userInterests: [F4SInterest] = { return interestsRepository.loadSelectedInterestsArray() }()
     lazy var draftPlacementLogic: DraftPlacementPreparer = {
         return DraftPlacementPreparer()
     }()
@@ -87,14 +85,12 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                environment: EnvironmentType,
-                interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
+                environment: EnvironmentType) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
         self.updateCandidateService = updateCandidateService
         self.environment = environment
         self.startingViewController = navigationRouter.navigationController.topViewController
-        self.interestsRepository = interestsRepository
         self.workplace = workplace
         self.association = association
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)

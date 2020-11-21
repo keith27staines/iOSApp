@@ -56,7 +56,6 @@ public protocol CoreInjectionProtocol : class {
     var launchOptions: LaunchOptions? { get set }
     var user: Candidate { get set }
     var userRepository: UserRepositoryProtocol { get }
-    var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
     var versionChecker: WorkfinderVersionCheckerProtocol { get }
 }

@@ -8,7 +8,6 @@ public class CoreInjection : CoreInjectionProtocol {
     public var launchOptions: LaunchOptions? = nil
     public var user: Candidate
     public var userRepository: UserRepositoryProtocol
-    public var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol
     public var log: F4SAnalyticsAndDebugging
     public var networkConfig: NetworkConfig
     public var versionChecker: WorkfinderVersionCheckerProtocol
@@ -18,7 +17,6 @@ public class CoreInjection : CoreInjectionProtocol {
                 versionChecker: WorkfinderVersionCheckerProtocol,
                 user: Candidate,
                 userRepository: UserRepositoryProtocol,
-                companyDownloadFileManager: F4SCompanyDownloadManagerProtocol,
                 log: F4SAnalyticsAndDebugging) {
         
         self.launchOptions = launchOptions
@@ -26,7 +24,6 @@ public class CoreInjection : CoreInjectionProtocol {
         self.versionChecker = versionChecker
         self.user = user
         self.userRepository = userRepository
-        self.companyDownloadFileManager = companyDownloadFileManager
         self.log = log
     }
 }

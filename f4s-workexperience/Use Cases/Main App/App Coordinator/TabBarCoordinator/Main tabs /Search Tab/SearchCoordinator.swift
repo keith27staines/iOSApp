@@ -8,32 +8,23 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     var shouldAskOperatingSystemToAllowLocation = false
-    let interestsRepository: F4SSelectedInterestsRepositoryProtocol
-    weak var interestsViewController: InterestsViewController?
     
     lazy var rootViewController: MapViewController = {
-        let storyboard = UIStoryboard(name: "MapView", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "MapViewCtrl") as! MapViewController
+        let vc = MapViewController()
         vc.coordinator = self
-        vc.companyFileDownloadManager = self.injected.companyDownloadFileManager
-        vc.interestsRepository = self.interestsRepository
-        vc.log = self.injected.log
         return vc
     }()
     
     init(parent: Coordinating,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
-         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-         interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
+         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
-        self.interestsRepository = interestsRepository
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
     override func start() {
         rootViewController.coordinator = self
-        rootViewController.shouldRequestAuthorization = shouldAskOperatingSystemToAllowLocation
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
     
@@ -94,21 +85,4 @@ class SearchCoordinator : CoreInjectionNavigationCoordinator {
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()
     }
-    
-    func filtersButtonWasTapped() {
-        guard
-            let unfilteredMapModel = rootViewController.unfilteredMapModel,
-            let visibleMapBounds = rootViewController.visibleMapBounds else { return }
-        let interestsStoryboard = UIStoryboard(name: "InterestsView", bundle: nil)
-        let interestsViewController = interestsStoryboard.instantiateViewController(withIdentifier: "interestsCtrl") as! InterestsViewController
-        interestsViewController.interestsRepository = interestsRepository
-        interestsViewController.allInterestsSet = interestsRepository.allInterestsSet
-        interestsViewController.visibleBounds = visibleMapBounds
-        interestsViewController.mapModel = unfilteredMapModel
-        interestsViewController.log = injected.log
-        interestsViewController.delegate = rootViewController
-        let navigationController = UINavigationController(rootViewController: interestsViewController)
-        self.interestsViewController = interestsViewController
-        rootViewController.present(navigationController, animated: true, completion: nil)
-   }
 }

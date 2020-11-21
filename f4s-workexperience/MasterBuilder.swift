@@ -19,8 +19,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             parent: parent,
             navigationRouter: router,
             inject: inject,
-            companyCoordinatorFactory: self.companyCoordinatorFactory,
-            interestsRepository: interestsRepository)
+            companyCoordinatorFactory: self.companyCoordinatorFactory
+        )
     }
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
@@ -78,8 +78,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             versionChecker: self.versionChecker,
             user: self.userRepo.loadCandidate(),
             userRepository: self.userRepo,
-            companyDownloadFileManager: self.companyFileDownloadManager,
-            log: self.log)
+            log: self.log
+        )
     }()
     
     lazy var window: UIWindow = {
@@ -111,8 +111,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         let applyService = PostPlacementService(networkConfig: self.networkConfiguration)
         return CompanyCoordinatorFactory(applyService: applyService,
                                          associationsProvider: self.associationsProvider,
-                                         environment: environment,
-                                         interestsRepository: interestsRepository)
+                                         environment: environment
+        )
     }()
     
     var log: F4SLog
@@ -125,20 +125,12 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return UserRepository(localStore: self.localStore)
     }()
     
-    lazy var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol = {
-        return F4SCompanyDownloadManager()
-    }()
-    
     lazy var hostsProvider: HostsProviderProtocol = {
         return HostsProvider(networkConfig: self.networkConfiguration)
     }()
     
     lazy var associationsProvider: AssociationsServiceProtocol = {
         return AssociationsService(networkConfig: self.networkConfiguration)
-    }()
-    
-    lazy var interestsRepository: F4SSelectedInterestsRepositoryProtocol = {
-        return F4SSelectedInterestsRepository(localStore: self.localStore)
     }()
     
     lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {

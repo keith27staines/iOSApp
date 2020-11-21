@@ -17,12 +17,6 @@
       location = "group:WorkfinderProjectApply/WorkfinderProjectApply.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:KSQuadTree/KSQuadTree.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:KSGeometry/KSGeometry.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:WorkfinderRecommendationsList/WorkfinderRecommendationsList.xcodeproj">
    </FileRef>
    <FileRef

@@ -8,7 +8,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var deviceToken: String?
     var masterBuilder: MasterBuilder!
-    var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol!
     var appCoordinator: AppCoordinatorProtocol!
     
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
@@ -27,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func startApp() {
         appCoordinator = self.masterBuilder.buildAppCoordinator()
         appCoordinator.start()
-        companyFileDownloadManager = self.masterBuilder.companyFileDownloadManager
     }
     
     func application(_ application: UIApplication,
@@ -92,8 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      handleEventsForBackgroundURLSession identifier: String,
                      completionHandler: @escaping () -> Void) {
-        companyFileDownloadManager?.backgroundSessionCompletionHandler = completionHandler
-        companyFileDownloadManager?.start()
+
+        
     }
 
 }

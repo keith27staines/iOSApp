@@ -14,7 +14,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-    let interestsRepository: F4SSelectedInterestsRepositoryProtocol
     
     let uuid: UUID = UUID()
     let navigationRouter: NavigationRoutingProtocol?
@@ -29,14 +28,12 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     required init(parent: AppCoordinatorProtocol?,
                   navigationRouter: NavigationRoutingProtocol,
                   inject: CoreInjectionProtocol,
-                  companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-                  interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
+                  companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
         self.appCoordinator = parent
         self.parentCoordinator = parent
         self.navigationRouter = navigationRouter
         self.injected = inject
         self.companyCoordinatorFactory = companyCoordinatorFactory
-        self.interestsRepository = interestsRepository
     }
     
     func start() {
@@ -178,8 +175,8 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             parent: self,
             navigationRouter: router,
             inject: injected,
-            companyCoordinatorFactory: companyCoordinatorFactory,
-            interestsRepository: interestsRepository)
+            companyCoordinatorFactory: companyCoordinatorFactory
+        )
         coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(coordinator)
         return coordinator
@@ -191,16 +188,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         coordinator.onRecommendationSelected = { uuid in
             self.dispatchRecommendationToSearchTab(uuid: uuid)
         }
-        addChildCoordinator(coordinator)
-        return coordinator
-    }()
-    
-    lazy var homeCoordinator: HomeCoordinator = {
-        let navigationController = UINavigationController()
-        let icon = UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationController.tabBarItem = UITabBarItem(title: "Home", image: icon, selectedImage: nil)
-        let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = HomeCoordinator(parent: nil, navigationRouter: router, inject: injected)
         addChildCoordinator(coordinator)
         return coordinator
     }()
