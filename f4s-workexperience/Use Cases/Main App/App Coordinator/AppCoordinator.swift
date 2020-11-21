@@ -7,8 +7,6 @@ import WorkfinderUserDetailsUseCase
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderOnboardingUseCase
 import WorkfinderRegisterCandidate
-import GoogleMaps
-import GooglePlaces
 
 extension UIApplication {}
 
@@ -59,8 +57,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     override func start() {
         injected.versionChecker.performChecksWithHardStop { [weak self] (optionalError) in
             guard let self = self else { return }
-            GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
-            GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
             self.startOnboarding()
             if self.launchOptions?[.remoteNotification] != nil {
                 self.startTabBarCoordinator()
