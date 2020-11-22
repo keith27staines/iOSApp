@@ -28,10 +28,10 @@
 		40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */; };
 		40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */; };
 		40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E8E1DD32C4E000A3776 /* Settings.bundle */; };
+		5344850F256A5F020082889C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5344850E256A5F020082889C /* WorkfinderHome.framework */; };
+		53448510256A5F020082889C /* WorkfinderHome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5344850E256A5F020082889C /* WorkfinderHome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C760D6251C845B0072281E /* DeviceRegistrar.swift */; };
 		53D94B592569D61400A2127C /* f4s-workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */; };
-		53D94B96256A37EE00A2127C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94B95256A37EE00A2127C /* WorkfinderHome.framework */; };
-		53D94B97256A37EE00A2127C /* WorkfinderHome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94B95256A37EE00A2127C /* WorkfinderHome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7DE4F9A693FA8C0A98C6A08D /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7DD6E9CDC56B84FEA51BE6 /* Pods_f4s_workexperience.framework */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B861233271FE0034A60E /* MasterBuilder.swift */; };
@@ -137,7 +137,7 @@
 				FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */,
 				FCBA984A24506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */,
 				FCBA984C24506D8C00C3D2E6 /* WorkfinderServices.framework in Embed Frameworks */,
-				53D94B97256A37EE00A2127C /* WorkfinderHome.framework in Embed Frameworks */,
+				53448510256A5F020082889C /* WorkfinderHome.framework in Embed Frameworks */,
 				FCAEEC0724E1909A00D6B579 /* ErrorHandlingUI.framework in Embed Frameworks */,
 				FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */,
 				FCBA985024506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
@@ -180,6 +180,7 @@
 		40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExampleDrawerVisualStateManager.swift; path = Menu/VisualStateManager/ExampleDrawerVisualStateManager.swift; sourceTree = "<group>"; };
 		40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsHelper.swift; sourceTree = "<group>"; };
 		40E78E8E1DD32C4E000A3776 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		5344850E256A5F020082889C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C3C51725333731002AFD98 /* DebugDevelop.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugDevelop.entitlements; path = Config/DebugDevelop.entitlements; sourceTree = "<group>"; };
 		53C3C51825333731002AFD98 /* DebugLive.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugLive.entitlements; path = Config/DebugLive.entitlements; sourceTree = "<group>"; };
 		53C3C51925333731002AFD98 /* DebugStaging.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugStaging.entitlements; path = Config/DebugStaging.entitlements; sourceTree = "<group>"; };
@@ -270,7 +271,7 @@
 				FC70C9D624DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Frameworks */,
 				FC06A19D24641C930023DE99 /* WorkfinderApplications.framework in Frameworks */,
 				FC5DF50E24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Frameworks */,
-				53D94B96256A37EE00A2127C /* WorkfinderHome.framework in Frameworks */,
+				5344850F256A5F020082889C /* WorkfinderHome.framework in Frameworks */,
 				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FC18C5B524C1870B006D017D /* WorkfinderCoverLetter.framework in Frameworks */,
@@ -440,6 +441,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5344850E256A5F020082889C /* WorkfinderHome.framework */,
 				53D94B95256A37EE00A2127C /* WorkfinderHome.framework */,
 				FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */,
 				FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */,

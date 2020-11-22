@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../../Keith&apos;s Projects/Develop/WorkfinderHome/WorkfinderHome.xcodeproj">
+      location = "group:WorkfinderHome/WorkfinderHome.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:ErrorHandlingUI/ErrorHandlingUI.xcodeproj">
