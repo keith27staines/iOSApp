@@ -7,6 +7,7 @@ import WorkfinderOnboardingUseCase
 import WorkfinderApplications
 import WorkfinderRecommendationsList
 import WorkfinderCompanyDetailsUseCase
+import WorkfinderHome
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     var parentCoordinator: Coordinating?
@@ -76,7 +77,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     public func dispatchRecommendationToSearchTab(uuid: F4SUUID) {
         closeMenu { [weak self] (success) in
             self?.navigateToMap()
-            self?.searchCoordinator.processRecommendation(uuid: uuid)
+            self?.homeCoordinator.processRecommendation(uuid: uuid)
         }
     }
     
@@ -109,7 +110,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     public func navigateToMap() {
         closeMenu { [weak self] (success) in
             guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.map.rawValue
+            self.tabBarViewController.selectedIndex = TabIndex.home.rawValue
         }
     }
     
@@ -169,9 +170,9 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         return coordinator
     }()
     
-    lazy var searchCoordinator: SearchCoordinator = {
-        let router = TabIndex.map.makeRouter()
-        let coordinator = SearchCoordinator(
+    lazy var homeCoordinator: HomeCoordinator = {
+        let router = TabIndex.home.makeRouter()
+        let coordinator = HomeCoordinator(
             parent: self,
             navigationRouter: router,
             inject: injected,
@@ -247,7 +248,7 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         drawerController!.openDrawerGestureModeMask = .all
         drawerController!.closeDrawerGestureModeMask = .all
         switch viewController {
-        case searchCoordinator.navigationRouter.navigationController:
+        case homeCoordinator.navigationRouter.navigationController:
             log.track(TrackingEvent.makeTabTap(tab: .search))
             drawerController!.openDrawerGestureModeMask = .bezelPanningCenterView
             drawerController!.closeDrawerGestureModeMask = .all

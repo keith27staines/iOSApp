@@ -28,13 +28,10 @@
 		40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */; };
 		40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */; };
 		40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E8E1DD32C4E000A3776 /* Settings.bundle */; };
-		40E78E981DD39275000A3776 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E971DD39275000A3776 /* MapViewController.swift */; };
-		535F7AE12544A091002D1B52 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F7ADD2544A091002D1B52 /* Tab.swift */; };
-		535F7AE22544A091002D1B52 /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F7ADE2544A091002D1B52 /* DiscoveryView.swift */; };
-		535F7AE32544A091002D1B52 /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F7ADF2544A091002D1B52 /* TabContentView.swift */; };
-		535F7AE42544A091002D1B52 /* TabSwitchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F7AE02544A091002D1B52 /* TabSwitchingView.swift */; };
 		53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C760D6251C845B0072281E /* DeviceRegistrar.swift */; };
 		53D94B592569D61400A2127C /* f4s-workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */; };
+		53D94B96256A37EE00A2127C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94B95256A37EE00A2127C /* WorkfinderHome.framework */; };
+		53D94B97256A37EE00A2127C /* WorkfinderHome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94B95256A37EE00A2127C /* WorkfinderHome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7DE4F9A693FA8C0A98C6A08D /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7DD6E9CDC56B84FEA51BE6 /* Pods_f4s_workexperience.framework */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B861233271FE0034A60E /* MasterBuilder.swift */; };
@@ -84,7 +81,6 @@
 		FCAEEC0624E1909A00D6B579 /* ErrorHandlingUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */; };
 		FCAEEC0724E1909A00D6B579 /* ErrorHandlingUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
-		FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; };
 		FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -141,6 +137,7 @@
 				FCBA984824506D8C00C3D2E6 /* WorkfinderNetworking.framework in Embed Frameworks */,
 				FCBA984A24506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Embed Frameworks */,
 				FCBA984C24506D8C00C3D2E6 /* WorkfinderServices.framework in Embed Frameworks */,
+				53D94B97256A37EE00A2127C /* WorkfinderHome.framework in Embed Frameworks */,
 				FCAEEC0724E1909A00D6B579 /* ErrorHandlingUI.framework in Embed Frameworks */,
 				FCBA984E24506D8C00C3D2E6 /* WorkfinderUI.framework in Embed Frameworks */,
 				FCBA985024506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Embed Frameworks */,
@@ -183,11 +180,6 @@
 		40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExampleDrawerVisualStateManager.swift; path = Menu/VisualStateManager/ExampleDrawerVisualStateManager.swift; sourceTree = "<group>"; };
 		40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsHelper.swift; sourceTree = "<group>"; };
 		40E78E8E1DD32C4E000A3776 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		40E78E971DD39275000A3776 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		535F7ADD2544A091002D1B52 /* Tab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
-		535F7ADE2544A091002D1B52 /* DiscoveryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
-		535F7ADF2544A091002D1B52 /* TabContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
-		535F7AE02544A091002D1B52 /* TabSwitchingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabSwitchingView.swift; sourceTree = "<group>"; };
 		53C3C51725333731002AFD98 /* DebugDevelop.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugDevelop.entitlements; path = Config/DebugDevelop.entitlements; sourceTree = "<group>"; };
 		53C3C51825333731002AFD98 /* DebugLive.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugLive.entitlements; path = Config/DebugLive.entitlements; sourceTree = "<group>"; };
 		53C3C51925333731002AFD98 /* DebugStaging.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugStaging.entitlements; path = Config/DebugStaging.entitlements; sourceTree = "<group>"; };
@@ -195,6 +187,7 @@
 		53C760D6251C845B0072281E /* DeviceRegistrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrar.swift; sourceTree = "<group>"; };
 		53D94B572569D61300A2127C /* f4s-workexperienceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "f4s-workexperienceTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "f4s-workexperienceTests.swift"; sourceTree = "<group>"; };
+		53D94B95256A37EE00A2127C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92EEC1B2F42AE23C370D87A1 /* Pods-f4s-workexperience.debugdevelop.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.debugdevelop.xcconfig"; path = "Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.debugdevelop.xcconfig"; sourceTree = "<group>"; };
 		A763C746C3A8C64064FFD78F /* Pods-f4s-workexperienceTests.debugstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.debugstaging.xcconfig"; path = "Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.debugstaging.xcconfig"; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -247,7 +240,6 @@
 		FCB4604024B53AA4001DAE2C /* KSGeometry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSGeometry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB4604124B53AA4001DAE2C /* KSQuadTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSQuadTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
-		FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +270,7 @@
 				FC70C9D624DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Frameworks */,
 				FC06A19D24641C930023DE99 /* WorkfinderApplications.framework in Frameworks */,
 				FC5DF50E24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Frameworks */,
+				53D94B96256A37EE00A2127C /* WorkfinderHome.framework in Frameworks */,
 				FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */,
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FC18C5B524C1870B006D017D /* WorkfinderCoverLetter.framework in Frameworks */,
@@ -444,20 +437,10 @@
 			name = DrawerController;
 			sourceTree = "<group>";
 		};
-		535F7ADC2544A056002D1B52 /* Discovery */ = {
-			isa = PBXGroup;
-			children = (
-				535F7ADE2544A091002D1B52 /* DiscoveryView.swift */,
-				535F7ADD2544A091002D1B52 /* Tab.swift */,
-				535F7ADF2544A091002D1B52 /* TabContentView.swift */,
-				535F7AE02544A091002D1B52 /* TabSwitchingView.swift */,
-			);
-			path = Discovery;
-			sourceTree = "<group>";
-		};
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53D94B95256A37EE00A2127C /* WorkfinderHome.framework */,
 				FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */,
 				FC70C9D524DC2A4A007DF84D /* WorkfinderDocumentUpload.framework */,
 				FC15BD0524CBF96900339A35 /* WorkfinderRegisterCandidate.framework */,
@@ -522,14 +505,6 @@
 			name = Builders;
 			sourceTree = "<group>";
 		};
-		FC0B4074226B15C700D992AC /* Map View */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E971DD39275000A3776 /* MapViewController.swift */,
-			);
-			path = "Map View";
-			sourceTree = "<group>";
-		};
 		FC1DC06921FE1410009ABC60 /* Main App */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,16 +523,6 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
-		FC24D235226AED5E00FA04A1 /* Search Tab */ = {
-			isa = PBXGroup;
-			children = (
-				535F7ADC2544A056002D1B52 /* Discovery */,
-				FCB49300222A4B3B00B88B8B /* SearchCoordinator.swift */,
-				FC0B4074226B15C700D992AC /* Map View */,
-			);
-			path = "Search Tab";
-			sourceTree = "<group>";
-		};
 		FC2D975A22185D0C00763B06 /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
@@ -574,7 +539,6 @@
 				40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */,
 				40C1A4E51DDB356B000F80AA /* TabBarViewController.swift */,
 				FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */,
-				FCB49304222A5CCC00B88B8B /* Main tabs  */,
 			);
 			path = TabBarCoordinator;
 			sourceTree = "<group>";
@@ -634,14 +598,6 @@
 				FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */,
 			);
 			name = "Force app update";
-			sourceTree = "<group>";
-		};
-		FCB49304222A5CCC00B88B8B /* Main tabs  */ = {
-			isa = PBXGroup;
-			children = (
-				FC24D235226AED5E00FA04A1 /* Search Tab */,
-			);
-			path = "Main tabs ";
 			sourceTree = "<group>";
 		};
 		FCB49305222A5D1B00B88B8B /* App Coordinator */ = {
@@ -886,7 +842,6 @@
 				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
 				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
-				535F7AE32544A091002D1B52 /* TabContentView.swift in Sources */,
 				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
 				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
@@ -897,12 +852,10 @@
 				FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FC459CEA2496161B00D6CE46 /* DeepLinkDispatcher.swift in Sources */,
-				40E78E981DD39275000A3776 /* MapViewController.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC04B8642332751F0034A60E /* CoordinatorFactories.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
-				FCB49301222A4B3B00B88B8B /* SearchCoordinator.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */,
 				FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */,
@@ -910,16 +863,13 @@
 				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
 				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
-				535F7AE22544A091002D1B52 /* DiscoveryView.swift in Sources */,
 				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
 				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
 				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
 				FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */,
-				535F7AE42544A091002D1B52 /* TabSwitchingView.swift in Sources */,
 				FC6C1CD824D1B359005E1936 /* Migrate_v303_to_v310.swift in Sources */,
-				535F7AE12544A091002D1B52 /* Tab.swift in Sources */,
 				FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */,
 				FC22F4F324B5CF020030924B /* TabIndexEnumeration.swift in Sources */,
 				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
