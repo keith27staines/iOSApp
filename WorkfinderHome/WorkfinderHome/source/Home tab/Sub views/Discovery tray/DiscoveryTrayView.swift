@@ -14,26 +14,13 @@ class DiscoveryTrayView : UIView {
     init() {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
-        layer.cornerRadius = 12
+        layer.cornerRadius = 16
         layer.masksToBounds = false
         layer.shadowRadius = 2
-        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
         configureViews()
     }
-    
-    
-//    lazy var swipeDown: UISwipeGestureRecognizer = {
-//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-//        swipe.direction = .down
-//        return swipe
-//    }()
-//
-//    lazy var swipeUp: UISwipeGestureRecognizer = {
-//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
-//        swipe.direction = .up
-//        return swipe
-//    }()
     
     @objc func handleSwipe(swipe: UISwipeGestureRecognizer) {
 

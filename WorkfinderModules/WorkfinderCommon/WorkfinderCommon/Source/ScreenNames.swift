@@ -6,7 +6,7 @@ public enum ScreenName: String {
     case companyClusterList
     case WorkplaceViewController
     case companySearch
-    case map
+    case home
 }
 
 public enum TrackEventType {
