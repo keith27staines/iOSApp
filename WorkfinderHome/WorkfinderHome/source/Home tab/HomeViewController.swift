@@ -10,6 +10,7 @@ class HomeViewController: UIViewController {
     var homeView: HomeView { view as! HomeView }
     lazy var messageHandler = UserMessageHandler(presenter: self)
     override func loadView() { view = HomeView() }
+    var trayController: DiscoveryTrayController!
     
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
@@ -39,8 +40,10 @@ class HomeViewController: UIViewController {
         adjustNavigationBar()
         guard !isConfigured else { return }
         isConfigured = true
+        homeView.isUserInteractionEnabled = true
         homeView.configureViews()
         homeView.headerView.height = (navigationBar?.frame.height ?? 0) + statusBarHeight
+        trayController = DiscoveryTrayController(parentView: homeView.backgroundView)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

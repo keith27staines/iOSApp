@@ -11,6 +11,7 @@
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53C9CAD6256B87D100F567B2 /* HeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9CAD5256B87D100F567B2 /* HeaderViewPresenter.swift */; };
+		53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */; };
 		53D94B76256A35B200A2127C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94B6C256A35B200A2127C /* WorkfinderHome.framework */; };
 		53D94B7B256A35B200A2127C /* WorkfinderHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94B7A256A35B200A2127C /* WorkfinderHomeTests.swift */; };
 		53D94B7D256A35B200A2127C /* WorkfinderHome.h in Headers */ = {isa = PBXBuildFile; fileRef = 53D94B6F256A35B200A2127C /* WorkfinderHome.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -20,7 +21,7 @@
 		53D94BA5256A382600A2127C /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94BA4256A382600A2127C /* WorkfinderCoordinators.framework */; };
 		53D94BA8256A383000A2127C /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94BA7256A383000A2127C /* WorkfinderServices.framework */; };
 		53D94BAF256A39A200A2127C /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BAB256A39A200A2127C /* TabContentView.swift */; };
-		53D94BB0256A39A200A2127C /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BAC256A39A200A2127C /* DiscoveryView.swift */; };
+		53D94BB0256A39A200A2127C /* DiscoveryTrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BAC256A39A200A2127C /* DiscoveryTrayView.swift */; };
 		53D94BB1256A39A200A2127C /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BAD256A39A200A2127C /* Tab.swift */; };
 		53D94BB2256A39A200A2127C /* TabSwitchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BAE256A39A200A2127C /* TabSwitchingView.swift */; };
 		53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BB8256A3A0900A2127C /* HomeCoordinator.swift */; };
@@ -44,6 +45,7 @@
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C9CAD5256B87D100F567B2 /* HeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewPresenter.swift; sourceTree = "<group>"; };
+		53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		53D94B6C256A35B200A2127C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D94B6F256A35B200A2127C /* WorkfinderHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderHome.h; sourceTree = "<group>"; };
 		53D94B70256A35B200A2127C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,7 +58,7 @@
 		53D94BA4256A382600A2127C /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D94BA7256A383000A2127C /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D94BAB256A39A200A2127C /* TabContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
-		53D94BAC256A39A200A2127C /* DiscoveryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
+		53D94BAC256A39A200A2127C /* DiscoveryTrayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryTrayView.swift; sourceTree = "<group>"; };
 		53D94BAD256A39A200A2127C /* Tab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		53D94BAE256A39A200A2127C /* TabSwitchingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabSwitchingView.swift; sourceTree = "<group>"; };
 		53D94BB8256A3A0900A2127C /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -194,7 +196,8 @@
 		53D94BC8256A433400A2127C /* Discovery tray */ = {
 			isa = PBXGroup;
 			children = (
-				53D94BAC256A39A200A2127C /* DiscoveryView.swift */,
+				53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */,
+				53D94BAC256A39A200A2127C /* DiscoveryTrayView.swift */,
 				53D94BAD256A39A200A2127C /* Tab.swift */,
 				53D94BAB256A39A200A2127C /* TabContentView.swift */,
 				53D94BAE256A39A200A2127C /* TabSwitchingView.swift */,
@@ -314,10 +317,11 @@
 				53D94BB1256A39A200A2127C /* Tab.swift in Sources */,
 				53C9CAD6256B87D100F567B2 /* HeaderViewPresenter.swift in Sources */,
 				53D94BBF256A3A3700A2127C /* HomeViewController.swift in Sources */,
+				53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */,
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,
 				53D94BAF256A39A200A2127C /* TabContentView.swift in Sources */,
-				53D94BB0256A39A200A2127C /* DiscoveryView.swift in Sources */,
+				53D94BB0256A39A200A2127C /* DiscoveryTrayView.swift in Sources */,
 				53D94BB2256A39A200A2127C /* TabSwitchingView.swift in Sources */,
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,
 			);

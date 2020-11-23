@@ -250,7 +250,7 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         switch viewController {
         case homeCoordinator.navigationRouter.navigationController:
             log.track(TrackingEvent.makeTabTap(tab: .search))
-            drawerController!.openDrawerGestureModeMask = .bezelPanningCenterView
+            drawerController!.openDrawerGestureModeMask = .panningNavigationBar
             drawerController!.closeDrawerGestureModeMask = .all
         case applicationsCoordinator.navigationRouter.navigationController:
             log.track(TrackingEvent.makeTabTap(tab: .applications))

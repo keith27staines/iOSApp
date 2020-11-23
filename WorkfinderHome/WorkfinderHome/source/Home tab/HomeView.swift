@@ -6,7 +6,7 @@ class HomeView: UIView {
     
     var headerView: HeaderView!
     var backgroundView: BackgroundView!
-    var discoveryView: DiscoveryView?
+    var discoveryView: DiscoveryTrayView?
     
     func refresh() {
         headerView.refresh()
@@ -29,7 +29,7 @@ class HomeView: UIView {
     
     private func addDiscoveryView() {
         guard self.discoveryView == nil else { return }
-        let discoveryView = DiscoveryView()
+        let discoveryView = DiscoveryTrayView()
         self.addSubview(discoveryView)
         self.discoveryView = discoveryView
     }
