@@ -48,6 +48,8 @@ class DiscoveryView : UIView {
         didSet { heightConstraint?.constant = heightConstant }
     }
     
+    func refresh() {}
+    
     @objc func changeDisplayState() {
         switch self.displayState {
         case .minimized:

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
+		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
+		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
+		53C9CAD6256B87D100F567B2 /* HeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9CAD5256B87D100F567B2 /* HeaderViewPresenter.swift */; };
 		53D94B76256A35B200A2127C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94B6C256A35B200A2127C /* WorkfinderHome.framework */; };
 		53D94B7B256A35B200A2127C /* WorkfinderHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94B7A256A35B200A2127C /* WorkfinderHomeTests.swift */; };
 		53D94B7D256A35B200A2127C /* WorkfinderHome.h in Headers */ = {isa = PBXBuildFile; fileRef = 53D94B6F256A35B200A2127C /* WorkfinderHome.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53C9CAD5256B87D100F567B2 /* HeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewPresenter.swift; sourceTree = "<group>"; };
 		53D94B6C256A35B200A2127C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D94B6F256A35B200A2127C /* WorkfinderHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderHome.h; sourceTree = "<group>"; };
 		53D94B70256A35B200A2127C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +75,9 @@
 				53D94BA5256A382600A2127C /* WorkfinderCoordinators.framework in Frameworks */,
 				53D94BA2256A381C00A2127C /* WorkfinderUI.framework in Frameworks */,
 				53D94B9F256A381400A2127C /* ErrorHandlingUI.framework in Frameworks */,
+				53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
+				53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */,
+				53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				53D94B9B256A380700A2127C /* WorkfinderCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +93,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5344851A256B7DBF0082889C /* Home tab */ = {
+			isa = PBXGroup;
+			children = (
+				53D94BB8256A3A0900A2127C /* HomeCoordinator.swift */,
+				53D94BBE256A3A3700A2127C /* HomeViewController.swift */,
+				53D94BD3256A527200A2127C /* HomeView.swift */,
+				5344851B256B7DD70082889C /* Sub views */,
+			);
+			path = "Home tab";
+			sourceTree = "<group>";
+		};
+		5344851B256B7DD70082889C /* Sub views */ = {
+			isa = PBXGroup;
+			children = (
+				5344851C256B7E1D0082889C /* Header view */,
+				5344851D256B7E2B0082889C /* Background view */,
+				53D94BC8256A433400A2127C /* Discovery tray */,
+			);
+			path = "Sub views";
+			sourceTree = "<group>";
+		};
+		5344851C256B7E1D0082889C /* Header view */ = {
+			isa = PBXGroup;
+			children = (
+				53D94BCB256A438F00A2127C /* HeaderView.swift */,
+				53C9CAD5256B87D100F567B2 /* HeaderViewPresenter.swift */,
+			);
+			path = "Header view";
+			sourceTree = "<group>";
+		};
+		5344851D256B7E2B0082889C /* Background view */ = {
+			isa = PBXGroup;
+			children = (
+				53D94BCF256A501600A2127C /* BackgroundView.swift */,
+			);
+			path = "Background view";
+			sourceTree = "<group>";
+		};
 		53D94B62256A35B200A2127C = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +172,8 @@
 		53D94B99256A380700A2127C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */,
+				53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */,
 				53D94BA7256A383000A2127C /* WorkfinderServices.framework */,
 				53D94BA4256A382600A2127C /* WorkfinderCoordinators.framework */,
 				53D94BA1256A381C00A2127C /* WorkfinderUI.framework */,
@@ -136,12 +186,7 @@
 		53D94BAA256A395C00A2127C /* source */ = {
 			isa = PBXGroup;
 			children = (
-				53D94BB8256A3A0900A2127C /* HomeCoordinator.swift */,
-				53D94BBE256A3A3700A2127C /* HomeViewController.swift */,
-				53D94BD3256A527200A2127C /* HomeView.swift */,
-				53D94BCB256A438F00A2127C /* HeaderView.swift */,
-				53D94BCF256A501600A2127C /* BackgroundView.swift */,
-				53D94BC8256A433400A2127C /* Discovery tray */,
+				5344851A256B7DBF0082889C /* Home tab */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -267,6 +312,7 @@
 			files = (
 				53D94BD4256A527200A2127C /* HomeView.swift in Sources */,
 				53D94BB1256A39A200A2127C /* Tab.swift in Sources */,
+				53C9CAD6256B87D100F567B2 /* HeaderViewPresenter.swift in Sources */,
 				53D94BBF256A3A3700A2127C /* HomeViewController.swift in Sources */,
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,

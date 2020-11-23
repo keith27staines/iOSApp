@@ -2,7 +2,6 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
-import WorkfinderOnboardingUseCase
 
 class HomeViewController: UIViewController {
 
@@ -13,17 +12,26 @@ class HomeViewController: UIViewController {
     override func loadView() { view = HomeView() }
     
     override func viewDidLoad() {
-
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
+    }
+    
+    @objc func handleLogin() {
+        refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureViews()
+        refresh()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+    }
+    
+    func refresh() {
+        homeView.refresh()
     }
     
     var isConfigured = false

@@ -147,6 +147,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
         isCandidateCreated = true
         isCandidateFetched = true
         userRepository.save(candidate: candidate)
+        NotificationCenter.default.post(name: .wfDidLoginCandidate, object: nil)
         completion?(Result<Candidate,Error>.success(candidate))
     }
     
