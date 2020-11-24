@@ -52,6 +52,7 @@ class HomeViewController: UIViewController {
         guard abs(velocity.y) > abs(velocity.x) else { return }
         if sender.state == .began {
             lastLocation = location
+            homeView.endEditing(true)
         } else if sender.state == .changed {
             trayTopConstraintConstant += location.y - (lastLocation?.y ?? 0)
             lastLocation = location
@@ -84,6 +85,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(animateTrayToTop), name: SearchBarCell.didStartEditingSearchFieldNotificationName, object: nil)
     }
     
     @objc func handleLogin() {
@@ -98,6 +100,11 @@ class HomeViewController: UIViewController {
         super.viewDidAppear(animated)
         configureViews()
         refresh()
+    }
+    
+    @objc func animateTrayToTop() {
+        trayTopConstraintConstant = 0
+        animateTrayToFinalPosition()
     }
     
     func refresh() {

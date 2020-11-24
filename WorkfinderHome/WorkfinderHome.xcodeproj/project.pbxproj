@@ -10,6 +10,11 @@
 		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
+		53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */; };
+		53C5CB4D256D1E4100176A2E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB4C256D1E4100176A2E /* SearchBar.swift */; };
+		53C5CB51256D1EC300176A2E /* PopularOnWorkfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB50256D1EC300176A2E /* PopularOnWorkfinder.swift */; };
+		53C5CB55256D1F0600176A2E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB54256D1F0600176A2E /* Recommendation.swift */; };
+		53C5CB59256D1F8600176A2E /* TopRolesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB58256D1F8600176A2E /* TopRolesCell.swift */; };
 		53C9CAD6256B87D100F567B2 /* HeaderViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9CAD5256B87D100F567B2 /* HeaderViewPresenter.swift */; };
 		53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */; };
 		53D94B76256A35B200A2127C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D94B6C256A35B200A2127C /* WorkfinderHome.framework */; };
@@ -44,6 +49,11 @@
 /* Begin PBXFileReference section */
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooter.swift; sourceTree = "<group>"; };
+		53C5CB4C256D1E4100176A2E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		53C5CB50256D1EC300176A2E /* PopularOnWorkfinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinder.swift; sourceTree = "<group>"; };
+		53C5CB54256D1F0600176A2E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
+		53C5CB58256D1F8600176A2E /* TopRolesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRolesCell.swift; sourceTree = "<group>"; };
 		53C9CAD5256B87D100F567B2 /* HeaderViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewPresenter.swift; sourceTree = "<group>"; };
 		53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		53D94B6C256A35B200A2127C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +143,28 @@
 			path = "Background view";
 			sourceTree = "<group>";
 		};
+		53C5CB42256D188E00176A2E /* Underlined tab */ = {
+			isa = PBXGroup;
+			children = (
+				53D94BAD256A39A200A2127C /* Tab.swift */,
+				53D94BAB256A39A200A2127C /* TabContentView.swift */,
+				53D94BAE256A39A200A2127C /* TabSwitchingView.swift */,
+			);
+			path = "Underlined tab";
+			sourceTree = "<group>";
+		};
+		53C5CB49256D1E1D00176A2E /* Tableview cells */ = {
+			isa = PBXGroup;
+			children = (
+				53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */,
+				53C5CB4C256D1E4100176A2E /* SearchBar.swift */,
+				53C5CB50256D1EC300176A2E /* PopularOnWorkfinder.swift */,
+				53C5CB54256D1F0600176A2E /* Recommendation.swift */,
+				53C5CB58256D1F8600176A2E /* TopRolesCell.swift */,
+			);
+			path = "Tableview cells";
+			sourceTree = "<group>";
+		};
 		53D94B62256A35B200A2127C = {
 			isa = PBXGroup;
 			children = (
@@ -198,9 +230,8 @@
 			children = (
 				53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */,
 				53D94BAC256A39A200A2127C /* DiscoveryTrayView.swift */,
-				53D94BAD256A39A200A2127C /* Tab.swift */,
-				53D94BAB256A39A200A2127C /* TabContentView.swift */,
-				53D94BAE256A39A200A2127C /* TabSwitchingView.swift */,
+				53C5CB49256D1E1D00176A2E /* Tableview cells */,
+				53C5CB42256D188E00176A2E /* Underlined tab */,
 			);
 			path = "Discovery tray";
 			sourceTree = "<group>";
@@ -313,11 +344,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C5CB55256D1F0600176A2E /* Recommendation.swift in Sources */,
+				53C5CB4D256D1E4100176A2E /* SearchBar.swift in Sources */,
+				53C5CB51256D1EC300176A2E /* PopularOnWorkfinder.swift in Sources */,
 				53D94BD4256A527200A2127C /* HomeView.swift in Sources */,
 				53D94BB1256A39A200A2127C /* Tab.swift in Sources */,
+				53C5CB59256D1F8600176A2E /* TopRolesCell.swift in Sources */,
 				53C9CAD6256B87D100F567B2 /* HeaderViewPresenter.swift in Sources */,
 				53D94BBF256A3A3700A2127C /* HomeViewController.swift in Sources */,
 				53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */,
+				53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */,
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,
 				53D94BAF256A39A200A2127C /* TabContentView.swift in Sources */,
