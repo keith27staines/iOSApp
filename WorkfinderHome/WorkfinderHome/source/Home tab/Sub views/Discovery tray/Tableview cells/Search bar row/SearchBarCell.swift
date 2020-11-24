@@ -9,12 +9,12 @@ class SearchBarCell: UITableViewCell, Presentable, UISearchBarDelegate {
     
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? SearchBarPresenter else { return }
-        //search.placeholder = presenter.placeholder
+        searchBar.placeholder = presenter.placeholderText
     }
     
     lazy var searchStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-                search,
+                searchBar,
                 filtersView
             ]
         )
@@ -30,12 +30,12 @@ class SearchBarCell: UITableViewCell, Presentable, UISearchBarDelegate {
         view.layer.borderWidth = 2
         view.layer.borderColor = WorkfinderColors.primaryColor.cgColor
         view.layer.cornerRadius = 24
-        view.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 360).isActive = true
         view.isHidden = true
         return view
     }()
     
-    lazy var search: UISearchBar = {
+    lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
         let textfield: UITextField!
         if #available(iOS 13.0, *) {
@@ -43,6 +43,7 @@ class SearchBarCell: UITableViewCell, Presentable, UISearchBarDelegate {
         } else {
             textfield = search.value(forKey: "searchField") as? UITextField
         }
+        textfield.font = UIFont.systemFont(ofSize: 15)
         textfield.backgroundColor = UIColor.white
         textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkText])
         if let leftView = textfield.leftView as? UIImageView {
@@ -62,6 +63,7 @@ class SearchBarCell: UITableViewCell, Presentable, UISearchBarDelegate {
         search.layer.borderWidth = 2
         search.layer.cornerRadius = 24
         search.layer.borderColor = WorkfinderColors.primaryColor.cgColor
+        search.layer.masksToBounds = true
         search.delegate = self
         return search
     }()

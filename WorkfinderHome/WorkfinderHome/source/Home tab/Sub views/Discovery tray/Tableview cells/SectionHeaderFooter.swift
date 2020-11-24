@@ -7,8 +7,9 @@ class SectionHeaderView: UITableViewHeaderFooterView {
     lazy var sectionTitle: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         contentView.addSubview(label)
-        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
         label.numberOfLines = 0
         label.textColor = UIColor.darkText
         contentView.backgroundColor = UIColor.white
@@ -21,7 +22,7 @@ class SectionFooterView: UITableViewHeaderFooterView {
     
     private lazy var separator: UIView = {
         let separator = UIView()
-        separator.backgroundColor = UIColor.init(white: 0.8, alpha: 1)
+        separator.backgroundColor = UIColor.init(white: 216/255, alpha: 1)
         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         return separator
     }()
@@ -39,7 +40,7 @@ class SectionFooterView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor.white
         contentView.addSubview(separator)
-        separator.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 20, bottom: 4, right: 20))
+        separator.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
         isLineHidden = false
     }
     

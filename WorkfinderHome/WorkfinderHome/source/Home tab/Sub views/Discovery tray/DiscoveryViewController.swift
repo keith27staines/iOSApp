@@ -130,7 +130,7 @@ extension DiscoveryTrayController: UITableViewDelegate {
         guard let section = Section(rawValue: section) else { return nil }
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
         switch section {
-        case .searchBar:
+        case .popularOnWorkfinder:
             (view as? SectionFooterView)?.isLineHidden = true
         default:
             break
