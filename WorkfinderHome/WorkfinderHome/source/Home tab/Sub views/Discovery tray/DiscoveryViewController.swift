@@ -14,6 +14,7 @@ class DiscoveryTrayController: NSObject {
     
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView()
     var tableView: UITableView { tray.tableView }
+    var sectionPresenters = [Section: CellPresenter]()
     
     override init() {
         super.init()
@@ -42,7 +43,7 @@ class DiscoveryTrayController: NSObject {
         tableView.register(PopularOnWorkfinderCell.self, forCellReuseIdentifier: PopularOnWorkfinderCell.identifier)
         tableView.register(RecommendationsCell.self, forCellReuseIdentifier: RecommendationsCell.identifier)
         tableView.register(TopRolesCell.self, forCellReuseIdentifier: TopRolesCell.identifier)
-        tableView.register(RecentRolesView.self, forCellReuseIdentifier: RecentRolesView.identifier)
+        tableView.register(RecentRolesCell.self, forCellReuseIdentifier: RecentRolesCell.identifier)
         tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.register(SectionFooterView.self, forHeaderFooterViewReuseIdentifier: SectionFooterView.identifier)
     }
@@ -83,7 +84,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
         case .topRoles:
             cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier)
         case .recentRoles:
-            cell = tableView.dequeueReusableCell(withIdentifier: RecentRolesView.identifier)
+            cell = tableView.dequeueReusableCell(withIdentifier: RecentRolesCell.identifier)
         }
         let presentable = cell as? Presentable
         let presenter = cellPresenter(indexPath)
@@ -92,7 +93,19 @@ extension DiscoveryTrayController: UITableViewDataSource {
     }
     
     func cellPresenter(_ indexPath: IndexPath) -> CellPresenter? {
-        return nil
+        guard let section = Section(rawValue: indexPath.section) else { return nil }
+        var presenter = sectionPresenters[section]
+        if presenter == nil {
+            switch section {
+            case .searchBar: presenter = SearchBarPresenter()
+            case .popularOnWorkfinder: presenter = PopularOnWorkfinderPresenter()
+            case .recommendations: presenter = RecommendationsPresenter()
+            case .topRoles: presenter = TopRolesPresenter()
+            case .recentRoles: presenter = RecentRolesPresenter()
+            }
+        }
+        sectionPresenters[section] = presenter
+        return presenter
     }
 
 }
@@ -115,12 +128,14 @@ extension DiscoveryTrayController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let section = Section(rawValue: section) else { return nil }
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
         switch section {
         case .searchBar:
-            return tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
+            (view as? SectionFooterView)?.isLineHidden = true
         default:
-            return tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
+            break
         }
+        return view
     }
 }
 
@@ -128,14 +143,6 @@ protocol CellPresenter {}
 
 protocol Presentable {
     func presentWith(_ presenter: CellPresenter?)
-}
-
-
-class RecentRolesView: UITableViewCell, Presentable {
-    static let identifier = "RecentRolesView"
-    func presentWith(_ presenter: CellPresenter?) {
-        
-    }
 }
 
 

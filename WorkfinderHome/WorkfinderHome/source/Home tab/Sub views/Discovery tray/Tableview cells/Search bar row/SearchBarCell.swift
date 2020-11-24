@@ -8,7 +8,8 @@ class SearchBarCell: UITableViewCell, Presentable, UISearchBarDelegate {
     static let didEndEditingSearchFieldNotificationName = Notification.Name("didEndEditingSearchField")
     
     func presentWith(_ presenter: CellPresenter?) {
-        
+        guard let presenter = presenter as? SearchBarPresenter else { return }
+        //search.placeholder = presenter.placeholder
     }
     
     lazy var searchStack: UIStackView = {
