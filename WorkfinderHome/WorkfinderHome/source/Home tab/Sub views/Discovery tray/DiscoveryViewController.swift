@@ -37,6 +37,7 @@ class DiscoveryTrayController: NSObject {
     }
     
     func configureTableView() {
+        tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(SearchBarCell.self, forCellReuseIdentifier: SearchBarCell.identifier)
