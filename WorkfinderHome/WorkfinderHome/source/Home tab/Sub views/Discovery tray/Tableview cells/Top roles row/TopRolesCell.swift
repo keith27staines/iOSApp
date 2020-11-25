@@ -9,10 +9,6 @@ class TopRolesCell: HorizontallyScrollingCell, Presentable {
         
     }
     
-    override func configureViews() {
-        super.configureViews()
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         updateHeightConstraint(verticalMargin: 20, scrollViewHeight: 368)

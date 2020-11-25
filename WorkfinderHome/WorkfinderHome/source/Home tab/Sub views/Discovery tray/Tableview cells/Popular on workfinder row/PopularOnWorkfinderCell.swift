@@ -21,20 +21,6 @@ class PopularOnWorkfinderCell: HorizontallyScrollingCell, Presentable {
         contentStack.addArrangedSubview(view)
     }
     
-    override func configureViews() {
-        super.configureViews()
-        scrollView.addSubview(contentStack)
-        scrollView.isScrollEnabled = true
-        contentStack.anchor(top: scrollView.topAnchor, leading: scrollView.leadingAnchor, bottom: scrollView.bottomAnchor, trailing: scrollView.trailingAnchor)
-    }
-    
-    lazy var contentStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 12
-        return stack
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         updateHeightConstraint(verticalMargin: 20, scrollViewHeight: 45)

@@ -11,6 +11,7 @@
 		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
+		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
 		53BCD7CE256D221800CC8FF4 /* SearchBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */; };
 		53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */; };
 		53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */; };
@@ -57,6 +58,7 @@
 		533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollingCell.swift; sourceTree = "<group>"; };
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarPresenter.swift; sourceTree = "<group>"; };
 		53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinderPresenter.swift; sourceTree = "<group>"; };
 		53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				5344851A256B7DBF0082889C /* Home tab */,
+				53692520256E9BCA00E21083 /* UIImage+extensions.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				53D94BB2256A39A200A2127C /* TabSwitchingView.swift in Sources */,
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,
 				53BCD7EB256D263900CC8FF4 /* RecentRolesCell.swift in Sources */,
+				53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,13 @@ class HorizontallyScrollingCell: UITableViewCell {
         let constraint = scrollView.heightAnchor.constraint(equalToConstant: scrollViewHeight)
         return constraint
     }()
+        
+    lazy var contentStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 12
+        return stack
+    }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -37,11 +44,15 @@ class HorizontallyScrollingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureViews() {
+    private func configureViews() {
         heightConstraint.isActive = true
         scrollViewHeightConstraint.isActive = true
         contentView.addSubview(scrollView)
         scrollView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor)
         scrollView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        scrollView.addSubview(contentStack)
+        scrollView.isScrollEnabled = true
+        contentStack.anchor(top: scrollView.topAnchor, leading: scrollView.leadingAnchor, bottom: scrollView.bottomAnchor, trailing: scrollView.trailingAnchor)
+
     }
 }
