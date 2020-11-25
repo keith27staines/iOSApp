@@ -137,6 +137,7 @@ class PortraitRoleCard: UIView {
     init(data: RoleData) {
         self.roleData = data
         super.init(frame: CGRect.zero)
+        backgroundColor = UIColor.white
         configureViews()
         refreshFromData(data)
     }
