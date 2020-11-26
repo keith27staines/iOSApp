@@ -21,7 +21,7 @@ class SearchBarCell: UITableViewCell, Presentable, UISearchBarDelegate {
         stack.axis = .vertical
         stack.spacing = 8
         contentView.addSubview(stack)
-        stack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
+        stack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 20, bottom: 4, right: 20))
         return stack
     }()
     

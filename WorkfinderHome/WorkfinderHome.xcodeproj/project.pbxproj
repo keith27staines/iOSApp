@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		532DD109256FA8B900CFD525 /* PortraitRoleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DD108256FA8B900CFD525 /* PortraitRoleCard.swift */; };
 		533A0F5E256E3905008D67D1 /* HorizontallyScrollingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */; };
 		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
+		536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */; };
 		53BCD7CE256D221800CC8FF4 /* SearchBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */; };
 		53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */; };
 		53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */; };
@@ -55,10 +57,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		532DD108256FA8B900CFD525 /* PortraitRoleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitRoleCard.swift; sourceTree = "<group>"; };
 		533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollingCell.swift; sourceTree = "<group>"; };
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
+		536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitShowMoreCard.swift; sourceTree = "<group>"; };
 		53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarPresenter.swift; sourceTree = "<group>"; };
 		53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinderPresenter.swift; sourceTree = "<group>"; };
 		53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
@@ -121,6 +125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		532DD10C256FA94000CFD525 /* Cards and Tiles */ = {
+			isa = PBXGroup;
+			children = (
+				532DD108256FA8B900CFD525 /* PortraitRoleCard.swift */,
+				536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */,
+			);
+			path = "Cards and Tiles";
+			sourceTree = "<group>";
+		};
 		5344851A256B7DBF0082889C /* Home tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +148,7 @@
 		5344851B256B7DD70082889C /* Sub views */ = {
 			isa = PBXGroup;
 			children = (
+				532DD10C256FA94000CFD525 /* Cards and Tiles */,
 				5344851C256B7E1D0082889C /* Header view */,
 				5344851D256B7E2B0082889C /* Background view */,
 				53D94BC8256A433400A2127C /* Discovery tray */,
@@ -423,6 +437,7 @@
 				53D94BBF256A3A3700A2127C /* HomeViewController.swift in Sources */,
 				53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */,
 				53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */,
+				532DD109256FA8B900CFD525 /* PortraitRoleCard.swift in Sources */,
 				53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */,
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,
@@ -430,6 +445,7 @@
 				53D94BB0256A39A200A2127C /* DiscoveryTrayView.swift in Sources */,
 				53D94BB2256A39A200A2127C /* TabSwitchingView.swift in Sources */,
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,
+				536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */,
 				53BCD7EB256D263900CC8FF4 /* RecentRolesCell.swift in Sources */,
 				53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */,
 			);

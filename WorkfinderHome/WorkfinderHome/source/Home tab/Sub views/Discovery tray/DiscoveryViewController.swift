@@ -15,7 +15,7 @@ class DiscoveryTrayController: NSObject {
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView()
     var tableView: UITableView { tray.tableView }
     var sectionPresenters = [Section: CellPresenter]()
-    
+    let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
     override init() {
         super.init()
         configureTableView()
@@ -74,23 +74,35 @@ extension DiscoveryTrayController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
+        let gutter = gutterMargin(fullWidth: tableView.frame.width - 40, cardWidth: 158)
         let cell: UITableViewCell?
         switch section {
         case .searchBar:
-            cell = tableView.dequeueReusableCell(withIdentifier: SearchBarCell.identifier)
+            cell = tableView.dequeueReusableCell(withIdentifier: SearchBarCell.identifier) as? SearchBarCell
+            cell?.backgroundColor = UIColor.white
         case .popularOnWorkfinder:
-            cell = tableView.dequeueReusableCell(withIdentifier: PopularOnWorkfinderCell.identifier)
+            cell = tableView.dequeueReusableCell(withIdentifier: PopularOnWorkfinderCell.identifier) as? PopularOnWorkfinderCell
+            cell?.backgroundColor = UIColor.white
         case .recommendations:
-            cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier)
+            cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier) as? RecommendationsCell
+            cell?.backgroundColor = UIColor.white
+            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGetter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
         case .topRoles:
-            cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier)
+            cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier) as? TopRolesCell
+            cell?.backgroundColor = topRolesBackgroundColor
+            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGetter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
         case .recentRoles:
-            cell = tableView.dequeueReusableCell(withIdentifier: RecentRolesCell.identifier)
+            cell = tableView.dequeueReusableCell(withIdentifier: RecentRolesCell.identifier) as? RecentRolesCell
+            cell?.backgroundColor = UIColor.white
         }
         let presentable = cell as? Presentable
         let presenter = cellPresenter(indexPath)
         presentable?.presentWith(presenter)
         return cell ?? UITableViewCell()
+    }
+    
+    func gutterMargin(fullWidth: CGFloat, cardWidth: CGFloat) -> CGFloat {
+        return (fullWidth - 2 * cardWidth) / 2
     }
     
     func cellPresenter(_ indexPath: IndexPath) -> CellPresenter? {
@@ -115,12 +127,16 @@ extension DiscoveryTrayController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let section = Section(rawValue: section) else { return UIView() }
         let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderView.identifier)
+        cell?.backgroundColor = UIColor.white
+        cell?.contentView.backgroundColor = UIColor.white
         var text: String = ""
         switch section {
         case .searchBar: break
         case .popularOnWorkfinder: text = "Popular on Workfinder"
         case .recommendations: text = "Recommendations"
-        case .topRoles: text = "Top roles"
+        case .topRoles:
+            text = "Top roles"
+            cell?.contentView.backgroundColor = topRolesBackgroundColor
         case .recentRoles: text = "Recent roles"
         }
         (cell as? SectionHeaderView)?.sectionTitle.text = text
@@ -129,12 +145,20 @@ extension DiscoveryTrayController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let section = Section(rawValue: section) else { return nil }
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
+        var view: UIView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
         switch section {
+        case .searchBar:
+            break
+        case .recommendations:
+            (view as? SectionFooterView)?.isLineHidden = true
         case .popularOnWorkfinder:
             (view as? SectionFooterView)?.isLineHidden = true
-        default:
-            break
+        case .topRoles:
+            view = UIView()
+            view?.backgroundColor = topRolesBackgroundColor
+        case .recentRoles:
+            view = UIView()
+            view?.backgroundColor = UIColor.white
         }
         return view
     }

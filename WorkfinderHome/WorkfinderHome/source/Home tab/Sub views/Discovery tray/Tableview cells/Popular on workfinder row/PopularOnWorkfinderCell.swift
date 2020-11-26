@@ -11,19 +11,18 @@ class PopularOnWorkfinderCell: HorizontallyScrollingCell, Presentable {
         presenter.capsulesData.forEach { (data) in
             addCapsule(data: data)
         }
-        scrollView.layoutSubviews()
     }
     
     func addCapsule(data: CapsuleData) {
         let view = CapsuleView(text: data.text, id: data.id)
         view.layer.cornerRadius = 45/2
         view.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        contentStack.addArrangedSubview(view)
+        addCard(view)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        updateHeightConstraint(verticalMargin: 20, scrollViewHeight: 45)
+        isPagingEnabled = false
     }
     
     required init?(coder: NSCoder) {

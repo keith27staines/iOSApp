@@ -8,21 +8,20 @@ class TopRolesCell: HorizontallyScrollingCell, Presentable {
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? TopRolesPresenter else { return }
         presenter.roles.forEach { (data) in
-            addCard(data: data)
+            addCardWith(data: data, tapAction: presenter.roleTapped)
         }
     }
     
-    func addCard(data: RoleData) {
-        let card = PortraitRoleCard(data: data)
+    func addCardWith(data: RoleData, tapAction: @escaping (String)->Void) {
+        let card = PortraitRoleCard(data: data, tapAction: tapAction)
         card.widthAnchor.constraint(equalToConstant: 158).isActive = true
         card.heightAnchor.constraint(equalToConstant: 262).isActive = true
-        contentStack.addArrangedSubview(card)
+        addCard(card)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        updateHeightConstraint(verticalMargin: 20, scrollViewHeight: 262)
-        scrollView.backgroundColor = UIColor.init(white: 247/255, alpha: 1)
+        isPagingEnabled = true
     }
     
     required init?(coder: NSCoder) {
