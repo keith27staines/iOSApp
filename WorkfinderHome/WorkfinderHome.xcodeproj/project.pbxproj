@@ -12,6 +12,8 @@
 		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
+		534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6BA2570DACD00ACD399 /* RolesService.swift */; };
+		534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6C12570DD4E00ACD399 /* RoleData.swift */; };
 		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
 		536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */; };
 		53BCD7CE256D221800CC8FF4 /* SearchBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */; };
@@ -61,6 +63,8 @@
 		533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollingCell.swift; sourceTree = "<group>"; };
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		534EF6BA2570DACD00ACD399 /* RolesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesService.swift; sourceTree = "<group>"; };
+		534EF6C12570DD4E00ACD399 /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitShowMoreCard.swift; sourceTree = "<group>"; };
 		53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarPresenter.swift; sourceTree = "<group>"; };
@@ -171,6 +175,15 @@
 				53D94BCF256A501600A2127C /* BackgroundView.swift */,
 			);
 			path = "Background view";
+			sourceTree = "<group>";
+		};
+		534EF6C02570DCFB00ACD399 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				534EF6BA2570DACD00ACD399 /* RolesService.swift */,
+				534EF6C12570DD4E00ACD399 /* RoleData.swift */,
+			);
+			path = services;
 			sourceTree = "<group>";
 		};
 		53BCD7CC256D21FA00CC8FF4 /* Search bar row */ = {
@@ -297,6 +310,7 @@
 		53D94BAA256A395C00A2127C /* source */ = {
 			isa = PBXGroup;
 			children = (
+				534EF6C02570DCFB00ACD399 /* services */,
 				5344851A256B7DBF0082889C /* Home tab */,
 				53692520256E9BCA00E21083 /* UIImage+extensions.swift */,
 			);
@@ -428,6 +442,7 @@
 				53C5CB4D256D1E4100176A2E /* SearchBarCell.swift in Sources */,
 				533A0F5E256E3905008D67D1 /* HorizontallyScrollingCell.swift in Sources */,
 				53C5CB51256D1EC300176A2E /* PopularOnWorkfinderCell.swift in Sources */,
+				534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */,
 				53BCD7F2256D265900CC8FF4 /* RecentRolesPresenter.swift in Sources */,
 				53D94BD4256A527200A2127C /* HomeView.swift in Sources */,
 				53BCD7E5256D22DA00CC8FF4 /* TopRolesPresenter.swift in Sources */,
@@ -442,6 +457,7 @@
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,
 				53D94BAF256A39A200A2127C /* TabContentView.swift in Sources */,
+				534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */,
 				53D94BB0256A39A200A2127C /* DiscoveryTrayView.swift in Sources */,
 				53D94BB2256A39A200A2127C /* TabSwitchingView.swift in Sources */,
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,

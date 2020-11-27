@@ -3,14 +3,14 @@ import UIKit
 
 class DiscoveryTrayView : UIView {
 
-    lazy var thumbButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "thumbScrollIndicator"), for: .normal)
-        addSubview(button)
-        button.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 44, height: 44))
-        button.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        return button
-    }()
+//    lazy var thumbButton: UIButton = {
+//        let button = UIButton()
+//        button.setImage(UIImage(named: "thumbScrollIndicator"), for: .normal)
+//        addSubview(button)
+//        button.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 44, height: 44))
+//        button.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//        return button
+//    }()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -18,7 +18,7 @@ class DiscoveryTrayView : UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         addSubview(tableView)
-        tableView.anchor(top: thumbButton.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
+        tableView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
         return tableView
     }()
     

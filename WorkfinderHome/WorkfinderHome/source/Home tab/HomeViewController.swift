@@ -16,6 +16,25 @@ class HomeViewController: UIViewController {
     lazy var trayController: DiscoveryTrayController = DiscoveryTrayController()
     var tray: DiscoveryTrayView { trayController.tray }
     
+    lazy var scrollHijackOverlay: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hijackScroll)))
+        view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(hijackScroll)))
+        return view
+    }()
+    
+    @objc func hijackScroll() {
+        trayTopConstraintConstant = 0
+        tray.layer.cornerRadius = 0
+        tray.layer.shadowRadius = 0
+        tray.layer.shadowColor = UIColor.clear.cgColor
+        //tray.thumbButton.isHidden = true
+        animateTrayToFinalPosition()
+        scrollHijackOverlay.removeFromSuperview()
+    }
+    
     lazy var trayTopConstraint: NSLayoutConstraint = {
         let constraint = tray.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0)
         constraint.isActive = true
@@ -158,9 +177,10 @@ extension HomeViewController {
         backgroundView.addSubview(tray)
         tray.anchor(top: nil, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor)
         tray.heightAnchor.constraint(equalTo: backgroundView.heightAnchor).isActive = true
-        tray.addGestureRecognizer(pan)
         trayTopConstraintConstant = backgroundView.frame.height/2
-        tray.addGestureRecognizer(pan)
+        //tray.addGestureRecognizer(pan)
+        tray.addSubview(scrollHijackOverlay)
+        scrollHijackOverlay.anchor(top: tray.topAnchor, leading: tray.leadingAnchor, bottom: tray.bottomAnchor, trailing: tray.trailingAnchor)
     }
     
 }

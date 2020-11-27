@@ -7,8 +7,16 @@ class TopRolesCell: HorizontallyScrollingCell, Presentable {
     
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? TopRolesPresenter else { return }
-        presenter.roles.forEach { (data) in
-            addCardWith(data: data, tapAction: presenter.roleTapped)
+        presenter.load { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let roles):
+                roles.forEach { (data) in
+                    self.addCardWith(data: data, tapAction: presenter.roleTapped)
+                }
+            case .failure(_):
+                break
+            }
         }
     }
     

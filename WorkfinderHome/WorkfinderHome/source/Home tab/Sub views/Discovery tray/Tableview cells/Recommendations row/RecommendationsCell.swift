@@ -9,11 +9,19 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
     
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? RecommendationsPresenter else { return }
-        presenter.roles.forEach { (data) in
-            addCardWith(data: data, tapAction: presenter.roleTapped)
-        }
-        if presenter.isMoreCardRequired {
-            addShowMoreCardIfRequired(tapAction: presenter.moreTapped)
+        presenter.load { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let roles):
+                roles.forEach { (data) in
+                    self.addCardWith(data: data, tapAction: presenter.roleTapped)
+                }
+                if presenter.isMoreCardRequired {
+                    self.addShowMoreCardIfRequired(tapAction: presenter.moreTapped)
+                }
+            case .failure(_):
+                break
+            }
         }
     }
     
