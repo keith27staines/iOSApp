@@ -13,11 +13,15 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
             guard let self = self else { return }
             switch result {
             case .success(let roles):
+                self.clear()
                 roles.forEach { (data) in
                     self.addCardWith(data: data, tapAction: presenter.roleTapped)
                 }
                 if presenter.isMoreCardRequired {
-                    self.addShowMoreCardIfRequired(tapAction: presenter.moreTapped)
+                    self.addShowMoreCard(tapAction: presenter.moreTapped)
+                    if roles.count.isMultiple(of: 2) {
+                        self.addShowPlaceholderCard()
+                    }
                 }
             case .failure(_):
                 break
@@ -25,7 +29,15 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
         }
     }
     
-    func addShowMoreCardIfRequired(tapAction: @escaping ()->Void) {
+    func addShowPlaceholderCard() {
+        let card = UIView()
+        card.backgroundColor = UIColor.clear
+        card.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
+        card.heightAnchor.constraint(equalToConstant: cardHeight).isActive = true
+        addCard(card)
+    }
+    
+    func addShowMoreCard(tapAction: @escaping ()->Void) {
         let card = PortraitShowMoreCard()
         card.tapAction = tapAction
         card.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true

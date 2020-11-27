@@ -8,6 +8,7 @@ class PopularOnWorkfinderCell: HorizontallyScrollingCell, Presentable {
     
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? PopularOnWorkfinderPresenter else { return }
+        clear()
         presenter.capsulesData.forEach { (data) in
             addCapsule(data: data)
         }

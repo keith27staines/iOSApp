@@ -16,7 +16,7 @@ class HorizontallyScrollingCell: UITableViewCell {
         didSet {
             contentStack.spacing = gutter
             leftInsetConstraint.constant = gutter/2.0
-            rightInsetConstraint.constant = gutter/2.0
+            rightInsetConstraint.constant = -gutter/2.0
         }
     }
 
@@ -24,7 +24,15 @@ class HorizontallyScrollingCell: UITableViewCell {
     func addCard(_ card: UIView) {
         contentStack.addArrangedSubview(card)
         cardCount += 1
-        pageControl.numberOfPages = 1 + cardCount / 3
+        pageControl.numberOfPages = 1 + (cardCount - 1) / 2
+    }
+    
+    func clear() {
+        contentStack.arrangedSubviews.forEach { (view) in
+            contentStack.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        cardCount = 0
     }
     
     var isPagingEnabled: Bool = false {
