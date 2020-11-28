@@ -16,7 +16,13 @@ class DiscoveryTrayController: NSObject {
     var tableView: UITableView { tray.tableView }
     var sectionPresenters = [Section: CellPresenter]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
-    lazy var recentRolesPresenter = RecentRolesDataSource()
+    lazy var recentRolesPresenter: RecentRolesDataSource = {
+        let datasource = RecentRolesDataSource()
+        datasource.reloadRow = { row in
+            self.tableView.reloadRows(at: [IndexPath(row: row, section: Section.recentRoles.rawValue)], with: .automatic)
+        }
+        return datasource
+    }()
     
     override init() {
         super.init()

@@ -124,7 +124,7 @@ class PortraitRoleCard: UIView {
     }
     
     func refreshFromData(_ data: RoleData) {
-        logo.load(urlString: data.logoUrlString)
+        logo.load(urlString: data.roleLogoUrlString)
         projectTitle.text = data.projectTitle
         paidHeader.text = data.paidHeader
         paidAmount.text = data.paidAmount

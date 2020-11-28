@@ -1,9 +1,10 @@
 
 struct RoleData: Codable {
     var id: String?
-    var logoUrlString: String?
+    var roleLogoUrlString: String?
     var projectTitle: String?
     var companyName: String?
+    var companyLogoUrlString: String?
     var paidHeader: String?
     var paidAmount: String?
     var workingHours: String?
