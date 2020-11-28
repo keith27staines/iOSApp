@@ -16,11 +16,17 @@ class DiscoveryTrayController: NSObject {
     var tableView: UITableView { tray.tableView }
     var sectionPresenters = [Section: CellPresenter]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
+    lazy var recentRolesPresenter = RecentRolesDataSource()
+    
     override init() {
         super.init()
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidStart), name: SearchBarCell.didStartEditingSearchFieldNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidEnd), name: SearchBarCell.didEndEditingSearchFieldNotificationName, object: nil)
+        recentRolesPresenter.resultHandler = { optionalError in
+            self.tableView.reloadSections(IndexSet([Section.recentRoles.rawValue]), with: .automatic)
+        }
+        recentRolesPresenter.loadData()
     }
     
     @objc func searchEditingDidStart() {
@@ -44,7 +50,7 @@ class DiscoveryTrayController: NSObject {
         tableView.register(PopularOnWorkfinderCell.self, forCellReuseIdentifier: PopularOnWorkfinderCell.identifier)
         tableView.register(RecommendationsCell.self, forCellReuseIdentifier: RecommendationsCell.identifier)
         tableView.register(TopRolesCell.self, forCellReuseIdentifier: TopRolesCell.identifier)
-        tableView.register(RecentRolesCell.self, forCellReuseIdentifier: RecentRolesCell.identifier)
+        tableView.register(LandscapeRoleCell.self, forCellReuseIdentifier: LandscapeRoleCell.identifer)
         tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.register(SectionFooterView.self, forHeaderFooterViewReuseIdentifier: SectionFooterView.identifier)
     }
@@ -68,7 +74,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
         case .topRoles:
             return 1
         case .recentRoles:
-            return 1
+            return recentRolesPresenter.numberOfRows
         }
     }
     
@@ -81,19 +87,20 @@ extension DiscoveryTrayController: UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: SearchBarCell.identifier) as? SearchBarCell
             cell?.backgroundColor = UIColor.white
         case .popularOnWorkfinder:
-            cell = tableView.dequeueReusableCell(withIdentifier: PopularOnWorkfinderCell.identifier) as? PopularOnWorkfinderCell
+            cell = tableView.dequeueReusableCell(withIdentifier: PopularOnWorkfinderCell.identifier)
             cell?.backgroundColor = UIColor.white
         case .recommendations:
-            cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier) as? RecommendationsCell
+            cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier)
             cell?.backgroundColor = UIColor.white
             (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGetter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
         case .topRoles:
-            cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier) as? TopRolesCell
+            cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier)
             cell?.backgroundColor = topRolesBackgroundColor
             (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGetter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
         case .recentRoles:
-            cell = tableView.dequeueReusableCell(withIdentifier: RecentRolesCell.identifier) as? RecentRolesCell
+            cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
             cell?.backgroundColor = UIColor.white
+            (cell as? LandscapeRoleCell)?.row = indexPath.row
         }
         let presentable = cell as? Presentable
         let presenter = cellPresenter(indexPath)
@@ -114,7 +121,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
             case .popularOnWorkfinder: presenter = PopularOnWorkfinderPresenter()
             case .recommendations: presenter = RecommendationsPresenter()
             case .topRoles: presenter = TopRolesPresenter()
-            case .recentRoles: presenter = RecentRolesPresenter()
+            case .recentRoles: presenter = recentRolesPresenter
             }
         }
         sectionPresenters[section] = presenter

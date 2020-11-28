@@ -23,8 +23,6 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         projectTitle.text = presenter?.projectTitle
         allTextStack.arrangedSubviews[0].isHidden = !(presenter?.isProject ?? false)
     }
-
-    lazy var hostPhoto = HostPhotoView(widthPoints: 55, defaultLogoName: nil)
     
     lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 70)
     
@@ -73,21 +71,6 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         return label
     }()
     
-    lazy var hostNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = UIColor.init(white: 33/255, alpha: 1)
-        label.numberOfLines = 1
-        return label
-    }()
-    lazy var hostRoleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = UIColor.init(white: 184/255, alpha: 1)
-        label.numberOfLines = 1
-        return label
-    }()
-    
     lazy var companyTextStack: UIStackView = {
         let textStack = UIStackView(arrangedSubviews: [
             self.companyNameLabel,
@@ -96,6 +79,24 @@ class RecommendationTileView: UITableViewCell, RecommendationTileViewProtocol {
         textStack.axis = .vertical
         textStack.spacing = 4
         return textStack
+    }()
+    
+    lazy var hostPhoto = HostPhotoView(widthPoints: 55, defaultLogoName: nil)
+    
+    lazy var hostNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.textColor = UIColor.init(white: 33/255, alpha: 1)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    lazy var hostRoleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.textColor = UIColor.init(white: 184/255, alpha: 1)
+        label.numberOfLines = 1
+        return label
     }()
     
     lazy var hostTextStack: UIStackView = {

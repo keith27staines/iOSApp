@@ -14,6 +14,7 @@
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6BA2570DACD00ACD399 /* RolesService.swift */; };
 		534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6C12570DD4E00ACD399 /* RoleData.swift */; };
+		534EF6CC2571FDE000ACD399 /* RecentRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6CB2571FDE000ACD399 /* RecentRoleCell.swift */; };
 		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
 		536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */; };
 		53BCD7CE256D221800CC8FF4 /* SearchBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */; };
@@ -21,7 +22,7 @@
 		53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */; };
 		53BCD7E5256D22DA00CC8FF4 /* TopRolesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7E4256D22DA00CC8FF4 /* TopRolesPresenter.swift */; };
 		53BCD7EB256D263900CC8FF4 /* RecentRolesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7EA256D263900CC8FF4 /* RecentRolesCell.swift */; };
-		53BCD7F2256D265900CC8FF4 /* RecentRolesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7F1256D265900CC8FF4 /* RecentRolesPresenter.swift */; };
+		53BCD7F2256D265900CC8FF4 /* RecentRolesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7F1256D265900CC8FF4 /* RecentRolesDataSource.swift */; };
 		53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */; };
 		53C5CB4D256D1E4100176A2E /* SearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB4C256D1E4100176A2E /* SearchBarCell.swift */; };
 		53C5CB51256D1EC300176A2E /* PopularOnWorkfinderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB50256D1EC300176A2E /* PopularOnWorkfinderCell.swift */; };
@@ -65,6 +66,7 @@
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		534EF6BA2570DACD00ACD399 /* RolesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesService.swift; sourceTree = "<group>"; };
 		534EF6C12570DD4E00ACD399 /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
+		534EF6CB2571FDE000ACD399 /* RecentRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRoleCell.swift; sourceTree = "<group>"; };
 		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitShowMoreCard.swift; sourceTree = "<group>"; };
 		53BCD7CD256D221800CC8FF4 /* SearchBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarPresenter.swift; sourceTree = "<group>"; };
@@ -72,7 +74,7 @@
 		53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
 		53BCD7E4256D22DA00CC8FF4 /* TopRolesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRolesPresenter.swift; sourceTree = "<group>"; };
 		53BCD7EA256D263900CC8FF4 /* RecentRolesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRolesCell.swift; sourceTree = "<group>"; };
-		53BCD7F1256D265900CC8FF4 /* RecentRolesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRolesPresenter.swift; sourceTree = "<group>"; };
+		53BCD7F1256D265900CC8FF4 /* RecentRolesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRolesDataSource.swift; sourceTree = "<group>"; };
 		53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooter.swift; sourceTree = "<group>"; };
 		53C5CB4C256D1E4100176A2E /* SearchBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarCell.swift; sourceTree = "<group>"; };
 		53C5CB50256D1EC300176A2E /* PopularOnWorkfinderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinderCell.swift; sourceTree = "<group>"; };
@@ -225,8 +227,9 @@
 		53BCD7EE256D264200CC8FF4 /* Recent roles row */ = {
 			isa = PBXGroup;
 			children = (
-				53BCD7F1256D265900CC8FF4 /* RecentRolesPresenter.swift */,
+				53BCD7F1256D265900CC8FF4 /* RecentRolesDataSource.swift */,
 				53BCD7EA256D263900CC8FF4 /* RecentRolesCell.swift */,
+				534EF6CB2571FDE000ACD399 /* RecentRoleCell.swift */,
 			);
 			path = "Recent roles row";
 			sourceTree = "<group>";
@@ -442,8 +445,9 @@
 				53C5CB4D256D1E4100176A2E /* SearchBarCell.swift in Sources */,
 				533A0F5E256E3905008D67D1 /* HorizontallyScrollingCell.swift in Sources */,
 				53C5CB51256D1EC300176A2E /* PopularOnWorkfinderCell.swift in Sources */,
+				534EF6CC2571FDE000ACD399 /* RecentRoleCell.swift in Sources */,
 				534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */,
-				53BCD7F2256D265900CC8FF4 /* RecentRolesPresenter.swift in Sources */,
+				53BCD7F2256D265900CC8FF4 /* RecentRolesDataSource.swift in Sources */,
 				53D94BD4256A527200A2127C /* HomeView.swift in Sources */,
 				53BCD7E5256D22DA00CC8FF4 /* TopRolesPresenter.swift in Sources */,
 				53D94BB1256A39A200A2127C /* Tab.swift in Sources */,
