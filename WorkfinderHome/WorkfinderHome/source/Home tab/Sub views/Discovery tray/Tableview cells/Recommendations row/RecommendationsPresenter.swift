@@ -1,9 +1,9 @@
 
-
+import WorkfinderServices
 
 class RecommendationsPresenter: CellPresenter {
     
-    lazy var rolesService: RolesServiceProtocol = RolesService()
+    let rolesService: RolesServiceProtocol
     
     func load(completion: @escaping (Result<[RoleData],Error>) -> Void) {
         rolesService.fetchRoles { (result) in
@@ -13,9 +13,7 @@ class RecommendationsPresenter: CellPresenter {
     
     var roles: [RoleData] = []
     
-    var isMoreCardRequired: Bool {
-        true
-    }
+    var isSeeMoreCardRequired: Bool { true }
     
     func roleTapped(id: String) {
         print("tapped role: \(id)")
@@ -23,5 +21,9 @@ class RecommendationsPresenter: CellPresenter {
     
     func moreTapped() {
         print("tapped \"See more\"")
+    }
+    
+    init(rolesService: RolesServiceProtocol) {
+        self.rolesService = rolesService
     }
 }

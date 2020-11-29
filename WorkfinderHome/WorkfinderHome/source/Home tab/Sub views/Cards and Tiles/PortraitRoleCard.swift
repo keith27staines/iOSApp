@@ -16,7 +16,6 @@ class PortraitRoleCard: UIView {
         view.addSubview(logo)
         logo.anchor(top: view.topAnchor, leading: nil, bottom: view.bottomAnchor, trailing: nil)
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        view.backgroundColor = UIColor.lightGray
         return view
     }()
     
@@ -124,7 +123,8 @@ class PortraitRoleCard: UIView {
     }
     
     func refreshFromData(_ data: RoleData) {
-        logo.load(urlString: data.roleLogoUrlString)
+        logo.image = UIImage.from(size: CGSize(width: 64, height: 64), string: data.companyName ?? "?", backgroundColor: WorkfinderColors.primaryColor)
+        logo.load(urlString: data.companyLogoUrlString)
         projectTitle.text = data.projectTitle
         paidHeader.text = data.paidHeader
         paidAmount.text = data.paidAmount

@@ -1,4 +1,6 @@
 
+import WorkfinderServices
+
 protocol RolesServiceProtocol {
     func fetchRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
 }
@@ -15,6 +17,23 @@ class RolesService: RolesServiceProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let roles = self?.roles else { return }
             completion(Result.success(roles))
+        }
+    }
+}
+
+extension RecommendationsService: RolesServiceProtocol {
+    func fetchRoles(completion: @escaping (Result<[RoleData], Error>) -> Void) {
+        fetchRecommendations { (result) in
+            switch result {
+            case .success(let recommendations):
+                let roles = recommendations.results.map { (recommendation) -> RoleData in
+                    let role = RoleData(recommendation: recommendation)
+                    return role
+                }
+                completion(.success(roles))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }

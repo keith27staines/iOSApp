@@ -3,6 +3,7 @@ import WorkfinderCommon
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderViewRecommendation
 import WorkfinderCoordinators
+import WorkfinderServices
 
 public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
@@ -10,7 +11,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     public var shouldAskOperatingSystemToAllowLocation = false
     
     lazy var rootViewController: HomeViewController = {
-        let vc = HomeViewController()
+        let vc = HomeViewController(recommendationsService: RecommendationsService(networkConfig: injected.networkConfig))
         vc.coordinator = self
         return vc
     }()

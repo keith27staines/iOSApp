@@ -13,7 +13,11 @@ class HomeViewController: UIViewController {
     var headerView: HeaderView { homeView.headerView }
     var backgroundView: BackgroundView { homeView.backgroundView }
     
-    lazy var trayController: DiscoveryTrayController = DiscoveryTrayController()
+    lazy var trayController: DiscoveryTrayController = {
+        let trayController = DiscoveryTrayController(recommendationsService: self.recommendationsService)
+        return trayController
+    }()
+    
     var tray: DiscoveryTrayView { trayController.tray }
     
     lazy var scrollHijackOverlay: UIView = {
@@ -143,6 +147,14 @@ class HomeViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
+    let recommendationsService: RolesServiceProtocol
+    init(recommendationsService: RolesServiceProtocol) {
+        self.recommendationsService = recommendationsService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
 }
 
 extension HomeViewController {
@@ -173,7 +185,7 @@ extension HomeViewController {
     }
     
     func configureTray() {
-        trayController = DiscoveryTrayController()
+        trayController = DiscoveryTrayController(recommendationsService: recommendationsService)
         backgroundView.addSubview(tray)
         tray.anchor(top: nil, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor)
         tray.heightAnchor.constraint(equalTo: backgroundView.heightAnchor).isActive = true

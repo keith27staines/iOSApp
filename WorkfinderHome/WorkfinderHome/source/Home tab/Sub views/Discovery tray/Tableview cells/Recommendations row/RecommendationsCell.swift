@@ -17,7 +17,7 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
                 roles.forEach { (data) in
                     self.addCardWith(data: data, tapAction: presenter.roleTapped)
                 }
-                if presenter.isMoreCardRequired {
+                if presenter.isSeeMoreCardRequired {
                     self.addShowMoreCard(tapAction: presenter.moreTapped)
                     if roles.count.isMultiple(of: 2) {
                         self.addShowPlaceholderCard()

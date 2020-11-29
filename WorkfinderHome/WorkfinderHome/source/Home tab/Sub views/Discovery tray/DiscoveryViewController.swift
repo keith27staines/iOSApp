@@ -2,6 +2,7 @@
 import UIKit
 import WorkfinderUI
 
+
 enum Section: Int, CaseIterable {
     case searchBar
     case popularOnWorkfinder
@@ -24,7 +25,10 @@ class DiscoveryTrayController: NSObject {
         return datasource
     }()
     
-    override init() {
+    let recommendationsService: RolesServiceProtocol
+    
+    init(recommendationsService: RolesServiceProtocol) {
+        self.recommendationsService = recommendationsService
         super.init()
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidStart), name: SearchBarCell.didStartEditingSearchFieldNotificationName, object: nil)
@@ -125,7 +129,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
             switch section {
             case .searchBar: presenter = SearchBarPresenter()
             case .popularOnWorkfinder: presenter = PopularOnWorkfinderPresenter()
-            case .recommendations: presenter = RecommendationsPresenter()
+            case .recommendations: presenter = RecommendationsPresenter(rolesService: recommendationsService)
             case .topRoles: presenter = TopRolesPresenter()
             case .recentRoles: presenter = recentRolesPresenter
             }
