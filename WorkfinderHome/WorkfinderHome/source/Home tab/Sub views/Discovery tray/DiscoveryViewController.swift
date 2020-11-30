@@ -2,27 +2,16 @@
 import UIKit
 import WorkfinderUI
 
-
-enum Section: Int, CaseIterable {
-    case searchBar
-    case popularOnWorkfinder
-    case recommendations
-    case topRoles
-    case recentRoles
-}
-
 class DiscoveryTrayController: NSObject {
     
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView()
     var tableView: UITableView { tray.tableView }
-    var sectionPresenters = [Section: CellPresenter]()
+    var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenter]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
+    let sectionManager = DiscoverTraySectionManager()
+    
     lazy var recentRolesPresenter: RecentRolesDataSource = {
-        let datasource = RecentRolesDataSource()
-        datasource.reloadRow = { row in
-            self.tableView.reloadRows(at: [IndexPath(row: row, section: Section.recentRoles.rawValue)], with: .automatic)
-        }
-        return datasource
+        RecentRolesDataSource()
     }()
     
     let recommendationsService: RolesServiceProtocol
@@ -33,10 +22,23 @@ class DiscoveryTrayController: NSObject {
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidStart), name: SearchBarCell.didStartEditingSearchFieldNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidEnd), name: SearchBarCell.didEndEditingSearchFieldNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
         recentRolesPresenter.resultHandler = { optionalError in
-            self.tableView.reloadSections(IndexSet([Section.recentRoles.rawValue]), with: .automatic)
+            guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
+            self.tableView.reloadSections(IndexSet([sectionIndex]), with: .automatic)
         }
         recentRolesPresenter.loadData()
+    }
+    
+    @objc func handleCandidateSignedIn() {
+        guard sectionManager.isSignedIn, let recommendationsSectionIndex = sectionManager.sectionIndexForSection(.recommendations)
+        else { return }
+        let indexSet = IndexSet([recommendationsSectionIndex])
+        tableView.performBatchUpdates({
+            tableView.insertSections(indexSet, with: .none)
+        }) { (update) in
+            print("Update SUccess")
+        }
     }
     
     @objc func searchEditingDidStart() {
@@ -69,11 +71,11 @@ class DiscoveryTrayController: NSObject {
 extension DiscoveryTrayController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        Section.allCases.count
+        sectionManager.sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = Section(rawValue: section) else { return 0 }
+        let section = sectionManager.sectionForSectionIndex(section)
         switch section {
         case .searchBar:
             return 1
@@ -89,7 +91,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
+        let section = sectionManager.sectionForSectionIndex(indexPath.section)
         let gutter = gutterMargin(fullWidth: tableView.frame.width - 40, cardWidth: 158)
         let cell: UITableViewCell?
         switch section {
@@ -123,7 +125,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
     }
     
     func cellPresenter(_ indexPath: IndexPath) -> CellPresenter? {
-        guard let section = Section(rawValue: indexPath.section) else { return nil }
+        let section = sectionManager.sectionForSectionIndex(indexPath.section)
         var presenter = sectionPresenters[section]
         if presenter == nil {
             switch section {
@@ -142,7 +144,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
 
 extension DiscoveryTrayController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let section = Section(rawValue: section) else { return UIView() }
+        let section = sectionManager.sectionForSectionIndex(section)
         let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderView.identifier)
         cell?.backgroundColor = UIColor.white
         cell?.contentView.backgroundColor = UIColor.white
@@ -161,7 +163,7 @@ extension DiscoveryTrayController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let section = Section(rawValue: section) else { return nil }
+        let section = sectionManager.sectionForSectionIndex(section)
         var view: UIView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
         switch section {
         case .searchBar:

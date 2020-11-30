@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		532DD109256FA8B900CFD525 /* PortraitRoleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DD108256FA8B900CFD525 /* PortraitRoleCard.swift */; };
+		5337EB972574F7A600762F2A /* DiscoveryTraySections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5337EB962574F7A600762F2A /* DiscoveryTraySections.swift */; };
 		533A0F5E256E3905008D67D1 /* HorizontallyScrollingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */; };
 		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		532DD108256FA8B900CFD525 /* PortraitRoleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitRoleCard.swift; sourceTree = "<group>"; };
+		5337EB962574F7A600762F2A /* DiscoveryTraySections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTraySections.swift; sourceTree = "<group>"; };
 		533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollingCell.swift; sourceTree = "<group>"; };
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */,
+				5337EB962574F7A600762F2A /* DiscoveryTraySections.swift */,
 				53D94BAC256A39A200A2127C /* DiscoveryTrayView.swift */,
 				53C5CB49256D1E1D00176A2E /* Tableview cells */,
 				53C5CB42256D188E00176A2E /* Underlined tab */,
@@ -441,6 +444,7 @@
 			files = (
 				53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */,
 				53BCD7CE256D221800CC8FF4 /* SearchBarPresenter.swift in Sources */,
+				5337EB972574F7A600762F2A /* DiscoveryTraySections.swift in Sources */,
 				53C5CB55256D1F0600176A2E /* RecommendationsCell.swift in Sources */,
 				53C5CB4D256D1E4100176A2E /* SearchBarCell.swift in Sources */,
 				533A0F5E256E3905008D67D1 /* HorizontallyScrollingCell.swift in Sources */,
