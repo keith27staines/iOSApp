@@ -14,6 +14,18 @@ class DiscoveryTrayController: NSObject {
         RecentRolesDataSource()
     }()
     
+    lazy var topRolesPresenter: TopRolesPresenter = {
+        TopRolesPresenter()
+    }()
+    
+    lazy var popularOnWorkfinderPresenter: PopularOnWorkfinderPresenter = {
+        PopularOnWorkfinderPresenter()
+    }()
+    
+    lazy var recommendationsPresenter: RecommendationsPresenter = {
+        RecommendationsPresenter(rolesService: recommendationsService)
+    }()
+    
     let recommendationsService: RolesServiceProtocol
     
     init(recommendationsService: RolesServiceProtocol) {
@@ -130,9 +142,9 @@ extension DiscoveryTrayController: UITableViewDataSource {
         if presenter == nil {
             switch section {
             case .searchBar: presenter = SearchBarPresenter()
-            case .popularOnWorkfinder: presenter = PopularOnWorkfinderPresenter()
-            case .recommendations: presenter = RecommendationsPresenter(rolesService: recommendationsService)
-            case .topRoles: presenter = TopRolesPresenter()
+            case .popularOnWorkfinder: presenter = popularOnWorkfinderPresenter
+            case .recommendations: presenter = recommendationsPresenter
+            case .topRoles: presenter = topRolesPresenter
             case .recentRoles: presenter = recentRolesPresenter
             }
         }
