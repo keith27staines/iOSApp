@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "recommendation_tab.png",
+      "filename" : "06 Recomendations.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "recommendation_tab@2x.png",
+      "filename" : "06 Recomendations@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "recommendation_tab@3x.png",
+      "filename" : "06 Recomendations@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

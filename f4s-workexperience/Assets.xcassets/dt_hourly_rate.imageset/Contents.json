@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "09 Applications.png",
+      "filename" : "01 Hourly Rate.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "09 Applications@2x.png",
+      "filename" : "01 Hourly Rate@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "09 Applications@3x.png",
+      "filename" : "01 Hourly Rate@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

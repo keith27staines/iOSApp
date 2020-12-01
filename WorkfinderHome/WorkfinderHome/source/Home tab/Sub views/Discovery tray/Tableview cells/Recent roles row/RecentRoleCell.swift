@@ -61,9 +61,9 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
         return stack
     }()
     
-    lazy var payIconLabel: IconLabel = { IconLabel(iconImage: nil) }()
-    lazy var hoursIconLabel: IconLabel = { IconLabel(iconImage: nil) }()
-    lazy var locationIconLabel:IconLabel = { IconLabel(iconImage: nil) }()
+    lazy var payIconLabel: IconLabel = { IconLabel(iconImage: UIImage(named:"dt_hourly_rate")) }()
+    lazy var hoursIconLabel: IconLabel = { IconLabel(iconImage: UIImage(named:"dt_placement_type")) }()
+    lazy var locationIconLabel:IconLabel = { IconLabel(iconImage: UIImage(named:"dt_location")) }()
     
     lazy var payAndHoursStack: UIStackView = {
         let stack = UIStackView()
