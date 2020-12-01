@@ -9,19 +9,15 @@ class TopRolesCell: HorizontallyScrollingCell, Presentable {
     
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? TopRolesPresenter else { return }
-        presenter.load { [weak self] (result) in
+        presenter.load { [weak self] (optionalError) in
             guard let self = self else { return }
             self.clear()
-            switch result {
-            case .success(let roles):
-                roles.forEach { (data) in
-                    self.addCardWith(data: data, tapAction: presenter.roleTapped)
-                }
-                if !roles.count.isMultiple(of: 2) {
-                    self.addShowPlaceholderCard()
-                }
-            case .failure(_):
-                break
+            let roles = presenter.roles
+            roles.forEach { (data) in
+                self.addCardWith(data: data, tapAction: presenter.roleTapped)
+            }
+            if !roles.count.isMultiple(of: 2) {
+                self.addShowPlaceholderCard()
             }
         }
     }

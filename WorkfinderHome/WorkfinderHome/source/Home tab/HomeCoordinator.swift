@@ -11,7 +11,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     public var shouldAskOperatingSystemToAllowLocation = false
     
     lazy var rootViewController: HomeViewController = {
-        let vc = HomeViewController(recommendationsService: RecommendationsService(networkConfig: injected.networkConfig))
+        let vc = HomeViewController(rolesService: RolesService(networkConfig: injected.networkConfig))
         vc.coordinator = self
         return vc
     }()

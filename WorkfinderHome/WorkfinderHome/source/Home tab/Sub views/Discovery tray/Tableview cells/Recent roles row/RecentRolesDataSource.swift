@@ -4,7 +4,7 @@ import WorkfinderUI
 import WorkfinderServices
 
 class RecentRolesDataSource: CellPresenter {
-    private lazy var rolesService: RolesServiceProtocol = RolesService()
+    let rolesService: RolesServiceProtocol
     var resultHandler: ((Error?) -> Void)?
     private var roles = [RoleData]()
     private var images = [UIImage]()
@@ -56,12 +56,12 @@ class RecentRolesDataSource: CellPresenter {
         }
     }
     
-    init() {
+    init(rolesService: RolesServiceProtocol) {
+        self.rolesService = rolesService
     }
-    
 
     func loadData() {
-        rolesService.fetchRoles { [weak self] (result) in
+        rolesService.fetchRecentRoles { [weak self] (result) in
             self?.result = result
         }
     }

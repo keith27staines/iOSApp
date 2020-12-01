@@ -6,7 +6,7 @@ class RecommendationsPresenter: CellPresenter {
     let rolesService: RolesServiceProtocol
     
     func load(completion: @escaping (Result<[RoleData],Error>) -> Void) {
-        rolesService.fetchRoles { (result) in
+        rolesService.fetchRecommendedRoles { (result) in
             completion(result)
         }
     }

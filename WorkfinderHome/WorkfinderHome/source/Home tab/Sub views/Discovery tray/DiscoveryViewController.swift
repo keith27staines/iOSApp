@@ -11,11 +11,11 @@ class DiscoveryTrayController: NSObject {
     let sectionManager = DiscoverTraySectionManager()
     
     lazy var recentRolesPresenter: RecentRolesDataSource = {
-        RecentRolesDataSource()
+        RecentRolesDataSource(rolesService: rolesService)
     }()
     
     lazy var topRolesPresenter: TopRolesPresenter = {
-        TopRolesPresenter()
+        TopRolesPresenter(rolesService: rolesService)
     }()
     
     lazy var popularOnWorkfinderPresenter: PopularOnWorkfinderPresenter = {
@@ -23,13 +23,13 @@ class DiscoveryTrayController: NSObject {
     }()
     
     lazy var recommendationsPresenter: RecommendationsPresenter = {
-        RecommendationsPresenter(rolesService: recommendationsService)
+        RecommendationsPresenter(rolesService: rolesService)
     }()
     
-    let recommendationsService: RolesServiceProtocol
+    let rolesService: RolesServiceProtocol
     
-    init(recommendationsService: RolesServiceProtocol) {
-        self.recommendationsService = recommendationsService
+    init(rolesService: RolesServiceProtocol) {
+        self.rolesService = rolesService
         super.init()
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidStart), name: SearchBarCell.didStartEditingSearchFieldNotificationName, object: nil)

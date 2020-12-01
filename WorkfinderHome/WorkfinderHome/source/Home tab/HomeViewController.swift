@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     var backgroundView: BackgroundView { homeView.backgroundView }
     
     lazy var trayController: DiscoveryTrayController = {
-        let trayController = DiscoveryTrayController(recommendationsService: self.recommendationsService)
+        let trayController = DiscoveryTrayController(rolesService: self.rolesService)
         return trayController
     }()
     
@@ -147,9 +147,9 @@ class HomeViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    let recommendationsService: RolesServiceProtocol
-    init(recommendationsService: RolesServiceProtocol) {
-        self.recommendationsService = recommendationsService
+    let rolesService: RolesServiceProtocol
+    init(rolesService: RolesServiceProtocol) {
+        self.rolesService = rolesService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -185,7 +185,7 @@ extension HomeViewController {
     }
     
     func configureTray() {
-        trayController = DiscoveryTrayController(recommendationsService: recommendationsService)
+        trayController = DiscoveryTrayController(rolesService: rolesService)
         backgroundView.addSubview(tray)
         tray.anchor(top: nil, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor)
         tray.heightAnchor.constraint(equalTo: backgroundView.heightAnchor).isActive = true
