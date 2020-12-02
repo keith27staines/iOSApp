@@ -4,11 +4,16 @@ import WorkfinderUI
 
 class DiscoveryTrayController: NSObject {
     
-    lazy var tray: DiscoveryTrayView = DiscoveryTrayView()
+    lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBar: searchBar, searchDetail: searchDetail)
     var tableView: UITableView { tray.tableView }
     var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenter]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
     let sectionManager = DiscoverTraySectionManager()
+    lazy var searchController: SearchController = {
+        let controller = SearchController()
+        controller.state = .hidden
+        return controller
+    }()
     
     lazy var recentRolesPresenter: RecentRolesDataSource = {
         RecentRolesDataSource(rolesService: rolesService)
@@ -26,14 +31,15 @@ class DiscoveryTrayController: NSObject {
         RecommendationsPresenter(rolesService: rolesService)
     }()
     
+    var searchBar: UISearchBar { searchController.searchBar }
+    var searchDetail: SearchDetailView { searchController.searchDetail }
+    
     let rolesService: RolesServiceProtocol
     
     init(rolesService: RolesServiceProtocol) {
         self.rolesService = rolesService
         super.init()
         configureTableView()
-        NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidStart), name: DiscoveryTrayView.didStartEditingSearchFieldNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidEnd), name: DiscoveryTrayView.didEndEditingSearchFieldNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
         recentRolesPresenter.resultHandler = { optionalError in
             guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }

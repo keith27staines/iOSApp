@@ -34,7 +34,6 @@ class HomeViewController: UIViewController {
         tray.layer.cornerRadius = 0
         tray.layer.shadowRadius = 0
         tray.layer.shadowColor = UIColor.clear.cgColor
-        //tray.thumbButton.isHidden = true
         animateTrayToFinalPosition()
         scrollHijackOverlay.removeFromSuperview()
     }
@@ -108,7 +107,6 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(animateTrayToTop), name: DiscoveryTrayView.didStartEditingSearchFieldNotificationName, object: nil)
     }
     
     @objc func handleLogin() {
