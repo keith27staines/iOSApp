@@ -2,22 +2,16 @@
 import UIKit
 
 class SearchDetailView: UIView {
-    lazy var categoriesView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = UIColor.red
-        return tableView
+    lazy var categoriesView: CategoriesView = {
+        CategoriesView()
     }()
     
-    lazy var typeAheadView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.green
-        return view
+    lazy var typeAheadView: TypeAheadView = {
+        TypeAheadView()
     }()
     
-    lazy var searchResultsView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.blue
-        return view
+    lazy var searchResultsView: SearchResultsView = {
+        SearchResultsView()
     }()
     
     init() {
@@ -26,6 +20,7 @@ class SearchDetailView: UIView {
     }
     
     func configureViews() {
+        backgroundColor = UIColor.white
         let subviews = [categoriesView, typeAheadView, searchResultsView]
         subviews.forEach { (subview) in
             addSubview(subview)

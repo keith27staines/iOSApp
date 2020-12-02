@@ -13,11 +13,12 @@ class SearchController: NSObject {
     
     var state = SearchState.hidden {
         didSet {
+            searchDetail.isHidden = false
             searchDetail.categoriesView.isHidden = true
             searchDetail.searchResultsView.isHidden = true
             searchDetail.typeAheadView.isHidden = true
             switch state {
-            case .hidden: break
+            case .hidden: searchDetail.isHidden = true
             case .showingTypeAhead: searchDetail.typeAheadView.isHidden = false
             case .showingCategories: searchDetail.categoriesView.isHidden = false
             case .showingResults: searchDetail.searchResultsView.isHidden = false
