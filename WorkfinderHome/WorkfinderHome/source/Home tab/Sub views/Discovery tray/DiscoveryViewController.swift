@@ -32,8 +32,8 @@ class DiscoveryTrayController: NSObject {
         self.rolesService = rolesService
         super.init()
         configureTableView()
-        NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidStart), name: SearchBarCell.didStartEditingSearchFieldNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidEnd), name: SearchBarCell.didEndEditingSearchFieldNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidStart), name: DiscoveryTrayView.didStartEditingSearchFieldNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(searchEditingDidEnd), name: DiscoveryTrayView.didEndEditingSearchFieldNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
         recentRolesPresenter.resultHandler = { optionalError in
             guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
@@ -70,7 +70,6 @@ class DiscoveryTrayController: NSObject {
         tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(SearchBarCell.self, forCellReuseIdentifier: SearchBarCell.identifier)
         tableView.register(PopularOnWorkfinderCell.self, forCellReuseIdentifier: PopularOnWorkfinderCell.identifier)
         tableView.register(RecommendationsCell.self, forCellReuseIdentifier: RecommendationsCell.identifier)
         tableView.register(TopRolesCell.self, forCellReuseIdentifier: TopRolesCell.identifier)
@@ -89,8 +88,6 @@ extension DiscoveryTrayController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = sectionManager.sectionForSectionIndex(section)
         switch section {
-        case .searchBar:
-            return 1
         case .popularOnWorkfinder:
             return 1
         case .recommendations:
@@ -107,9 +104,6 @@ extension DiscoveryTrayController: UITableViewDataSource {
         let gutter = gutterMargin(fullWidth: tableView.frame.width - 40, cardWidth: 158)
         let cell: UITableViewCell?
         switch section {
-        case .searchBar:
-            cell = tableView.dequeueReusableCell(withIdentifier: SearchBarCell.identifier) as? SearchBarCell
-            cell?.backgroundColor = UIColor.white
         case .popularOnWorkfinder:
             cell = tableView.dequeueReusableCell(withIdentifier: PopularOnWorkfinderCell.identifier)
             cell?.backgroundColor = UIColor.white
@@ -141,7 +135,6 @@ extension DiscoveryTrayController: UITableViewDataSource {
         var presenter = sectionPresenters[section]
         if presenter == nil {
             switch section {
-            case .searchBar: presenter = SearchBarPresenter()
             case .popularOnWorkfinder: presenter = popularOnWorkfinderPresenter
             case .recommendations: presenter = recommendationsPresenter
             case .topRoles: presenter = topRolesPresenter
@@ -162,7 +155,6 @@ extension DiscoveryTrayController: UITableViewDelegate {
         cell?.contentView.backgroundColor = UIColor.white
         var text: String = ""
         switch section {
-        case .searchBar: break
         case .popularOnWorkfinder: text = "Popular on Workfinder"
         case .recommendations: text = "Recommendations"
         case .topRoles:
@@ -178,8 +170,6 @@ extension DiscoveryTrayController: UITableViewDelegate {
         let section = sectionManager.sectionForSectionIndex(section)
         var view: UIView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
         switch section {
-        case .searchBar:
-            break
         case .recommendations:
             (view as? SectionFooterView)?.isLineHidden = true
         case .popularOnWorkfinder:

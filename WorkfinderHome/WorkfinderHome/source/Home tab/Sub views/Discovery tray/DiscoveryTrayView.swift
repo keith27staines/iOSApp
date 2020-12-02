@@ -1,16 +1,34 @@
 
 import UIKit
+import WorkfinderUI
 
 class DiscoveryTrayView : UIView {
-
-//    lazy var thumbButton: UIButton = {
-//        let button = UIButton()
-//        button.setImage(UIImage(named: "thumbScrollIndicator"), for: .normal)
-//        addSubview(button)
-//        button.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 44, height: 44))
-//        button.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        return button
-//    }()
+    static let didStartEditingSearchFieldNotificationName = Notification.Name("didStartEditingSearchField")
+    static let didEndEditingSearchFieldNotificationName = Notification.Name("didEndEditingSearchField")
+    
+    lazy var searchBar: UISearchBar = {
+        let search = UISearchBar()
+        let textfield: UITextField!
+        if #available(iOS 13.0, *) {
+            textfield = search.searchTextField
+        } else {
+            textfield = search.value(forKey: "searchField") as? UITextField
+        }
+        if let leftView = textfield.leftView as? UIImageView {
+            leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+            leftView.tintColor = WorkfinderColors.primaryColor
+        }
+        search.autocapitalizationType = .none
+        search.autocorrectionType = .default
+        search.placeholder = "projects, companies, hosts"
+        search.returnKeyType = .go
+        search.showsCancelButton = true
+        search.tintColor = WorkfinderColors.primaryColor
+        search.delegate = self
+        addSubview(search)
+        search.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        return search
+    }()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -18,7 +36,7 @@ class DiscoveryTrayView : UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         addSubview(tableView)
-        tableView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+        tableView.anchor(top: searchBar.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
         return tableView
     }()
     
@@ -43,7 +61,35 @@ class DiscoveryTrayView : UIView {
 }
 
 
-extension DiscoveryTrayView {
+extension DiscoveryTrayView: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if #available(iOS 13.0, *) {
+            searchBar.setShowsCancelButton(true, animated: true)
+        } else {
+            searchBar.showsCancelButton = true
+        }
+        NotificationCenter.default.post(name: Self.didStartEditingSearchFieldNotificationName, object: self)
+    }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if #available(iOS 13.0, *) {
+            searchBar.setShowsCancelButton(false, animated: true)
+        } else {
+            searchBar.showsCancelButton = false
+        }
+        NotificationCenter.default.post(name: Self.didEndEditingSearchFieldNotificationName, object: self)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // do search
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        true
+    }
 
 }

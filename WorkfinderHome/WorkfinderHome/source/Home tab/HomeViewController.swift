@@ -108,7 +108,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(animateTrayToTop), name: SearchBarCell.didStartEditingSearchFieldNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(animateTrayToTop), name: DiscoveryTrayView.didStartEditingSearchFieldNotificationName, object: nil)
     }
     
     @objc func handleLogin() {
