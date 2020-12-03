@@ -14,7 +14,8 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
             switch result {
             case .success(let roles):
                 self.clear()
-                roles.forEach { (data) in
+                let maxRoles = min(9, roles.count)
+                roles[0..<maxRoles].forEach { (data) in
                     self.addCardWith(data: data, tapAction: presenter.roleTapped)
                 }
                 if presenter.isSeeMoreCardRequired {

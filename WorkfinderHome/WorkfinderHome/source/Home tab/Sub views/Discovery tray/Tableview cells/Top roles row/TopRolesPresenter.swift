@@ -7,7 +7,8 @@ class TopRolesPresenter: CellPresenter {
         rolesService.fetchTopRoles { (result) in
             switch result {
             case .success(let roles):
-                self.roles = ([RoleData](roles[0..<10])).map({ (roleData) -> RoleData in
+                let maxRoles = min(10, roles.count)
+                self.roles = ([RoleData](roles[0..<maxRoles])).map({ (roleData) -> RoleData in
                     var adaptedData = roleData
                     adaptedData.actionButtonText = "Discover more"
                     return adaptedData

@@ -21,7 +21,7 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     }()
 
     public func fetchTopRoles(completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "promote_on_homepage", value: "True")]
+        let queryItems = [URLQueryItem(name: "promote_on_home_page", value: "True")]
         topRolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: queryItems) { (result) in
            completion(result)
         }

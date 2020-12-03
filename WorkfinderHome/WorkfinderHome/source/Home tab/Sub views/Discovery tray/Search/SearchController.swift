@@ -7,7 +7,7 @@ class SearchController: NSObject {
     enum SearchState {
         case hidden
         case showingTypeAhead
-        case showingCategories
+        case showingFilters
         case showingResults
     }
     
@@ -20,7 +20,7 @@ class SearchController: NSObject {
             switch state {
             case .hidden: searchDetail.isHidden = true
             case .showingTypeAhead: searchDetail.typeAheadView.isHidden = false
-            case .showingCategories: searchDetail.categoriesView.isHidden = false
+            case .showingFilters: searchDetail.categoriesView.isHidden = false
             case .showingResults: searchDetail.searchResultsView.isHidden = false
             }
         }
@@ -69,9 +69,9 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text?.isEmpty == true {
-            state = .showingCategories
+            state = .showingFilters
         } else {
-            state = .showingCategories
+            state = .showingFilters
         }
         configureKeyboardReturnKey()
     }
