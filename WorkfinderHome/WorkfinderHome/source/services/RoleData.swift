@@ -28,6 +28,7 @@ extension RoleData {
         paidAmount = project?.isPaid == true ? "£6 - 8.21" : "Voluntary"
         locationHeader = "Location"
         location = project?.isRemote == false ?  "On site" : "Remote"
+        workingHours = project?.employmentType 
         actionButtonText = "Discover more"
     }
 }

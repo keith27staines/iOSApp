@@ -13,10 +13,10 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
         self.presenter = presenter
         let role: RoleData = presenter.roleForRow(row)
         companyLogo.image = presenter.imageForRow(row)
-        companyName.text = role.companyName ?? "Company name"
+        companyName.text = role.companyName ?? "Not specified"
         projectTitle.text = role.projectTitle
         payIconLabel.label.text = role.paidAmount
-        hoursIconLabel.label.text = role.workingHours ?? "Flexible"
+        hoursIconLabel.label.text = role.workingHours ?? "Not specified"
         locationIconLabel.label.text = role.location
     }
     

@@ -10,7 +10,7 @@ protocol RolesServiceProtocol {
 
 class RolesService: WorkfinderService, RolesServiceProtocol {
     
-    let rolesEndpoint = "recommendation-projects/"
+    let rolesEndpoint = "projects/"
     
     fileprivate lazy var topRolesWorkerService: FetchRolesWorkerService = {
         FetchRolesWorkerService(networkConfig: networkConfig)
@@ -28,7 +28,8 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     }
     
     public func fetchRecentRoles(completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        recentRolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: nil) { (result) in
+        let queryItems = [URLQueryItem(name: "status", value: "open")]
+        recentRolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: queryItems) { (result) in
            completion(result)
         }
     }
@@ -83,6 +84,7 @@ fileprivate struct Role: Codable {
     var association: ExpandedAssociation
     var is_remote: Bool?
     var is_paid: Bool?
+    var employment_type: String?
 }
 
 fileprivate extension RoleData {
@@ -94,7 +96,8 @@ fileprivate extension RoleData {
         locationHeader = "Location"
         location = role.is_remote == true ? "Remote" : ""
         paidHeader = "Paid (ph)"
-        paidAmount = role.is_paid == true ? "£6 - 8.21" : "voluntary"
+        paidAmount = role.is_paid == true ? "£6 - 8.21" : "Voluntary"
         actionButtonText = "Apply now"
+        workingHours = role.employment_type
     }
 }
