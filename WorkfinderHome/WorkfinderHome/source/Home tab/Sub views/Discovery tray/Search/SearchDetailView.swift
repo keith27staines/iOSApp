@@ -2,8 +2,8 @@
 import UIKit
 
 class SearchDetailView: UIView {
-    lazy var categoriesView: CategoriesView = {
-        CategoriesView()
+    lazy var categoriesView: FiltersView = {
+        FiltersView()
     }()
     
     lazy var typeAheadView: TypeAheadView = {

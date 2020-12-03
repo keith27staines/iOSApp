@@ -2,11 +2,11 @@
 import UIKit
 import WorkfinderUI
 
-class CategoriesView: UIView {
+class FiltersView: UIView {
     
     lazy var label: UILabel = {
         let label = UILabel()
-        label.text = "Categories List"
+        label.text = "Filters"
         return label
     }()
     
