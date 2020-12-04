@@ -2,7 +2,7 @@
 import UIKit
 
 class SearchDetailView: UIView {
-    lazy var categoriesView: FiltersView = {
+    lazy var filtersView: FiltersView = {
         FiltersView()
     }()
     
@@ -21,11 +21,11 @@ class SearchDetailView: UIView {
     
     func configureViews() {
         backgroundColor = UIColor.white
-        let subviews = [categoriesView, typeAheadView, searchResultsView]
+        let subviews = [filtersView, typeAheadView, searchResultsView]
         subviews.forEach { (subview) in
             addSubview(subview)
             subview.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)        }
-        addSubview(categoriesView)
+        addSubview(filtersView)
         addSubview(typeAheadView)
         addSubview(searchResultsView)
     }

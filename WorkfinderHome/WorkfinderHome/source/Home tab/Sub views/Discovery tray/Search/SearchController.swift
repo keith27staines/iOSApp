@@ -14,13 +14,13 @@ class SearchController: NSObject {
     var state = SearchState.hidden {
         didSet {
             searchDetail.isHidden = false
-            searchDetail.categoriesView.isHidden = true
+            searchDetail.filtersView.isHidden = true
             searchDetail.searchResultsView.isHidden = true
             searchDetail.typeAheadView.isHidden = true
             switch state {
             case .hidden: searchDetail.isHidden = true
             case .showingTypeAhead: searchDetail.typeAheadView.isHidden = false
-            case .showingFilters: searchDetail.categoriesView.isHidden = false
+            case .showingFilters: searchDetail.filtersView.isHidden = false
             case .showingResults: searchDetail.searchResultsView.isHidden = false
             }
         }
@@ -41,7 +41,6 @@ class SearchController: NSObject {
         super.init()
         state = .hidden
     }
-
 }
 
 extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
@@ -51,8 +50,7 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
         } else {
             searchBar.showsCancelButton = true
         }
-        state = .showingTypeAhead
-        performTypeAhead(string: searchBar.text)
+        setStateFromSearchText()
         DispatchQueue.main.async {
             self.configureKeyboardReturnKey()
         }
@@ -64,16 +62,20 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
         } else {
             searchBar.showsCancelButton = false
         }
-
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        performTypeAhead(string: searchBar.text)
+        setStateFromSearchText()
+        configureKeyboardReturnKey()
+    }
+    
+    func setStateFromSearchText() {
         if searchBar.text == nil || searchBar.text?.isEmpty == true {
             state = .showingFilters
         } else {
-            state = .showingFilters
+            state = .showingTypeAhead
         }
-        configureKeyboardReturnKey()
     }
     
     func configureKeyboardReturnKey() {

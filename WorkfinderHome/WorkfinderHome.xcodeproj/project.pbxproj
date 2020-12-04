@@ -16,6 +16,8 @@
 		5337EBF02577E47400762F2A /* TypeAheadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5337EBEF2577E47400762F2A /* TypeAheadView.swift */; };
 		5337EBF42577E49000762F2A /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5337EBF32577E49000762F2A /* SearchResultsView.swift */; };
 		533A0F5E256E3905008D67D1 /* HorizontallyScrollingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */; };
+		533D544925794EED006B6F0C /* FiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D544825794EED006B6F0C /* FiltersModel.swift */; };
+		533D544F25794F3C006B6F0C /* FiltersSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D544E25794F3C006B6F0C /* FiltersSectionHeaderCell.swift */; };
 		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
@@ -74,6 +76,8 @@
 		5337EBEF2577E47400762F2A /* TypeAheadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadView.swift; sourceTree = "<group>"; };
 		5337EBF32577E49000762F2A /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollingCell.swift; sourceTree = "<group>"; };
+		533D544825794EED006B6F0C /* FiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersModel.swift; sourceTree = "<group>"; };
+		533D544E25794F3C006B6F0C /* FiltersSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSectionHeaderCell.swift; sourceTree = "<group>"; };
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		534EF6BA2570DACD00ACD399 /* RolesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesService.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				5337EBEB2577E44600762F2A /* FiltersView.swift */,
+				533D544825794EED006B6F0C /* FiltersModel.swift */,
+				533D544E25794F3C006B6F0C /* FiltersSectionHeaderCell.swift */,
 				5337EBEF2577E47400762F2A /* TypeAheadView.swift */,
 				5337EBF32577E49000762F2A /* SearchResultsView.swift */,
 			);
@@ -463,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */,
+				533D544925794EED006B6F0C /* FiltersModel.swift in Sources */,
 				5337EB972574F7A600762F2A /* DiscoveryTraySections.swift in Sources */,
 				53C5CB55256D1F0600176A2E /* RecommendationsCell.swift in Sources */,
 				5337EBF02577E47400762F2A /* TypeAheadView.swift in Sources */,
@@ -485,6 +492,7 @@
 				53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */,
 				53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */,
 				532DD109256FA8B900CFD525 /* PortraitRoleCard.swift in Sources */,
+				533D544F25794F3C006B6F0C /* FiltersSectionHeaderCell.swift in Sources */,
 				53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */,
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,

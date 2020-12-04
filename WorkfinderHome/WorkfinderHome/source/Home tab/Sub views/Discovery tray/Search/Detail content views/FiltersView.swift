@@ -4,16 +4,19 @@ import WorkfinderUI
 
 class FiltersView: UIView {
     
+    let filtersModel: FiltersModel
+    
     lazy var topStack: UIStackView = {
         let leftSpacer = UIView()
         let rightSpacer = UIView()
-        leftSpacer.widthAnchor.constraint(equalTo: rightSpacer.widthAnchor).isActive = true
         let stack = UIStackView()
         stack.addArrangedSubview(leftSpacer)
         stack.addArrangedSubview(titleLabel)
         stack.addArrangedSubview(rightSpacer)
         stack.addArrangedSubview(resetButton)
         stack.axis = .horizontal
+        leftSpacer.widthAnchor.constraint(equalTo: rightSpacer.widthAnchor).isActive = true
+        stack.heightAnchor.constraint(equalToConstant: 64).isActive = true
         return stack
     }()
     
@@ -35,71 +38,72 @@ class FiltersView: UIView {
         return label
     }()
     
-    init() {
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = 44
+        tableView.estimatedSectionHeaderHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.register(FiltersSectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
+        return tableView
+    }()
+    
+    init(filtersModel: FiltersModel = FiltersModel()) {
+        self.filtersModel = filtersModel
         super.init(frame: CGRect.zero)
+        configureViews()
     }
     
     func configureViews() {
         addSubview(topStack)
-        topStack.translatesAutoresizingMaskIntoConstraints = false
-        topStack.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-        topStack.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        addSubview(tableView)
+        backgroundColor = UIColor.white
+        topStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        tableView.anchor(top: topStack.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-typealias FilterName = String
-typealias FilterCollectionName = String
-typealias FilterQueryKey = String
-
-enum FilterCollectionType: CaseIterable {
-    case jobType
-    case projectType
-    case skills
-    case salary
+extension FiltersView: UITableViewDataSource {
     
-    var collectionName: FilterCollectionName {
-        switch self {
-        case .jobType: return "Job type"
-        case .projectType: return "Project type"
-        case .skills: return "Skills"
-        case .salary: return "Salary"
+    func numberOfSections(in tableView: UITableView) -> Int {
+        filtersModel.filterCollections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let filtersCollection = filtersModel.filterCollections[section]
+        return filtersCollection.isExpanded ? filtersCollection.filters.count : 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let filtersCollection = filtersModel.filterCollections[indexPath.section]
+        let filter = filtersCollection.filters[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "") ?? UITableViewCell()
+        cell.textLabel?.text = filter.type.name
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? FiltersSectionHeaderCell else { return UITableViewHeaderFooterView() }
+        let filtersCollection = filtersModel.filterCollections[section]
+        header.section = section
+        header.sectionTitle.text = filtersCollection.name
+        header.onTap = { [weak self] tappedSection in
+            guard let self = self else { return }
+            let filtersCollection = self.filtersModel.filterCollections[tappedSection]
+            filtersCollection.isExpanded.toggle()
+            tableView.reloadSections(IndexSet([section]), with: .automatic)
         }
-    }
-    
-    var queryKey: FilterQueryKey {
-        switch self {
-        case .jobType: return "employment_type"
-        case .projectType: return "type"
-        case .skills: return "skill"
-        case .salary: return "is_paid"
-        }
-    }
-    
-}
-
-struct FilterModel {
-
-    var filterCollections = [FilterCollectionType: FilterCollection]()
-
-    init() {
-        filterCollections[.jobType] = FilterCollection(type: .jobType)
-        filterCollections[.projectType] = FilterCollection(type: .projectType)
-        filterCollections[.skills] = FilterCollection(type: .skills)
-        filterCollections[.salary] = FilterCollection(type: .salary)
+        return header
     }
 }
 
-struct FilterCollection {
-    var name: FilterCollectionName
-    var filters = [FilterName:Filter]()
-    
-    init(type: FilterCollectionType) {
-        self.name = type.collectionName
-    }
+extension FiltersView: UITableViewDelegate {
+
 }
-struct Filter {
-    var name: FilterName
-    var value: Bool
-}
+
+
+
