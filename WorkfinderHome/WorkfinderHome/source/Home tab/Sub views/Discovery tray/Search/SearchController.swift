@@ -4,6 +4,8 @@ import WorkfinderUI
 
 class SearchController: NSObject {
     
+    let filtersModel: FiltersModel = FiltersModel()
+    
     enum SearchState {
         case hidden
         case showingTypeAhead
@@ -34,7 +36,7 @@ class SearchController: NSObject {
     }()
     
     lazy var searchDetail: SearchDetailView = {
-        SearchDetailView()
+        SearchDetailView(filtersModel: filtersModel)
     }()
     
     override init() {

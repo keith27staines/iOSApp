@@ -16,18 +16,19 @@ class FiltersView: UIView {
         stack.addArrangedSubview(resetButton)
         stack.axis = .horizontal
         leftSpacer.widthAnchor.constraint(equalTo: rightSpacer.widthAnchor).isActive = true
-        stack.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        stack.heightAnchor.constraint(equalToConstant: 44).isActive = true
         return stack
     }()
     
     @objc func reset() {
-        
+        filtersModel.clear()
+        tableView.reloadData()
     }
     
     lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("Reset", for: .normal)
-        button.tintColor = WorkfinderColors.primaryColor
+        button.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
         button.addTarget(self, action: #selector(reset), for: .touchUpInside)
         return button
     }()
@@ -40,17 +41,19 @@ class FiltersView: UIView {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+        tableView.backgroundColor = UIColor.white
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 44
         tableView.estimatedSectionHeaderHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.tintColor = WorkfinderColors.primaryColor
         tableView.register(FiltersSectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
         return tableView
     }()
     
-    init(filtersModel: FiltersModel = FiltersModel()) {
+    init(filtersModel: FiltersModel) {
         self.filtersModel = filtersModel
         super.init(frame: CGRect.zero)
         configureViews()
@@ -83,26 +86,47 @@ extension FiltersView: UITableViewDataSource {
         let filter = filtersCollection.filters[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "") ?? UITableViewCell()
         cell.textLabel?.text = filter.type.name
+        cell.accessoryType = filter.isSelected ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? FiltersSectionHeaderCell else { return UITableViewHeaderFooterView() }
-        let filtersCollection = filtersModel.filterCollections[section]
+        let tappedCollection = filtersModel.filterCollections[section]
+        header.isExpanded = tappedCollection.isExpanded
         header.section = section
-        header.sectionTitle.text = filtersCollection.name
+        header.sectionTitle.text = tappedCollection.name
         header.onTap = { [weak self] tappedSection in
             guard let self = self else { return }
             let filtersCollection = self.filtersModel.filterCollections[tappedSection]
             filtersCollection.isExpanded.toggle()
-            tableView.reloadSections(IndexSet([section]), with: .automatic)
+            var changeSet = IndexSet()
+            changeSet.insert(section)
+            for otherSectionIndex in 0 ..< self.filtersModel.filterCollections.count {
+                guard otherSectionIndex != section else { continue }
+                let otherSection = self.filtersModel.filterCollections[otherSectionIndex]
+                guard otherSection.isExpanded else { continue }
+                self.filtersModel.filterCollections[otherSectionIndex].isExpanded = false
+                changeSet.insert(otherSectionIndex)
+            }
+            header.isExpanded = filtersCollection.isExpanded
+            tableView.reloadSections(changeSet, with: .automatic)
+            if filtersCollection.isExpanded {
+                tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .top, animated: true)
+            }
         }
         return header
     }
 }
 
 extension FiltersView: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let filtersCollection = filtersModel.filterCollections[indexPath.section]
+        let filter = filtersCollection.filters[indexPath.row]
+        filter.isSelected.toggle()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
 }
 
 

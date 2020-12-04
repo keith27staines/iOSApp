@@ -59,8 +59,8 @@ class FilterCollection {
         switch type {
         case .jobType:
             filters.append(Filter(type: FilterType.jobFullTime))
-            filters.append(Filter(type: FilterType.jobFullTime))
-            filters.append(Filter(type: FilterType.jobFullTime))
+            filters.append(Filter(type: FilterType.jobPartTime))
+            filters.append(Filter(type: FilterType.jobFlexible))
         case .projectType:
             filters.append(Filter(type: FilterType.projectApplicationTesting))
             filters.append(Filter(type: FilterType.projectBespoke))

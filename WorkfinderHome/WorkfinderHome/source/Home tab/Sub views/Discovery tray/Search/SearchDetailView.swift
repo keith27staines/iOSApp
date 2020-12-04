@@ -2,8 +2,11 @@
 import UIKit
 
 class SearchDetailView: UIView {
+    
+    let filtersModel: FiltersModel
+    
     lazy var filtersView: FiltersView = {
-        FiltersView()
+        FiltersView(filtersModel: filtersModel)
     }()
     
     lazy var typeAheadView: TypeAheadView = {
@@ -14,7 +17,8 @@ class SearchDetailView: UIView {
         SearchResultsView()
     }()
     
-    init() {
+    init(filtersModel: FiltersModel) {
+        self.filtersModel = filtersModel
         super.init(frame: CGRect.zero)
         configureViews()
     }
