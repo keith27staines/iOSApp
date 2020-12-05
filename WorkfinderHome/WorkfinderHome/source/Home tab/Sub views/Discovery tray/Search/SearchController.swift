@@ -5,6 +5,7 @@ import WorkfinderUI
 class SearchController: NSObject {
     
     let filtersModel: FiltersModel = FiltersModel()
+    let typeAheadDatasource: TypeAheadDataSource
     
     enum SearchState {
         case hidden
@@ -36,10 +37,18 @@ class SearchController: NSObject {
     }()
     
     lazy var searchDetail: SearchDetailView = {
-        SearchDetailView(filtersModel: filtersModel)
+        SearchDetailView(
+            filtersModel: filtersModel,
+            typeAheadDataSource: typeAheadDatasource,
+            didSelectTypeAheadText: { string in
+                self.searchBar.text = string
+                self.searchTextDidUpdate()
+            }
+        )
     }()
     
-    override init() {
+    init(typeAheadService: TypeAheadServiceProtocol) {
+        typeAheadDatasource = TypeAheadDataSource(typeAheadService: typeAheadService)
         super.init()
         state = .hidden
     }
@@ -68,6 +77,10 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         performTypeAhead(string: searchBar.text)
+        searchTextDidUpdate()
+    }
+    
+    func searchTextDidUpdate() {
         setStateFromSearchText()
         configureKeyboardReturnKey()
     }
@@ -123,13 +136,12 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
     }
     
     var shouldEnableReturnKey: Bool {
-        searchBar.text?.count ?? 0 > 3 ? true : false
+        searchBar.text?.count ?? 0 > 2 ? true : false
     }
 }
 
 extension SearchController {
     func performTypeAhead(string: String?) {
-        guard let string = string, string.count > 3 else { return }
-        // Get type ahead results
+        typeAheadDatasource.string = string
     }
 }

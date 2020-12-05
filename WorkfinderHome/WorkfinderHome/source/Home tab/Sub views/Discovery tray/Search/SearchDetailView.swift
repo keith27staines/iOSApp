@@ -9,18 +9,22 @@ class SearchDetailView: UIView {
         FiltersView(filtersModel: filtersModel)
     }()
     
-    lazy var typeAheadView: TypeAheadView = {
-        TypeAheadView()
-    }()
+    let typeAheadView: TypeAheadView
     
     lazy var searchResultsView: SearchResultsView = {
         SearchResultsView()
     }()
     
-    init(filtersModel: FiltersModel) {
+    init(
+        filtersModel: FiltersModel,
+        typeAheadDataSource: TypeAheadDataSource,
+        didSelectTypeAheadText: @escaping (String) -> Void
+    ) {
         self.filtersModel = filtersModel
+        self.typeAheadView = TypeAheadView(filtersModel: filtersModel, typeAheadDataSource: typeAheadDataSource)
         super.init(frame: CGRect.zero)
         configureViews()
+        typeAheadView.didSelectText = didSelectTypeAheadText
     }
     
     func configureViews() {

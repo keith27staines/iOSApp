@@ -24,8 +24,10 @@
 		534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6BA2570DACD00ACD399 /* RolesService.swift */; };
 		534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6C12570DD4E00ACD399 /* RoleData.swift */; };
 		534EF6CC2571FDE000ACD399 /* RecentRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6CB2571FDE000ACD399 /* RecentRoleCell.swift */; };
+		535CDAB6257B768A005FBC2E /* TypeAheadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CDAB5257B768A005FBC2E /* TypeAheadService.swift */; };
 		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
 		536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */; };
+		537F8ADA257B4A5D00C5F2EB /* TypeAheadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */; };
 		53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */; };
 		53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */; };
 		53BCD7E5256D22DA00CC8FF4 /* TopRolesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7E4256D22DA00CC8FF4 /* TopRolesPresenter.swift */; };
@@ -83,8 +85,10 @@
 		534EF6BA2570DACD00ACD399 /* RolesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesService.swift; sourceTree = "<group>"; };
 		534EF6C12570DD4E00ACD399 /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		534EF6CB2571FDE000ACD399 /* RecentRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRoleCell.swift; sourceTree = "<group>"; };
+		535CDAB5257B768A005FBC2E /* TypeAheadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadService.swift; sourceTree = "<group>"; };
 		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitShowMoreCard.swift; sourceTree = "<group>"; };
+		537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadDataSource.swift; sourceTree = "<group>"; };
 		53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinderPresenter.swift; sourceTree = "<group>"; };
 		53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
 		53BCD7E4256D22DA00CC8FF4 /* TopRolesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRolesPresenter.swift; sourceTree = "<group>"; };
@@ -168,11 +172,9 @@
 		5337EBF72577E49B00762F2A /* Detail content views */ = {
 			isa = PBXGroup;
 			children = (
-				5337EBEB2577E44600762F2A /* FiltersView.swift */,
-				533D544825794EED006B6F0C /* FiltersModel.swift */,
-				533D544E25794F3C006B6F0C /* FiltersSectionHeaderCell.swift */,
-				5337EBEF2577E47400762F2A /* TypeAheadView.swift */,
-				5337EBF32577E49000762F2A /* SearchResultsView.swift */,
+				537F8ADF257B614C00C5F2EB /* Filters */,
+				537F8AE2257B615A00C5F2EB /* Type-ahead */,
+				537F8AE5257B616A00C5F2EB /* Search results */,
 			);
 			path = "Detail content views";
 			sourceTree = "<group>";
@@ -223,6 +225,34 @@
 				534EF6C12570DD4E00ACD399 /* RoleData.swift */,
 			);
 			path = services;
+			sourceTree = "<group>";
+		};
+		537F8ADF257B614C00C5F2EB /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				5337EBEB2577E44600762F2A /* FiltersView.swift */,
+				533D544825794EED006B6F0C /* FiltersModel.swift */,
+				533D544E25794F3C006B6F0C /* FiltersSectionHeaderCell.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		537F8AE2257B615A00C5F2EB /* Type-ahead */ = {
+			isa = PBXGroup;
+			children = (
+				5337EBEF2577E47400762F2A /* TypeAheadView.swift */,
+				537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */,
+				535CDAB5257B768A005FBC2E /* TypeAheadService.swift */,
+			);
+			path = "Type-ahead";
+			sourceTree = "<group>";
+		};
+		537F8AE5257B616A00C5F2EB /* Search results */ = {
+			isa = PBXGroup;
+			children = (
+				5337EBF32577E49000762F2A /* SearchResultsView.swift */,
+			);
+			path = "Search results";
 			sourceTree = "<group>";
 		};
 		53BCD7D1256D224600CC8FF4 /* Popular on workfinder row */ = {
@@ -498,8 +528,10 @@
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,
 				53D94BAF256A39A200A2127C /* TabContentView.swift in Sources */,
 				534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */,
+				537F8ADA257B4A5D00C5F2EB /* TypeAheadDataSource.swift in Sources */,
 				53D94BB0256A39A200A2127C /* DiscoveryTrayView.swift in Sources */,
 				53D94BB2256A39A200A2127C /* TabSwitchingView.swift in Sources */,
+				535CDAB6257B768A005FBC2E /* TypeAheadService.swift in Sources */,
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,
 				536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */,
 				53BCD7EB256D263900CC8FF4 /* RecentRolesCell.swift in Sources */,

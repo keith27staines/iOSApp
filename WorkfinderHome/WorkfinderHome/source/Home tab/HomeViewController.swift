@@ -4,7 +4,9 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class HomeViewController: UIViewController {
-
+    let rolesService: RolesServiceProtocol
+    let typeAheadService: TypeAheadServiceProtocol
+    
     let screenName = ScreenName.home
     weak var coordinator: HomeCoordinator?
     lazy var messageHandler = UserMessageHandler(presenter: self)
@@ -14,7 +16,9 @@ class HomeViewController: UIViewController {
     var backgroundView: BackgroundView { homeView.backgroundView }
     
     lazy var trayController: DiscoveryTrayController = {
-        let trayController = DiscoveryTrayController(rolesService: self.rolesService)
+        let trayController = DiscoveryTrayController(
+            rolesService: self.rolesService,
+            typeAheadService: self.typeAheadService)
         return trayController
     }()
     
@@ -145,9 +149,9 @@ class HomeViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    let rolesService: RolesServiceProtocol
-    init(rolesService: RolesServiceProtocol) {
+    init(rolesService: RolesServiceProtocol, typeAheadService: TypeAheadServiceProtocol) {
         self.rolesService = rolesService
+        self.typeAheadService = typeAheadService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -183,7 +187,7 @@ extension HomeViewController {
     }
     
     func configureTray() {
-        trayController = DiscoveryTrayController(rolesService: rolesService)
+        trayController = DiscoveryTrayController(rolesService: rolesService, typeAheadService: typeAheadService)
         backgroundView.addSubview(tray)
         tray.anchor(top: nil, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor)
         tray.heightAnchor.constraint(equalTo: backgroundView.heightAnchor).isActive = true
