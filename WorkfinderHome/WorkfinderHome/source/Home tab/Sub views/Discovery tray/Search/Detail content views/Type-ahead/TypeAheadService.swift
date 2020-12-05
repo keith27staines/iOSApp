@@ -41,7 +41,6 @@ class TypeAheadOperation: Operation {
                 result.append(String(chars.randomElement() ?? Character("")))
             }
             results.append(result)
-            if !isCancelled { Thread.sleep(forTimeInterval: 0.02) }
         }
         guard !isCancelled else { return }
         self.results = results

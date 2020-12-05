@@ -1,7 +1,7 @@
 
 typealias FilterName = String
 typealias FilterCollectionName = String
-typealias FilterQueryKey = String
+typealias FilterQueryValue = String
 
 enum FilterCollectionType: CaseIterable {
     case jobType
@@ -18,7 +18,7 @@ enum FilterCollectionType: CaseIterable {
         }
     }
     
-    var queryKey: FilterQueryKey {
+    var queryKey: FilterQueryValue {
         switch self {
         case .jobType: return "employment_type"
         case .projectType: return "type"
@@ -35,6 +35,17 @@ class FiltersModel {
     func clear() {
         filterCollections.forEach { (collection) in collection.clear() }
     }
+    
+    var queryString: String? {
+        let params = filterCollections.reduce("") { (result, collection) -> String in
+            let queryString = collection.queryString
+            guard !queryString.isEmpty else { return result }
+            let term = "\(collection.type.queryKey)=\(queryString)"
+            guard !result.isEmpty else { return term }
+            return result.appending("&\(term)")
+        }
+        return params.isEmpty ? nil : params
+    }
 
     init() {
         filterCollections.append(FilterCollection(type: .jobType))
@@ -49,6 +60,15 @@ class FilterCollection {
     var name: FilterCollectionName { type.collectionName }
     var type: FilterCollectionType
     var filters = [Filter]()
+    
+    var queryString: String {
+        filters.reduce("") { (string, filter) -> String in
+            guard filter.isSelected else { return string }
+            let queryValue = filter.type.queryValue
+            if string.isEmpty { return queryValue }
+            return "\(string),\(queryValue)"
+        }
+    }
     
     func clear() {
         filters.forEach { filter in filter.isSelected = false }
@@ -95,7 +115,7 @@ class FilterCollection {
 
 protocol FilterTypeProtocol {
     var name: FilterName { get }
-    var queryKey: FilterQueryKey { get }
+    var queryValue: FilterQueryValue { get }
 }
 
 enum FilterType: FilterTypeProtocol {
@@ -147,8 +167,8 @@ enum FilterType: FilterTypeProtocol {
         case .projectDesignBrandCollateral: return "Brand Collateral"
         case .projectLeadGenerationForSales: return "Lead Generation For Sales"
         case .projectProductDevelopment: return "Product Development"
-        case .projectProofOfConceptBuild: return "Proof Of ConceptBuild"
-        case .projectUXTestingAndAnalysis: return "UX Testing AndA nalysis"
+        case .projectProofOfConceptBuild: return "Proof Of Concept Build"
+        case .projectUXTestingAndAnalysis: return "UX Testing And Analysis"
         case .projectWebDesign: return "Web Design"
         case .skillApplicationTesting: return "Application Testing"
         case .skillBrandDesign: return "Brand Design"
@@ -168,36 +188,11 @@ enum FilterType: FilterTypeProtocol {
         }
     }
     
-    var queryKey: FilterQueryKey {
+    var queryValue: FilterQueryValue {
         switch self {
-        case .jobFullTime: return ""
-        case .jobPartTime: return ""
-        case .jobFlexible: return ""
-        case .projectApplicationTesting: return ""
-        case .projectBespoke: return ""
-        case .projectCompetitorAnalysisReview: return ""
-        case .projectCreativeDigitalMarketing: return ""
-        case .projectDesignBrandCollateral: return ""
-        case .projectLeadGenerationForSales: return ""
-        case .projectProductDevelopment: return ""
-        case .projectProofOfConceptBuild: return ""
-        case .projectUXTestingAndAnalysis: return ""
-        case .projectWebDesign: return ""
-        case .skillApplicationTesting: return ""
-        case .skillBrandDesign: return ""
-        case .skillBusinessDevelopment: return ""
-        case .skillCompetitorAnalysis: return ""
-        case .skillContentPlanning: return ""
-        case .skillDigitalMarketing: return ""
-        case .salaryPaid: return ""
-        case .salaryVoluntary: return ""
-        case .skillBusinessSales: return ""
-        case .skillCustomerSegmentation: return ""
-        case .skillGraphicDesign: return ""
-        case .skillMVPBuilds: return ""
-        case .skillMarketAnalysis: return ""
-        case .skillMarketing: return ""
-        case .skillMarketingAnalysis: return ""
+        case .salaryPaid: return "True"
+        case .salaryVoluntary: return "True"
+        default: return name
         }
     }
 }
@@ -211,3 +206,4 @@ class Filter {
         self.type = type
     }
 }
+

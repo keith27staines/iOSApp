@@ -104,7 +104,6 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
         searchBar.resignFirstResponder()
         state = .hidden
     }
