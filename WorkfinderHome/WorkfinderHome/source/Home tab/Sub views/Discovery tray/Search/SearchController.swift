@@ -135,13 +135,13 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
     }
     
     var shouldEnableReturnKey: Bool {
-        searchBar.text?.count ?? 0 > 2 ? true : false
+        searchBar.text?.count ?? 0 > 0 ? true : false
     }
 }
 
 extension SearchController {
     func performTypeAhead(string: String?) {
-        guard let string = string, string.count > 2 else { return }
+        //guard let string = string, string.count > 2 else { return }
         typeAheadDatasource.string = makeFullQueryString(search: string, filters: filtersModel.queryString)
     }
     

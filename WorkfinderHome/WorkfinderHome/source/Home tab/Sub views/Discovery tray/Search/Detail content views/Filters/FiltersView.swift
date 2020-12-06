@@ -23,6 +23,16 @@ class FiltersView: UIView {
     @objc func reset() {
         filtersModel.clear()
         tableView.reloadData()
+        titleLabel.text = titleLabelText
+    }
+    
+    var titleLabelText: String {
+        "Filters [\(filtersModel.count) active]"
+    }
+    
+    func sectionTitleText(sectionIndex: Int) -> String {
+        let collection = filtersModel.filterCollections[sectionIndex]
+        return "\(collection.name) [\(collection.count) active]"
     }
     
     lazy var resetButton: UIButton = {
@@ -35,7 +45,7 @@ class FiltersView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Filters"
+        label.text = titleLabelText
         return label
     }()
     
@@ -50,7 +60,15 @@ class FiltersView: UIView {
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.tintColor = WorkfinderColors.primaryColor
         tableView.register(FiltersSectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: "header")
+        tableView.tableFooterView = tableFooterView
         return tableView
+    }()
+    
+    lazy var tableFooterView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 400))
+        view.backgroundColor = UIColor.white
+        view.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        return view
     }()
     
     init(filtersModel: FiltersModel) {
@@ -95,7 +113,7 @@ extension FiltersView: UITableViewDataSource {
         let tappedCollection = filtersModel.filterCollections[section]
         header.isExpanded = tappedCollection.isExpanded
         header.section = section
-        header.sectionTitle.text = tappedCollection.name
+        header.sectionTitle.text = sectionTitleText(sectionIndex: section)
         header.onTap = { [weak self] tappedSection in
             guard let self = self else { return }
             let filtersCollection = self.filtersModel.filterCollections[tappedSection]
@@ -106,14 +124,16 @@ extension FiltersView: UITableViewDataSource {
                 guard otherSectionIndex != section else { continue }
                 let otherSection = self.filtersModel.filterCollections[otherSectionIndex]
                 guard otherSection.isExpanded else { continue }
-                self.filtersModel.filterCollections[otherSectionIndex].isExpanded = false
+                otherSection.isExpanded = false
                 changeSet.insert(otherSectionIndex)
             }
             header.isExpanded = filtersCollection.isExpanded
+            header.sectionTitle.text = self.sectionTitleText(sectionIndex: section)
             tableView.reloadSections(changeSet, with: .automatic)
             if filtersCollection.isExpanded {
                 tableView.scrollToRow(at: IndexPath(row: 0, section: section), at: .top, animated: true)
             }
+            self.titleLabel.text = self.titleLabelText
         }
         return header
     }
@@ -125,7 +145,9 @@ extension FiltersView: UITableViewDelegate {
         let filtersCollection = filtersModel.filterCollections[indexPath.section]
         let filter = filtersCollection.filters[indexPath.row]
         filter.isSelected.toggle()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        //tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.reloadSections(IndexSet([indexPath.section]), with: .automatic)
+        titleLabel.text = titleLabelText
     }
 }
 

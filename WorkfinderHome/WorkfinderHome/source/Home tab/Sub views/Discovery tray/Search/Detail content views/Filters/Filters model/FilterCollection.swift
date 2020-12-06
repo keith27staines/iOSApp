@@ -14,6 +14,12 @@ class FilterCollection {
         }
     }
     
+    var count: Int {
+        filters.reduce(0) { (count, filter) -> Int in
+            return count + (filter.isSelected ? 1 : 0)
+        }
+    }
+    
     func clear() {
         filters.forEach { filter in filter.isSelected = false }
     }
@@ -39,17 +45,17 @@ class FilterCollection {
         case .skills:
             filters.append(Filter(type: FilterType.skillApplicationTesting))
             filters.append(Filter(type: FilterType.skillBrandDesign))
+            filters.append(Filter(type: FilterType.skillBusinessSales))
             filters.append(Filter(type: FilterType.skillBusinessDevelopment))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
-            filters.append(Filter(type: FilterType.skillApplicationTesting))
+            filters.append(Filter(type: FilterType.skillCompetitorAnalysis))
+            filters.append(Filter(type: FilterType.skillContentPlanning))
+            filters.append(Filter(type: FilterType.skillDigitalMarketing))
+            filters.append(Filter(type: FilterType.skillCustomerSegmentation))
+            filters.append(Filter(type: FilterType.skillGraphicDesign))
+            filters.append(Filter(type: FilterType.skillMVPBuilds))
+            filters.append(Filter(type: FilterType.skillMarketAnalysis))
+            filters.append(Filter(type: FilterType.skillMarketing))
+            filters.append(Filter(type: FilterType.skillMarketingAnalysis))
         case .salary:
             filters.append(Filter(type: FilterType.salaryPaid))
             filters.append(Filter(type: FilterType.salaryVoluntary))

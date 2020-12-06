@@ -8,6 +8,12 @@ class FiltersModel {
         filterCollections.forEach { (collection) in collection.clear() }
     }
     
+    var count: Int {
+        filterCollections.reduce(0) { (count, collection) -> Int in
+            return count + collection.count
+        }
+    }
+    
     var queryString: String? {
         let params = filterCollections.reduce("") { (result, collection) -> String in
             let queryString = collection.queryString

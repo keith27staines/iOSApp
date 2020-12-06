@@ -27,7 +27,7 @@ class SearchBar: UISearchBar {
         autocapitalizationType = .none
         autocorrectionType = .default
         placeholder = "projects, companies, hosts"
-        returnKeyType = .go
+        returnKeyType = .search
         showsCancelButton = true
         enablesReturnKeyAutomatically = false
         tintColor = WorkfinderColors.primaryColor

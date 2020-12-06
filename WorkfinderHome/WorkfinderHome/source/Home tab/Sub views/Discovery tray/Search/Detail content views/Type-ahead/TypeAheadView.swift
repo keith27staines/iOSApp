@@ -39,7 +39,14 @@ class TypeAheadView: UIView {
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.tintColor = WorkfinderColors.primaryColor
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.tableFooterView = tableFooterView
         return tableView
+    }()
+    
+    lazy var tableFooterView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 400))
+        view.backgroundColor = UIColor.white
+        return view
     }()
     
     init(filtersModel: FiltersModel, typeAheadDataSource: TypeAheadDataSource) {
