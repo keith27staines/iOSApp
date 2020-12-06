@@ -56,7 +56,7 @@ class TypeAheadView: UIView {
             self.tableView.reloadData()
             let matchCount = self.typeAheadDataSource.results.count
             if self.typeAheadDataSource.string?.count ?? 0 > 2 {
-                self.titleLabel.text = "Matches (\(matchCount))"
+                self.titleLabel.text = "Type-ahead matches (\(matchCount))"
             } else {
                 self.titleLabel.text = "Please enter 3 or more characters"
             }

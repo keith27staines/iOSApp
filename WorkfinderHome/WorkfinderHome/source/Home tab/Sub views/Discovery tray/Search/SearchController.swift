@@ -141,6 +141,21 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
 
 extension SearchController {
     func performTypeAhead(string: String?) {
-        typeAheadDatasource.string = string
+        guard let string = string, string.count > 2 else { return }
+        typeAheadDatasource.string = makeFullQueryString(search: string, filters: filtersModel.queryString)
     }
+    
+    func makeFullQueryString(search: String?, filters: String?) -> String? {
+        var queryString = "?"
+        if let search = search { queryString.append("q=\(search)") }
+        if let filters = filters {
+            if search != nil { queryString.append("&")}
+            queryString.append(filters)
+        }
+        
+        let allowedCharacters = CharacterSet(["-","_",".","=","&","?"])
+        
+        return queryString.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics.union(allowedCharacters))
+    }
+
 }

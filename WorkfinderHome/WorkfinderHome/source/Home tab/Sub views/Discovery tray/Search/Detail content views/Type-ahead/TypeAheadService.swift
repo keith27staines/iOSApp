@@ -2,7 +2,7 @@
 import WorkfinderServices
 
 protocol TypeAheadServiceProtocol {
-    func fetch(search: String, queryString: String, completion: @escaping ([String]) -> Void)
+    func fetch(search: String, completion: @escaping ([String]) -> Void)
 }
 
 class TypeAheadService: WorkfinderService, TypeAheadServiceProtocol {
@@ -14,7 +14,7 @@ class TypeAheadService: WorkfinderService, TypeAheadServiceProtocol {
         return queue
     }()
     
-    func fetch(search: String, queryString: String, completion: @escaping ([String]) -> Void) {
+    func fetch(search: String, completion: @escaping ([String]) -> Void) {
         queue.cancelAllOperations()
         let operation = TypeAheadOperation(search: search)
         operation.completionBlock = {
@@ -31,7 +31,7 @@ class TypeAheadOperation: Operation {
     let chars = "abcdefghijklmnopqrstuvwxyz1234567890"
     override func main() {
         var results = [String]()
-        let resultCount = 2*max(10 - search.count, 0)
+        let resultCount = 2*max(20 - search.count, 0)
         for _ in  0 ..< resultCount {
             guard !isCancelled else { break }
             var result: String = search

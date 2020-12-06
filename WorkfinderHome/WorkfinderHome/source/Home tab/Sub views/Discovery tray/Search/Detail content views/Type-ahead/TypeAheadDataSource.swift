@@ -17,7 +17,9 @@ class TypeAheadDataSource {
                 results = []
                 return
             }
-            service.fetch(search: string, queryString: "") { results in
+            let search = string.deletingPrefix("?q=").deletingFromFirstAmbersand()
+            print("Search string: " + search)
+            service.fetch(search: search) { results in
                 DispatchQueue.main.async { [weak self] in
                     self?.results = results
                 }
@@ -42,3 +44,16 @@ class TypeAheadDataSource {
     }
 }
 
+extension String {
+    func deletingPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else { return self }
+        return String(self.dropFirst(prefix.count))
+    }
+    
+    func deletingFromFirstAmbersand() -> String {
+        let string = self
+        let array = self.split(separator: "&")
+        if array.count < 2 { return string }
+        return String(array[0])
+    }
+}
