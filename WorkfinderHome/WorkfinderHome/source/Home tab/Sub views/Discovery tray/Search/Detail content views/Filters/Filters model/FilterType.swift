@@ -8,23 +8,18 @@ protocol FilterTypeProtocol {
     var queryValue: FilterQueryValue { get }
 }
 
+struct FilterType: FilterTypeProtocol {
+    var name: FilterName
+    var queryValue: FilterQueryValue
+}
+
 enum FilterTypeEnum: FilterTypeProtocol {
     // jop types
     case jobFullTime
     case jobPartTime
     case jobFlexible
     
-    // project types
-    case projectApplicationTesting
-    case projectBespoke
-    case projectCompetitorAnalysisReview
-    case projectCreativeDigitalMarketing
-    case projectDesignBrandCollateral
-    case projectLeadGenerationForSales
-    case projectProductDevelopment
-    case projectProofOfConceptBuild
-    case projectUXTestingAndAnalysis
-    case projectWebDesign
+    // project types - now fetched from server
     
     // skill types
     case skillApplicationTesting
@@ -50,16 +45,6 @@ enum FilterTypeEnum: FilterTypeProtocol {
         case .jobFullTime: return "Full-time"
         case .jobPartTime: return "Part-time"
         case .jobFlexible: return "Flexible"
-        case .projectApplicationTesting: return "Application Testing"
-        case .projectBespoke: return "Bespoke"
-        case .projectCompetitorAnalysisReview: return "Competitor Analysis Review"
-        case .projectCreativeDigitalMarketing: return "Creative Digital Marketing"
-        case .projectDesignBrandCollateral: return "Brand Collateral"
-        case .projectLeadGenerationForSales: return "Lead Generation For Sales"
-        case .projectProductDevelopment: return "Product Development"
-        case .projectProofOfConceptBuild: return "Proof Of Concept Build"
-        case .projectUXTestingAndAnalysis: return "UX Testing And Analysis"
-        case .projectWebDesign: return "Web Design"
         case .skillApplicationTesting: return "Application Testing"
         case .skillBrandDesign: return "Brand Design"
         case .skillBusinessDevelopment: return "Business Development"

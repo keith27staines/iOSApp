@@ -60,8 +60,3 @@ class FilterCollection {
         }
     }
 }
-
-struct FilterType: FilterTypeProtocol {
-    var name: FilterName
-    var queryValue: FilterQueryValue
-}

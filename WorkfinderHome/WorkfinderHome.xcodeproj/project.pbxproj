@@ -24,7 +24,7 @@
 		534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6BA2570DACD00ACD399 /* RolesService.swift */; };
 		534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6C12570DD4E00ACD399 /* RoleData.swift */; };
 		534EF6CC2571FDE000ACD399 /* RecentRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6CB2571FDE000ACD399 /* RecentRoleCell.swift */; };
-		5355B0CC257CDF9300B751C7 /* FilterTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355B0CB257CDF9300B751C7 /* FilterTypeEnum.swift */; };
+		5355B0CC257CDF9300B751C7 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355B0CB257CDF9300B751C7 /* FilterType.swift */; };
 		5355B0D0257CDFCB00B751C7 /* FilterCollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355B0CF257CDFCB00B751C7 /* FilterCollectionType.swift */; };
 		5355B0D4257CDFEC00B751C7 /* FilterCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355B0D3257CDFEC00B751C7 /* FilterCollection.swift */; };
 		5355B0DA257CE08800B751C7 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355B0D9257CE08800B751C7 /* Filter.swift */; };
@@ -90,7 +90,7 @@
 		534EF6BA2570DACD00ACD399 /* RolesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesService.swift; sourceTree = "<group>"; };
 		534EF6C12570DD4E00ACD399 /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		534EF6CB2571FDE000ACD399 /* RecentRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRoleCell.swift; sourceTree = "<group>"; };
-		5355B0CB257CDF9300B751C7 /* FilterTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeEnum.swift; sourceTree = "<group>"; };
+		5355B0CB257CDF9300B751C7 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		5355B0CF257CDFCB00B751C7 /* FilterCollectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollectionType.swift; sourceTree = "<group>"; };
 		5355B0D3257CDFEC00B751C7 /* FilterCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCollection.swift; sourceTree = "<group>"; };
 		5355B0D9257CE08800B751C7 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				533D544825794EED006B6F0C /* FiltersModel.swift */,
-				5355B0CB257CDF9300B751C7 /* FilterTypeEnum.swift */,
+				5355B0CB257CDF9300B751C7 /* FilterType.swift */,
 				5355B0CF257CDFCB00B751C7 /* FilterCollectionType.swift */,
 				5355B0D3257CDFEC00B751C7 /* FilterCollection.swift */,
 				5355B0D9257CE08800B751C7 /* Filter.swift */,
@@ -531,7 +531,7 @@
 				53C5CB51256D1EC300176A2E /* PopularOnWorkfinderCell.swift in Sources */,
 				5355B0DA257CE08800B751C7 /* Filter.swift in Sources */,
 				534EF6CC2571FDE000ACD399 /* RecentRoleCell.swift in Sources */,
-				5355B0CC257CDF9300B751C7 /* FilterTypeEnum.swift in Sources */,
+				5355B0CC257CDF9300B751C7 /* FilterType.swift in Sources */,
 				5337EBE62577BEF300762F2A /* SearchBar.swift in Sources */,
 				5337EBDB2577B32700762F2A /* SearchController.swift in Sources */,
 				5355B0D4257CDFEC00B751C7 /* FilterCollection.swift in Sources */,
