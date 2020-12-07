@@ -75,6 +75,13 @@ class FiltersView: UIView {
         self.filtersModel = filtersModel
         super.init(frame: CGRect.zero)
         configureViews()
+        loadFiltersModel()
+    }
+    
+    func loadFiltersModel() {
+        filtersModel.loadModel { [weak self] (optionalError) in
+            self?.reset()
+        }
     }
     
     func configureViews() {

@@ -1,8 +1,14 @@
 
 
 class FiltersModel {
-
+    let projectTypesService: ProjectTypesServiceProtocol
     var filterCollections = [FilterCollection]()
+    let collectionsOrdering: [FilterCollectionType] = [
+        .jobType,
+        .projectType,
+        .skills,
+        .salary
+    ]
     
     func clear() {
         filterCollections.forEach { (collection) in collection.clear() }
@@ -24,11 +30,23 @@ class FiltersModel {
         }
         return params.isEmpty ? nil : params
     }
+    
+    func loadModel(completion: @escaping (Error?) -> Void) {
+        projectTypesService.fetch { [weak self] (result) in
+            switch result {
+            case .success(let projectTypes):
+                let orderedType = projectTypes.sorted()
+                self?.filterCollections[1].addFilters(with: orderedType)
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
 
-    init() {
-        filterCollections.append(FilterCollection(type: .jobType))
-        filterCollections.append(FilterCollection(type: .projectType))
-        filterCollections.append(FilterCollection(type: .skills))
-        filterCollections.append(FilterCollection(type: .salary))
+    init(projectTypesService: ProjectTypesServiceProtocol) {
+        self.projectTypesService = projectTypesService
+        collectionsOrdering.forEach { (type) in
+            filterCollections.append(FilterCollection(type: type))
+        }
     }
 }

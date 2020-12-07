@@ -4,7 +4,7 @@ import WorkfinderUI
 
 class SearchController: NSObject {
     
-    let filtersModel: FiltersModel = FiltersModel()
+    let filtersModel: FiltersModel
     let typeAheadDatasource: TypeAheadDataSource
     
     enum SearchState {
@@ -47,8 +47,9 @@ class SearchController: NSObject {
         )
     }()
     
-    init(typeAheadService: TypeAheadServiceProtocol) {
+    init(typeAheadService: TypeAheadServiceProtocol, filtersModel: FiltersModel) {
         typeAheadDatasource = TypeAheadDataSource(typeAheadService: typeAheadService)
+        self.filtersModel = filtersModel
         super.init()
         state = .hidden
     }
@@ -141,7 +142,6 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
 
 extension SearchController {
     func performTypeAhead(string: String?) {
-        //guard let string = string, string.count > 2 else { return }
         typeAheadDatasource.string = makeFullQueryString(search: string, filters: filtersModel.queryString)
     }
     

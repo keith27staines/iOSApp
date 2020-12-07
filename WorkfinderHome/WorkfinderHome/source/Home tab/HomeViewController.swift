@@ -4,8 +4,6 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class HomeViewController: UIViewController {
-    let rolesService: RolesServiceProtocol
-    let typeAheadService: TypeAheadServiceProtocol
     
     let screenName = ScreenName.home
     weak var coordinator: HomeCoordinator?
@@ -15,12 +13,7 @@ class HomeViewController: UIViewController {
     var headerView: HeaderView { homeView.headerView }
     var backgroundView: BackgroundView { homeView.backgroundView }
     
-    lazy var trayController: DiscoveryTrayController = {
-        let trayController = DiscoveryTrayController(
-            rolesService: self.rolesService,
-            typeAheadService: self.typeAheadService)
-        return trayController
-    }()
+    let trayController: DiscoveryTrayController
     
     var tray: DiscoveryTrayView { trayController.tray }
     
@@ -149,9 +142,16 @@ class HomeViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    init(rolesService: RolesServiceProtocol, typeAheadService: TypeAheadServiceProtocol) {
-        self.rolesService = rolesService
-        self.typeAheadService = typeAheadService
+    init(
+        rolesService: RolesServiceProtocol,
+        typeAheadService: TypeAheadServiceProtocol,
+        projectTypesService: ProjectTypesServiceProtocol
+    ) {
+        trayController = DiscoveryTrayController(
+            rolesService: rolesService,
+            typeAheadService: typeAheadService,
+            projectTypesService: projectTypesService
+        )
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -187,12 +187,10 @@ extension HomeViewController {
     }
     
     func configureTray() {
-        trayController = DiscoveryTrayController(rolesService: rolesService, typeAheadService: typeAheadService)
         backgroundView.addSubview(tray)
         tray.anchor(top: nil, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor)
         tray.heightAnchor.constraint(equalTo: backgroundView.heightAnchor).isActive = true
         trayTopConstraintConstant = backgroundView.frame.height/2
-        //tray.addGestureRecognizer(pan)
         tray.addSubview(scrollHijackOverlay)
         scrollHijackOverlay.anchor(top: tray.topAnchor, leading: tray.leadingAnchor, bottom: tray.bottomAnchor, trailing: tray.trailingAnchor)
     }

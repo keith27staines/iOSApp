@@ -5,6 +5,7 @@ import WorkfinderUI
 class DiscoveryTrayController: NSObject {
     let rolesService: RolesServiceProtocol
     let typeAheadService: TypeAheadServiceProtocol
+    let projectTypesService: ProjectTypesServiceProtocol
     
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBar: searchBar, searchDetail: searchDetail)
     var tableView: UITableView { tray.tableView }
@@ -13,7 +14,11 @@ class DiscoveryTrayController: NSObject {
     let sectionManager = DiscoverTraySectionManager()
     
     lazy var searchController: SearchController = {
-        let controller = SearchController(typeAheadService: typeAheadService)
+        let filtersModel = FiltersModel(projectTypesService: projectTypesService)
+        let controller = SearchController(
+            typeAheadService: typeAheadService,
+            filtersModel: filtersModel
+        )
         controller.state = .hidden
         return controller
     }()
@@ -37,9 +42,12 @@ class DiscoveryTrayController: NSObject {
     var searchBar: UISearchBar { searchController.searchBar }
     var searchDetail: SearchDetailView { searchController.searchDetail }
     
-    init(rolesService: RolesServiceProtocol, typeAheadService: TypeAheadServiceProtocol) {
+    init(rolesService: RolesServiceProtocol,
+         typeAheadService: TypeAheadServiceProtocol,
+         projectTypesService: ProjectTypesServiceProtocol) {
         self.rolesService = rolesService
         self.typeAheadService = typeAheadService
+        self.projectTypesService = projectTypesService
         super.init()
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)

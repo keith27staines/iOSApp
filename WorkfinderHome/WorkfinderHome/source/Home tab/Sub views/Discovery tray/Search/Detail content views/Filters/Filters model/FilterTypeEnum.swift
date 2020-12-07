@@ -8,7 +8,7 @@ protocol FilterTypeProtocol {
     var queryValue: FilterQueryValue { get }
 }
 
-enum FilterType: FilterTypeProtocol {
+enum FilterTypeEnum: FilterTypeProtocol {
     // jop types
     case jobFullTime
     case jobPartTime
