@@ -2,7 +2,7 @@
 class FilterCollection {
     var isExpanded: Bool = false
     var name: FilterCollectionName { type.collectionName }
-    var type: FilterCollectionType
+    let type: FilterCollectionType
     var filters = [Filter]()
     
     var queryString: String {
@@ -25,7 +25,6 @@ class FilterCollection {
     }
     
     func addFilters(with names: [String]) {
-        self.type = .projectType
         names.forEach { (name) in
             filters.append(Filter(type: FilterType(name: name, queryValue: name)))
         }

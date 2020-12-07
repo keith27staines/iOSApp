@@ -16,6 +16,7 @@ struct FilterType: FilterTypeProtocol {
 enum FilterTypeEnum: FilterTypeProtocol {
     // jop types - now fetched from server
 
+
     // project types - now fetched from server
 
     // skill types - now fetched from server

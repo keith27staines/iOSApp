@@ -152,7 +152,6 @@ extension FiltersView: UITableViewDelegate {
         let filtersCollection = filtersModel.filterCollections[indexPath.section]
         let filter = filtersCollection.filters[indexPath.row]
         filter.isSelected.toggle()
-        //tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.reloadSections(IndexSet([indexPath.section]), with: .automatic)
         titleLabel.text = titleLabelText
     }
