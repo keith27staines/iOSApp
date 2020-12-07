@@ -8,20 +8,15 @@ protocol FilterTypeProtocol {
     var queryValue: FilterQueryValue { get }
 }
 
+/// Filters loaded from api use `FilterType`
 struct FilterType: FilterTypeProtocol {
     var name: FilterName
     var queryValue: FilterQueryValue
 }
 
+/// Hard coded filters use `FilterTypeEnum`
 enum FilterTypeEnum: FilterTypeProtocol {
-    // jop types - now fetched from server
 
-
-    // project types - now fetched from server
-
-    // skill types - now fetched from server
-    
-    // salary types
     case salaryPaid
     case salaryVoluntary
     
