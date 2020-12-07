@@ -15,7 +15,9 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         let vc = HomeViewController(
             rolesService: RolesService(networkConfig: networkConfig),
             typeAheadService: TypeAheadService(networkConfig: networkConfig),
-            projectTypesService: ProjectTypesService(networkConfig: networkConfig)
+            projectTypesService: ProjectTypesService(networkConfig: networkConfig),
+            employmentTypesService: EmploymentTypesService(networkConfig: networkConfig),
+            skillsTypeService: SkillAcquiredTypesService(networkConfig: networkConfig)
         )
         vc.coordinator = self
         return vc

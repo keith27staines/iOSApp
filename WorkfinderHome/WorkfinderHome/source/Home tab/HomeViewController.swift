@@ -145,12 +145,16 @@ class HomeViewController: UIViewController {
     init(
         rolesService: RolesServiceProtocol,
         typeAheadService: TypeAheadServiceProtocol,
-        projectTypesService: ProjectTypesServiceProtocol
+        projectTypesService: ProjectTypesServiceProtocol,
+        employmentTypesService: EmploymentTypesServiceProtocol,
+        skillsTypeService: SkillAcquiredTypesServiceProtocol
     ) {
         trayController = DiscoveryTrayController(
             rolesService: rolesService,
             typeAheadService: typeAheadService,
-            projectTypesService: projectTypesService
+            projectTypesService: projectTypesService,
+            employmentTypesService: employmentTypesService,
+            skillTypesService: skillsTypeService
         )
         super.init(nibName: nil, bundle: nil)
     }

@@ -34,26 +34,9 @@ class FilterCollection {
     init(type: FilterCollectionType) {
         self.type = type
         switch type {
-        case .jobType:
-            filters.append(Filter(type: FilterTypeEnum.jobFullTime))
-            filters.append(Filter(type: FilterTypeEnum.jobPartTime))
-            filters.append(Filter(type: FilterTypeEnum.jobFlexible))
-        case .projectType:
-            break
-        case .skills:
-            filters.append(Filter(type: FilterTypeEnum.skillApplicationTesting))
-            filters.append(Filter(type: FilterTypeEnum.skillBrandDesign))
-            filters.append(Filter(type: FilterTypeEnum.skillBusinessSales))
-            filters.append(Filter(type: FilterTypeEnum.skillBusinessDevelopment))
-            filters.append(Filter(type: FilterTypeEnum.skillCompetitorAnalysis))
-            filters.append(Filter(type: FilterTypeEnum.skillContentPlanning))
-            filters.append(Filter(type: FilterTypeEnum.skillDigitalMarketing))
-            filters.append(Filter(type: FilterTypeEnum.skillCustomerSegmentation))
-            filters.append(Filter(type: FilterTypeEnum.skillGraphicDesign))
-            filters.append(Filter(type: FilterTypeEnum.skillMVPBuilds))
-            filters.append(Filter(type: FilterTypeEnum.skillMarketAnalysis))
-            filters.append(Filter(type: FilterTypeEnum.skillMarketing))
-            filters.append(Filter(type: FilterTypeEnum.skillMarketingAnalysis))
+        case .jobType: break
+        case .projectType: break
+        case .skills: break
         case .salary:
             filters.append(Filter(type: FilterTypeEnum.salaryPaid))
             filters.append(Filter(type: FilterTypeEnum.salaryVoluntary))
