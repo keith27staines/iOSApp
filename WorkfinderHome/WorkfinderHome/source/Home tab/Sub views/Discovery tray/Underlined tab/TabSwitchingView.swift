@@ -10,15 +10,20 @@ class TabSwitchingView: UIView {
         tabs.first { (tab) -> Bool in tab.isSelected }
     }
     
+    func selectTab(_ index: Int) {
+        let tab = tabs[0]
+        selectTab(tab)
+    }
+    
     func selectTab(_ tab: Tab) {
         tabs.forEach { (otherTab) in
             otherTab.isSelected = false
         }
         tab.isSelected = true
+        didSelectTab?(tab)
     }
     
-    init(titles: [String], tabTapped: @escaping ((Tab) -> Void)) {
-        self.didSelectTab = tabTapped
+    init(titles: [String]) {
         super.init(frame: CGRect.zero)
         addSubview(tabStack)
         tabStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
@@ -34,13 +39,14 @@ class TabSwitchingView: UIView {
         return stack
     }()
     
-    func appendTab(title: String) {
+    @discardableResult func appendTab(title: String) -> Tab {
         let tab = Tab(index: tabs.count, title: title) { [weak self] (tab) in
             self?.selectTab(tab)
             self?.didSelectTab?(tab)
         }
         tabs.append(tab)
         tabStack.addArrangedSubview(tab)
+        return tab
     }
     
     required init?(coder: NSCoder) {

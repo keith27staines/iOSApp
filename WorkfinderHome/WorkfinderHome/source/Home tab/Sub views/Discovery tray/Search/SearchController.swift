@@ -6,6 +6,7 @@ class SearchController: NSObject {
     
     let filtersModel: FiltersModel
     let typeAheadDatasource: TypeAheadDataSource
+    let searchResultsController: SearchResultsController
     var filtersString: String?
     
     enum SearchState {
@@ -99,7 +100,7 @@ class SearchController: NSObject {
     }()
     
     lazy var searchDetail: SearchDetailView = {
-        SearchDetailView(
+        let view = SearchDetailView(
             filtersModel: filtersModel,
             typeAheadDataSource: typeAheadDatasource,
             didSelectTypeAheadText: { string in
@@ -110,11 +111,18 @@ class SearchController: NSObject {
                 self?.applyFilters()
             }
         )
+        view.searchResultsView.controller = searchResultsController
+        return view
     }()
     
-    init(typeAheadService: TypeAheadServiceProtocol, filtersModel: FiltersModel) {
+    init(
+        typeAheadService: TypeAheadServiceProtocol,
+        filtersModel: FiltersModel,
+        searchResultsController: SearchResultsController
+    ) {
         typeAheadDatasource = TypeAheadDataSource(typeAheadService: typeAheadService)
         self.filtersModel = filtersModel
+        self.searchResultsController = searchResultsController
         super.init()
         state = .hidden
     }
@@ -209,7 +217,7 @@ extension SearchController {
                 filters: filtersString) else {
             return
         }
-        searchDetail.searchResultsView.queryString = queryString
+        searchResultsController.queryString = queryString
         state = .showingResults
     }
     

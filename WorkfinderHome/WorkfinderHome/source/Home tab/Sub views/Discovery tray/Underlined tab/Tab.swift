@@ -36,7 +36,8 @@ class Tab: UIView {
         super.init(frame: CGRect.zero)
         let stack = UIStackView(arrangedSubviews: [
             titleLabel,
-            selectedUnderline
+            selectedUnderline,
+            tableView
         ])
         addSubview(stack)
         stack.axis = .vertical
@@ -44,6 +45,11 @@ class Tab: UIView {
         stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
         isUserInteractionEnabled = true
     }
+    
+    lazy var tableView: UITableView = {
+        let table = UITableView()
+        return table
+    }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()

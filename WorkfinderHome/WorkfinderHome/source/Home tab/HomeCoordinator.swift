@@ -17,7 +17,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             typeAheadService: TypeAheadService(networkConfig: networkConfig),
             projectTypesService: ProjectTypesService(networkConfig: networkConfig),
             employmentTypesService: EmploymentTypesService(networkConfig: networkConfig),
-            skillsTypeService: SkillAcquiredTypesService(networkConfig: networkConfig)
+            skillsTypeService: SkillAcquiredTypesService(networkConfig: networkConfig),
+            searchResultsController: SearchResultsController(rolesService: RolesService(networkConfig: networkConfig))
         )
         vc.coordinator = self
         return vc

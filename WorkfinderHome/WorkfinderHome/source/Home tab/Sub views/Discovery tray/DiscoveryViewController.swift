@@ -8,6 +8,7 @@ class DiscoveryTrayController: NSObject {
     let projectTypesService: ProjectTypesServiceProtocol
     let employmentTypesService: EmploymentTypesServiceProtocol
     let skillTypesService: SkillAcquiredTypesServiceProtocol
+    let searchResultsController: SearchResultsController
     
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBarStack: searchBarStack, searchDetail: searchDetail)
     var tableView: UITableView { tray.tableView }
@@ -23,7 +24,8 @@ class DiscoveryTrayController: NSObject {
         )
         let controller = SearchController(
             typeAheadService: typeAheadService,
-            filtersModel: filtersModel
+            filtersModel: filtersModel,
+            searchResultsController: searchResultsController
         )
         controller.state = .hidden
         return controller
@@ -52,13 +54,15 @@ class DiscoveryTrayController: NSObject {
          typeAheadService: TypeAheadServiceProtocol,
          projectTypesService: ProjectTypesServiceProtocol,
          employmentTypesService: EmploymentTypesServiceProtocol,
-         skillTypesService: SkillAcquiredTypesServiceProtocol
+         skillTypesService: SkillAcquiredTypesServiceProtocol,
+         searchResultsController: SearchResultsController
     ) {
         self.rolesService = rolesService
         self.typeAheadService = typeAheadService
         self.projectTypesService = projectTypesService
         self.employmentTypesService = employmentTypesService
         self.skillTypesService = skillTypesService
+        self.searchResultsController = searchResultsController
         super.init()
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)

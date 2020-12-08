@@ -6,6 +6,10 @@ protocol RolesServiceProtocol {
     func fetchTopRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
     func fetchRecentRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
     func fetchRecommendedRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
+    func fetchRolesWithQuery(
+        _ query: String,
+        completion: @escaping (Result<[RoleData], Error>) -> Void
+    )
 }
 
 class RolesService: WorkfinderService, RolesServiceProtocol {
@@ -19,6 +23,20 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     fileprivate lazy var recentRolesWorkerService: FetchRolesWorkerService = {
         FetchRolesWorkerService(networkConfig: networkConfig)
     }()
+    
+    fileprivate lazy var rolesWorkerService: FetchRolesWorkerService = {
+        FetchRolesWorkerService(networkConfig: networkConfig)
+    }()
+    
+    public func fetchRolesWithQuery(
+        _ query: String,
+        completion: @escaping (Result<[RoleData], Error>) -> Void
+    ) {
+        let endpointWithQuery = rolesEndpoint + query
+        rolesWorkerService.fetchRoles(endpoint: endpointWithQuery, queryItems: nil) { (result) in
+           completion(result)
+        }
+    }
 
     public func fetchTopRoles(completion: @escaping (Result<[RoleData], Error>) -> Void) {
         let queryItems = [URLQueryItem(name: "promote_on_home_page", value: "True")]

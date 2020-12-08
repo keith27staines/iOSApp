@@ -69,7 +69,7 @@ class HorizontallyScrollingCell: UITableViewCell {
     }()
     
     private lazy var pageControl: UIPageControl = {
-        let control = UIPageControl()
+        let control = UIPageControl(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
         control.pageIndicatorTintColor = UIColor.init(white: 216/255, alpha: 1)
         control.currentPageIndicatorTintColor = WorkfinderColors.primaryColor
         control.numberOfPages = 5
