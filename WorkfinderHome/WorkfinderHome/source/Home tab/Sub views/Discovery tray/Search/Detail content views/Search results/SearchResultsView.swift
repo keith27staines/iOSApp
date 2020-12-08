@@ -4,7 +4,11 @@ import WorkfinderUI
 
 class SearchResultsView: UIView {
     
-    var queryString: String?
+    var queryString: String? {
+        didSet {
+            print("searching... [\(queryString ?? "No search string")]")
+        }
+    }
     
     lazy var tabSwitchingView: TabSwitchingView = {
         let view = TabSwitchingView(titles: []) { (tab) in

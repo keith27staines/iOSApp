@@ -204,13 +204,13 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
 extension SearchController {
     
     func performSearch() {
-        guard let query = makeFullQueryString(
+        guard let queryString = makeFullQueryString(
                 search: searchBar.text,
                 filters: filtersString) else {
             return
         }
+        searchDetail.searchResultsView.queryString = queryString
         state = .showingResults
-        print("searching... [\(query)]")
     }
     
     func performTypeAhead(string: String?) {
