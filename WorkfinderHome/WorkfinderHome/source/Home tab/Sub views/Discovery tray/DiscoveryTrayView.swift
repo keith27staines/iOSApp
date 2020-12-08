@@ -4,7 +4,7 @@ import WorkfinderUI
 
 class DiscoveryTrayView : UIView {
     
-    let searchBar: UISearchBar
+    let searchBarStack: UIView
     let searchDetail: SearchDetailView
     
     lazy var tableView: UITableView = {
@@ -25,16 +25,16 @@ class DiscoveryTrayView : UIView {
         layer.shadowRadius = 2
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
-        addSubview(searchBar)
+        addSubview(searchBarStack)
         addSubview(tableView)
         addSubview(searchDetail)
-        searchBar.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
-        tableView.anchor(top: searchBar.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
+        searchBarStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        tableView.anchor(top: searchBarStack.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
         searchDetail.anchor(top: tableView.topAnchor, leading: tableView.leadingAnchor, bottom: tableView.bottomAnchor, trailing: tableView.trailingAnchor)
     }
     
-    init(searchBar: UISearchBar, searchDetail: SearchDetailView) {
-        self.searchBar = searchBar
+    init(searchBarStack: UIStackView, searchDetail: SearchDetailView) {
+        self.searchBarStack = searchBarStack
         self.searchDetail = searchDetail
         super.init(frame: CGRect.zero)
         configureViews()

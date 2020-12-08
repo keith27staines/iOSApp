@@ -9,7 +9,7 @@ class DiscoveryTrayController: NSObject {
     let employmentTypesService: EmploymentTypesServiceProtocol
     let skillTypesService: SkillAcquiredTypesServiceProtocol
     
-    lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBar: searchBar, searchDetail: searchDetail)
+    lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBarStack: searchBarStack, searchDetail: searchDetail)
     var tableView: UITableView { tray.tableView }
     var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenter]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
@@ -45,7 +45,7 @@ class DiscoveryTrayController: NSObject {
         RecommendationsPresenter(rolesService: rolesService)
     }()
     
-    var searchBar: UISearchBar { searchController.searchBar }
+    var searchBarStack: UIStackView { searchController.searchBarStack }
     var searchDetail: SearchDetailView { searchController.searchDetail }
     
     init(rolesService: RolesServiceProtocol,

@@ -4,6 +4,8 @@ import WorkfinderUI
 
 class SearchResultsView: UIView {
     
+    var queryString: String?
+    
     lazy var tabSwitchingView: TabSwitchingView = {
         let view = TabSwitchingView(titles: []) { (tab) in
             

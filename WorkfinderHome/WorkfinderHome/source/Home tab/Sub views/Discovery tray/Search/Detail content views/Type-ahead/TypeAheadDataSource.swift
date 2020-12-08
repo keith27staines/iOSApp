@@ -13,13 +13,12 @@ class TypeAheadDataSource {
     
     var string: String? {
         didSet {
-            guard let string = string?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), string.count > 2 else {
+            guard let bareSearchString = string?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).deletingPrefix("?q=").deletingFromFirstAmbersand(), bareSearchString.count > 2 else {
                 results = []
                 return
             }
-            let search = string.deletingPrefix("?q=").deletingFromFirstAmbersand()
-            print("Search string: " + search)
-            service.fetch(search: search) { results in
+            print("Search string: " + (string ?? ""))
+            service.fetch(search: bareSearchString) { results in
                 DispatchQueue.main.async { [weak self] in
                     self?.results = results
                 }

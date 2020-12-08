@@ -10,6 +10,7 @@ class FiltersView: UIView {
         let leftSpacer = UIView()
         let rightSpacer = UIView()
         let stack = UIStackView()
+        stack.addArrangedSubview(applyButton)
         stack.addArrangedSubview(leftSpacer)
         stack.addArrangedSubview(titleLabel)
         stack.addArrangedSubview(rightSpacer)
@@ -20,12 +21,6 @@ class FiltersView: UIView {
         return stack
     }()
     
-    @objc func reset() {
-        filtersModel.clear()
-        tableView.reloadData()
-        titleLabel.text = titleLabelText
-    }
-    
     var titleLabelText: String {
         "Filters [\(filtersModel.count) active]"
     }
@@ -35,6 +30,18 @@ class FiltersView: UIView {
         return "\(collection.name) [\(collection.count) active]"
     }
     
+    lazy var applyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Apply", for: .normal)
+        button.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
+        button.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc private func applyButtonTapped() { didTapApplyFilters(filtersModel) }
+    
+    var didTapApplyFilters: (FiltersModel) -> Void
+    
     lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("Reset", for: .normal)
@@ -42,6 +49,12 @@ class FiltersView: UIView {
         button.addTarget(self, action: #selector(reset), for: .touchUpInside)
         return button
     }()
+    
+    @objc func reset() {
+        filtersModel.clear()
+        tableView.reloadData()
+        titleLabel.text = titleLabelText
+    }
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -71,8 +84,9 @@ class FiltersView: UIView {
         return view
     }()
     
-    init(filtersModel: FiltersModel) {
+    init(filtersModel: FiltersModel, didTapApplyFilters: @escaping (FiltersModel) -> Void) {
         self.filtersModel = filtersModel
+        self.didTapApplyFilters = didTapApplyFilters
         super.init(frame: CGRect.zero)
         configureViews()
         loadFiltersModel()
