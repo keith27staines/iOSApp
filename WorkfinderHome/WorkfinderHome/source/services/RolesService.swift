@@ -6,8 +6,8 @@ protocol RolesServiceProtocol {
     func fetchTopRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
     func fetchRecentRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
     func fetchRecommendedRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
-    func fetchRolesWithQuery(
-        _ query: String,
+    func fetchRolesWithQueryItems(
+        _ queryItems: [URLQueryItem],
         completion: @escaping (Result<[RoleData], Error>) -> Void
     )
 }
@@ -28,12 +28,12 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
         FetchRolesWorkerService(networkConfig: networkConfig)
     }()
     
-    public func fetchRolesWithQuery(
-        _ query: String,
+    public func fetchRolesWithQueryItems(
+        _ queryItems: [URLQueryItem],
         completion: @escaping (Result<[RoleData], Error>) -> Void
     ) {
-        let endpointWithQuery = rolesEndpoint + query
-        rolesWorkerService.fetchRoles(endpoint: endpointWithQuery, queryItems: nil) { (result) in
+        let endpointWithQuery = rolesEndpoint
+        rolesWorkerService.fetchRoles(endpoint: endpointWithQuery, queryItems: queryItems) { (result) in
            completion(result)
         }
     }

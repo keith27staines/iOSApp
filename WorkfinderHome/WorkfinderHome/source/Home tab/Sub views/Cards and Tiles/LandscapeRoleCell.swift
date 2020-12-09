@@ -11,13 +11,17 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? RecentRolesDataSource else { return }
         self.presenter = presenter
-        let role: RoleData = presenter.roleForRow(row)
         companyLogo.image = presenter.imageForRow(row)
-        companyName.text = role.companyName ?? "Not specified"
-        projectTitle.text = role.projectTitle
-        payIconLabel.label.text = role.paidAmount
-        hoursIconLabel.label.text = role.workingHours ?? "Not specified"
-        locationIconLabel.label.text = role.location
+        let roleData: RoleData = presenter.roleForRow(row)
+        presentWith(roleData)
+    }
+    
+    func presentWith(_ roleData: RoleData) {
+        companyName.text = roleData.companyName ?? "Not specified"
+        projectTitle.text = roleData.projectTitle
+        payIconLabel.label.text = roleData.paidAmount
+        hoursIconLabel.label.text = roleData.workingHours ?? "Not specified"
+        locationIconLabel.label.text = roleData.location
     }
     
     lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 68)

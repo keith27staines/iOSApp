@@ -1,17 +1,14 @@
 
+import Foundation
+
 class FilterCollection {
     var isExpanded: Bool = false
     var name: FilterCollectionName { type.collectionName }
     let type: FilterCollectionType
     var filters = [Filter]()
     
-    var queryString: String {
-        filters.reduce("") { (string, filter) -> String in
-            guard filter.isSelected else { return string }
-            let queryValue = filter.type.queryValue
-            if string.isEmpty { return queryValue }
-            return "\(string),\(queryValue)"
-        }
+    var queryItem: URLQueryItem? {
+        queryString.isEmpty ? nil : URLQueryItem(name: type.queryKey, value: queryString)
     }
     
     var count: Int {
@@ -41,4 +38,14 @@ class FilterCollection {
             filters.append(Filter(type: FilterTypeEnum.salaryVoluntary))
         }
     }
+    
+    private var queryString: String {
+        filters.reduce("") { (string, filter) -> String in
+            guard filter.isSelected else { return string }
+            let queryValue = filter.type.queryValue
+            if string.isEmpty { return queryValue }
+            return "\(string),\(queryValue)"
+        }.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics.union(["_","-",])) ?? ""
+    }
+
 }

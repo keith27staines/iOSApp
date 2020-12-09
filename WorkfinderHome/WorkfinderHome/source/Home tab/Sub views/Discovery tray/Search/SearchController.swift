@@ -7,7 +7,7 @@ class SearchController: NSObject {
     let filtersModel: FiltersModel
     let typeAheadDatasource: TypeAheadDataSource
     let searchResultsController: SearchResultsController
-    var filtersString: String?
+    var queryItems = [URLQueryItem]()
     
     enum SearchState {
         case hidden
@@ -86,7 +86,7 @@ class SearchController: NSObject {
     }
     
     func applyFilters() {
-        filtersString = filtersModel.queryString
+        queryItems = filtersModel.queryItems
         self.performSearch()
     }
     
@@ -212,30 +212,13 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
 extension SearchController {
     
     func performSearch() {
-        guard let queryString = makeFullQueryString(
-                search: searchBar.text,
-                filters: filtersString) else {
-            return
-        }
-        searchResultsController.queryString = queryString
+        var queryItems = [URLQueryItem(name: "q", value: searchBar.text)]
+        queryItems.append(contentsOf: self.queryItems)
+        searchResultsController.queryItems = queryItems
         state = .showingResults
     }
     
     func performTypeAhead(string: String?) {
         typeAheadDatasource.string = string
     }
-    
-    func makeFullQueryString(search: String?, filters: String?) -> String? {
-        var queryString = "?"
-        if let search = search { queryString.append("q=\(search)") }
-        if let filters = filters {
-            if search != nil { queryString.append("&")}
-            queryString.append(filters)
-        }
-        
-        let allowedCharacters = CharacterSet(["-","_",".","=","&","?"])
-        
-        return queryString.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics.union(allowedCharacters))
-    }
-
 }

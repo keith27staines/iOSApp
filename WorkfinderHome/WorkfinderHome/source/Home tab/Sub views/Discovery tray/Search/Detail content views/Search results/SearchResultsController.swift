@@ -15,11 +15,7 @@ class SearchResultsController {
     var tables: [UITableView] { view?.tableViews ?? [] }
     
     lazy var datasources: [Datasource] = {
-        [Datasource(tag: 0, dataLoader: dataLoaders[0], table: tables[0])]
-    }()
-    
-    lazy var dataLoaders: [DataLoader] = {
-        [RolesDataLoader(service: rolesService)]
+        [RolesDatasource(tag: 0, table: tables[0], searchResultsController: self, service: rolesService)]
     }()
     
     var selectedTabIndex: Int = 0 {
@@ -29,10 +25,12 @@ class SearchResultsController {
     }
     
     func tabTapped(tab: Tab) { selectedTabIndex = tab.index }
-    
-    var queryString: String? {
+        
+    var queryItems = [URLQueryItem]() {
         didSet {
-            print("searching... [\(queryString ?? "No search string")]")
+            datasources.forEach { (datasource) in
+                datasource.queryItems = queryItems
+            }
             datasources[selectedTabIndex].loadData()
         }
     }
@@ -43,35 +41,61 @@ class SearchResultsController {
     
 }
 
-protocol DataLoader {
-    func fetch<A:Codable>(completion: (Result<[A], Error>) -> Void)
+class RolePresenter: CellPresenter {
+    let roleData: RoleData
+    init(roleData: RoleData) {
+        self.roleData = roleData
+    }
 }
 
-class RolesDataLoader: DataLoader {
-    var query = ""
-    let service: RolesServiceProtocol
-    func fetch<A:Codable>(completion: (Result<[A], Error>) -> Void) {
-        //service.fetchRolesWithQuery(query, completion: <#T##(Result<[RoleData], Error>) -> Void#>)
+class RolesDatasource: Datasource {
+    let cellReuseId = "role"
+    let service: RolesServiceProtocol?
+    
+    override func loadData() {
+        service?.fetchRolesWithQueryItems(queryItems, completion: { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let roleDataArray):
+                self.lastError = nil
+                self.data = roleDataArray
+                self.table?.reloadData()
+            case .failure(let error):
+                self.lastError = error
+                self.data = []
+                self.table?.reloadData()
+            }
+        })
     }
     
-    init(service: RolesServiceProtocol) {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId) as? LandscapeRoleCell,
+            let roleData = data[indexPath.row] as? RoleData
+        else { return UITableViewCell() }
+        cell.presentWith(roleData)
+        return cell
+    }
+
+    init(
+        tag: Int,
+        table: UITableView,
+        searchResultsController: SearchResultsController,
+        service: RolesServiceProtocol
+    ) {
         self.service = service
+        super.init(tag: tag, table: table, searchResultsController: searchResultsController)
+        table.register(LandscapeRoleCell.self, forCellReuseIdentifier: cellReuseId)
     }
 }
 
 class Datasource: NSObject, UITableViewDataSource {
-
+    weak var searchResultsController: SearchResultsController?
+    var lastError: Error?
+    var queryItems = [URLQueryItem]()
     weak var table: UITableView?
-    let dataLoader: DataLoader
-    var data = [String]()
+    var data = [Any]()
     let tag: Int
-        
-    func loadData() {
-//        dataLoader.fetch { [weak self] (result) in
-//            self?.data = ["Apple", "Banana", "Orange"]
-//            self?.table?.reloadData()
-//        }
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
@@ -79,15 +103,22 @@ class Datasource: NSObject, UITableViewDataSource {
         data.count
     }
     
+    /// override this method
+    func loadData() {}
+    
+    /// override this method
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        return UITableViewCell()
     }
     
-    init(tag: Int, dataLoader: DataLoader, table: UITableView) {
+    init(tag: Int, table: UITableView, searchResultsController: SearchResultsController) {
         self.tag = tag
-        self.dataLoader = dataLoader
         self.table = table
+        self.searchResultsController = searchResultsController
         super.init()
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.dataSource = self
     }
+    
 }
 

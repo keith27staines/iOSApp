@@ -27,15 +27,10 @@ class FiltersModel {
         }
     }
     
-    var queryString: String? {
-        let params = filterCollections.reduce("") { (result, collection) -> String in
-            let queryString = collection.queryString
-            guard !queryString.isEmpty else { return result }
-            let term = "\(collection.type.queryKey)=\(queryString)"
-            guard !result.isEmpty else { return term }
-            return result.appending("&\(term)")
+    var queryItems: [URLQueryItem] {
+        filterCollections.compactMap { (collection) -> URLQueryItem? in
+            return collection.queryItem
         }
-        return params.isEmpty ? nil : params
     }
     
     func loadModel(completion: @escaping (Error?) -> Void) {
