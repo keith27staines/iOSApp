@@ -36,10 +36,8 @@ class SearchDetailView: UIView {
         let subviews = [filtersView, typeAheadView, searchResultsView]
         subviews.forEach { (subview) in
             addSubview(subview)
-            subview.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)        }
-        addSubview(filtersView)
-        addSubview(typeAheadView)
-        addSubview(searchResultsView)
+            subview.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        }
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

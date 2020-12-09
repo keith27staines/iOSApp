@@ -9,7 +9,6 @@ class SearchResultsView: UIView {
             controller?.view = self
             configureViews()
             tabSwitchingView.didSelectTab = controller?.tabTapped
-            //controller?.selectedTabIndex = 0
             tabSwitchingView.selectTab(0)
         }
     }
@@ -57,7 +56,7 @@ class SearchResultsView: UIView {
     func configureViews() {
         addSubview(tabSwitchingView)
         addSubview(tabContent)
-        tabSwitchingView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 0))
+        tabSwitchingView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
         tabContent.anchor(top: tabSwitchingView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 12, left: 20, bottom: 20, right: 20))
     }
     

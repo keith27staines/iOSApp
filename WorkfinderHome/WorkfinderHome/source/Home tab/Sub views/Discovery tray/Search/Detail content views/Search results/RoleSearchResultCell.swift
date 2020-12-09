@@ -2,25 +2,28 @@
 import UIKit
 import WorkfinderUI
 
-class LandscapeRoleCell: UITableViewCell, Presentable {
+class RoleSearchResultCell: UITableViewCell {
     
-    static var identifer = "LandscapeRoleCell"
+    static var identifer = "RoleSearchResultCell"
     var row: Int = 0
     var presenter: RecentRolesDataSource!
+    var logoUrlString: String?
     
-    func presentWith(_ presenter: CellPresenter?) {
-        guard let presenter = presenter as? RecentRolesDataSource else { return }
-        self.presenter = presenter
-        companyLogo.image = presenter.imageForRow(row)
-        let roleData: RoleData = presenter.roleForRow(row)
+    func presentWith(_ roleData: RoleData) {
         companyName.text = roleData.companyName ?? "Not specified"
         projectTitle.text = roleData.projectTitle
         payIconLabel.label.text = roleData.paidAmount
         hoursIconLabel.label.text = roleData.workingHours ?? "Not specified"
         locationIconLabel.label.text = roleData.location
+        logoUrlString = roleData.companyLogoUrlString
+        companyLogo.load(companyName: roleData.companyName ?? " ", urlString: roleData.companyLogoUrlString) {
+            
+        }
     }
-
-    lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 68)
+    
+    lazy var companyLogo: CompanyLogoView = {
+        CompanyLogoView(widthPoints: 68, defaultLogoName: nil)
+    }()
     
     lazy var companyLogoStack: UIStackView = {
         let padding = UIView()
@@ -29,6 +32,7 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
             padding
         ])
         stack.axis = .vertical
+        stack.widthAnchor.constraint(equalToConstant: 70).isActive = true
         return stack
     }()
     
@@ -79,6 +83,7 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
         let stack = UIStackView()
         stack.addArrangedSubview(payAndHoursStack)
         stack.addArrangedSubview(locationIconLabel)
+        stack.addArrangedSubview(UIView())
         stack.spacing = 13
         stack.axis = .vertical
         stack.distribution = .fill
@@ -99,6 +104,7 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
         let stack = UIStackView()
         stack.addArrangedSubview(companyLogoStack)
         stack.addArrangedSubview(textStack)
+        stack.addArrangedSubview(UIView())
         stack.spacing = 20
         stack.axis = .horizontal
         stack.alignment = .fill
@@ -121,7 +127,7 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
     func configureViews() {
         contentView.addSubview(mainStack)
         contentView.addSubview(separator)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 21, left: 23, bottom: 15, right: 17))
+        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 21, left: 0, bottom: 15, right: 0))
         separator.anchor(top: nil, leading: nil, bottom: contentView.bottomAnchor, trailing: nil)
         separator.widthAnchor.constraint(equalTo: mainStack.widthAnchor).isActive = true
     }
@@ -131,46 +137,3 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
     }
     
 }
-
-class IconLabel: UIView {
-    
-    lazy var icon: UIImageView = {
-        let icon = UIImageView()
-        icon.contentMode = .scaleAspectFit
-        icon.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        icon.widthAnchor.constraint(equalToConstant: 18).isActive = true
-        return icon
-    }()
-    
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = UIColor.black
-        return label
-    }()
-    
-    lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-                icon,
-                label
-            ]
-        )
-        stack.axis = .horizontal
-        stack.spacing = 11
-        return stack
-    }()
-    
-    init(iconImage: UIImage?) {
-        super.init(frame: CGRect.zero)
-        self.icon.image = iconImage
-        configureViews()
-    }
-    
-    func configureViews() {
-        addSubview(stack)
-        stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
-    }
-    
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-}
-

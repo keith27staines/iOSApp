@@ -49,7 +49,6 @@ class RolePresenter: CellPresenter {
 }
 
 class RolesDatasource: Datasource {
-    let cellReuseId = "role"
     let service: RolesServiceProtocol?
     
     override func loadData() {
@@ -70,7 +69,7 @@ class RolesDatasource: Datasource {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId) as? LandscapeRoleCell,
+            let cell = tableView.dequeueReusableCell(withIdentifier: RoleSearchResultCell.identifer) as? RoleSearchResultCell,
             let roleData = data[indexPath.row] as? RoleData
         else { return UITableViewCell() }
         cell.presentWith(roleData)
@@ -85,7 +84,7 @@ class RolesDatasource: Datasource {
     ) {
         self.service = service
         super.init(tag: tag, table: table, searchResultsController: searchResultsController)
-        table.register(LandscapeRoleCell.self, forCellReuseIdentifier: cellReuseId)
+        table.register(RoleSearchResultCell.self, forCellReuseIdentifier: RoleSearchResultCell.identifer)
     }
 }
 
