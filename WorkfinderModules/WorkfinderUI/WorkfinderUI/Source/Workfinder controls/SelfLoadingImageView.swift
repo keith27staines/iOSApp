@@ -15,7 +15,10 @@ public class ImageLoader: UIImage {
             return
         }
         imageFetcher.getImage(url: url) { (downloadedImage) in
-            completion(urlString,downloadedImage ?? defaultImage)
+            DispatchQueue.main.async {
+                print("Downloaded \(url.absoluteString)")
+                completion(urlString,downloadedImage ?? defaultImage)
+            }
         }
     }
 }

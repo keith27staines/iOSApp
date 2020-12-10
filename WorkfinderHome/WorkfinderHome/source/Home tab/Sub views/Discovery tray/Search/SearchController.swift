@@ -219,6 +219,6 @@ extension SearchController {
     }
     
     func performTypeAhead(string: String?) {
-        typeAheadDatasource.string = string
+        typeAheadDatasource.searchString = string
     }
 }

@@ -35,15 +35,11 @@ class TypeAheadDataSource {
         }
     }
     
-    var categories = [String:[TypeAheadItem]]() {
-        didSet {
-            
-        }
-    }
+    var categories = [String:[TypeAheadItem]]()
     
-    var string: String? {
+    var searchString: String? {
         didSet {
-            let queryItem = URLQueryItem(name: "q", value: string)
+            let queryItem = URLQueryItem(name: "q", value: searchString)
             service.fetch(queryItems: [queryItem]) { [weak self] (result) in
                 self?.result = result
             }
