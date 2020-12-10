@@ -32,6 +32,7 @@
 		535CDAB6257B768A005FBC2E /* TypeAheadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CDAB5257B768A005FBC2E /* TypeAheadService.swift */; };
 		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
 		536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */; };
+		536D660525820C2F0013B397 /* TypeAheadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536D660425820C2F0013B397 /* TypeAheadCell.swift */; };
 		537F5229257E3BB3003C5699 /* EmploymentTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */; };
 		537F522D257E3E78003C5699 /* SkillAcquiredTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */; };
 		537F8ADA257B4A5D00C5F2EB /* TypeAheadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */; };
@@ -102,6 +103,7 @@
 		535CDAB5257B768A005FBC2E /* TypeAheadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadService.swift; sourceTree = "<group>"; };
 		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitShowMoreCard.swift; sourceTree = "<group>"; };
+		536D660425820C2F0013B397 /* TypeAheadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadCell.swift; sourceTree = "<group>"; };
 		537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentTypesService.swift; sourceTree = "<group>"; };
 		537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillAcquiredTypesService.swift; sourceTree = "<group>"; };
 		537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadDataSource.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 		534EF6C02570DCFB00ACD399 /* services */ = {
 			isa = PBXGroup;
 			children = (
+				535CDAB5257B768A005FBC2E /* TypeAheadService.swift */,
 				534EF6BA2570DACD00ACD399 /* RolesService.swift */,
 				534EF6C12570DD4E00ACD399 /* RoleData.swift */,
 				5355B0DF257DE7A800B751C7 /* ProjectTypesService.swift */,
@@ -264,7 +267,7 @@
 			children = (
 				5337EBEF2577E47400762F2A /* TypeAheadView.swift */,
 				537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */,
-				535CDAB5257B768A005FBC2E /* TypeAheadService.swift */,
+				536D660425820C2F0013B397 /* TypeAheadCell.swift */,
 			);
 			path = "Type-ahead";
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */,
 				533D544925794EED006B6F0C /* FiltersModel.swift in Sources */,
 				5337EB972574F7A600762F2A /* DiscoveryTraySections.swift in Sources */,
+				536D660525820C2F0013B397 /* TypeAheadCell.swift in Sources */,
 				53C5CB55256D1F0600176A2E /* RecommendationsCell.swift in Sources */,
 				5337EBF02577E47400762F2A /* TypeAheadView.swift in Sources */,
 				5355B0E0257DE7A800B751C7 /* ProjectTypesService.swift in Sources */,

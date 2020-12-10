@@ -5,37 +5,65 @@ class TypeAheadDataSource {
     
     let service: TypeAheadServiceProtocol
     var didUpdateResults: (() -> Void)?
-    var results = [String]() {
+    var error: Error?
+    var totalMatches: Int = 0
+    let sectionNames = ["projects", "companies", "people"]
+    
+    func itemForIndexPath(_ indexPath: IndexPath) -> TypeAheadItem {
+        let sectionName = sectionNames[indexPath.section]
+        return categories[sectionName]?[indexPath.row] ?? TypeAheadItem()
+    }
+    
+    var result: Result<TypeAheadJson,Error>? {
         didSet {
+            guard let result = result else { return }
+            switch result {
+            case .success(let typeAheadJson):
+                self.categories = [
+                    "projects": typeAheadJson.projects ?? [],
+                    "companies": typeAheadJson.companies ?? [],
+                    "people": typeAheadJson.people ?? []
+                ]
+                error = nil
+                totalMatches = typeAheadJson.count
+            case .failure(let error):
+                categories = [:]
+                self.error = error
+                self.totalMatches = 0
+            }
             didUpdateResults?()
+        }
+    }
+    
+    var categories = [String:[TypeAheadItem]]() {
+        didSet {
+            
         }
     }
     
     var string: String? {
         didSet {
-            guard let bareSearchString = string?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).deletingPrefix("?q=").deletingFromFirstAmbersand(), bareSearchString.count > 2 else {
-                results = []
-                return
-            }
-            print("Search string: " + (string ?? ""))
-            service.fetch(search: bareSearchString) { results in
-                DispatchQueue.main.async { [weak self] in
-                    self?.results = results
-                }
+            let queryItem = URLQueryItem(name: "q", value: string)
+            service.fetch(queryItems: [queryItem]) { [weak self] (result) in
+                self?.result = result
             }
         }
     }
     
     func clear() {
-        results = []
+        result = nil
     }
     
     func numberOfSections() -> Int {
-        return 1
+        return categories.count
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        results.count
+        categories[sectionNameForIndex(section)]?.count ?? 0
+    }
+    
+    func sectionNameForIndex(_ index: Int) -> String {
+        ["projects", "companies", "people"][index]
     }
     
     init(typeAheadService: TypeAheadServiceProtocol) {

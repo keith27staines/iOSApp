@@ -1,6 +1,25 @@
 
 import UIKit
 
+public class ImageLoader: UIImage {
+    
+    var imageFetcher: ImageFetching = ImageFetcher()
+    
+    public func load(
+        urlString: String,
+        defaultImage: UIImage,
+        completion: @escaping (String,UIImage) -> Void
+    ) {
+        guard let url = URL(string: urlString) else {
+            completion(urlString,defaultImage)
+            return
+        }
+        imageFetcher.getImage(url: url) { (downloadedImage) in
+            completion(urlString,downloadedImage ?? defaultImage)
+        }
+    }
+}
+
 public class SelfloadingImageView: UIView {
     
     let widthPoints: CGFloat

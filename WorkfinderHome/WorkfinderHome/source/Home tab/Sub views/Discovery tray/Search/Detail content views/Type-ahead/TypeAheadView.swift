@@ -38,7 +38,7 @@ class TypeAheadView: UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.tintColor = WorkfinderColors.primaryColor
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TypeAheadCell.self, forCellReuseIdentifier: TypeAheadCell.reuseIdentifier)
         tableView.tableFooterView = tableFooterView
         return tableView
     }()
@@ -61,7 +61,7 @@ class TypeAheadView: UIView {
         typeAheadDataSource.didUpdateResults = { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
-            let matchCount = self.typeAheadDataSource.results.count
+            let matchCount = self.typeAheadDataSource.totalMatches
             if self.typeAheadDataSource.string?.count ?? 0 > 2 {
                 self.titleLabel.text = "Type-ahead matches (\(matchCount))"
             } else {
@@ -92,15 +92,18 @@ extension TypeAheadView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let result = typeAheadDataSource.results[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell()
-        cell.textLabel?.text = result
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TypeAheadCell.reuseIdentifier) as? TypeAheadCell else {
+            return UITableViewCell()
+        }
+        let item = typeAheadDataSource.itemForIndexPath(indexPath)
+        cell.updateFrom(item)
         return cell
     }
 }
 
 extension TypeAheadView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        didSelectText?(typeAheadDataSource.results[indexPath.row])
+        let item = typeAheadDataSource.itemForIndexPath(indexPath)
+        didSelectText?(item.searchTerm ?? "")
     }
 }
