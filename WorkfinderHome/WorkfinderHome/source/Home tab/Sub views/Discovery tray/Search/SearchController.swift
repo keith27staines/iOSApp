@@ -217,6 +217,12 @@ extension SearchController {
         var queryItems = [URLQueryItem(name: "q", value: searchBar.text)]
         queryItems.append(contentsOf: self.queryItems)
         searchResultsController.queryItems = queryItems
+        switch typeAheadDatasource.result {
+        case .success(let typeAheadJson):
+            searchResultsController.typeAheadJson = typeAheadJson
+        case .failure(_), .none:
+            searchResultsController.typeAheadJson = nil
+        }
         state = .showingResults
     }
     

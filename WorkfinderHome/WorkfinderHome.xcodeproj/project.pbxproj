@@ -21,6 +21,11 @@
 		53448514256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
 		53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */; };
 		53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */; };
+		5348EB5125835EC30048D7EB /* Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB5025835EC30048D7EB /* Datasource.swift */; };
+		5348EB5725835F0A0048D7EB /* RolesDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB5625835F0A0048D7EB /* RolesDatasource.swift */; };
+		5348EB5B25835F5D0048D7EB /* PeopleDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB5A25835F5D0048D7EB /* PeopleDatasource.swift */; };
+		5348EB5F25835F750048D7EB /* CompaniesDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB5E25835F750048D7EB /* CompaniesDatasource.swift */; };
+		5348EB6325837B5E0048D7EB /* TypeAheadItemDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB6225837B5E0048D7EB /* TypeAheadItemDatasource.swift */; };
 		534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6BA2570DACD00ACD399 /* RolesService.swift */; };
 		534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6C12570DD4E00ACD399 /* RoleData.swift */; };
 		534EF6CC2571FDE000ACD399 /* LandscapeRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6CB2571FDE000ACD399 /* LandscapeRoleCell.swift */; };
@@ -94,6 +99,11 @@
 		533D544E25794F3C006B6F0C /* FiltersSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersSectionHeaderCell.swift; sourceTree = "<group>"; };
 		53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCompanyDetailsUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5348EB5025835EC30048D7EB /* Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datasource.swift; sourceTree = "<group>"; };
+		5348EB5625835F0A0048D7EB /* RolesDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesDatasource.swift; sourceTree = "<group>"; };
+		5348EB5A25835F5D0048D7EB /* PeopleDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDatasource.swift; sourceTree = "<group>"; };
+		5348EB5E25835F750048D7EB /* CompaniesDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesDatasource.swift; sourceTree = "<group>"; };
+		5348EB6225837B5E0048D7EB /* TypeAheadItemDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadItemDatasource.swift; sourceTree = "<group>"; };
 		534EF6BA2570DACD00ACD399 /* RolesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesService.swift; sourceTree = "<group>"; };
 		534EF6C12570DD4E00ACD399 /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		534EF6CB2571FDE000ACD399 /* LandscapeRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeRoleCell.swift; sourceTree = "<group>"; };
@@ -243,6 +253,18 @@
 			path = "Background view";
 			sourceTree = "<group>";
 		};
+		5348EB4F25835E9D0048D7EB /* Data sources */ = {
+			isa = PBXGroup;
+			children = (
+				5348EB5025835EC30048D7EB /* Datasource.swift */,
+				5348EB6225837B5E0048D7EB /* TypeAheadItemDatasource.swift */,
+				5348EB5625835F0A0048D7EB /* RolesDatasource.swift */,
+				5348EB5A25835F5D0048D7EB /* PeopleDatasource.swift */,
+				5348EB5E25835F750048D7EB /* CompaniesDatasource.swift */,
+			);
+			path = "Data sources";
+			sourceTree = "<group>";
+		};
 		534EF6C02570DCFB00ACD399 /* services */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +303,7 @@
 		537F8AE5257B616A00C5F2EB /* Search results */ = {
 			isa = PBXGroup;
 			children = (
+				5348EB4F25835E9D0048D7EB /* Data sources */,
 				538C1DD9257F8EE800E34F95 /* SearchResultsController.swift */,
 				5337EBF32577E49000762F2A /* SearchResultsView.swift */,
 				53C4472A25810012008CE52E /* RoleSearchResultCell.swift */,
@@ -554,17 +577,22 @@
 				5355B0DA257CE08800B751C7 /* Filter.swift in Sources */,
 				534EF6CC2571FDE000ACD399 /* LandscapeRoleCell.swift in Sources */,
 				538C1DDA257F8EE800E34F95 /* SearchResultsController.swift in Sources */,
+				5348EB5125835EC30048D7EB /* Datasource.swift in Sources */,
 				5355B0CC257CDF9300B751C7 /* FilterType.swift in Sources */,
+				5348EB6325837B5E0048D7EB /* TypeAheadItemDatasource.swift in Sources */,
 				5337EBE62577BEF300762F2A /* SearchBar.swift in Sources */,
 				5337EBDB2577B32700762F2A /* SearchController.swift in Sources */,
 				5355B0D4257CDFEC00B751C7 /* FilterCollection.swift in Sources */,
 				534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */,
 				53BCD7F2256D265900CC8FF4 /* RecentRolesDataSource.swift in Sources */,
+				5348EB5B25835F5D0048D7EB /* PeopleDatasource.swift in Sources */,
 				5337EBE22577BEB900762F2A /* SearchDetailView.swift in Sources */,
 				53D94BD4256A527200A2127C /* HomeView.swift in Sources */,
 				5337EBF42577E49000762F2A /* SearchResultsView.swift in Sources */,
 				53BCD7E5256D22DA00CC8FF4 /* TopRolesPresenter.swift in Sources */,
 				5355B0D0257CDFCB00B751C7 /* FilterCollectionType.swift in Sources */,
+				5348EB5725835F0A0048D7EB /* RolesDatasource.swift in Sources */,
+				5348EB5F25835F750048D7EB /* CompaniesDatasource.swift in Sources */,
 				53D94BB1256A39A200A2127C /* Tab.swift in Sources */,
 				53C5CB59256D1F8600176A2E /* TopRolesCell.swift in Sources */,
 				53C9CAD6256B87D100F567B2 /* HeaderViewPresenter.swift in Sources */,
