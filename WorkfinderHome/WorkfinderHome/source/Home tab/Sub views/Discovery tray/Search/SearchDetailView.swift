@@ -20,7 +20,7 @@ class SearchDetailView: UIView {
     init(
         filtersModel: FiltersModel,
         typeAheadDataSource: TypeAheadDataSource,
-        didSelectTypeAheadText: @escaping (String) -> Void,
+        didSelectTypeAheadItem: @escaping (TypeAheadItem) -> Void,
         didTapApplyFilters: @escaping (FiltersModel) -> Void
     ) {
         self.filtersModel = filtersModel
@@ -28,7 +28,7 @@ class SearchDetailView: UIView {
         self.typeAheadView = TypeAheadView(filtersModel: filtersModel, typeAheadDataSource: typeAheadDataSource)
         super.init(frame: CGRect.zero)
         configureViews()
-        typeAheadView.didSelectText = didSelectTypeAheadText
+        typeAheadView.didSelectTypeAheadItem = didSelectTypeAheadItem
     }
     
     func configureViews() {

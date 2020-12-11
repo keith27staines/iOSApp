@@ -3,6 +3,7 @@ import UIKit
 import WorkfinderUI
 
 class DiscoveryTrayController: NSObject {
+    weak var coordinator: HomeCoordinator?
     let rolesService: RolesServiceProtocol
     let typeAheadService: TypeAheadServiceProtocol
     let projectTypesService: ProjectTypesServiceProtocol
@@ -23,6 +24,7 @@ class DiscoveryTrayController: NSObject {
             skillTypeService: skillTypesService
         )
         let controller = SearchController(
+            coordinator: coordinator,
             typeAheadService: typeAheadService,
             filtersModel: filtersModel,
             searchResultsController: searchResultsController
@@ -50,13 +52,15 @@ class DiscoveryTrayController: NSObject {
     var searchBarStack: UIStackView { searchController.searchBarStack }
     var searchDetail: SearchDetailView { searchController.searchDetail }
     
-    init(rolesService: RolesServiceProtocol,
+    init(coordinator: HomeCoordinator?,
+         rolesService: RolesServiceProtocol,
          typeAheadService: TypeAheadServiceProtocol,
          projectTypesService: ProjectTypesServiceProtocol,
          employmentTypesService: EmploymentTypesServiceProtocol,
          skillTypesService: SkillAcquiredTypesServiceProtocol,
          searchResultsController: SearchResultsController
     ) {
+        self.coordinator = coordinator
         self.rolesService = rolesService
         self.typeAheadService = typeAheadService
         self.projectTypesService = projectTypesService

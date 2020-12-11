@@ -13,6 +13,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     lazy var rootViewController: HomeViewController = {
         let networkConfig = injected.networkConfig
         let vc = HomeViewController(
+            coordinator: self,
             rolesService: RolesService(networkConfig: networkConfig),
             typeAheadService: TypeAheadService(networkConfig: networkConfig),
             projectTypesService: ProjectTypesService(networkConfig: networkConfig),
@@ -23,6 +24,25 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         vc.coordinator = self
         return vc
     }()
+    
+    func dispatchTypeAheadItem(_ item: TypeAheadItem) {
+        guard let objectType = item.objectType else { return }
+        var title = ""
+        let subtitle = "\(item.objectType ?? "")\n\(item.title ?? "")\n\(item.subtitle ?? "")"
+        switch objectType {
+        case "association":
+            title = "TODO: Route to PASSIVE apply workflow"
+        case "project":
+            title = "TODO: Route to PROJECT apply workflow"
+        default:
+            title = "Unexpected object type, no known routing"
+        }
+        
+        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        navigationRouter.present(alert, animated: true, completion: nil)
+    }
     
     public init(parent: Coordinating,
          navigationRouter: NavigationRoutingProtocol,

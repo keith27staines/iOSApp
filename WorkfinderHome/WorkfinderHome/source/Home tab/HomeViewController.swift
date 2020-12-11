@@ -143,6 +143,7 @@ class HomeViewController: UIViewController {
     }
     
     init(
+        coordinator: HomeCoordinator?,
         rolesService: RolesServiceProtocol,
         typeAheadService: TypeAheadServiceProtocol,
         projectTypesService: ProjectTypesServiceProtocol,
@@ -150,7 +151,9 @@ class HomeViewController: UIViewController {
         skillsTypeService: SkillAcquiredTypesServiceProtocol,
         searchResultsController: SearchResultsController
     ) {
+        self.coordinator = coordinator
         trayController = DiscoveryTrayController(
+            coordinator: coordinator,
             rolesService: rolesService,
             typeAheadService: typeAheadService,
             projectTypesService: projectTypesService,

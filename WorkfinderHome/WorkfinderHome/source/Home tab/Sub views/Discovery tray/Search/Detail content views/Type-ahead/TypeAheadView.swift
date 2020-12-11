@@ -7,7 +7,7 @@ class TypeAheadView: UIView {
     let filtersModel: FiltersModel
     let typeAheadDataSource: TypeAheadDataSource
     
-    var didSelectText: ((String) -> Void)?
+    var didSelectTypeAheadItem: ((TypeAheadItem) -> Void)?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -77,7 +77,7 @@ extension TypeAheadView: UITableViewDataSource {
 extension TypeAheadView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = typeAheadDataSource.itemForIndexPath(indexPath)
-        didSelectText?(item.searchTerm ?? "")
+        didSelectTypeAheadItem?(item)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -8,6 +8,7 @@ class SearchController: NSObject {
     let typeAheadDatasource: TypeAheadDataSource
     let searchResultsController: SearchResultsController
     var queryItems = [URLQueryItem]()
+    weak var coordinator: HomeCoordinator?
     
     enum SearchState {
         case hidden
@@ -103,9 +104,8 @@ class SearchController: NSObject {
         let view = SearchDetailView(
             filtersModel: filtersModel,
             typeAheadDataSource: typeAheadDatasource,
-            didSelectTypeAheadText: { string in
-                self.searchBar.text = string
-                self.searchTextDidUpdate()
+            didSelectTypeAheadItem: { [weak self] item in
+                self?.coordinator?.dispatchTypeAheadItem(item)
             },
             didTapApplyFilters: { [weak self] filtersModel in
                 self?.applyFilters()
@@ -116,10 +116,12 @@ class SearchController: NSObject {
     }()
     
     init(
+        coordinator: HomeCoordinator?,
         typeAheadService: TypeAheadServiceProtocol,
         filtersModel: FiltersModel,
         searchResultsController: SearchResultsController
     ) {
+        self.coordinator = coordinator
         typeAheadDatasource = TypeAheadDataSource(typeAheadService: typeAheadService)
         self.filtersModel = filtersModel
         self.searchResultsController = searchResultsController
