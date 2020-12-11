@@ -66,6 +66,8 @@
 		53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BCB256A438F00A2127C /* HeaderView.swift */; };
 		53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BCF256A501600A2127C /* BackgroundView.swift */; };
 		53D94BD4256A527200A2127C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94BD3256A527200A2127C /* HomeView.swift */; };
+		53E4BA1B258355AC00252348 /* TypeAheadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4BA1A258355AC00252348 /* TypeAheadItem.swift */; };
+		53E4BA1F2583561400252348 /* TypeAheadJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4BA1E2583561400252348 /* TypeAheadJson.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +142,8 @@
 		53D94BCB256A438F00A2127C /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		53D94BCF256A501600A2127C /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		53D94BD3256A527200A2127C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		53E4BA1A258355AC00252348 /* TypeAheadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadItem.swift; sourceTree = "<group>"; };
+		53E4BA1E2583561400252348 /* TypeAheadJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadJson.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +272,8 @@
 				5337EBEF2577E47400762F2A /* TypeAheadView.swift */,
 				537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */,
 				536D660425820C2F0013B397 /* TypeAheadCell.swift */,
+				53E4BA1A258355AC00252348 /* TypeAheadItem.swift */,
+				53E4BA1E2583561400252348 /* TypeAheadJson.swift */,
 			);
 			path = "Type-ahead";
 			sourceTree = "<group>";
@@ -573,6 +579,7 @@
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,
 				53C4472B25810012008CE52E /* RoleSearchResultCell.swift in Sources */,
+				53E4BA1F2583561400252348 /* TypeAheadJson.swift in Sources */,
 				53D94BAF256A39A200A2127C /* TabContentView.swift in Sources */,
 				537F522D257E3E78003C5699 /* SkillAcquiredTypesService.swift in Sources */,
 				534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */,
@@ -581,6 +588,7 @@
 				53D94BB2256A39A200A2127C /* TabSwitchingView.swift in Sources */,
 				535CDAB6257B768A005FBC2E /* TypeAheadService.swift in Sources */,
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,
+				53E4BA1B258355AC00252348 /* TypeAheadItem.swift in Sources */,
 				536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */,
 				53BCD7EB256D263900CC8FF4 /* RecentRolesCell.swift in Sources */,
 				53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */,

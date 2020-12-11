@@ -63,7 +63,10 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         if childCoordinators.count == 0 {
             startViewRecommendationCoordinator(recommendationUuid: uuid)
         } else {
-            let alert = UIAlertController(title: "View Recommendation?", message: "You have an application in progress. Would you like to view your recommendation or continue with your current application?", preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: "View Recommendation?",
+                message: "You have an application in progress. Would you like to view your recommendation or continue with your current application?",
+                preferredStyle: .alert)
             let recommendationAction = UIAlertAction(title: "View recommendation", style: .destructive) { (_) in
                 self.navigationRouter.popToViewController(self.rootViewController, animated: true)
                 self.childCoordinators.removeAll()

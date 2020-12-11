@@ -25,6 +25,8 @@ class SearchResultsController {
     }
     
     func tabTapped(tab: Tab) { selectedTabIndex = tab.index }
+    
+    var typeAhead: TypeAheadJson?
         
     var queryItems = [URLQueryItem]() {
         didSet {
