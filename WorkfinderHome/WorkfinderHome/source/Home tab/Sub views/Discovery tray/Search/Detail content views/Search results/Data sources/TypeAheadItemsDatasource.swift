@@ -1,7 +1,14 @@
 
 import UIKit
 
-class TypeAheadItemDatasource: Datasource {
+class TypeAheadItemsDatasource: Datasource {
+    
+    var typeAheadItems = [TypeAheadItem]() {
+        didSet {
+            data = typeAheadItems
+            loadData()
+        }
+    }
     
     override func loadData() {
         table?.reloadData()

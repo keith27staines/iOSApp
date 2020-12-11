@@ -15,7 +15,11 @@ class SearchResultsController {
     var tables: [UITableView] { view?.tableViews ?? [] }
     
     lazy var datasources: [Datasource] = {
-        [RolesDatasource(tag: 0, table: tables[0], searchResultsController: self, service: rolesService)]
+        [
+            RolesDatasource(tag: 0, table: tables[0], searchResultsController: self, service: rolesService),
+            CompaniesDatasource(tag: 1, table: tables[1], searchResultsController: self),
+            PeopleDatasource(tag: 2, table: tables[2], searchResultsController: self)
+        ]
     }()
     
     var selectedTabIndex: Int = 0 {
@@ -28,7 +32,8 @@ class SearchResultsController {
     
     var typeAheadJson: TypeAheadJson? {
         didSet {
-            
+            (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.companies ?? []
+            (datasources[2] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.people ?? []
         }
     }
         
