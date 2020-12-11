@@ -77,7 +77,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         let associationDetail = projectPresenter?.association
         let projectTitle = projectPresenter?.project.name
         guard
-            let companyName = associationDetail?.company?.name,
+            let companyName = associationDetail?.location?.company?.name,
             let hostName = associationDetail?.host?.displayName
             else { return }
         

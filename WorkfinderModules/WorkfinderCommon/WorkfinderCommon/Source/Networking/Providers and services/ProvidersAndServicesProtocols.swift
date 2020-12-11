@@ -15,7 +15,7 @@ public struct ServerListJson<A:Decodable>: Decodable {
 
 public struct AssociationJson: Codable, Equatable, Hashable {
     public var uuid: F4SUUID
-    public var location: CompanyLocationJson //F4SUUID
+    public var location: F4SUUID
     public var host: Host // F4SUUID
     public var title: String? = nil
     public var description: String? = nil
@@ -51,16 +51,16 @@ public struct HostAssociationJson: Codable, Equatable, Hashable {
     public var stopped: String?
     public var isSelected: Bool = false
     
-    public init(uuidAssociation: AssociationJson, host:Host) {
-        self.uuid = uuidAssociation.uuid
-        self.location = uuidAssociation.location
-        self.host = host
-        self.title = uuidAssociation.title
-        self.description = uuidAssociation.description
-        self.started = uuidAssociation.started
-        self.stopped = uuidAssociation.stopped
-        self.isSelected = uuidAssociation.isSelected
-    }
+//    public init(uuidAssociation: AssociationJson, host:Host) {
+//        self.uuid = uuidAssociation.uuid
+//        self.location = uuidAssociation.location
+//        self.host = host
+//        self.title = uuidAssociation.title
+//        self.description = uuidAssociation.description
+//        self.started = uuidAssociation.started
+//        self.stopped = uuidAssociation.stopped
+//        self.isSelected = uuidAssociation.isSelected
+//    }
     
     private enum CodingKeys: String, CodingKey {
         case uuid

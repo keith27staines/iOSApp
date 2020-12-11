@@ -86,7 +86,7 @@ public class WorkplaceAndAssociationService {
                 handleError(error)
                 return
         }
-        companyLocationJson = associationJson.location
+        //companyLocationJson = associationJson.location
         onLocationFetched()
     }
     

@@ -79,7 +79,7 @@ class AssociationDetailService: AssociationDetailServiceProtocol {
     
     private func onHostLoaded(host: Host) {
         associationDetail.host = host
-        guard let locationUuid = associationDetail.association?.location.uuid else {
+        guard let locationUuid = associationDetail.association?.location else {
             completion?(Result<AssociationDetail, Error>.success(associationDetail))
             return
         }
