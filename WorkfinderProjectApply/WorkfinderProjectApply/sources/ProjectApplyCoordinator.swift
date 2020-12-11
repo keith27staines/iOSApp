@@ -141,7 +141,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         let builder = DraftPlacementPreparer()
         builder.update(candidateUuid: UserRepository().loadCandidate().uuid)
         builder.update(picklists: picklistsDictionary)
-        builder.update(associationUuid: projectPresenter?.detail.project?.association)
+        builder.update(associationUuid: projectPresenter?.detail.project?.association?.uuid)
         builder.update(associatedProject: projectPresenter?.detail.project?.uuid)
         builder.update(coverletter: coverLetterText)
         placementService = PostPlacementService(networkConfig: injected.networkConfig)

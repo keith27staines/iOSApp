@@ -46,7 +46,7 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
         addCard(card)
     }
     
-    func addCardWith(data: RoleData, tapAction: @escaping (String) -> Void) {
+    func addCardWith(data: RoleData, tapAction: @escaping (RoleData) -> Void) {
         let card = PortraitRoleCard(data: data, tapAction: tapAction)
         card.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
         card.heightAnchor.constraint(equalToConstant: cardHeight).isActive = true

@@ -4,6 +4,7 @@ import WorkfinderCompanyDetailsUseCase
 import WorkfinderViewRecommendation
 import WorkfinderCoordinators
 import WorkfinderServices
+import WorkfinderProjectApply
 
 public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
@@ -50,11 +51,29 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
          companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
+        NotificationCenter.default.addObserver(self, selector: #selector(roleTapped), name: .wfHomeScreenRoleTapped, object: nil)
+    }
+    
+    @objc func roleTapped(notification: Notification) {
+        guard
+            let roleData = notification.object as? RoleData,
+            let id = roleData.id
+        else { return }
+        startProjectApply(project: id, source: .searchTab)
     }
     
     public override func start() {
         rootViewController.coordinator = self
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
+    }
+    
+    var projectApplyCoordinator: ProjectApplyCoordinator?
+    
+    func startProjectApply(project: F4SUUID, source: ApplicationSource) {
+        let projectApplyCoordinator = makeProjectApplyCoordinator(project: project, source: source)
+        addChildCoordinator(projectApplyCoordinator)
+        projectApplyCoordinator.start()
+        self.projectApplyCoordinator = projectApplyCoordinator
     }
     
     public func processRecommendation(uuid: F4SUUID?) {
@@ -143,5 +162,29 @@ extension HomeCoordinator: CompanyCoordinatorParentProtocol {
     
     public func showSearch() {
         injected.appCoordinator?.showSearch()
+    }
+}
+
+extension HomeCoordinator {
+    func makeProjectApplyCoordinator(project: F4SUUID, source: ApplicationSource) -> ProjectApplyCoordinator {
+        ProjectApplyCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            projectUuid: project,
+            applicationSource: source,
+            navigateToSearch: {
+
+            },
+            navigateToApplications: {
+
+            }
+        )
+    }
+}
+
+extension HomeCoordinator: ProjectApplyCoordinatorDelegate {
+    public func onProjectApplyDidFinish() {
+        
     }
 }

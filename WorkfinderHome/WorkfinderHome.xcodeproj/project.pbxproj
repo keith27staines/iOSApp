@@ -26,6 +26,8 @@
 		5348EB5B25835F5D0048D7EB /* PeopleDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB5A25835F5D0048D7EB /* PeopleDatasource.swift */; };
 		5348EB5F25835F750048D7EB /* CompaniesDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB5E25835F750048D7EB /* CompaniesDatasource.swift */; };
 		5348EB6325837B5E0048D7EB /* TypeAheadItemsDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EB6225837B5E0048D7EB /* TypeAheadItemsDatasource.swift */; };
+		5348EB6B25838B9A0048D7EB /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5348EB6A25838B9A0048D7EB /* WorkfinderProjectApply.framework */; };
+		5348EBA42583AA110048D7EB /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348EBA32583AA110048D7EB /* Notifications.swift */; };
 		534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6BA2570DACD00ACD399 /* RolesService.swift */; };
 		534EF6C22570DD4E00ACD399 /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6C12570DD4E00ACD399 /* RoleData.swift */; };
 		534EF6CC2571FDE000ACD399 /* LandscapeRoleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534EF6CB2571FDE000ACD399 /* LandscapeRoleCell.swift */; };
@@ -104,6 +106,8 @@
 		5348EB5A25835F5D0048D7EB /* PeopleDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDatasource.swift; sourceTree = "<group>"; };
 		5348EB5E25835F750048D7EB /* CompaniesDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesDatasource.swift; sourceTree = "<group>"; };
 		5348EB6225837B5E0048D7EB /* TypeAheadItemsDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadItemsDatasource.swift; sourceTree = "<group>"; };
+		5348EB6A25838B9A0048D7EB /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5348EBA32583AA110048D7EB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		534EF6BA2570DACD00ACD399 /* RolesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesService.swift; sourceTree = "<group>"; };
 		534EF6C12570DD4E00ACD399 /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		534EF6CB2571FDE000ACD399 /* LandscapeRoleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeRoleCell.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 				53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */,
 				53448524256B7FD00082889C /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				53D94B9B256A380700A2127C /* WorkfinderCommon.framework in Frameworks */,
+				5348EB6B25838B9A0048D7EB /* WorkfinderProjectApply.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +226,7 @@
 				53D94BBE256A3A3700A2127C /* HomeViewController.swift */,
 				53D94BD3256A527200A2127C /* HomeView.swift */,
 				5344851B256B7DD70082889C /* Sub views */,
+				5348EBA32583AA110048D7EB /* Notifications.swift */,
 			);
 			path = "Home tab";
 			sourceTree = "<group>";
@@ -423,6 +429,7 @@
 		53D94B99256A380700A2127C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5348EB6A25838B9A0048D7EB /* WorkfinderProjectApply.framework */,
 				53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */,
 				53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */,
 				53D94BA7256A383000A2127C /* WorkfinderServices.framework */,
@@ -573,6 +580,7 @@
 				5337EBF02577E47400762F2A /* TypeAheadView.swift in Sources */,
 				5355B0E0257DE7A800B751C7 /* ProjectTypesService.swift in Sources */,
 				533A0F5E256E3905008D67D1 /* HorizontallyScrollingCell.swift in Sources */,
+				5348EBA42583AA110048D7EB /* Notifications.swift in Sources */,
 				53C5CB51256D1EC300176A2E /* PopularOnWorkfinderCell.swift in Sources */,
 				5355B0DA257CE08800B751C7 /* Filter.swift in Sources */,
 				534EF6CC2571FDE000ACD399 /* LandscapeRoleCell.swift in Sources */,

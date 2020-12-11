@@ -4,11 +4,10 @@ import WorkfinderUI
 
 class PortraitRoleCard: UIView {
     
-    var tapAction: ((String) -> Void)?
+    var tapAction: ((RoleData) -> Void)?
     
     @objc func tapped() {
-        guard let id = roleData.id else { return }
-        tapAction?(id)
+        tapAction?(roleData)
     }
     
     lazy var logoContainer: UIView = {
@@ -113,7 +112,7 @@ class PortraitRoleCard: UIView {
     
     let roleData: RoleData
     
-    init(data: RoleData, tapAction: @escaping ((String)-> Void) ) {
+    init(data: RoleData, tapAction: @escaping ((RoleData)-> Void) ) {
         self.roleData = data
         self.tapAction = tapAction
         super.init(frame: CGRect.zero)

@@ -22,8 +22,8 @@ class TopRolesPresenter: CellPresenter {
     
     var roles: [RoleData] = []
     
-    func roleTapped(id: String) {
-        print("tapped role: \(id)")
+    func roleTapped(roleData: RoleData) {
+        NotificationCenter.default.post(name: .wfHomeScreenRoleTapped, object: roleData)
     }
     
     init(rolesService: RolesServiceProtocol) {

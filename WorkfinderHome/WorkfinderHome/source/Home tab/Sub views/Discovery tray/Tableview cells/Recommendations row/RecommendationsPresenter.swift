@@ -15,8 +15,8 @@ class RecommendationsPresenter: CellPresenter {
     
     var isSeeMoreCardRequired: Bool { true }
     
-    func roleTapped(id: String) {
-        print("tapped role: \(id)")
+    func roleTapped(roleData: RoleData) {
+        NotificationCenter.default.post(name: .wfHomeScreenRoleTapped, object: roleData)
     }
     
     func moreTapped() {
@@ -27,3 +27,5 @@ class RecommendationsPresenter: CellPresenter {
         self.rolesService = rolesService
     }
 }
+
+
