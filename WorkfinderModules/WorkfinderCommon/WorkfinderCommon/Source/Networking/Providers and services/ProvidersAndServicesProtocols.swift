@@ -13,25 +13,25 @@ public struct ServerListJson<A:Decodable>: Decodable {
     public var results: [A]
 }
 
-public struct AssociationJson: Codable {
+public struct AssociationJson: Codable, Equatable, Hashable {
     public var uuid: F4SUUID
-    public var locationUuid: F4SUUID
-    public var host: F4SUUID
+    public var location: CompanyLocationJson //F4SUUID
+    public var host: Host // F4SUUID
     public var title: String? = nil
     public var description: String? = nil
     public var started: String? = nil
     public var stopped: String? = nil
     public var isSelected: Bool = false
     
-    public init(uuid: F4SUUID,locationUuid: F4SUUID, hostUuid: F4SUUID) {
-        self.uuid = uuid
-        self.locationUuid = locationUuid
-        self.host = hostUuid
-    }
+//    public init(uuid: F4SUUID,locationUuid: F4SUUID, hostUuid: F4SUUID) {
+//        self.uuid = uuid
+//        self.locationUuid = locationUuid
+//        self.host = hostUuid
+//    }
     
     private enum CodingKeys: String, CodingKey {
         case uuid
-        case locationUuid = "location"
+        case location
         case host
         case title
         case description
@@ -41,9 +41,9 @@ public struct AssociationJson: Codable {
 }
 
 /// Like an AssociationJson but with a full host object rather than a uuid
-public struct HostAssociationJson: Codable {
+public struct HostAssociationJson: Codable, Equatable, Hashable {
     public var uuid: F4SUUID
-    public var locationUuid: F4SUUID
+    public var location: CompanyLocationJson
     public var host: Host
     public var title: String?
     public var description: String?
@@ -53,7 +53,7 @@ public struct HostAssociationJson: Codable {
     
     public init(uuidAssociation: AssociationJson, host:Host) {
         self.uuid = uuidAssociation.uuid
-        self.locationUuid = uuidAssociation.locationUuid
+        self.location = uuidAssociation.location
         self.host = host
         self.title = uuidAssociation.title
         self.description = uuidAssociation.description
@@ -64,7 +64,7 @@ public struct HostAssociationJson: Codable {
     
     private enum CodingKeys: String, CodingKey {
         case uuid
-        case locationUuid = "location"
+        case location
         case host
         case title
         case description

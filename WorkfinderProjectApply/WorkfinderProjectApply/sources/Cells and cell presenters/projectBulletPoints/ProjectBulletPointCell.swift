@@ -15,6 +15,7 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
         let label = UILabel()
         Style.body.text.applyTo(label: label)
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
@@ -25,7 +26,7 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
         label.text = "\u{2022}"
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         return label
     }()
@@ -37,9 +38,9 @@ class ProjectBulletPointWithTitleCell: PresentableCell {
         ])
         stack.axis = .horizontal
         stack.alignment = .firstBaseline
-        stack.spacing = 20
+        stack.spacing = 8
         let height = stack.heightAnchor.constraint(equalToConstant: 20)
-        height.priority = .defaultLow
+        height.priority = .defaultHigh
         height.isActive = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack

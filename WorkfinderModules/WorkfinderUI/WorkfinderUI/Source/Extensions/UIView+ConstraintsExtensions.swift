@@ -79,7 +79,7 @@ public extension UIView {
         }
         let constraints = [topConstraint, leadingConstraint, bottomConstraint,trailingConstraint, widthConstraint, heightConstraint]
         constraints.forEach { (constraint) in
-            constraint?.priority = .defaultHigh
+            constraint?.priority = UILayoutPriority(999)
             constraint?.isActive = true
         }
         return (topConstraint, leadingConstraint, bottomConstraint, trailingConstraint, widthConstraint, heightConstraint)

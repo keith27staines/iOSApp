@@ -53,7 +53,7 @@ class AssociationDetailService: AssociationDetailServiceProtocol {
     
     private func onAssociationLoaded(association: AssociationJson) {
         associationDetail.association = association
-        loadHost(hostUuid: association.host)
+        loadHost(hostUuid: association.host.uuid!)
     }
     
     private func loadHost(hostUuid: F4SUUID) {
@@ -79,7 +79,7 @@ class AssociationDetailService: AssociationDetailServiceProtocol {
     
     private func onHostLoaded(host: Host) {
         associationDetail.host = host
-        guard let locationUuid = associationDetail.association?.locationUuid else {
+        guard let locationUuid = associationDetail.association?.location.uuid else {
             completion?(Result<AssociationDetail, Error>.success(associationDetail))
             return
         }
@@ -109,7 +109,7 @@ class AssociationDetailService: AssociationDetailServiceProtocol {
     
     private func onLocationLoaded(location: CompanyLocationJson) {
         associationDetail.location = location
-        guard let companyUuid = location.company else {
+        guard let companyUuid = location.company?.uuid else {
             completion?(Result<AssociationDetail, Error>.success(associationDetail))
             return
         }

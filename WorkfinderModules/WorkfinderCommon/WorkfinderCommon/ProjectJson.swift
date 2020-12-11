@@ -7,7 +7,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var aboutCandidate: String?
     public var candidateActivities: [String]?
     public var type: F4SUUID?
-    public var association: F4SUUID?
+    public var association: AssociationDetail?
     public var isPaid: Bool?
     public var status: String?
     public var candidateQuantity: String?
@@ -15,6 +15,8 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var isRemote: Bool?
     public var duration: String?
     public var startDate: String?
+    
+    public init() {}
     
     enum CodingKeys: String, CodingKey {
         case uuid

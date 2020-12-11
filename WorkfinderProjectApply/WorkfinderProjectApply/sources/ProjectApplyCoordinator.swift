@@ -61,7 +61,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         let presenter = ProjectPresenter(
             coordinator: self,
             projectUuid: projectUuid,
-            projectService: ProjectAndAssociationDetailsService(networkConfig: injected.networkConfig)
+            projectService: ProjectService(networkConfig: injected.networkConfig)
         )
         self.projectPresenter = presenter
         let vc = ProjectViewController(coordinator: self, presenter: presenter)
@@ -74,8 +74,8 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     
     func startCoverLetterFlow() {
         let candidate = UserRepository().loadCandidate()
-        let associationDetail = projectPresenter?.detail.associationDetail
-        let projectTitle = projectPresenter?.detail.project?.name
+        let associationDetail = projectPresenter?.association
+        let projectTitle = projectPresenter?.project.name
         guard
             let companyName = associationDetail?.company?.name,
             let hostName = associationDetail?.host?.displayName
@@ -141,8 +141,8 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         let builder = DraftPlacementPreparer()
         builder.update(candidateUuid: UserRepository().loadCandidate().uuid)
         builder.update(picklists: picklistsDictionary)
-        builder.update(associationUuid: projectPresenter?.detail.project?.association?.uuid)
-        builder.update(associatedProject: projectPresenter?.detail.project?.uuid)
+        builder.update(associationUuid: projectPresenter?.association?.uuid)
+        builder.update(associatedProject: projectPresenter?.project.uuid)
         builder.update(coverletter: coverLetterText)
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         placementService?.postPlacement(draftPlacement: builder.draft) { [weak self] (result) in

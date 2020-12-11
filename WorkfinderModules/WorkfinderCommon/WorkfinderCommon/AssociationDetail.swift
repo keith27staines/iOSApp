@@ -1,5 +1,6 @@
 
-public struct AssociationDetail: Codable {
+public struct AssociationDetail: Codable, Equatable, Hashable {
+    public var uuid: F4SUUID?
     public var association: AssociationJson?
     public var location: CompanyLocationJson?
     public var host: Host?

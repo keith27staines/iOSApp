@@ -29,12 +29,12 @@ public class Workplace: Codable {
     }
 }
 
-public struct CodeAndName: Codable {
+public struct CodeAndName: Codable, Equatable, Hashable {
     public let code: String
     public let name: String
 }
 
-public struct CompanyJson: Codable {
+public struct CompanyJson: Codable, Equatable, Hashable {
     public var uuid: String?
     public var name: String?
     public var description: String?
@@ -116,8 +116,8 @@ public struct CompanyJson: Codable {
  }
  */
 
-public struct CompanyLocationJson: Codable {
-    public var company: F4SUUID?
+public struct CompanyLocationJson: Codable, Equatable, Hashable {
+    public var company: CompanyJson?
     public var uuid: String?
     public var address_postcode: String?
     public var address_city: String?
@@ -135,14 +135,14 @@ public struct CompanyLocationJson: Codable {
     }
 }
 
-public struct PointJson : Codable {
+public struct PointJson : Codable, Equatable, Hashable {
     public var type: String?
     public var coordinates: [Float]
     public var latitude: CGFloat { return CGFloat(coordinates[1]) }
     public var longitude: CGFloat { return CGFloat(coordinates[0]) }
 }
 
-public struct Host : Codable {
+public struct Host : Codable, Equatable, Hashable {
     
     public var uuid: F4SUUID?
     public var displayName: String?

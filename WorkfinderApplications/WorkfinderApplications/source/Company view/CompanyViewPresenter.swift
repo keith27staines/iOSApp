@@ -83,7 +83,7 @@ class CompanyViewPresenter: NSObject {
     
     func rebuild(companyJson: CompanyJson, association: AssociationJson) {
         let location = companyJson.locations?.first(where: { (location) -> Bool in
-            location.uuid == association.locationUuid
+            location.uuid == association.location.uuid
         })
         let pinJson = PinJson(
             workplaceUuid: location?.uuid ?? "",

@@ -86,23 +86,14 @@ public class WorkplaceAndAssociationService {
                 handleError(error)
                 return
         }
-        let locationUuid = associationJson.locationUuid
-        locationService.fetchLocation(locationUuid: locationUuid) { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let companyLocationJson):
-                self.companyLocationJson = companyLocationJson
-                self.onLocationFetched()
-            case .failure(let error):
-                self.handleError(error)
-            }
-        }
+        companyLocationJson = associationJson.location
+        onLocationFetched()
     }
     
     func onLocationFetched() {
         guard
             let location = self.companyLocationJson,
-            let companyUuid = location.company
+            let companyUuid = location.company?.uuid
             else {
                 let error = WorkfinderError(title: "Company not found", description: "Either the location hasn't been fetched from the server or the location doesn't have a company")
                 handleError(error)
