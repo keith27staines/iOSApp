@@ -1,4 +1,4 @@
 
-class PeopleDatasource: TypeAheadDataSource {
+class PeopleDatasource: TypeAheadItemsDatasource {
     
 }

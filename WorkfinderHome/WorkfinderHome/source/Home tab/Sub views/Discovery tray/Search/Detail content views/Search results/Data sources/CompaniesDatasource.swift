@@ -1,5 +1,5 @@
 
 
-class CompaniesDatasource: TypeAheadDataSource {
+class CompaniesDatasource: TypeAheadItemsDatasource {
     
 }
