@@ -7,7 +7,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var aboutCandidate: String?
     public var candidateActivities: [String]?
     public var type: F4SUUID?
-    public var association: AssociationDetail?
+    public var association: RoleNestedAssociation?
     public var isPaid: Bool?
     public var status: String?
     public var candidateQuantity: String?

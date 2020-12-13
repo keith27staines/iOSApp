@@ -75,7 +75,8 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
 fileprivate class FetchRolesWorkerService: WorkfinderService {
     
     func fetchRoles(endpoint: String, queryItems: [URLQueryItem]?, completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        let innerResultHandler: ((Result<ServerListJson<Role>, Error>) -> Void) = { result in
+        let queryItems = [URLQueryItem(name: "limit", value: "1")]
+        let innerResultHandler: ((Result<ServerListJson<RoleJson>, Error>) -> Void) = { result in
             switch result {
             case .success(let json):
                 let roleDataArray = json.results.map { (role) -> RoleData in
@@ -96,21 +97,13 @@ fileprivate class FetchRolesWorkerService: WorkfinderService {
     }
 }
 
-fileprivate struct Role: Codable {
-    var uuid: F4SUUID?
-    var name: String?
-    var association: ExpandedAssociation
-    var is_remote: Bool?
-    var is_paid: Bool?
-    var employment_type: String?
-}
-
 fileprivate extension RoleData {
-    init(role: Role) {
+    init(role: RoleJson) {
         id = role.uuid
         projectTitle = role.name
-        companyName = role.association.location?.company?.name
-        companyLogoUrlString = role.association.location?.company?.logo
+        let company = role.association.location?.company
+        companyName = company?.name
+        companyLogoUrlString = company?.logo
         locationHeader = "Location"
         location = role.is_remote == true ? "Remote" : ""
         paidHeader = "Paid (ph)"

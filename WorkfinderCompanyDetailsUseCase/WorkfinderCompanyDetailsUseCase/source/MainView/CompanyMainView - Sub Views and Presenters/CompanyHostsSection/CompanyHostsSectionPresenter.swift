@@ -10,13 +10,13 @@ protocol CompanyHostsSectionViewProtocol: class {
 protocol CompanyHostsSectionPresenterProtocol {
     var selectedHostRow: Int? { get }
     var isAssociationSelected: Bool { get }
-    var selectedAssociation: HostAssociationJson? { get }
+    var selectedAssociation: ExpandedAssociation? { get }
     var numberOfRows: Int { get }
     var associationsTextModel: TextModel { get }
     func cellforRow(_ row: Int, in tableView: UITableView) -> UITableViewCell
-    func onDidTapLinkedIn(for: HostAssociationJson)
+    func onDidTapLinkedIn(for: ExpandedAssociation)
     func onDidTapHostCell(_ hostCell: HostLocationAssociationCell, atIndexPath indexPath: IndexPath)
-    func onHostsDidLoad(_ hosts: [HostAssociationJson])
+    func onHostsDidLoad(_ hosts: [ExpandedAssociation])
     func onViewDidLoad(_ view: CompanyHostsSectionViewProtocol)
 }
 
@@ -40,9 +40,9 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         return hostCell
     }
     
-    var tappedLinkedin: ((HostAssociationJson) -> Void)?
+    var tappedLinkedin: ((ExpandedAssociation) -> Void)?
     
-    func onDidTapLinkedIn(for association: HostAssociationJson) {
+    func onDidTapLinkedIn(for association: ExpandedAssociation) {
         tappedLinkedin?(association)
     }
     var selectedHostRow: Int?
@@ -57,11 +57,11 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
     
     var isAssociationSelected: Bool { selectedAssociation != nil }
     
-    var selectedAssociation: HostAssociationJson? {
+    var selectedAssociation: ExpandedAssociation? {
         return associations.first { (association) -> Bool in association.isSelected }
     }
     
-    func updateAssociationSelectionState(from updatedAssociation: HostAssociationJson) {
+    func updateAssociationSelectionState(from updatedAssociation: ExpandedAssociation) {
         if updatedAssociation.isSelected {
             for (index, association) in associations.enumerated() {
                 if association.uuid == updatedAssociation.uuid {
@@ -76,7 +76,7 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         view?.refresh()
     }
     
-    private func updateAssociation(from updatedAssociation: HostAssociationJson) {
+    private func updateAssociation(from updatedAssociation: ExpandedAssociation) {
         guard let index = (associations.firstIndex { (association) -> Bool in
             association.uuid == updatedAssociation.uuid
         }) else { return }
@@ -93,9 +93,9 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
         self.view = view
     }
     
-    var associations: [HostAssociationJson] = []
+    var associations: [ExpandedAssociation] = []
     
-    func onHostsDidLoad(_ associations: [HostAssociationJson]) {
+    func onHostsDidLoad(_ associations: [ExpandedAssociation]) {
         self.associations = associations
         if associations.count == 1 { self.associations[0].isSelected = true }
         self.associationsTextModel = TextModel(associations: associations)

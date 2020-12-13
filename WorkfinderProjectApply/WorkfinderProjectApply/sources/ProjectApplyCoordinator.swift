@@ -74,11 +74,11 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     
     func startCoverLetterFlow() {
         let candidate = UserRepository().loadCandidate()
-        let associationDetail = projectPresenter?.association
+        let association = projectPresenter?.association
         let projectTitle = projectPresenter?.project.name
         guard
-            let companyName = associationDetail?.location?.company?.name,
-            let hostName = associationDetail?.host?.displayName
+            let companyName = association?.location?.company?.name,
+            let hostName = association?.host?.fullName
             else { return }
         
         let coordinator = CoverLetterFlowFactory.makeFlow(

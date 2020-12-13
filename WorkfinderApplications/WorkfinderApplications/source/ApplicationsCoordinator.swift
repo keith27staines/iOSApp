@@ -108,11 +108,11 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     func showCompanyHost(application: Application) {
         guard let associationUuid = application.associationUuid else { return }
         let hostService = HostsProvider(networkConfig: networkConfig)
-        let hostLocationService = AssociationsService(networkConfig: networkConfig)
+        let locationService = AssociationsService(networkConfig: networkConfig)
         let presenter = HostViewPresenter(
             coordinator: self,
             hostService: hostService,
-            hostLocationService: hostLocationService,
+            locationService: locationService,
             associationUuid: associationUuid)
         let vc = HostViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)

@@ -5,8 +5,8 @@ import WorkfinderUI
 
 protocol CompanyMainViewCoordinatorProtocol: class {
     func onDidTapDuedil()
-    func onDidTapLinkedin(association: HostAssociationJson)
-    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson)
+    func onDidTapLinkedin(association: ExpandedAssociation)
+    func applyTo(workplace: Workplace, association: ExpandedAssociation)
 }
 
 protocol CompanyMainViewPresenterProtocol: class {
@@ -31,7 +31,7 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var companyLocation: LatLon {
         return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon))
     }
-    var selectedAssociation: HostAssociationJson? { return hostsSectionPresenter.selectedAssociation }
+    var selectedAssociation: ExpandedAssociation? { return hostsSectionPresenter.selectedAssociation }
     var isHostSelected: Bool { return hostsSectionPresenter.isAssociationSelected }
     lazy var headerViewPresenter: CompanyHeaderViewPresenterProtocol = {
         return CompanyHeaderViewPresenter(workplace: self.workplace)
@@ -68,7 +68,7 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     func onDidTapApply() {
         guard let association = selectedAssociation else { return }
         let hostRowIndex = hostsSectionPresenter.selectedHostRow  ?? 0
-        let host = hostsSectionPresenter.selectedAssociation?.host.uuid ?? ""
+        let host = hostsSectionPresenter.selectedAssociation?.host?.uuid ?? ""
         let company = workplace.companyJson.uuid ?? ""
         let event = TrackingEvent.makeApplyStart(
             hostRowIndex: hostRowIndex,
@@ -76,7 +76,7 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
             company: company)
         
         log?.track(event)
-        coordinator?.applyTo(workplace: workplace, hostLocationAssociation: association)
+        coordinator?.applyTo(workplace: workplace, association: association)
     }
 }
 

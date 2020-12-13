@@ -1,22 +1,22 @@
 
 import WorkfinderCommon
 
-struct RoleData: Codable {
-    var id: String?
-    var recommendationUuid: String?
-    var roleLogoUrlString: String?
-    var projectTitle: String?
-    var companyName: String?
-    var companyLogoUrlString: String?
-    var paidHeader: String?
-    var paidAmount: String?
-    var workingHours: String?
-    var locationHeader: String?
-    var location: String?
-    var actionButtonText: String?
+public struct RoleData: Codable {
+    public var id: String?
+    public var recommendationUuid: String?
+    public var roleLogoUrlString: String?
+    public var projectTitle: String?
+    public var companyName: String?
+    public var companyLogoUrlString: String?
+    public var paidHeader: String?
+    public var paidAmount: String?
+    public var workingHours: String?
+    public var locationHeader: String?
+    public var location: String?
+    public var actionButtonText: String?
 }
 
-extension RoleData {
+public extension RoleData {
     init(recommendation: RecommendationsListItem) {
         let project = recommendation.project
         id = project?.uuid

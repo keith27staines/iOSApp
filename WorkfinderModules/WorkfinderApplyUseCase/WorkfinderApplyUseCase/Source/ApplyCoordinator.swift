@@ -74,14 +74,14 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         return candidate.uuid == nil
     }
     
-    let association: HostAssociationJson
+    let association: ExpandedAssociation
     let workplace: Workplace
     let updateCandidateService: UpdateCandidateServiceProtocol
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 updateCandidateService: UpdateCandidateServiceProtocol,
                 applyService: PostPlacementServiceProtocol,
                 workplace: Workplace,
-                association: HostAssociationJson,
+                association: ExpandedAssociation,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
@@ -115,7 +115,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }
     
     func startCoverLetterCoordinator(candidateAge: Int) {
-        guard let hostName = association.host.displayName else { return }
+        guard let hostName = association.host?.fullName else { return }
         let candidateName = injected.user.fullName
         let companyName = workplace.companyJson.name ?? "Unknown company"
         coverletterCoordinator = CoverLetterFlowFactory.makeFlow(

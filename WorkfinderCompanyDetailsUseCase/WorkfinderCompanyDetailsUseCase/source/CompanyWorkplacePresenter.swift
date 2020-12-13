@@ -8,7 +8,7 @@ import WorkfinderServices
 
 protocol CompanyDetailsPresenterProtocol: class {
     var view: CompanyDetailsViewProtocol? { get set }
-    var selectedHost: Host? { get }
+    var selectedHost: HostJson? { get }
     var mainViewPresenter: CompanyMainViewPresenter { get }
     func onTapBack()
     func onTapApply()
@@ -33,7 +33,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
         }
     }
     
-    var selectedHost: Host? { mainViewPresenter.hostsSectionPresenter.selectedAssociation?.host }
+    var selectedHost: HostJson? { mainViewPresenter.hostsSectionPresenter.selectedAssociation?.host }
     
     var companyPostcode: String? {
         didSet { view?.refresh() }
@@ -94,7 +94,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     
     func onTapApply() {
         guard let host = mainViewPresenter.hostsSectionPresenter.selectedAssociation else { return }
-        coordinator?.applyTo(workplace: workplace, hostLocationAssociation: host)
+        coordinator?.applyTo(workplace: workplace, association: host)
     }
     
     init(coordinator: CompanyDetailsCoordinator,

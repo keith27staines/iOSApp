@@ -12,7 +12,7 @@ public class WorkplaceAndAssociationService {
     
     var recommendation: RecommendationsListItem?
     public internal (set) var associationJson: AssociationJson?
-    var companyLocationJson: CompanyLocationJson?
+    var companyLocationJson: LocationJson?
     var companyJson: CompanyJson?
     
     var completion: ((Result<WorkplaceAndAssociationUuid,Error>) -> Void)?

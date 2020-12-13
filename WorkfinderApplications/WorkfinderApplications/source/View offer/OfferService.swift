@@ -34,7 +34,7 @@ class OfferService: OfferServiceProtocol{
                     endDateString: json.end_date,
                     duration: json.offered_duration,
                     hostCompany: json.association?.location?.company?.name,
-                    hostContact: json.association?.host?.displayName,
+                    hostContact: json.association?.host?.fullName,
                     email: json.association?.host?.emails?.first,
                     location: self.addressStringFromOfferJson(json),
                     logoUrl: json.association?.location?.company?.logo,
@@ -49,16 +49,16 @@ class OfferService: OfferServiceProtocol{
         }
     }
     
-    func addressStringFromOfferJson(_ json: ExpandedAssociationPlacementJson) -> String {
+    func addressStringFromOfferJson(_ json: PlacementJson) -> String {
         let loc = json.association?.location
         var addressElements = [String]()
-        if let element = loc?.address_unit { addressElements.append(element) }
-        if let element = loc?.address_building { addressElements.append(element) }
-        if let element = loc?.address_street { addressElements.append(element) }
-        if let element = loc?.address_city { addressElements.append(element) }
-        if let element = loc?.address_region { addressElements.append(element) }
-        if let element = loc?.address_country?.name { addressElements.append(element) }
-        if let element = loc?.address_postcode { addressElements.append(element) }
+        if let element = loc?.addressUnit { addressElements.append(element) }
+        if let element = loc?.addressBuilding { addressElements.append(element) }
+        if let element = loc?.addressStreet { addressElements.append(element) }
+        if let element = loc?.addressCity { addressElements.append(element) }
+        if let element = loc?.addressRegion { addressElements.append(element) }
+        if let element = loc?.addressCountry { addressElements.append(element.name) }
+        if let element = loc?.addressPostcode { addressElements.append(element) }
         var commaList = addressElements.reduce("") { (result, element) -> String in
             element.isEmpty ? result : result + ", \(element)"
         }
@@ -137,14 +137,14 @@ fileprivate class AcceptOfferService: WorkfinderService {
 fileprivate class FetchOfferService: WorkfinderService {
     func fetchOffer(
         uuid: F4SUUID,
-        completion: @escaping (Result<ExpandedAssociationPlacementJson,Error>) -> Void) {
+        completion: @escaping (Result<PlacementJson,Error>) -> Void) {
         do {
             let relativePath = "offers/\(uuid)"
             let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
             let request = try buildRequest(relativePath: relativePath, queryItems: queryItems, verb: .get)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
-            completion(Result<ExpandedAssociationPlacementJson,Error>.failure(error))
+            completion(Result<PlacementJson,Error>.failure(error))
         }
     }
 }

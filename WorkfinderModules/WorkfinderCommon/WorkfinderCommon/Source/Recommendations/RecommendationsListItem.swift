@@ -55,30 +55,3 @@ public struct RecommendationsListItem: Codable, Hashable {
     }
     
 }
-
-public struct ExpandedAssociation: Codable, Equatable, Hashable {
-    public var uuid: F4SUUID?
-    public var title: String?
-    public var host: Host?
-    public var location: Location?
-    
-    public struct Host: Codable, Equatable, Hashable {
-        public var uuid: F4SUUID?
-        public var photo: String?
-        public var fullName: String?
-        enum CodingKeys: String, CodingKey {
-            case uuid
-            case photo
-            case fullName = "full_name"
-        }
-    }
-    
-    public struct Location: Codable, Equatable, Hashable {
-        public var company: Company?
-        public struct Company: Codable, Equatable, Hashable  {
-            public var name: String?
-            public var logo: String?
-        }
-    }
-}
-

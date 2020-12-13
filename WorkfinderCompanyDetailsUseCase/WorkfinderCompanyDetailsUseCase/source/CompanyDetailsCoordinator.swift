@@ -23,8 +23,8 @@ protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorPr
     func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: Workplace)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String)
-    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson)
-    func onDidTapLinkedin(association: HostAssociationJson)
+    func applyTo(workplace: Workplace, association: ExpandedAssociation)
+    func onDidTapLinkedin(association: ExpandedAssociation)
 }
 
 public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, CompanyDetailsCoordinatorProtocol, CompanyMainViewCoordinatorProtocol {
@@ -93,14 +93,14 @@ extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
 
 extension CompanyDetailsCoordinator {
     
-    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson) {
+    func applyTo(workplace: Workplace, association: ExpandedAssociation) {
         guard let _ = workplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             updateCandidateService:UpdateCandidateService(networkConfig: injected.networkConfig),
             applyService: applyService,
             workplace: workplace,
-            association: hostLocationAssociation,
+            association: association,
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
@@ -121,8 +121,8 @@ extension CompanyDetailsCoordinator {
         childCoordinators = [:]
     }
     
-    func onDidTapLinkedin(association: HostAssociationJson) {
-        openUrl(association.host.linkedinUrlString)
+    func onDidTapLinkedin(association: ExpandedAssociation) {
+        openUrl(association.host?.linkedinUrlString)
     }
     
     func onDidTapDuedil() {

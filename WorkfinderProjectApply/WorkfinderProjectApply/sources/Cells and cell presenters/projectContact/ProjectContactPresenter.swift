@@ -18,9 +18,9 @@ class ProjectContactPresenter: ProjectContactPresenterProtocol {
     let linkedIn: String?
     var isHidden: Bool
     
-    init(host: Host?, role: String?, isHidden: Bool = false) {
+    init(host: HostJson?, role: String?, isHidden: Bool = false) {
         photo = host?.photoUrlString
-        name = host?.displayName
+        name = host?.fullName
         information = host?.description
         self.title = role
         linkedIn = host?.linkedinUrlString

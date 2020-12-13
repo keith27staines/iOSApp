@@ -7,7 +7,6 @@ class ProjectJsonTests: XCTestCase {
     let jsonString = """
     {\"uuid\": \"88e20661-814b-4d1f-b62f-37f7b9c5be0e\",
     \"type\": \"db0ffacd-c38c-4cb8-9476-548017aa3ede\",
-    \"association\": \"4d6b8144-eec1-495e-a536-9fb559d2e406\",
     \"is_paid\": true,
     \"candidate_quantity\": \"3\",
     \"is_remote\": false,
@@ -28,13 +27,14 @@ class ProjectJsonTests: XCTestCase {
     }
     
     func makeSUT() -> ProjectJson {
-        return ProjectJson(
-            uuid: "88e20661-814b-4d1f-b62f-37f7b9c5be0e",
-            type: "db0ffacd-c38c-4cb8-9476-548017aa3ede",
-            association: "4d6b8144-eec1-495e-a536-9fb559d2e406",
-            isPaid: true,
-            candidateQuantity: "3",
-            isRemote: false,
-            duration: "abcdef")
+        var project = ProjectJson()
+        project.uuid = "88e20661-814b-4d1f-b62f-37f7b9c5be0e"
+        project.type = "db0ffacd-c38c-4cb8-9476-548017aa3ede"
+        project.association = nil
+        project.isPaid = true
+        project.candidateQuantity = "3"
+        project.isRemote = false
+        project.duration = "abcdef"
+        return project
     }
 }

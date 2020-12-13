@@ -7,10 +7,10 @@ class HostLocationAssociationCell: UITableViewCell {
     
     static var reuseIdentifier: String = "HostLocationAssociationCell"
     
-    func configureWithAssociation(_ association: HostAssociationJson,
+    func configureWithAssociation(_ association: ExpandedAssociation,
                            summaryState: ExpandableLabelState ,
-                           profileLinkTap: @escaping ((HostAssociationJson) -> Void),
-                           selectAction: @escaping (HostAssociationJson) -> Void) {
+                           profileLinkTap: @escaping ((ExpandedAssociation) -> Void),
+                           selectAction: @escaping (ExpandedAssociation) -> Void) {
         hostView.association = association
         hostView.expandableLabelState = summaryState
         hostView.profileLinkTap = profileLinkTap

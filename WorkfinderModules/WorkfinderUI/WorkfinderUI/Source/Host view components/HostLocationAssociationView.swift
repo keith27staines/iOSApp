@@ -8,14 +8,14 @@ public class HostLocationAssociationView : UIView {
     var lineHeight: CGFloat = 23
     var fontWeight = UIFont.Weight.light
     
-    public var association: HostAssociationJson? {
+    public var association: ExpandedAssociation? {
         didSet {
-            image.load(urlString: association?.host.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
-            nameLabel.text = association?.host.displayName
+            image.load(urlString: association?.host?.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
+            nameLabel.text = association?.host?.fullName
             roleLabel.text = association?.title
-            expandableLabel.text = association?.host.description ?? "Description text"
-            textView.text = association?.host.description ?? "Description text"
-            if let _ = association?.host.linkedinUrlString {
+            expandableLabel.text = association?.host?.description ?? "Description text"
+            textView.text = association?.host?.description ?? "Description text"
+            if let _ = association?.host?.linkedinUrlString {
                 profileButton.isHidden = false
                 profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
             } else {
@@ -38,7 +38,7 @@ public class HostLocationAssociationView : UIView {
         readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
     }
     
-    public var profileLinkTap: ((HostAssociationJson) -> Void)?
+    public var profileLinkTap: ((ExpandedAssociation) -> Void)?
     
     public init(showSelectionButton: Bool = true) {
         self.showSelectionButton = showSelectionButton

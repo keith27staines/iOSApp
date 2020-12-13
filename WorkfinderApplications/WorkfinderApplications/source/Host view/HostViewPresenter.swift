@@ -3,20 +3,20 @@ import WorkfinderCommon
 
 class HostViewPresenter {
     let coordinator: ApplicationsCoordinator
-    let hostLocationService: AssociationsServiceProtocol
+    let locationService: AssociationsServiceProtocol
     let hostService: HostsProviderProtocol
     let associationUuid: F4SUUID
-    var association: HostAssociationJson?
+    var association: ExpandedAssociation?
     var view: HostViewController?
-    var host: Host?
+    var host: HostJson?
     
     init(coordinator: ApplicationsCoordinator,
          hostService: HostsProviderProtocol,
-         hostLocationService: AssociationsServiceProtocol,
+         locationService: AssociationsServiceProtocol,
          associationUuid: F4SUUID) {
         self.coordinator = coordinator
         self.hostService = hostService
-        self.hostLocationService = hostLocationService
+        self.locationService = locationService
         self.associationUuid = associationUuid
     }
     
@@ -29,7 +29,7 @@ class HostViewPresenter {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        hostLocationService.fetchAssociation(uuid: associationUuid) { [weak self] (result) in
+        locationService.fetchAssociation(uuid: associationUuid) { [weak self] (result) in
             switch result {
             case .success(let model): break
 //                self?.hostService.fetchHost(uuid: model.host) { [weak self ] (hostResult) in

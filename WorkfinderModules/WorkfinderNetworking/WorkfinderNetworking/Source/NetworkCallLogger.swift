@@ -23,7 +23,6 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
         text = "\(text)\n\(separator)\n\n"
         log.error(message: text, functionName: #function, fileName: #file, lineNumber: #line)
         log.notifyError(error, functionName: #function, fileName: #file, lineNumber: #line, callDetails: text)
-        assertionFailure()
     }
     
     public func logDataTaskFailure(error: WorkfinderError) {

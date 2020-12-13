@@ -2,8 +2,6 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-typealias ApplicationDetail = Application
-
 protocol ApplicationDetailPresenterProtocol {
     var screenTitle: String { get }
     var logoUrl: String? { get }
@@ -53,7 +51,7 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     let applicationService: ApplicationDetailServiceProtocol
     let coordinator: ApplicationsCoordinatorProtocol
     let application: Application
-    var applicationDetail: ApplicationDetail?
+    var applicationDetail: Application?
     
     var screenTitle: String { application.state.screenTitle }
     var stateDescription: String { application.state.description }

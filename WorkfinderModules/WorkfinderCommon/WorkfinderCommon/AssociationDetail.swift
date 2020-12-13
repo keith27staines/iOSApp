@@ -2,8 +2,8 @@
 public struct AssociationDetail: Codable, Equatable, Hashable {
     public var uuid: F4SUUID?
     public var association: AssociationJson?
-    public var location: CompanyLocationJson?
-    public var host: Host?
+    public var location: LocationJson?
+    public var host: HostJson?
     public var title: String? { association?.title }
     public var company: CompanyJson? //{ association?.location.company }
     

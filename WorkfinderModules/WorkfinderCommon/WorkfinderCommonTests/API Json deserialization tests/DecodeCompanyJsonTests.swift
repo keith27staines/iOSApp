@@ -1,15 +1,9 @@
-//
-//  WorkfinderHomeTests.swift
-//  WorkfinderHomeTests
-//
-//  Created by Keith Staines on 22/11/2020.
-//
+
 
 import XCTest
-import WorkfinderCommon
-@testable import WorkfinderHome
+@testable import WorkfinderCommon
 
-class CompanyJsonTests: XCTestCase {
+class DecodeCompanyJsonTests: XCTestCase {
 
     let companyData = companyString.data(using: .utf8)!
     let locationData = locationString.data(using: .utf8)!
@@ -21,13 +15,15 @@ class CompanyJsonTests: XCTestCase {
         XCTAssertEqual(sut?.locations?.first?.addressPostcode, "WC1N 3AX")
     }
     
-    func test_decodeCompanyNestedLocationJson() {
+    func test_decodeLCompanyNestedLocationJson() {
         let decoder = JSONDecoder()
         let sut = try? decoder.decode(CompanyNestedLocationJson.self, from: locationData)
         XCTAssertNotNil(sut)
         XCTAssertEqual(sut?.company, "d3ec9374-3618-4617-9ff6-535c40a7be46")
         XCTAssertEqual(sut?.addressPostcode, "WC1N 3AX")
     }
+    
+
 }
 
 let locationString = """

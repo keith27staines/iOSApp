@@ -69,8 +69,8 @@ class ProjectPresenter: ProjectPresenterProtocol {
     let service: ProjectServiceProtocol
     
     private var company: CompanyJson? { association?.location?.company }
-    var association: AssociationDetail? { project.association }
-    var host: Host? { association?.host }
+    var association: RoleNestedAssociation? { project.association }
+    var host: HostJson? { association?.host }
     var projectType: String? { project.type }
     var project: ProjectJson = ProjectJson() { didSet { view?.refreshFromPresenter() } }
     var projectName: String? { project.name }
@@ -159,7 +159,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
                 if project.isRemote == true {
                     locationString = "This is a remote project"
                 } else {
-                    if let city = association?.location?.address_city {
+                    if let city = association?.location?.addressCity {
                         locationString = "The company is based in \(city)"
                     }
                 }
