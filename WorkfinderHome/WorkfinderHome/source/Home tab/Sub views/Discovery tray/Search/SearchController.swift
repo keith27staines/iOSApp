@@ -127,6 +127,18 @@ class SearchController: NSObject {
         self.searchResultsController = searchResultsController
         super.init()
         state = .hidden
+        addNotificationListeners()
+    }
+    
+    func addNotificationListeners() {
+        NotificationCenter.default.addObserver(self, selector: #selector(popularOnWorkfinderTapListener), name: .wfHomeScreenPopularOnWorkfinderTapped, object: nil)
+    }
+    
+    @objc func popularOnWorkfinderTapListener(notification: Notification) {
+        guard let searchString = notification.object as? String
+        else { return }
+        searchBar.text = searchString
+        performSearch()
     }
 }
 
@@ -206,9 +218,7 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
         return nil
     }
     
-    var shouldEnableReturnKey: Bool {
-        searchBar.text?.count ?? 0 > 0 ? true : false
-    }
+    var shouldEnableReturnKey: Bool { searchBar.text?.count ?? 0 > 0 ? true : false }
 }
 
 extension SearchController {

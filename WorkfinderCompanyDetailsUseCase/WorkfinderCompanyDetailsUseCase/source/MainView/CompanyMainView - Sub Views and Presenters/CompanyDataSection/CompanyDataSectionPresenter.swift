@@ -24,7 +24,7 @@ protocol CompanyDataSectionPresenterProtocol: class {
 
 class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
     
-    var workplace: Workplace?
+    var workplace: CompanyAndPin?
     var numberOfRows: Int { return items.count }
     var company: CompanyJson? { return self.workplace?.companyJson }
     
@@ -117,7 +117,7 @@ class CompanyDataSectionPresenter: CompanyDataSectionPresenterProtocol {
                                    link: nil)
     }
     
-    init(workplace: Workplace) {
+    init(workplace: CompanyAndPin) {
         self.workplace = workplace
     }
     

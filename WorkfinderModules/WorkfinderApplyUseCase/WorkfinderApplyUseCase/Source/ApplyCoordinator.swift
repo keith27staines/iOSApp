@@ -75,12 +75,12 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }
     
     let association: ExpandedAssociation
-    let workplace: Workplace
+    let workplace: CompanyAndPin
     let updateCandidateService: UpdateCandidateServiceProtocol
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 updateCandidateService: UpdateCandidateServiceProtocol,
                 applyService: PostPlacementServiceProtocol,
-                workplace: Workplace,
+                workplace: CompanyAndPin,
                 association: ExpandedAssociation,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,

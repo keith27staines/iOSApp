@@ -45,6 +45,12 @@ class CapsuleView: UIView {
         tintColor = UIColor(red: 33, green: 33, blue: 33)
         addSubview(stack)
         stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+        isUserInteractionEnabled = true
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(capsuleTapped)))
+    }
+    
+    @objc func capsuleTapped() {
+        NotificationCenter.default.post(name: .wfHomeScreenPopularOnWorkfinderTapped, object: text)
     }
     
     lazy var stack: UIStackView = {

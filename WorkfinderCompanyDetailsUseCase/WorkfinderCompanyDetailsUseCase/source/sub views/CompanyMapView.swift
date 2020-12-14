@@ -55,7 +55,7 @@ class F4SCompanyAnnotation : MKPointAnnotation  {
 }
 
 extension CLLocation {
-    convenience init(pin: PinJson) {
+    convenience init(pin: LocationPin) {
         self.init(latitude: pin.lat, longitude: pin.lon)
     }
     
@@ -67,7 +67,7 @@ extension CLLocation {
 }
 
 extension CLLocationCoordinate2D {
-    init(pin: PinJson) {
+    init(pin: LocationPin) {
         self.init(latitude: pin.lat, longitude: pin.lon)
     }
 }

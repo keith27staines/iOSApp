@@ -11,7 +11,7 @@ public protocol CompanyCoordinatorFactoryProtocol {
     func buildCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        workplace: Workplace,
+        workplace: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)
@@ -21,9 +21,9 @@ public protocol CompanyCoordinatorFactoryProtocol {
 protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorProtocol {
     var originScreen: ScreenName { get set }
     func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol)
-    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: Workplace)
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: CompanyAndPin)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String)
-    func applyTo(workplace: Workplace, association: ExpandedAssociation)
+    func applyTo(workplace: CompanyAndPin, association: ExpandedAssociation)
     func onDidTapLinkedin(association: ExpandedAssociation)
 }
 
@@ -32,7 +32,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     let environment: EnvironmentType
     var companyViewController: CompanyDetailsViewController!
     var workplacePresenter: WorkplacePresenter!
-    var workplace: Workplace
+    var workplace: CompanyAndPin
     var recommendedAssociationUuid: F4SUUID?
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
@@ -42,7 +42,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     public init(
         parent: CompanyCoordinatorParentProtocol?,
         navigationRouter: NavigationRoutingProtocol,
-        workplace: Workplace,
+        workplace: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
@@ -93,7 +93,7 @@ extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
 
 extension CompanyDetailsCoordinator {
     
-    func applyTo(workplace: Workplace, association: ExpandedAssociation) {
+    func applyTo(workplace: CompanyAndPin, association: ExpandedAssociation) {
         guard let _ = workplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
@@ -129,7 +129,7 @@ extension CompanyDetailsCoordinator {
         openUrl(workplace.companyJson.duedilUrlString)
     }
     
-    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor workplace: Workplace) {
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor workplace: CompanyAndPin) {
         guard
             let urlString = workplace.companyJson.duedilUrlString,
             let url = URL(string: urlString) else { return }

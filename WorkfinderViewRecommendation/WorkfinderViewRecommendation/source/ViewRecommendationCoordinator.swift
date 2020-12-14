@@ -8,14 +8,14 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     let recommendationUuid: F4SUUID
     
     /// Tuple containing this coordinator, the recommended Workplace and the recommended association  uuid
-    var onSuccess: (ViewRecommendationCoordinator, Workplace, F4SUUID) -> Void
+    var onSuccess: (ViewRecommendationCoordinator, CompanyAndPin, F4SUUID) -> Void
     var onCancel: (ViewRecommendationCoordinator) -> Void
     
     public init(recommendationUuid: F4SUUID,
                 parent: Coordinating?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                onSuccess: @escaping (ViewRecommendationCoordinator, Workplace, F4SUUID) -> Void,
+                onSuccess: @escaping (ViewRecommendationCoordinator, CompanyAndPin, F4SUUID) -> Void,
                 onCancel: @escaping (ViewRecommendationCoordinator) -> Void) {
         self.recommendationUuid = recommendationUuid
         self.onSuccess = onSuccess

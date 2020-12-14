@@ -26,7 +26,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     func buildCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        workplace: Workplace,
+        workplace: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)

@@ -6,6 +6,11 @@ import WorkfinderCoordinators
 import WorkfinderServices
 import WorkfinderProjectApply
 
+extension Notification.Name {
+    static let wfHomeScreenRoleTapped = Notification.Name("RoleTapped")
+    static let wfHomeScreenPopularOnWorkfinderTapped = Notification.Name("PopularOnWorkfinderTapped")
+}
+
 public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
@@ -51,6 +56,10 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
          companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
+        addNotificationListeners()
+    }
+    
+    func addNotificationListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(roleTapped), name: .wfHomeScreenRoleTapped, object: nil)
     }
     
@@ -117,9 +126,9 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         coordinator.start()
     }
     
-    var showingDetailForWorkplace: Workplace?
+    var showingDetailForWorkplace: CompanyAndPin?
 
-    func showDetail(workplace: Workplace?, recommendedAssociationUuid: F4SUUID?, originScreen: ScreenName) {
+    func showDetail(workplace: CompanyAndPin?, recommendedAssociationUuid: F4SUUID?, originScreen: ScreenName) {
         guard let Workplace = workplace else { return }
         showingDetailForWorkplace = workplace
         rootViewController.dismiss(animated: true)

@@ -9,11 +9,11 @@ protocol CompanySummarySectionPresenterProtocol {
 }
 
  class CompanySummarySectionPresenter: CompanySummarySectionPresenterProtocol {
-    let workplace: Workplace?
+    let workplace: CompanyAndPin?
     var company: CompanyJson? { workplace?.companyJson }
     var numberOfRows: Int { return summarySectionRowModel.count }
     
-    init(workplace: Workplace?) {
+    init(workplace: CompanyAndPin?) {
         self.workplace = workplace
         buildSummarySectionRowModel()
     }

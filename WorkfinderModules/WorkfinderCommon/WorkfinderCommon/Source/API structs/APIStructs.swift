@@ -303,14 +303,14 @@ public struct CodeAndName: Codable, Equatable, Hashable {
 
 // MARK: - Workplace and pin -
 /// locates a company on a map
-public struct PinJson: Codable, Hashable {
-    public var workplaceUuid: String
+public struct LocationPin: Codable, Hashable {
+    public var locationUuid: String
     public var lat: Double
     public var lon: Double
     public var tags: [String]
     
-    public init(workplaceUuid: F4SUUID, latitude: Double, longitude: Double) {
-        self.workplaceUuid = workplaceUuid
+    public init(locationUuid: F4SUUID, latitude: Double, longitude: Double) {
+        self.locationUuid = locationUuid
         self.lat = latitude
         self.lon = longitude
         self.tags = []
@@ -326,12 +326,12 @@ public struct PointJson : Codable, Equatable, Hashable {
 }
 
 /// Represents a company and the pin data that positions the company on a map
-public class Workplace: Codable {
+public class CompanyAndPin: Codable {
     public var companyJson: CompanyJson
-    public var pinJson: PinJson
-    public init(companyJson: CompanyJson, pinJson: PinJson) {
+    public var locationPin: LocationPin
+    public init(companyJson: CompanyJson, locationPin: LocationPin) {
         self.companyJson = companyJson
-        self.pinJson = pinJson
+        self.locationPin = locationPin
     }
     public var postcode: String {
         companyJson.locations?.first?.addressPostcode ?? "unknown postcode"

@@ -1,7 +1,7 @@
 
 import WorkfinderCommon
 
-public typealias WorkplaceAndAssociationUuid = (Workplace,F4SUUID)
+public typealias WorkplaceAndAssociationUuid = (CompanyAndPin,F4SUUID)
 
 public class WorkplaceAndAssociationService {
     var recommendationUuid: F4SUUID?
@@ -144,10 +144,10 @@ public class WorkplaceAndAssociationService {
                 handleError(error)
                 return
         }
-        let pinJson = PinJson(workplaceUuid: locationUuid,
+        let pin = LocationPin(locationUuid: locationUuid,
                               latitude: Double(latitude),
                               longitude: Double(longitude))
-        let workplace = Workplace(companyJson: companyJson, pinJson: pinJson)
+        let workplace = CompanyAndPin(companyJson: companyJson, locationPin: pin)
         handleSuccess((workplace, recommendedAssociationUuid))
     }
 }

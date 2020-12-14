@@ -39,14 +39,14 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
         didSet { view?.refresh() }
     }
 
-    var workplace: Workplace {
+    var companyAndPin: CompanyAndPin {
         didSet {
             view?.refresh()
         }
     }
     
     var companyLocation: CLLocation {
-        let pin = workplace.pinJson
+        let pin = companyAndPin.locationPin
         return CLLocation(latitude: pin.lat, longitude: pin.lon)
     }
     
@@ -94,16 +94,16 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     
     func onTapApply() {
         guard let host = mainViewPresenter.hostsSectionPresenter.selectedAssociation else { return }
-        coordinator?.applyTo(workplace: workplace, association: host)
+        coordinator?.applyTo(workplace: companyAndPin, association: host)
     }
     
     init(coordinator: CompanyDetailsCoordinator,
-         workplace: Workplace,
+         workplace: CompanyAndPin,
          recommendedAssociationUuid: F4SUUID?,
          associationsService: AssociationsServiceProtocol,
          log: F4SAnalyticsAndDebugging?) {
         self.associationsService = associationsService
-        self.workplace = workplace
+        self.companyAndPin = workplace
         self.recommendedAssociationUuid = recommendedAssociationUuid
         self.coordinator = coordinator
         self.log = log
@@ -139,7 +139,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     
     func beginLoadHosts() {
         view?.showLoadingIndicator()
-        let locationUuid = workplace.pinJson.workplaceUuid
+        let locationUuid = companyAndPin.locationPin.locationUuid
         associationsService.fetchAssociations(for: locationUuid) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.hideLoadingIndicator(self)
