@@ -8,21 +8,31 @@ public class HostLocationAssociationView : UIView {
     var lineHeight: CGFloat = 23
     var fontWeight = UIFont.Weight.light
     
-    public var association: ExpandedAssociation? {
+    var host: HostJson? {
         didSet {
-            image.load(urlString: association?.host?.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
-            nameLabel.text = association?.host?.fullName
-            roleLabel.text = association?.title
-            expandableLabel.text = association?.host?.description ?? "Description text"
-            textView.text = association?.host?.description ?? "Description text"
-            if let _ = association?.host?.linkedinUrlString {
+            image.load(urlString: host?.photoUrlString, defaultImage: HostLocationAssociationView.defaultImage)
+            nameLabel.text = host?.fullName
+            expandableLabel.text = host?.description ?? "Description text"
+            textView.text = host?.description ?? "Description text"
+            if let _ = host?.linkedinUrlString {
                 profileButton.isHidden = false
                 profileButton.setTitle("see more on LinkedIn", for: UIControl.State.normal)
             } else {
                 profileButton.isHidden = true
             }
+        }
+    }
+    
+    var association: ExpandedAssociation? {
+        didSet {
+            roleLabel.text = association?.title
             associationSelectionView.isSelected = association?.isSelected ?? false
         }
+    }
+    
+    public func configureWith(host: HostJson?, association: ExpandedAssociation?) {
+        self.host = host
+        self.association = association
     }
     
     public var expandableLabelState = ExpandableLabelState() {
@@ -48,9 +58,6 @@ public class HostLocationAssociationView : UIView {
             fullStack.fillSuperview(padding: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
         } else {
             fullStack.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: nil, trailing: self.trailingAnchor)
-            addSubview(textView)
-            fullStack.heightAnchor.constraint(equalToConstant: 80).isActive = true
-            textView.anchor(top: fullStack.bottomAnchor, leading: fullStack.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor)
         }
         
     }

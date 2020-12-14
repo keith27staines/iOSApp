@@ -7,12 +7,13 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
     static var identifer = "LandscapeRoleCell"
     var row: Int = 0
     var presenter: RecentRolesDataSource!
+    var roleData: RoleData = RoleData()
     
     func presentWith(_ presenter: CellPresenter?) {
         guard let presenter = presenter as? RecentRolesDataSource else { return }
         self.presenter = presenter
         companyLogo.image = presenter.imageForRow(row)
-        let roleData: RoleData = presenter.roleForRow(row)
+        roleData = presenter.roleForRow(row)
         companyName.text = roleData.companyName ?? "Not specified"
         projectTitle.text = roleData.projectTitle
         payIconLabel.label.text = roleData.paidAmount
@@ -124,6 +125,11 @@ class LandscapeRoleCell: UITableViewCell, Presentable {
         mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 21, left: 23, bottom: 15, right: 17))
         separator.anchor(top: nil, leading: nil, bottom: contentView.bottomAnchor, trailing: nil)
         separator.widthAnchor.constraint(equalTo: mainStack.widthAnchor).isActive = true
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cellTapped)))
+    }
+    
+    @objc func cellTapped() {
+        NotificationCenter.default.post(name: .wfHomeScreenRoleTapped, object: roleData)
     }
     
     required init?(coder: NSCoder) {

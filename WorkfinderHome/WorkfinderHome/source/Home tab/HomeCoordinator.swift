@@ -27,14 +27,14 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     }()
     
     func dispatchTypeAheadItem(_ item: TypeAheadItem) {
-        guard let objectType = item.objectType else { return }
+        guard let objectType = item.objectType, let uuid = item.uuid else { return }
         var title = ""
         let subtitle = "\(item.objectType ?? "")\n\(item.title ?? "")\n\(item.subtitle ?? "")"
         switch objectType {
         case "association":
             title = "TODO: Route to PASSIVE apply workflow"
         case "project":
-            title = "TODO: Route to PROJECT apply workflow"
+            startProjectApply(project: uuid, source: .searchTab)
         default:
             title = "Unexpected object type, no known routing"
         }

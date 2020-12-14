@@ -243,6 +243,8 @@ public struct ExpandedAssociation: Codable, Equatable, Hashable {
         case started
         case stopped
     }
+    
+    public init() {}
 }
 
 /// Identical to ExpandedAssociation except for the type of the nested location object, as returned by projects/ and roles/ apis

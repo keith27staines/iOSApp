@@ -12,7 +12,7 @@ public class WorkplaceAndAssociationService {
     
     var recommendation: RecommendationsListItem?
     public internal (set) var associationJson: AssociationJson?
-    var companyLocationJson: LocationJson?
+    var locationJson: LocationJson?
     var companyJson: CompanyJson?
     
     var completion: ((Result<WorkplaceAndAssociationUuid,Error>) -> Void)?
@@ -86,13 +86,22 @@ public class WorkplaceAndAssociationService {
                 handleError(error)
                 return
         }
-        //companyLocationJson = associationJson.location
-        onLocationFetched()
+        let locationUuid = associationJson.locationUuid
+        locationService.fetchLocation(locationUuid: locationUuid) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let locationJson):
+                self.locationJson = locationJson
+                self.onLocationFetched()
+            case .failure(let error):
+                self.handleError(error)
+            }
+        }
     }
     
     func onLocationFetched() {
         guard
-            let location = self.companyLocationJson,
+            let location = self.locationJson,
             let companyUuid = location.company?.uuid
             else {
                 let error = WorkfinderError(title: "Company not found", description: "Either the location hasn't been fetched from the server or the location doesn't have a company")
@@ -114,7 +123,7 @@ public class WorkplaceAndAssociationService {
     func onCompanyFetched() {
         guard
             let companyJson = self.companyJson,
-            let location = self.companyLocationJson
+            let location = self.locationJson
             else {
                 let error = WorkfinderError(title: "No workplace", description: "Either the company or the location is missing, or both are missing")
                 handleError(error)
