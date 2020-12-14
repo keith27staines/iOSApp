@@ -16,9 +16,9 @@ enum OfferState {
     
     init(applicationState: ApplicationState) {
         switch applicationState {
-        case .offerMade: self = .hostOfferOpen
-        case .offerAccepted: self = .candidateAccepted
-        case .candidateWithdrew: self = .candidateWithdrew
+        case .offered: self = .hostOfferOpen
+        case .accepted: self = .candidateAccepted
+        case .withdrawn: self = .candidateWithdrew
         default: self = .unknown
         }
     }

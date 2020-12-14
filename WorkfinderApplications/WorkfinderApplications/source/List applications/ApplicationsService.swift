@@ -44,27 +44,6 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
     }
 }
 
-extension ApplicationState {
-    init(string: String?) {
-        guard let string = string else {
-            self = .unknown
-            return
-        }
-        switch string {
-        case "pending": self = .applied
-        case "expired": self = .expired
-        case "viewed": self = .viewedByHost
-        case "declined": self = .applicationDeclined
-        case "saved": self = .savedByHost
-        case "offered": self = .offerMade
-        case "accepted": self = .offerAccepted
-        case "withdrawn": self = .candidateWithdrew
-        case "cancelled": self = .cancelled
-        default: self = .unknown
-        }
-    }
-}
-
 struct PlacementJson: Codable {
     var uuid: F4SUUID?
     var status: String?

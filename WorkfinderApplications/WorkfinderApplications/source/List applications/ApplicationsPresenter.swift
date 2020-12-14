@@ -60,13 +60,14 @@ class ApplicationsPresenter {
         let action: ApplicationAction
         switch application.state {
         case .applied: action = .viewApplication
-        case .hostWillBeContactingYou: action = .viewApplication
-        case .viewedByHost: action = .viewApplication
-        case .savedByHost: action = .viewApplication
-        case .applicationDeclined: action = .viewApplication
-        case .offerMade: action = .viewOffer
-        case .offerAccepted: action = .viewOffer
-        case .candidateWithdrew: action = .viewOffer
+        case .pending: action = .viewApplication
+        case .contacting: action = .viewApplication
+        case .viewed: action = .viewApplication
+        case .saved: action = .viewApplication
+        case .declined: action = .viewApplication
+        case .offered: action = .viewOffer
+        case .accepted: action = .viewOffer
+        case .withdrawn: action = .viewOffer
         case .expired: action = .viewApplication
         case .cancelled: action = .viewOffer
         case .unknown: action = .viewApplication
