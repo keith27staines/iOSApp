@@ -11,7 +11,7 @@ public protocol CompanyCoordinatorFactoryProtocol {
     func buildCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        workplace: CompanyAndPin,
+        companyAndPin: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void)

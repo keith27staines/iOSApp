@@ -31,7 +31,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }()
     var log: F4SAnalytics { injected.log }
     var picklistsDictionary: PicklistsDictionary?
-    var applicationSource: ApplicationSource = .searchTab
+    var applicationSource: ApplicationSource = .homeTab
     
     public var coverLetterPrimaryButtonText: String {
         let candidate = injected.userRepository.loadCandidate()
@@ -99,7 +99,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     
     override public func start() {
         super.start()
-        log.track(TrackingEvent(type: .uc_apply_start(.searchTab)))
+        log.track(TrackingEvent(type: .uc_apply_start(.homeTab)))
         startDateOfBirthIfNecessary()
     }
     

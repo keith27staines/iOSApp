@@ -12,7 +12,7 @@ extension Notification.Name {
 }
 
 public class HomeCoordinator : CoreInjectionNavigationCoordinator {
-    
+    var projectApplyCoordinator: ProjectApplyCoordinator?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     public var shouldAskOperatingSystemToAllowLocation = false
     
@@ -33,21 +33,23 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     func dispatchTypeAheadItem(_ item: TypeAheadItem) {
         guard let objectType = item.objectType, let uuid = item.uuid else { return }
-        var title = ""
-        let subtitle = "\(item.objectType ?? "")\n\(item.title ?? "")\n\(item.subtitle ?? "")"
+        let source = ApplicationSource.homeTabTypeAhead
         switch objectType {
         case "association":
-            title = "TODO: Route to PASSIVE apply workflow"
+            startAssociationApply(associationUuid: uuid, source: source)
+            return
         case "project":
-            startProjectApply(project: uuid, source: .searchTab)
+            startProjectApply(projectUuid: uuid, source: source)
+            return
         default:
+            var title = ""
+            let subtitle = "\(item.objectType ?? "")\n\(item.title ?? "")\n\(item.subtitle ?? "")"
             title = "Unexpected object type, no known routing"
+            let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            navigationRouter.present(alert, animated: true, completion: nil)
         }
-        
-        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(action)
-        navigationRouter.present(alert, animated: true, completion: nil)
     }
     
     public init(parent: Coordinating,
@@ -68,7 +70,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             let roleData = notification.object as? RoleData,
             let id = roleData.id
         else { return }
-        startProjectApply(project: id, source: .searchTab)
+        startProjectApply(projectUuid: id, source: .homeTab)
     }
     
     public override func start() {
@@ -76,10 +78,20 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
     
-    var projectApplyCoordinator: ProjectApplyCoordinator?
+    func startAssociationApply(associationUuid: F4SUUID, source: ApplicationSource) {
+
+//        let companyAndPin = CompanyAndPin(companyJson: <#T##CompanyJson#>, locationPin: <#T##LocationPin#>)
+//        let coordinator = companyCoordinatorFactory.buildCoordinator(
+//            parent: self,
+//            navigationRouter: navigationRouter,
+//            companyAndPin: <#T##CompanyAndPin#>,
+//            recommendedAssociationUuid: <#T##F4SUUID?#>,
+//            inject: <#T##CoreInjectionProtocol#>,
+//            applicationFinished: <#T##((PreferredDestination) -> Void)##((PreferredDestination) -> Void)##(PreferredDestination) -> Void#>)
+    }
     
-    func startProjectApply(project: F4SUUID, source: ApplicationSource) {
-        let projectApplyCoordinator = makeProjectApplyCoordinator(project: project, source: source)
+    func startProjectApply(projectUuid: F4SUUID, source: ApplicationSource) {
+        let projectApplyCoordinator = makeProjectApplyCoordinator(project: projectUuid, source: source)
         addChildCoordinator(projectApplyCoordinator)
         projectApplyCoordinator.start()
         self.projectApplyCoordinator = projectApplyCoordinator
@@ -116,7 +128,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             navigationRouter: navigationRouter,
             inject: injected,
             onSuccess: { [weak self] (coordinator,workplace,recommendedAssociationUuid) in
-                self?.showDetail(workplace: workplace,
+                self?.showDetail(companyAndPin: workplace,
                                  recommendedAssociationUuid: recommendedAssociationUuid,
                                  originScreen: .notSpecified)
             }, onCancel: { [weak self] coordinator in
@@ -128,14 +140,14 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     var showingDetailForWorkplace: CompanyAndPin?
 
-    func showDetail(workplace: CompanyAndPin?, recommendedAssociationUuid: F4SUUID?, originScreen: ScreenName) {
-        guard let Workplace = workplace else { return }
-        showingDetailForWorkplace = workplace
+    func showDetail(companyAndPin: CompanyAndPin?, recommendedAssociationUuid: F4SUUID?, originScreen: ScreenName) {
+        guard let companyAndPin = companyAndPin else { return }
+        showingDetailForWorkplace = companyAndPin
         rootViewController.dismiss(animated: true)
         let companyCoordinator = companyCoordinatorFactory.buildCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
-            workplace: Workplace,
+            companyAndPin: companyAndPin,
             recommendedAssociationUuid: recommendedAssociationUuid,
             inject: injected, applicationFinished: { [weak self] preferredDestination in
                 guard let self = self else { return }
