@@ -119,6 +119,7 @@ class PortraitRoleCard: UIView {
         backgroundColor = UIColor.white
         configureViews()
         refreshFromData(data)
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
     }
     
     func refreshFromData(_ data: RoleData) {

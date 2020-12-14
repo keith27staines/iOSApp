@@ -16,7 +16,6 @@ class PortraitShowMoreCard: UIView {
         label.text = "See more"
         label.textColor = WorkfinderColors.primaryColor
         label.numberOfLines = 0
-        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
         label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -26,6 +25,8 @@ class PortraitShowMoreCard: UIView {
         super.init(frame: CGRect.zero)
         configureBorder()
         configureViews()
+        isUserInteractionEnabled = true
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
     }
     
     func configureViews() {
