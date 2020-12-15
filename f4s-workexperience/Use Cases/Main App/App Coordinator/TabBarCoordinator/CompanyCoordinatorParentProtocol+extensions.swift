@@ -11,7 +11,7 @@ extension CoreInjectionNavigationCoordinator: CompanyCoordinatorParentProtocol {
         case .applications:
             showApplications()
         case .home:
-            showSearch()
+            showHome()
         case .none:
             break
         }
@@ -21,7 +21,7 @@ extension CoreInjectionNavigationCoordinator: CompanyCoordinatorParentProtocol {
         injected.appCoordinator?.showApplications(uuid: nil)
     }
     
-    public func showSearch() {
+    public func showHome() {
         injected.appCoordinator?.showSearch()
     }
 }

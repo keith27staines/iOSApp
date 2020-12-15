@@ -34,7 +34,7 @@ public protocol OnboardingCoordinatorProtocol : Coordinating {
 }
 
 public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    func showSearch()
+    func showHome()
 }
 
 public protocol TabNavigating: AnyObject {

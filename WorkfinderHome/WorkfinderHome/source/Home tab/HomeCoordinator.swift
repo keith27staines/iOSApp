@@ -8,6 +8,7 @@ import WorkfinderProjectApply
 
 extension Notification.Name {
     static let wfHomeScreenRoleTapped = Notification.Name("RoleTapped")
+    static let wfHomeScreenShowRecommendationsTapped = Notification.Name("ShowRecommendationsTapped")
     static let wfHomeScreenPopularOnWorkfinderTapped = Notification.Name("PopularOnWorkfinderTapped")
 }
 
@@ -66,6 +67,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     func addNotificationListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(roleTapped), name: .wfHomeScreenRoleTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(navigateToRecommendationsTab), name: .wfHomeScreenShowRecommendationsTapped, object: nil)
     }
     
     @objc func roleTapped(notification: Notification) {
@@ -76,12 +78,18 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         startProjectApply(projectUuid: id, source: .homeTab)
     }
     
+    @objc func navigateToRecommendationsTab() {
+        tabNavigator?.navigateToTab(tab: .recommendations)
+    }
+    
     public override func start() {
         rootViewController.coordinator = self
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
     
     func startAssociationApply(associationUuid: F4SUUID, source: ApplicationSource) {
+        
+        let passiveApplyContextService = WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
 
 //        let companyAndPin = CompanyAndPin(companyJson: <#T##CompanyJson#>, locationPin: <#T##LocationPin#>)
 //        let coordinator = companyCoordinatorFactory.buildCoordinator(
@@ -163,7 +171,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
 }
 
 extension HomeCoordinator: CompanyCoordinatorParentProtocol {
-    
+
     public func show(destination: PreferredDestination) {
         switch destination {
         case .applications:
@@ -174,12 +182,12 @@ extension HomeCoordinator: CompanyCoordinatorParentProtocol {
             break
         }
     }
-    
+
     public func showApplications() {
         tabNavigator?.navigateToTab(tab: .applications)
     }
 
-    public func showSearch() {
+    public func showHome() {
         tabNavigator?.navigateToTab(tab: .home)
     }
 }

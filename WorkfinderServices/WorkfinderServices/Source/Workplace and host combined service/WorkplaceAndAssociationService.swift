@@ -1,7 +1,26 @@
 
 import WorkfinderCommon
 
+import WorkfinderCommon
+
 public typealias WorkplaceAndAssociationUuid = (CompanyAndPin,F4SUUID)
+
+public struct ApplicationContext {
+    var recommendationUuid: F4SUUID?
+    var locationUuid: F4SUUID?
+    var associationUuid: F4SUUID?
+    var companyUuid: F4SUUID?
+    var projectUuid: F4SUUID?
+    var hostUuid: F4SUUID?
+    
+    var recommendation: RecommendationsListItem?
+    var location: LocationJson?
+    var association: AssociationJson?
+    var company: CompanyJson?
+    var project: ProjectJson?
+    var host: HostJson?
+    var pin: LocationPin?
+}
 
 public class WorkplaceAndAssociationService {
     var recommendationUuid: F4SUUID?

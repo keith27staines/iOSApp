@@ -7,6 +7,7 @@ class PortraitShowMoreCard: UIView {
     var tapAction: (() -> Void)?
 
     @objc func tapped() {
+        NotificationCenter.default.post(name: .wfHomeScreenShowRecommendationsTapped, object: nil)
         tapAction?()
     }
     
