@@ -47,7 +47,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .applications)
         }) { [weak self] in
             self?.removeApplicationSubmittedSuccessfully()
-            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .search)
+            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .home)
         }
     }()
     

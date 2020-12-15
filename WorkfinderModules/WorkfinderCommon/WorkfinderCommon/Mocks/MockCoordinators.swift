@@ -7,13 +7,17 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
         
     }
     
+    public func navigateToTab(tab: TabIndex) {
+        
+    }
+    
     public func navigateToRecommendations() {}
     
     
     public var shouldAskOperatingSystemToAllowLocation: Bool = false
     
     var showApplicationsCallCount: Int = 0
-    public func showApplications(uuid: F4SUUID?) {
+    public func showApplicationsTab(uuid: F4SUUID?) {
         
     }
     
@@ -28,7 +32,7 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     }
     
     var showSearchCallCount: Int = 0
-    public func showSearch() {
+    public func showHomeTab() {
         showSearchCallCount += 1
     }
     

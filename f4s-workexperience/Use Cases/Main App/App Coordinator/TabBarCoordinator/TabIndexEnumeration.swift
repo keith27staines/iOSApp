@@ -1,14 +1,10 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderCoordinators
 
-enum TabIndex : Int, CaseIterable {
-    
-    // The order of the cases will determine the order of the tabs on the tab bar
-    case applications
-    case home
-    case recommendations
+extension TabIndex {
     
     var title: String {
         switch self {
@@ -23,7 +19,7 @@ enum TabIndex : Int, CaseIterable {
         case .applications:
             return UIImage(named: "applications")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         case .home:
-            return UIImage(named: "searchIcon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            return UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         case .recommendations:
             return UIImage(named: "recommendations")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         }

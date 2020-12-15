@@ -10,6 +10,7 @@ import WorkfinderCompanyDetailsUseCase
 import WorkfinderHome
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
+    
     var parentCoordinator: Coordinating?
     var appCoordinator: AppCoordinatorProtocol?
     
@@ -49,7 +50,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     private var recommendationsService: RecommendationsServiceProtocol?
     public func navigateToMostAppropriateInitialTab() {
         guard injected.userRepository.loadUser().candidateUuid != nil else {
-            navigateToMap()
+            navigateToTab(tab: .home)
             return
         }
         recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)
@@ -58,13 +59,13 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             switch result {
             case .success(let recommendations):
                 if recommendations.count == 0 {
-                    self.navigateToMap()
+                    self.navigateToTab(tab: .home)
                 } else {
-                    self.navigateToRecommendations()
+                    self.navigateToTab(tab: .recommendations)
                     self.appCoordinator?.requestPushNotifications(from:self.topNavigationController)
                 }
             case .failure(_):
-                self.navigateToMap()
+                self.navigateToTab(tab: .home)
             }
         }
         
@@ -76,7 +77,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
     public func dispatchRecommendationToSearchTab(uuid: F4SUUID) {
         closeMenu { [weak self] (success) in
-            self?.navigateToMap()
+            self?.navigateToTab(tab: .home)
             self?.homeCoordinator.processRecommendation(uuid: uuid)
         }
     }
@@ -93,24 +94,10 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         }
     }
     
-    public func navigateToApplications() {
+    public func navigateToTab(tab: TabIndex) {
         closeMenu() { [ weak self]  (success) in
             guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.applications.rawValue
-        }
-    }
-    
-    public func navigateToRecommendations() {
-        closeMenu() { [ weak self]  (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
-        }
-    }
-    
-    public func navigateToMap() {
-        closeMenu { [weak self] (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.home.rawValue
+            self.tabBarViewController.selectedIndex = tab.rawValue
         }
     }
     
@@ -176,7 +163,8 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             parent: self,
             navigationRouter: router,
             inject: injected,
-            companyCoordinatorFactory: companyCoordinatorFactory
+            companyCoordinatorFactory: companyCoordinatorFactory,
+            tabNavigator: self
         )
         coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(coordinator)
@@ -185,7 +173,13 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     lazy var recommendationsCoordinator: RecommendationsCoordinator = {
         let router = TabIndex.recommendations.makeRouter()
-        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected, navigateToSearch: self.navigateToMap, navigateToApplications: self.navigateToApplications)
+        let coordinator = RecommendationsCoordinator(
+            parent: nil,
+            navigationRouter: router,
+            inject: injected,
+            navigateToSearch: { self.navigateToTab(tab: .home) },
+            navigateToApplications: { self.navigateToTab(tab: .applications) }
+        )
         coordinator.onRecommendationSelected = { uuid in
             self.dispatchRecommendationToSearchTab(uuid: uuid)
         }
@@ -228,12 +222,12 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         parentCtrl.present(navigationController, animated: true, completion: nil)
     }
     
-    func showApplications(uuid: F4SUUID?) {
-        navigateToApplications()
+    func showApplicationsTab(uuid: F4SUUID?) {
+        navigateToTab(tab: .applications)
     }
     
-    func showSearch() {
-        navigateToMap()
+    func showHomeTab() {
+        navigateToTab(tab: .home)
     }
     
     func updateUnreadMessagesCount(_ count: Int) {
@@ -249,7 +243,7 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         drawerController!.closeDrawerGestureModeMask = .all
         switch viewController {
         case homeCoordinator.navigationRouter.navigationController:
-            log.track(TrackingEvent.makeTabTap(tab: .search))
+            log.track(TrackingEvent.makeTabTap(tab: .home))
             drawerController!.openDrawerGestureModeMask = .panningNavigationBar
             drawerController!.closeDrawerGestureModeMask = .all
         case applicationsCoordinator.navigationRouter.navigationController:
@@ -264,13 +258,7 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
 }
 
 fileprivate extension TrackingEvent {
-    enum TabName: String {
-        case applications
-        case recommendations
-        case notifications
-        case search
-    }
-    static func makeTabTap(tab: TabName) -> TrackingEvent {
+    static func makeTabTap(tab: TabIndex) -> TrackingEvent {
         TrackingEvent(
             type: .tabTap,
             additionalProperties: ["navigation_item": tab.rawValue]

@@ -14,6 +14,7 @@ extension Notification.Name {
 public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     var projectApplyCoordinator: ProjectApplyCoordinator?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
+    weak var tabNavigator: TabNavigating?
     public var shouldAskOperatingSystemToAllowLocation = false
     
     lazy var rootViewController: HomeViewController = {
@@ -55,8 +56,10 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     public init(parent: Coordinating,
          navigationRouter: NavigationRoutingProtocol,
          inject: CoreInjectionProtocol,
-         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
+         companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
+         tabNavigator:  TabNavigating) {
         self.companyCoordinatorFactory = companyCoordinatorFactory
+        self.tabNavigator = tabNavigator
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
         addNotificationListeners()
     }
@@ -164,25 +167,20 @@ extension HomeCoordinator: CompanyCoordinatorParentProtocol {
     public func show(destination: PreferredDestination) {
         switch destination {
         case .applications:
-            showApplications()
-        case .messages:
-            showMessages()
-        case .search:
-            showSearch()
+            tabNavigator?.navigateToTab(tab: .applications)
+        case .home:
+            tabNavigator?.navigateToTab(tab: .home)
         case .none:
             break
         }
     }
-    public func showMessages() {
-        //injected.appCoordinator?.showMessages()
-    }
     
     public func showApplications() {
-        injected.appCoordinator?.showApplications(uuid: nil)
+        tabNavigator?.navigateToTab(tab: .applications)
     }
-    
+
     public func showSearch() {
-        injected.appCoordinator?.showSearch()
+        tabNavigator?.navigateToTab(tab: .home)
     }
 }
 
@@ -194,11 +192,11 @@ extension HomeCoordinator {
             inject: injected,
             projectUuid: project,
             applicationSource: source,
-            navigateToSearch: {
-
+            navigateToSearch: { [weak self] in
+                self?.tabNavigator?.navigateToTab(tab: .home)
             },
-            navigateToApplications: {
-
+            navigateToApplications: { [weak self] in
+                self?.tabNavigator?.navigateToTab(tab: .applications)
             }
         )
     }

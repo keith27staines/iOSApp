@@ -34,14 +34,23 @@ public protocol OnboardingCoordinatorProtocol : Coordinating {
 }
 
 public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    func showMessages()
     func showSearch()
 }
 
-public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    func showApplications(uuid: F4SUUID?)
-    func showSearch()
-    func navigateToRecommendations()
+public protocol TabNavigating: AnyObject {
+    func navigateToTab(tab: TabIndex)
+}
+
+public enum TabIndex : Int, CaseIterable {
+    // The order of the cases will determine the order of the tabs on the tab bar
+    case applications
+    case home
+    case recommendations
+}
+
+public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
+    func showApplicationsTab(uuid: F4SUUID?)
+    func showHomeTab()
     func dispatchRecommendationToSearchTab(uuid: F4SUUID)
     func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: ApplicationSource)
     func updateBadges()

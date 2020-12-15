@@ -10,16 +10,11 @@ extension CoreInjectionNavigationCoordinator: CompanyCoordinatorParentProtocol {
         switch destination {
         case .applications:
             showApplications()
-        case .messages:
-            showMessages()
-        case .search:
+        case .home:
             showSearch()
         case .none:
             break
         }
-    }
-    public func showMessages() {
-        //injected.appCoordinator?.showMessages()
     }
     
     public func showApplications() {
