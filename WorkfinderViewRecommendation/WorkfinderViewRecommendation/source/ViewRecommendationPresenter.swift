@@ -6,7 +6,7 @@ class LoadingViewPresenter {
     weak var view: LoadingViewController?
     weak var coordinator: ViewRecommendationCoordinator?
     let recommendationUuid: F4SUUID
-    let service: WorkplaceAndAssociationService
+    let service: ApplicationContextService
     
     func onViewDidLoad(_ view: LoadingViewController) {
         self.view = view
@@ -17,7 +17,7 @@ class LoadingViewPresenter {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        service.fetchCompanyWorkplace(recommendationUuid: recommendationUuid) { result in
+        service.fetchStartingFrom(recommendationUuid: recommendationUuid) { result in
             switch result {
             case .success(let value):
                 // leave screen spinning for a short time otherwise looks too transient
@@ -33,7 +33,7 @@ class LoadingViewPresenter {
     }
         
     init(recommendationUuid: F4SUUID,
-         service: WorkplaceAndAssociationService,
+         service: ApplicationContextService,
          coordinator: ViewRecommendationCoordinator) {
         self.recommendationUuid = recommendationUuid
         self.service = service

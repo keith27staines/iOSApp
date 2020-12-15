@@ -89,7 +89,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     func startAssociationApply(associationUuid: F4SUUID, source: ApplicationSource) {
         
-        let passiveApplyContextService = WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
+        let passiveApplyContextService = ApplicationContextService(networkConfig: injected.networkConfig)
 
 //        let companyAndPin = CompanyAndPin(companyJson: <#T##CompanyJson#>, locationPin: <#T##LocationPin#>)
 //        let coordinator = companyCoordinatorFactory.buildCoordinator(

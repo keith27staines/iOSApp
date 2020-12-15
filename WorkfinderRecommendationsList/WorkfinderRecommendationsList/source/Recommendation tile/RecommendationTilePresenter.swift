@@ -56,7 +56,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
 
     init(parent: RecommendationsPresenter,
          recommendation: RecommendationsListItem,
-         workplaceService: WorkplaceAndAssociationService?,
+         workplaceService: ApplicationContextService?,
          projectService: ProjectServiceProtocol?,
          hostService: HostsProviderProtocol?,
          row: Int) {

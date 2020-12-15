@@ -1,8 +1,6 @@
 
 import WorkfinderCommon
 
-import WorkfinderCommon
-
 public typealias WorkplaceAndAssociationUuid = (CompanyAndPin,F4SUUID)
 
 public struct ApplicationContext {
@@ -22,10 +20,11 @@ public struct ApplicationContext {
     var pin: LocationPin?
 }
 
-public class WorkplaceAndAssociationService {
+public class ApplicationContextService {
     var recommendationUuid: F4SUUID?
     let recommendationService: RecommendationsServiceProtocol
     let associationService: AssociationsServiceProtocol
+    var context = ApplicationContext()
     let locationService: LocationServiceProtocol
     let companyService: CompanyServiceProtocol
     
@@ -43,7 +42,7 @@ public class WorkplaceAndAssociationService {
         self.companyService = CompanyService(networkConfig: networkConfig)
     }
     
-    public func fetchCompanyWorkplace(
+    public func fetchStartingFrom(
         recommendationUuid: F4SUUID,
         completion: @escaping (Result<WorkplaceAndAssociationUuid,Error>) -> Void) {
         self.completion = completion
@@ -58,7 +57,7 @@ public class WorkplaceAndAssociationService {
         }
     }
     
-    public func fetchCompanyWorkplace(
+    public func fetchStartingFrom(
         associationUuid: F4SUUID,
         completion: @escaping (Result<WorkplaceAndAssociationUuid,Error>) -> Void) {
         self.completion = completion
@@ -95,7 +94,7 @@ public class WorkplaceAndAssociationService {
             handleError(error)
             return
         }
-        fetchCompanyWorkplace(associationUuid: associationUuid, completion: completion)
+        fetchStartingFrom(associationUuid: associationUuid, completion: completion)
     }
     
     func onAssociationFetched() {

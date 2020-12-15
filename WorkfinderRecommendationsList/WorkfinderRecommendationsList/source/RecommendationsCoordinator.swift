@@ -20,8 +20,8 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func workplaceServiceFactory() -> WorkplaceAndAssociationService {
-        WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
+    func workplaceServiceFactory() -> ApplicationContextService {
+        ApplicationContextService(networkConfig: injected.networkConfig)
     }
     
     func projectServiceFactory() -> ProjectServiceProtocol {

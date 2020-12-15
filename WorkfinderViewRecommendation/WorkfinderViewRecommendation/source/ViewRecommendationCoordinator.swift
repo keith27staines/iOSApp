@@ -24,7 +24,7 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     }
     var vc: UIViewController?
     public override func start() {
-        let service = WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
+        let service = ApplicationContextService(networkConfig: injected.networkConfig)
         let presenter = LoadingViewPresenter(
             recommendationUuid: recommendationUuid,
             service: service,

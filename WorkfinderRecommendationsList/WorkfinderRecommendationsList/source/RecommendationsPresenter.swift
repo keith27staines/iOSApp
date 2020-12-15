@@ -8,14 +8,14 @@ class RecommendationsPresenter {
     var recommendations = [RecommendationsListItem]()
     var tilePresenters = [RecommendationTilePresenter]()
     let userRepo: UserRepositoryProtocol
-    var workplaceServiceFactory: (() -> WorkplaceAndAssociationService)?
+    var workplaceServiceFactory: (() -> ApplicationContextService)?
     var hostServiceFactory: (() -> HostsProviderProtocol)?
     var projectServiceFactory: (() -> ProjectServiceProtocol)?
     
     init(coordinator: RecommendationsCoordinator,
          service: RecommendationsServiceProtocol,
          userRepo:UserRepositoryProtocol,
-         workplaceServiceFactory: @escaping (() -> WorkplaceAndAssociationService),
+         workplaceServiceFactory: @escaping (() -> ApplicationContextService),
          projectServiceFactory: @escaping (() -> ProjectServiceProtocol),
          hostServiceFactory: @escaping (() -> HostsProviderProtocol)) {
         self.coordinator = coordinator
