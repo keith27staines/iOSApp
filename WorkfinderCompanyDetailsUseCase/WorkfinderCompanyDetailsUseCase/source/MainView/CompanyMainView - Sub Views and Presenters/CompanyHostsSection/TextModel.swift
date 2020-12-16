@@ -7,7 +7,7 @@ class TextModel {
 
     var expandableLabelStates = [ExpandableLabelState]()
     
-    init(associations: [ExpandedAssociation]) {
+    init(associations: [HostAssociationJson]) {
         for association in associations {
             let host = association.host
             var state = ExpandableLabelState()

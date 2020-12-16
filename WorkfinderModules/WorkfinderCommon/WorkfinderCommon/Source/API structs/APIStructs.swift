@@ -13,7 +13,7 @@ public typealias PicklistServerJson = ServerListJson<PicklistItemJson>
 public typealias CompanyListJson = ServerListJson<CompanyJson>
 
 /// Standard server paged array `[HostLocationAssociationJson]`
-public typealias HostAssociationListJson = ServerListJson<ExpandedAssociation>
+public typealias HostAssociationListJson = ServerListJson<HostAssociationJson>
 
 // MARK: - Roles aka projects -
 
@@ -237,6 +237,41 @@ public struct ExpandedAssociation: Codable, Equatable, Hashable {
     private enum CodingKeys: String, CodingKey {
         case uuid
         case location
+        case host
+        case title
+        case description
+        case started
+        case stopped
+    }
+    
+    public init() {}
+}
+
+/// Like an AssociationJson but with a full host object rather than a uuid
+public struct HostAssociationJson: Codable {
+    public var uuid: F4SUUID?
+    public var locationUuid: F4SUUID?
+    public var host: HostJson?
+    public var title: String?
+    public var description: String?
+    public var started: String?
+    public var stopped: String?
+    public var isSelected: Bool = false
+    
+    public init(uuidAssociation: AssociationJson, host:HostJson) {
+        self.uuid = uuidAssociation.uuid
+        self.locationUuid = uuidAssociation.locationUuid
+        self.host = host
+        self.title = uuidAssociation.title
+        self.description = uuidAssociation.description
+        self.started = uuidAssociation.started
+        self.stopped = uuidAssociation.stopped
+        self.isSelected = uuidAssociation.isSelected
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case uuid
+        case locationUuid = "location"
         case host
         case title
         case description

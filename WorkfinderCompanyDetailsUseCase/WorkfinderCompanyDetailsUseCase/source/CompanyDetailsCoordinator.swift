@@ -23,8 +23,8 @@ protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorPr
     func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: CompanyAndPin)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String)
-    func applyTo(workplace: CompanyAndPin, association: ExpandedAssociation)
-    func onDidTapLinkedin(association: ExpandedAssociation)
+    func applyTo(workplace: CompanyAndPin, association: HostAssociationJson)
+    func onDidTapLinkedin(association: HostAssociationJson)
 }
 
 public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, CompanyDetailsCoordinatorProtocol, CompanyMainViewCoordinatorProtocol {
@@ -93,7 +93,7 @@ extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
 
 extension CompanyDetailsCoordinator {
     
-    func applyTo(workplace: CompanyAndPin, association: ExpandedAssociation) {
+    func applyTo(workplace: CompanyAndPin, association: HostAssociationJson) {
         guard let _ = workplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
@@ -121,7 +121,7 @@ extension CompanyDetailsCoordinator {
         childCoordinators = [:]
     }
     
-    func onDidTapLinkedin(association: ExpandedAssociation) {
+    func onDidTapLinkedin(association: HostAssociationJson) {
         openUrl(association.host?.linkedinUrlString)
     }
     

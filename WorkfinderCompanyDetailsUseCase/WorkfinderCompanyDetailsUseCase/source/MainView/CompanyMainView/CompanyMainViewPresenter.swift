@@ -5,8 +5,8 @@ import WorkfinderUI
 
 protocol CompanyMainViewCoordinatorProtocol: class {
     func onDidTapDuedil()
-    func onDidTapLinkedin(association: ExpandedAssociation)
-    func applyTo(workplace: CompanyAndPin, association: ExpandedAssociation)
+    func onDidTapLinkedin(association: HostAssociationJson)
+    func applyTo(workplace: CompanyAndPin, association: HostAssociationJson)
 }
 
 protocol CompanyMainViewPresenterProtocol: class {
@@ -31,7 +31,7 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var companyLocation: LatLon {
         return LatLon(latitude: CGFloat(pin.lat), longitude: CGFloat(pin.lon))
     }
-    var selectedAssociation: ExpandedAssociation? { return hostsSectionPresenter.selectedAssociation }
+    var selectedAssociation: HostAssociationJson? { return hostsSectionPresenter.selectedAssociation }
     var isHostSelected: Bool { return hostsSectionPresenter.isAssociationSelected }
     lazy var headerViewPresenter: CompanyHeaderViewPresenterProtocol = {
         return CompanyHeaderViewPresenter(workplace: self.companyAndPin)

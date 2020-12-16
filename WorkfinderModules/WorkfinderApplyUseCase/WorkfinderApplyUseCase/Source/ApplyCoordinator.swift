@@ -32,6 +32,9 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     var log: F4SAnalytics { injected.log }
     var picklistsDictionary: PicklistsDictionary?
     var applicationSource: ApplicationSource = .homeTab
+    let association: HostAssociationJson
+    let workplace: CompanyAndPin
+    let updateCandidateService: UpdateCandidateServiceProtocol
     
     public var coverLetterPrimaryButtonText: String {
         let candidate = injected.userRepository.loadCandidate()
@@ -73,15 +76,12 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         let candidate = userRepository.loadCandidate()
         return candidate.uuid == nil
     }
-    
-    let association: ExpandedAssociation
-    let workplace: CompanyAndPin
-    let updateCandidateService: UpdateCandidateServiceProtocol
+
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 updateCandidateService: UpdateCandidateServiceProtocol,
                 applyService: PostPlacementServiceProtocol,
                 workplace: CompanyAndPin,
-                association: ExpandedAssociation,
+                association: HostAssociationJson,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,

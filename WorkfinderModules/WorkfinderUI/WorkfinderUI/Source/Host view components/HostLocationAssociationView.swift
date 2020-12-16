@@ -23,14 +23,14 @@ public class HostLocationAssociationView : UIView {
         }
     }
     
-    var association: ExpandedAssociation? {
+    var association: HostAssociationJson? {
         didSet {
             roleLabel.text = association?.title
             associationSelectionView.isSelected = association?.isSelected ?? false
         }
     }
     
-    public func configureWith(host: HostJson?, association: ExpandedAssociation?) {
+    public func configureWith(host: HostJson?, association: HostAssociationJson?) {
         self.host = host
         self.association = association
     }
@@ -48,7 +48,7 @@ public class HostLocationAssociationView : UIView {
         readMoreLabelStack.isHidden = !self.expandableLabel.isExpandable
     }
     
-    public var profileLinkTap: ((ExpandedAssociation) -> Void)?
+    public var profileLinkTap: ((HostAssociationJson) -> Void)?
     
     public init(showSelectionButton: Bool = true) {
         self.showSelectionButton = showSelectionButton

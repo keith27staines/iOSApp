@@ -6,7 +6,7 @@ class HostViewPresenter {
     let locationService: AssociationsServiceProtocol
     let hostService: HostsProviderProtocol
     let associationUuid: F4SUUID
-    var association: ExpandedAssociation?
+    var association: HostAssociationJson?
     var view: HostViewController?
     var host: HostJson?
     
@@ -32,7 +32,7 @@ class HostViewPresenter {
         locationService.fetchAssociation(uuid: associationUuid) { [weak self] (result) in
             switch result {
             case .success(let association):
-                self?.association = ExpandedAssociation(association: association)
+                self?.association = HostAssociationJson(association: association)
                 self?.hostService.fetchHost(uuid: association.hostUuid) { [weak self ] (hostResult) in
                     guard let self = self else { return }
                     switch hostResult {
@@ -50,7 +50,7 @@ class HostViewPresenter {
     }
 }
 
-fileprivate extension ExpandedAssociation {
+fileprivate extension HostAssociationJson {
     init(association: AssociationJson) {
         self.init()
         self.uuid = association.uuid
