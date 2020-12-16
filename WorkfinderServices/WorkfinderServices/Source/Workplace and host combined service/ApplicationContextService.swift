@@ -4,36 +4,28 @@ import WorkfinderCommon
 public typealias WorkplaceAndAssociationUuid = (CompanyAndPin,F4SUUID)
 
 public struct ApplicationContext {
-    var recommendationUuid: F4SUUID?
-    var locationUuid: F4SUUID?
-    var associationUuid: F4SUUID?
-    var companyUuid: F4SUUID?
-    var projectUuid: F4SUUID?
-    var hostUuid: F4SUUID?
+    public var recommendationUuid: F4SUUID?
+    public var associationUuid: F4SUUID?
     
-    var recommendation: RecommendationsListItem?
-    var location: LocationJson?
-    var association: AssociationJson?
-    var company: CompanyJson?
-    var project: ProjectJson?
-    var host: HostJson?
-    var pin: LocationPin?
+    public var recommendationJson: RecommendationsListItem?
+    public var associationJson: AssociationJson?
+    public var locationJson: CompanyNestedLocationJson?
+    public var companyJson: CompanyJson?
+    public var hostJson: HostJson?
+    public var pin: LocationPin?
+    public var companyAndPin: CompanyAndPin?
 }
 
 public class ApplicationContextService {
     var recommendationUuid: F4SUUID?
     let recommendationService: RecommendationsServiceProtocol
     let associationService: AssociationsServiceProtocol
-    var context = ApplicationContext()
     let locationService: LocationServiceProtocol
     let companyService: CompanyServiceProtocol
+
+    public internal (set) var context = ApplicationContext()
     
-    var recommendation: RecommendationsListItem?
-    public internal (set) var associationJson: AssociationJson?
-    var locationJson: LocationJson?
-    var companyJson: CompanyJson?
-    
-    var completion: ((Result<WorkplaceAndAssociationUuid,Error>) -> Void)?
+    var completion: ((Result<ApplicationContext,Error>) -> Void)?
     
     public init(networkConfig: NetworkConfig) {
         self.associationService = AssociationsService(networkConfig: networkConfig)
@@ -44,12 +36,14 @@ public class ApplicationContextService {
     
     public func fetchStartingFrom(
         recommendationUuid: F4SUUID,
-        completion: @escaping (Result<WorkplaceAndAssociationUuid,Error>) -> Void) {
+        completion: @escaping (Result<ApplicationContext,Error>
+    ) -> Void) {
         self.completion = completion
+        context.recommendationUuid = recommendationUuid
         recommendationService.fetchRecommendation(uuid: recommendationUuid) { (result) in
             switch result {
             case .success(let recommendation):
-                self.recommendation = recommendation
+                self.context.recommendationJson = recommendation
                 self.onRecommendationFetched()
             case .failure(let error):
                 self.handleError(error)
@@ -59,13 +53,15 @@ public class ApplicationContextService {
     
     public func fetchStartingFrom(
         associationUuid: F4SUUID,
-        completion: @escaping (Result<WorkplaceAndAssociationUuid,Error>) -> Void) {
+        completion: @escaping (Result<ApplicationContext,Error>) -> Void
+    ) {
         self.completion = completion
+        context.associationUuid = associationUuid
         associationService.fetchAssociation(uuid: associationUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let associationJson):
-                self.associationJson = associationJson
+                self.context.associationJson = associationJson
                 self.onAssociationFetched()
             case .failure(let error):
                 self.handleError(error)
@@ -74,16 +70,16 @@ public class ApplicationContextService {
     }
     
     func handleError(_ error: Error) {
-        completion?(Result<WorkplaceAndAssociationUuid,Error>.failure(error))
+        completion?(.failure(error))
     }
     
-    func handleSuccess(_ value: WorkplaceAndAssociationUuid) {
-        completion?(Result<WorkplaceAndAssociationUuid,Error>.success(value))
+    func handleSuccess(_ value: ApplicationContext) {
+        completion?(.success(value))
     }
     
     func onRecommendationFetched() {
         guard
-            let recommendation = recommendation,
+            let recommendation = context.recommendationJson,
             let associationUuid = recommendation.project?.association?.uuid else {
             let error = WorkfinderError(title: "Invalid recommendation", description: "The recommendation is nil or its association is nil")
             handleError(error)
@@ -98,7 +94,7 @@ public class ApplicationContextService {
     }
     
     func onAssociationFetched() {
-        guard let associationJson = associationJson
+        guard let associationJson = context.associationJson
             else {
                 let error = WorkfinderError(title: "Association missing", description: "The association hasn't been fetched from the server")
                 handleError(error)
@@ -109,7 +105,7 @@ public class ApplicationContextService {
             guard let self = self else { return }
             switch result {
             case .success(let locationJson):
-                self.locationJson = locationJson
+                self.context.locationJson = locationJson
                 self.onLocationFetched()
             case .failure(let error):
                 self.handleError(error)
@@ -119,7 +115,7 @@ public class ApplicationContextService {
     
     func onLocationFetched() {
         guard
-            let location = self.locationJson,
+            let location = context.locationJson,
             let companyUuid = location.company?.uuid
             else {
                 let error = WorkfinderError(title: "Company not found", description: "Either the location hasn't been fetched from the server or the location doesn't have a company")
@@ -130,7 +126,7 @@ public class ApplicationContextService {
             guard let self = self else { return }
             switch result {
             case .success(let companyJson):
-                self.companyJson = companyJson
+                self.context.companyJson = companyJson
                 self.onCompanyFetched()
             case .failure(let error):
                 self.handleError(error)
@@ -140,8 +136,8 @@ public class ApplicationContextService {
     
     func onCompanyFetched() {
         guard
-            let companyJson = self.companyJson,
-            let location = self.locationJson
+            let companyJson = context.companyJson,
+            let location = context.locationJson
             else {
                 let error = WorkfinderError(title: "No workplace", description: "Either the company or the location is missing, or both are missing")
                 handleError(error)
@@ -156,17 +152,13 @@ public class ApplicationContextService {
                 handleError(error)
                 return
         }
-        guard let recommendedAssociationUuid = associationJson?.uuid
-            else {
-                let error = WorkfinderError(title: "The association has no uuid", description: "The association's uuid is nil")
-                handleError(error)
-                return
-        }
         let pin = LocationPin(locationUuid: locationUuid,
                               latitude: Double(latitude),
                               longitude: Double(longitude))
-        let workplace = CompanyAndPin(companyJson: companyJson, locationPin: pin)
-        handleSuccess((workplace, recommendedAssociationUuid))
+        let companyAndPin = CompanyAndPin(companyJson: companyJson, locationPin: pin)
+        context.pin = pin
+        context.companyAndPin = companyAndPin
+        handleSuccess((context))
     }
 }
 

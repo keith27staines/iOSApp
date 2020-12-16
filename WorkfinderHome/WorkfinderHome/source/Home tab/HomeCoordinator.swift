@@ -37,7 +37,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         guard let objectType = item.objectType, let uuid = item.uuid else { return }
         let source = ApplicationSource.homeTabTypeAhead
         switch objectType {
-        case "association":
+        case "association", "company":
             startAssociationApply(associationUuid: uuid, source: source)
             return
         case "project":
@@ -87,18 +87,32 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
     }
     
+    var contextService: ApplicationContextService?
     func startAssociationApply(associationUuid: F4SUUID, source: ApplicationSource) {
-        
-        let passiveApplyContextService = ApplicationContextService(networkConfig: injected.networkConfig)
-
-//        let companyAndPin = CompanyAndPin(companyJson: <#T##CompanyJson#>, locationPin: <#T##LocationPin#>)
-//        let coordinator = companyCoordinatorFactory.buildCoordinator(
-//            parent: self,
-//            navigationRouter: navigationRouter,
-//            companyAndPin: <#T##CompanyAndPin#>,
-//            recommendedAssociationUuid: <#T##F4SUUID?#>,
-//            inject: <#T##CoreInjectionProtocol#>,
-//            applicationFinished: <#T##((PreferredDestination) -> Void)##((PreferredDestination) -> Void)##(PreferredDestination) -> Void#>)
+        contextService = ApplicationContextService(networkConfig: injected.networkConfig)
+        contextService?.fetchStartingFrom(
+            associationUuid: associationUuid) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let context):
+                guard
+                    let companyAndPin = context.companyAndPin,
+                    let associationUuid = context.associationUuid
+                else { return }
+                let coordinator = self.companyCoordinatorFactory.buildCoordinator(
+                    parent: self,
+                    navigationRouter: self.navigationRouter,
+                    companyAndPin: companyAndPin,
+                    recommendedAssociationUuid: associationUuid,
+                    inject: self.injected) { (destination) in
+                }
+                self.addChildCoordinator(coordinator)
+                coordinator.start()
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
     }
     
     func startProjectApply(projectUuid: F4SUUID, source: ApplicationSource) {
@@ -138,9 +152,9 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
-            onSuccess: { [weak self] (coordinator,workplace,recommendedAssociationUuid) in
-                self?.showDetail(companyAndPin: workplace,
-                                 recommendedAssociationUuid: recommendedAssociationUuid,
+            onSuccess: { [weak self] (coordinator, context) in
+                self?.showDetail(companyAndPin: context.companyAndPin,
+                                 recommendedAssociationUuid: context.associationUuid,
                                  originScreen: .notSpecified)
             }, onCancel: { [weak self] coordinator in
                 self?.childCoordinatorDidFinish(coordinator)

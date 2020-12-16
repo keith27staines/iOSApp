@@ -12,8 +12,7 @@ public class AssociationsService: WorkfinderService, AssociationsServiceProtocol
         do {
             let path = "\(relativePath)\(uuid)"
             let request = try buildRequest(relativePath: path, queryItems: nil, verb: .get)
-            performTask(with: request, completion: completion,
-            attempting: #function)
+            performTask(with: request, completion: completion, attempting: #function)
         } catch {
             completion(Result<AssociationJson,Error>.failure(error))
         }

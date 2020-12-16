@@ -7,15 +7,14 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
     
     let recommendationUuid: F4SUUID
     
-    /// Tuple containing this coordinator, the recommended Workplace and the recommended association  uuid
-    var onSuccess: (ViewRecommendationCoordinator, CompanyAndPin, F4SUUID) -> Void
+    var onSuccess: (ViewRecommendationCoordinator, ApplicationContext) -> Void
     var onCancel: (ViewRecommendationCoordinator) -> Void
     
     public init(recommendationUuid: F4SUUID,
                 parent: Coordinating?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                onSuccess: @escaping (ViewRecommendationCoordinator, CompanyAndPin, F4SUUID) -> Void,
+                onSuccess: @escaping (ViewRecommendationCoordinator, ApplicationContext) -> Void,
                 onCancel: @escaping (ViewRecommendationCoordinator) -> Void) {
         self.recommendationUuid = recommendationUuid
         self.onSuccess = onSuccess
@@ -42,10 +41,10 @@ public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
         onCancel(self)
     }
     
-    func onWorkplaceAndHostObtainedFromRecommendation(_ value: WorkplaceAndAssociationUuid) {
+    func onApplicationContextObtainedFromRecommendation(_ context: ApplicationContext) {
         vc?.dismiss(animated: true, completion: nil)
         parentCoordinator?.childCoordinatorDidFinish(self)
-        onSuccess(self, value.0, value.1)
+        onSuccess(self, context)
     }
 }
 
