@@ -75,7 +75,6 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
 fileprivate class FetchRolesWorkerService: WorkfinderService {
     
     func fetchRoles(endpoint: String, queryItems: [URLQueryItem]?, completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "limit", value: "1")]
         let innerResultHandler: ((Result<ServerListJson<RoleJson>, Error>) -> Void) = { result in
             switch result {
             case .success(let json):
