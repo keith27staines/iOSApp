@@ -19,7 +19,7 @@ class DecodeCompanyJsonTests: XCTestCase {
         let decoder = JSONDecoder()
         let sut = try? decoder.decode(CompanyNestedLocationJson.self, from: locationData)
         XCTAssertNotNil(sut)
-        XCTAssertEqual(sut?.company, "d3ec9374-3618-4617-9ff6-535c40a7be46")
+        XCTAssertEqual(sut?.companyUuid, "d3ec9374-3618-4617-9ff6-535c40a7be46")
         XCTAssertEqual(sut?.addressPostcode, "WC1N 3AX")
     }
     

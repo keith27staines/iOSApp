@@ -107,9 +107,9 @@ class AssociationDetailService: AssociationDetailServiceProtocol {
         }
     }
     
-    private func onLocationLoaded(location: LocationJson) {
+    private func onLocationLoaded(location: CompanyNestedLocationJson) {
         associationDetail.location = location
-        guard let companyUuid = location.company?.uuid else {
+        guard let companyUuid = location.companyUuid else {
             completion?(Result<AssociationDetail, Error>.success(associationDetail))
             return
         }

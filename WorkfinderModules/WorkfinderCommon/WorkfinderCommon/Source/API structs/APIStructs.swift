@@ -128,7 +128,7 @@ public struct LocationJson: Codable, Equatable, Hashable {
 /// Similar to a location but the company field is a uuid rather than a CompanyJson.
 public struct CompanyNestedLocationJson: Codable, Equatable, Hashable {
     public var uuid: String?
-    public var company: F4SUUID?
+    public var companyUuid: F4SUUID?
     public var addressUnit: String?
     public var addressBuilding: String?
     public var addressStreet: String?
@@ -140,7 +140,7 @@ public struct CompanyNestedLocationJson: Codable, Equatable, Hashable {
     
     private enum CodingKeys: String, CodingKey {
         case uuid
-        case company
+        case companyUuid        = "company"
         case addressUnit        = "address_unit"
         case addressBuilding    = "address_building"
         case addressStreet      = "address_street"

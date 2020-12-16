@@ -116,7 +116,7 @@ public class ApplicationContextService {
     func onLocationFetched() {
         guard
             let location = context.locationJson,
-            let companyUuid = location.company?.uuid
+            let companyUuid = location.companyUuid
             else {
                 let error = WorkfinderError(title: "Company not found", description: "Either the location hasn't been fetched from the server or the location doesn't have a company")
                 handleError(error)
