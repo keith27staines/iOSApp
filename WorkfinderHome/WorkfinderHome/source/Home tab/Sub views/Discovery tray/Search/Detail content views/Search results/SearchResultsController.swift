@@ -11,6 +11,7 @@ class SearchResultsController {
     
     var view: SearchResultsView?
     let rolesService: RolesServiceProtocol
+    let associationsService: AssociationsServiceProtocol
     let tabNames: [String] = TabName.allCases.map { $0.rawValue }
     var tables: [UITableView] { view?.tableViews ?? [] }
     
@@ -18,7 +19,7 @@ class SearchResultsController {
         [
             RolesDatasource(tag: 0, table: tables[0], searchResultsController: self, service: rolesService),
             CompaniesDatasource(tag: 1, table: tables[1], searchResultsController: self),
-            PeopleDatasource(tag: 2, table: tables[2], searchResultsController: self)
+            PeopleDatasource(tag: 2, table: tables[2], searchResultsController: self, associationsService: associationsService)
         ]
     }()
     
@@ -33,7 +34,7 @@ class SearchResultsController {
     var typeAheadJson: TypeAheadJson? {
         didSet {
             (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.companies ?? []
-            (datasources[2] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.people ?? []
+            (datasources[2] as? TypeAheadItemsDatasource)?.typeAheadItems = []
         }
     }
         
@@ -46,8 +47,9 @@ class SearchResultsController {
         }
     }
     
-    init(rolesService: RolesServiceProtocol) {
+    init(rolesService: RolesServiceProtocol, associationsService: AssociationsServiceProtocol) {
         self.rolesService = rolesService
+        self.associationsService = associationsService
     }
     
 }

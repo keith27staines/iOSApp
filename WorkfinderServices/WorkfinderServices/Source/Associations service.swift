@@ -19,6 +19,21 @@ public class AssociationsService: WorkfinderService, AssociationsServiceProtocol
     }
     
     public func fetchAssociations(
+        queryItems: [URLQueryItem],
+        completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void)
+    ) {
+        
+        do {
+            let request = try buildFetchAssociationsRequest(location: nil, queryItems: queryItems)
+            performTask(
+                with: request,
+                completion: completion, attempting: #function)
+        } catch {
+            completion(Result<HostAssociationListJson,Error>.failure(error))
+        }
+    }
+    
+    public func fetchAssociations(
         for locationUuid: F4SUUID,
         completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void)) {
         
@@ -32,14 +47,15 @@ public class AssociationsService: WorkfinderService, AssociationsServiceProtocol
         }
     }
     
-    func buildFetchAssociationsRequest(location: F4SUUID) throws -> URLRequest {
-        let queryItems = [
-            URLQueryItem(name: "location__uuid", value: location),
-            URLQueryItem(name: "expand-host", value: "1")
-        ]
+    func buildFetchAssociationsRequest(location: F4SUUID?, queryItems: [URLQueryItem] = []) throws -> URLRequest {
+        var qItems = queryItems
+        qItems.append(URLQueryItem(name: "expand-host", value: "1"))
+        if let location = location {
+            qItems.append(URLQueryItem(name: "location__uuid", value: location))
+        }
         return try buildRequest(
             relativePath: relativePath,
-            queryItems: queryItems,
+            queryItems: qItems,
             verb: .get)
     }
 }

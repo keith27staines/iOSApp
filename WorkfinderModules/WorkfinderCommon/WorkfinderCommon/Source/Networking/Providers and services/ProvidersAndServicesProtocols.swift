@@ -3,6 +3,7 @@ import Foundation
 
 public protocol AssociationsServiceProtocol {
     func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<AssociationJson,Error>) -> Void))
+    func fetchAssociations(queryItems: [URLQueryItem], completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
     func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
 }
 
