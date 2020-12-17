@@ -1,7 +1,7 @@
 
 import UIKit
 
-class TypeAheadItemsDatasource: Datasource {
+class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
     
     var typeAheadItems = [TypeAheadItem]() {
         didSet {
@@ -20,7 +20,15 @@ class TypeAheadItemsDatasource: Datasource {
             let item = data[indexPath.row] as? TypeAheadItem
         else { return UITableViewCell() }
         cell.updateFrom(item)
+        cell.accessoryType = .disclosureIndicator
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let item = data[indexPath.row]
+        NotificationCenter.default.post(name: .wfHomeScreenSearchResultTapped, object: item)
+
     }
 
     override init(
@@ -30,5 +38,6 @@ class TypeAheadItemsDatasource: Datasource {
     ) {
         super.init(tag: tag, table: table, searchResultsController: searchResultsController)
         table.register(TypeAheadCell.self, forCellReuseIdentifier: TypeAheadCell.reuseIdentifier)
+        table.delegate = self
     }
 }

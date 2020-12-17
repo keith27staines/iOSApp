@@ -8,6 +8,7 @@ import WorkfinderProjectApply
 
 extension Notification.Name {
     static let wfHomeScreenRoleTapped = Notification.Name("RoleTapped")
+    static let wfHomeScreenSearchResultTapped = Notification.Name("SearchResultTapped")
     static let wfHomeScreenShowRecommendationsTapped = Notification.Name("ShowRecommendationsTapped")
     static let wfHomeScreenPopularOnWorkfinderTapped = Notification.Name("PopularOnWorkfinderTapped")
 }
@@ -68,6 +69,12 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     func addNotificationListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(roleTapped), name: .wfHomeScreenRoleTapped, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(navigateToRecommendationsTab), name: .wfHomeScreenShowRecommendationsTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(searchResultTapped), name: .wfHomeScreenSearchResultTapped, object: nil)
+    }
+    
+    @objc func searchResultTapped(notification: Notification) {
+        guard let uuid = (notification.object as? TypeAheadItem)?.uuid else { return }
+        startAssociationApply(associationUuid: uuid, source: .homeTab)
     }
     
     @objc func roleTapped(notification: Notification) {

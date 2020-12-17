@@ -7,27 +7,23 @@ class FiltersView: UIView {
     let filtersModel: FiltersModel
     
     lazy var topStack: UIStackView = {
-        let leftSpacer = UIView()
-        let rightSpacer = UIView()
         let stack = UIStackView()
-        stack.addArrangedSubview(applyButton)
-        stack.addArrangedSubview(leftSpacer)
         stack.addArrangedSubview(titleLabel)
-        stack.addArrangedSubview(rightSpacer)
+        stack.addArrangedSubview(applyButton)
         stack.addArrangedSubview(resetButton)
         stack.axis = .horizontal
-        leftSpacer.widthAnchor.constraint(equalTo: rightSpacer.widthAnchor).isActive = true
+        stack.distribution = .fillEqually
         stack.heightAnchor.constraint(equalToConstant: 44).isActive = true
         return stack
     }()
     
     var titleLabelText: String {
-        "Filters [\(filtersModel.count) active]"
+        "[\(filtersModel.count) active]".uppercased()
     }
     
     func sectionTitleText(sectionIndex: Int) -> String {
         let collection = filtersModel.filterCollections[sectionIndex]
-        return "\(collection.name) [\(collection.count) active]"
+        return "\(collection.name) [\(collection.count) active]".uppercased()
     }
     
     lazy var applyButton: UIButton = {
@@ -58,6 +54,7 @@ class FiltersView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .light)
         label.text = titleLabelText
         return label
     }()
@@ -102,7 +99,7 @@ class FiltersView: UIView {
         addSubview(topStack)
         addSubview(tableView)
         backgroundColor = UIColor.white
-        topStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        topStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20))
         tableView.anchor(top: topStack.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
     }
     
@@ -124,6 +121,7 @@ extension FiltersView: UITableViewDataSource {
         let filtersCollection = filtersModel.filterCollections[indexPath.section]
         let filter = filtersCollection.filters[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "") ?? UITableViewCell()
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         cell.textLabel?.text = filter.type.name
         cell.accessoryType = filter.isSelected ? .checkmark : .none
         return cell

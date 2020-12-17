@@ -23,6 +23,7 @@ class FiltersSectionHeaderCell: UITableViewHeaderFooterView {
     lazy var sectionTitle: UILabel = {
         let label = UILabel()
         label.text = "Section header"
+        label.font = UIFont.systemFont(ofSize: 15, weight: .light)
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         label.isUserInteractionEnabled = true
         return label

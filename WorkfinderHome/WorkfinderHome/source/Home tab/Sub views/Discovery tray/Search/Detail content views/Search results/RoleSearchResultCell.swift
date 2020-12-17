@@ -8,16 +8,19 @@ class RoleSearchResultCell: UITableViewCell {
     var row: Int = 0
     var presenter: RecentRolesDataSource!
     var logoUrlString: String?
+    var roleData: RoleData?
     
     func presentWith(_ roleData: RoleData) {
+        self.roleData = roleData
         companyName.text = roleData.companyName ?? "Not specified"
         projectTitle.text = roleData.projectTitle
         payIconLabel.label.text = roleData.paidAmount
         hoursIconLabel.label.text = roleData.workingHours ?? "Not specified"
         locationIconLabel.label.text = roleData.location
         logoUrlString = roleData.companyLogoUrlString
-        companyLogo.load(companyName: roleData.companyName ?? " ", urlString: roleData.companyLogoUrlString) {
-            
+        companyLogo.load(
+            companyName: roleData.companyName ?? " ",
+            urlString: roleData.companyLogoUrlString) {
         }
     }
     
