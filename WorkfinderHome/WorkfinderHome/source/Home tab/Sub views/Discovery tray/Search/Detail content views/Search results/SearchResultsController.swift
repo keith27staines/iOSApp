@@ -5,7 +5,7 @@ import WorkfinderCommon
 class SearchResultsController {
     enum TabName: String, CaseIterable {
         case roles = "Roles"
-        case companies = "Companies"
+//        case companies = "Companies"
         case people = "People"
     }
     
@@ -18,8 +18,9 @@ class SearchResultsController {
     lazy var datasources: [Datasource] = {
         [
             RolesDatasource(tag: 0, table: tables[0], searchResultsController: self, service: rolesService),
-            CompaniesDatasource(tag: 1, table: tables[1], searchResultsController: self),
-            PeopleDatasource(tag: 2, table: tables[2], searchResultsController: self, associationsService: associationsService)
+//            CompaniesDatasource(tag: 1, table: tables[1], searchResultsController: self),
+
+            PeopleDatasource(tag: 1, table: tables[1], searchResultsController: self, associationsService: associationsService)
         ]
     }()
     
@@ -33,8 +34,8 @@ class SearchResultsController {
     
     var typeAheadJson: TypeAheadJson? {
         didSet {
-            (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.companies ?? []
-            (datasources[2] as? TypeAheadItemsDatasource)?.typeAheadItems = []
+//            (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.companies ?? []
+            (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = []
         }
     }
         

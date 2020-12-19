@@ -1,19 +1,32 @@
 
 import WorkfinderCommon
+import WorkfinderUI
 
 class PopularOnWorkfinderPresenter: CellPresenter {
+    weak var userMessageHandler: HSUserMessageHandler?
     var capsulesData: [CapsuleData] = [
-        CapsuleData(id: UUID().uuidString, text: "Marketing"),
-        CapsuleData(id: UUID().uuidString, text: "Two week placement"),
-        CapsuleData(id: UUID().uuidString, text: "Social media"),
-        CapsuleData(id: UUID().uuidString, text: "Testing"),
-        CapsuleData(id: UUID().uuidString, text: "Design"),
-        CapsuleData(id: UUID().uuidString, text: "Sales"),
-        CapsuleData(id: UUID().uuidString, text: "Product")
+        CapsuleData(id: UUID().uuidString, title: "Marketing"),
+        CapsuleData(id: UUID().uuidString, title: "Two week placement", searchText: ""),
+        CapsuleData(id: UUID().uuidString, title: "Social media"),
+        CapsuleData(id: UUID().uuidString, title: "Testing"),
+        CapsuleData(id: UUID().uuidString, title: "Design"),
+        CapsuleData(id: UUID().uuidString, title: "Sales"),
+        CapsuleData(id: UUID().uuidString, title: "Product")
     ]
+    
+    init(messageHandler: HSUserMessageHandler?) {
+        self.userMessageHandler = messageHandler
+    }
 }
 
 struct CapsuleData {
     var id: F4SUUID
-    var text: String
+    var title: String
+    var searchText: String
+    
+    init(id: String, title: String, searchText: String? = nil) {
+        self.id = id
+        self.title = title
+        self.searchText = searchText ?? title
+    }
 }

@@ -15,7 +15,7 @@ class PopularOnWorkfinderCell: HorizontallyScrollingCell, Presentable {
     }
     
     func addCapsule(data: CapsuleData) {
-        let view = CapsuleView(text: data.text, id: data.id)
+        let view = CapsuleView(data: data)
         view.layer.cornerRadius = 45/2
         view.heightAnchor.constraint(equalToConstant: 45).isActive = true
         addCard(view)
@@ -32,17 +32,17 @@ class PopularOnWorkfinderCell: HorizontallyScrollingCell, Presentable {
 }
 
 class CapsuleView: UIView {
-    let id: String
-    let text: String
+    var id: String {data.id}
+    var text: String { data.title }
+    let data: CapsuleData
     
-    init(text: String, id: String) {
-        self.id = id
-        self.text = text
+    init(data: CapsuleData) {
+        self.data = data
         super.init(frame: CGRect.zero)
         layer.masksToBounds = true
         layer.borderColor = UIColor(red: 151, green: 151, blue: 151).cgColor
         layer.borderWidth = 1
-        tintColor = UIColor(red: 33, green: 33, blue: 33)
+        tintColor = WorkfinderColors.primaryColor //UIColor(red: 33, green: 33, blue: 33)
         addSubview(stack)
         stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
         isUserInteractionEnabled = true
@@ -50,7 +50,7 @@ class CapsuleView: UIView {
     }
     
     @objc func capsuleTapped() {
-        NotificationCenter.default.post(name: .wfHomeScreenPopularOnWorkfinderTapped, object: text)
+        NotificationCenter.default.post(name: .wfHomeScreenPopularOnWorkfinderTapped, object: data)
     }
     
     lazy var stack: UIStackView = {

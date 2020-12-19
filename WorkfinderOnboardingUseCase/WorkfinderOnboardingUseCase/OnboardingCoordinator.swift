@@ -40,13 +40,6 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
         self.onboardingViewController = onboardingViewController
         onboardingViewController.hideOnboardingControls = !isFirstLaunch
         onboardingViewController.coordinator = self
-        onboardingViewController.shouldEnableLocation = { [weak self] enable in
-            guard let self = self else { return }
-            self.delegate?.shouldEnableLocation(enable)
-            LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
-            self.log.track(TrackingEvent(type: .uc_onboarding_convert))
-            self.onboardingDidFinish?(self)
-        }
         onboardingViewController.isLoggedIn = injected.userRepository.loadUser().candidateUuid != nil
         onboardingViewController.modalPresentationStyle = .fullScreen
         onboardingViewController.coordinator = self
@@ -62,7 +55,20 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
         loginHandler.startLoginWorkflow(screenOrder: .loginThenRegister) { [weak self] (isLoggedIn) in
             guard let self = self else { return }
             self.onboardingViewController?.isLoggedIn = isLoggedIn
+            if isLoggedIn {
+                self.finishOnboarding()
+            }
         }
+    }
+    
+    func justGetStartedButtonTapped(viewController: UIViewController) {
+        finishOnboarding()
+    }
+    
+    func finishOnboarding() {
+        LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
+        self.log.track(TrackingEvent(type: .uc_onboarding_convert))
+        self.onboardingDidFinish?(self)
     }
     
 }

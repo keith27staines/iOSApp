@@ -24,7 +24,6 @@ public protocol AppCoordinatorProtocol : Coordinating {
 }
 
 public protocol OnboardingCoordinatorDelegate : class {
-    func shouldEnableLocation(_ :Bool)
 }
 
 public protocol OnboardingCoordinatorProtocol : Coordinating {
@@ -56,7 +55,6 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)
-    var shouldAskOperatingSystemToAllowLocation: Bool { get set }
 }
 
 public protocol CoreInjectionProtocol : class {

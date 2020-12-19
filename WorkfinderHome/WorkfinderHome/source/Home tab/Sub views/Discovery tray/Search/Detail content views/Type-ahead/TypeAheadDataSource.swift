@@ -7,7 +7,7 @@ class TypeAheadDataSource {
     var didUpdateResults: (() -> Void)?
     var error: Error?
     var totalMatches: Int = 0
-    let sectionNames = ["projects", "companies", "people"]
+    let sectionNames = ["projects", "people"] // ["projects", "companies", "people"]
     
     func itemForIndexPath(_ indexPath: IndexPath) -> TypeAheadItem {
         let sectionName = sectionNames[indexPath.section]
@@ -21,7 +21,7 @@ class TypeAheadDataSource {
             case .success(let typeAheadJson):
                 self.categories = [
                     "projects": typeAheadJson.projects ?? [],
-                    "companies": typeAheadJson.companies ?? [],
+//                    "companies": typeAheadJson.companies ?? [],
                     "people": typeAheadJson.people ?? []
                 ]
                 error = nil
@@ -59,7 +59,7 @@ class TypeAheadDataSource {
     }
     
     func sectionNameForIndex(_ index: Int) -> String {
-        ["projects", "companies", "people"][index]
+        sectionNames[index]
     }
     
     init(typeAheadService: TypeAheadServiceProtocol) {

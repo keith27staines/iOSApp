@@ -25,7 +25,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     var tabBarViewController: TabBarViewController!
     var drawerController: DrawerController?
-    var shouldAskOperatingSystemToAllowLocation = false
     
     required init(parent: AppCoordinatorProtocol?,
                   navigationRouter: NavigationRoutingProtocol,
@@ -166,7 +165,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             companyCoordinatorFactory: companyCoordinatorFactory,
             tabNavigator: self
         )
-        coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(coordinator)
         return coordinator
     }()

@@ -37,6 +37,8 @@
 		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
 		536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */; };
 		536D660525820C2F0013B397 /* TypeAheadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536D660425820C2F0013B397 /* TypeAheadCell.swift */; };
+		53763785258DE48100F563B5 /* HSLoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53763784258DE48100F563B5 /* HSLoadingOverlay.swift */; };
+		53763789258DE4B900F563B5 /* HSUserMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53763788258DE4B900F563B5 /* HSUserMessageHandler.swift */; };
 		53786A642585204E00B671EB /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53786A632585204E00B671EB /* RoleData.swift */; };
 		537F5229257E3BB3003C5699 /* EmploymentTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */; };
 		537F522D257E3E78003C5699 /* SkillAcquiredTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */; };
@@ -116,6 +118,8 @@
 		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitShowMoreCard.swift; sourceTree = "<group>"; };
 		536D660425820C2F0013B397 /* TypeAheadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadCell.swift; sourceTree = "<group>"; };
+		53763784258DE48100F563B5 /* HSLoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLoadingOverlay.swift; sourceTree = "<group>"; };
+		53763788258DE4B900F563B5 /* HSUserMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSUserMessageHandler.swift; sourceTree = "<group>"; };
 		53786A632585204E00B671EB /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentTypesService.swift; sourceTree = "<group>"; };
 		537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillAcquiredTypesService.swift; sourceTree = "<group>"; };
@@ -442,6 +446,8 @@
 				534EF6C02570DCFB00ACD399 /* services */,
 				5344851A256B7DBF0082889C /* Home tab */,
 				53692520256E9BCA00E21083 /* UIImage+extensions.swift */,
+				53763784258DE48100F563B5 /* HSLoadingOverlay.swift */,
+				53763788258DE4B900F563B5 /* HSUserMessageHandler.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -587,6 +593,8 @@
 				5355B0D4257CDFEC00B751C7 /* FilterCollection.swift in Sources */,
 				534EF6BB2570DACD00ACD399 /* RolesService.swift in Sources */,
 				53BCD7F2256D265900CC8FF4 /* RecentRolesDataSource.swift in Sources */,
+				53763789258DE4B900F563B5 /* HSUserMessageHandler.swift in Sources */,
+				53763785258DE48100F563B5 /* HSLoadingOverlay.swift in Sources */,
 				53786A642585204E00B671EB /* RoleData.swift in Sources */,
 				5348EB5B25835F5D0048D7EB /* PeopleDatasource.swift in Sources */,
 				5337EBE22577BEB900762F2A /* SearchDetailView.swift in Sources */,

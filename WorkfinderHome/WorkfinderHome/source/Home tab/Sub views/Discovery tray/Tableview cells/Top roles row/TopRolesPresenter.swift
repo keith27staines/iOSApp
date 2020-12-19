@@ -1,10 +1,15 @@
 
+import WorkfinderUI
+
 class TopRolesPresenter: CellPresenter {
-    
+    weak var messageHandler: HSUserMessageHandler?
     let rolesService: RolesServiceProtocol
     
     func load(completion: @escaping (Error?) -> Void) {
-        rolesService.fetchTopRoles { (result) in
+        messageHandler?.showLoadingOverlay(style: .transparent)
+        rolesService.fetchTopRoles { [weak self] (result) in
+            guard let self = self else { return }
+            self.messageHandler?.hideLoadingOverlay()
             switch result {
             case .success(let roles):
                 let maxRoles = min(10, roles.count)
@@ -26,7 +31,8 @@ class TopRolesPresenter: CellPresenter {
         NotificationCenter.default.post(name: .wfHomeScreenRoleTapped, object: roleData)
     }
     
-    init(rolesService: RolesServiceProtocol) {
+    init(rolesService: RolesServiceProtocol, messageHandler: HSUserMessageHandler?) {
         self.rolesService = rolesService
+        self.messageHandler = messageHandler
     }
 }

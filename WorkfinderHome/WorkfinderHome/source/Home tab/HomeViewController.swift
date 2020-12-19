@@ -4,10 +4,9 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class HomeViewController: UIViewController {
-    
+    lazy var messageHandler = HSUserMessageHandler(presenter: self)
     let screenName = ScreenName.home
     weak var coordinator: HomeCoordinator?
-    lazy var messageHandler = UserMessageHandler(presenter: self)
 
     var homeView: HomeView { view as! HomeView }
     var headerView: HeaderView { homeView.headerView }
@@ -127,6 +126,11 @@ class HomeViewController: UIViewController {
     
     func refresh() {
         homeView.refresh()
+        trayController.messageHandler = messageHandler
+        DispatchQueue.main.async { [weak self] in
+            self?.trayController.loadData()
+        }
+        
     }
     
     var isConfigured = false
@@ -159,7 +163,8 @@ class HomeViewController: UIViewController {
             projectTypesService: projectTypesService,
             employmentTypesService: employmentTypesService,
             skillTypesService: skillsTypeService,
-            searchResultsController: searchResultsController
+            searchResultsController: searchResultsController,
+            messageHandler: nil
         )
         super.init(nibName: nil, bundle: nil)
     }

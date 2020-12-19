@@ -13,9 +13,6 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     
     public func navigateToRecommendations() {}
     
-    
-    public var shouldAskOperatingSystemToAllowLocation: Bool = false
-    
     var showApplicationsCallCount: Int = 0
     public func showApplicationsTab(uuid: F4SUUID?) {
         

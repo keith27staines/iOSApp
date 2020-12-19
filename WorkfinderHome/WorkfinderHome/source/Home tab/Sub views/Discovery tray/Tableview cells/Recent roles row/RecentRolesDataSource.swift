@@ -4,6 +4,7 @@ import WorkfinderUI
 import WorkfinderServices
 
 class RecentRolesDataSource: CellPresenter {
+    weak var messageHandler: HSUserMessageHandler?
     let rolesService: RolesServiceProtocol
     var resultHandler: ((Error?) -> Void)?
     private var roles = [RoleData]()
@@ -56,13 +57,18 @@ class RecentRolesDataSource: CellPresenter {
         }
     }
     
-    init(rolesService: RolesServiceProtocol) {
+    init(rolesService: RolesServiceProtocol, messageHandler: HSUserMessageHandler?) {
         self.rolesService = rolesService
+        self.messageHandler = messageHandler
     }
 
     func loadData() {
+        messageHandler?.showLoadingOverlay(style: .transparent)
         rolesService.fetchRecentRoles { [weak self] (result) in
-            self?.result = result
+            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
+                self?.messageHandler?.hideLoadingOverlay()
+                self?.result = result
+            }
         }
     }
     

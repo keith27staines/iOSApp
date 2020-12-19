@@ -1,13 +1,6 @@
-//
-//  CompanyToolbar.swift
-//  F4SPrototypes
-//
-//  Created by Keith Dev on 21/01/2019.
-//  Copyright © 2019 Keith Staines. All rights reserved.
-//
 
 import UIKit
-
+import WorkfinderUI
 
 protocol CompanyToolbarDelegate : class {
     func companyToolbar(_ : CompanyToolbar, requestedAction: CompanyToolbar.ActionType)
@@ -24,7 +17,7 @@ class CompanyToolbar: UIToolbar {
     weak var toolbarDelegate: CompanyToolbarDelegate?
     
     func mapAppearance(shown: Bool) {
-        mapButton.tintColor = shown ? UIColor.blue :UIColor.black
+        mapButton.tintColor = shown ? WorkfinderColors.primaryColor : UIColor.black
     }
     
     var mapButton: UIBarButtonItem = {

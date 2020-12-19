@@ -15,7 +15,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
-    var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol?
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
     var deepLinkDispatcher: DeepLinkDispatcher?
@@ -75,7 +74,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             log: log)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
-        onboardingCoordinator.delegate = self
         onboardingCoordinator.isFirstLaunch = localStore.value(key: LocalStore.Key.isFirstLaunch) as? Bool ?? true
         onboardingCoordinator.onboardingDidFinish = onboardingDidFinish
         addChildCoordinator(onboardingCoordinator)
@@ -100,7 +98,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             parent: self,
             router: navigationRouter,
             inject: injected)
-        tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
         self.tabBarCoordinator = tabBarCoordinator
         tabBarCoordinator.start()
@@ -225,12 +222,6 @@ extension AppCoordinator {
         
         """
         injected.log.debug(info, functionName: #function, fileName: #file, lineNumber: #line)
-    }
-}
-
-extension AppCoordinator : OnboardingCoordinatorDelegate {
-    func shouldEnableLocation(_ enable: Bool) {
-        shouldAskOperatingSystemToAllowLocation = enable
     }
 }
 

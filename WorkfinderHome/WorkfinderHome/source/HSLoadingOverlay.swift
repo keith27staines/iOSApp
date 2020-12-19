@@ -1,20 +1,11 @@
-//
-//  LoadingOverlay.swift
-//  f4s-workexperience
-//
-//  Created by Andreea Rusu on 26/04/16.
-//  Copyright © 2016 Chelsea Apps Factory. All rights reserved.
-//
 
-import Foundation
-import WorkfinderCommon
 import UIKit
+import WorkfinderUI
 
-class LoadingOverlay: UIView {
+class HSLoadingOverlay: UIView {
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-        activityIndicator.color = WorkfinderColors.primaryColor
         return activityIndicator
     }()
     
@@ -49,6 +40,8 @@ class LoadingOverlay: UIView {
     }
     
     private func configure() {
+        isUserInteractionEnabled = true
+        translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         captionLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(activityIndicator)
@@ -61,21 +54,31 @@ class LoadingOverlay: UIView {
         captionLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
     
-    func showOverlay() {
-        self.backgroundColor = UIColor.black
-        self.alpha = 0.75
-        self.translatesAutoresizingMaskIntoConstraints = false
+    func showOverlay(style: LoadingOverlayStyle) {
+        applyStyle(style: style)
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         guard let superview = superview else { return }
         guard !(superview is UITableView) else { return }
         fillSuperview()
     }
-
-    func showLightOverlay() {
-        showOverlay()
-        self.backgroundColor = UIColor.white
-        activityIndicator.color = UIColor.gray
+    
+    func applyStyle(style: LoadingOverlayStyle) {
+        activityIndicator.color = WorkfinderColors.primaryColor
+        switch style {
+        case .dark:
+            isUserInteractionEnabled = false
+            backgroundColor = UIColor.black
+            alpha = 0.75
+        case .light:
+            isUserInteractionEnabled = false
+            backgroundColor = UIColor.white
+            alpha = 0.75
+        case .transparent:
+            isUserInteractionEnabled = true
+            backgroundColor = UIColor.clear
+            alpha = 1
+        }
     }
 
     func hideOverlay() {

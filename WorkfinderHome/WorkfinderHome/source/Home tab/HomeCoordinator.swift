@@ -17,9 +17,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     var projectApplyCoordinator: ProjectApplyCoordinator?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     weak var tabNavigator: TabNavigating?
-    public var shouldAskOperatingSystemToAllowLocation = false
     
-    lazy var rootViewController: HomeViewController = {
+    lazy var homeViewController: HomeViewController = {
         let networkConfig = injected.networkConfig
         let vc = HomeViewController(
             coordinator: self,
@@ -31,7 +30,6 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             searchResultsController: SearchResultsController(rolesService: RolesService(networkConfig: networkConfig),
             associationsService: AssociationsService(networkConfig: networkConfig))
         )
-        vc.coordinator = self
         return vc
     }()
     
@@ -91,8 +89,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     public override func start() {
-        rootViewController.coordinator = self
-        navigationRouter.navigationController.pushViewController(rootViewController, animated: false)
+        homeViewController.coordinator = self
+        navigationRouter.navigationController.pushViewController(homeViewController, animated: false)
     }
     
     var contextService: ApplicationContextService?
@@ -132,7 +130,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     public func processRecommendation(uuid: F4SUUID?) {
         guard let uuid = uuid else { return }
-        rootViewController.dismiss(animated: true, completion: nil)
+        homeViewController.dismiss(animated: true, completion: nil)
         if childCoordinators.count == 0 {
             startViewRecommendationCoordinator(recommendationUuid: uuid)
         } else {
@@ -141,7 +139,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
                 message: "You have an application in progress. Would you like to view your recommendation or continue with your current application?",
                 preferredStyle: .alert)
             let recommendationAction = UIAlertAction(title: "View recommendation", style: .destructive) { (_) in
-                self.navigationRouter.popToViewController(self.rootViewController, animated: true)
+                self.navigationRouter.popToViewController(self.homeViewController, animated: true)
                 self.childCoordinators.removeAll()
                 self.startViewRecommendationCoordinator(recommendationUuid: uuid)
             }
@@ -176,7 +174,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     func showDetail(companyAndPin: CompanyAndPin?, recommendedAssociationUuid: F4SUUID?, originScreen: ScreenName) {
         guard let companyAndPin = companyAndPin else { return }
         showingDetailForWorkplace = companyAndPin
-        rootViewController.dismiss(animated: true)
+        homeViewController.dismiss(animated: true)
         let companyCoordinator = companyCoordinatorFactory.buildCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
@@ -185,7 +183,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             inject: injected, applicationFinished: { [weak self] preferredDestination in
                 guard let self = self else { return }
                 self.show(destination: preferredDestination)
-                self.navigationRouter.popToViewController(self.rootViewController, animated: true)
+                self.navigationRouter.popToViewController(self.homeViewController, animated: true)
         })
         addChildCoordinator(companyCoordinator)
         companyCoordinator.start()

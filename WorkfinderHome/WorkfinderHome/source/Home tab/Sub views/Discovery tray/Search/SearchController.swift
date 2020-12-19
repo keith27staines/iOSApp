@@ -135,7 +135,7 @@ class SearchController: NSObject {
     }
     
     @objc func popularOnWorkfinderTapListener(notification: Notification) {
-        guard let searchString = notification.object as? String
+        guard let searchString = (notification.object as? CapsuleData)?.searchText
         else { return }
         searchBar.text = searchString
         performSearch()
@@ -237,6 +237,7 @@ extension SearchController {
     }
     
     func performTypeAhead(string: String?) {
+        guard let string = string, string.count > 0 else { return }
         typeAheadDatasource.searchString = string
     }
 }

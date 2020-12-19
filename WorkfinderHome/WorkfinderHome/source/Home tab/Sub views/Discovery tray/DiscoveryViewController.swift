@@ -16,6 +16,7 @@ class DiscoveryTrayController: NSObject {
     var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenter]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
     let sectionManager = DiscoverTraySectionManager()
+    weak var messageHandler: HSUserMessageHandler?
     
     lazy var searchController: SearchController = {
         let filtersModel = FiltersModel(
@@ -34,19 +35,19 @@ class DiscoveryTrayController: NSObject {
     }()
     
     lazy var recentRolesPresenter: RecentRolesDataSource = {
-        RecentRolesDataSource(rolesService: rolesService)
+        RecentRolesDataSource(rolesService: rolesService, messageHandler: messageHandler)
     }()
     
     lazy var topRolesPresenter: TopRolesPresenter = {
-        TopRolesPresenter(rolesService: rolesService)
+        TopRolesPresenter(rolesService: rolesService, messageHandler: messageHandler)
     }()
     
     lazy var popularOnWorkfinderPresenter: PopularOnWorkfinderPresenter = {
-        PopularOnWorkfinderPresenter()
+        PopularOnWorkfinderPresenter(messageHandler: messageHandler)
     }()
     
     lazy var recommendationsPresenter: RecommendationsPresenter = {
-        RecommendationsPresenter(rolesService: rolesService)
+        RecommendationsPresenter(rolesService: rolesService, messageHandler: messageHandler)
     }()
     
     var searchBarStack: UIStackView { searchController.searchBarStack }
@@ -58,7 +59,8 @@ class DiscoveryTrayController: NSObject {
          projectTypesService: ProjectTypesServiceProtocol,
          employmentTypesService: EmploymentTypesServiceProtocol,
          skillTypesService: SkillAcquiredTypesServiceProtocol,
-         searchResultsController: SearchResultsController
+         searchResultsController: SearchResultsController,
+         messageHandler: HSUserMessageHandler?
     ) {
         self.coordinator = coordinator
         self.rolesService = rolesService
@@ -67,9 +69,15 @@ class DiscoveryTrayController: NSObject {
         self.employmentTypesService = employmentTypesService
         self.skillTypesService = skillTypesService
         self.searchResultsController = searchResultsController
+        self.messageHandler = messageHandler
         super.init()
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
+    }
+    
+    func loadData() {
+        tableView.dataSource = self
+        tableView.delegate = self
         recentRolesPresenter.resultHandler = { optionalError in
             guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
             self.tableView.reloadSections(IndexSet([sectionIndex]), with: .automatic)
@@ -103,8 +111,6 @@ class DiscoveryTrayController: NSObject {
     
     func configureTableView() {
         tableView.allowsSelection = false
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.register(PopularOnWorkfinderCell.self, forCellReuseIdentifier: PopularOnWorkfinderCell.identifier)
         tableView.register(RecommendationsCell.self, forCellReuseIdentifier: RecommendationsCell.identifier)
         tableView.register(TopRolesCell.self, forCellReuseIdentifier: TopRolesCell.identifier)

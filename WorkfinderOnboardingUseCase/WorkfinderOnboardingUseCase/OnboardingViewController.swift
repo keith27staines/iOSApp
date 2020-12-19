@@ -6,13 +6,11 @@ import WorkfinderUI
 class OnboardingViewController: UIViewController {
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var enterLocationButton: UIButton!
-    @IBOutlet weak var enableLocationButton: UIButton!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var signinButton: UIButton!
+    @IBOutlet weak var justGetStartedButton: UIButton!
     
     weak var coordinator: OnboardingCoordinator?
-    var shouldEnableLocation: ((Bool) -> Void)?
+
     var hideOnboardingControls: Bool = true {
         didSet {
             _ = view
@@ -21,12 +19,7 @@ class OnboardingViewController: UIViewController {
     }
     
     var isLoggedIn: Bool = false {
-        didSet {
-            if isLoggedIn {
-                self.loginLabel.isHidden = true
-                self.loginButton.isHidden = true
-            }
-        }
+        didSet { signinButton.isHidden = isLoggedIn }
     }
     
     override func viewDidLoad() {
@@ -35,10 +28,8 @@ class OnboardingViewController: UIViewController {
     }
     
     lazy var viewsToFadeIn: [UIView] = [
-        enterLocationButton,
-        enableLocationButton,
-        loginLabel,
-        loginButton
+        signinButton,
+        justGetStartedButton
     ]
     
     func fadeInViews() {
@@ -65,12 +56,12 @@ extension OnboardingViewController {
     }
 
     func setUpButtons() {
-        enableLocationButton.isHidden = hideOnboardingControls
-        enterLocationButton.isHidden = hideOnboardingControls
-        enableLocationButton.layer.cornerRadius = 8
-        enterLocationButton.layer.cornerRadius = 8
-        enableLocationButton.layer.masksToBounds = true
-        enterLocationButton.layer.masksToBounds = true
+        justGetStartedButton.isHidden = hideOnboardingControls
+        signinButton.isHidden = hideOnboardingControls
+        justGetStartedButton.layer.cornerRadius = 8
+        signinButton.layer.cornerRadius = 8
+        justGetStartedButton.layer.masksToBounds = true
+        signinButton.layer.masksToBounds = true
     }
 
     func setupAppearance() {
@@ -85,18 +76,14 @@ extension OnboardingViewController {
 }
 
 extension OnboardingViewController {
-    @IBAction func enterLocationButtonTapped(_: AnyObject) {
-        enterLocationButton.isEnabled = false
-        shouldEnableLocation?(false)
+    @IBAction func signinOrRegisterButtonTapped(_: AnyObject) {
+        signinButton.isEnabled = false
+        coordinator?.loginButtonTapped(viewController: self)
     }
 
-    @IBAction func enableLocationButtonTapped(_: AnyObject) {
-        enterLocationButton.isEnabled = false
-        shouldEnableLocation?(true)
-    }
-    
-    @IBAction func loginTapped(_:AnyObject) {
-        coordinator?.loginButtonTapped(viewController: self)
+    @IBAction func justgetStartedButtonTapped(_: AnyObject) {
+        signinButton.isEnabled = false
+        coordinator?.finishOnboarding()
     }
     
 }

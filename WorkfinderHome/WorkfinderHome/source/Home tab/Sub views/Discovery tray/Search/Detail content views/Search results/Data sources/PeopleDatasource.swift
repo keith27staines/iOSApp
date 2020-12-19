@@ -11,8 +11,8 @@ class PeopleDatasource: TypeAheadItemsDatasource {
         associationsService.fetchAssociations(queryItems: queryItems) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let xxx):
-                self.data = xxx.results.map { (association) -> TypeAheadItem in
+            case .success(let hostAssociationsListItem):
+                self.data = hostAssociationsListItem.results.map { (association) -> TypeAheadItem in
                     TypeAheadItem(uuid: association.uuid, title: association.host?.fullName, subtitle: association.title, searchTerm: "", objectType: "association", iconUrlString: association.host?.photoUrlString)
                 }
                 self.table?.reloadData()
