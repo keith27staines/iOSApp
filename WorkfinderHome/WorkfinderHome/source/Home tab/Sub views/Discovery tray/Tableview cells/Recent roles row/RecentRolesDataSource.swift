@@ -65,7 +65,7 @@ class RecentRolesDataSource: CellPresenter {
     func loadData() {
         messageHandler?.showLoadingOverlay(style: .transparent)
         rolesService.fetchRecentRoles { [weak self] (result) in
-            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
+            DispatchQueue.main.async {
                 self?.messageHandler?.hideLoadingOverlay()
                 self?.result = result
             }

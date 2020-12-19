@@ -78,6 +78,7 @@ class DiscoveryTrayController: NSObject {
     func loadData() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.reloadData()
         recentRolesPresenter.resultHandler = { optionalError in
             guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
             self.tableView.reloadSections(IndexSet([sectionIndex]), with: .automatic)

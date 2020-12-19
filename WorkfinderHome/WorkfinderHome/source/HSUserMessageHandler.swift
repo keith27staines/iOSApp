@@ -74,20 +74,25 @@ public class HSUserMessageHandler {
     public func showLoadingOverlay(_ view: UIView? = nil, style: LoadingOverlayStyle) {
         guard let view = view ?? messagePresenter?.view else { return }
         DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            let loadingOverlay = strongSelf.loadingOverlay
-            if strongSelf.count > 0 { return }
+            guard let self = self else { return }
+            let loadingOverlay = self.loadingOverlay
+            self.count += 1
+            if self.count > 1 { return }
+            print("adding count \(self.count)")
             view.addSubview(loadingOverlay)
             loadingOverlay.frame = view.frame
-            self?.count += 1
-            loadingOverlay.applyStyle(style: style)
+            loadingOverlay.showOverlay(style: style)
         }
     }
 
     public func hideLoadingOverlay() {
         DispatchQueue.main.async { [weak self] in
-            self?.count -= 1
-            //self?.loadingOverlay.hideOverlay()
+            guard let self = self else { return }
+            self.count -= 1
+            print("removing count \(self.count)")
+            if self.count <= 0 {
+                self.loadingOverlay.hideOverlay()
+            }
         }
     }
     
