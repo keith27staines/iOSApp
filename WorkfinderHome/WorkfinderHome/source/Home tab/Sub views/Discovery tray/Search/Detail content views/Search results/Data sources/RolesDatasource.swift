@@ -5,18 +5,18 @@ import WorkfinderUI
 class RolesDatasource: Datasource, UITableViewDelegate {
     let service: RolesServiceProtocol?
     
-    override func loadData() {
+    override func loadData(completion: @escaping (Error?) -> Void) {
         service?.fetchRolesWithQueryItems(queryItems, completion: { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let roleDataArray):
-                self.lastError = nil
                 self.data = roleDataArray
                 self.table?.reloadData()
+                completion(nil)
             case .failure(let error):
-                self.lastError = error
                 self.data = []
                 self.table?.reloadData()
+                completion(error)
             }
         })
     }

@@ -3,13 +3,20 @@ import UIKit
 import WorkfinderCommon
 
 class SearchResultsController {
+    var messageHandler: HSUserMessageHandler?
     enum TabName: String, CaseIterable {
         case roles = "Roles"
 //        case companies = "Companies"
         case people = "People"
     }
     
-    var view: SearchResultsView?
+    var view: SearchResultsView? {
+        didSet {
+            guard let view = view else { return }
+            messageHandler = HSUserMessageHandler(view: view)
+        }
+    }
+    
     let rolesService: RolesServiceProtocol
     let associationsService: AssociationsServiceProtocol
     let tabNames: [String] = TabName.allCases.map { $0.rawValue }
@@ -36,19 +43,29 @@ class SearchResultsController {
         didSet {
 //            (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.companies ?? []
             (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = []
+            self.messageHandler?.showLoadingOverlay(style: .transparent)
+            datasources[1].loadData { [weak self] (error) in
+                guard let self = self else { return }
+                self.messageHandler?.hideLoadingOverlay()
+            }
         }
     }
         
     var queryItems = [URLQueryItem]() {
         didSet {
-            datasources.forEach { (datasource) in
-                datasource.queryItems = queryItems
+            let roleDatasource = datasources[0]
+            roleDatasource.queryItems = queryItems
+            messageHandler?.showLoadingOverlay(style: .transparent)
+            roleDatasource.loadData() { [weak self] error in
+                guard let self = self else { return }
+                self.messageHandler?.hideLoadingOverlay()
             }
-            datasources[selectedTabIndex].loadData()
         }
     }
     
-    init(rolesService: RolesServiceProtocol, associationsService: AssociationsServiceProtocol) {
+    init(
+        rolesService: RolesServiceProtocol,
+        associationsService: AssociationsServiceProtocol) {
         self.rolesService = rolesService
         self.associationsService = associationsService
     }

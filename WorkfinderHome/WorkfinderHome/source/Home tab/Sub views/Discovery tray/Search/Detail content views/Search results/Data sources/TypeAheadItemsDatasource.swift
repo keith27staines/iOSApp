@@ -6,11 +6,10 @@ class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
     var typeAheadItems = [TypeAheadItem]() {
         didSet {
             data = typeAheadItems
-            loadData()
         }
     }
     
-    override func loadData() {
+    override func loadData(completion: @escaping (Error?) -> Void) {
         table?.reloadData()
     }
     

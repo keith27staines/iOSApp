@@ -5,7 +5,7 @@ import WorkfinderServices
 class PeopleDatasource: TypeAheadItemsDatasource {
     let associationsService: AssociationsServiceProtocol
     
-    override func loadData() {
+    override func loadData(completion: @escaping (Error?) -> Void) {
         data = []
         table?.reloadData()
         associationsService.fetchAssociations(queryItems: queryItems) { [weak self] (result) in
@@ -16,9 +16,11 @@ class PeopleDatasource: TypeAheadItemsDatasource {
                     TypeAheadItem(uuid: association.uuid, title: association.host?.fullName, subtitle: association.title, searchTerm: "", objectType: "association", iconUrlString: association.host?.photoUrlString)
                 }
                 self.table?.reloadData()
+                completion(nil)
             case .failure(let error):
                 self.data = []
                 self.table?.reloadData()
+                completion(error)
                 break
             }
         }

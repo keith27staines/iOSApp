@@ -12,12 +12,18 @@ public enum LoadingOverlayStyle {
 public class HSUserMessageHandler {
     private var count: Int = 0
     weak public private (set) var messagePresenter: UIViewController?
+    weak var view: UIView?
     
     let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
     var loadingOverlay: HSLoadingOverlay = HSLoadingOverlay()
 
-    public init(presenter: UIViewController) {
+    public convenience init(presenter: UIViewController) {
+        self.init(view: presenter.view)
         self.messagePresenter = presenter
+    }
+    
+    public init(view: UIView) {
+        self.view = view
         let action = UIAlertAction(title: "OK", style: .default) { _ in
         }
         alert.addAction(action)
@@ -71,14 +77,14 @@ public class HSUserMessageHandler {
         messagePresenter?.present(alert, animated: true, completion: nil)
     }
 
-    public func showLoadingOverlay(_ view: UIView? = nil, style: LoadingOverlayStyle) {
-        guard let view = view ?? messagePresenter?.view else { return }
+    public func showLoadingOverlay(style: LoadingOverlayStyle) {
+        guard let view = view else { return }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             let loadingOverlay = self.loadingOverlay
             self.count += 1
+            print("Adding overlay \(self.count)")
             if self.count > 1 { return }
-            print("adding count \(self.count)")
             view.addSubview(loadingOverlay)
             loadingOverlay.frame = view.frame
             loadingOverlay.showOverlay(style: style)
@@ -88,8 +94,8 @@ public class HSUserMessageHandler {
     public func hideLoadingOverlay() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+            print("Removing overlay \(self.count)")
             self.count -= 1
-            print("removing count \(self.count)")
             if self.count <= 0 {
                 self.loadingOverlay.hideOverlay()
             }
