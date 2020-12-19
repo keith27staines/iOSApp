@@ -106,7 +106,6 @@ class PortraitRoleCard: UIView {
         topVariableSpace.heightAnchor.constraint(equalTo: bottomVariableSpace.heightAnchor).isActive = true
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.layoutSubviews()
         return stack
     }()
     

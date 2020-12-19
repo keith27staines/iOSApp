@@ -21,23 +21,6 @@ class HeaderView: UIView {
         self.heightAnchor.constraint(equalToConstant: height)
     }()
     
-    private lazy var leftImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image =  UIImage(named: "logo2")
-        imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private lazy var leftLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Workfinder"
-        label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
-        return label
-    }()
-    
     private lazy var rightLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
@@ -49,8 +32,6 @@ class HeaderView: UIView {
     
     private lazy var stack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            leftImageView,
-            leftLabel,
             UIView(),
             rightLabel
         ])

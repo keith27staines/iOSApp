@@ -12,6 +12,7 @@ class DiscoveryTrayView : UIView {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.white
         return tableView
     }()
     

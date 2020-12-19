@@ -118,6 +118,7 @@ class DiscoveryTrayController: NSObject {
         tableView.register(LandscapeRoleCell.self, forCellReuseIdentifier: LandscapeRoleCell.identifer)
         tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.register(SectionFooterView.self, forHeaderFooterViewReuseIdentifier: SectionFooterView.identifier)
+        tableView.tableFooterView = UIView()
     }
 }
 

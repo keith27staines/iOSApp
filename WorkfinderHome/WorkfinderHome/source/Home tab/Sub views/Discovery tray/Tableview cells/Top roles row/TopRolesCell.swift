@@ -32,8 +32,8 @@ class TopRolesCell: HorizontallyScrollingCell, Presentable {
     
     func addCardWith(data: RoleData, tapAction: @escaping (RoleData)->Void) {
         let card = PortraitRoleCard(data: data, tapAction: tapAction)
-        card.widthAnchor.constraint(equalToConstant: 158).isActive = true
-        card.heightAnchor.constraint(equalToConstant: 262).isActive = true
+        card.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
+        card.heightAnchor.constraint(equalToConstant: cardHeight).isActive = true
         addCard(card)
     }
     
