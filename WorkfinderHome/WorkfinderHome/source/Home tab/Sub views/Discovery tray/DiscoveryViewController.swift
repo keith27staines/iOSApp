@@ -125,7 +125,14 @@ class DiscoveryTrayController: NSObject {
     }
     
     lazy var refreshControl: UIRefreshControl = {
+        let title = NSLocalizedString("Pull to refresh", comment: "Pull to refresh")
+        let font = UIFont.systemFont(ofSize: 20)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: WorkfinderColors.primaryColor,
+        ]
         let control = UIRefreshControl()
+        control.attributedTitle = NSAttributedString(string: title, attributes: attributes)
         control.addTarget(self, action: #selector(loadData), for: .valueChanged)
         control.tintColor = WorkfinderColors.primaryColor
         control.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
