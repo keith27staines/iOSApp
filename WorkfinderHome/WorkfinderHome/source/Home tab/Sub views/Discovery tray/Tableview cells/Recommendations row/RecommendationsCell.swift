@@ -18,12 +18,10 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
                 roles[0..<maxRoles].forEach { (data) in
                     self.addCardWith(data: data, tapAction: presenter.roleTapped)
                 }
-                if presenter.isSeeMoreCardRequired {
-                    self.addShowMoreCard(tapAction: presenter.moreTapped)
-                    if roles.count.isMultiple(of: 2) {
-                        self.addShowPlaceholderCard()
-                    }
-                }
+                let lastCardType = presenter.lastCardType
+                guard lastCardType != .none else { break }
+                self.addShowMoreCard(text: lastCardType.title, tapAction: presenter.moreTapped)
+                if roles.count.isMultiple(of: 2) { self.addShowPlaceholderCard() }
             case .failure(_):
                 break
             }
@@ -38,8 +36,8 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
         addCard(card)
     }
     
-    func addShowMoreCard(tapAction: @escaping ()->Void) {
-        let card = PortraitShowMoreCard()
+    func addShowMoreCard(text: String, tapAction: @escaping ()->Void) {
+        let card = PortraitLastCard(text: text)
         card.tapAction = tapAction
         card.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
         card.heightAnchor.constraint(equalToConstant: cardHeight).isActive = true

@@ -2,14 +2,11 @@
 import UIKit
 import WorkfinderUI
 
-class PortraitShowMoreCard: UIView {
+class PortraitLastCard: UIView {
     
     var tapAction: (() -> Void)?
 
-    @objc func tapped() {
-        NotificationCenter.default.post(name: .wfHomeScreenShowRecommendationsTapped, object: nil)
-        tapAction?()
-    }
+    @objc func tapped() { tapAction?() }
     
     lazy var actionLabel: UILabel = {
         let label = UILabel()
@@ -17,15 +14,19 @@ class PortraitShowMoreCard: UIView {
         label.text = "See more"
         label.textColor = WorkfinderColors.primaryColor
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.6
         label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    init() {
+    init(text: String) {
         super.init(frame: CGRect.zero)
         configureBorder()
         configureViews()
+        self.actionLabel.text = text
         isUserInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
     }

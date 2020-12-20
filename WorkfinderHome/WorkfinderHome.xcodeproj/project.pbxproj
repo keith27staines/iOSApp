@@ -35,7 +35,7 @@
 		5355B0E0257DE7A800B751C7 /* ProjectTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5355B0DF257DE7A800B751C7 /* ProjectTypesService.swift */; };
 		535CDAB6257B768A005FBC2E /* TypeAheadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CDAB5257B768A005FBC2E /* TypeAheadService.swift */; };
 		53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53692520256E9BCA00E21083 /* UIImage+extensions.swift */; };
-		536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */; };
+		536976B2256FF03800196E12 /* PortraitLastCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536976B1256FF03800196E12 /* PortraitLastCard.swift */; };
 		536D660525820C2F0013B397 /* TypeAheadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536D660425820C2F0013B397 /* TypeAheadCell.swift */; };
 		53763785258DE48100F563B5 /* HSLoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53763784258DE48100F563B5 /* HSLoadingOverlay.swift */; };
 		53763789258DE4B900F563B5 /* HSUserMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53763788258DE4B900F563B5 /* HSUserMessageHandler.swift */; };
@@ -116,7 +116,7 @@
 		5355B0DF257DE7A800B751C7 /* ProjectTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTypesService.swift; sourceTree = "<group>"; };
 		535CDAB5257B768A005FBC2E /* TypeAheadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadService.swift; sourceTree = "<group>"; };
 		53692520256E9BCA00E21083 /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
-		536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitShowMoreCard.swift; sourceTree = "<group>"; };
+		536976B1256FF03800196E12 /* PortraitLastCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitLastCard.swift; sourceTree = "<group>"; };
 		536D660425820C2F0013B397 /* TypeAheadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadCell.swift; sourceTree = "<group>"; };
 		53763784258DE48100F563B5 /* HSLoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLoadingOverlay.swift; sourceTree = "<group>"; };
 		53763788258DE4B900F563B5 /* HSUserMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSUserMessageHandler.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				532DD108256FA8B900CFD525 /* PortraitRoleCard.swift */,
-				536976B1256FF03800196E12 /* PortraitShowMoreCard.swift */,
+				536976B1256FF03800196E12 /* PortraitLastCard.swift */,
 				534EF6CB2571FDE000ACD399 /* LandscapeRoleCell.swift */,
 			);
 			path = "Cards and Tiles";
@@ -627,7 +627,7 @@
 				535CDAB6257B768A005FBC2E /* TypeAheadService.swift in Sources */,
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,
 				53E4BA1B258355AC00252348 /* TypeAheadItem.swift in Sources */,
-				536976B2256FF03800196E12 /* PortraitShowMoreCard.swift in Sources */,
+				536976B2256FF03800196E12 /* PortraitLastCard.swift in Sources */,
 				53BCD7EB256D263900CC8FF4 /* RecentRolesCell.swift in Sources */,
 				53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */,
 			);
