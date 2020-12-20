@@ -49,9 +49,19 @@ class TypeAheadCell: UITableViewCell {
     }()
     
     func updateFrom(_ typeAhead: TypeAheadItem) {
+        guard typeAhead.objectType != nil else {
+            title.text = typeAhead.title
+            title.font = UIFont.systemFont(ofSize: 15, weight: .light)
+            subtitle.text = ""
+            icon.isHidden = true
+            icon.image = nil
+            return
+        }
+        icon.isHidden = false
         let defaultImage = UIImage.from(size: CGSize(width: 40, height: 40), string: typeAhead.title ?? "", backgroundColor: WorkfinderColors.primaryColor)
         let downloadFromUrlString = typeAhead.iconUrlString ?? ""
         title.text = typeAhead.title
+        title.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         subtitle.text = typeAhead.subtitle
         icon.load(urlString: downloadFromUrlString, defaultImage: defaultImage)
     }

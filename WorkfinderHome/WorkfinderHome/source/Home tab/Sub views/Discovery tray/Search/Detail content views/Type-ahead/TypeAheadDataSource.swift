@@ -11,7 +11,9 @@ class TypeAheadDataSource {
     
     func itemForIndexPath(_ indexPath: IndexPath) -> TypeAheadItem {
         let sectionName = sectionNames[indexPath.section]
-        return categories[sectionName]?[indexPath.row] ?? TypeAheadItem()
+        guard let category = categories[sectionName] else { return TypeAheadItem() }
+        guard indexPath.row < category.count else { return TypeAheadItem(title: "No matches")}
+        return category[indexPath.row]
     }
     
     var result: Result<TypeAheadJson,Error>? {
@@ -55,7 +57,7 @@ class TypeAheadDataSource {
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        categories[sectionNameForIndex(section)]?.count ?? 0
+        max(categories[sectionNameForIndex(section)]?.count ?? 0, 1)
     }
     
     func sectionNameForIndex(_ index: Int) -> String {
