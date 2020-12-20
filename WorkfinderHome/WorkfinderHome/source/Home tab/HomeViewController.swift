@@ -98,6 +98,32 @@ class HomeViewController: UIViewController {
             completion: nil
         )
     }
+    
+    var isShowingError = false
+    @objc func handleErrorNotification(_ notification: Notification) {
+        guard let wfError = notification.object as? WorkfinderError else { return }
+        guard !isShowingError else {
+            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                wfError.retryHandler?()
+            }
+            return
+        }
+        isShowingError = true
+        let alert = UIAlertController(title: "Data isn't loading", message: "Please check your internet connection", preferredStyle: .alert)
+        if let retryHandler = wfError.retryHandler {
+            alert.addAction(
+                UIAlertAction(
+                    title: "Retry",
+                    style: .default,
+                    handler: {_ in
+                        self.isShowingError = false
+                        retryHandler()
+                    }
+                )
+            )
+        }
+        present(alert, animated: true, completion: nil)
+    }
 
     override func loadView() { view = HomeView() }
 
@@ -167,6 +193,7 @@ class HomeViewController: UIViewController {
             messageHandler: nil
         )
         super.init(nibName: nil, bundle: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleErrorNotification), name: .wfHomeScreenErrorNotification, object: nil)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

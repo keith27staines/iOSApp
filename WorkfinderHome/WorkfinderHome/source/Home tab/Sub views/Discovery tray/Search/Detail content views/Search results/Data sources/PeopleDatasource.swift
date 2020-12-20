@@ -18,10 +18,7 @@ class PeopleDatasource: TypeAheadItemsDatasource {
                 self.table?.reloadData()
                 completion(nil)
             case .failure(let error):
-                self.data = []
-                self.table?.reloadData()
-                completion(error)
-                break
+                self.handleDataLoadError(error, retry: { self.loadData(completion: completion) }, completion: completion)
             }
         }
     }

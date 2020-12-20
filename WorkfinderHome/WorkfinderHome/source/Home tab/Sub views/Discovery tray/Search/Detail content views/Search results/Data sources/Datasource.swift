@@ -1,4 +1,5 @@
 
+import WorkfinderCommon
 import UIKit
 
 class Datasource: NSObject, UITableViewDataSource {
@@ -12,6 +13,15 @@ class Datasource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         data.count
+    }
+    
+    func handleDataLoadError(_ error: Error, retry: @escaping () -> Void, completion: (Error?) -> Void) {
+        data = []
+        table?.reloadData()
+        guard let wfError = error as? WorkfinderError else { return }
+        wfError.retryHandler = retry
+        NotificationCenter.default.post(name: .wfHomeScreenErrorNotification, object: error)
+        completion(error)
     }
     
     /// override this method

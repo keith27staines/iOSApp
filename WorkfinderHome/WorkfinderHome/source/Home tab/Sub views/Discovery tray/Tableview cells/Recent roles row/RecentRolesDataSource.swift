@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderServices
 
@@ -62,14 +63,27 @@ class RecentRolesDataSource: CellPresenter {
         self.messageHandler = messageHandler
     }
 
-    func loadData() {
+    func loadData(completion: @escaping () -> Void) {
         messageHandler?.showLoadingOverlay(style: .transparent)
         rolesService.fetchRecentRoles { [weak self] (result) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.messageHandler?.hideLoadingOverlay()
-                self?.result = result
+                self.messageHandler?.hideLoadingOverlay()
+                switch result {
+                case .success(_):
+                    self.result = result
+                    completion()
+                case .failure(let error):
+                    self.handleError(error: error, retry: {self.loadData(completion: completion)})
+                }
             }
         }
+    }
+    
+    func handleError(error: Error, retry: @escaping () -> Void) {
+        guard let wfError = error as? WorkfinderError else { return }
+        wfError.retryHandler = retry
+        NotificationCenter.default.post(name: .wfHomeScreenErrorNotification, object: error)
     }
     
 }

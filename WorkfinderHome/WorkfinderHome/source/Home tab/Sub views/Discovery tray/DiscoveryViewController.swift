@@ -75,7 +75,7 @@ class DiscoveryTrayController: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
     }
     
-    func loadData() {
+    @objc func loadData() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
@@ -83,7 +83,9 @@ class DiscoveryTrayController: NSObject {
             guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
             self.tableView.reloadSections(IndexSet([sectionIndex]), with: .automatic)
         }
-        recentRolesPresenter.loadData()
+        recentRolesPresenter.loadData { [weak self] in
+            self?.refreshControl.endRefreshing()
+        }
     }
     
     @objc func handleCandidateSignedIn() {
@@ -119,7 +121,16 @@ class DiscoveryTrayController: NSObject {
         tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.register(SectionFooterView.self, forHeaderFooterViewReuseIdentifier: SectionFooterView.identifier)
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
     }
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        control.tintColor = WorkfinderColors.primaryColor
+        control.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        return control
+    }()
 }
 
 extension DiscoveryTrayController: UITableViewDataSource {

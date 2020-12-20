@@ -41,7 +41,6 @@ class SearchResultsController {
     
     var typeAheadJson: TypeAheadJson? {
         didSet {
-//            (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = typeAheadJson?.companies ?? []
             (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = []
             self.messageHandler?.showLoadingOverlay(style: .transparent)
             datasources[1].loadData { [weak self] (error) in

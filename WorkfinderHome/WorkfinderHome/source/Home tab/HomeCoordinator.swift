@@ -11,6 +11,7 @@ extension Notification.Name {
     static let wfHomeScreenSearchResultTapped = Notification.Name("SearchResultTapped")
     static let wfHomeScreenShowRecommendationsTapped = Notification.Name("ShowRecommendationsTapped")
     static let wfHomeScreenPopularOnWorkfinderTapped = Notification.Name("PopularOnWorkfinderTapped")
+    static let wfHomeScreenErrorNotification = Notification.Name("ErrorNotification")
 }
 
 public class HomeCoordinator : CoreInjectionNavigationCoordinator {

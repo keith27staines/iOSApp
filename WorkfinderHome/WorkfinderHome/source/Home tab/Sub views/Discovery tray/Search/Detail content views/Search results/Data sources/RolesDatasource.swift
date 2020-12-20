@@ -1,4 +1,4 @@
-
+import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
 
@@ -14,9 +14,7 @@ class RolesDatasource: Datasource, UITableViewDelegate {
                 self.table?.reloadData()
                 completion(nil)
             case .failure(let error):
-                self.data = []
-                self.table?.reloadData()
-                completion(error)
+                self.handleDataLoadError(error, retry: { self.loadData(completion: completion)}, completion: completion)
             }
         })
     }

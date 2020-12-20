@@ -308,10 +308,10 @@
 		537F8AE5257B616A00C5F2EB /* Search results */ = {
 			isa = PBXGroup;
 			children = (
-				5348EB4F25835E9D0048D7EB /* Data sources */,
 				538C1DD9257F8EE800E34F95 /* SearchResultsController.swift */,
 				5337EBF32577E49000762F2A /* SearchResultsView.swift */,
 				53C4472A25810012008CE52E /* RoleSearchResultCell.swift */,
+				5348EB4F25835E9D0048D7EB /* Data sources */,
 			);
 			path = "Search results";
 			sourceTree = "<group>";
