@@ -39,6 +39,7 @@
 		536D660525820C2F0013B397 /* TypeAheadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536D660425820C2F0013B397 /* TypeAheadCell.swift */; };
 		53763785258DE48100F563B5 /* HSLoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53763784258DE48100F563B5 /* HSLoadingOverlay.swift */; };
 		53763789258DE4B900F563B5 /* HSUserMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53763788258DE4B900F563B5 /* HSUserMessageHandler.swift */; };
+		537637CC259091E200F563B5 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537637CB259091E200F563B5 /* WorkfinderRegisterCandidate.framework */; };
 		53786A642585204E00B671EB /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53786A632585204E00B671EB /* RoleData.swift */; };
 		537F5229257E3BB3003C5699 /* EmploymentTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */; };
 		537F522D257E3E78003C5699 /* SkillAcquiredTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */; };
@@ -120,6 +121,7 @@
 		536D660425820C2F0013B397 /* TypeAheadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadCell.swift; sourceTree = "<group>"; };
 		53763784258DE48100F563B5 /* HSLoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSLoadingOverlay.swift; sourceTree = "<group>"; };
 		53763788258DE4B900F563B5 /* HSUserMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSUserMessageHandler.swift; sourceTree = "<group>"; };
+		537637CB259091E200F563B5 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53786A632585204E00B671EB /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentTypesService.swift; sourceTree = "<group>"; };
 		537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillAcquiredTypesService.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				53448521256B7FC50082889C /* WorkfinderViewRecommendation.framework in Frameworks */,
 				53D94B9B256A380700A2127C /* WorkfinderCommon.framework in Frameworks */,
 				5348EB6B25838B9A0048D7EB /* WorkfinderProjectApply.framework in Frameworks */,
+				537637CC259091E200F563B5 /* WorkfinderRegisterCandidate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +431,7 @@
 		53D94B99256A380700A2127C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				537637CB259091E200F563B5 /* WorkfinderRegisterCandidate.framework */,
 				5348EB6A25838B9A0048D7EB /* WorkfinderProjectApply.framework */,
 				53448520256B7FC50082889C /* WorkfinderViewRecommendation.framework */,
 				53448513256A612A0082889C /* WorkfinderCompanyDetailsUseCase.framework */,

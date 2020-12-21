@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		537637912590857600F563B5 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537637902590857600F563B5 /* WorkfinderRegisterCandidate.framework */; };
-		537637922590857600F563B5 /* WorkfinderRegisterCandidate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 537637902590857600F563B5 /* WorkfinderRegisterCandidate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5397E0E8253B8C510009EFAC /* CapsuleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */; };
 		5397E0E9253B8C510009EFAC /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E7253B8C500009EFAC /* CapsuleView.swift */; };
 		5397E0F1253B8E0F0009EFAC /* CapsuleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */; };
@@ -58,20 +57,6 @@
 			remoteInfo = WorkfinderProjectApply;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		537637932590857600F563B5 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				537637922590857600F563B5 /* WorkfinderRegisterCandidate.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		537637902590857600F563B5 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,7 +330,6 @@
 				FCA13FC424BC7F060009C30F /* Sources */,
 				FCA13FC524BC7F060009C30F /* Frameworks */,
 				FCA13FC624BC7F060009C30F /* Resources */,
-				537637932590857600F563B5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
