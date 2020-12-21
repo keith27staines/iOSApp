@@ -7,10 +7,17 @@ public protocol UserRepositoryProtocol {
     func loadUser() -> User
     func loadAccessToken() -> String?
     func saveAccessToken(_ token: String)
+    var isCandidateLoggedIn: Bool { get }
 }
 
 public class UserRepository : UserRepositoryProtocol {
     let localStore: LocalStorageProtocol
+    
+    public var isCandidateLoggedIn: Bool {
+        guard let candidateUuid = loadCandidate().uuid, candidateUuid.isEmpty
+        else { return false }
+        return true
+    }
     public init(localStore: LocalStorageProtocol = UserDefaults.standard) {
         self.localStore = localStore
     }

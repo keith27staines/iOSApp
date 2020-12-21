@@ -7,6 +7,7 @@ import WorkfinderAppLogic
 import WorkfinderDocumentUpload
 import WorkfinderUI
 import ErrorHandlingUI
+import WorkfinderRegisterCandidate
 
 protocol ProjectApplyCoordinatorProtocol: AnyObject, ErrorHandlerProviderProtocol {
     func onCoverLetterWorkflowCancelled()
@@ -33,6 +34,9 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     var projectType: String = ""
     var log: F4SAnalytics { injected.log }
     let applicationSource: ApplicationSource
+    var coverLetterText: String = ""
+    var picklistsDictionary = PicklistsDictionary()
+    
     lazy public var errorHandler: ErrorHandlerProtocol = {
         ErrorHandler(
             navigationRouter: self.newNavigationRouter,
@@ -130,9 +134,26 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         log.track(TrackingEvent(type: .uc_projectApply_cancel(applicationSource)))
     }
     
-    func submitApplication(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
+    func onCoverLetterDidComplete() {
+        switch UserRepository().isCandidateLoggedIn {
+        case true: submitApplication()
+        case false: startLogin()
+        }
+    }
+    
+    func startLogin() {
+        let coordinator = RegisterAndSignInCoordinator(
+            parent: self,
+            navigationRouter: newNavigationRouter,
+            inject: injected,
+            firstScreenHidesBackButton: true)
+        addChildCoordinator(coordinator)
+        coordinator.startLoginFirst()
+    }
+    
+    func submitApplication() {
         guard let vc = modalVC, let view = vc.view else { return }
-        var picklistsDictionary = picklistsDictionary
+        var picklistsDictionary = self.picklistsDictionary
         picklistsDictionary[.availabilityPeriod] = nil
         picklistsDictionary[.duration] = nil
         let messageHandler = vc.messageHandler
@@ -156,7 +177,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {
                     // just dismiss
                 }, retryHandler: {
-                    self.submitApplication(coverLetterText: coverLetterText, picklistsDictionary: picklistsDictionary)
+                    self.submitApplication()
                 })
             }
         }
@@ -203,7 +224,9 @@ extension ProjectApplyCoordinator: CoverLetterParentCoordinatorProtocol {
         onCoverLetterWorkflowCancelled()
     }
     public func coverLetterCoordinatorDidComplete(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
-        submitApplication(coverLetterText: coverLetterText, picklistsDictionary: picklistsDictionary)
+        self.coverLetterText = coverLetterText
+        self.picklistsDictionary = picklistsDictionary
+        onCoverLetterDidComplete()
     }
 }
 
@@ -215,4 +238,16 @@ extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
     public func onUploadComplete() {
         showSuccess()
     }
+}
+
+extension ProjectApplyCoordinator: RegisterAndSignInCoordinatorParent {
+    public func onCandidateIsSignedIn() {
+        submitApplication()
+    }
+    
+    public func onRegisterAndSignInCancelled() {
+        newNavigationRouter.pop(animated: true)
+    }
+    
+    
 }
