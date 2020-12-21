@@ -18,7 +18,10 @@ class TypeAheadDataSource {
     
     var result: Result<TypeAheadJson,Error>? {
         didSet {
-            guard let result = result else { return }
+            guard let result = result else {
+                didUpdateResults?()
+                return
+            }
             switch result {
             case .success(let typeAheadJson):
                 self.categories = [
@@ -41,14 +44,20 @@ class TypeAheadDataSource {
     
     var searchString: String? {
         didSet {
+            isCleared = false
             let queryItem = URLQueryItem(name: "q", value: searchString)
             service.fetch(queryItems: [queryItem]) { [weak self] (result) in
+                guard self?.isCleared == false else { return }
                 self?.result = result
             }
         }
     }
     
+    var isCleared: Bool = true
+    
     func clear() {
+        isCleared = true
+        categories = [String:[TypeAheadItem]]()
         result = nil
     }
     

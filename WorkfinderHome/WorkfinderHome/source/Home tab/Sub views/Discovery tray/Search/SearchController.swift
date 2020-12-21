@@ -61,10 +61,10 @@ class SearchController: NSObject {
         }
     }
     
-    lazy var searchBar: UISearchBar = {
-        let searchBar = SearchBar()
+    lazy var searchBar: KSSearchBar = {
+        let searchBar = KSSearchBar()
+        searchBar.tintColor = WorkfinderColors.primaryColor
         searchBar.delegate = self
-        searchBar.textEntryField?.delegate = self
         return searchBar
     }()
     
@@ -142,36 +142,49 @@ class SearchController: NSObject {
     }
 }
 
-extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        if #available(iOS 13.0, *) {
-            searchBar.setShowsCancelButton(true, animated: true)
-        } else {
-            searchBar.showsCancelButton = true
-        }
+extension SearchController: KSSearchBarDelegate {
+    func searchBarButtonTapped(_ searchbar: KSSearchBar) {
+        searchBar.resignFirstResponder()
+        performSearch()
+    }
+    
+    func searchbarTextDidChange(_ searchbar: KSSearchBar) {
+        performTypeAhead(string: searchBar.text)
+        searchTextDidUpdate()
+    }
+    
+    func searchbarDidBeginEditing(_ searchbar: KSSearchBar) {
         setStateFromSearchText()
         DispatchQueue.main.async {
             self.configureKeyboardReturnKey()
         }
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if #available(iOS 13.0, *) {
-            searchBar.setShowsCancelButton(false, animated: true)
-        } else {
-            searchBar.showsCancelButton = false
-        }
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        performTypeAhead(string: searchBar.text)
-        searchTextDidUpdate()
+    func searchBarDidCancel(_ searchbar: KSSearchBar) {
+        state = .hidden
     }
     
     func searchTextDidUpdate() {
         setStateFromSearchText()
         configureKeyboardReturnKey()
     }
+    
+    func searchBarShouldReturn(_ searchbar: KSSearchBar) -> Bool {
+        searchBar.resignFirstResponder()
+        performSearch()
+        return false
+    }
+    
+    func searchBarButtonTapped(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        performSearch()
+    }
+}
+
+
+extension SearchController {
+    
+    var shouldEnableReturnKey: Bool { searchBar.text?.count ?? 0 > 0 ? true : false }
     
     func setStateFromSearchText() {
         state = .showingTypeAhead
@@ -180,20 +193,6 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
     func configureKeyboardReturnKey() {
         guard let keyboard = getKeyboard() else { return }
         keyboard.setValue(shouldEnableReturnKey, forKey: "returnKeyEnabled")
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        performSearch()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        state = .hidden
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        shouldEnableReturnKey
     }
     
     func getKeyboard() -> UIView?
@@ -217,8 +216,6 @@ extension SearchController: UISearchBarDelegate, UITextFieldDelegate {
         }
         return nil
     }
-    
-    var shouldEnableReturnKey: Bool { searchBar.text?.count ?? 0 > 0 ? true : false }
 }
 
 extension SearchController {
@@ -237,7 +234,10 @@ extension SearchController {
     }
     
     func performTypeAhead(string: String?) {
-        guard let string = string, string.count > 0 else { return }
+        guard let string = string, string.count > 0 else {
+            typeAheadDatasource.clear()
+            return
+        }
         typeAheadDatasource.searchString = string
     }
 }
