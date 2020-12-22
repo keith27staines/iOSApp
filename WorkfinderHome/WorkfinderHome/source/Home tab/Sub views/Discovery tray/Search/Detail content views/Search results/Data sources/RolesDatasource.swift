@@ -3,6 +3,7 @@ import WorkfinderServices
 import WorkfinderUI
 
 class RolesDatasource: Datasource, UITableViewDelegate {
+    
     let service: RolesServiceProtocol?
     
     override func loadData(completion: @escaping (Error?) -> Void) {
@@ -10,7 +11,7 @@ class RolesDatasource: Datasource, UITableViewDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let roleDataArray):
-                self.data = roleDataArray
+                self.data = roleDataArray.settingApplicationSource(self.applicationSource)
                 self.table?.reloadData()
                 completion(nil)
             case .failure(let error):
@@ -40,10 +41,11 @@ class RolesDatasource: Datasource, UITableViewDelegate {
         tag: Int,
         table: UITableView,
         searchResultsController: SearchResultsController,
-        service: RolesServiceProtocol
+        service: RolesServiceProtocol,
+        applicationSource: ApplicationSource
     ) {
         self.service = service
-        super.init(tag: tag, table: table, searchResultsController: searchResultsController)
+        super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)
         table.register(RoleSearchResultCell.self, forCellReuseIdentifier: RoleSearchResultCell.identifer)
         table.delegate = self
     }

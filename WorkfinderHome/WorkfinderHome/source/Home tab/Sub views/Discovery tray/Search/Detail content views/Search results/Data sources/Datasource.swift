@@ -8,6 +8,7 @@ class Datasource: NSObject, UITableViewDataSource {
     weak var table: UITableView?
     var data = [Any]()
     let tag: Int
+    let applicationSource: ApplicationSource
     
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
@@ -34,10 +35,15 @@ class Datasource: NSObject, UITableViewDataSource {
         return UITableViewCell()
     }
     
-    init(tag: Int, table: UITableView, searchResultsController: SearchResultsController) {
+    init(
+        tag: Int,
+        table: UITableView,
+        searchResultsController: SearchResultsController,
+        applicationSource: ApplicationSource) {
         self.tag = tag
         self.table = table
         self.searchResultsController = searchResultsController
+        self.applicationSource = applicationSource
         super.init()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         table.dataSource = self

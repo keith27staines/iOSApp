@@ -24,10 +24,15 @@ class SearchResultsController {
     
     lazy var datasources: [Datasource] = {
         [
-            RolesDatasource(tag: 0, table: tables[0], searchResultsController: self, service: rolesService),
+            RolesDatasource(
+                tag: 0,
+                table: tables[0],
+                searchResultsController: self,
+                service: rolesService,
+                applicationSource: .homeTabSearchResultsProjects),
 //            CompaniesDatasource(tag: 1, table: tables[1], searchResultsController: self),
 
-            PeopleDatasource(tag: 1, table: tables[1], searchResultsController: self, associationsService: associationsService)
+            PeopleDatasource(tag: 1, table: tables[1], searchResultsController: self, associationsService: associationsService, applicationSource: .homeTabSearchResultsPeople)
         ]
     }()
     

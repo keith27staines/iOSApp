@@ -1,4 +1,6 @@
 
+import WorkfinderCommon
+
 struct TypeAheadItem: Codable {
     var uuid: String?
     var title: String?
@@ -6,6 +8,7 @@ struct TypeAheadItem: Codable {
     var searchTerm: String?
     var objectType: String?
     var iconUrlString: String?
+    var applicationSource: ApplicationSource = .unspecified
     
     private enum CodingKeys: String, CodingKey {
         case uuid
@@ -14,5 +17,11 @@ struct TypeAheadItem: Codable {
         case searchTerm = "search_term"
         case objectType = "object_type"
         case iconUrlString = "icon"
+    }
+    
+    func settingApplicationSource(_ applicationSource: ApplicationSource) -> TypeAheadItem {
+        var item = self
+        item.applicationSource = applicationSource
+        return item
     }
 }

@@ -74,10 +74,10 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
     }
 
-    public func dispatchRecommendationToSearchTab(uuid: F4SUUID) {
+    public func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: ApplicationSource) {
         closeMenu { [weak self] (success) in
             self?.navigateToTab(tab: .home)
-            self?.homeCoordinator.processRecommendation(uuid: uuid)
+            self?.homeCoordinator.processRecommendation(uuid: uuid, source: source)
         }
     }
     
@@ -179,7 +179,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             navigateToApplications: { self.navigateToTab(tab: .applications) }
         )
         coordinator.onRecommendationSelected = { uuid in
-            self.dispatchRecommendationToSearchTab(uuid: uuid)
+            self.dispatchRecommendationToSearchTab(uuid: uuid, source: .recommendationsTab)
         }
         addChildCoordinator(coordinator)
         return coordinator

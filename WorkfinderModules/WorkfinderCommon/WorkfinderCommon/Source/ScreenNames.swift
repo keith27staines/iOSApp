@@ -69,6 +69,10 @@ public enum TrackEventType {
     case uc_projectApply_start(ApplicationSource)
     case uc_projectApply_cancel(ApplicationSource)
     case uc_projectApply_convert(ApplicationSource)
+    
+    // object views
+    case uc_projectView(ApplicationSource)
+    case uc_associationView(ApplicationSource)
 
     case uc_offer_start
     case uc_offer_cancel
@@ -119,6 +123,9 @@ public enum TrackEventType {
         case .uc_offer_cancel: return  "candidate_uc_offer_cancel"
         case .uc_offer_convert: return  "candidate_uc_offer_convert"
         case .uc_offer_withdraw: return  "candidate_uc_offer_withdraw"
+            
+        case .uc_projectView: return "candidate_uc_projectView"
+        case .uc_associationView: return "candidate_uc_associationView"
         
         case .firstUse: return "firstUse"
         case .appOpen: return "appOpen"

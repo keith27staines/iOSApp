@@ -4,12 +4,16 @@ public enum ApplicationSource: String {
     case deeplink
     case pushNotification
     case homeTab
-    case homeTabTypeAhead
+    case homeTabTypeAheadProjects
+    case homeTabTypeAheadPeople
+    case homeTabSearchResultsProjects
+    case homeTabSearchResultsPeople
     case homeTabRecommendations
     case homeTabRecentRoles
     case homeTabTopRoles
     case recommendationsTab
     case other
+    case unspecified
     
     public init(deeplinkSource: DeeplinkDispatchInfo.Source) {
         switch deeplinkSource {

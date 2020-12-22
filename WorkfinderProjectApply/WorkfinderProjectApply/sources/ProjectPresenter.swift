@@ -85,10 +85,13 @@ class ProjectPresenter: ProjectPresenterProtocol {
     
     init(coordinator: ProjectApplyCoordinator,
          projectUuid: F4SUUID,
-         projectService: ProjectServiceProtocol) {
+         projectService: ProjectServiceProtocol,
+         source: ApplicationSource,
+         log: F4SAnalyticsAndDebugging) {
         self.coordinator = coordinator
         self.projectUuid = projectUuid
         self.service = projectService
+        log.track(TrackingEvent(type: .uc_projectView(source)))
     }
     
     func onViewDidLoad(view: ProjectViewProtocol) {

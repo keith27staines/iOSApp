@@ -18,6 +18,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     var projectApplyCoordinator: ProjectApplyCoordinator?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     weak var tabNavigator: TabNavigating?
+    var log: F4SAnalyticsAndDebugging { injected.log }
     
     lazy var homeViewController: HomeViewController = {
         let networkConfig = injected.networkConfig
@@ -36,14 +37,11 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     func dispatchTypeAheadItem(_ item: TypeAheadItem) {
         guard let objectType = item.objectType, let uuid = item.uuid else { return }
-        let source = ApplicationSource.homeTabTypeAhead
         switch objectType {
         case "association", "company":
-            startAssociationApply(associationUuid: uuid, source: source)
-            return
+            startAssociationApply(associationUuid: uuid, source: item.applicationSource)
         case "project":
-            startProjectApply(projectUuid: uuid, source: source)
-            return
+            startProjectApply(projectUuid: uuid, source: item.applicationSource)
         default:
             var title = ""
             let subtitle = "\(item.objectType ?? "")\n\(item.title ?? "")\n\(item.subtitle ?? "")"
@@ -73,8 +71,9 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     @objc func searchResultTapped(notification: Notification) {
-        guard let uuid = (notification.object as? TypeAheadItem)?.uuid else { return }
-        startAssociationApply(associationUuid: uuid, source: .homeTab)
+        guard let item = notification.object as? TypeAheadItem,
+              let uuid = item.uuid else { return }
+        startAssociationApply(associationUuid: uuid, source: item.applicationSource)
     }
     
     @objc func roleTapped(notification: Notification) {
@@ -82,7 +81,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             let roleData = notification.object as? RoleData,
             let id = roleData.id
         else { return }
-        startProjectApply(projectUuid: id, source: .homeTab)
+        startProjectApply(projectUuid: id, source: roleData.applicationSource)
     }
     
     @objc func navigateToRecommendationsTab() {
@@ -111,7 +110,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
                     navigationRouter: self.navigationRouter,
                     companyAndPin: companyAndPin,
                     recommendedAssociationUuid: associationUuid,
-                    inject: self.injected) { (destination) in
+                    inject: self.injected,
+                    applicationSource: source) { (destination) in
                 }
                 self.addChildCoordinator(coordinator)
                 coordinator.start()
@@ -129,11 +129,11 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         self.projectApplyCoordinator = projectApplyCoordinator
     }
     
-    public func processRecommendation(uuid: F4SUUID?) {
+    public func processRecommendation(uuid: F4SUUID?, source: ApplicationSource) {
         guard let uuid = uuid else { return }
         homeViewController.dismiss(animated: true, completion: nil)
         if childCoordinators.count == 0 {
-            startViewRecommendationCoordinator(recommendationUuid: uuid)
+            startViewRecommendationCoordinator(recommendationUuid: uuid, applicationSource: source)
         } else {
             let alert = UIAlertController(
                 title: "View Recommendation?",
@@ -142,7 +142,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             let recommendationAction = UIAlertAction(title: "View recommendation", style: .destructive) { (_) in
                 self.navigationRouter.popToViewController(self.homeViewController, animated: true)
                 self.childCoordinators.removeAll()
-                self.startViewRecommendationCoordinator(recommendationUuid: uuid)
+                self.startViewRecommendationCoordinator(recommendationUuid: uuid, applicationSource: source)
             }
             let continueAction = UIAlertAction(title: "Continue with current application", style: .default) { (_) in
                 return
@@ -153,16 +153,17 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         }
     }
     
-    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID) {
+    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID, applicationSource: ApplicationSource) {
         let coordinator = ViewRecommendationCoordinator(
             recommendationUuid: recommendationUuid,
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
             onSuccess: { [weak self] (coordinator, context) in
-                self?.showDetail(companyAndPin: context.companyAndPin,
-                                 recommendedAssociationUuid: context.associationUuid,
-                                 originScreen: .notSpecified)
+                self?.showDetail(
+                    companyAndPin: context.companyAndPin,
+                    recommendedAssociationUuid: context.associationUuid,
+                    originScreen: .notSpecified)
             }, onCancel: { [weak self] coordinator in
                 self?.childCoordinatorDidFinish(coordinator)
         })
@@ -181,7 +182,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             navigationRouter: navigationRouter,
             companyAndPin: companyAndPin,
             recommendedAssociationUuid: recommendedAssociationUuid,
-            inject: injected, applicationFinished: { [weak self] preferredDestination in
+            inject: injected, applicationSource: .unspecified,
+            applicationFinished: { [weak self] preferredDestination in
                 guard let self = self else { return }
                 self.show(destination: preferredDestination)
                 self.navigationRouter.popToViewController(self.homeViewController, animated: true)

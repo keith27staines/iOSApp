@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderCommon
 
 class TypeAheadDataSource {
     
@@ -25,9 +26,8 @@ class TypeAheadDataSource {
             switch result {
             case .success(let typeAheadJson):
                 self.categories = [
-                    "projects": typeAheadJson.projects ?? [],
-//                    "companies": typeAheadJson.companies ?? [],
-                    "people": typeAheadJson.people ?? []
+                    "projects": typeAheadJson.projects?.settingApplicationSource(.homeTabTypeAheadProjects) ?? [],
+                    "people": typeAheadJson.people?.settingApplicationSource(.homeTabTypeAheadPeople) ?? []
                 ]
                 error = nil
                 totalMatches = typeAheadJson.count
@@ -89,5 +89,21 @@ extension String {
         let array = self.split(separator: "&")
         if array.count < 2 { return string }
         return String(array[0])
+    }
+}
+
+extension Array where Element == TypeAheadItem {
+    func settingApplicationSource(_ source: ApplicationSource) -> [TypeAheadItem] {
+        map { (item) -> TypeAheadItem in
+            item.settingApplicationSource(source)
+        }
+    }
+}
+
+extension Array where Element == RoleData {
+    func settingApplicationSource(_ source: ApplicationSource) -> [RoleData] {
+        map { (roleData) -> RoleData in
+            roleData.settingApplicationSource(source)
+        }
     }
 }

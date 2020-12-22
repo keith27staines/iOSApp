@@ -1,11 +1,14 @@
 
 import UIKit
+import WorkfinderCommon
 
 class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
     
     var typeAheadItems = [TypeAheadItem]() {
         didSet {
-            data = typeAheadItems
+            data = typeAheadItems.map({ (item) -> TypeAheadItem in
+                return item.settingApplicationSource(applicationSource)
+            })
         }
     }
     
@@ -33,9 +36,10 @@ class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
     override init(
         tag: Int,
         table: UITableView,
-        searchResultsController: SearchResultsController
+        searchResultsController: SearchResultsController,
+        applicationSource: ApplicationSource
     ) {
-        super.init(tag: tag, table: table, searchResultsController: searchResultsController)
+        super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)
         table.register(TypeAheadCell.self, forCellReuseIdentifier: TypeAheadCell.reuseIdentifier)
         table.delegate = self
     }

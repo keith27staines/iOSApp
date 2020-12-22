@@ -17,7 +17,7 @@ class RecentRolesDataSource: CellPresenter {
             guard let result = result else { return }
             switch result {
             case .success(let roles):
-                self.roles = roles
+                self.roles = roles.settingApplicationSource(.homeTabRecentRoles)
                 self.images = self.makeDefaultImages()
                 self.error = nil
             case .failure(let error):

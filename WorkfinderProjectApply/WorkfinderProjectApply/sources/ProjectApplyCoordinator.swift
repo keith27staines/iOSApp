@@ -65,7 +65,9 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         let presenter = ProjectPresenter(
             coordinator: self,
             projectUuid: projectUuid,
-            projectService: ProjectService(networkConfig: injected.networkConfig)
+            projectService: ProjectService(networkConfig: injected.networkConfig),
+            source: applicationSource,
+            log: injected.log
         )
         self.projectPresenter = presenter
         let vc = ProjectViewController(coordinator: self, presenter: presenter)
