@@ -2,41 +2,9 @@
 import UIKit
 import WorkfinderUI
 
-//class SearchBar: UISearchBar {
-//
-//    init() {
-//        super.init(frame: CGRect.zero)
-//        configureViews()
-//    }
-//
-//    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-//
-//    var textEntryField: UITextField? {
-//        if #available(iOS 13.0, *) {
-//            return searchTextField
-//        } else {
-//            return value(forKey: "searchField") as? UITextField
-//        }
-//    }
-//
-//    func configureViews() {
-//        if let leftView = textEntryField?.leftView as? UIImageView {
-//            leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
-//            leftView.tintColor = WorkfinderColors.primaryColor
-//        }
-//        autocapitalizationType = .none
-//        autocorrectionType = .default
-//        placeholder = "projects, companies, hosts"
-//        returnKeyType = .search
-//        enablesReturnKeyAutomatically = false
-//        tintColor = WorkfinderColors.primaryColor
-//    }
-//}
-
 protocol KSSearchBarDelegate: AnyObject {
     func searchbarTextDidChange(_ searchbar: KSSearchBar)
     func searchbarDidBeginEditing(_ searchbar: KSSearchBar)
-    //func searchbarDidEndEditing(_ searchbar: KSSearchBar)
     func searchBarDidCancel(_ searchbar: KSSearchBar)
     func searchBarShouldReturn(_ searchbar: KSSearchBar) -> Bool
     func searchBarButtonTapped(_ searchbar: KSSearchBar)
@@ -48,14 +16,19 @@ class KSSearchBar: UIView {
     private var cancelWidth: CGFloat { gap + cancelButton.frame.width }
     weak var delegate: KSSearchBarDelegate?
     
-    private enum State {
+    enum State {
         case inactive
         case activeEmpty
         case activeWithContent
     }
     
-    private var state: State = .inactive {
+    private (set) var state: State = .inactive {
         didSet { configureForState() }
+    }
+    
+    var placeholder: String? {
+        get { textField.placeholder }
+        set { textField.placeholder = newValue }
     }
     
     override var tintColor: UIColor! {
@@ -66,13 +39,11 @@ class KSSearchBar: UIView {
         }
     }
     
+    override var isFirstResponder: Bool { textField.isFirstResponder }
+    
     var text: String? {
-        set {
-            textField.text = newValue
-        }
-        get {
-            return textField.text
-        }
+        set { textField.text = newValue }
+        get { return textField.text }
     }
     
     @discardableResult
@@ -89,9 +60,11 @@ class KSSearchBar: UIView {
     
     private lazy var textField: UITextField = {
         let view = UITextField()
+        view.font = UIFont.systemFont(ofSize: 15, weight: .light)
         view.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        view.heightAnchor.constraint(equalToConstant: 30).isActive = true
         view.placeholder = "placeholder"
         view.delegate = self
         view.returnKeyType = .search

@@ -65,6 +65,7 @@ class SearchController: NSObject {
         let searchBar = KSSearchBar()
         searchBar.tintColor = WorkfinderColors.primaryColor
         searchBar.delegate = self
+        searchBar.placeholder = "Projects or people"
         return searchBar
     }()
     
@@ -100,6 +101,16 @@ class SearchController: NSObject {
         return stack
     }()
     
+    lazy var beginTypingLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.white
+        label.numberOfLines = 0
+        label.text = "Begin typing to see some suggestions"
+        label.textColor = UIColor.lightGray
+        label.isHidden = true
+        return label
+    }()
+    
     lazy var searchDetail: SearchDetailView = {
         let view = SearchDetailView(
             filtersModel: filtersModel,
@@ -112,6 +123,8 @@ class SearchController: NSObject {
             }
         )
         view.searchResultsView.controller = searchResultsController
+        view.addSubview(beginTypingLabel)
+        beginTypingLabel.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
         return view
     }()
     
@@ -188,6 +201,14 @@ extension SearchController {
     
     func setStateFromSearchText() {
         state = .showingTypeAhead
+        beginTypingLabel.isHidden = false
+        if !searchBar.isFirstResponder {
+            beginTypingLabel.isHidden = true
+            return
+        }
+        if searchBar.text?.count ?? 0 > 0 {
+            beginTypingLabel.isHidden = true
+        }
     }
     
     func configureKeyboardReturnKey() {
