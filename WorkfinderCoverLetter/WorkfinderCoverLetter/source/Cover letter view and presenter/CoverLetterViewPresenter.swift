@@ -35,7 +35,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     }
     
     func onViewDidAppear() {
-        log.track(TrackingEvent(type: .letterView))
+        log.track(.letterView)
     }
     
     func onViewDidLoad(view: CoverLetterViewProtocol) {

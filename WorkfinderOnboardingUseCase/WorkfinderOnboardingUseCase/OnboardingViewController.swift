@@ -77,7 +77,6 @@ extension OnboardingViewController {
 
 extension OnboardingViewController {
     @IBAction func signinOrRegisterButtonTapped(_: AnyObject) {
-        signinButton.isEnabled = false
         coordinator?.loginButtonTapped(viewController: self)
     }
 

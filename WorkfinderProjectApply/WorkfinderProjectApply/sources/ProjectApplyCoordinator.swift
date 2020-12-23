@@ -117,19 +117,19 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
 extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onTapApply() {
-        log.track(TrackingEvent(type: .project_apply_start(applicationSource)))
+        log.track(.project_apply_start(applicationSource))
         startCoverLetterFlow()
     }
     
     func onModalFinished() {
         originalVC?.dismiss(animated: true, completion: nil)
         delegate?.onProjectApplyDidFinish()
-        log.track(TrackingEvent(type: .project_apply_convert(applicationSource)))
+        log.track(.project_apply_convert(applicationSource))
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
     func onCoverLetterWorkflowCancelled() {
-        log.track(TrackingEvent(type: .project_apply_cancel(applicationSource)))
+        log.track(.project_apply_cancel(applicationSource))
     }
     
     func onCoverLetterDidComplete() {
@@ -169,7 +169,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
             messageHandler.hideLoadingOverlay()
             switch result {
             case .success(let placement):
-                self.log.track(TrackingEvent(type: .onboarding_convert))
+                self.log.track(.onboarding_convert)
                 self.onApplicationSubmitted(placement: placement)
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {

@@ -37,9 +37,8 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     func trackAppOpenedEvent() {
         let localStore = LocalStore()
         let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
-        let openEvent: TrackingEvent
-        openEvent = isFirstLaunch ? TrackingEvent(type: .first_use) : TrackingEvent(type: .app_open)
-        self.track(openEvent)
+        let eventType: TrackEventType = isFirstLaunch ? .first_use : .app_open
+        self.track(eventType)
     }
     
     func startMixpanel(for environment: EnvironmentType) {
@@ -75,11 +74,14 @@ public class F4SLog : F4SAnalyticsAndDebugging {
 
 extension F4SLog : F4SAnalytics {
     
-    public func track(_ event: TrackingEvent) {
+    public func track(_ eventType: TrackEventType) {
+        let event = TrackingEvent(type: eventType)
         let mixpanelProperties = event.additionalProperties.compactMapValues({ (value) -> MixpanelType? in
             value as? MixpanelType
         })
-        mixPanel.track(event: event.type.name, properties: mixpanelProperties)
+        assert(mixpanelProperties.count == event.additionalProperties.count)
+        print(eventType)
+        mixPanel.track(event: eventType.name, properties: mixpanelProperties)
     }
 }
 

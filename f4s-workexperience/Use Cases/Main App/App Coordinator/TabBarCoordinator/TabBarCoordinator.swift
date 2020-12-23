@@ -241,14 +241,14 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         drawerController!.closeDrawerGestureModeMask = .all
         switch viewController {
         case homeCoordinator.navigationRouter.navigationController:
-            log.track(TrackingEvent(type: .tab_tap("home")))
+            log.track(.tab_tap("home"))
             drawerController!.openDrawerGestureModeMask = .panningNavigationBar
             drawerController!.closeDrawerGestureModeMask = .all
         case applicationsCoordinator.navigationRouter.navigationController:
-            log.track(TrackingEvent(type: .tab_tap("applications")))
+            log.track(.tab_tap("applications"))
         case recommendationsCoordinator.navigationRouter.navigationController:
             appCoordinator?.requestPushNotifications(from: viewController)
-            log.track(TrackingEvent(type: .tab_tap("recommendations")))
+            log.track(.tab_tap("recommendations"))
         default:
             fatalError("unknown coordinator")
         }

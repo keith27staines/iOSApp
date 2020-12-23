@@ -58,7 +58,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         guard let window = UIApplication.shared.keyWindow
             else { return }
         let log = injected.log
-        log.track(TrackingEvent(type: .passive_apply_convert(applicationSource)))
+        log.track(.passive_apply_convert(applicationSource))
         let navigationController = navigationRouter.navigationController
         window.addSubview(successPopup)
         navigationController.navigationBar.layer.zPosition = -1
@@ -101,7 +101,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     
     override public func start() {
         super.start()
-        log.track(TrackingEvent(type: .passive_apply_start(applicationSource)))
+        log.track(.passive_apply_start(applicationSource))
         startDateOfBirthIfNecessary()
     }
     
@@ -145,7 +145,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     public func coverLetterDidCancel() {
-        log.track(TrackingEvent(type: .passive_apply_cancel(applicationSource)))
+        log.track(.passive_apply_cancel(applicationSource))
     }
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
@@ -167,7 +167,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             navigationController: navigationController,
             messageHandler: messageHandler,
             onSuccess: { placementUuid in
-                self.log.track(TrackingEvent(type: .passive_apply_convert(self.applicationSource)))
+                self.log.track(.passive_apply_convert(self.applicationSource))
                 self.addSupportingDocument(placementUuid)
             },
             onCancel: {

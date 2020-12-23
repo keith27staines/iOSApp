@@ -16,7 +16,7 @@ public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {
 }
 
 public protocol F4SAnalytics {
-    func track(_ event: TrackingEvent)
+    func track(_ event: TrackEventType)
 }
 
 public protocol F4SDebugging {

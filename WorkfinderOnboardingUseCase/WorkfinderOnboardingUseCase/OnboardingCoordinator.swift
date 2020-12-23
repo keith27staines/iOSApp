@@ -35,7 +35,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
             self.onboardingDidFinish?(self)
             return
         }
-        log.track(TrackingEvent(type: .onboarding_start))
+        log.track(.onboarding_start)
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
         onboardingViewController.hideOnboardingControls = !isFirstLaunch
@@ -47,6 +47,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     }
     
     func loginButtonTapped(viewController: UIViewController) {
+        log.track(.onboarding_tap_sign_in)
         let loginHandler = LoginHandler(
             parentCoordinator: self,
             navigationRouter: navigationRouter,
@@ -62,12 +63,13 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     }
     
     func justGetStartedButtonTapped(viewController: UIViewController) {
+        log.track(.onboarding_tap_just_get_started)
         finishOnboarding()
     }
     
     func finishOnboarding() {
         LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
-        self.log.track(TrackingEvent(type: .onboarding_convert))
+        self.log.track(.onboarding_convert)
         self.onboardingDidFinish?(self)
     }
     

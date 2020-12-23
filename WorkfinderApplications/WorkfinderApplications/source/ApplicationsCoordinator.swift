@@ -50,7 +50,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     }
     
     func showOfferViewer(for application: Application) {
-        log.track(TrackingEvent(type: .offer_start))
+        log.track(.offer_start)
         let offerService = OfferService(networkConfig: networkConfig)
         let presenter = OfferPresenter(coordinator: self, application: application, offerService: offerService)
         let vc = OfferViewController(coordinator: self, presenter: presenter)
@@ -60,24 +60,19 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     var offerAwaitingDecision = false
     var offerDecisionMade = false
     
-    func offerAwaitingDecisionViewed() {
-        offerAwaitingDecision = true
-        log.track(TrackingEvent(type: .offer_start))
-    }
-    
     func offerAccepted() {
-        log.track(TrackingEvent(type: .offer_convert))
+        log.track(.offer_convert)
         offerDecisionMade = true
     }
     
     func offerDeclined() {
-        log.track(TrackingEvent(type: .offer_withdraw))
+        log.track(.offer_withdraw)
         offerDecisionMade = true
     }
     
     func offerScreenCancelled() {
         if offerAwaitingDecision && !offerDecisionMade {
-            log.track(TrackingEvent(type: .offer_cancel))
+            log.track(.offer_cancel)
         }
     }
     

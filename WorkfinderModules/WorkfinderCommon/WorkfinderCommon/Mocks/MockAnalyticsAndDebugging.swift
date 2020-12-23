@@ -39,18 +39,7 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     public init() {}
     
-    public struct AnalyticsItem {
-        enum ItemType {
-            case screen
-            case track
-        }
-        var type: ItemType
-        var name: String
-        var properties: [String : Any]?
-        var options: [String :  Any]?
-    }
-    
-    public var analyticsItems = [AnalyticsItem]()
+    public var analyticsItems = [TrackingEvent]()
     public var identities: [F4SUUID] = []
     
     public func updateIdentity() {
@@ -63,13 +52,9 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
         aliases.append(userId)
     }
 
-    public func track(_ event: TrackingEvent) {
+    public func track(_ eventType: TrackEventType) {
         analyticsItems.append(
-            AnalyticsItem(
-                type: .track,
-                name: event.type.name,
-                properties: event.additionalProperties
-            )
+            TrackingEvent(type: eventType)
         )
     }
     

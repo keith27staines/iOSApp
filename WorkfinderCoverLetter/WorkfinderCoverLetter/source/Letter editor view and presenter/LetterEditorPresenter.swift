@@ -39,7 +39,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     
     func showPicklist(_ picklist: PicklistProtocol) {
         showingPicklist = picklist
-        log.track(TrackingEvent(type: .questionOpened(picklist.type)))
+        log.track(.questionOpened(picklist.type))
         appearanceCount -= 1
         coordinator?.showPicklist(picklist, completion: nil)
     }
@@ -97,9 +97,9 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
 
     func onViewDidAppear() {
         if let picklist = showingPicklist {
-            log.track(TrackingEvent(type: .questionClosed(picklist.type, picklist.isPopulated)))
+            log.track(.questionClosed(picklist.type, picklist.isPopulated))
         }
-        log.track(TrackingEvent(type: .letterEditor))
+        log.track(.letterEditor)
         appearanceCount += 1
         consistencyCheck()
         coordinator?.onLetterEditorDidUpdate()
