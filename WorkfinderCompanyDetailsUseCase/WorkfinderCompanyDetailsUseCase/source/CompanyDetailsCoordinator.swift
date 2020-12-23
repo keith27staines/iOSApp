@@ -69,7 +69,9 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
             workplace: workplace,
             recommendedAssociationUuid: recommendedAssociationUuid,
             associationsService: associationsProvider,
-            log: injected.log)
+            log: injected.log,
+            applicationSource: applicationSource
+        )
         companyViewController = CompanyDetailsViewController(
             presenter: workplacePresenter)
         companyViewController.log = self.injected.log

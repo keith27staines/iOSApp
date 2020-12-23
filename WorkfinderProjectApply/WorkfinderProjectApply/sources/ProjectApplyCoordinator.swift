@@ -117,18 +117,14 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
 extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onTapApply() {
-        projectType = projectPresenter?.projectName ?? ""
-        let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
-        log.track(TrackingEvent(type: .projectApplyStart, additionalProperties: properties))
         log.track(TrackingEvent(type: .uc_projectApply_start(applicationSource)))
         startCoverLetterFlow()
     }
     
     func onModalFinished() {
         originalVC?.dismiss(animated: true, completion: nil)
-        let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
-        log.track(TrackingEvent(type: .projectApplySubmit, additionalProperties: properties))
         delegate?.onProjectApplyDidFinish()
+        log.track(TrackingEvent(type: .uc_projectApply_convert(applicationSource)))
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     

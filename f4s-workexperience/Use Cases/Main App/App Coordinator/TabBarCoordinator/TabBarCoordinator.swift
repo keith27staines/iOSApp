@@ -241,25 +241,16 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         drawerController!.closeDrawerGestureModeMask = .all
         switch viewController {
         case homeCoordinator.navigationRouter.navigationController:
-            log.track(TrackingEvent.makeTabTap(tab: .home))
+            log.track(TrackingEvent(type: .tabTap("home")))
             drawerController!.openDrawerGestureModeMask = .panningNavigationBar
             drawerController!.closeDrawerGestureModeMask = .all
         case applicationsCoordinator.navigationRouter.navigationController:
-            log.track(TrackingEvent.makeTabTap(tab: .applications))
+            log.track(TrackingEvent(type: .tabTap("applications")))
         case recommendationsCoordinator.navigationRouter.navigationController:
             appCoordinator?.requestPushNotifications(from: viewController)
-            log.track(TrackingEvent.makeTabTap(tab: .recommendations))
+            log.track(TrackingEvent(type: .tabTap("recommendations")))
         default:
             fatalError("unknown coordinator")
         }
-    }
-}
-
-fileprivate extension TrackingEvent {
-    static func makeTabTap(tab: TabIndex) -> TrackingEvent {
-        TrackingEvent(
-            type: .tabTap,
-            additionalProperties: ["navigation_item": tab.rawValue]
-        )
     }
 }

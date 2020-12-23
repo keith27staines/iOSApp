@@ -101,13 +101,20 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
          workplace: CompanyAndPin,
          recommendedAssociationUuid: F4SUUID?,
          associationsService: AssociationsServiceProtocol,
-         log: F4SAnalyticsAndDebugging?) {
+         log: F4SAnalyticsAndDebugging?,
+         applicationSource: ApplicationSource
+    ) {
         self.associationsService = associationsService
         self.companyAndPin = workplace
         self.recommendedAssociationUuid = recommendedAssociationUuid
         self.coordinator = coordinator
         self.log = log
-        self.mainViewPresenter = CompanyMainViewPresenter(workplace: workplace, coordinator: coordinator, log: log)
+        self.mainViewPresenter = CompanyMainViewPresenter(
+            workplace: workplace,
+            coordinator: coordinator,
+            log: log,
+            applicationSource: applicationSource
+        )
         super.init()
     }
     

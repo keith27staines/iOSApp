@@ -23,6 +23,7 @@ protocol CompanyMainViewPresenterProtocol: class {
 
 class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var log: F4SAnalyticsAndDebugging?
+    let applicationSource: ApplicationSource
     weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var view: CompanyMainViewProtocol?
     var companyAndPin: CompanyAndPin
@@ -59,40 +60,19 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
 
     init(workplace: CompanyAndPin,
          coordinator: CompanyMainViewCoordinatorProtocol,
-         log: F4SAnalyticsAndDebugging?) {
+         log: F4SAnalyticsAndDebugging?,
+         applicationSource: ApplicationSource) {
         self.log = log
         self.coordinator = coordinator
         self.companyAndPin = workplace
+        self.applicationSource = applicationSource
     }
     
     func onDidTapApply() {
         guard let association = selectedAssociation else { return }
-        let hostRowIndex = hostsSectionPresenter.selectedHostRow  ?? 0
-        let host = hostsSectionPresenter.selectedAssociation?.host?.uuid ?? ""
-        let company = companyAndPin.companyJson.uuid ?? ""
-        let event = TrackingEvent.makeApplyStart(
-            hostRowIndex: hostRowIndex,
-            host: host,
-            company: company)
-        
+        let event = TrackingEvent(type: .uc_apply_start(applicationSource))
         log?.track(event)
         coordinator?.applyTo(workplace: companyAndPin, association: association)
-    }
-}
-
-private extension TrackingEvent {
-    static func makeApplyStart(
-        hostRowIndex: Int,
-        host: F4SUUID,
-        company: F4SUUID) -> TrackingEvent {
-        TrackingEvent(
-            type: .applyStart,
-            additionalProperties: [
-                "host_chosen_position": hostRowIndex,
-                "host_id": host,
-                "company_id": company
-            ]
-        )
     }
 }
 

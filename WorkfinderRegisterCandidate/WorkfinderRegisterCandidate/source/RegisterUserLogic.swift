@@ -62,7 +62,6 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     }
     
     func signIn() {
-        log.track(TrackingEvent.signInUser())
         let user = userRepository.loadUser()
         signInService.signIn(user: user) { [weak self] result in
             guard let self = self else { return }
@@ -81,7 +80,6 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
             return
         }
         let user = userRepository.loadUser()
-        log.track(TrackingEvent.registerUser())
         registerService.registerUser(user: user) { [weak self] (result) in
             guard let self = self else { return }
             switch result {

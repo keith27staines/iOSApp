@@ -66,7 +66,6 @@
 		FCD1B63724C0113D005A65BB /* CoverLetterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */; };
 		FCDF63D424C028170008EFB0 /* CoverLetterFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */; };
 		FCDF63D624C028790008EFB0 /* CoverLetterFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */; };
-		FCFE646B24E53015005E1FD0 /* TrackEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE646A24E53015005E1FD0 /* TrackEvent+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +141,6 @@
 		FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlow.swift; sourceTree = "<group>"; };
 		FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlowFactory.swift; sourceTree = "<group>"; };
 		FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlowType.swift; sourceTree = "<group>"; };
-		FCFE646A24E53015005E1FD0 /* TrackEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackEvent+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +245,6 @@
 		FC9B334E24BEB58D00C075CE /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FCFE646A24E53015005E1FD0 /* TrackEvent+Extensions.swift */,
 				FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */,
 				FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */,
 				FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */,
@@ -496,7 +493,6 @@
 				FC9B339924BEBD2700C075CE /* PicklistDataSourceAndDelegate.swift in Sources */,
 				FC9B336124BEB5DF00C075CE /* Grammer.swift in Sources */,
 				FC04D06924BEE4C000FF44E6 /* CoverLetterLogic.swift in Sources */,
-				FCFE646B24E53015005E1FD0 /* TrackEvent+Extensions.swift in Sources */,
 				FC9B336C24BEB62A00C075CE /* AvailabilityPeriodPicklist.swift in Sources */,
 				FCDF63D624C028790008EFB0 /* CoverLetterFlowType.swift in Sources */,
 				FC9B336324BEB5DF00C075CE /* TemplateRenderer.swift in Sources */,
