@@ -78,6 +78,7 @@ class KSSearchBar: UIView {
         let view = UIImageView(image: UIImage(named: "circle_with_cross")?.withRenderingMode(.alwaysTemplate))
         view.isUserInteractionEnabled = true
         view.contentMode = .scaleAspectFit
+        view.isHidden = true
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clear)))
         return view
     }()
@@ -146,7 +147,7 @@ class KSSearchBar: UIView {
         capsuleContainer.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.sizeToFit()
-        capsuleContainerWidthConstraint = capsuleContainer.widthAnchor.constraint(equalTo: widthAnchor, constant: -cancelWidth)
+        capsuleContainerWidthConstraint = capsuleContainer.widthAnchor.constraint(equalTo: widthAnchor, constant: 0)
         NSLayoutConstraint.activate([
             capsuleContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             capsuleContainer.topAnchor.constraint(equalTo: topAnchor),
@@ -155,10 +156,10 @@ class KSSearchBar: UIView {
             cancelButton.leadingAnchor.constraint(equalTo: capsuleContainer.trailingAnchor, constant: gap),
             capsuleContainerWidthConstraint
         ])
-        state = .inactive
+        clearButton.isHidden = true
         clearButton.alpha = 0
         cancelButton.isHidden = true
-        configureForState()
+        state = .inactive
     }
     
     private func configureForState() {
@@ -185,6 +186,7 @@ class KSSearchBar: UIView {
     
     private func animateInClearButton() {
         let button = clearButton
+        button.isHidden = false
         guard button.alpha == 0 else { return }
         UIView.animate(withDuration: 0.3) {
             button.alpha = 1

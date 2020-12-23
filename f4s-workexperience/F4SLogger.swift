@@ -37,8 +37,8 @@ public class F4SLog : F4SAnalyticsAndDebugging {
     func trackAppOpenedEvent() {
         let localStore = LocalStore()
         let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
-        let eventType: TrackEventType = isFirstLaunch ? .first_use : .app_open
-        self.track(eventType)
+        if isFirstLaunch { track(.first_use) }
+        track(.app_open)
     }
     
     func startMixpanel(for environment: EnvironmentType) {
