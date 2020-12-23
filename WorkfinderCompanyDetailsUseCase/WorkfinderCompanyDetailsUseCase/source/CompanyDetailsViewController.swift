@@ -21,8 +21,6 @@ protocol CompanyDetailsViewProtocol : CompanyHostsSectionViewProtocol {
 class CompanyDetailsViewController: UIViewController {
     var presenter: CompanyDetailsPresenterProtocol!
     weak var coordinator: CompanyDetailsCoordinatorProtocol!
-    let screenName = ScreenName.WorkplaceViewController
-    var originScreen = ScreenName.notSpecified
     weak var log: F4SAnalyticsAndDebugging?
     lazy var messageHandler = UserMessageHandler(presenter: self)
     
@@ -51,7 +49,7 @@ class CompanyDetailsViewController: UIViewController {
         presenter.onViewDidLoad(self)
         view.addSubview(companyMainPageView)
         companyMainPageView.fillSuperview()
-        log?.track(TrackingEvent(type: .companyView))
+        log?.track(TrackingEvent(type: .company_view))
     }
     
     override func viewWillAppear(_ animated: Bool) {

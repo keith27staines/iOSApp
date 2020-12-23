@@ -35,7 +35,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
             self.onboardingDidFinish?(self)
             return
         }
-        log.track(TrackingEvent(type: .uc_onboarding_start))
+        log.track(TrackingEvent(type: .onboarding_start))
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
         onboardingViewController.hideOnboardingControls = !isFirstLaunch
@@ -67,7 +67,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     
     func finishOnboarding() {
         LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
-        self.log.track(TrackingEvent(type: .uc_onboarding_convert))
+        self.log.track(TrackingEvent(type: .onboarding_convert))
         self.onboardingDidFinish?(self)
     }
     

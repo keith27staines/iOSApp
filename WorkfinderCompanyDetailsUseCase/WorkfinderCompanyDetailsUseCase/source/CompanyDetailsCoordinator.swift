@@ -20,7 +20,7 @@ public protocol CompanyCoordinatorFactoryProtocol {
 }
 
 protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorProtocol {
-    var originScreen: ScreenName { get set }
+   
     func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: CompanyAndPin)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String)
@@ -29,7 +29,7 @@ protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorPr
 }
 
 public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, CompanyDetailsCoordinatorProtocol, CompanyMainViewCoordinatorProtocol {
-    public var originScreen = ScreenName.notSpecified
+
     let environment: EnvironmentType
     var companyViewController: CompanyDetailsViewController!
     var workplacePresenter: WorkplacePresenter!
@@ -75,7 +75,6 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         companyViewController = CompanyDetailsViewController(
             presenter: workplacePresenter)
         companyViewController.log = self.injected.log
-        companyViewController.originScreen = originScreen
         navigationRouter.push(viewController: companyViewController, animated: true)
     }
     
@@ -110,7 +109,8 @@ extension CompanyDetailsCoordinator {
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
-            environment: environment)
+            environment: environment,
+            applicationSource: applicationSource)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
     }

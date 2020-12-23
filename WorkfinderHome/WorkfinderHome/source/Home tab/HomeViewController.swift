@@ -5,7 +5,6 @@ import WorkfinderUI
 
 class HomeViewController: UIViewController {
     lazy var messageHandler = HSUserMessageHandler(presenter: self)
-    let screenName = ScreenName.home
     weak var coordinator: HomeCoordinator?
 
     var homeView: HomeView { view as! HomeView }

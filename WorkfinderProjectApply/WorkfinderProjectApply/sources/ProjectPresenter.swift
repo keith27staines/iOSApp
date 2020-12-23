@@ -91,7 +91,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         self.coordinator = coordinator
         self.projectUuid = projectUuid
         self.service = projectService
-        log.track(TrackingEvent(type: .uc_projectView(source)))
+        log.track(TrackingEvent(type: .project_view(source)))
     }
     
     func onViewDidLoad(view: ProjectViewProtocol) {

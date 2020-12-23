@@ -162,8 +162,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             onSuccess: { [weak self] (coordinator, context) in
                 self?.showDetail(
                     companyAndPin: context.companyAndPin,
-                    recommendedAssociationUuid: context.associationUuid,
-                    originScreen: .notSpecified)
+                    recommendedAssociationUuid: context.associationUuid
+                )
             }, onCancel: { [weak self] coordinator in
                 self?.childCoordinatorDidFinish(coordinator)
         })
@@ -173,7 +173,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     var showingDetailForWorkplace: CompanyAndPin?
 
-    func showDetail(companyAndPin: CompanyAndPin?, recommendedAssociationUuid: F4SUUID?, originScreen: ScreenName) {
+    func showDetail(companyAndPin: CompanyAndPin?, recommendedAssociationUuid: F4SUUID?) {
         guard let companyAndPin = companyAndPin else { return }
         showingDetailForWorkplace = companyAndPin
         homeViewController.dismiss(animated: true)

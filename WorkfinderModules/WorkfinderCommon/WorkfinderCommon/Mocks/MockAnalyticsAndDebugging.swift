@@ -64,24 +64,13 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     }
 
     public func track(_ event: TrackingEvent) {
-        let notNilProperties = event.additionalProperties ?? [:]
-        analyticsItems.append(AnalyticsItem(type: .track, name: event.type.name, properties: notNilProperties))
-    }
-    
-    public func screen(_ name: ScreenName) {
-        analyticsItems.append(AnalyticsItem(type: .screen, name: name.rawValue))
-    }
-    
-    public func screen(_ name: ScreenName, originScreen: ScreenName) {
-        let item = AnalyticsItem(
-            type: .screen,
-            name: name.rawValue,
-            properties: ["origin" : originScreen.rawValue])
-        analyticsItems.append(item)
-    }
-    
-    public func screen(title: String, properties: [String : Any]) {
-        analyticsItems.append(AnalyticsItem(type: .screen, name: title, properties: properties))
+        analyticsItems.append(
+            AnalyticsItem(
+                type: .track,
+                name: event.type.name,
+                properties: event.additionalProperties
+            )
+        )
     }
     
     // MARK:- debuggin and error reporting

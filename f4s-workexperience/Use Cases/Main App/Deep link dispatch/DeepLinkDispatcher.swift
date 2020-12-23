@@ -20,13 +20,13 @@ class DeepLinkDispatcher {
             case .recommendation:
                 switch info.source {
                 case .deeplink:
-                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_start))
+                    log.track(TrackingEvent(type: TrackEventType.recommendation_deeplink_start))
                     coordinator.showRecommendation(uuid: info.objectId, source: source)
-                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_deeplink_convert))
+                    log.track(TrackingEvent(type: TrackEventType.recommendation_deeplink_convert))
                 case .pushNotification:
-                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_pushNotification_start))
+                    log.track(TrackingEvent(type: TrackEventType.recommendation_pushnotification_start))
                     coordinator.showRecommendation(uuid: info.objectId, source: source)
-                    log.track(TrackingEvent(type: TrackEventType.uc_recommendation_pushNotification_convert))
+                    log.track(TrackingEvent(type: TrackEventType.recommendation_pushnotification_convert))
                 }
             case .placement:
                 coordinator.showApplications(uuid: info.objectId)

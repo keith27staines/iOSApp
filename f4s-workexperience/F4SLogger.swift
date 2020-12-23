@@ -38,7 +38,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         let localStore = LocalStore()
         let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
         let openEvent: TrackingEvent
-        openEvent = isFirstLaunch ? TrackingEvent(type: .firstUse) : TrackingEvent(type: .appOpen)
+        openEvent = isFirstLaunch ? TrackingEvent(type: .first_use) : TrackingEvent(type: .app_open)
         self.track(openEvent)
     }
     
@@ -76,36 +76,10 @@ public class F4SLog : F4SAnalyticsAndDebugging {
 extension F4SLog : F4SAnalytics {
     
     public func track(_ event: TrackingEvent) {
-        var mixpanelProperties = event.additionalProperties?.compactMapValues({ (value) -> MixpanelType? in
+        let mixpanelProperties = event.additionalProperties.compactMapValues({ (value) -> MixpanelType? in
             value as? MixpanelType
-        }) ?? [:]
-
-        if let userUuid = UserRepository().loadUser().uuid {
-            mixpanelProperties["with_user_id"] = userUuid
-        }
-        if let vendorUuid = UIDevice.current.identifierForVendor?.uuidString {
-            mixpanelProperties["device_id"] = vendorUuid
-        }
+        })
         mixPanel.track(event: event.type.name, properties: mixpanelProperties)
-    }
-    
-    public func screen(_ name: ScreenName) {
-        writeScreenToAnalytics(name)
-    }
-    
-    public func screen(_ name: ScreenName, originScreen origin: ScreenName) {
-        writeScreenToAnalytics(name, originScreen: origin)
-    }
-    
-    func writeScreenToAnalytics(_ name: ScreenName, originScreen origin: ScreenName = .notSpecified) {
-        let screen = name.rawValue.replacingOccurrences(of: " ", with: "_")
-        let previous = origin.rawValue.replacingOccurrences(of: " ", with: "_")
-//        let parameters = [
-//            "name": screen,
-//            "previous_screen": previous
-//        ]
-//        Analytics.logEvent("SCREEN", parameters: parameters)
-        print("SCREEN DID APPEAR: \(screen) from \(previous)")
     }
 }
 
