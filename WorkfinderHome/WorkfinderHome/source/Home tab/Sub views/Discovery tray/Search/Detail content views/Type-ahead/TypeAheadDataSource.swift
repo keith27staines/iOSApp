@@ -26,8 +26,8 @@ class TypeAheadDataSource {
             switch result {
             case .success(let typeAheadJson):
                 self.categories = [
-                    "projects": typeAheadJson.projects?.settingAppSource(.homeTabTypeAheadProjects) ?? [],
-                    "people": typeAheadJson.people?.settingAppSource(.homeTabTypeAheadPeople) ?? []
+                    "projects": typeAheadJson.projects?.settingAppSource(.homeTabTypeaheadProjectsList) ?? [],
+                    "people": typeAheadJson.people?.settingAppSource(.homeTabTypeaheadPeopleList) ?? []
                 ]
                 error = nil
                 totalMatches = typeAheadJson.count

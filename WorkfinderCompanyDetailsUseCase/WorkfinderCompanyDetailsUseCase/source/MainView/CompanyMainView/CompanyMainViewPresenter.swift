@@ -70,7 +70,6 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     
     func onDidTapApply() {
         guard let association = selectedAssociation else { return }
-        log?.track(.passive_apply_start(appSource))
         coordinator?.applyTo(workplace: companyAndPin, association: association)
     }
 }

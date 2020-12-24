@@ -1,14 +1,14 @@
 
 public enum AppSource: String {
     case deeplink
-    case pushNotification
-    case homeTabTypeAheadProjects
-    case homeTabTypeAheadPeople
-    case homeTabSearchResultsProjects
-    case homeTabSearchResultsPeople
-    case homeTabRecommendations
-    case homeTabRecentRoles
-    case homeTabTopRoles
+    case pushnotification
+    case homeTabTypeaheadProjectsList
+    case homeTabTypeaheadPeopleList
+    case homeTabSearchResultsProjectsList
+    case homeTabSearchResultsPeopleList
+    case homeTabRecommendationsList
+    case homeTabRecentRolesList
+    case homeTabTopRolesList
     case recommendationsTab
     case unspecified
     
@@ -17,7 +17,7 @@ public enum AppSource: String {
         case .deeplink:
             self = .deeplink
         case .pushNotification:
-            self = .pushNotification
+            self = .pushnotification
         }
     }
 }

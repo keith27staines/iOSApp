@@ -17,7 +17,7 @@ class TopRolesPresenter: CellPresenter {
                     var adaptedData = roleData
                     adaptedData.actionButtonText = "Discover more"
                     return adaptedData
-                }).settingAppSource(.homeTabTopRoles)
+                }).settingAppSource(.homeTabTopRolesList)
                 completion(nil)
             case .failure(let error):
                 completion(error)

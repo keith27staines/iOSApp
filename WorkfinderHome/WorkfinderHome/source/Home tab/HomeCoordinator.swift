@@ -37,6 +37,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     
     func dispatchTypeAheadItem(_ item: TypeAheadItem) {
         guard let objectType = item.objectType, let uuid = item.uuid else { return }
+        log.track(.search_home_selected_typeahead_item)
         switch objectType {
         case "association", "company":
             startAssociationApply(associationUuid: uuid, source: item.appSource)

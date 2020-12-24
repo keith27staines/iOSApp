@@ -118,6 +118,7 @@ class SearchController: NSObject {
             filtersModel: filtersModel,
             typeAheadDataSource: typeAheadDatasource,
             didSelectTypeAheadItem: { [weak self] item in
+                self?.searchBar.resignFirstResponder()
                 self?.coordinator?.dispatchTypeAheadItem(item)
             },
             didTapApplyFilters: { [weak self] filtersModel in
@@ -173,7 +174,7 @@ extension SearchController: KSSearchBarDelegate {
     }
     
     func searchbarDidBeginEditing(_ searchbar: KSSearchBar) {
-        log?.track(.search_home_start_typeahead)
+        log?.track(.search_home_typeahead_start)
         setStateFromSearchText()
         DispatchQueue.main.async {
             self.configureKeyboardReturnKey()

@@ -21,18 +21,19 @@ public enum TrackingEventType {
     case register_user_convert                                                  // ok
     
     // MARK:- Search                                                            // checking
-    case search_home_start_typeahead                                            // ok
+    case search_home_typeahead_start                                            // ok
+    case search_home_selected_typeahead_item                                    // ?
     case search_home_cancel_typeahead                                           // ok
     case search_home_perform_full(String)                                       // ok
     case search_home_perform_popular(String)                                    // ok
     case search_home_apply_filters(String)                                      // ok
 
-    // MARK: Allow notifications
+    // MARK:- Allow notifications
     case allow_notifications_start
     case allow_notifications_cancel
     case allow_notifications_convert
 
-    // MARK: Recommendations deeplink processing
+    // MARK:- Recommendations deeplink processing
     case recommendation_deeplink_start
     case recommendation_deeplink_cancel
     case recommendation_deeplink_convert
@@ -42,17 +43,17 @@ public enum TrackingEventType {
     case offer_deeplink_cancel
     case offer_deeplink_convert
 
-    // MARK: Recommendations push notification processing
+    // MARK:- Recommendations push notification processing
     case recommendation_pushnotification_start
     case recommendation_pushnotification_cancel
     case recommendation_pushnotification_convert
 
-    /// MARK: Passive apply
+    // MARK:-  Passive apply
     case passive_apply_start(AppSource)
     case passive_apply_cancel(AppSource)
     case passive_apply_convert(AppSource)
 
-    // MARK: Project apply
+    // MARK:- Project apply
     case project_apply_start(AppSource)
     case project_apply_cancel(AppSource)
     case project_apply_convert(AppSource)
@@ -74,7 +75,7 @@ public enum TrackingEventType {
     case company_details_page_view
     case project_page_view(AppSource)
     case application_page_view(AppSource)
-
+ 
     public var name: String {
    
         switch self {
@@ -99,7 +100,8 @@ public enum TrackingEventType {
         case .register_user_convert: return  "ios_register_user_convert"
         
         // MARK:- Search
-        case .search_home_start_typeahead: return "ios_home_start_typeahead_search"
+        case .search_home_typeahead_start: return "ios_home_typeahead_start"
+        case .search_home_selected_typeahead_item: return "ios_home_typeahead_selected_item"
         case .search_home_cancel_typeahead: return "ios_home_cancel_typeahead_search"
         case .search_home_perform_full: return "ios_home_perform_full_search"
         case .search_home_perform_popular: return "ios_home_perform_popular_search"
@@ -151,7 +153,7 @@ public enum TrackingEventType {
         // MARK:- Object viewing
         case .company_details_page_view: return "ios_company_details_page_view"
         case .project_page_view: return "ios_project_page_view"
-        case .application_page_view: return "ios_association_page_view"
+        case .application_page_view: return "ios_application_page_view"
         }
     }
 }
