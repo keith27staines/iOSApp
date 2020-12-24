@@ -109,7 +109,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         guard let dateOfBirthString = userRepository.loadCandidate().dateOfBirth,
             let dob = Date.workfinderDateStringToDate(dateOfBirthString)
             else {
-            let dobVC = DateOfBirthCollectorViewController(coordinator: self)
+            let dobVC = DateOfBirthCollectorViewController(coordinator: self, log: injected.log)
             navigationRouter.push(viewController: dobVC, animated: true)
             return
         }

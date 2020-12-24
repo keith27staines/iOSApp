@@ -76,8 +76,14 @@ class DateOfBirthCollectorViewController: UIViewController {
         dateFieldStack.state = .bad
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        log?.track(.date_of_birth_capture_start)
+        super.viewDidAppear(animated)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
+            log?.track(.date_of_birth_capture_cancel)
             coordinator?.onDidCancel()
         }
     }
@@ -155,7 +161,9 @@ class DateOfBirthCollectorViewController: UIViewController {
     }
     
     @objc func nextButtonTapped() {
-        coordinator?.onDidSelectDataOfBirth(date: datePicker.date)
+        let dob = datePicker.date
+        log?.track(.date_of_birth_capture_convert(dob))
+        coordinator?.onDidSelectDataOfBirth(date: dob)
     }
     
     func updateStateFromPicker() {
@@ -206,8 +214,11 @@ class DateOfBirthCollectorViewController: UIViewController {
         
     }
     
-    init(coordinator: DateOfBirthCoordinatorProtocol) {
+    weak var log: F4SAnalyticsAndDebugging?
+    
+    init(coordinator: DateOfBirthCoordinatorProtocol, log: F4SAnalyticsAndDebugging) {
         self.coordinator = coordinator
+        self.log = log
         super.init(nibName: nil, bundle: nil)
     }
     

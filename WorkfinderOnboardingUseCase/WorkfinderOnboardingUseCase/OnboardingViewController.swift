@@ -83,7 +83,7 @@ extension OnboardingViewController {
     @IBAction func justgetStartedButtonTapped(_: AnyObject) {
         signinButton.isEnabled = false
         justGetStartedButton.isEnabled = false
-        coordinator?.finishOnboarding()
+        coordinator?.justGetStartedButtonTapped(viewController: self)
     }
     
 }

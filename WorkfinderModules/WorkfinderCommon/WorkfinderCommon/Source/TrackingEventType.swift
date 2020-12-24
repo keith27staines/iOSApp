@@ -52,6 +52,9 @@ public enum TrackingEventType {
     case passive_apply_start(AppSource)
     case passive_apply_cancel(AppSource)
     case passive_apply_convert(AppSource)
+    case date_of_birth_capture_start
+    case date_of_birth_capture_cancel
+    case date_of_birth_capture_convert(Date)
 
     // MARK:- Project apply
     case project_apply_start(AppSource)
@@ -131,6 +134,9 @@ public enum TrackingEventType {
         case .passive_apply_start: return  "ios_passive_apply_start"
         case .passive_apply_cancel: return  "ios_passive_apply_cancel"
         case .passive_apply_convert: return  "ios_passive_apply_convert"
+        case .date_of_birth_capture_start: return "ios_dob_capture_start"
+        case .date_of_birth_capture_cancel: return "ios_dob_capture_cancel"
+        case .date_of_birth_capture_convert: return "ios_dob_capture_convert"
             
         // MARK: Project apply
         case .project_apply_start: return  "ios_project_apply_start"

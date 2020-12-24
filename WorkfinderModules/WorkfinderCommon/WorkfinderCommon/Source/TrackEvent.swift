@@ -36,6 +36,8 @@ public struct TrackingEvent {
             properties["answered"] = isAnswered
         case .application_page_view(let source): properties["source"] = source.rawValue
         case .project_page_view(let source): properties["source"] = source.rawValue
+        case .date_of_birth_capture_convert(let dob): properties["dob"] = dob
+        
         
         // cases where the TrackEventType does not have associated data
         case .first_use: break
@@ -71,6 +73,8 @@ public struct TrackingEvent {
         case .search_home_typeahead_start: break
         case .search_home_cancel_typeahead: break
         case .search_home_selected_typeahead_item: break
+        case .date_of_birth_capture_start: break
+        case .date_of_birth_capture_cancel: break
         }
         return properties
     }
