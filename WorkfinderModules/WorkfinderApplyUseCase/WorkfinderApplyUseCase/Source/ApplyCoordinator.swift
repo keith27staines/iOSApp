@@ -37,11 +37,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     let updateCandidateService: UpdateCandidateServiceProtocol
     
     public var coverLetterPrimaryButtonText: String {
-        let candidate = injected.userRepository.loadCandidate()
-        guard let candidateUuid = candidate.uuid, !candidateUuid.isEmpty else {
-            return NSLocalizedString("Next", comment: "")
-        }
-        return NSLocalizedString("Submit application", comment: "")
+        let isCandidateSignedIn = injected.userRepository.isCandidateLoggedIn
+        return isCandidateSignedIn ? NSLocalizedString("Submit application", comment: "") : NSLocalizedString("Next", comment: "")
     }
 
     lazy var successPopup: SuccessPopupView = {
@@ -109,8 +106,11 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         guard let dateOfBirthString = userRepository.loadCandidate().dateOfBirth,
             let dob = Date.workfinderDateStringToDate(dateOfBirthString)
             else {
-            let dobVC = DateOfBirthCollectorViewController(coordinator: self, log: injected.log)
-            navigationRouter.push(viewController: dobVC, animated: true)
+            let vc = DateOfBirthCollectorViewController(
+                coordinator: self,
+                log: injected.log
+            )
+            navigationRouter.push(viewController: vc, animated: true)
             return
         }
         onDidSelectDataOfBirth(date: dob)
@@ -145,7 +145,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     public func coverLetterDidCancel() {
-        log.track(.passive_apply_cancel(appSource))
+        //log.track(.passive_apply_cancel(appSource))
     }
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
@@ -213,7 +213,6 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
         navigationRouter.pop(animated: true)
         coverletterCoordinator?.messageHandler?.hideLoadingOverlay()
     }
-    
     
     public func onCandidateIsSignedIn() {
         let uuid = userRepository.loadCandidate().uuid!

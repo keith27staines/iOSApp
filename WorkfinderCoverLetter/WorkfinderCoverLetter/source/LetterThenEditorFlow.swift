@@ -19,6 +19,7 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
     
     override public func start() {
         super.start()
+        log.track(.letter_start)
         let viewController = CoverLetterViewController(presenter: presenter)
         self.coverLetterViewController = viewController
         navigationRouter.push(viewController: viewController, animated: true)
@@ -43,15 +44,19 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
             return
         }
         if picklist.isLoaded {
-            showPicklist(picklist, completion: completion)
-            completion(nil)
+            log.track(.question_opened(picklist.type))
+            showPicklist(picklist, completion: { [weak self] _ in
+                self?.log.track(.question_closed(picklist.type, picklist.isPopulated))
+                completion(nil)
+            })
             return
         }
         (picklist as? Picklist)?.fetchItems(completion: { [weak self] (_, result) in
             switch result {
             case .success(_):
-                self?.showPicklist(picklist, completion: completion)
+                self?.onCoverLetterTapField(name: name, completion: completion)
             case .failure(let error):
+                self?.log.track(.question_closed(picklist.type, picklist.isPopulated))
                 completion(error)
             }
         })

@@ -22,7 +22,7 @@ public enum TrackingEventType {
     
     // MARK:- Search                                                            // checking
     case search_home_typeahead_start                                            // ok
-    case search_home_selected_typeahead_item                                    // ?
+    case search_home_selected_typeahead_item                                    // ok
     case search_home_cancel_typeahead                                           // ok
     case search_home_perform_full(String)                                       // ok
     case search_home_perform_popular(String)                                    // ok
@@ -62,11 +62,13 @@ public enum TrackingEventType {
     case project_apply_convert(AppSource)
     
     // MARK:- Cover letter events
-    case letterView
-    case letterEditor
-    case questionOpened(PicklistType)
-    case questionClosed(PicklistType, Bool)
-    case letterCompleted
+    case letter_start
+    case letter_viewed(isComplete: Bool)
+    case letter_editor
+    case question_opened(PicklistType)
+    case question_closed(PicklistType, Bool)
+    case letter_convert
+    case letter_cancel(isComplete: Bool)
     
     // MARK:- Offer
     case offer_start
@@ -145,11 +147,13 @@ public enum TrackingEventType {
         case .project_apply_convert: return  "ios_project_apply_convert"
             
         // MARK:- Cover letter events
-        case .letterView: return "ios_letter_view"
-        case .letterEditor: return "ios_letter_editor"
-        case .questionOpened: return "ios_question_opened"
-        case .questionClosed: return "ios_question_closed"
-        case .letterCompleted: return "ios_letter_completed"
+        case .letter_start: return "ios_letter_start"
+        case .letter_viewed: return "ios_letter_viewed"
+        case .letter_editor: return "ios_letter_editor"
+        case .question_opened: return "ios_question_opened"
+        case .question_closed: return "ios_question_closed"
+        case .letter_cancel: return "ios_letter_cancel"
+        case .letter_convert: return "ios_letter_convert"
             
         // MARK:- Offer
         case .offer_start: return  "ios_offer_start"

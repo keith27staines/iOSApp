@@ -30,14 +30,15 @@ public struct TrackingEvent {
         case .project_apply_start(let source): properties["source"] = source.rawValue
         case .project_apply_cancel(let source): properties["source"] = source.rawValue
         case .project_apply_convert(let source): properties["source"] = source.rawValue
-        case .questionOpened(let question): properties["question"] = question.title
-        case .questionClosed(let question, let isAnswered):
+        case .question_opened(let question): properties["question"] = question.title
+        case .question_closed(let question, let isAnswered):
             properties["question"] = question.title
             properties["answered"] = isAnswered
         case .application_page_view(let source): properties["source"] = source.rawValue
         case .project_page_view(let source): properties["source"] = source.rawValue
         case .date_of_birth_capture_convert(let dob): properties["dob"] = dob
-        
+        case .letter_viewed(let isComplete): properties["is_complete"] = isComplete
+        case .letter_cancel(let isComplete): properties["is_complete"] = isComplete
         
         // cases where the TrackEventType does not have associated data
         case .first_use: break
@@ -62,9 +63,9 @@ public struct TrackingEvent {
         case .recommendation_pushnotification_start: break
         case .recommendation_pushnotification_cancel: break
         case .recommendation_pushnotification_convert: break
-        case .letterView: break
-        case .letterEditor: break
-        case .letterCompleted: break
+        case .letter_start: break
+        case .letter_editor: break
+        case .letter_convert: break
         case .offer_start: break
         case .offer_cancel: break
         case .offer_convert: break
