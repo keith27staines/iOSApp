@@ -58,6 +58,7 @@ class CompanyDetailsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
+            log?.track(.company_details_page_dismiss)
             presenter.onTapBack()
         }
     }

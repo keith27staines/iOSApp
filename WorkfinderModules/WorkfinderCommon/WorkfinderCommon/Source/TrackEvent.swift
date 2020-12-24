@@ -70,6 +70,7 @@ public struct TrackingEvent {
         case .offer_convert: break
         case .offer_withdraw: break
         case .company_details_page_view: break
+        case .company_details_page_dismiss: break
         case .search_home_typeahead_start: break
         case .search_home_cancel_typeahead: break
         case .search_home_selected_typeahead_item: break

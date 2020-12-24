@@ -76,6 +76,7 @@ public enum TrackingEventType {
     
     // MARK:- Object viewing
     case company_details_page_view
+    case company_details_page_dismiss
     case project_page_view(AppSource)
     case application_page_view(AppSource)
  
@@ -158,6 +159,7 @@ public enum TrackingEventType {
             
         // MARK:- Object viewing
         case .company_details_page_view: return "ios_company_details_page_view"
+        case .company_details_page_dismiss: return "ios_company_details_page_dismiss"
         case .project_page_view: return "ios_project_page_view"
         case .application_page_view: return "ios_application_page_view"
         }

@@ -283,8 +283,9 @@ extension ApplyCoordinator {
     }
     
     func cancelButtonWasTapped(sender: Any?) {
+        log.track(.passive_apply_cancel(appSource))
         cleanup()
-        navigationRouter.pop(animated: true)
+        //navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
@@ -297,6 +298,7 @@ extension ApplyCoordinator {
 extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
     
     func onDidCancel() {
+        cancelButtonWasTapped(sender: nil)
     }
     
     func onDidSelectDataOfBirth(date: Date) {
