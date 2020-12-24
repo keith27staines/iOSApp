@@ -49,7 +49,7 @@ public class DataTaskCompletionHandler {
             }
             
             let result = Result<Data,Error>.success(data)
-            self?.logger.logDataTaskSuccess(request: request, response: response, responseData: data)
+            self?.logger.logDataTaskSuccess(request: request, response: response, responseData: data, verbose: verbose)
             completion(result)
         }
     }

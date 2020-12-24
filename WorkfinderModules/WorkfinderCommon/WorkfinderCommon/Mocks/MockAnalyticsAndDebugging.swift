@@ -24,7 +24,7 @@ public class MockNetworkCallLogger: NetworkCallLoggerProtocol {
         self.responseData = error.responseData
     }
     
-    public func logDataTaskSuccess(request: URLRequest, response: HTTPURLResponse, responseData: Data) {
+    public func logDataTaskSuccess(request: URLRequest, response: HTTPURLResponse, responseData: Data, verbose: Bool = true) {
         logDataTaskSuccessWasCalled = true
         self.request = request
         self.response = response

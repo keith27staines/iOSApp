@@ -39,6 +39,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     let associationsProvider: AssociationsServiceProtocol
     let appSource: AppSource
     var applicationFinishedWithPreferredDestination: ((PreferredDestination) -> Void)
+    weak var rootViewController: UIViewController?
     
     public init(
         parent: CompanyCoordinatorParentProtocol?,
@@ -75,6 +76,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         companyViewController = CompanyDetailsViewController(
             presenter: workplacePresenter)
         companyViewController.log = self.injected.log
+        rootViewController = navigationRouter.navigationController.topViewController
         navigationRouter.push(viewController: companyViewController, animated: true)
     }
     
@@ -85,10 +87,13 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
 
 extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
     public func applicationDidFinish(preferredDestination: PreferredDestination) {
-        applicationFinishedWithPreferredDestination(preferredDestination)
+        if let rootViewController = rootViewController {
+            navigationRouter.popToViewController(rootViewController, animated: false)
+        }
         cleanup()
         navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
+        applicationFinishedWithPreferredDestination(preferredDestination)
     }
     public func applicationDidCancel() {
         cleanup()

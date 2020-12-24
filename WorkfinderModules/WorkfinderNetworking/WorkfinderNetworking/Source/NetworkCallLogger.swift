@@ -70,7 +70,8 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
     
     public func logDataTaskSuccess(request: URLRequest,
                             response: HTTPURLResponse,
-                            responseData: Data) {
+                            responseData: Data,
+                            verbose: Bool) {
         let separator = "-----------------------------------------------------------------------"
         var text = "\n\n\(separator)\nNETWORK SUCCESS"
         text = "\(text)\nRequest method: \(request.httpMethod!.uppercased())"
@@ -84,7 +85,11 @@ public class NetworkCallLogger : NetworkCallLoggerProtocol {
                 text = "\(text)\n\nRequest data: \(requestData.count) bytes"
             }
         }
-        text = "\(text)\n\nResponse data:\n\(String(data: responseData, encoding: .utf8)!)"
+        var dataString = String(data: responseData, encoding: .utf8) ?? ""
+        if !verbose && dataString.count > 100 {
+            dataString = dataString.prefix(100) + "..."
+        }
+        text = "\(text)\n\nResponse data:\n\(dataString))"
         if request.allHTTPHeaderFields?.isEmpty == false {
             text = "\n\(text)\nRequest Headers:"
             request.allHTTPHeaderFields?.forEach({ (key, value) in

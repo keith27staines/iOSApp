@@ -3,6 +3,8 @@ import Foundation
 import WorkfinderNetworking
 import WorkfinderCommon
 
+let verbose: Bool = false
+
 open class WorkfinderService {
     public let networkConfig: NetworkConfig
     
@@ -91,12 +93,7 @@ open class WorkfinderService {
         case .success(let data):
             do {
                 #if DEBUG
-                print()
-                print("--------------- Start Json capture --------------------")
-                print("Deserialising \(ResponseJson.self) from...")
-                prettyPrint(data: data)
-                print("--------------- End Json capture ----------------------")
-                print()
+                captureJson(data: data, type: "\(ResponseJson.self)")
                 #endif
                 let json = try decoder.decode(ResponseJson.self, from: data)
                 completion(Result<ResponseJson,Error>.success(json))
@@ -116,7 +113,20 @@ open class WorkfinderService {
         }
     }
     
-    func prettyPrint(data: Data?) {
+    private func captureJson(data: Data?, type: String) {
+        guard verbose else {
+            print("suppressing json capture because `verbose`==false")
+            return
+        }
+        print()
+        print("--------------- Start Json capture --------------------")
+        print("Deserialising \(type) from...")
+        prettyPrint(data: data)
+        print("--------------- End Json capture ----------------------")
+        print()
+    }
+    
+    private func prettyPrint(data: Data?) {
         guard let data = data else { return }
         if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
             if let prettyPrintedData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {

@@ -35,6 +35,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     let association: HostAssociationJson
     let workplace: CompanyAndPin
     let updateCandidateService: UpdateCandidateServiceProtocol
+    var didCaptureDOB = false
     
     public var coverLetterPrimaryButtonText: String {
         let isCandidateSignedIn = injected.userRepository.isCandidateLoggedIn
@@ -43,21 +44,15 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
 
     lazy var successPopup: SuccessPopupView = {
         return SuccessPopupView(leftButtonTapped: { [weak self] in
-            guard let self = self else { return }
-            self.removeApplicationSubmittedSuccessfully()
-            self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .applications)
+            self?.finishApply(destination: .applications)
         }) { [weak self] in
-            guard let self = self else { return }
-            self.removeApplicationSubmittedSuccessfully()
-            self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .home)
+            self?.finishApply(destination: .home)
         }
     }()
     
     private func showApplicationSubmittedSuccessfully() {
         guard let window = UIApplication.shared.keyWindow
             else { return }
-        let log = injected.log
-        log.track(.passive_apply_convert(appSource))
         let navigationController = navigationRouter.navigationController
         window.addSubview(successPopup)
         navigationController.navigationBar.layer.zPosition = -1
@@ -94,6 +89,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         self.workplace = workplace
         self.association = association
         self.appSource = appSource
+        self.rootViewController = navigationRouter.navigationController.topViewController
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
         draftPlacementLogic.update(associationUuid: association.uuid)
     }
@@ -103,7 +99,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         log.track(.passive_apply_start(appSource))
         startDateOfBirthIfNecessary()
     }
-    
+
     func startDateOfBirthIfNecessary() {
         guard let dateOfBirthString = userRepository.loadCandidate().dateOfBirth,
             let dob = Date.workfinderDateStringToDate(dateOfBirthString)
@@ -113,6 +109,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
                 log: injected.log
             )
             navigationRouter.push(viewController: vc, animated: true)
+            didCaptureDOB = true
             return
         }
         onDidSelectDataOfBirth(date: dob)
@@ -147,7 +144,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     public func coverLetterDidCancel() {
-        
+        switch didCaptureDOB {
+        case true: break
+        case false: cancelApply()
+        }
     }
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
@@ -172,7 +172,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
                 self.addSupportingDocument(placementUuid)
             },
             onCancel: {
-                self.cancelButtonWasTapped(sender: self)
+                self.cancelApply()
             })
         applicationSubmitter?.submitApplication()
     }
@@ -282,7 +282,18 @@ extension ApplyCoordinator {
         navigationRouter.present(alert, animated: true, completion: nil)
     }
     
-    func cancelButtonWasTapped(sender: Any?) {
+    func finishApply(destination: PreferredDestination) {
+        log.track(.passive_apply_convert(appSource))
+        cleanup()
+//        if let rootViewController = rootViewController {
+//            navigationRouter.popToViewController(rootViewController, animated: true)
+//        }
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: destination)
+        self.removeApplicationSubmittedSuccessfully()
+    }
+    
+    func cancelApply() {
         log.track(.passive_apply_cancel(appSource))
         cleanup()
         parentCoordinator?.childCoordinatorDidFinish(self)
@@ -296,9 +307,7 @@ extension ApplyCoordinator {
 
 extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
     
-    func onDidCancel() {
-        cancelButtonWasTapped(sender: nil)
-    }
+    func onDidCancel() { cancelApply() }
     
     func onDidSelectDataOfBirth(date: Date) {
         var candidate = userRepository.loadCandidate()

@@ -113,6 +113,13 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
                     recommendedAssociationUuid: associationUuid,
                     inject: self.injected,
                     appSource: source) { (destination) in
+                    switch destination {
+                    case .applications:
+                        self.tabNavigator?.navigateToTab(tab: .applications)
+                    case .home:
+                        self.tabNavigator?.navigateToTab(tab: .home)
+                    case .none: break
+                    }
                 }
                 self.addChildCoordinator(coordinator)
                 coordinator.start()
