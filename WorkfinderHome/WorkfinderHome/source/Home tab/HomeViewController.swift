@@ -30,9 +30,6 @@ class HomeViewController: UIViewController {
         hijacked = true
         scrollHijackOverlay.removeFromSuperview()
         trayTopConstraintConstant = 0
-//        tray.layer.cornerRadius = 0
-//        tray.layer.shadowRadius = 0
-//        tray.layer.shadowColor = UIColor.clear.cgColor
         animateTrayToFinalPosition()
     }
     
