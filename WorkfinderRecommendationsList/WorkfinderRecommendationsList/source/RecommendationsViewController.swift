@@ -36,7 +36,8 @@ class RecommendationsViewController: UIViewController {
     lazy var noRecommendationsYet:UILabel = {
         let label = UILabel()
         label.text = "Please make your first application to start receiving recommendations"
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.font = WorkfinderFonts.title2
+        label.textColor = WorkfinderColors.textLight
         label.backgroundColor = WorkfinderColors.white
         label.textAlignment = .center
         label.numberOfLines = 0

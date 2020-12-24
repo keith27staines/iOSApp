@@ -52,7 +52,7 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
         aliases.append(userId)
     }
 
-    public func track(_ eventType: TrackEventType) {
+    public func track(_ eventType: TrackingEventType) {
         analyticsItems.append(
             TrackingEvent(type: eventType)
         )

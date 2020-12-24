@@ -74,7 +74,7 @@ public class F4SLog : F4SAnalyticsAndDebugging {
 
 extension F4SLog : F4SAnalytics {
     
-    public func track(_ eventType: TrackEventType) {
+    public func track(_ eventType: TrackingEventType) {
         let event = TrackingEvent(type: eventType)
         let mixpanelProperties = event.additionalProperties.compactMapValues({ (value) -> MixpanelType? in
             value as? MixpanelType

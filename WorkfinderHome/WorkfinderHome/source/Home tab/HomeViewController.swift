@@ -24,13 +24,16 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    var hijacked = false
     @objc func hijackScroll() {
-        trayTopConstraintConstant = 0
-        tray.layer.cornerRadius = 0
-        tray.layer.shadowRadius = 0
-        tray.layer.shadowColor = UIColor.clear.cgColor
-        animateTrayToFinalPosition()
+        guard hijacked == false else { return }
+        hijacked = true
         scrollHijackOverlay.removeFromSuperview()
+        trayTopConstraintConstant = 0
+//        tray.layer.cornerRadius = 0
+//        tray.layer.shadowRadius = 0
+//        tray.layer.shadowColor = UIColor.clear.cgColor
+        animateTrayToFinalPosition()
     }
     
     lazy var trayTopConstraint: NSLayoutConstraint = {
@@ -92,6 +95,10 @@ class HomeViewController: UIViewController {
             delay: 0,
             options: .curveEaseOut,
             animations: {
+                let tray = self.tray
+                tray.layer.cornerRadius = 0
+                tray.layer.shadowRadius = 0
+                tray.layer.shadowColor = UIColor.clear.cgColor
                 self.homeView.layoutIfNeeded()
             },
             completion: nil
