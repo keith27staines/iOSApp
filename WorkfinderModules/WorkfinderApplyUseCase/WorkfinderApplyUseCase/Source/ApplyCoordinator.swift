@@ -43,11 +43,13 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
 
     lazy var successPopup: SuccessPopupView = {
         return SuccessPopupView(leftButtonTapped: { [weak self] in
-            self?.removeApplicationSubmittedSuccessfully()
-            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .applications)
+            guard let self = self else { return }
+            self.removeApplicationSubmittedSuccessfully()
+            self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .applications)
         }) { [weak self] in
-            self?.removeApplicationSubmittedSuccessfully()
-            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .home)
+            guard let self = self else { return }
+            self.removeApplicationSubmittedSuccessfully()
+            self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .home)
         }
     }()
     
@@ -145,7 +147,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     public func coverLetterDidCancel() {
-        //log.track(.passive_apply_cancel(appSource))
+        
     }
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
@@ -167,7 +169,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             navigationController: navigationController,
             messageHandler: messageHandler,
             onSuccess: { placementUuid in
-                self.log.track(.passive_apply_convert(self.appSource))
                 self.addSupportingDocument(placementUuid)
             },
             onCancel: {
@@ -284,7 +285,6 @@ extension ApplyCoordinator {
     func cancelButtonWasTapped(sender: Any?) {
         log.track(.passive_apply_cancel(appSource))
         cleanup()
-        //navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
