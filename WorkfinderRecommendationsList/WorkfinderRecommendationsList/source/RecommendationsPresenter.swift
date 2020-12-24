@@ -86,7 +86,7 @@ class RecommendationsPresenter {
         if tile.isProject {
             coordinator?.processProjectViewRequest(
                 tile.recommendation.project?.uuid,
-                applicationSource: .recommendationsTab)
+                appSource: .recommendationsTab)
         } else {
             coordinator?.onRecommendationSelected?(uuid)
         }

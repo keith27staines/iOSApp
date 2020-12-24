@@ -14,7 +14,7 @@ public protocol CompanyCoordinatorFactoryProtocol {
         companyAndPin: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
-        applicationSource: AppSource,
+        appSource: AppSource,
         applicationFinished: @escaping ((PreferredDestination) -> Void)
     ) -> CoreInjectionNavigationCoordinatorProtocol
 }
@@ -37,7 +37,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     var recommendedAssociationUuid: F4SUUID?
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
-    let applicationSource: AppSource
+    let appSource: AppSource
     var applicationFinishedWithPreferredDestination: ((PreferredDestination) -> Void)
     
     public init(
@@ -50,7 +50,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         applyService: PostPlacementServiceProtocol,
         associationsProvider: AssociationsServiceProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void),
-        applicationSource: AppSource
+        appSource: AppSource
     ) {
         self.environment = environment
         self.workplace = workplace
@@ -58,7 +58,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         self.applyService = applyService
         self.associationsProvider = associationsProvider
         self.applicationFinishedWithPreferredDestination = applicationFinished
-        self.applicationSource = applicationSource
+        self.appSource = appSource
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -70,7 +70,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
             recommendedAssociationUuid: recommendedAssociationUuid,
             associationsService: associationsProvider,
             log: injected.log,
-            applicationSource: applicationSource
+            appSource: appSource
         )
         companyViewController = CompanyDetailsViewController(
             presenter: workplacePresenter)
@@ -110,7 +110,7 @@ extension CompanyDetailsCoordinator {
             navigationRouter: navigationRouter,
             inject: injected,
             environment: environment,
-            applicationSource: applicationSource)
+            appSource: appSource)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
     }

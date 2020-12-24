@@ -31,7 +31,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }()
     var log: F4SAnalytics { injected.log }
     var picklistsDictionary: PicklistsDictionary?
-    let applicationSource: AppSource
+    let appSource: AppSource
     let association: HostAssociationJson
     let workplace: CompanyAndPin
     let updateCandidateService: UpdateCandidateServiceProtocol
@@ -58,7 +58,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         guard let window = UIApplication.shared.keyWindow
             else { return }
         let log = injected.log
-        log.track(.passive_apply_convert(applicationSource))
+        log.track(.passive_apply_convert(appSource))
         let navigationController = navigationRouter.navigationController
         window.addSubview(successPopup)
         navigationController.navigationBar.layer.zPosition = -1
@@ -86,7 +86,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 environment: EnvironmentType,
-                applicationSource: AppSource) {
+                appSource: AppSource) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
         self.updateCandidateService = updateCandidateService
@@ -94,14 +94,14 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         self.startingViewController = navigationRouter.navigationController.topViewController
         self.workplace = workplace
         self.association = association
-        self.applicationSource = applicationSource
+        self.appSource = appSource
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
         draftPlacementLogic.update(associationUuid: association.uuid)
     }
     
     override public func start() {
         super.start()
-        log.track(.passive_apply_start(applicationSource))
+        log.track(.passive_apply_start(appSource))
         startDateOfBirthIfNecessary()
     }
     
@@ -145,7 +145,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     public func coverLetterDidCancel() {
-        log.track(.passive_apply_cancel(applicationSource))
+        log.track(.passive_apply_cancel(appSource))
     }
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
@@ -167,7 +167,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             navigationController: navigationController,
             messageHandler: messageHandler,
             onSuccess: { placementUuid in
-                self.log.track(.passive_apply_convert(self.applicationSource))
+                self.log.track(.passive_apply_convert(self.appSource))
                 self.addSupportingDocument(placementUuid)
             },
             onCancel: {

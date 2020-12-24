@@ -119,7 +119,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     func showProject(uuid: F4SUUID?, source: AppSource) {
         guard let uuid = uuid else { return }
         if let tabBarCoordinator = self.tabBarCoordinator {
-            tabBarCoordinator.dispatchProjectViewRequest(uuid, applicationSource: source)
+            tabBarCoordinator.dispatchProjectViewRequest(uuid, appSource: source)
             return
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in

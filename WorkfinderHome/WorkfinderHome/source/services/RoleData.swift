@@ -14,7 +14,7 @@ public struct RoleData: Codable {
     public var locationHeader: String?
     public var location: String?
     public var actionButtonText: String?
-    public var applicationSource: AppSource = .unspecified
+    public var appSource: AppSource = .unspecified
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -30,9 +30,9 @@ public struct RoleData: Codable {
         case location
     }
     
-    public func settingApplicationSource(_ source: AppSource) -> RoleData {
+    public func settingAppSource(_ source: AppSource) -> RoleData {
         var role = self
-        role.applicationSource = source
+        role.appSource = source
         return role
     }
 }

@@ -102,7 +102,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
          recommendedAssociationUuid: F4SUUID?,
          associationsService: AssociationsServiceProtocol,
          log: F4SAnalyticsAndDebugging?,
-         applicationSource: AppSource
+         appSource: AppSource
     ) {
         self.associationsService = associationsService
         self.companyAndPin = workplace
@@ -113,7 +113,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
             workplace: workplace,
             coordinator: coordinator,
             log: log,
-            applicationSource: applicationSource
+            appSource: appSource
         )
         super.init()
     }

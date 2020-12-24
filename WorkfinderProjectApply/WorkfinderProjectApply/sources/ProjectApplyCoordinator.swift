@@ -33,7 +33,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     var delegate: ProjectApplyCoordinatorDelegate?
     var projectType: String = ""
     var log: F4SAnalytics { injected.log }
-    let applicationSource: AppSource
+    let appSource: AppSource
     var coverLetterText: String = ""
     var picklistsDictionary = PicklistsDictionary()
     
@@ -49,11 +49,11 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
         projectUuid: F4SUUID,
-        applicationSource: AppSource,
+        appSource: AppSource,
         navigateToSearch: (() -> Void)?,
         navigateToApplications: (() -> Void)?) {
         self.delegate = parent
-        self.applicationSource = applicationSource
+        self.appSource = appSource
         self.navigateToSearch = navigateToSearch
         self.navigateToApplications = navigateToApplications
         self.projectUuid = projectUuid
@@ -66,7 +66,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
             coordinator: self,
             projectUuid: projectUuid,
             projectService: ProjectService(networkConfig: injected.networkConfig),
-            source: applicationSource,
+            source: appSource,
             log: injected.log
         )
         self.projectPresenter = presenter
@@ -117,7 +117,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
 extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onTapApply() {
-        log.track(.project_apply_start(applicationSource))
+        log.track(.project_apply_start(appSource))
         startCoverLetterFlow()
     }
     
@@ -128,7 +128,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func onCoverLetterWorkflowCancelled() {
-        log.track(.project_apply_cancel(applicationSource))
+        log.track(.project_apply_cancel(appSource))
     }
     
     func onCoverLetterDidComplete() {

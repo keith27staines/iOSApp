@@ -29,10 +29,10 @@ class SearchResultsController {
                 table: tables[0],
                 searchResultsController: self,
                 service: rolesService,
-                applicationSource: .homeTabSearchResultsProjects),
+                appSource: .homeTabSearchResultsProjects),
 //            CompaniesDatasource(tag: 1, table: tables[1], searchResultsController: self),
 
-            PeopleDatasource(tag: 1, table: tables[1], searchResultsController: self, associationsService: associationsService, applicationSource: .homeTabSearchResultsPeople)
+            PeopleDatasource(tag: 1, table: tables[1], searchResultsController: self, associationsService: associationsService, appSource: .homeTabSearchResultsPeople)
         ]
     }()
     

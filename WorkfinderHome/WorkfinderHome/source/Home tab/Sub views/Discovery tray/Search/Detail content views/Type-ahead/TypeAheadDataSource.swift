@@ -26,8 +26,8 @@ class TypeAheadDataSource {
             switch result {
             case .success(let typeAheadJson):
                 self.categories = [
-                    "projects": typeAheadJson.projects?.settingApplicationSource(.homeTabTypeAheadProjects) ?? [],
-                    "people": typeAheadJson.people?.settingApplicationSource(.homeTabTypeAheadPeople) ?? []
+                    "projects": typeAheadJson.projects?.settingAppSource(.homeTabTypeAheadProjects) ?? [],
+                    "people": typeAheadJson.people?.settingAppSource(.homeTabTypeAheadPeople) ?? []
                 ]
                 error = nil
                 totalMatches = typeAheadJson.count
@@ -93,17 +93,17 @@ extension String {
 }
 
 extension Array where Element == TypeAheadItem {
-    func settingApplicationSource(_ source: AppSource) -> [TypeAheadItem] {
+    func settingAppSource(_ source: AppSource) -> [TypeAheadItem] {
         map { (item) -> TypeAheadItem in
-            item.settingApplicationSource(source)
+            item.settingAppSource(source)
         }
     }
 }
 
 extension Array where Element == RoleData {
-    func settingApplicationSource(_ source: AppSource) -> [RoleData] {
+    func settingAppSource(_ source: AppSource) -> [RoleData] {
         map { (roleData) -> RoleData in
-            roleData.settingApplicationSource(source)
+            roleData.settingAppSource(source)
         }
     }
 }

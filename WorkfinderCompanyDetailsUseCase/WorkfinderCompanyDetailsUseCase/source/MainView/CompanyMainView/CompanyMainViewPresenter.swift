@@ -23,7 +23,7 @@ protocol CompanyMainViewPresenterProtocol: class {
 
 class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var log: F4SAnalyticsAndDebugging?
-    let applicationSource: AppSource
+    let appSource: AppSource
     weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var view: CompanyMainViewProtocol?
     var companyAndPin: CompanyAndPin
@@ -61,16 +61,16 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     init(workplace: CompanyAndPin,
          coordinator: CompanyMainViewCoordinatorProtocol,
          log: F4SAnalyticsAndDebugging?,
-         applicationSource: AppSource) {
+         appSource: AppSource) {
         self.log = log
         self.coordinator = coordinator
         self.companyAndPin = workplace
-        self.applicationSource = applicationSource
+        self.appSource = appSource
     }
     
     func onDidTapApply() {
         guard let association = selectedAssociation else { return }
-        log?.track(.passive_apply_start(applicationSource))
+        log?.track(.passive_apply_start(appSource))
         coordinator?.applyTo(workplace: companyAndPin, association: association)
     }
 }

@@ -8,7 +8,7 @@ struct TypeAheadItem: Codable {
     var searchTerm: String?
     var objectType: String?
     var iconUrlString: String?
-    var applicationSource: AppSource = .unspecified
+    var appSource: AppSource = .unspecified
     
     private enum CodingKeys: String, CodingKey {
         case uuid
@@ -19,9 +19,9 @@ struct TypeAheadItem: Codable {
         case iconUrlString = "icon"
     }
     
-    func settingApplicationSource(_ applicationSource: AppSource) -> TypeAheadItem {
+    func settingAppSource(_ appSource: AppSource) -> TypeAheadItem {
         var item = self
-        item.applicationSource = applicationSource
+        item.appSource = appSource
         return item
     }
 }

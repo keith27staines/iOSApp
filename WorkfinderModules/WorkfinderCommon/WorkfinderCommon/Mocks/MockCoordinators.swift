@@ -3,7 +3,7 @@ import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
     
-    public func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: AppSource) {
+    public func dispatchProjectViewRequest(_ projectUuid: F4SUUID, appSource: AppSource) {
         
     }
     

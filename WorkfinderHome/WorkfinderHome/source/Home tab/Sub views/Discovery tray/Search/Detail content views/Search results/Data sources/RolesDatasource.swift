@@ -11,7 +11,7 @@ class RolesDatasource: Datasource, UITableViewDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let roleDataArray):
-                self.data = roleDataArray.settingApplicationSource(self.applicationSource)
+                self.data = roleDataArray.settingAppSource(self.appSource)
                 self.table?.reloadData()
                 completion(nil)
             case .failure(let error):
@@ -42,10 +42,10 @@ class RolesDatasource: Datasource, UITableViewDelegate {
         table: UITableView,
         searchResultsController: SearchResultsController,
         service: RolesServiceProtocol,
-        applicationSource: AppSource
+        appSource: AppSource
     ) {
         self.service = service
-        super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)
+        super.init(tag: tag, table: table, searchResultsController: searchResultsController, appSource: appSource)
         table.register(RoleSearchResultCell.self, forCellReuseIdentifier: RoleSearchResultCell.identifer)
         table.delegate = self
     }

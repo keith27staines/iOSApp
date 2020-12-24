@@ -39,9 +39,9 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         guard let objectType = item.objectType, let uuid = item.uuid else { return }
         switch objectType {
         case "association", "company":
-            startAssociationApply(associationUuid: uuid, source: item.applicationSource)
+            startAssociationApply(associationUuid: uuid, source: item.appSource)
         case "project":
-            startProjectApply(projectUuid: uuid, source: item.applicationSource)
+            startProjectApply(projectUuid: uuid, source: item.appSource)
         default:
             var title = ""
             let subtitle = "\(item.objectType ?? "")\n\(item.title ?? "")\n\(item.subtitle ?? "")"
@@ -73,7 +73,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     @objc func searchResultTapped(notification: Notification) {
         guard let item = notification.object as? TypeAheadItem,
               let uuid = item.uuid else { return }
-        startAssociationApply(associationUuid: uuid, source: item.applicationSource)
+        startAssociationApply(associationUuid: uuid, source: item.appSource)
     }
     
     @objc func roleTapped(notification: Notification) {
@@ -81,7 +81,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             let roleData = notification.object as? RoleData,
             let id = roleData.id
         else { return }
-        startProjectApply(projectUuid: id, source: roleData.applicationSource)
+        startProjectApply(projectUuid: id, source: roleData.appSource)
     }
     
     @objc func navigateToRecommendationsTab() {
@@ -111,7 +111,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
                     companyAndPin: companyAndPin,
                     recommendedAssociationUuid: associationUuid,
                     inject: self.injected,
-                    applicationSource: source) { (destination) in
+                    appSource: source) { (destination) in
                 }
                 self.addChildCoordinator(coordinator)
                 coordinator.start()
@@ -133,7 +133,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         guard let uuid = uuid else { return }
         homeViewController.dismiss(animated: true, completion: nil)
         if childCoordinators.count == 0 {
-            startViewRecommendationCoordinator(recommendationUuid: uuid, applicationSource: source)
+            startViewRecommendationCoordinator(recommendationUuid: uuid, appSource: source)
         } else {
             let alert = UIAlertController(
                 title: "View Recommendation?",
@@ -142,7 +142,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             let recommendationAction = UIAlertAction(title: "View recommendation", style: .destructive) { (_) in
                 self.navigationRouter.popToViewController(self.homeViewController, animated: true)
                 self.childCoordinators.removeAll()
-                self.startViewRecommendationCoordinator(recommendationUuid: uuid, applicationSource: source)
+                self.startViewRecommendationCoordinator(recommendationUuid: uuid, appSource: source)
             }
             let continueAction = UIAlertAction(title: "Continue with current application", style: .default) { (_) in
                 return
@@ -153,7 +153,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         }
     }
     
-    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID, applicationSource: AppSource) {
+    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID, appSource: AppSource) {
         let coordinator = ViewRecommendationCoordinator(
             recommendationUuid: recommendationUuid,
             parent: self,
@@ -182,7 +182,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             navigationRouter: navigationRouter,
             companyAndPin: companyAndPin,
             recommendedAssociationUuid: recommendedAssociationUuid,
-            inject: injected, applicationSource: .unspecified,
+            inject: injected, appSource: .unspecified,
             applicationFinished: { [weak self] preferredDestination in
                 guard let self = self else { return }
                 self.show(destination: preferredDestination)
@@ -222,7 +222,7 @@ extension HomeCoordinator {
             navigationRouter: navigationRouter,
             inject: injected,
             projectUuid: project,
-            applicationSource: source,
+            appSource: source,
             navigateToSearch: { [weak self] in
                 self?.tabNavigator?.navigateToTab(tab: .home)
             },

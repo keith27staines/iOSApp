@@ -13,7 +13,7 @@ class PeopleDatasource: TypeAheadItemsDatasource {
             switch result {
             case .success(let hostAssociationsListItem):
                 self.data = hostAssociationsListItem.results.map { (association) -> TypeAheadItem in
-                    TypeAheadItem(uuid: association.uuid, title: association.host?.fullName, subtitle: association.title, searchTerm: "", objectType: "association", iconUrlString: association.host?.photoUrlString, applicationSource: self.applicationSource)
+                    TypeAheadItem(uuid: association.uuid, title: association.host?.fullName, subtitle: association.title, searchTerm: "", objectType: "association", iconUrlString: association.host?.photoUrlString, appSource: self.appSource)
                 }
                 self.table?.reloadData()
                 completion(nil)
@@ -28,9 +28,9 @@ class PeopleDatasource: TypeAheadItemsDatasource {
         table: UITableView,
         searchResultsController: SearchResultsController,
         associationsService: AssociationsServiceProtocol,
-        applicationSource: AppSource
+        appSource: AppSource
     ) {
         self.associationsService = associationsService
-        super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)
+        super.init(tag: tag, table: table, searchResultsController: searchResultsController, appSource: appSource)
     }
 }

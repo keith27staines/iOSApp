@@ -7,7 +7,7 @@ class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
     var typeAheadItems = [TypeAheadItem]() {
         didSet {
             data = typeAheadItems.map({ (item) -> TypeAheadItem in
-                return item.settingApplicationSource(applicationSource)
+                return item.settingAppSource(appSource)
             })
         }
     }
@@ -37,9 +37,9 @@ class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
         tag: Int,
         table: UITableView,
         searchResultsController: SearchResultsController,
-        applicationSource: AppSource
+        appSource: AppSource
     ) {
-        super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)
+        super.init(tag: tag, table: table, searchResultsController: searchResultsController, appSource: appSource)
         table.register(TypeAheadCell.self, forCellReuseIdentifier: TypeAheadCell.reuseIdentifier)
         table.delegate = self
     }
