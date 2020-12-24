@@ -90,7 +90,7 @@ class SearchController: NSObject {
     
     func applyFilters() {
         queryItems = filtersModel.queryItems
-        log?.track(.search_home_apply_filters(queryItems.queryString))
+        log?.track(.search_home_apply_filters(search: queryItems.queryString))
         self.performSearch()
     }
     
@@ -155,7 +155,7 @@ class SearchController: NSObject {
     @objc func popularOnWorkfinderTapListener(notification: Notification) {
         guard let searchString = (notification.object as? CapsuleData)?.searchText
         else { return }
-        log?.track(.search_home_perform_popular(searchString))
+        log?.track(.search_home_perform_popular(search: searchString))
         searchBar.text = searchString
         performSearch()
     }
@@ -163,7 +163,7 @@ class SearchController: NSObject {
 
 extension SearchController: KSSearchBarDelegate {
     func searchBarButtonTapped(_ searchbar: KSSearchBar) {
-        log?.track(.search_home_perform_full(searchbar.text ?? ""))
+        log?.track(.search_home_perform_full(search: searchbar.text ?? ""))
         searchBar.resignFirstResponder()
         performSearch()
     }

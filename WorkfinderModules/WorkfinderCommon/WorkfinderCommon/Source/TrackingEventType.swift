@@ -13,20 +13,20 @@ public enum TrackingEventType {
     case onboarding_convert                                                     // ok
     
     // MARK:- Main navigation                                                   // checked
-    case tab_tap(String)                                                        // ok
+    case tab_tap(tabName: String)                                               // ok
 
     // MARK:- Register and sign in                                              // checked
     case register_user_start                                                    // ok
     case register_user_cancel                                                   // ok
     case register_user_convert                                                  // ok
     
-    // MARK:- Search                                                            // checking
+    // MARK:- Search                                                            // checked
     case search_home_typeahead_start                                            // ok
     case search_home_selected_typeahead_item                                    // ok
     case search_home_cancel_typeahead                                           // ok
-    case search_home_perform_full(String)                                       // ok
-    case search_home_perform_popular(String)                                    // ok
-    case search_home_apply_filters(String)                                      // ok
+    case search_home_perform_full(search: String)                               // ok
+    case search_home_perform_popular(search: String)                            // ok
+    case search_home_apply_filters(search: String)                              // ok
 
     // MARK:- Allow notifications
     case allow_notifications_start
@@ -48,7 +48,7 @@ public enum TrackingEventType {
     case recommendation_pushnotification_cancel
     case recommendation_pushnotification_convert
 
-    // MARK:-  Passive apply
+    // MARK:-  Passive apply                                                    // checking
     case passive_apply_start(AppSource)
     case passive_apply_cancel(AppSource)
     case passive_apply_convert(AppSource)
@@ -61,12 +61,12 @@ public enum TrackingEventType {
     case project_apply_cancel(AppSource)
     case project_apply_convert(AppSource)
     
-    // MARK:- Cover letter events
+    // MARK:- Cover letter events                                               // checking
     case letter_start
     case letter_viewed(isComplete: Bool)
     case letter_editor
     case question_opened(PicklistType)
-    case question_closed(PicklistType, Bool)
+    case question_closed(PicklistType, isAnswered: Bool)
     case letter_convert
     case letter_cancel(isComplete: Bool)
     
@@ -76,7 +76,7 @@ public enum TrackingEventType {
     case offer_convert
     case offer_withdraw
     
-    // MARK:- Object viewing
+    // MARK:- Object viewing                                                    // checking
     case company_details_page_view
     case company_details_page_dismiss
     case project_page_view(AppSource)

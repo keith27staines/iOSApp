@@ -97,7 +97,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
 
     func onViewDidAppear() {
         if let picklist = showingPicklist {
-            log.track(.question_closed(picklist.type, picklist.isPopulated))
+            log.track(.question_closed(picklist.type, isAnswered: picklist.isPopulated))
         }
         log.track(.letter_editor)
         appearanceCount += 1

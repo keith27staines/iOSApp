@@ -46,7 +46,7 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
         if picklist.isLoaded {
             log.track(.question_opened(picklist.type))
             showPicklist(picklist, completion: { [weak self] _ in
-                self?.log.track(.question_closed(picklist.type, picklist.isPopulated))
+                self?.log.track(.question_closed(picklist.type, isAnswered: picklist.isPopulated))
                 completion(nil)
             })
             return
@@ -56,7 +56,7 @@ public class LetterThenEditorFlow: CoverLetterFlow  {
             case .success(_):
                 self?.onCoverLetterTapField(name: name, completion: completion)
             case .failure(let error):
-                self?.log.track(.question_closed(picklist.type, picklist.isPopulated))
+                self?.log.track(.question_closed(picklist.type, isAnswered: picklist.isPopulated))
                 completion(error)
             }
         })
