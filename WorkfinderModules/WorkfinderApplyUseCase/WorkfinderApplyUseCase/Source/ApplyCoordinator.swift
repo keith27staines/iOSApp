@@ -31,7 +31,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }()
     var log: F4SAnalytics { injected.log }
     var picklistsDictionary: PicklistsDictionary?
-    let applicationSource: ApplicationSource
+    let applicationSource: AppSource
     let association: HostAssociationJson
     let workplace: CompanyAndPin
     let updateCandidateService: UpdateCandidateServiceProtocol
@@ -86,7 +86,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 environment: EnvironmentType,
-                applicationSource: ApplicationSource) {
+                applicationSource: AppSource) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
         self.updateCandidateService = updateCandidateService

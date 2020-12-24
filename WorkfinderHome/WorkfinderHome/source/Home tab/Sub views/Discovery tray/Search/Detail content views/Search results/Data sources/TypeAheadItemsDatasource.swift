@@ -37,7 +37,7 @@ class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
         tag: Int,
         table: UITableView,
         searchResultsController: SearchResultsController,
-        applicationSource: ApplicationSource
+        applicationSource: AppSource
     ) {
         super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)
         table.register(TypeAheadCell.self, forCellReuseIdentifier: TypeAheadCell.reuseIdentifier)

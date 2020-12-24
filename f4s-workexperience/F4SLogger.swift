@@ -13,7 +13,7 @@ import Mixpanel
 import WorkfinderCommon
 import UIKit
 
-public class F4SLog : F4SAnalyticsAndDebugging {
+public class F4SLog {
 
     var mixPanel: MixpanelInstance { return Mixpanel.mainInstance() }
     
@@ -31,14 +31,6 @@ public class F4SLog : F4SAnalyticsAndDebugging {
         startBugsnag(for: environment)
         startMixpanel(for: environment)
         updateIdentity()
-        trackAppOpenedEvent()
-    }
-    
-    func trackAppOpenedEvent() {
-        let localStore = LocalStore()
-        let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
-        if isFirstLaunch { track(.first_use) }
-        track(.app_open)
     }
     
     func startMixpanel(for environment: EnvironmentType) {
@@ -111,4 +103,6 @@ extension F4SLog : F4SDebugging {
         Bugsnag.leaveBreadcrumb(withMessage: message)
     }
 }
+
+extension F4SLog: F4SAnalyticsAndDebugging {}
 

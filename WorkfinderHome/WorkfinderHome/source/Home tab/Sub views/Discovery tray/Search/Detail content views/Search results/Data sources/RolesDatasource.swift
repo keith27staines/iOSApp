@@ -42,7 +42,7 @@ class RolesDatasource: Datasource, UITableViewDelegate {
         table: UITableView,
         searchResultsController: SearchResultsController,
         service: RolesServiceProtocol,
-        applicationSource: ApplicationSource
+        applicationSource: AppSource
     ) {
         self.service = service
         super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)

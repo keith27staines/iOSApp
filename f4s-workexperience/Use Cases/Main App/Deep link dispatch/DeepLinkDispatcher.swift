@@ -13,7 +13,7 @@ class DeepLinkDispatcher {
     func dispatch(info: DeeplinkDispatchInfo) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self, let coordinator = self.coordinator else { return }
-            let source = ApplicationSource(deeplinkSource: info.source)
+            let source = AppSource(deeplinkSource: info.source)
             let log = self.log
             
             switch info.objectType {

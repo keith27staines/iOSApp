@@ -33,7 +33,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     var delegate: ProjectApplyCoordinatorDelegate?
     var projectType: String = ""
     var log: F4SAnalytics { injected.log }
-    let applicationSource: ApplicationSource
+    let applicationSource: AppSource
     var coverLetterText: String = ""
     var picklistsDictionary = PicklistsDictionary()
     
@@ -49,7 +49,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
         projectUuid: F4SUUID,
-        applicationSource: ApplicationSource,
+        applicationSource: AppSource,
         navigateToSearch: (() -> Void)?,
         navigateToApplications: (() -> Void)?) {
         self.delegate = parent
@@ -124,7 +124,6 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     func onModalFinished() {
         originalVC?.dismiss(animated: true, completion: nil)
         delegate?.onProjectApplyDidFinish()
-        log.track(.project_apply_convert(applicationSource))
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     

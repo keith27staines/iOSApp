@@ -23,7 +23,7 @@ protocol CompanyMainViewPresenterProtocol: class {
 
 class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     var log: F4SAnalyticsAndDebugging?
-    let applicationSource: ApplicationSource
+    let applicationSource: AppSource
     weak var coordinator: CompanyMainViewCoordinatorProtocol?
     weak var view: CompanyMainViewProtocol?
     var companyAndPin: CompanyAndPin
@@ -61,7 +61,7 @@ class CompanyMainViewPresenter: CompanyMainViewPresenterProtocol {
     init(workplace: CompanyAndPin,
          coordinator: CompanyMainViewCoordinatorProtocol,
          log: F4SAnalyticsAndDebugging?,
-         applicationSource: ApplicationSource) {
+         applicationSource: AppSource) {
         self.log = log
         self.coordinator = coordinator
         self.companyAndPin = workplace

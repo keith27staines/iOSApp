@@ -21,7 +21,6 @@ public struct TrackingEvent {
         
         // cases where the TrackEventType has associated data
         case .tab_tap(let tabName): properties["main_tab"] = tabName
-        case .search_home_perform_typeahead(let searchTerm): properties["search_term"] = searchTerm
         case .search_home_perform_full(let searchTerm): properties["search_term"] = searchTerm
         case .search_home_perform_popular(let searchTerm): properties["search_term"] = searchTerm
         case .search_home_apply_filters(let filters): properties["search_filters"] = filters
@@ -35,8 +34,8 @@ public struct TrackingEvent {
         case .questionClosed(let question, let isAnswered):
             properties["question"] = question.title
             properties["answered"] = isAnswered
-        case .association_view(let source): properties["source"] = source.rawValue
-        case .project_view(let source): properties["source"] = source.rawValue
+        case .application_page_view(let source): properties["source"] = source.rawValue
+        case .project_page_view(let source): properties["source"] = source.rawValue
         
         // cases where the TrackEventType does not have associated data
         case .first_use: break
@@ -68,7 +67,9 @@ public struct TrackingEvent {
         case .offer_cancel: break
         case .offer_convert: break
         case .offer_withdraw: break
-        case .company_view: break
+        case .company_details_page_view: break
+        case .search_home_start_typeahead: break
+        case .search_home_cancel_typeahead: break
         }
         return properties
     }

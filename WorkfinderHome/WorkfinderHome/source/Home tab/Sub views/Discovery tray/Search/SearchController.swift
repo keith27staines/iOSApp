@@ -1,4 +1,5 @@
 
+import WorkfinderCommon
 import UIKit
 import WorkfinderUI
 
@@ -9,7 +10,7 @@ class SearchController: NSObject {
     let searchResultsController: SearchResultsController
     var queryItems = [URLQueryItem]()
     weak var coordinator: HomeCoordinator?
-    
+    weak var log: F4SAnalyticsAndDebugging?
     enum SearchState {
         case hidden
         case showingTypeAhead
@@ -89,6 +90,7 @@ class SearchController: NSObject {
     
     func applyFilters() {
         queryItems = filtersModel.queryItems
+        log?.track(.search_home_apply_filters(queryItems.queryString))
         self.performSearch()
     }
     
@@ -130,11 +132,13 @@ class SearchController: NSObject {
     
     init(
         coordinator: HomeCoordinator?,
+        log: F4SAnalyticsAndDebugging?,
         typeAheadService: TypeAheadServiceProtocol,
         filtersModel: FiltersModel,
         searchResultsController: SearchResultsController
     ) {
         self.coordinator = coordinator
+        self.log = log
         typeAheadDatasource = TypeAheadDataSource(typeAheadService: typeAheadService)
         self.filtersModel = filtersModel
         self.searchResultsController = searchResultsController
@@ -150,6 +154,7 @@ class SearchController: NSObject {
     @objc func popularOnWorkfinderTapListener(notification: Notification) {
         guard let searchString = (notification.object as? CapsuleData)?.searchText
         else { return }
+        log?.track(.search_home_perform_popular(searchString))
         searchBar.text = searchString
         performSearch()
     }
@@ -157,6 +162,7 @@ class SearchController: NSObject {
 
 extension SearchController: KSSearchBarDelegate {
     func searchBarButtonTapped(_ searchbar: KSSearchBar) {
+        log?.track(.search_home_perform_full(searchbar.text ?? ""))
         searchBar.resignFirstResponder()
         performSearch()
     }
@@ -167,6 +173,7 @@ extension SearchController: KSSearchBarDelegate {
     }
     
     func searchbarDidBeginEditing(_ searchbar: KSSearchBar) {
+        log?.track(.search_home_start_typeahead)
         setStateFromSearchText()
         DispatchQueue.main.async {
             self.configureKeyboardReturnKey()
@@ -174,6 +181,7 @@ extension SearchController: KSSearchBarDelegate {
     }
     
     func searchBarDidCancel(_ searchbar: KSSearchBar) {
+        log?.track(.search_home_cancel_typeahead)
         state = .hidden
     }
     
@@ -183,14 +191,7 @@ extension SearchController: KSSearchBarDelegate {
     }
     
     func searchBarShouldReturn(_ searchbar: KSSearchBar) -> Bool {
-        searchBar.resignFirstResponder()
-        performSearch()
         return false
-    }
-    
-    func searchBarButtonTapped(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        performSearch()
     }
 }
 
@@ -242,7 +243,8 @@ extension SearchController {
 extension SearchController {
     
     func performSearch() {
-        var queryItems = [URLQueryItem(name: "q", value: searchBar.text)]
+        let searchText = searchBar.text
+        var queryItems = [URLQueryItem(name: "q", value: searchText)]
         queryItems.append(contentsOf: self.queryItems)
         searchResultsController.queryItems = queryItems
         switch typeAheadDatasource.result {
@@ -260,5 +262,13 @@ extension SearchController {
             return
         }
         typeAheadDatasource.searchString = string
+    }
+}
+
+extension Array where Element == URLQueryItem {
+    var queryString: String {
+        var components = URLComponents()
+        components.queryItems = self
+        return components.query ?? ""
     }
 }

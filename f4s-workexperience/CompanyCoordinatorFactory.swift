@@ -29,7 +29,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         companyAndPin: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
-        applicationSource: ApplicationSource,
+        applicationSource: AppSource,
         applicationFinished: @escaping ((PreferredDestination) -> Void)
         ) -> CoreInjectionNavigationCoordinatorProtocol {
         return CompanyDetailsCoordinator(

@@ -94,7 +94,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     var contextService: ApplicationContextService?
-    func startAssociationApply(associationUuid: F4SUUID, source: ApplicationSource) {
+    func startAssociationApply(associationUuid: F4SUUID, source: AppSource) {
         contextService = ApplicationContextService(networkConfig: injected.networkConfig)
         contextService?.fetchStartingFrom(
             associationUuid: associationUuid) { [weak self] (result) in
@@ -122,14 +122,14 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         }
     }
     
-    func startProjectApply(projectUuid: F4SUUID, source: ApplicationSource) {
+    func startProjectApply(projectUuid: F4SUUID, source: AppSource) {
         let projectApplyCoordinator = makeProjectApplyCoordinator(project: projectUuid, source: source)
         addChildCoordinator(projectApplyCoordinator)
         projectApplyCoordinator.start()
         self.projectApplyCoordinator = projectApplyCoordinator
     }
     
-    public func processRecommendation(uuid: F4SUUID?, source: ApplicationSource) {
+    public func processRecommendation(uuid: F4SUUID?, source: AppSource) {
         guard let uuid = uuid else { return }
         homeViewController.dismiss(animated: true, completion: nil)
         if childCoordinators.count == 0 {
@@ -153,7 +153,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         }
     }
     
-    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID, applicationSource: ApplicationSource) {
+    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID, applicationSource: AppSource) {
         let coordinator = ViewRecommendationCoordinator(
             recommendationUuid: recommendationUuid,
             parent: self,
@@ -216,7 +216,7 @@ extension HomeCoordinator: CompanyCoordinatorParentProtocol {
 }
 
 extension HomeCoordinator {
-    func makeProjectApplyCoordinator(project: F4SUUID, source: ApplicationSource) -> ProjectApplyCoordinator {
+    func makeProjectApplyCoordinator(project: F4SUUID, source: AppSource) -> ProjectApplyCoordinator {
         ProjectApplyCoordinator(
             parent: self,
             navigationRouter: navigationRouter,

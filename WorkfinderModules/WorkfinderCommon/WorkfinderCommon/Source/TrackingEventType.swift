@@ -1,30 +1,31 @@
 
 public enum TrackingEventType {
     
-    // MARK:- App lifecycle
-    case first_use                                                              // checked
-    case app_open
+    // MARK:- App lifecycle                                                     // checked
+    case first_use                                                              // ok
+    case app_open                                                               // ok
     
-    // MARK:- Onboarding
-    case onboarding_start                                                       // checked
-    case onboarding_cancel
-    case onboarding_tap_sign_in
-    case onboarding_tap_just_get_started
-    case onboarding_convert
+    // MARK:- Onboarding                                                        // checked
+    case onboarding_start                                                       // ok
+    case onboarding_cancel                                                      // ok
+    case onboarding_tap_sign_in                                                 // ok
+    case onboarding_tap_just_get_started                                        // ok
+    case onboarding_convert                                                     // ok
     
-    // MARK:- Main navigation
-    case tab_tap(String)
+    // MARK:- Main navigation                                                   // checked
+    case tab_tap(String)                                                        // ok
 
-    // MARK:- Register and sign in
-    case register_user_start
-    case register_user_cancel
-    case register_user_convert
+    // MARK:- Register and sign in                                              // checked
+    case register_user_start                                                    // ok
+    case register_user_cancel                                                   // ok
+    case register_user_convert                                                  // ok
     
-    // MARK:- Search
-    case search_home_perform_typeahead(String)
-    case search_home_perform_full(String)
-    case search_home_perform_popular(String)
-    case search_home_apply_filters(String)
+    // MARK:- Search                                                            // checking
+    case search_home_start_typeahead                                            // ok
+    case search_home_cancel_typeahead                                           // ok
+    case search_home_perform_full(String)                                       // ok
+    case search_home_perform_popular(String)                                    // ok
+    case search_home_apply_filters(String)                                      // ok
 
     // MARK: Allow notifications
     case allow_notifications_start
@@ -47,14 +48,14 @@ public enum TrackingEventType {
     case recommendation_pushnotification_convert
 
     /// MARK: Passive apply
-    case passive_apply_start(ApplicationSource)
-    case passive_apply_cancel(ApplicationSource)
-    case passive_apply_convert(ApplicationSource)
+    case passive_apply_start(AppSource)
+    case passive_apply_cancel(AppSource)
+    case passive_apply_convert(AppSource)
 
     // MARK: Project apply
-    case project_apply_start(ApplicationSource)
-    case project_apply_cancel(ApplicationSource)
-    case project_apply_convert(ApplicationSource)
+    case project_apply_start(AppSource)
+    case project_apply_cancel(AppSource)
+    case project_apply_convert(AppSource)
     
     // MARK:- Cover letter events
     case letterView
@@ -70,9 +71,9 @@ public enum TrackingEventType {
     case offer_withdraw
     
     // MARK:- Object viewing
-    case company_view
-    case project_view(ApplicationSource)
-    case association_view(ApplicationSource)
+    case company_details_page_view
+    case project_page_view(AppSource)
+    case application_page_view(AppSource)
 
     public var name: String {
    
@@ -98,7 +99,8 @@ public enum TrackingEventType {
         case .register_user_convert: return  "ios_register_user_convert"
         
         // MARK:- Search
-        case .search_home_perform_typeahead: return "ios_home_perform_typeahead_search"
+        case .search_home_start_typeahead: return "ios_home_start_typeahead_search"
+        case .search_home_cancel_typeahead: return "ios_home_cancel_typeahead_search"
         case .search_home_perform_full: return "ios_home_perform_full_search"
         case .search_home_perform_popular: return "ios_home_perform_popular_search"
         case .search_home_apply_filters: return "ios_home_apply_filters"
@@ -147,9 +149,9 @@ public enum TrackingEventType {
         case .offer_withdraw: return  "ios_offer_withdraw"
             
         // MARK:- Object viewing
-        case .company_view: return "ios_companyView"
-        case .project_view: return "ios_projectView"
-        case .association_view: return "ios_associationView"
+        case .company_details_page_view: return "ios_company_details_page_view"
+        case .project_page_view: return "ios_project_page_view"
+        case .application_page_view: return "ios_association_page_view"
         }
     }
 }

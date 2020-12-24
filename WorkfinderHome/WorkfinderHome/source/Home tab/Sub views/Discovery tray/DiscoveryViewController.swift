@@ -26,6 +26,7 @@ class DiscoveryTrayController: NSObject {
         )
         let controller = SearchController(
             coordinator: coordinator,
+            log: coordinator?.injected.log,
             typeAheadService: typeAheadService,
             filtersModel: filtersModel,
             searchResultsController: searchResultsController

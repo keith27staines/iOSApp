@@ -1,5 +1,5 @@
 
-public enum ApplicationSource: String {
+public enum AppSource: String {
     case deeplink
     case pushNotification
     case homeTabTypeAheadProjects

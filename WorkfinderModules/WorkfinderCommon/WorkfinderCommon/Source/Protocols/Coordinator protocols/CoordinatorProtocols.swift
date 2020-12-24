@@ -12,8 +12,8 @@ public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
     func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void)
-    func showRecommendation(uuid: F4SUUID?, source: ApplicationSource)
-    func showProject(uuid: F4SUUID?, source: ApplicationSource)
+    func showRecommendation(uuid: F4SUUID?, source: AppSource)
+    func showProject(uuid: F4SUUID?, source: AppSource)
     func showApplications(uuid: F4SUUID?)
     func showSearch()
     func updateBadges()
@@ -50,8 +50,8 @@ public enum TabIndex : Int, CaseIterable {
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
     func showApplicationsTab(uuid: F4SUUID?)
     func showHomeTab()
-    func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: ApplicationSource)
-    func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: ApplicationSource)
+    func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: AppSource)
+    func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: AppSource)
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)

@@ -49,7 +49,7 @@ class CompanyDetailsViewController: UIViewController {
         presenter.onViewDidLoad(self)
         view.addSubview(companyMainPageView)
         companyMainPageView.fillSuperview()
-        log?.track(.company_view)
+        log?.track(.company_details_page_view)
     }
     
     override func viewWillAppear(_ animated: Bool) {

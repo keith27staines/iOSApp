@@ -8,7 +8,7 @@ class Datasource: NSObject, UITableViewDataSource {
     weak var table: UITableView?
     var data = [Any]()
     let tag: Int
-    let applicationSource: ApplicationSource
+    let applicationSource: AppSource
     
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
@@ -39,7 +39,7 @@ class Datasource: NSObject, UITableViewDataSource {
         tag: Int,
         table: UITableView,
         searchResultsController: SearchResultsController,
-        applicationSource: ApplicationSource) {
+        applicationSource: AppSource) {
         self.tag = tag
         self.table = table
         self.searchResultsController = searchResultsController

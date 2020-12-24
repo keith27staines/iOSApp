@@ -15,7 +15,7 @@
 		53C76059251B6F9A0072281E /* DeeplinkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C76058251B6F9A0072281E /* DeeplinkInfo.swift */; };
 		53C7605D251B704B0072281E /* DeeplinkInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */; };
 		53C9CADA256B93EB00F567B2 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9CAD9256B93EB00F567B2 /* NotificationNames.swift */; };
-		53DFFDF22518BAF2006A975D /* ApplicationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFFDF12518BAF2006A975D /* ApplicationSource.swift */; };
+		53DFFDF22518BAF2006A975D /* AppSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DFFDF12518BAF2006A975D /* AppSource.swift */; };
 		FC04B867233277080034A60E /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B866233277080034A60E /* CoordinatorProtocols.swift */; };
 		FC0660572326635000496FE2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0660562326635000496FE2 /* Protocols.swift */; };
 		FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC083F7A230FF01000641F17 /* F4SDocument.swift */; };
@@ -133,7 +133,7 @@
 		53C76058251B6F9A0072281E /* DeeplinkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfo.swift; sourceTree = "<group>"; };
 		53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfoTests.swift; sourceTree = "<group>"; };
 		53C9CAD9256B93EB00F567B2 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
-		53DFFDF12518BAF2006A975D /* ApplicationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSource.swift; sourceTree = "<group>"; };
+		53DFFDF12518BAF2006A975D /* AppSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSource.swift; sourceTree = "<group>"; };
 		FC04B866233277080034A60E /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
 		FC0660562326635000496FE2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FC083F7A230FF01000641F17 /* F4SDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDocument.swift; sourceTree = "<group>"; };
@@ -408,7 +408,7 @@
 				FCA91E8622340478007ED308 /* Source */,
 				FCA91E852234044C007ED308 /* Supporting files */,
 				FC69EBA82481371C00901A2B /* GlobalNotifications.swift */,
-				53DFFDF12518BAF2006A975D /* ApplicationSource.swift */,
+				53DFFDF12518BAF2006A975D /* AppSource.swift */,
 				53C76058251B6F9A0072281E /* DeeplinkInfo.swift */,
 				53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */,
 				53C9CAD9256B93EB00F567B2 /* NotificationNames.swift */,
@@ -736,7 +736,7 @@
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
-				53DFFDF22518BAF2006A975D /* ApplicationSource.swift in Sources */,
+				53DFFDF22518BAF2006A975D /* AppSource.swift in Sources */,
 				53770B6125933BFC0085928E /* TrackEvent.swift in Sources */,
 				FC9EE07F2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift in Sources */,
 				FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */,

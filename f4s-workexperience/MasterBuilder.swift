@@ -12,6 +12,42 @@ import WorkfinderVersionCheck
 import UIKit
 
 class MasterBuilder: TabbarCoordinatorFactoryProtocol {
+    
+    let workfinderEndpoint: WorkfinderEndpoint
+    var log: F4SLog
+    
+    lazy var localStore: LocalStorageProtocol = {
+        return LocalStore()
+    }()
+    
+    lazy var userRepo: UserRepositoryProtocol = {
+        return UserRepository(localStore: self.localStore)
+    }()
+    
+    lazy var hostsProvider: HostsProviderProtocol = {
+        return HostsProvider(networkConfig: self.networkConfiguration)
+    }()
+    
+    lazy var associationsProvider: AssociationsServiceProtocol = {
+        return AssociationsService(networkConfig: self.networkConfiguration)
+    }()
+    
+    lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
+         return OnboardingCoordinatorFactory(localStore: self.localStore)
+     }()
+    
+    let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
+    let apnsEnvironment: String = Config.apnsEnv
+    let environment: EnvironmentType = Config.environment
+    var baseUrlString: String { return Config.workfinderApiBase }
+    
+    init(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
+        self.launchOptions = launchOptions
+        self.log = F4SLog()
+        self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: Config.workfinderApiBase)
+        onLaunched()
+    }
+    
     func makeTabBarCoordinator(parent: AppCoordinatorProtocol,
                                router: NavigationRoutingProtocol,
                                inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol {
@@ -23,18 +59,12 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         )
     }
     
-    let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
-    let apnsEnvironment: String = Config.apnsEnv
-    let environment: EnvironmentType = Config.environment
-    var baseUrlString: String { return Config.workfinderApiBase }
-    
-    init(launchOptions: [UIApplication.LaunchOptionsKey : Any]?) {
-        self.launchOptions = launchOptions
-        self.log = F4SLog()
-        self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: Config.workfinderApiBase)
+    func onLaunched() {
+        let localStore = LocalStore()
+        let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
+        if isFirstLaunch { log.track(.first_use) }
+        log.track(.app_open)
     }
-    
-    let workfinderEndpoint: WorkfinderEndpoint
     
     lazy var appVersion: String = {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
@@ -94,6 +124,14 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return window
     }()
     
+    lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
+        let applyService = PostPlacementService(networkConfig: self.networkConfiguration)
+        return CompanyCoordinatorFactory(applyService: applyService,
+                                         associationsProvider: self.associationsProvider,
+                                         environment: environment
+        )
+    }()
+    
     func buildAppCoordinator() -> AppCoordinatorProtocol {
         return  AppCoordinator(
             navigationRouter: rootNavigationRouter,
@@ -106,35 +144,5 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             tabBarCoordinatorFactory: self,
             window: self.window)
     }
-    
-    lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
-        let applyService = PostPlacementService(networkConfig: self.networkConfiguration)
-        return CompanyCoordinatorFactory(applyService: applyService,
-                                         associationsProvider: self.associationsProvider,
-                                         environment: environment
-        )
-    }()
-    
-    var log: F4SLog
-    
-    lazy var localStore: LocalStorageProtocol = {
-        return LocalStore()
-    }()
-    
-    lazy var userRepo: UserRepositoryProtocol = {
-        return UserRepository(localStore: self.localStore)
-    }()
-    
-    lazy var hostsProvider: HostsProviderProtocol = {
-        return HostsProvider(networkConfig: self.networkConfiguration)
-    }()
-    
-    lazy var associationsProvider: AssociationsServiceProtocol = {
-        return AssociationsService(networkConfig: self.networkConfiguration)
-    }()
-    
-    lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
-         return OnboardingCoordinatorFactory(localStore: self.localStore)
-     }()
 
 }

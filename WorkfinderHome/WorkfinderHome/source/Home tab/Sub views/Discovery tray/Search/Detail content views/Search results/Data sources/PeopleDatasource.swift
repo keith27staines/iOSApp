@@ -28,7 +28,7 @@ class PeopleDatasource: TypeAheadItemsDatasource {
         table: UITableView,
         searchResultsController: SearchResultsController,
         associationsService: AssociationsServiceProtocol,
-        applicationSource: ApplicationSource
+        applicationSource: AppSource
     ) {
         self.associationsService = associationsService
         super.init(tag: tag, table: table, searchResultsController: searchResultsController, applicationSource: applicationSource)

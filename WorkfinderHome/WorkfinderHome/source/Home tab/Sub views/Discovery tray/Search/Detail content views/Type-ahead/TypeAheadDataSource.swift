@@ -93,7 +93,7 @@ extension String {
 }
 
 extension Array where Element == TypeAheadItem {
-    func settingApplicationSource(_ source: ApplicationSource) -> [TypeAheadItem] {
+    func settingApplicationSource(_ source: AppSource) -> [TypeAheadItem] {
         map { (item) -> TypeAheadItem in
             item.settingApplicationSource(source)
         }
@@ -101,7 +101,7 @@ extension Array where Element == TypeAheadItem {
 }
 
 extension Array where Element == RoleData {
-    func settingApplicationSource(_ source: ApplicationSource) -> [RoleData] {
+    func settingApplicationSource(_ source: AppSource) -> [RoleData] {
         map { (roleData) -> RoleData in
             roleData.settingApplicationSource(source)
         }

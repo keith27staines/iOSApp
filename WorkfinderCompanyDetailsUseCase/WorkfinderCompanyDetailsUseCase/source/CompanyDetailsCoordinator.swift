@@ -14,7 +14,7 @@ public protocol CompanyCoordinatorFactoryProtocol {
         companyAndPin: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
-        applicationSource: ApplicationSource,
+        applicationSource: AppSource,
         applicationFinished: @escaping ((PreferredDestination) -> Void)
     ) -> CoreInjectionNavigationCoordinatorProtocol
 }
@@ -37,7 +37,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     var recommendedAssociationUuid: F4SUUID?
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
-    let applicationSource: ApplicationSource
+    let applicationSource: AppSource
     var applicationFinishedWithPreferredDestination: ((PreferredDestination) -> Void)
     
     public init(
@@ -50,7 +50,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         applyService: PostPlacementServiceProtocol,
         associationsProvider: AssociationsServiceProtocol,
         applicationFinished: @escaping ((PreferredDestination) -> Void),
-        applicationSource: ApplicationSource
+        applicationSource: AppSource
     ) {
         self.environment = environment
         self.workplace = workplace
