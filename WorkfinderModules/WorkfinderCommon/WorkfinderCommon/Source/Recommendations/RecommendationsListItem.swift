@@ -2,7 +2,7 @@
 public struct RecommendationsListItem: Codable, Hashable {
     public var uuid: F4SUUID?
     public var user: F4SUUID?
-    public var association: RoleNestedAssociation? //ExpandedAssociation?
+    public var association: RoleNestedAssociation?
     public var createdAt: String?
     public var sentAt: String?
     public var confidence: Double?
@@ -30,7 +30,7 @@ public struct RecommendationsListItem: Codable, Hashable {
         public var duration: String?
         public var type: F4SUUID?
         public var additionalComments: String?
-        public var association: ExpandedAssociation?
+        public var association: RoleNestedAssociation?
         public var employmentType: String?
         
         enum CodingKeys: String, CodingKey {

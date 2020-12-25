@@ -3,8 +3,6 @@ import Foundation
 import WorkfinderNetworking
 import WorkfinderCommon
 
-let verbose: Bool = false
-
 open class WorkfinderService {
     public let networkConfig: NetworkConfig
     
@@ -32,19 +30,24 @@ open class WorkfinderService {
     
     public func performTask<A:Decodable>(
         with request: URLRequest,
+        verbose: Bool = false,
         completion: @escaping (Result<A,Error>) -> Void,
-        attempting: String) {
+        attempting: String
+    ) {
         task?.cancel()
         task = buildTask(
             request: request,
             completion: completion,
-            attempting: attempting)
+            attempting: attempting,
+            verbose: verbose
+        )
         task?.resume()
     }
     
     public func buildRequest<A: Encodable>(
         relativePath: String?,
-        verb: RequestVerb, body: A) throws -> URLRequest {
+        verb: RequestVerb, body: A
+    ) throws -> URLRequest {
         var request = try buildRequest(
             relativePath: relativePath,
             queryItems: nil,
@@ -70,7 +73,9 @@ open class WorkfinderService {
     private func buildTask<ResponseJson:Decodable>(
         request: URLRequest,
         completion: @escaping ((Result<ResponseJson,Error>) -> Void),
-        attempting: String) -> URLSessionDataTask {
+        attempting: String,
+        verbose: Bool
+    ) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
             guard let self = self else { return }
             self.taskHandler.convertToDataResult(
@@ -78,9 +83,12 @@ open class WorkfinderService {
                 request: request,
                 responseData: data,
                 httpResponse: response as? HTTPURLResponse,
-                error: error) { [weak self] (result) in
-                    self?.deserialise(dataResult: result, completion: completion)
-                
+                error: error, verbose: verbose
+            ) { [weak self] (result) in
+                self?.deserialise(
+                    dataResult: result,
+                    verbose: verbose,
+                    completion: completion)
             }
         })
         return task
@@ -88,12 +96,13 @@ open class WorkfinderService {
     
     private func deserialise<ResponseJson:Decodable>(
         dataResult: Result<Data,Error>,
+        verbose: Bool,
         completion: ((Result<ResponseJson,Error>) -> Void)) {
         switch dataResult {
         case .success(let data):
             do {
                 #if DEBUG
-                captureJson(data: data, type: "\(ResponseJson.self)")
+                captureJson(data: data, type: "\(ResponseJson.self)", verbose: verbose)
                 #endif
                 let json = try decoder.decode(ResponseJson.self, from: data)
                 completion(Result<ResponseJson,Error>.success(json))
@@ -113,11 +122,8 @@ open class WorkfinderService {
         }
     }
     
-    private func captureJson(data: Data?, type: String) {
-        guard verbose else {
-            print("suppressing json capture because `verbose`==false")
-            return
-        }
+    private func captureJson(data: Data?, type: String, verbose: Bool) {
+        guard verbose else { return }
         print()
         print("--------------- Start Json capture --------------------")
         print("Deserialising \(type) from...")

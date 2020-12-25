@@ -15,7 +15,9 @@ public class DataTaskCompletionHandler {
                                     responseData: Data?,
                                     httpResponse: HTTPURLResponse?,
                                     error: Error?,
-                                    completion: @escaping((Result<Data,Error>) -> Void)) {
+                                    verbose: Bool,
+                                    completion: @escaping((Result<Data,Error>) -> Void)
+    ) {
         if let error = error as NSError?, error.code == -999 {
             return // request was cancelled
         }

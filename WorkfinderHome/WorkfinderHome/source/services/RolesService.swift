@@ -28,6 +28,10 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
         FetchRolesWorkerService(networkConfig: networkConfig)
     }()
     
+    fileprivate lazy var recommendationsService: RecommendationsServiceProtocol = {
+        RecommendationsService(networkConfig: networkConfig)
+    }()
+    
     public func fetchRolesWithQueryItems(
         _ queryItems: [URLQueryItem],
         completion: @escaping (Result<[RoleData], Error>) -> Void
@@ -66,10 +70,6 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
             }
         }
     }
-    
-    lazy var recommendationsService: RecommendationsServiceProtocol = {
-        RecommendationsService(networkConfig: networkConfig)
-    }()
 }
 
 fileprivate class FetchRolesWorkerService: WorkfinderService {

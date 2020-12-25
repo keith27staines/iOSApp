@@ -265,6 +265,7 @@
 		53786B102586004100B671EB /* API Json deserialization tests */ = {
 			isa = PBXGroup;
 			children = (
+				FC6A0B2A24F7C6E500053DF7 /* WorkfinderRecommendationsListTests.swift */,
 				FCC4E66923EAD04D00ED6491 /* DecodeCompanyJsonTests.swift */,
 				53786B132586015100B671EB /* DecodeRoleJson.swift */,
 				FCC4E67123EAFD5400ED6491 /* DecodeHostTests.swift */,
@@ -419,7 +420,6 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC6A0B2A24F7C6E500053DF7 /* WorkfinderRecommendationsListTests.swift */,
 				53786B102586004100B671EB /* API Json deserialization tests */,
 				FCC4E66B23EAE58200ED6491 /* F4SDateHelperTests.swift */,
 				FCC4E66123EAB01100ED6491 /* CoordinatingTests.swift */,
