@@ -87,5 +87,11 @@ class DateExtensionTests: XCTestCase {
         print(date.rfc3339UtcDateTime)
         XCTAssertTrue(date.rfc3339UtcDateTime == "2010-07-23T03:09:27Z")
     }
-
+    
+    func test_date_static_workfinderDateString() {
+        let dateString = "2020-12-31"
+        let date = Date.dateFromRfc3339(string: dateString)!
+        XCTAssertEqual(date.workfinderDateString, date.rfc3339UtcDate)
+        XCTAssertEqual(date.workfinderDateString, dateString)
+    }
 }

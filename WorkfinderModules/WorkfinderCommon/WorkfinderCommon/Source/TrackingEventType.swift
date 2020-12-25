@@ -49,12 +49,12 @@ public enum TrackingEventType {
     case recommendation_pushnotification_convert
 
     // MARK:-  Passive apply                                                    // checking
-    case passive_apply_start(AppSource)
-    case passive_apply_cancel(AppSource)
-    case passive_apply_convert(AppSource)
-    case date_of_birth_capture_start
-    case date_of_birth_capture_cancel
-    case date_of_birth_capture_convert(Date)
+    case passive_apply_start(AppSource)                                         // ok
+    case passive_apply_cancel(AppSource)                                        // ok
+    case passive_apply_convert(AppSource)                                       // ok
+    case date_of_birth_capture_start                                            // ok
+    case date_of_birth_capture_cancel                                           // ok
+    case date_of_birth_capture_convert(Date)                                    // ok
 
     // MARK:- Project apply
     case project_apply_start(AppSource)
@@ -62,9 +62,10 @@ public enum TrackingEventType {
     case project_apply_convert(AppSource)
     
     // MARK:- Cover letter events                                               // checking
-    case letter_start
-    case letter_viewed(isComplete: Bool)
-    case letter_editor
+    case letter_start                                                           // ok
+    case letter_viewed(isComplete: Bool)                                        // ok
+    case letter_editor_opened                                                   // ok
+    case letter_editor_closed                                                   // ok
     case question_opened(PicklistType)
     case question_closed(PicklistType, isAnswered: Bool)
     case letter_convert
@@ -149,7 +150,8 @@ public enum TrackingEventType {
         // MARK:- Cover letter events
         case .letter_start: return "ios_letter_start"
         case .letter_viewed: return "ios_letter_viewed"
-        case .letter_editor: return "ios_letter_editor"
+        case .letter_editor_opened: return "ios_letter_editor_opened"
+        case .letter_editor_closed: return "ios_letter_editor_closed"
         case .question_opened: return "ios_question_opened"
         case .question_closed: return "ios_question_closed"
         case .letter_cancel: return "ios_letter_cancel"

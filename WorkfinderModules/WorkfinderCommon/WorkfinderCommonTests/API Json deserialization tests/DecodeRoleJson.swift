@@ -10,7 +10,7 @@ class DecodeRoleJsonTests: XCTestCase {
     func test_decodeRoleJson() {
         let decoder = JSONDecoder()
         do {
-            let sut = try decoder.decode(RoleJson2.self, from: roleJsonData)
+            let sut = try decoder.decode(RoleJson.self, from: roleJsonData)
             XCTAssertEqual(sut.uuid,"32a82c14-eeb6-4aea-b93e-15a191e19c0c")
         } catch {
             print(error)

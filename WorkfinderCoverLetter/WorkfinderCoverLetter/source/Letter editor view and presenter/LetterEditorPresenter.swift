@@ -84,7 +84,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         case 0:
             return ("Please provide all the information required to complete your cover letter", "(fields in this section are required)")
         case 1:
-            return ("The below fields are optional but could help in finding you relevant role matches", "")
+            return ("Enable us to make better recommendations", "(fields in this section are optional)")
         default:
             return ("","")
         }
@@ -99,7 +99,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
         if let picklist = showingPicklist {
             log.track(.question_closed(picklist.type, isAnswered: picklist.isPopulated))
         }
-        log.track(.letter_editor)
+        log.track(.letter_editor_opened)
         appearanceCount += 1
         consistencyCheck()
         coordinator?.onLetterEditorDidUpdate()
@@ -112,18 +112,19 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
                 completion(error)
                 return
             }
+            var optionalError: Error? = nil
             for picklist in self.logic.allPicklists() {
                 guard !picklist.isLoaded else { continue }
                 picklist.fetchItems { (picklist, result) in
                     switch result {
-                    case .success(_):
-                        self.consistencyCheck()
-                        completion(nil)
+                    case .success(_): break
                     case .failure(let error):
-                        completion(error)
+                        optionalError = error
                     }
                 }
             }
+            self.consistencyCheck()
+            completion(optionalError)
         }
     }
     
@@ -136,6 +137,7 @@ class LetterEditorPresenter: LetterEditorPresenterProtocol {
     }
     
     func onDismiss() {
+        log.track(.letter_editor_closed)
         coordinator?.onLetterEditorDismiss()
     }
     

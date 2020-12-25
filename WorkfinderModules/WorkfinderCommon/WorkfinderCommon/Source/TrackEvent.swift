@@ -64,7 +64,8 @@ public struct TrackingEvent {
         case .recommendation_pushnotification_cancel: break
         case .recommendation_pushnotification_convert: break
         case .letter_start: break
-        case .letter_editor: break
+        case .letter_editor_opened: break
+        case .letter_editor_closed: break
         case .letter_convert: break
         case .offer_start: break
         case .offer_cancel: break

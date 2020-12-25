@@ -2,7 +2,7 @@
 public struct RecommendationsListItem: Codable, Hashable {
     public var uuid: F4SUUID?
     public var user: F4SUUID?
-    public var association: ExpandedAssociation?
+    public var association: RoleNestedAssociation? //ExpandedAssociation?
     public var createdAt: String?
     public var sentAt: String?
     public var confidence: Double?

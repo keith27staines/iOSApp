@@ -60,11 +60,8 @@ public extension Date {
 
 extension Date {
     
-    public var workfinderDateString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        return dateFormatter.string(from: self)
-    }
+    /// Returns a string representing the current instance in the format "YYYY-MM-dd"
+    public var workfinderDateString: String { return self.rfc3339UtcDate }
     
     public static func workfinderDateStringToDate(_ dateString: String) -> Date? {
         return dateFromRfc3339(string: dateString)
