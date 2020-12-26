@@ -51,15 +51,17 @@ public enum TrackingEventType {
     // MARK:-  Passive apply                                                    // checking
     case passive_apply_start(AppSource)                                         // ok
     case passive_apply_cancel(AppSource)                                        // ok
+    case passive_apply_submit(AppSource)                                        // ok
     case passive_apply_convert(AppSource)                                       // ok
     case date_of_birth_capture_start                                            // ok
     case date_of_birth_capture_cancel                                           // ok
     case date_of_birth_capture_convert(Date)                                    // ok
 
     // MARK:- Project apply
-    case project_apply_start(AppSource)
-    case project_apply_cancel(AppSource)
-    case project_apply_convert(AppSource)
+    case project_apply_start(AppSource)                                         // ok
+    case project_apply_cancel(AppSource)                                        // ok
+    case project_apply_submit(AppSource)                                        // ok
+    case project_apply_convert(AppSource)                                       // ok
     
     // MARK:- Cover letter events                                               // checking
     case letter_start                                                           // ok
@@ -72,20 +74,18 @@ public enum TrackingEventType {
     case letter_cancel(isComplete: Bool)                                        // ok
     
     // MARK:- Offer
-    case offer_start
-    case offer_cancel
-    case offer_convert
-    case offer_withdraw
+    case offer_accept
+    case offer_decline(reason: String)
     
     // MARK:- Object viewing                                                    // checking
-    case company_hosts_page_view(AppSource)                                   // ok
-    case company_hosts_page_dismiss(AppSource)                                // ok
-    case project_page_view(AppSource)
-    case project_page_dismiss(AppSource)
-    case application_page_view(AppSource)
-    case application_page_dismiss(AppSource)
+    case company_hosts_page_view(AppSource)                                     // ok
+    case company_hosts_page_dismiss(AppSource)                                  // ok
+    case project_page_view(AppSource)                                           // ok
+    case project_page_dismiss(AppSource)                                        // ok
+    case application_page_view(AppSource)                                       // ok
+    case application_page_dismiss(AppSource)                                    // ok
     case offer_page_view(AppSource)                                             //
-    case offer_page_dismiss(AppSource)
+    case offer_page_dismiss(AppSource)                                          //
  
     public var name: String {
    
@@ -141,6 +141,7 @@ public enum TrackingEventType {
         // MARK: Passive apply
         case .passive_apply_start: return  "ios_passive_apply_start"
         case .passive_apply_cancel: return  "ios_passive_apply_cancel"
+        case .passive_apply_submit: return "ios_passive_apply_submitted"
         case .passive_apply_convert: return  "ios_passive_apply_convert"
         case .date_of_birth_capture_start: return "ios_dob_capture_start"
         case .date_of_birth_capture_cancel: return "ios_dob_capture_cancel"
@@ -149,6 +150,7 @@ public enum TrackingEventType {
         // MARK: Project apply
         case .project_apply_start: return  "ios_project_apply_start"
         case .project_apply_cancel: return  "ios_project_apply_cancel"
+        case .project_apply_submit: return "ios_project_apply-submitted"
         case .project_apply_convert: return  "ios_project_apply_convert"
             
         // MARK:- Cover letter events
@@ -162,18 +164,16 @@ public enum TrackingEventType {
         case .letter_convert: return "ios_letter_convert"
             
         // MARK:- Offer
-        case .offer_start: return  "ios_offer_start"
-        case .offer_cancel: return  "ios_offer_cancel"
-        case .offer_convert: return  "ios_offer_convert"
-        case .offer_withdraw: return  "ios_offer_withdraw"
+        case .offer_accept: return  "ios_offer_accept"
+        case .offer_decline: return  "ios_offer_decline"
             
-        // MARK:- Object viewing                                                // checking
+        // MARK:- Object viewing
         case .company_hosts_page_view: return "ios_company_hosts_page_view"
         case .company_hosts_page_dismiss: return "ios_company_hosts_page_dismiss"
         case .project_page_view: return "ios_project_page_view"
         case .project_page_dismiss: return "ios_project_page_dismiss"
-        case .application_page_view: return "ios_application_page_view"         // ok
-        case .application_page_dismiss: return "ios_application_page_dismiss"   // ok
+        case .application_page_view: return "ios_application_page_view"
+        case .application_page_dismiss: return "ios_application_page_dismiss"
         case .offer_page_view: return "ios_offer_page_view"
         case .offer_page_dismiss: return "ios_offer_page_dismiss"
 

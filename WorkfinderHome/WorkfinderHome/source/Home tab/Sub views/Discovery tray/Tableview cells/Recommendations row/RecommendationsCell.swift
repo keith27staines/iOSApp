@@ -16,7 +16,8 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
                 self.clear()
                 let maxRoles = min(9, roles.count)
                 roles[0..<maxRoles].forEach { (data) in
-                    self.addCardWith(data: data, tapAction: presenter.roleTapped)
+                    let role = data.settingAppSource(.homeTabRecommendationsList)
+                    self.addCardWith(data: role, tapAction: presenter.roleTapped)
                 }
                 let lastCardType = presenter.lastCardType
                 guard lastCardType != .none else { break }

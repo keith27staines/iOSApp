@@ -159,9 +159,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }
     
     func submitApplication() {
-        let navigationController = navigationRouter.navigationController
         guard let messageHandler = coverletterCoordinator?.messageHandler
             else { return }
+        log.track(.passive_apply_submit(appSource))
+        let navigationController = navigationRouter.navigationController
         let draft = draftPlacementLogic.draft
         applicationSubmitter = ApplicationSubmitter(
             applyService: applyService,
@@ -285,9 +286,6 @@ extension ApplyCoordinator {
     func finishApply(destination: PreferredDestination) {
         log.track(.passive_apply_convert(appSource))
         cleanup()
-//        if let rootViewController = rootViewController {
-//            navigationRouter.popToViewController(rootViewController, animated: true)
-//        }
         parentCoordinator?.childCoordinatorDidFinish(self)
         self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: destination)
         self.removeApplicationSubmittedSuccessfully()
@@ -312,7 +310,7 @@ extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
     func onDidSelectDataOfBirth(date: Date) {
         var candidate = userRepository.loadCandidate()
         candidate.dateOfBirth = date.workfinderDateString
-        userRepository.save(candidate: candidate)
+        userRepository.saveCandidate(candidate)
         if candidate.uuid != nil {
             // persist the candidate's dob to the server
             updateCandidateService.update(candidate: candidate) { (result) in

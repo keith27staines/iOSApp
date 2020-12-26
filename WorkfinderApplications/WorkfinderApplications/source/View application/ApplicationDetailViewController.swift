@@ -74,9 +74,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if isMovingFromParent {
-            log.track(.application_page_dismiss(appSource))
-        }
+        if isMovingFromParent { log.track(.application_page_dismiss(appSource)) }
     }
     
     func loadData() {

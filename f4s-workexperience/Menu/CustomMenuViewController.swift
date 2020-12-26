@@ -105,7 +105,7 @@ class CustomMenuViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     var isLoggedIn: Bool {
-        guard let uuid = UserRepository().loadUser().candidateUuid, !uuid.isEmpty else { return false}
+        guard UserRepository().isCandidateLoggedIn else { return false}
         return true
     }
     

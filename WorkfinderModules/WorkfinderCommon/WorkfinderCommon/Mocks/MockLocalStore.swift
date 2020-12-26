@@ -34,11 +34,11 @@ public class MockUserRepository: UserRepositoryProtocol {
     
     public var isCandidateLoggedIn: Bool = false
     
-    public func save(user: User) {
+    public func saveUser(_ user: User) {
         self.user = user
     }
     
-    public func save(candidate: Candidate) {
+    public func saveCandidate(_ candidate: Candidate) {
         self.candidate = candidate
     }
     

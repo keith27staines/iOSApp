@@ -21,9 +21,8 @@ class PicklistViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if isMovingFromParent {
-            coordinator?.picklistIsClosing(picklist)
-        }
+        guard isMovingFromParent else { return }
+       coordinator?.picklistIsClosing(picklist)
     }
     
     func configureNavigationBar() {

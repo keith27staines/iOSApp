@@ -115,7 +115,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     
     func onUserFetched(user: User) {
         isUserUuidFetched = true
-        userRepository.save(user: user)
+        userRepository.saveUser(user)
         if let candidateUuid = user.candidateUuid {
             fetchCandidateFromServer(candidateUuid: candidateUuid)
         } else {
@@ -144,7 +144,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
     func onCandidateFetched(candidate: Candidate) {
         isCandidateCreated = true
         isCandidateFetched = true
-        userRepository.save(candidate: candidate)
+        userRepository.saveCandidate(candidate)
         NotificationCenter.default.post(name: .wfDidLoginCandidate, object: nil)
         completion?(Result<Candidate,Error>.success(candidate))
     }
@@ -157,7 +157,7 @@ class RegisterUserLogic: RegisterUserLogicProtocol {
             fetchCandidateFromServer(candidateUuid: candidateUuid)
             return
         }
-        userRepository.save(candidate: candidate)
+        userRepository.saveCandidate(candidate)
         let creatableCandidate = CreatableCandidate(candidate: candidate, userUuid: userUuid)
         createCandidateService.createCandidate(candidate: creatableCandidate) {
             [weak self] (result) in

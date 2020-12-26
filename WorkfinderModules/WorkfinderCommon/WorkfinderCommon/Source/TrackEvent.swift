@@ -26,9 +26,11 @@ public struct TrackingEvent {
         case .search_home_apply_filters(let filters): properties["search_filters"] = filters
         case .passive_apply_start(let source): properties["source"] = source.rawValue
         case .passive_apply_cancel(let source): properties["source"] = source.rawValue
+        case .passive_apply_submit(let source): properties["source"] = source.rawValue
         case .passive_apply_convert(let source): properties["source"] = source.rawValue
         case .project_apply_start(let source): properties["source"] = source.rawValue
         case .project_apply_cancel(let source): properties["source"] = source.rawValue
+        case .project_apply_submit(let source): properties["source"] = source.rawValue
         case .project_apply_convert(let source): properties["source"] = source.rawValue
         case .question_opened(let question): properties["question"] = question.title
         case .question_closed(let question, let isAnswered):
@@ -45,6 +47,7 @@ public struct TrackingEvent {
         case .project_page_view(let source): properties["source"] = source.rawValue
         case .project_page_dismiss(let source): properties["source"] = source.rawValue
         case .offer_page_view(let source): properties["source"] = source.rawValue
+        case .offer_decline(let reason): properties["reason"] = reason
         case .offer_page_dismiss(let source): properties["source"] = source.rawValue
         
         // cases where the TrackEventType does not have associated data
@@ -74,10 +77,7 @@ public struct TrackingEvent {
         case .letter_editor_opened: break
         case .letter_editor_closed: break
         case .letter_convert: break
-        case .offer_start: break
-        case .offer_cancel: break
-        case .offer_convert: break
-        case .offer_withdraw: break
+        case .offer_accept: break
         case .search_home_typeahead_start: break
         case .search_home_cancel_typeahead: break
         case .search_home_selected_typeahead_item: break

@@ -155,6 +155,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func submitApplication() {
+        self.log.track(.project_apply_submit(self.appSource))
         guard let vc = modalVC, let view = vc.view else { return }
         var picklistsDictionary = self.picklistsDictionary
         picklistsDictionary[.availabilityPeriod] = nil
@@ -174,7 +175,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
             messageHandler.hideLoadingOverlay()
             switch result {
             case .success(let placement):
-                self.log.track(.onboarding_convert)
+                self.log.track(.project_apply_convert(self.appSource))
                 self.onApplicationSubmitted(placement: placement)
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {

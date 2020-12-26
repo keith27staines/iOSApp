@@ -47,17 +47,16 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         guard let action = action else { return }
         switch action {
         case .viewApplication: showApplicationDetailViewer(for: application, appSource: appSource)
-        case .viewOffer: showOfferViewer(for: application)
+        case .viewOffer: showOfferViewer(for: application, appSource: appSource)
         case .acceptOffer: break
         case .declineOffer: break
         }
     }
     
-    func showOfferViewer(for application: Application) {
-        log.track(.offer_start)
+    func showOfferViewer(for application: Application, appSource: AppSource) {
         let offerService = OfferService(networkConfig: networkConfig)
         let presenter = OfferPresenter(coordinator: self, application: application, offerService: offerService)
-        let vc = OfferViewController(coordinator: self, presenter: presenter)
+        let vc = OfferViewController(coordinator: self, presenter: presenter, log: log, appSource: appSource)
         navigationRouter.push(viewController: vc, animated: true)
     }
     
@@ -65,19 +64,15 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     var offerDecisionMade = false
     
     func offerAccepted() {
-        log.track(.offer_convert)
         offerDecisionMade = true
     }
     
     func offerDeclined() {
-        log.track(.offer_withdraw)
         offerDecisionMade = true
     }
     
     func offerScreenCancelled() {
-        if offerAwaitingDecision && !offerDecisionMade {
-            log.track(.offer_cancel)
-        }
+        //
     }
     
     func showApplicationDetailViewer(for application: Application, appSource: AppSource) {

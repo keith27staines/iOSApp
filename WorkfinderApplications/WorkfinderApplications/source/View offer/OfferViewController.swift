@@ -8,6 +8,8 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     let presenter: OfferPresenterProtocol
     lazy var messageHandler = UserMessageHandler(presenter: self)
     var acceptDecisionMade = false
+    let log: F4SAnalyticsAndDebugging
+    let appSource: AppSource
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -44,6 +46,7 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     }
     
     @objc func handleTapAccept() {
+        log.track(.offer_accept)
         messageHandler.showLoadingOverlay(self.view)
         presenter.onTapAccept { [weak self] (optionalError) in
             guard let self = self else { return }
@@ -85,6 +88,9 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     }
     
     func declineWithReason(_ reason: WithdrawReason, otherText: String? = nil) {
+        var reasonText = reason.buttonTitle
+        if case WithdrawReason.other = reason { reasonText = otherText ?? "reason not given" }
+        log.track(.offer_decline(reason: reasonText))
         presenter.onTapDeclineWithReason(reason, otherText: otherText) { [weak self] (optionalError) in
             guard let self = self else { return }
             self.coordinator?.offerDeclined()
@@ -120,17 +126,27 @@ class OfferViewController: UIViewController, WorkfinderViewControllerProtocol {
     }()
     
     init(coordinator: ApplicationsCoordinatorProtocol,
-         presenter: OfferPresenterProtocol) {
+         presenter: OfferPresenterProtocol,
+         log: F4SAnalyticsAndDebugging,
+         appSource: AppSource
+    ) {
         self.presenter = presenter
+        self.log = log
+        self.appSource = appSource
         super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
+        log.track(.offer_page_view(appSource))
         configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
         loadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if isMovingFromParent { log.track(.offer_page_dismiss(appSource)) }
     }
     
     func loadData() {

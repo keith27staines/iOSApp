@@ -39,9 +39,11 @@ class TypeAheadView: UIView {
     }
     
     func configureTypeAhead() {
-        typeAheadDataSource.didUpdateResults = { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
+        typeAheadDataSource.didUpdateResults = {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.tableView.reloadData()
+            }
         }
     }
     
