@@ -34,11 +34,18 @@ public struct TrackingEvent {
         case .question_closed(let question, let isAnswered):
             properties["question"] = question.title
             properties["answered"] = isAnswered
-        case .application_page_view(let source): properties["source"] = source.rawValue
-        case .project_page_view(let source): properties["source"] = source.rawValue
         case .date_of_birth_capture_convert(let dob): properties["dob"] = dob
         case .letter_viewed(let isComplete): properties["is_complete"] = isComplete
         case .letter_cancel(let isComplete): properties["is_complete"] = isComplete
+            
+        case .company_hosts_page_view(let source): properties["source"] = source.rawValue
+        case .company_hosts_page_dismiss(let source): properties["source"] = source.rawValue
+        case .application_page_view(let source): properties["source"] = source.rawValue
+        case .application_page_dismiss(let source): properties["source"] = source.rawValue
+        case .project_page_view(let source): properties["source"] = source.rawValue
+        case .project_page_dismiss(let source): properties["source"] = source.rawValue
+        case .offer_page_view(let source): properties["source"] = source.rawValue
+        case .offer_page_dismiss(let source): properties["source"] = source.rawValue
         
         // cases where the TrackEventType does not have associated data
         case .first_use: break
@@ -71,8 +78,6 @@ public struct TrackingEvent {
         case .offer_cancel: break
         case .offer_convert: break
         case .offer_withdraw: break
-        case .company_details_page_view: break
-        case .company_details_page_dismiss: break
         case .search_home_typeahead_start: break
         case .search_home_cancel_typeahead: break
         case .search_home_selected_typeahead_item: break

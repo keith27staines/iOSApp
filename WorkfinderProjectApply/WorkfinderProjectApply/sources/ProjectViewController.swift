@@ -13,6 +13,8 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     weak var coordinator: ProjectApplyCoordinatorProtocol?
     let presenter: ProjectPresenterProtocol
     let companyLogoSide = CGFloat(80)
+    let log: F4SAnalyticsAndDebugging
+    let appSource: AppSource
     
     var lastError: Error? {
         didSet {
@@ -44,6 +46,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }()
     
     @objc func close() {
+        log.track(.project_page_dismiss(appSource))
         coordinator?.onModalFinished()
     }
     
@@ -63,6 +66,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }()
     
     override func viewDidLoad() {
+        log.track(.project_page_view(appSource))
         configureViews()
         lastError = nil
         presenter.onViewDidLoad(view: self)
@@ -177,9 +181,16 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
         tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
     }
     
-    init(coordinator: ProjectApplyCoordinator, presenter: ProjectPresenter) {
+    init(
+        coordinator: ProjectApplyCoordinator,
+        presenter: ProjectPresenter,
+        appSource: AppSource,
+        log: F4SAnalyticsAndDebugging
+    ) {
         self.coordinator = coordinator
         self.presenter = presenter
+        self.appSource = appSource
+        self.log = log
         super.init(nibName: nil, bundle: nil)
     }
 

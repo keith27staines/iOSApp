@@ -9,6 +9,7 @@ public enum AppSource: String {
     case homeTabRecommendationsList
     case homeTabRecentRolesList
     case homeTabTopRolesList
+    case applicationsTab
     case recommendationsTab
     case unspecified
     

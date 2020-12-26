@@ -6,7 +6,7 @@ import WorkfinderServices
 
 protocol ApplicationsCoordinatorProtocol: AnyObject {
     func applicationsDidLoad(_ applications: [Application])
-    func performAction(_ action: ApplicationAction?, for application: Application)
+    func performAction(_ action: ApplicationAction?, for application: Application, appSource: AppSource)
     func showCompanyHost(application: Application)
     func showCompany(application: Application)
 }
@@ -15,7 +15,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     var applications = [Application]()
     var networkConfig: NetworkConfig { injected.networkConfig }
-    var log: F4SAnalytics { injected.log }
+    var log: F4SAnalyticsAndDebugging { injected.log }
     
     lazy var applicationsViewController: UIViewController = {
         let service = ApplicationsService(networkConfig: networkConfig)
@@ -39,10 +39,14 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         self.applications = applications
     }
     
-    func performAction(_ action: ApplicationAction?, for application: Application) {
+    func performAction(
+        _ action: ApplicationAction?,
+        for application: Application,
+        appSource: AppSource
+    ) {
         guard let action = action else { return }
         switch action {
-        case .viewApplication: showApplicationDetailViewer(for: application)
+        case .viewApplication: showApplicationDetailViewer(for: application, appSource: appSource)
         case .viewOffer: showOfferViewer(for: application)
         case .acceptOffer: break
         case .declineOffer: break
@@ -76,7 +80,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         }
     }
     
-    func showApplicationDetailViewer(for application: Application) {
+    func showApplicationDetailViewer(for application: Application, appSource: AppSource) {
         let applicationService = ApplicationDetailService(networkConfig: networkConfig)
         let presenter = ApplicationDetailPresenter(
             coordinator: self,
@@ -84,7 +88,10 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
             application: application)
         let vc = ApplicationDetailViewController(
             coordinator: self,
-            presenter: presenter)
+            presenter: presenter,
+            appSource: appSource,
+            log: log
+        )
         navigationRouter.push(viewController: vc, animated: true)
     }
     

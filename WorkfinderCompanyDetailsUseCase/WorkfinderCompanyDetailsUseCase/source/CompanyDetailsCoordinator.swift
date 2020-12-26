@@ -74,7 +74,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
             appSource: appSource
         )
         companyViewController = CompanyDetailsViewController(
-            presenter: workplacePresenter)
+            presenter: workplacePresenter, appSource: appSource)
         companyViewController.log = self.injected.log
         rootViewController = navigationRouter.navigationController.topViewController
         navigationRouter.push(viewController: companyViewController, animated: true)

@@ -66,10 +66,10 @@ public enum TrackingEventType {
     case letter_viewed(isComplete: Bool)                                        // ok
     case letter_editor_opened                                                   // ok
     case letter_editor_closed                                                   // ok
-    case question_opened(PicklistType)
-    case question_closed(PicklistType, isAnswered: Bool)
-    case letter_convert
-    case letter_cancel(isComplete: Bool)
+    case question_opened(PicklistType)                                          // ok
+    case question_closed(PicklistType, isAnswered: Bool)                        // ok
+    case letter_convert                                                         // ok
+    case letter_cancel(isComplete: Bool)                                        // ok
     
     // MARK:- Offer
     case offer_start
@@ -78,10 +78,14 @@ public enum TrackingEventType {
     case offer_withdraw
     
     // MARK:- Object viewing                                                    // checking
-    case company_details_page_view
-    case company_details_page_dismiss
+    case company_hosts_page_view(AppSource)                                   // ok
+    case company_hosts_page_dismiss(AppSource)                                // ok
     case project_page_view(AppSource)
+    case project_page_dismiss(AppSource)
     case application_page_view(AppSource)
+    case application_page_dismiss(AppSource)
+    case offer_page_view(AppSource)                                             //
+    case offer_page_dismiss(AppSource)
  
     public var name: String {
    
@@ -163,11 +167,16 @@ public enum TrackingEventType {
         case .offer_convert: return  "ios_offer_convert"
         case .offer_withdraw: return  "ios_offer_withdraw"
             
-        // MARK:- Object viewing
-        case .company_details_page_view: return "ios_company_details_page_view"
-        case .company_details_page_dismiss: return "ios_company_details_page_dismiss"
+        // MARK:- Object viewing                                                // checking
+        case .company_hosts_page_view: return "ios_company_hosts_page_view"
+        case .company_hosts_page_dismiss: return "ios_company_hosts_page_dismiss"
         case .project_page_view: return "ios_project_page_view"
-        case .application_page_view: return "ios_application_page_view"
+        case .project_page_dismiss: return "ios_project_page_dismiss"
+        case .application_page_view: return "ios_application_page_view"         // ok
+        case .application_page_dismiss: return "ios_application_page_dismiss"   // ok
+        case .offer_page_view: return "ios_offer_page_view"
+        case .offer_page_dismiss: return "ios_offer_page_dismiss"
+
         }
     }
 }

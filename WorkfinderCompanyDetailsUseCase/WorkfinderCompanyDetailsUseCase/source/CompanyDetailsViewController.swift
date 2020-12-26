@@ -23,9 +23,11 @@ class CompanyDetailsViewController: UIViewController {
     weak var coordinator: CompanyDetailsCoordinatorProtocol!
     weak var log: F4SAnalyticsAndDebugging?
     lazy var messageHandler = UserMessageHandler(presenter: self)
+    let appSource: AppSource
     
-    init(presenter: CompanyDetailsPresenterProtocol) {
+    init(presenter: CompanyDetailsPresenterProtocol, appSource: AppSource) {
         self.presenter = presenter
+        self.appSource = appSource
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
     }
@@ -49,7 +51,7 @@ class CompanyDetailsViewController: UIViewController {
         presenter.onViewDidLoad(self)
         view.addSubview(companyMainPageView)
         companyMainPageView.fillSuperview()
-        log?.track(.company_details_page_view)
+        log?.track(.company_hosts_page_view(appSource))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +60,7 @@ class CompanyDetailsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
-            log?.track(.company_details_page_dismiss)
+            log?.track(.company_hosts_page_dismiss(appSource))
             presenter.onTapBack()
         }
     }

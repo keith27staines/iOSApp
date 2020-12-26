@@ -32,7 +32,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     var placementService: PostPlacementServiceProtocol?
     var delegate: ProjectApplyCoordinatorDelegate?
     var projectType: String = ""
-    var log: F4SAnalytics { injected.log }
+    var log: F4SAnalyticsAndDebugging { injected.log }
     let appSource: AppSource
     var coverLetterText: String = ""
     var picklistsDictionary = PicklistsDictionary()
@@ -51,7 +51,8 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         projectUuid: F4SUUID,
         appSource: AppSource,
         navigateToSearch: (() -> Void)?,
-        navigateToApplications: (() -> Void)?) {
+        navigateToApplications: (() -> Void)?
+    ) {
         self.delegate = parent
         self.appSource = appSource
         self.navigateToSearch = navigateToSearch
@@ -70,7 +71,12 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
             log: injected.log
         )
         self.projectPresenter = presenter
-        let vc = ProjectViewController(coordinator: self, presenter: presenter)
+        let vc = ProjectViewController(
+            coordinator: self,
+            presenter: presenter,
+            appSource: appSource,
+            log: log
+        )
         let newNav = UINavigationController(rootViewController: vc)
         newNav.modalPresentationStyle = .fullScreen
         originalVC?.present(newNav, animated: true, completion: nil)

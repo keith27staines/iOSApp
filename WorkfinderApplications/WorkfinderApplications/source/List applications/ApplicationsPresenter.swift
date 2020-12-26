@@ -72,6 +72,6 @@ class ApplicationsPresenter {
         case .cancelled: action = .viewOffer
         case .unknown: action = .viewApplication
         }
-        coordinator?.performAction(action, for: application)
+        coordinator?.performAction(action, for: application, appSource: .applicationsTab)
     }
 }
