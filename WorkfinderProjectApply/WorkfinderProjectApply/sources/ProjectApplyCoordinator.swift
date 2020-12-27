@@ -26,8 +26,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     weak var originalVC: UIViewController?
     var projectPresenter: ProjectPresenter?
     var newNavigationRouter:NavigationRouter!
-    var navigateToSearch: (() -> Void)?
-    var navigateToApplications: (() -> Void)?
+    var switchToTab: ((TabIndex) -> Void)?
     weak var successViewController: UIViewController?
     var placementService: PostPlacementServiceProtocol?
     var delegate: ProjectApplyCoordinatorDelegate?
@@ -50,13 +49,11 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         inject: CoreInjectionProtocol,
         projectUuid: F4SUUID,
         appSource: AppSource,
-        navigateToSearch: (() -> Void)?,
-        navigateToApplications: (() -> Void)?
+        switchToTab: ((TabIndex) -> Void)?
     ) {
         self.delegate = parent
         self.appSource = appSource
-        self.navigateToSearch = navigateToSearch
-        self.navigateToApplications = navigateToApplications
+        self.switchToTab = switchToTab
         self.projectUuid = projectUuid
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
@@ -207,14 +204,13 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
                 guard let self = self else { return }
                 self.successViewController?.dismiss(animated: true, completion: nil)
                 self.onModalFinished()
-                self.navigateToApplications?()
-                
+                self.switchToTab?(.applications)
         },
             searchButtonTap: { [weak self] in
                 guard let self = self else { return }
                 self.successViewController?.dismiss(animated: true, completion: nil)
                 self.onModalFinished()
-                self.navigateToSearch?()
+                self.switchToTab?(.home)
         })
         vc.modalPresentationStyle = .overCurrentContext
         modalVC?.present(vc, animated: false, completion: nil)

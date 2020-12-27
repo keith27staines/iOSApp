@@ -42,15 +42,14 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
             inject: injected,
             projectUuid: projectUuid,
             appSource: appSource,
-            navigateToSearch: navigateToSearch,
-            navigateToApplications: navigateToApplications)
+            switchToTab: switchToTab
+        )
         addChildCoordinator(projectApplyCoordinator)
         self.projectApplyCoordinator = projectApplyCoordinator
         projectApplyCoordinator.start()
     }
     
-    var navigateToSearch: (() -> Void)?
-    var navigateToApplications: (() -> Void)?
+    var switchToTab: ((TabIndex) -> Void)?
     
     public var onRecommendationSelected: ((F4SUUID) -> Void)?
     
@@ -58,13 +57,11 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         parent: Coordinating?,
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
-        navigateToSearch: (() -> Void)?,
-        navigateToApplications: (() -> Void)?) {
-        self.navigateToSearch = navigateToSearch
-        self.navigateToApplications = navigateToApplications
+        switchToTab: ((TabIndex) -> Void)?
+    ) {
+        self.switchToTab = switchToTab
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
-    
 }
 
 extension RecommendationsCoordinator: ProjectApplyCoordinatorDelegate {

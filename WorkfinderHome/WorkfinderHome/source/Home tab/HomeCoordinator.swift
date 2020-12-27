@@ -210,11 +210,8 @@ extension HomeCoordinator {
             inject: injected,
             projectUuid: project,
             appSource: source,
-            navigateToSearch: { [weak self] in
-                self?.tabNavigator?.switchToTab(.home)
-            },
-            navigateToApplications: { [weak self] in
-                self?.tabNavigator?.switchToTab(.applications)
+            switchToTab: { [weak self] (tab) in
+                self?.tabNavigator?.switchToTab(tab)
             }
         )
     }

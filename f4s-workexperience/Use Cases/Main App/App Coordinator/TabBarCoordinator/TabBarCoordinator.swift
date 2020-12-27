@@ -43,31 +43,13 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window else { return }
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
-        navigateToMostAppropriateInitialTab()
+        switchToTab(.home)
+        requestPushNotificationsIsSignedIn()
     }
     
-    private var recommendationsService: RecommendationsServiceProtocol?
-    public func navigateToMostAppropriateInitialTab() {
-        guard injected.userRepository.loadUser().candidateUuid != nil else {
-            switchToTab(.home)
-            return
-        }
-        recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)
-        recommendationsService?.fetchRecommendations { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let recommendations):
-                if recommendations.count == 0 {
-                    self.switchToTab(.home)
-                } else {
-                    self.switchToTab(.recommendations)
-                    self.appCoordinator?.requestPushNotifications(from:self.topNavigationController)
-                }
-            case .failure(_):
-                self.switchToTab(.home)
-            }
-        }
-        
+    func requestPushNotificationsIsSignedIn() {
+        guard injected.userRepository.isCandidateLoggedIn else { return }
+        appCoordinator?.requestPushNotifications(from:self.topNavigationController)
     }
     
     public func updateBadges() {
@@ -179,8 +161,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             parent: nil,
             navigationRouter: router,
             inject: injected,
-            navigateToSearch: { self.switchToTab(.home) },
-            navigateToApplications: { self.switchToTab(.applications) }
+            switchToTab: { [weak self] tab in self?.switchToTab(tab) }
         )
         coordinator.onRecommendationSelected = { uuid in
             self.dispatchRecommendationToSearchTab(uuid: uuid, source: .recommendationsTab)
