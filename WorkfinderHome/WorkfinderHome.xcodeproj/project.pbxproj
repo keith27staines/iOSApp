@@ -527,6 +527,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1230;
+				ORGANIZATIONNAME = Workfinder;
 				TargetAttributes = {
 					53D94B6B256A35B200A2127C = {
 						CreatedOnToolsVersion = 12.2;
