@@ -1,5 +1,5 @@
 
-public struct DeeplinkDispatchInfo {
+public struct DeeplinkRoutingInfo {
     
     public enum Source: String {
         case deeplink
@@ -57,7 +57,7 @@ public struct DeeplinkDispatchInfo {
     
     public init?(deeplinkUrl: URL) {
         guard
-            let (objectTypeString, objectId) = DeeplinkDispatchInfo.deeplinkUrlToObjectAndId(url: deeplinkUrl),
+            let (objectTypeString, objectId) = DeeplinkRoutingInfo.deeplinkUrlToObjectAndId(url: deeplinkUrl),
             let objectType: ObjectType = ObjectType(urlPathComponent: objectTypeString)
         else { return nil }
         let action: Action = (objectId == nil) ? Action.list : Action.open
@@ -65,7 +65,7 @@ public struct DeeplinkDispatchInfo {
     }
 }
 
-extension DeeplinkDispatchInfo {
+extension DeeplinkRoutingInfo {
     private static func deeplinkUrlToObjectAndId(url: URL) -> (String, String?)? {
         if let placementUuid = placementViewRequestUuid(url: url) {
             return ("placement", placementUuid)

@@ -3,7 +3,7 @@
 //  WorkfinderCommonTests
 //
 //  Created by Keith Dev on 07/08/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
+//  Copyright © 2019 Workfinder Ltd. All rights reserved.
 //
 
 import XCTest

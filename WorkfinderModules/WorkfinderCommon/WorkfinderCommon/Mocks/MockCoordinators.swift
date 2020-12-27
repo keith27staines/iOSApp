@@ -3,7 +3,8 @@ import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
     
-    public func dispatchProjectViewRequest(_ projectUuid: F4SUUID, appSource: AppSource) {
+    
+    public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
         
     }
     
@@ -14,12 +15,12 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     public func navigateToRecommendations() {}
     
     var showApplicationsCallCount: Int = 0
-    public func showApplicationsTab(uuid: F4SUUID?) {
+    public func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
         
     }
     
     var dispatchRecommendationToSearchTabCount = 0
-    public func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: AppSource) {
+    public func routeRecommendation(recommendationUuid: F4SUUID, appSource: AppSource) {
         dispatchRecommendationToSearchTabCount += 1
     }
     

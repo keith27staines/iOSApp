@@ -3,7 +3,7 @@
 //  WorkfinderCommon
 //
 //  Created by Keith Dev on 18/09/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
+//  Copyright © 2019 Workfinder Ltd. All rights reserved.
 //
 
 import Foundation
@@ -12,9 +12,9 @@ public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
     func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void)
-    func showRecommendation(uuid: F4SUUID?, source: AppSource)
-    func showProject(uuid: F4SUUID?, source: AppSource)
-    func showApplicationsTab(uuid: F4SUUID?, source: AppSource)
+    func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource)
+    func routeProject(projectUuid: F4SUUID?, appSource: AppSource)
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
     func switchToTab(_ tab: TabIndex)
     func updateBadges()
     func handleDeepLinkUrl(url: URL) -> Bool
@@ -49,9 +49,9 @@ public enum TabIndex : Int, CaseIterable {
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
     func switchToTab(_ tab: TabIndex)
-    func showApplicationsTab(uuid: F4SUUID?)
-    func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: AppSource)
-    func dispatchProjectViewRequest(_ projectUuid: F4SUUID, appSource: AppSource)
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
+    func routeRecommendation(recommendationUuid: F4SUUID, appSource: AppSource)
+    func routeProject(projectUuid: F4SUUID, appSource: AppSource)
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)

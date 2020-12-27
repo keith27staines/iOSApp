@@ -55,15 +55,27 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     public func updateBadges() {
 
     }
-
-    public func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: AppSource) {
-        closeMenu { [weak self] (success) in
-            self?.switchToTab(.home)
-            self?.homeCoordinator.processRecommendation(uuid: uuid, source: source)
+    
+    public func switchToTab(_ tab: TabIndex) {
+        closeMenu() { [ weak self]  (success) in
+            guard let self = self else { return }
+            self.tabBarViewController.selectedIndex = tab.rawValue
         }
     }
     
-    public func dispatchProjectViewRequest(_ projectUuid: F4SUUID, appSource: AppSource) {
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
+        #warning("incomplete implementation")
+        switchToTab(.applications)
+    }
+    
+    public func routeRecommendation(recommendationUuid: F4SUUID, appSource: AppSource) {
+        closeMenu { [weak self] (success) in
+            self?.switchToTab(.home)
+            self?.homeCoordinator.processRecommendation(uuid: recommendationUuid, source: appSource)
+        }
+    }
+    
+    public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
         closeMenu() { [ weak self]  (success) in
             guard let self = self else { return }
             self.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
@@ -73,17 +85,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
                     appSource: appSource)
             }
         }
-    }
-    
-    public func switchToTab(_ tab: TabIndex) {
-        closeMenu() { [ weak self]  (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = tab.rawValue
-        }
-    }
-    
-    func showApplicationsTab(uuid: F4SUUID?) {
-        switchToTab(.applications)
     }
     
     public func openMenu(completion: ((Bool) -> ())? = nil) {
@@ -164,7 +165,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             switchToTab: { [weak self] tab in self?.switchToTab(tab) }
         )
         coordinator.onRecommendationSelected = { uuid in
-            self.dispatchRecommendationToSearchTab(uuid: uuid, source: .recommendationsTab)
+            self.routeRecommendation(recommendationUuid: uuid, appSource: .recommendationsTab)
         }
         addChildCoordinator(coordinator)
         return coordinator

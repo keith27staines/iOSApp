@@ -17,7 +17,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
     var tabBarCoordinator: TabBarCoordinatorProtocol?
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
-    var deepLinkDispatcher: DeepLinkDispatcher?
+    var deepLinkRouter: DeepLinkRouter?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
@@ -48,7 +48,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
         super.init(parent:nil, navigationRouter: navigationRouter)
-        self.deepLinkDispatcher = DeepLinkDispatcher(log: inject.log, coordinator: self)
+        self.deepLinkRouter = DeepLinkRouter(log: inject.log, coordinator: self)
         self.injected.appCoordinator = self
         userNotificationService = UNService(appCoordinator: self, userRepository: injected.userRepository)
     }
@@ -112,29 +112,31 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         return service
     }()
     
-    func showApplicationsTab(uuid: F4SUUID?, source: AppSource) { tabBarCoordinator?.showApplicationsTab(uuid: uuid) }
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
+        tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
+    }
     
     func switchToTab(_ tab: TabIndex) { tabBarCoordinator?.switchToTab(tab) }
     
-    func showProject(uuid: F4SUUID?, source: AppSource) {
-        guard let uuid = uuid else { return }
+    func routeProject(projectUuid: F4SUUID?, appSource: AppSource) {
+        guard let projectUuid = projectUuid else { return }
         if let tabBarCoordinator = self.tabBarCoordinator {
-            tabBarCoordinator.dispatchProjectViewRequest(uuid, appSource: source)
+            tabBarCoordinator.routeProject(projectUuid: projectUuid, appSource: appSource)
             return
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-            self?.showProject(uuid: uuid, source: source)
+            self?.routeProject(projectUuid: projectUuid, appSource: appSource)
         }
     }
     
-    func showRecommendation(uuid: F4SUUID?, source: AppSource) {
+    func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource) {
         guard let tabBarCoordinator = tabBarCoordinator else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-                self?.showRecommendation(uuid: uuid, source: source)
+                self?.routeRecommendation(recommendationUuid: recommendationUuid, appSource: appSource)
             }
             return
         }
-        guard let uuid = uuid else {
+        guard let uuid = recommendationUuid else {
             tabBarCoordinator.switchToTab(.recommendations)
             return
         }
@@ -143,9 +145,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             switch result {
             case .success(let recommendation):
                 if let projectUuid = recommendation.project?.uuid {
-                    self.showProject(uuid: projectUuid, source: source)
+                    self.routeProject(projectUuid: projectUuid, appSource: appSource)
                 } else {
-                    tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid, source: source)
+                    tabBarCoordinator.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
                 }
             case .failure(let error):
                 guard let workfinderError = error as? WorkfinderError else { return }
@@ -154,7 +156,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                     self.signIn(screenOrder: .loginThenRegister) { loggedIn in
                         switch loggedIn {
                         case true:
-                            self.showRecommendation(uuid: uuid, source: source)
+                            self.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
                         case false:
                             return
                         }
@@ -162,7 +164,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 default:
                     guard workfinderError.retry else { return }
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                        self.showRecommendation(uuid: uuid, source: source)
+                        self.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
                     }
                 }
             }
@@ -230,18 +232,18 @@ extension AppCoordinator {
     func handlePushNotification(_ pushNotification: PushNotification?) {
         guard
             let pushNotification = pushNotification,
-            let deepLinkInfo = DeeplinkDispatchInfo(pushNotification: pushNotification),
-            let dispatcher = deepLinkDispatcher
+            let deepLinkInfo = DeeplinkRoutingInfo(pushNotification: pushNotification),
+            let dispatcher = deepLinkRouter
         else { return }
-        dispatcher.dispatch(info: deepLinkInfo)
+        dispatcher.route(routingInfo: deepLinkInfo)
     }
     
     func handleDeepLinkUrl(url: URL) -> Bool {
         guard
-            let deeplinkInfo = DeeplinkDispatchInfo(deeplinkUrl: url),
-            let dispatcher = deepLinkDispatcher
+            let routingInfo = DeeplinkRoutingInfo(deeplinkUrl: url),
+            let router = deepLinkRouter
         else { return false }
-        dispatcher.dispatch(info: deeplinkInfo)
+        router.route(routingInfo: routingInfo)
         return true
     }
 

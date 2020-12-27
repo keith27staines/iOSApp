@@ -3,7 +3,7 @@
 //  f4s-workexperience
 //
 //  Created by Keith Dev on 01/02/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
+//  Copyright © 2019 Workfinder Ltd. All rights reserved.
 //
 
 import MapKit

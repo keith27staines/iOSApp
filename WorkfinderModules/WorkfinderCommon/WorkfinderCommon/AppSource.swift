@@ -14,7 +14,7 @@ public enum AppSource: String {
     case userChoice
     case unspecified
     
-    public init(deeplinkSource: DeeplinkDispatchInfo.Source) {
+    public init(deeplinkSource: DeeplinkRoutingInfo.Source) {
         switch deeplinkSource {
         case .deeplink:
             self = .deeplink

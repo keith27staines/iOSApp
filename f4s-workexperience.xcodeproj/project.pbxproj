@@ -53,7 +53,7 @@
 		FC2A64DA2495026300DA28DD /* WorkfinderViewRecommendation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64D82495026300DA28DD /* WorkfinderViewRecommendation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
 		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
-		FC459CEA2496161B00D6CE46 /* DeepLinkDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE92496161B00D6CE46 /* DeepLinkDispatcher.swift */; };
+		FC459CEA2496161B00D6CE46 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE92496161B00D6CE46 /* DeepLinkRouter.swift */; };
 		FC5336782488CD0200DA3033 /* MigratorBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336772488CD0200DA3033 /* MigratorBase.swift */; };
 		FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */; };
 		FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC56A0EF2455B62B00A7EC3F /* WorkfinderCommon.framework */; };
@@ -213,7 +213,7 @@
 		FC2E456A234CB5EF00121496 /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
 		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
-		FC459CE92496161B00D6CE46 /* DeepLinkDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkDispatcher.swift; sourceTree = "<group>"; };
+		FC459CE92496161B00D6CE46 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
 		FC5336772488CD0200DA3033 /* MigratorBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigratorBase.swift; sourceTree = "<group>"; };
 		FC5336792488CD5000DA3033 /* Migrate_v2_to_v3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrate_v2_to_v3.swift; sourceTree = "<group>"; };
 		FC5336ED2488D33500DA3033 /* WorkfinderVersionCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderVersionCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -558,7 +558,7 @@
 		FC459CE8249615F900D6CE46 /* Deep link dispatch */ = {
 			isa = PBXGroup;
 			children = (
-				FC459CE92496161B00D6CE46 /* DeepLinkDispatcher.swift */,
+				FC459CE92496161B00D6CE46 /* DeepLinkRouter.swift */,
 			);
 			path = "Deep link dispatch";
 			sourceTree = "<group>";
@@ -853,7 +853,7 @@
 				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				FC53367A2488CD5000DA3033 /* Migrate_v2_to_v3.swift in Sources */,
 				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
-				FC459CEA2496161B00D6CE46 /* DeepLinkDispatcher.swift in Sources */,
+				FC459CEA2496161B00D6CE46 /* DeepLinkRouter.swift in Sources */,
 				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC04B8642332751F0034A60E /* CoordinatorFactories.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,

@@ -3,7 +3,7 @@
 //  f4s-workexperience
 //
 //  Created by Keith Dev on 07/01/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
+//  Copyright © 2018 Workfinder Ltd. All rights reserved.
 //
 
 import Foundation
