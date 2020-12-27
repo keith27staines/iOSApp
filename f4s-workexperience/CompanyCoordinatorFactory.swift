@@ -30,7 +30,7 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         appSource: AppSource,
-        applicationFinished: @escaping ((PreferredDestination) -> Void)
+        applicationFinished: @escaping ((TabIndex) -> Void)
         ) -> CoreInjectionNavigationCoordinatorProtocol {
         return CompanyDetailsCoordinator(
             parent: parent,

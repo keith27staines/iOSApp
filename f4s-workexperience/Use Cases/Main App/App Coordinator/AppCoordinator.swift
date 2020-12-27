@@ -103,10 +103,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         tabBarCoordinator.start()
     }
     
-    func showApplications(uuid: F4SUUID?) { tabBarCoordinator?.showApplicationsTab(uuid: uuid) }
-    
-    func showSearch() { tabBarCoordinator?.showHomeTab() }
-    
     func requestPushNotifications(from viewController: UIViewController) {
         userNotificationService.authorize(from: viewController)
     }
@@ -115,6 +111,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         let service = RecommendationsService(networkConfig: injected.networkConfig)
         return service
     }()
+    
+    func showApplicationsTab(uuid: F4SUUID?, source: AppSource) { tabBarCoordinator?.showApplicationsTab(uuid: uuid) }
+    
+    func switchToTab(_ tab: TabIndex) { tabBarCoordinator?.switchToTab(tab) }
     
     func showProject(uuid: F4SUUID?, source: AppSource) {
         guard let uuid = uuid else { return }
@@ -135,7 +135,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             return
         }
         guard let uuid = uuid else {
-            tabBarCoordinator.navigateToTab(tab: .recommendations)
+            tabBarCoordinator.switchToTab(.recommendations)
             return
         }
         recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in

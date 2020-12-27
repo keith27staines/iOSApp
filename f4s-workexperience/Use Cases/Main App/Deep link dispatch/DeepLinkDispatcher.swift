@@ -29,7 +29,9 @@ class DeepLinkDispatcher {
                     log.track(.recommendation_pushnotification_convert)
                 }
             case .placement:
-                coordinator.showApplications(uuid: info.objectId)
+                log.track(.placement_deeplink_start)
+                coordinator.showApplicationsTab(uuid: info.objectId, source: source)
+                log.track(.placement_deeplink_convert)
             }
         }
     }

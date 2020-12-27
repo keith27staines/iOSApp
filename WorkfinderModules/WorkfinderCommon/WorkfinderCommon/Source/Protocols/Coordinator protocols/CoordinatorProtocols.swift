@@ -14,8 +14,8 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void)
     func showRecommendation(uuid: F4SUUID?, source: AppSource)
     func showProject(uuid: F4SUUID?, source: AppSource)
-    func showApplications(uuid: F4SUUID?)
-    func showSearch()
+    func showApplicationsTab(uuid: F4SUUID?, source: AppSource)
+    func switchToTab(_ tab: TabIndex)
     func updateBadges()
     func handleDeepLinkUrl(url: URL) -> Bool
     func handlePushNotification(_ pushNotification: PushNotification?)
@@ -33,11 +33,11 @@ public protocol OnboardingCoordinatorProtocol : Coordinating {
 }
 
 public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    func showHome()
+    func switchToTab(_ tab: TabIndex)
 }
 
 public protocol TabNavigating: AnyObject {
-    func navigateToTab(tab: TabIndex)
+    func switchToTab(_ tab: TabIndex)
 }
 
 public enum TabIndex : Int, CaseIterable {
@@ -48,8 +48,8 @@ public enum TabIndex : Int, CaseIterable {
 }
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
+    func switchToTab(_ tab: TabIndex)
     func showApplicationsTab(uuid: F4SUUID?)
-    func showHomeTab()
     func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: AppSource)
     func dispatchProjectViewRequest(_ projectUuid: F4SUUID, appSource: AppSource)
     func updateBadges()

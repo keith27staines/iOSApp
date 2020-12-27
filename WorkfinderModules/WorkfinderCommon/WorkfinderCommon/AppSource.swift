@@ -11,6 +11,7 @@ public enum AppSource: String {
     case homeTabTopRolesList
     case applicationsTab
     case recommendationsTab
+    case userChoice
     case unspecified
     
     public init(deeplinkSource: DeeplinkDispatchInfo.Source) {

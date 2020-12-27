@@ -49,7 +49,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     private var recommendationsService: RecommendationsServiceProtocol?
     public func navigateToMostAppropriateInitialTab() {
         guard injected.userRepository.loadUser().candidateUuid != nil else {
-            navigateToTab(tab: .home)
+            switchToTab(.home)
             return
         }
         recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)
@@ -58,13 +58,13 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             switch result {
             case .success(let recommendations):
                 if recommendations.count == 0 {
-                    self.navigateToTab(tab: .home)
+                    self.switchToTab(.home)
                 } else {
-                    self.navigateToTab(tab: .recommendations)
+                    self.switchToTab(.recommendations)
                     self.appCoordinator?.requestPushNotifications(from:self.topNavigationController)
                 }
             case .failure(_):
-                self.navigateToTab(tab: .home)
+                self.switchToTab(.home)
             }
         }
         
@@ -76,7 +76,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 
     public func dispatchRecommendationToSearchTab(uuid: F4SUUID, source: AppSource) {
         closeMenu { [weak self] (success) in
-            self?.navigateToTab(tab: .home)
+            self?.switchToTab(.home)
             self?.homeCoordinator.processRecommendation(uuid: uuid, source: source)
         }
     }
@@ -93,16 +93,15 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         }
     }
     
-    public func navigateToTab(tab: TabIndex) {
+    public func switchToTab(_ tab: TabIndex) {
         closeMenu() { [ weak self]  (success) in
             guard let self = self else { return }
             self.tabBarViewController.selectedIndex = tab.rawValue
         }
     }
     
-    public func topMostViewController() -> UIViewController? {
-        let vc = drawerController?.topMostViewController
-        return vc
+    func showApplicationsTab(uuid: F4SUUID?) {
+        switchToTab(.applications)
     }
     
     public func openMenu(completion: ((Bool) -> ())? = nil) {
@@ -115,6 +114,11 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     public func toggleMenu(completion: ((Bool) -> ())? = nil) {
         drawerController?.toggleLeftDrawerSide(animated: true, completion: completion)
+    }
+    
+    public func topMostViewController() -> UIViewController? {
+        let vc = drawerController?.topMostViewController
+        return vc
     }
     
     public func closeMenu(completion: ((Bool) -> ())? = nil) {
@@ -175,8 +179,8 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             parent: nil,
             navigationRouter: router,
             inject: injected,
-            navigateToSearch: { self.navigateToTab(tab: .home) },
-            navigateToApplications: { self.navigateToTab(tab: .applications) }
+            navigateToSearch: { self.switchToTab(.home) },
+            navigateToApplications: { self.switchToTab(.applications) }
         )
         coordinator.onRecommendationSelected = { uuid in
             self.dispatchRecommendationToSearchTab(uuid: uuid, source: .recommendationsTab)
@@ -218,14 +222,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             return
         }
         parentCtrl.present(navigationController, animated: true, completion: nil)
-    }
-    
-    func showApplicationsTab(uuid: F4SUUID?) {
-        navigateToTab(tab: .applications)
-    }
-    
-    func showHomeTab() {
-        navigateToTab(tab: .home)
     }
     
     func updateUnreadMessagesCount(_ count: Int) {

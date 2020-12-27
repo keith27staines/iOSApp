@@ -13,7 +13,7 @@ import WorkfinderDocumentUpload
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
 public protocol ApplyCoordinatorDelegate : class {
-    func applicationDidFinish(preferredDestination: PreferredDestination)
+    func applicationDidFinish(preferredDestination: TabIndex)
     func applicationDidCancel()
 }
 
@@ -283,7 +283,7 @@ extension ApplyCoordinator {
         navigationRouter.present(alert, animated: true, completion: nil)
     }
     
-    func finishApply(destination: PreferredDestination) {
+    func finishApply(destination: TabIndex) {
         log.track(.passive_apply_convert(appSource))
         cleanup()
         parentCoordinator?.childCoordinatorDidFinish(self)

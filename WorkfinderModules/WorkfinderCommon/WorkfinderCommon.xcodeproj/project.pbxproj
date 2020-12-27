@@ -110,7 +110,6 @@
 		FCEA245724EBF0DC0075A68B /* AssociationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEA245624EBF0DC0075A68B /* AssociationDetail.swift */; };
 		FCEE3EF6249A645A0034C226 /* CandidateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEE3EF5249A645A0034C226 /* CandidateTests.swift */; };
 		FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC06AA23225764003C59C8 /* LatLon.swift */; };
-		FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */; };
 		FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE450D2250BA6700C38436 /* MockLocalStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -231,7 +230,6 @@
 		FCEE3EF5249A645A0034C226 /* CandidateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTests.swift; sourceTree = "<group>"; };
 		FCFC069223224080003C59C8 /* ScaledNumberTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaledNumberTests.swift; sourceTree = "<group>"; };
 		FCFC06AA23225764003C59C8 /* LatLon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatLon.swift; sourceTree = "<group>"; };
-		FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredDestinations.swift; sourceTree = "<group>"; };
 		FCFE450D2250BA6700C38436 /* MockLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -493,7 +491,6 @@
 				FCC1DF5E232507530074D5C1 /* SocialShare.swift */,
 				FCC85DC9245184A200BC600E /* Picklist */,
 				FC473E8C2451CCF1004CEA17 /* TemplateModel.swift */,
-				FCFDCE5724599278006BA3AC /* PreferredDestinations.swift */,
 				53022183253591C800C01B10 /* PushNotification.swift */,
 			);
 			path = Source;
@@ -739,7 +736,6 @@
 				53DFFDF22518BAF2006A975D /* AppSource.swift in Sources */,
 				53770B6125933BFC0085928E /* TrackEvent.swift in Sources */,
 				FC9EE07F2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift in Sources */,
-				FCFDCE5824599278006BA3AC /* PreferredDestinations.swift in Sources */,
 				FC426EFC232FA274004F8A3E /* Document upload protocols.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
 				FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */,

@@ -34,19 +34,19 @@ public enum TrackingEventType {
     case allow_notifications_convert
 
     // MARK:- Recommendations deeplink processing
-    case recommendation_deeplink_start
-    case recommendation_deeplink_cancel
-    case recommendation_deeplink_convert
+    case recommendation_deeplink_start                                          // ok
+    case recommendation_deeplink_cancel                                         // not used
+    case recommendation_deeplink_convert                                        // ok
     
-    // MARK:- Offer deeplink processing
-    case offer_deeplink_start
-    case offer_deeplink_cancel
-    case offer_deeplink_convert
+    // MARK:- Placement deeplink processing
+    case placement_deeplink_start                                               // ok
+    case placement_deeplink_cancel                                              // not used
+    case placement_deeplink_convert                                             // ok
 
     // MARK:- Recommendations push notification processing
-    case recommendation_pushnotification_start
-    case recommendation_pushnotification_cancel
-    case recommendation_pushnotification_convert
+    case recommendation_pushnotification_start                                  // ok
+    case recommendation_pushnotification_cancel                                 // not used
+    case recommendation_pushnotification_convert                                // ok
 
     // MARK:-  Passive apply                                                    // checking
     case passive_apply_start(AppSource)                                         // ok
@@ -74,8 +74,8 @@ public enum TrackingEventType {
     case letter_cancel(isComplete: Bool)                                        // ok
     
     // MARK:- Offer
-    case offer_accept
-    case offer_decline(reason: String)
+    case offer_accept                                                           // ok
+    case offer_decline(reason: String)                                          // ok
     
     // MARK:- Object viewing                                                    // checking
     case company_hosts_page_view(AppSource)                                     // ok
@@ -84,8 +84,8 @@ public enum TrackingEventType {
     case project_page_dismiss(AppSource)                                        // ok
     case application_page_view(AppSource)                                       // ok
     case application_page_dismiss(AppSource)                                    // ok
-    case offer_page_view(AppSource)                                             //
-    case offer_page_dismiss(AppSource)                                          //
+    case offer_page_view(AppSource)                                             // ok
+    case offer_page_dismiss(AppSource)                                          // ok
  
     public var name: String {
    
@@ -124,34 +124,34 @@ public enum TrackingEventType {
         case .allow_notifications_convert: return  "ios_allow_notifications_convert"
             
         // MARK: Recommendations deeplink processing
-        case .recommendation_deeplink_start: return  "ios_recommendation_deeplink_start"
-        case .recommendation_deeplink_cancel: return  "ios_recommendation_deeplink_cancel"
-        case .recommendation_deeplink_convert: return  "ios_recommendation_deeplink_convert"
+        case .recommendation_deeplink_start: return "ios_recommendation_deeplink_start"
+        case .recommendation_deeplink_cancel: return "ios_recommendation_deeplink_cancel"
+        case .recommendation_deeplink_convert: return "ios_recommendation_deeplink_convert"
             
         // MARK:- Offer deeplink processing
-        case .offer_deeplink_start: return  "ios_offer_deeplink_start"
-        case .offer_deeplink_cancel: return  "ios_offer_deeplink_cancel"
-        case .offer_deeplink_convert: return  "ios_offer_deeplink_convert"
+        case .placement_deeplink_start: return "ios_placement_deeplink_start"
+        case .placement_deeplink_cancel: return "ios_placement_deeplink_cancel"
+        case .placement_deeplink_convert: return "ios_placement_deeplink_convert"
             
         // MARK: Recommendations push notification processing
-        case .recommendation_pushnotification_start: return  "ios_recommendation_pushnotification_start"
-        case .recommendation_pushnotification_cancel: return  "ios_recommendation_pushnotification_cancel"
-        case .recommendation_pushnotification_convert: return  "ios_recommendation_pushnotification_convert"
+        case .recommendation_pushnotification_start: return "ios_recommendation_pushnotification_start"
+        case .recommendation_pushnotification_cancel: return "ios_recommendation_pushnotification_cancel"
+        case .recommendation_pushnotification_convert: return "ios_recommendation_pushnotification_convert"
             
         // MARK: Passive apply
-        case .passive_apply_start: return  "ios_passive_apply_start"
-        case .passive_apply_cancel: return  "ios_passive_apply_cancel"
-        case .passive_apply_submit: return "ios_passive_apply_submitted"
-        case .passive_apply_convert: return  "ios_passive_apply_convert"
-        case .date_of_birth_capture_start: return "ios_dob_capture_start"
-        case .date_of_birth_capture_cancel: return "ios_dob_capture_cancel"
-        case .date_of_birth_capture_convert: return "ios_dob_capture_convert"
+        case .passive_apply_start: return "ios_passive_apply_start"
+        case .passive_apply_cancel: return "ios_passive_apply_cancel"
+        case .passive_apply_submit: return "ios_passive_apply_submitted"        
+        case .passive_apply_convert: return  "ios_passive_apply_convert"        
+        case .date_of_birth_capture_start: return "ios_dob_capture_start"       
+        case .date_of_birth_capture_cancel: return "ios_dob_capture_cancel"     
+        case .date_of_birth_capture_convert: return "ios_dob_capture_convert"   
             
         // MARK: Project apply
-        case .project_apply_start: return  "ios_project_apply_start"
-        case .project_apply_cancel: return  "ios_project_apply_cancel"
+        case .project_apply_start: return "ios_project_apply_start"
+        case .project_apply_cancel: return "ios_project_apply_cancel"
         case .project_apply_submit: return "ios_project_apply-submitted"
-        case .project_apply_convert: return  "ios_project_apply_convert"
+        case .project_apply_convert: return "ios_project_apply_convert"
             
         // MARK:- Cover letter events
         case .letter_start: return "ios_letter_start"
@@ -164,8 +164,8 @@ public enum TrackingEventType {
         case .letter_convert: return "ios_letter_convert"
             
         // MARK:- Offer
-        case .offer_accept: return  "ios_offer_accept"
-        case .offer_decline: return  "ios_offer_decline"
+        case .offer_accept: return "ios_offer_accept"
+        case .offer_decline: return "ios_offer_decline"
             
         // MARK:- Object viewing
         case .company_hosts_page_view: return "ios_company_hosts_page_view"

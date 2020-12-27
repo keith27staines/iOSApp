@@ -15,7 +15,7 @@ public protocol CompanyCoordinatorFactoryProtocol {
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         appSource: AppSource,
-        applicationFinished: @escaping ((PreferredDestination) -> Void)
+        applicationFinished: @escaping ((TabIndex) -> Void)
     ) -> CoreInjectionNavigationCoordinatorProtocol
 }
 
@@ -38,7 +38,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
     let appSource: AppSource
-    var applicationFinishedWithPreferredDestination: ((PreferredDestination) -> Void)
+    var applicationFinishedWithPreferredDestination: ((TabIndex) -> Void)
     weak var rootViewController: UIViewController?
     
     public init(
@@ -50,7 +50,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
         environment: EnvironmentType,
         applyService: PostPlacementServiceProtocol,
         associationsProvider: AssociationsServiceProtocol,
-        applicationFinished: @escaping ((PreferredDestination) -> Void),
+        applicationFinished: @escaping ((TabIndex) -> Void),
         appSource: AppSource
     ) {
         self.environment = environment
@@ -86,7 +86,7 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
 }
 
 extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
-    public func applicationDidFinish(preferredDestination: PreferredDestination) {
+    public func applicationDidFinish(preferredDestination: TabIndex) {
         if let rootViewController = rootViewController {
             navigationRouter.popToViewController(rootViewController, animated: false)
         }

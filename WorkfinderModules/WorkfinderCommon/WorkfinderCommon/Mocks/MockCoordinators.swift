@@ -7,7 +7,7 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
         
     }
     
-    public func navigateToTab(tab: TabIndex) {
+    public func switchToTab(_ tab: TabIndex) {
         
     }
     

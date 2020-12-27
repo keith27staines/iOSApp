@@ -86,7 +86,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
     }
     
     @objc func navigateToRecommendationsTab() {
-        tabNavigator?.navigateToTab(tab: .recommendations)
+        tabNavigator?.switchToTab(.recommendations)
     }
     
     public override func start() {
@@ -112,14 +112,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
                     companyAndPin: companyAndPin,
                     recommendedAssociationUuid: associationUuid,
                     inject: self.injected,
-                    appSource: source) { (destination) in
-                    switch destination {
-                    case .applications:
-                        self.tabNavigator?.navigateToTab(tab: .applications)
-                    case .home:
-                        self.tabNavigator?.navigateToTab(tab: .home)
-                    case .none: break
-                    }
+                    appSource: source) { (tab) in
+                    self.switchToTab(tab)
                 }
                 self.addChildCoordinator(coordinator)
                 coordinator.start()
@@ -193,7 +187,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             inject: injected, appSource: .unspecified,
             applicationFinished: { [weak self] preferredDestination in
                 guard let self = self else { return }
-                self.show(destination: preferredDestination)
+                self.switchToTab(preferredDestination)
                 self.navigationRouter.popToViewController(self.homeViewController, animated: true)
         })
         addChildCoordinator(companyCoordinator)
@@ -202,24 +196,9 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
 }
 
 extension HomeCoordinator: CompanyCoordinatorParentProtocol {
-
-    public func show(destination: PreferredDestination) {
-        switch destination {
-        case .applications:
-            tabNavigator?.navigateToTab(tab: .applications)
-        case .home:
-            tabNavigator?.navigateToTab(tab: .home)
-        case .none:
-            break
-        }
-    }
-
-    public func showApplications() {
-        tabNavigator?.navigateToTab(tab: .applications)
-    }
-
-    public func showHome() {
-        tabNavigator?.navigateToTab(tab: .home)
+    
+    public func switchToTab(_ tab: TabIndex) {
+        tabNavigator?.switchToTab(.home)
     }
 }
 
@@ -232,10 +211,10 @@ extension HomeCoordinator {
             projectUuid: project,
             appSource: source,
             navigateToSearch: { [weak self] in
-                self?.tabNavigator?.navigateToTab(tab: .home)
+                self?.tabNavigator?.switchToTab(.home)
             },
             navigateToApplications: { [weak self] in
-                self?.tabNavigator?.navigateToTab(tab: .applications)
+                self?.tabNavigator?.switchToTab(.applications)
             }
         )
     }
