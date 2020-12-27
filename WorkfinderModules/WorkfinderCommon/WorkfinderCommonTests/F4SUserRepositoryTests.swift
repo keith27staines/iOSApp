@@ -22,7 +22,7 @@ class F4SUserRepositoryTests: XCTestCase {
         let sut = UserRepository(localStore: store)
         var candidate = Candidate()
         candidate.dateOfBirth = "some date string"
-        sut.save(candidate: candidate)
+        sut.saveCandidate(candidate)
         let retrievedCandidate = sut.loadCandidate()
         XCTAssertEqual(retrievedCandidate.dateOfBirth, candidate.dateOfBirth)
     }
