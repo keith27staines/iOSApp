@@ -7,7 +7,7 @@ public enum TrackingEventType {
     
     // MARK:- Onboarding                                                        // checked
     case onboarding_start                                                       // ok
-    case onboarding_cancel                                                      // ok
+    case onboarding_cancel                                                      // not used
     case onboarding_tap_sign_in                                                 // ok
     case onboarding_tap_just_get_started                                        // ok
     case onboarding_convert                                                     // ok
@@ -33,17 +33,17 @@ public enum TrackingEventType {
     case allow_notifications_cancel
     case allow_notifications_convert
 
-    // MARK:- Recommendations deeplink processing
+    // MARK:- Recommendations deeplink processing                               // checked
     case recommendation_deeplink_start                                          // ok
     case recommendation_deeplink_cancel                                         // not used
     case recommendation_deeplink_convert                                        // ok
     
-    // MARK:- Placement deeplink processing
+    // MARK:- Placement deeplink processing                                     // checked
     case placement_deeplink_start                                               // ok
     case placement_deeplink_cancel                                              // not used
     case placement_deeplink_convert                                             // ok
 
-    // MARK:- Recommendations push notification processing
+    // MARK:- Recommendations push notification processing                      // checked
     case recommendation_pushnotification_start                                  // ok
     case recommendation_pushnotification_cancel                                 // not used
     case recommendation_pushnotification_convert                                // ok
@@ -57,7 +57,7 @@ public enum TrackingEventType {
     case date_of_birth_capture_cancel                                           // ok
     case date_of_birth_capture_convert(Date)                                    // ok
 
-    // MARK:- Project apply
+    // MARK:- Project apply                                                     // checked
     case project_apply_start(AppSource)                                         // ok
     case project_apply_cancel(AppSource)                                        // ok
     case project_apply_submit(AppSource)                                        // ok
@@ -73,7 +73,7 @@ public enum TrackingEventType {
     case letter_convert                                                         // ok
     case letter_cancel(isComplete: Bool)                                        // ok
     
-    // MARK:- Offer
+    // MARK:- Offer                                                             // checked
     case offer_accept                                                           // ok
     case offer_decline(reason: String)                                          // ok
     

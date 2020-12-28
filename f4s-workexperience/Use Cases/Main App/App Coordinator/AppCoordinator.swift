@@ -63,8 +63,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         injected.versionChecker.performChecksWithHardStop { [weak self] (optionalError) in
             guard let self = self else { return }
             switch self.suppressOnboarding {
-            case true: self.startTabBarCoordinator()
-            case false: self.startOnboarding()
+            case true:
+                self.localStore.setValue(false, for: .isOnboardingRequired)
+                self.startTabBarCoordinator()
+            case false:
+                self.startOnboarding()
             }
             if self.injected.userRepository.isCandidateLoggedIn {
                 UIApplication.shared.registerForRemoteNotifications()
