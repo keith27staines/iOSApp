@@ -19,13 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.applicationIconBadgeNumber = 0
         masterBuilder = MasterBuilder(launchOptions: launchOptions)
         window = masterBuilder.window
-        startApp()
+        startApp(launchOptions: launchOptions)
         return true
     }
     
-    func startApp() {
-        appCoordinator = self.masterBuilder.buildAppCoordinator()
+    func startApp(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        let suppressOnboarding = shouldSuppressOnboarding(launchOptions: launchOptions)
+        appCoordinator = self.masterBuilder.buildAppCoordinator(suppressOnboarding: suppressOnboarding)
         appCoordinator.start()
+    }
+    
+    func shouldSuppressOnboarding(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        guard let options = launchOptions else { return false }
+        let isPush = options[.remoteNotification] == nil ? false :  true
+        let isDeeplink = options[.url] == nil ? false : true
+        let isUserActivity = options[.userActivityDictionary] == nil ? false : true
+        return isPush || isDeeplink || isUserActivity
     }
     
     func application(_ application: UIApplication,

@@ -3,19 +3,19 @@ import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderUI
 
-public class ViewRecommendationCoordinator: CoreInjectionNavigationCoordinator {
+public class RecommendedAssociationCoordinator: CoreInjectionNavigationCoordinator {
     
     let recommendationUuid: F4SUUID
     
-    var onSuccess: (ViewRecommendationCoordinator, ApplicationContext) -> Void
-    var onCancel: (ViewRecommendationCoordinator) -> Void
+    var onSuccess: (RecommendedAssociationCoordinator, ApplicationContext) -> Void
+    var onCancel: (RecommendedAssociationCoordinator) -> Void
     
     public init(recommendationUuid: F4SUUID,
                 parent: Coordinating?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                onSuccess: @escaping (ViewRecommendationCoordinator, ApplicationContext) -> Void,
-                onCancel: @escaping (ViewRecommendationCoordinator) -> Void) {
+                onSuccess: @escaping (RecommendedAssociationCoordinator, ApplicationContext) -> Void,
+                onCancel: @escaping (RecommendedAssociationCoordinator) -> Void) {
         self.recommendationUuid = recommendationUuid
         self.onSuccess = onSuccess
         self.onCancel = onCancel

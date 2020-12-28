@@ -132,7 +132,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         )
     }()
     
-    func buildAppCoordinator() -> AppCoordinatorProtocol {
+    func buildAppCoordinator(suppressOnboarding: Bool) -> AppCoordinatorProtocol {
         return  AppCoordinator(
             navigationRouter: rootNavigationRouter,
             inject: injection,
@@ -142,7 +142,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             localStore: localStore,
             onboardingCoordinatorFactory: onboardingCoordinatorFactory,
             tabBarCoordinatorFactory: self,
-            window: self.window)
+            window: self.window,
+            suppressOnboarding: suppressOnboarding)
     }
 
 }

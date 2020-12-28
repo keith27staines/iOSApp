@@ -28,6 +28,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol
+    var suppressOnboarding: Bool
     
     public init(navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
@@ -37,7 +38,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 localStore: LocalStorageProtocol,
                 onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
                 tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol,
-                window: UIWindow) {
+                window: UIWindow,
+                suppressOnboarding: Bool = false
+    ) {
         
         self.window = window
         self.injected = inject
@@ -47,6 +50,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.deviceRegistrar = deviceRegistrar
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
+        self.suppressOnboarding = suppressOnboarding
         super.init(parent:nil, navigationRouter: navigationRouter)
         self.deepLinkRouter = DeepLinkRouter(log: inject.log, coordinator: self)
         self.injected.appCoordinator = self
@@ -54,16 +58,34 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     override func start() {
+        printUserInfo()
         injected.versionChecker.performChecksWithHardStop { [weak self] (optionalError) in
             guard let self = self else { return }
-            self.startOnboarding()
-            if self.launchOptions?[.remoteNotification] != nil {
-                self.startTabBarCoordinator()
+            switch self.suppressOnboarding {
+            case true: self.startTabBarCoordinator()
+            case false: self.startOnboarding()
             }
-            if let _ = self.injected.userRepository.loadUser().uuid {
+            if self.injected.userRepository.isCandidateLoggedIn {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+    }
+    
+    func printUserInfo() {
+        let userRepo = injected.userRepository
+        let user = userRepo.loadUser()
+        let candidate = userRepo.loadCandidate()
+        print("\n\n-----------------------------------------------------------")
+        switch userRepo.isCandidateLoggedIn {
+        case true:
+            print("Candidate \(candidate.fullName)")
+            print("Email \(user.email ?? "unknown")")
+            print("User uuid \(user.uuid ?? "unknown")")
+            print("Candidate uuid \(candidate.uuid ?? "unknown")")
+        case false:
+            print("Candidate not signed in")
+        }
+        print("-----------------------------------------------------------\n\n")
     }
     
     func startOnboarding() {
@@ -136,10 +158,8 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             }
             return
         }
-        guard let uuid = recommendationUuid else {
-            tabBarCoordinator.switchToTab(.recommendations)
-            return
-        }
+        tabBarCoordinator.switchToTab(.recommendations)
+        guard let uuid = recommendationUuid else { return }
         recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -147,7 +167,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 if let projectUuid = recommendation.project?.uuid {
                     self.routeProject(projectUuid: projectUuid, appSource: appSource)
                 } else {
-                    tabBarCoordinator.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
+                    tabBarCoordinator.routeRecommendationForAssociation(recommendationUuid: uuid, appSource: appSource)
                 }
             case .failure(let error):
                 guard let workfinderError = error as? WorkfinderError else { return }
@@ -162,7 +182,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                         }
                     }
                 default:
-                    guard workfinderError.retry else { return }
+                    guard workfinderError.retry else {
+                        return
+                    }
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
                         self.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
                     }

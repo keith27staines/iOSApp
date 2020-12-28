@@ -131,11 +131,11 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         self.projectApplyCoordinator = projectApplyCoordinator
     }
     
-    public func processRecommendation(uuid: F4SUUID?, source: AppSource) {
-        guard let uuid = uuid else { return }
+    public func processRecommendedAssociation(recommendationUuid: F4SUUID?, source: AppSource) {
+        guard let uuid = recommendationUuid else { return }
         homeViewController.dismiss(animated: true, completion: nil)
         if childCoordinators.count == 0 {
-            startViewRecommendationCoordinator(recommendationUuid: uuid, appSource: source)
+            startRecommendedAssociationCoordinator(recommendationUuid: uuid, appSource: source)
         } else {
             let alert = UIAlertController(
                 title: "View Recommendation?",
@@ -144,7 +144,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
             let recommendationAction = UIAlertAction(title: "View recommendation", style: .destructive) { (_) in
                 self.navigationRouter.popToViewController(self.homeViewController, animated: true)
                 self.childCoordinators.removeAll()
-                self.startViewRecommendationCoordinator(recommendationUuid: uuid, appSource: source)
+                self.startRecommendedAssociationCoordinator(recommendationUuid: uuid, appSource: source)
             }
             let continueAction = UIAlertAction(title: "Continue with current application", style: .default) { (_) in
                 return
@@ -155,8 +155,8 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         }
     }
     
-    func startViewRecommendationCoordinator(recommendationUuid: F4SUUID, appSource: AppSource) {
-        let coordinator = ViewRecommendationCoordinator(
+    func startRecommendedAssociationCoordinator(recommendationUuid: F4SUUID, appSource: AppSource) {
+        let coordinator = RecommendedAssociationCoordinator(
             recommendationUuid: recommendationUuid,
             parent: self,
             navigationRouter: navigationRouter,

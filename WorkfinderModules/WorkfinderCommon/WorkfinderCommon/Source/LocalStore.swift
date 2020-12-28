@@ -32,6 +32,7 @@ public class LocalStore : LocalStorageProtocol {
         case accessToken
 
         case isFirstLaunch
+        case isOnboardingRequired
         case installationUuid
         case isDeviceRegistered
 

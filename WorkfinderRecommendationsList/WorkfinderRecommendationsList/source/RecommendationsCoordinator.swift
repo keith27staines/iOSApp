@@ -51,8 +51,6 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     
     var switchToTab: ((TabIndex) -> Void)?
     
-    public var onRecommendationSelected: ((F4SUUID) -> Void)?
-    
     public init(
         parent: Coordinating?,
         navigationRouter: NavigationRoutingProtocol,

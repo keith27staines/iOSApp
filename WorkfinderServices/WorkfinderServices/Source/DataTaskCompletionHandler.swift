@@ -18,11 +18,12 @@ public class DataTaskCompletionHandler {
                                     verbose: Bool,
                                     completion: @escaping((Result<Data,Error>) -> Void)
     ) {
-        if let error = error as NSError?, error.code == -999 {
-            completion(.failure(WorkfinderError.init(errorType: .operationCancelled, attempting: "Network request")))
-            return // request was cancelled
-        }
         DispatchQueue.main.async { [weak self] in
+            if let error = error as NSError?, error.code == -999 {
+                completion(.failure(WorkfinderError.init(errorType: .operationCancelled, attempting: "Network request")))
+                return // request was cancelled
+            }
+        
             guard let response = httpResponse, let data = responseData else {
                 var workfinderError: WorkfinderError?
                 if let error = error {

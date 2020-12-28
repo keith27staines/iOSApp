@@ -50,7 +50,7 @@ public enum TabIndex : Int, CaseIterable {
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
     func switchToTab(_ tab: TabIndex)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
-    func routeRecommendation(recommendationUuid: F4SUUID, appSource: AppSource)
+    func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID, appSource: AppSource)
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)

@@ -90,7 +90,7 @@ class DiscoveryTrayController: NSObject {
     }
     
     @objc func handleCandidateSignedIn() {
-        guard sectionManager.isSignedIn, let recommendationsSectionIndex = sectionManager.sectionIndexForSection(.recommendations)
+        guard tableView.numberOfSections > 1, sectionManager.isSignedIn, let recommendationsSectionIndex = sectionManager.sectionIndexForSection(.recommendations)
         else { return }
         let indexSet = IndexSet([recommendationsSectionIndex])
         tableView.performBatchUpdates({

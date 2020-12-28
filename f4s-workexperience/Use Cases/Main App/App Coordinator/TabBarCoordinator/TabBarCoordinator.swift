@@ -64,14 +64,16 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
-        #warning("incomplete implementation")
-        switchToTab(.applications)
+        closeMenu { [weak self] (success) in
+            #warning("incomplete implementation")
+            self?.switchToTab(.applications)
+        }
     }
     
-    public func routeRecommendation(recommendationUuid: F4SUUID, appSource: AppSource) {
+    public func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource) {
         closeMenu { [weak self] (success) in
             self?.switchToTab(.home)
-            self?.homeCoordinator.processRecommendation(uuid: recommendationUuid, source: appSource)
+            self?.homeCoordinator.processRecommendedAssociation(recommendationUuid: recommendationUuid, source: appSource)
         }
     }
     
@@ -164,9 +166,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
             inject: injected,
             switchToTab: { [weak self] tab in self?.switchToTab(tab) }
         )
-        coordinator.onRecommendationSelected = { uuid in
-            self.routeRecommendation(recommendationUuid: uuid, appSource: .recommendationsTab)
-        }
         addChildCoordinator(coordinator)
         return coordinator
     }()

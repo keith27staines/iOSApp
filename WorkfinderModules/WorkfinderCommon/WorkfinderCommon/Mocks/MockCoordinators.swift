@@ -20,7 +20,7 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     }
     
     var dispatchRecommendationToSearchTabCount = 0
-    public func routeRecommendation(recommendationUuid: F4SUUID, appSource: AppSource) {
+    public func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource) {
         dispatchRecommendationToSearchTabCount += 1
     }
     

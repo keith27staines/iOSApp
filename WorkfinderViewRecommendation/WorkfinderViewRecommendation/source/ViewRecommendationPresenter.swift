@@ -4,7 +4,7 @@ import WorkfinderServices
 
 class LoadingViewPresenter {
     weak var view: LoadingViewController?
-    weak var coordinator: ViewRecommendationCoordinator?
+    weak var coordinator: RecommendedAssociationCoordinator?
     let recommendationUuid: F4SUUID
     let service: ApplicationContextService
     
@@ -34,7 +34,7 @@ class LoadingViewPresenter {
         
     init(recommendationUuid: F4SUUID,
          service: ApplicationContextService,
-         coordinator: ViewRecommendationCoordinator) {
+         coordinator: RecommendedAssociationCoordinator) {
         self.recommendationUuid = recommendationUuid
         self.service = service
         self.coordinator = coordinator

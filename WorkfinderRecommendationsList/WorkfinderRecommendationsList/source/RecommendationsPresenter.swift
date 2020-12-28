@@ -82,13 +82,15 @@ class RecommendationsPresenter {
     }
     
     func onTileTapped(_ tile: RecommendationTilePresenter) {
-        guard let uuid = tile.recommendation.uuid else { return }
+        
         if tile.isProject {
             coordinator?.processProjectViewRequest(
                 tile.recommendation.project?.uuid,
                 appSource: .recommendationsTab)
         } else {
-            coordinator?.onRecommendationSelected?(uuid)
+            #warning("incomplete implementation")
+            // guard let uuid = tile.recommendation.uuid else { return }
+            // coordinator?.onRecommendationForAssociationSelected?(uuid)
         }
     }
     

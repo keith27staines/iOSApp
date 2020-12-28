@@ -14,7 +14,7 @@
 		FC2A64CE2494D56E00DA28DD /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64CD2494D56E00DA28DD /* WorkfinderUI.framework */; };
 		FC2A64D12494D57700DA28DD /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64D02494D57700DA28DD /* WorkfinderCoordinators.framework */; };
 		FC2A64D42494D58100DA28DD /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64D32494D58100DA28DD /* WorkfinderServices.framework */; };
-		FC2A64D72494D5D100DA28DD /* ViewRecommendationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2A64D62494D5D100DA28DD /* ViewRecommendationCoordinator.swift */; };
+		FC2A64D72494D5D100DA28DD /* RecommendedAssociationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2A64D62494D5D100DA28DD /* RecommendedAssociationCoordinator.swift */; };
 		FC2A64DC249527BA00DA28DD /* WorkfinderApplyUseCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64DB249527BA00DA28DD /* WorkfinderApplyUseCase.framework */; };
 		FC2A64E02495284900DA28DD /* ViewRecommendationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2A64DF2495284900DA28DD /* ViewRecommendationPresenter.swift */; };
 		FC2A64E224952A6C00DA28DD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2A64E124952A6C00DA28DD /* LoadingViewController.swift */; };
@@ -41,7 +41,7 @@
 		FC2A64CD2494D56E00DA28DD /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2A64D02494D57700DA28DD /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2A64D32494D58100DA28DD /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC2A64D62494D5D100DA28DD /* ViewRecommendationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRecommendationCoordinator.swift; sourceTree = "<group>"; };
+		FC2A64D62494D5D100DA28DD /* RecommendedAssociationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedAssociationCoordinator.swift; sourceTree = "<group>"; };
 		FC2A64DB249527BA00DA28DD /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2A64DF2495284900DA28DD /* ViewRecommendationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRecommendationPresenter.swift; sourceTree = "<group>"; };
 		FC2A64E124952A6C00DA28DD /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		FC2A64C72494D54500DA28DD /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FC2A64D62494D5D100DA28DD /* ViewRecommendationCoordinator.swift */,
+				FC2A64D62494D5D100DA28DD /* RecommendedAssociationCoordinator.swift */,
 				FC2A64DF2495284900DA28DD /* ViewRecommendationPresenter.swift */,
 				FC2A64E124952A6C00DA28DD /* LoadingViewController.swift */,
 			);
@@ -242,7 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2A64E02495284900DA28DD /* ViewRecommendationPresenter.swift in Sources */,
-				FC2A64D72494D5D100DA28DD /* ViewRecommendationCoordinator.swift in Sources */,
+				FC2A64D72494D5D100DA28DD /* RecommendedAssociationCoordinator.swift in Sources */,
 				FC2A64E224952A6C00DA28DD /* LoadingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
