@@ -43,7 +43,7 @@ class HeaderView: UIView {
     
     private func configureViews() {
         addSubview(stack)
-        stack.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 4, right: 20))
+        stack.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 12, right: 20))
     }
     
     init(presenter: HeaderViewPresenter = HeaderViewPresenter()) {

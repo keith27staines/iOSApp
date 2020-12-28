@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
     }
     
     lazy var trayTopConstraint: NSLayoutConstraint = {
-        let constraint = tray.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0)
+        let constraint = tray.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0)
         constraint.isActive = true
         return constraint
     }()
@@ -206,17 +206,19 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     var navigationBar: UINavigationBar? { navigationController?.navigationBar }
     var statusBarHeight: CGFloat {
+        var height: CGFloat = 0
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-            return window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+            height = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         } else {
-            return UIApplication.shared.statusBarFrame.height
+            height = UIApplication.shared.statusBarFrame.height
         }
+        return height
     }
     
     func adjustNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationBar?.barTintColor = UIColor.black
+        navigationBar?.barTintColor = WorkfinderColors.primaryColor
         navigationBar?.tintColor = UIColor.white
         navigationBar?.isTranslucent = false
         setNeedsStatusBarAppearanceUpdate()

@@ -4,8 +4,8 @@ import WorkfinderUI
 
 class HomeView: UIView {
     
-    var headerView: HeaderView!
-    var backgroundView: BackgroundView!
+    lazy var headerView: HeaderView = HeaderView()
+    lazy var backgroundView: BackgroundView = BackgroundView()
     
     var headerVerticalOffset = CGFloat(0) {
         didSet {
@@ -23,22 +23,12 @@ class HomeView: UIView {
         backgroundView.refresh()
     }
     
-    private func addHeaderView() {
-        headerView = HeaderView()
-        addSubview(headerView)
-        headerView.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
-    }
-
-    private func addBackgroundView() {
-        backgroundView = BackgroundView()
-        addSubview(backgroundView)
-        backgroundView.anchor(top: headerView.bottomAnchor, leading: headerView.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: headerView.trailingAnchor)
-    }
-    
     func configureViews() {
         backgroundColor = WorkfinderColors.primaryColor
-        addHeaderView()
-        addBackgroundView()
+        addSubview(backgroundView)
+        addSubview(headerView)
+        headerView.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
+        backgroundView.anchor(top: safeAreaLayoutGuide.topAnchor, leading: headerView.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: headerView.trailingAnchor)
     }
     
 }
