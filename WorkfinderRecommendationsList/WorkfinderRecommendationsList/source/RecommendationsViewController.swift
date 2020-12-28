@@ -7,6 +7,10 @@ class RecommendationsViewController: UIViewController {
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let presenter: RecommendationsPresenter
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
