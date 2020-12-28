@@ -14,7 +14,9 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     
     public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
     
-    public var isFirstLaunch: Bool = true
+    lazy public var isOnboardingRequired: Bool = {
+        (localStore.value(key: .isOnboardingRequired) as? Bool) ?? true
+    }()
     
     let log: F4SAnalytics
     
@@ -31,14 +33,14 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     }
     
     public override func start() {
-        guard isFirstLaunch else {
+        guard isOnboardingRequired else {
             self.onboardingDidFinish?(self)
             return
         }
         log.track(.onboarding_start)
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
-        onboardingViewController.hideOnboardingControls = !isFirstLaunch
+        onboardingViewController.hideOnboardingControls = !isOnboardingRequired
         onboardingViewController.coordinator = self
         onboardingViewController.isLoggedIn = injected.userRepository.loadUser().candidateUuid != nil
         onboardingViewController.modalPresentationStyle = .fullScreen
@@ -68,7 +70,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     }
     
     func finishOnboarding() {
-        LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
+        LocalStore().setValue(false, for: LocalStore.Key.isOnboardingRequired)
         self.log.track(.onboarding_convert)
         self.onboardingDidFinish?(self)
     }

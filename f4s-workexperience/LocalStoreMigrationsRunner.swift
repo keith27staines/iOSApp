@@ -1,11 +1,12 @@
 
 import WorkfinderCommon
 
+/// NB: Local store versions are not 1-1 with app versions
 enum LocalStoreVersion: String {
     case unrecognised
     case v2_all     // any v2 (or v1) version migrates to v3_0_1
     case v3_0_1     // first v3 release to go live on appstore
-    case v3_1_0     // The "apply to project" release
+    case v3_2_0
     
     /*
      Need to add a new migration?
@@ -18,7 +19,8 @@ enum LocalStoreVersion: String {
 class LocalStoreMigrationsRunner {
     
     private let migrations: [Migrator] = [
-        Migrate_v2_all__to__v3_0_1()
+        Migrate_v2_all__to__v3_0_1(),
+        Migrate_v3_0_1_to__v3_2_0()
     ]
     
     public func run(localStore: LocalStorageProtocol) {

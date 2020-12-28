@@ -27,7 +27,7 @@ public protocol OnboardingCoordinatorDelegate : class {
 }
 
 public protocol OnboardingCoordinatorProtocol : Coordinating {
-    var isFirstLaunch: Bool { get set }
+    var isOnboardingRequired: Bool { get }
     var delegate: OnboardingCoordinatorDelegate? { get set }
     var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)? { get set }
 }
@@ -64,7 +64,7 @@ public protocol CoreInjectionProtocol : class {
     var user: Candidate { get set }
     var userRepository: UserRepositoryProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
-    var versionChecker: WorkfinderVersionCheckerProtocol { get }
+    var versionChecker: WorkfinderEnvironmentConsistencyCheckerProtocol { get }
 }
 
 public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {

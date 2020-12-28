@@ -58,6 +58,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     override func start() {
+        trackAppStart()
         printUserInfo()
         injected.versionChecker.performChecksWithHardStop { [weak self] (optionalError) in
             guard let self = self else { return }
@@ -69,6 +70,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+    }
+    
+    func trackAppStart() {
+        let localStore = LocalStore()
+        let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
+        if isFirstLaunch { log.track(.first_use) }
+        localStore.setValue(false, for: .isFirstLaunch)
+        log.track(.app_open)
     }
     
     func printUserInfo() {
@@ -96,7 +105,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             log: log)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
-        onboardingCoordinator.isFirstLaunch = localStore.value(key: LocalStore.Key.isFirstLaunch) as? Bool ?? true
         onboardingCoordinator.onboardingDidFinish = onboardingDidFinish
         addChildCoordinator(onboardingCoordinator)
         onboardingCoordinator.start()
@@ -104,7 +112,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func onboardingDidFinish(onboardingCoordinator: OnboardingCoordinatorProtocol) {
-        localStore.setValue(false, for: LocalStore.Key.isFirstLaunch)
         navigationRouter.dismiss(animated: false, completion: nil)
         removeChildCoordinator(onboardingCoordinator)
         startTabBarCoordinator()

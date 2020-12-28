@@ -8,7 +8,7 @@ protocol ForceUpdatePresenter: AnyObject {
     func gotoAppStore()
 }
 
-public class WorkfinderVersionChecker: WorkfinderVersionCheckerProtocol {
+public class WorkfinderEnvironmentConsistencyChecker: WorkfinderEnvironmentConsistencyCheckerProtocol {
     let serverEnvironmentType: EnvironmentType
     let thisVersion: Version?
     var completion: ((Error?) -> Void)?
@@ -56,28 +56,32 @@ public class WorkfinderVersionChecker: WorkfinderVersionCheckerProtocol {
     
     func performEnvironmentCheckWithHardStop(completion: () -> Void) {
         guard environmentConsistencyCheckRequired else {
+            // environment consistency checks only need to be run once
             completion()
             return
         }
         environmentConsistencyCheckRequired = false
         let localStore = LocalStore()
-        let isFirstLaunchValue = localStore.value(key: .isFirstLaunch) as? Bool
-        guard isFirstLaunchValue != nil else {
-            // first launch flag hasn't been set yet so this is the first launch,
-            // hence there is no previous environment to conflict with,
-            // and so no hard stop required
-            localStore.setValue(true, for: .isFirstLaunch)
+        // Has an environment been set yet?
+        guard let localEnvironmentName = localStore.value(key: .environment) as? String else {
+            // No local environment has been established so the server cannot be inconsistent with it
+            // Just set the local environment to match the server and return
             localStore.setValue(serverEnvironmentType.rawValue, for: .environment)
             completion()
             return
         }
-        let localEnvironmentName = localStore.value(key: .environment) as? String ?? "unknown"
+        // Does the local environment match the server environment?
         let localEnvironmentType = EnvironmentType.init(rawValue: localEnvironmentName)
         guard localEnvironmentType != serverEnvironmentType
-            else {
-                completion()
-                return
+        else {
+            // local environment (from last run) matches the server environment
+            // therefore there is no inconsistency
+            completion()
+            return
         }
+        
+        // The local environment and the server environment don't match
+        // Therefore, we cannot let the app run
         let window = UIApplication.shared.keyWindow!
         window.rootViewController = ForceEnvironmentSwitchViewController(
             serverEnvironment: serverEnvironmentType,
@@ -123,7 +127,7 @@ public class WorkfinderVersionChecker: WorkfinderVersionCheckerProtocol {
 }
 
 
-extension WorkfinderVersionChecker: ForceUpdatePresenter {
+extension WorkfinderEnvironmentConsistencyChecker: ForceUpdatePresenter {
     func gotoAppStore() {
         guard let url = URL(string: __appStoreLink), UIApplication.shared.canOpenURL(url)
             else { return }

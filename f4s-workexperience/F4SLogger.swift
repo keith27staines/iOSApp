@@ -72,7 +72,9 @@ extension F4SLog : F4SAnalytics {
             value as? MixpanelType
         })
         assert(mixpanelProperties.count == event.additionalProperties.count)
-        print(eventType)
+        print("\n\n-----------------------------------------------------------------------")
+        print("Tracked event \(eventType)")
+        print("-----------------------------------------------------------------------\n\n")
         mixPanel.track(event: eventType.name, properties: mixpanelProperties)
     }
 }

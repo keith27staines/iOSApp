@@ -10,11 +10,11 @@ public class CoreInjection : CoreInjectionProtocol {
     public var userRepository: UserRepositoryProtocol
     public var log: F4SAnalyticsAndDebugging
     public var networkConfig: NetworkConfig
-    public var versionChecker: WorkfinderVersionCheckerProtocol
+    public var versionChecker: WorkfinderEnvironmentConsistencyCheckerProtocol
     
     public init(launchOptions: LaunchOptions?,
                 networkConfig: NetworkConfig,
-                versionChecker: WorkfinderVersionCheckerProtocol,
+                versionChecker: WorkfinderEnvironmentConsistencyCheckerProtocol,
                 user: Candidate,
                 userRepository: UserRepositoryProtocol,
                 log: F4SAnalyticsAndDebugging) {

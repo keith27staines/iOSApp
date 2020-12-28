@@ -45,7 +45,6 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         self.launchOptions = launchOptions
         self.log = F4SLog()
         self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: Config.workfinderApiBase)
-        onLaunched()
     }
     
     func makeTabBarCoordinator(parent: AppCoordinatorProtocol,
@@ -59,20 +58,13 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         )
     }
     
-    func onLaunched() {
-        let localStore = LocalStore()
-        let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
-        if isFirstLaunch { log.track(.first_use) }
-        log.track(.app_open)
-    }
-    
     lazy var appVersion: String = {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }()
     
-    lazy var versionChecker: WorkfinderVersionChecker = {
+    lazy var versionChecker: WorkfinderEnvironmentConsistencyChecker = {
         
-        let versionChecker = WorkfinderVersionChecker(
+        let versionChecker = WorkfinderEnvironmentConsistencyChecker(
             serverEnvironmentType: Config.environment,
             currentVersion: appVersion,
             networkConfig: self.networkConfiguration,

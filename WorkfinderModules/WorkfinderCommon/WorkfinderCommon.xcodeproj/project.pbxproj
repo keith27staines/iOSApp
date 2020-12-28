@@ -69,7 +69,7 @@
 		FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */; };
 		FC9535A5231E7E7700F4A9DA /* APIStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9535A4231E7E7700F4A9DA /* APIStructs.swift */; };
 		FC9865BC229D3963006D3E63 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FC9865BB229D3963006D3E63 /* README */; };
-		FC9EE07F2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EE07E2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift */; };
+		FC9EE07F2482264D00CCE8CC /* WorkfinderEnvironmentConsistencyCheckerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9EE07E2482264D00CCE8CC /* WorkfinderEnvironmentConsistencyCheckerProtocol.swift */; };
 		FCA2901B247F636100588F6E /* String+isEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA2901A247F636100588F6E /* String+isEmail.swift */; };
 		FCA91E752234043D007ED308 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */; };
 		FCA91E7C2234043D007ED308 /* WorkfinderCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -183,7 +183,7 @@
 		FC93DC5923202CFB00F1CE23 /* EnvironmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentType.swift; sourceTree = "<group>"; };
 		FC9535A4231E7E7700F4A9DA /* APIStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStructs.swift; sourceTree = "<group>"; };
 		FC9865BB229D3963006D3E63 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		FC9EE07E2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderVersionCheckerProtocol.swift; sourceTree = "<group>"; };
+		FC9EE07E2482264D00CCE8CC /* WorkfinderEnvironmentConsistencyCheckerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderEnvironmentConsistencyCheckerProtocol.swift; sourceTree = "<group>"; };
 		FCA2901A247F636100588F6E /* String+isEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isEmail.swift"; sourceTree = "<group>"; };
 		FCA91E6B2234043D007ED308 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA91E6E2234043D007ED308 /* WorkfinderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCommon.h; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 				FC04B865233276960034A60E /* Coordinator protocols */,
 				FC22438D232F94AA0073C9B1 /* Document upload */,
 				FC9670A2225A193700318F69 /* Repository protocols */,
-				FC9EE07E2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift */,
+				FC9EE07E2482264D00CCE8CC /* WorkfinderEnvironmentConsistencyCheckerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -735,7 +735,7 @@
 				FCE5192F2249482A00B550C9 /* F4SCalendarMonth.swift in Sources */,
 				53DFFDF22518BAF2006A975D /* AppSource.swift in Sources */,
 				53770B6125933BFC0085928E /* TrackEvent.swift in Sources */,
-				FC9EE07F2482264D00CCE8CC /* WorkfinderVersionCheckerProtocol.swift in Sources */,
+				FC9EE07F2482264D00CCE8CC /* WorkfinderEnvironmentConsistencyCheckerProtocol.swift in Sources */,
 				FC426EFC232FA274004F8A3E /* Document upload protocols.swift in Sources */,
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
 				FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */,
