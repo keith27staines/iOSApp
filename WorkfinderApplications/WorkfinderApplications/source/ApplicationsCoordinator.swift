@@ -48,7 +48,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
             case .success(let application):
                 switch application.state {
                 case .offered, .accepted, .withdrawn:
-                    self.showApplicationDetailViewer(for: application, appSource: appSource)
+                    self.showOfferViewer(for: application, appSource: appSource)
 
                 default:
                     self.showApplicationDetailViewer(for: application, appSource: appSource)
