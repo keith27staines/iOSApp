@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
             trayTopConstraint.constant = trayTopConstraintConstant
             if trayTopConstraintConstant < 100 {
                 homeView.headerVerticalOffset = -(100 - trayTopConstraintConstant)/2
-                headerView.alpha = 1 - 2*(100 - trayTopConstraintConstant)/100
+                headerView.alpha = 1 // - (100 - trayTopConstraintConstant)/100
                 
             } else {
                 homeView.headerVerticalOffset = 0
@@ -96,9 +96,14 @@ class HomeViewController: UIViewController {
                 tray.layer.cornerRadius = 0
                 tray.layer.shadowRadius = 0
                 tray.layer.shadowColor = UIColor.clear.cgColor
+                self.headerView.alpha = 0
                 self.homeView.layoutIfNeeded()
             },
-            completion: nil
+            completion: {_ in
+                if self.trayTopConstraintConstant == 0 {
+                    self.headerView.isHidden = true
+                }
+            }
         )
     }
     
