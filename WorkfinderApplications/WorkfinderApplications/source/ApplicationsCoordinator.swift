@@ -9,6 +9,7 @@ protocol ApplicationsCoordinatorProtocol: AnyObject {
     func performAction(_ action: ApplicationAction?, for application: Application, appSource: AppSource)
     func showCompanyHost(application: Application)
     func showCompany(application: Application)
+    func routeToApplication(_ uuid: F4SUUID, appSource: AppSource)
 }
 
 public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, ApplicationsCoordinatorProtocol {
@@ -37,6 +38,25 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     func applicationsDidLoad(_ applications: [Application]) {
         self.applications = applications
+    }
+    
+    lazy var applicationDetailService: ApplicationDetailService = ApplicationDetailService(networkConfig: networkConfig)
+    public func routeToApplication(_ uuid: F4SUUID, appSource: AppSource) {
+        applicationDetailService.fetchApplication(placementUuid: uuid) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let application):
+                switch application.state {
+                case .offered, .accepted, .withdrawn:
+                    self.showApplicationDetailViewer(for: application, appSource: appSource)
+
+                default:
+                    self.showApplicationDetailViewer(for: application, appSource: appSource)
+                }
+            case .failure(_):
+                break
+            }
+        }
     }
     
     func performAction(

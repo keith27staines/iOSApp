@@ -6,6 +6,7 @@ protocol ApplicationsServiceProtocol: AnyObject {
 }
 
 class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
+
     func fetchApplications(completion: @escaping (Result<[Application],Error>) -> Void) {
         performNetworkRequest { [weak self] (networkResult) in
             guard let self = self else { return }

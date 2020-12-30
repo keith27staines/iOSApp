@@ -1,24 +1,23 @@
 import WorkfinderCommon
 import WorkfinderServices
 
-protocol ApplicationDetailServiceProtocol: AnyObject {
-    func fetchApplicationDetail(application: Application, completion: @escaping (Result<Application,Error>)-> Void)
+protocol PlacementDetailServiceProtocol: AnyObject {
+    func fetchApplication(placementUuid: F4SUUID, completion: @escaping (Result<Application,Error>)-> Void)
 }
 
-class ApplicationDetailService: WorkfinderService, ApplicationDetailServiceProtocol {
+class ApplicationDetailService: WorkfinderService, PlacementDetailServiceProtocol {
     
-    func fetchApplicationDetail(application: Application, completion: @escaping (Result<Application,Error>)-> Void) {
+    func fetchApplication(placementUuid: F4SUUID, completion: @escaping (Result<Application,Error>)-> Void) {
         
-        performNetworkRequest(placementUuid: application.placementUuid) { (result) in
+        performNetworkRequest(placementUuid: placementUuid) { (result) in
             switch result {
             case .success(let placement):
-                let applicationDetail = Application(json: placement)
-                completion(.success(applicationDetail))
+                let application = Application(json: placement)
+                completion(.success(application))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
-        completion(.success(application))
     }
     
     func performNetworkRequest(placementUuid: F4SUUID, completion: @escaping (Result<PlacementJson, Error>) -> Void) {

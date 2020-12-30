@@ -65,8 +65,9 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
         closeMenu { [weak self] (success) in
-            #warning("incomplete implementation")
-            self?.switchToTab(.applications)
+            guard let self = self, let uuid = placementUuid else { return }
+            self.switchToTab(.applications)
+            self.applicationsCoordinator.routeToApplication(uuid, appSource: appSource)
         }
     }
     

@@ -48,7 +48,7 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     var coverLetterText: String? { applicationDetail?.coverLetterString }
     var companyName: String? { applicationDetail?.companyName }
     
-    let applicationService: ApplicationDetailServiceProtocol
+    let applicationService: PlacementDetailServiceProtocol
     let coordinator: ApplicationsCoordinatorProtocol
     let application: Application
     var applicationDetail: Application?
@@ -70,7 +70,7 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        applicationService.fetchApplicationDetail(application: application) { [weak self] (result) in
+        applicationService.fetchApplication(placementUuid: application.placementUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let applicationDetail):
