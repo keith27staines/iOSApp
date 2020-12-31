@@ -34,7 +34,7 @@ enum OfferState {
     
     var description: String {
         switch self {
-        case .hostOfferOpen: return "Congratulations! You have been offered a placement!"
+        case .hostOfferOpen: return "You have been offered a placement!"
         case .candidateAccepted: return "Congratulations! You have accepted this placement!"
         case .candidateWithdrew: return "You declined this offer"
         case .unknown: return "Offer"
