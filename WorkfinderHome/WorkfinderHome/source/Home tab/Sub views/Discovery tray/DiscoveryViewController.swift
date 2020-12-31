@@ -76,15 +76,21 @@ class DiscoveryTrayController: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
     }
     
-    @objc func loadData() {
+    @objc func loadFirstPage() {
+        recentRolesPresenter.clear()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
         recentRolesPresenter.resultHandler = { optionalError in
             guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
-            self.tableView.reloadSections(IndexSet([sectionIndex]), with: .automatic)
+            let indexSet = self.recentRolesPresenter.lastIndexChangeSet.map { (row) -> IndexPath in
+                IndexPath(row: row, section: sectionIndex)
+            }
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: indexSet, with: .automatic)
+            self.tableView.endUpdates()
         }
-        recentRolesPresenter.loadData { [weak self] in
+        recentRolesPresenter.loadFirstPage { [weak self] in
             self?.refreshControl.endRefreshing()
         }
     }
@@ -134,7 +140,7 @@ class DiscoveryTrayController: NSObject {
         ]
         let control = UIRefreshControl()
         control.attributedTitle = NSAttributedString(string: title, attributes: attributes)
-        control.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        control.addTarget(self, action: #selector(loadFirstPage), for: .valueChanged)
         control.tintColor = WorkfinderColors.primaryColor
         control.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         return control
@@ -181,6 +187,11 @@ extension DiscoveryTrayController: UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
             cell?.backgroundColor = UIColor.white
             (cell as? LandscapeRoleCell)?.row = indexPath.row
+            if indexPath.row == recentRolesPresenter.numberOfRows - 1 {
+                recentRolesPresenter.loadNextPage {
+                    
+                }
+            }
         }
         let presentable = cell as? Presentable
         let presenter = cellPresenter(indexPath)
@@ -245,6 +256,7 @@ extension DiscoveryTrayController: UITableViewDelegate {
         }
         return view
     }
+
 }
 
 protocol CellPresenter {}

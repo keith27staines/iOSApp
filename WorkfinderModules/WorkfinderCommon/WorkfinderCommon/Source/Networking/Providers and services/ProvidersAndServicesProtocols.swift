@@ -12,6 +12,12 @@ public struct ServerListJson<A:Decodable>: Decodable {
     public var next: String?
     public var previous: String?
     public var results: [A]
+    public init(count: Int?, next: String?, previous: String?, results: [A]) {
+        self.count = count
+        self.next = next
+        self.previous = previous
+        self.results = results
+    }
 }
 
 public protocol TemplateProviderProtocol: class {

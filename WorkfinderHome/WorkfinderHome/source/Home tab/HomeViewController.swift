@@ -137,6 +137,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
+        refresh()
     }
     
     @objc func handleLogin() {
@@ -150,7 +151,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        refresh()
+        //refresh()
     }
     
     @objc func animateTrayToTop() {
@@ -162,7 +163,7 @@ class HomeViewController: UIViewController {
         homeView.refresh()
         trayController.messageHandler = messageHandler
         DispatchQueue.main.async { [weak self] in
-            self?.trayController.loadData()
+            self?.trayController.loadFirstPage()
         }
         
     }

@@ -58,7 +58,8 @@ open class WorkfinderService {
     
     public func buildRequest(
         relativePath: String?,
-        queryItems: [URLQueryItem]?, verb: RequestVerb) throws -> URLRequest {
+        queryItems: [URLQueryItem]?, verb: RequestVerb
+    ) throws -> URLRequest {
         var components = urlComponents
         components.path += relativePath ?? ""
         components.queryItems = queryItems
@@ -67,6 +68,30 @@ open class WorkfinderService {
                 errorType: .invalidUrl(components.path),
                 attempting: #function,
                 retryHandler: nil) }
+        return networkConfig.buildUrlRequest(url: url, verb: verb, body: nil)
+    }
+    
+    public func buildRequest(
+        path: String?,
+        queryItems: [URLQueryItem]?, verb: RequestVerb
+    ) throws -> URLRequest {
+        let isAbsolute = (path ?? "").starts(with: "http")
+        switch isAbsolute {
+        case true: return try buildRequest(absolutePath: path, queryItems: queryItems, verb: .get)
+        case false: return try buildRequest(relativePath: path, queryItems: queryItems, verb: .get)
+        }
+    }
+    
+    func buildRequest(
+        absolutePath: String?,
+        queryItems: [URLQueryItem]?, verb: RequestVerb
+    ) throws -> URLRequest {
+        guard var components = URLComponents(string: absolutePath ?? ""), let url = components.url else {
+            throw WorkfinderError(
+                errorType: .invalidUrl(absolutePath ?? ""),
+                attempting: #function,
+                retryHandler: nil) }
+        components.queryItems = queryItems
         return networkConfig.buildUrlRequest(url: url, verb: verb, body: nil)
     }
 
