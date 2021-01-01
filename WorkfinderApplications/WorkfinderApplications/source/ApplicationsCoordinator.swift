@@ -6,16 +6,17 @@ import WorkfinderServices
 
 protocol ApplicationsCoordinatorProtocol: AnyObject {
     func applicationsDidLoad(_ applications: [Application])
-    func performAction(_ action: ApplicationAction?, for application: Application)
+    func performAction(_ action: ApplicationAction?, for application: Application, appSource: AppSource)
     func showCompanyHost(application: Application)
     func showCompany(application: Application)
+    func routeToApplication(_ uuid: F4SUUID, appSource: AppSource)
 }
 
 public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, ApplicationsCoordinatorProtocol {
     
     var applications = [Application]()
     var networkConfig: NetworkConfig { injected.networkConfig }
-    var log: F4SAnalytics { injected.log }
+    var log: F4SAnalyticsAndDebugging { injected.log }
     
     lazy var applicationsViewController: UIViewController = {
         let service = ApplicationsService(networkConfig: networkConfig)
@@ -39,49 +40,62 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         self.applications = applications
     }
     
-    func performAction(_ action: ApplicationAction?, for application: Application) {
+    lazy var applicationDetailService: ApplicationDetailService = ApplicationDetailService(networkConfig: networkConfig)
+    public func routeToApplication(_ uuid: F4SUUID, appSource: AppSource) {
+        applicationDetailService.fetchApplication(placementUuid: uuid) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let application):
+                switch application.state {
+                case .offered, .accepted, .withdrawn:
+                    self.showOfferViewer(for: application, appSource: appSource)
+
+                default:
+                    self.showApplicationDetailViewer(for: application, appSource: appSource)
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func performAction(
+        _ action: ApplicationAction?,
+        for application: Application,
+        appSource: AppSource
+    ) {
         guard let action = action else { return }
         switch action {
-        case .viewApplication: showApplicationDetailViewer(for: application)
-        case .viewOffer: showOfferViewer(for: application)
+        case .viewApplication: showApplicationDetailViewer(for: application, appSource: appSource)
+        case .viewOffer: showOfferViewer(for: application, appSource: appSource)
         case .acceptOffer: break
         case .declineOffer: break
         }
     }
     
-    func showOfferViewer(for application: Application) {
-        log.track(TrackingEvent(type: .uc_offer_start))
+    func showOfferViewer(for application: Application, appSource: AppSource) {
         let offerService = OfferService(networkConfig: networkConfig)
         let presenter = OfferPresenter(coordinator: self, application: application, offerService: offerService)
-        let vc = OfferViewController(coordinator: self, presenter: presenter)
+        let vc = OfferViewController(coordinator: self, presenter: presenter, log: log, appSource: appSource)
         navigationRouter.push(viewController: vc, animated: true)
     }
     
     var offerAwaitingDecision = false
     var offerDecisionMade = false
     
-    func offerAwaitingDecisionViewed() {
-        offerAwaitingDecision = true
-        log.track(TrackingEvent(type: .uc_offer_start))
-    }
-    
     func offerAccepted() {
-        log.track(TrackingEvent(type: .uc_offer_convert))
         offerDecisionMade = true
     }
     
     func offerDeclined() {
-        log.track(TrackingEvent(type: .uc_offer_withdraw))
         offerDecisionMade = true
     }
     
     func offerScreenCancelled() {
-        if offerAwaitingDecision && !offerDecisionMade {
-            log.track(TrackingEvent(type: .uc_offer_cancel))
-        }
+        //
     }
     
-    func showApplicationDetailViewer(for application: Application) {
+    func showApplicationDetailViewer(for application: Application, appSource: AppSource) {
         let applicationService = ApplicationDetailService(networkConfig: networkConfig)
         let presenter = ApplicationDetailPresenter(
             coordinator: self,
@@ -89,7 +103,10 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
             application: application)
         let vc = ApplicationDetailViewController(
             coordinator: self,
-            presenter: presenter)
+            presenter: presenter,
+            appSource: appSource,
+            log: log
+        )
         navigationRouter.push(viewController: vc, animated: true)
     }
     
@@ -108,11 +125,11 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     func showCompanyHost(application: Application) {
         guard let associationUuid = application.associationUuid else { return }
         let hostService = HostsProvider(networkConfig: networkConfig)
-        let hostLocationService = AssociationsService(networkConfig: networkConfig)
+        let locationService = AssociationsService(networkConfig: networkConfig)
         let presenter = HostViewPresenter(
             coordinator: self,
             hostService: hostService,
-            hostLocationService: hostLocationService,
+            locationService: locationService,
             associationUuid: associationUuid)
         let vc = HostViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)

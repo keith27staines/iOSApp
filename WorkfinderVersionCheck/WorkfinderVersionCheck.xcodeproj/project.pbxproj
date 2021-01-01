@@ -10,7 +10,7 @@
 		FC5336B32488D0C900DA3033 /* WorkfinderVersionCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5336A92488D0C900DA3033 /* WorkfinderVersionCheck.framework */; };
 		FC5336BA2488D0C900DA3033 /* WorkfinderVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5336AC2488D0C900DA3033 /* WorkfinderVersionCheck.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC5336CA2488D16B00DA3033 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336C42488D16B00DA3033 /* Version.swift */; };
-		FC5336CB2488D16B00DA3033 /* WorkfinderVersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336C52488D16B00DA3033 /* WorkfinderVersionChecker.swift */; };
+		FC5336CB2488D16B00DA3033 /* WorkfinderEnvironmentConsistencyChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336C52488D16B00DA3033 /* WorkfinderEnvironmentConsistencyChecker.swift */; };
 		FC5336CC2488D16B00DA3033 /* VersionCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336C62488D16B00DA3033 /* VersionCheckService.swift */; };
 		FC5336CD2488D16B00DA3033 /* VersionCheckResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336C72488D16B00DA3033 /* VersionCheckResult.swift */; };
 		FC5336CE2488D16B00DA3033 /* ForceEnvironmentSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336C82488D16B00DA3033 /* ForceEnvironmentSwitchViewController.swift */; };
@@ -39,7 +39,7 @@
 		FC5336B22488D0C900DA3033 /* WorkfinderVersionCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderVersionCheckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5336B92488D0C900DA3033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC5336C42488D16B00DA3033 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
-		FC5336C52488D16B00DA3033 /* WorkfinderVersionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkfinderVersionChecker.swift; sourceTree = "<group>"; };
+		FC5336C52488D16B00DA3033 /* WorkfinderEnvironmentConsistencyChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkfinderEnvironmentConsistencyChecker.swift; sourceTree = "<group>"; };
 		FC5336C62488D16B00DA3033 /* VersionCheckService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheckService.swift; sourceTree = "<group>"; };
 		FC5336C72488D16B00DA3033 /* VersionCheckResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheckResult.swift; sourceTree = "<group>"; };
 		FC5336C82488D16B00DA3033 /* ForceEnvironmentSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceEnvironmentSwitchViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				FC5336C42488D16B00DA3033 /* Version.swift */,
 				FC5336C72488D16B00DA3033 /* VersionCheckResult.swift */,
 				FC5336C62488D16B00DA3033 /* VersionCheckService.swift */,
-				FC5336C52488D16B00DA3033 /* WorkfinderVersionChecker.swift */,
+				FC5336C52488D16B00DA3033 /* WorkfinderEnvironmentConsistencyChecker.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -253,7 +253,7 @@
 				FC5336CD2488D16B00DA3033 /* VersionCheckResult.swift in Sources */,
 				FC5336CF2488D16B00DA3033 /* ForceAppUpdateViewController.swift in Sources */,
 				FC5336CE2488D16B00DA3033 /* ForceEnvironmentSwitchViewController.swift in Sources */,
-				FC5336CB2488D16B00DA3033 /* WorkfinderVersionChecker.swift in Sources */,
+				FC5336CB2488D16B00DA3033 /* WorkfinderEnvironmentConsistencyChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

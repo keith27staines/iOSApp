@@ -82,7 +82,7 @@ class CompanyHeaderView: UIView, CompanyHeaderViewProtocol {
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
         label.text = "2.0 km away"
-        label.textColor = UIColor.init(white: 0.5, alpha: 1)
+        label.textColor = distanceLabelColor
         return label
     }()
     

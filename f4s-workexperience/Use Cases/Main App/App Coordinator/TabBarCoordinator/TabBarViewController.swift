@@ -7,14 +7,11 @@
 //
 
 import UIKit
-import Reachability
 import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
 
 class TabBarViewController: UITabBarController {
-
-    var reachability: Reachability?
     
     public init() { super.init(nibName: nil, bundle: nil) }
     
@@ -23,7 +20,6 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
-        startNotifier()
     }
     
     func configureTimelineTabBarWithCount(count: Int? = 0) {
@@ -36,11 +32,6 @@ class TabBarViewController: UITabBarController {
                 tabBarItem.badgeValue = nil
             }
         }
-    }
-
-    deinit {
-        stopNotifier()
-        NotificationCenter.default.removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,23 +67,5 @@ extension TabBarViewController {
 
     func menuGestureShouldRecognizeTouch(drawerController _: DrawerController, gestureRecognizer _: UIGestureRecognizer, touch _: UITouch) -> Bool {
         return false
-    }
-}
-
-// MARK: - Reachability Setup
-extension TabBarViewController {
-
-    func startNotifier() {
-        do {
-            try reachability?.startNotifier()
-        } catch {
-            return
-        }
-    }
-
-    func stopNotifier() {
-        reachability?.stopNotifier()
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: nil)
-        reachability = nil
     }
 }

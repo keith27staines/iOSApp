@@ -35,7 +35,7 @@ class CoverLetterViewPresenter: CoverLetterViewPresenterProtocol {
     }
     
     func onViewDidAppear() {
-        log.track(TrackingEvent.event(type: .letterPreview, flow: logic.flowType))
+        log.track(.letter_viewed(isComplete: logic.isLetterComplete))
     }
     
     func onViewDidLoad(view: CoverLetterViewProtocol) {

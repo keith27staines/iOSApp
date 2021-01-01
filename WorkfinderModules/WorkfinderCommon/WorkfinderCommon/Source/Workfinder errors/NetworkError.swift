@@ -3,7 +3,7 @@
 //  f4s-workexperience
 //
 //  Created by Keith Dev on 07/01/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
+//  Copyright © 2018 Workfinder Ltd. All rights reserved.
 //
 
 import Foundation
@@ -18,6 +18,7 @@ public enum WorkfinderErrorType {
     case noData
     case http(request:URLRequest?, response:HTTPURLResponse?, data: Data?)
     case networkConnectivity
+    case operationCancelled
     case custom(title: String, description: String)
 
     public var code: Int {
@@ -31,6 +32,7 @@ public enum WorkfinderErrorType {
         case .deserialization(_): return 1003
         case .noData: return 1004
         case .networkConnectivity: return 1005
+        case .operationCancelled: return 1006
         case .custom(_,_): return unexpectedErrorCode - 1
         }
     }
@@ -50,6 +52,7 @@ public enum WorkfinderErrorType {
             default: return "Server error" + code
             }
         case .networkConnectivity: return "Cannot contact server" + code
+        case .operationCancelled: return "Operation cancelled"
         case .custom(let title,_): return title
         }
     }
@@ -63,6 +66,7 @@ public enum WorkfinderErrorType {
         case .noData: return true
         case .http(request: _, response: _, data: _): return true
         case .networkConnectivity: return false
+        case .operationCancelled: return false
         case .custom(title: _, description: _): return true
         }
     }
@@ -89,6 +93,7 @@ public enum WorkfinderErrorType {
             default: return "Server error"
             }
         case .networkConnectivity: return "Please make sure you have a good internet connection"
+        case .operationCancelled: return "The operation was cancelled"
         case .custom(_,let description): return description
         }
     }

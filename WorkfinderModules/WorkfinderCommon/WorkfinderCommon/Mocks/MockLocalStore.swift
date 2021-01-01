@@ -3,7 +3,7 @@
 //  WorkfinderCommon
 //
 //  Created by Keith Dev on 31/03/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
+//  Copyright © 2019 Workfinder Ltd. All rights reserved.
 //
 
 import Foundation
@@ -32,11 +32,13 @@ public class MockUserRepository: UserRepositoryProtocol {
     var user: User?
     var candidate: Candidate?
     
-    public func save(user: User) {
+    public var isCandidateLoggedIn: Bool = false
+    
+    public func saveUser(_ user: User) {
         self.user = user
     }
     
-    public func save(candidate: Candidate) {
+    public func saveCandidate(_ candidate: Candidate) {
         self.candidate = candidate
     }
     

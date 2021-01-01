@@ -3,6 +3,7 @@ import Foundation
 
 public protocol AssociationsServiceProtocol {
     func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<AssociationJson,Error>) -> Void))
+    func fetchAssociations(queryItems: [URLQueryItem], completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
     func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
 }
 
@@ -11,65 +12,11 @@ public struct ServerListJson<A:Decodable>: Decodable {
     public var next: String?
     public var previous: String?
     public var results: [A]
-}
-
-public struct AssociationJson: Codable {
-    public var uuid: F4SUUID
-    public var locationUuid: F4SUUID
-    public var host: F4SUUID
-    public var title: String? = nil
-    public var description: String? = nil
-    public var started: String? = nil
-    public var stopped: String? = nil
-    public var isSelected: Bool = false
-    
-    public init(uuid: F4SUUID,locationUuid: F4SUUID, hostUuid: F4SUUID) {
-        self.uuid = uuid
-        self.locationUuid = locationUuid
-        self.host = hostUuid
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case uuid
-        case locationUuid = "location"
-        case host
-        case title
-        case description
-        case started
-        case stopped
-    }
-}
-
-/// Like an AssociationJson but with a full host object rather than a uuid
-public struct HostAssociationJson: Codable {
-    public var uuid: F4SUUID
-    public var locationUuid: F4SUUID
-    public var host: Host
-    public var title: String?
-    public var description: String?
-    public var started: String?
-    public var stopped: String?
-    public var isSelected: Bool = false
-    
-    public init(uuidAssociation: AssociationJson, host:Host) {
-        self.uuid = uuidAssociation.uuid
-        self.locationUuid = uuidAssociation.locationUuid
-        self.host = host
-        self.title = uuidAssociation.title
-        self.description = uuidAssociation.description
-        self.started = uuidAssociation.started
-        self.stopped = uuidAssociation.stopped
-        self.isSelected = uuidAssociation.isSelected
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case uuid
-        case locationUuid = "location"
-        case host
-        case title
-        case description
-        case started
-        case stopped
+    public init(count: Int?, next: String?, previous: String?, results: [A]) {
+        self.count = count
+        self.next = next
+        self.previous = previous
+        self.results = results
     }
 }
 
@@ -90,6 +37,6 @@ public protocol WorkplaceListProviderProtocol: class {
 }
 
 public protocol HostsProviderProtocol: class {
-    func fetchHost(uuid: String, completion: @escaping (Result<Host,Error>) -> Void)
+    func fetchHost(uuid: String, completion: @escaping (Result<HostJson,Error>) -> Void)
     func fetchHosts(locationUuid: F4SUUID, completion: @escaping((Result<HostListJson,Error>) -> Void) )
 }

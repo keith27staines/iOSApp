@@ -3,7 +3,7 @@
 //  WorkfinderCommon
 //
 //  Created by Keith Dev on 18/09/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
+//  Copyright © 2019 Workfinder Ltd. All rights reserved.
 //
 
 import Foundation
@@ -12,10 +12,10 @@ public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
     func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void)
-    func showRecommendation(uuid: F4SUUID?, applicationSource: ApplicationSource)
-    func showProject(uuid: F4SUUID?, applicationSource: ApplicationSource)
-    func showApplications(uuid: F4SUUID?)
-    func showSearch()
+    func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource)
+    func routeProject(projectUuid: F4SUUID?, appSource: AppSource)
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
+    func switchToTab(_ tab: TabIndex)
     func updateBadges()
     func handleDeepLinkUrl(url: URL) -> Bool
     func handlePushNotification(_ pushNotification: PushNotification?)
@@ -24,30 +24,37 @@ public protocol AppCoordinatorProtocol : Coordinating {
 }
 
 public protocol OnboardingCoordinatorDelegate : class {
-    func shouldEnableLocation(_ :Bool)
 }
 
 public protocol OnboardingCoordinatorProtocol : Coordinating {
-    var isFirstLaunch: Bool { get set }
+    var isOnboardingRequired: Bool { get }
     var delegate: OnboardingCoordinatorDelegate? { get set }
     var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)? { get set }
 }
 
 public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    func showMessages()
-    func showSearch()
+    func switchToTab(_ tab: TabIndex)
 }
 
-public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol {
-    func showApplications(uuid: F4SUUID?)
-    func showSearch()
-    func navigateToRecommendations()
-    func dispatchRecommendationToSearchTab(uuid: F4SUUID)
-    func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: ApplicationSource)
+public protocol TabNavigating: AnyObject {
+    func switchToTab(_ tab: TabIndex)
+}
+
+public enum TabIndex : Int, CaseIterable {
+    // The order of the cases will determine the order of the tabs on the tab bar
+    case applications
+    case home
+    case recommendations
+}
+
+public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
+    func switchToTab(_ tab: TabIndex)
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
+    func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)
+    func routeProject(projectUuid: F4SUUID, appSource: AppSource)
     func updateBadges()
     func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)
-    var shouldAskOperatingSystemToAllowLocation: Bool { get set }
 }
 
 public protocol CoreInjectionProtocol : class {
@@ -56,9 +63,8 @@ public protocol CoreInjectionProtocol : class {
     var launchOptions: LaunchOptions? { get set }
     var user: Candidate { get set }
     var userRepository: UserRepositoryProtocol { get }
-    var companyDownloadFileManager: F4SCompanyDownloadManagerProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
-    var versionChecker: WorkfinderVersionCheckerProtocol { get }
+    var versionChecker: WorkfinderEnvironmentConsistencyCheckerProtocol { get }
 }
 
 public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {

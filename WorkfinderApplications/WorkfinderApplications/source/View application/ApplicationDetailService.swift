@@ -1,27 +1,26 @@
 import WorkfinderCommon
 import WorkfinderServices
 
-protocol ApplicationDetailServiceProtocol: AnyObject {
-    func fetchApplicationDetail(application: Application, completion: @escaping (Result<ApplicationDetail,Error>)-> Void)
+protocol PlacementDetailServiceProtocol: AnyObject {
+    func fetchApplication(placementUuid: F4SUUID, completion: @escaping (Result<Application,Error>)-> Void)
 }
 
-class ApplicationDetailService: WorkfinderService, ApplicationDetailServiceProtocol {
+class ApplicationDetailService: WorkfinderService, PlacementDetailServiceProtocol {
     
-    func fetchApplicationDetail(application: Application, completion: @escaping (Result<ApplicationDetail,Error>)-> Void) {
+    func fetchApplication(placementUuid: F4SUUID, completion: @escaping (Result<Application,Error>)-> Void) {
         
-        performNetworkRequest(placementUuid: application.placementUuid) { (result) in
+        performNetworkRequest(placementUuid: placementUuid) { (result) in
             switch result {
             case .success(let placement):
-                let applicationDetail = ApplicationDetail(json: placement)
-                completion(Result<ApplicationDetail,Error>.success(applicationDetail))
+                let application = Application(json: placement)
+                completion(.success(application))
             case .failure(let error):
-                completion(Result<ApplicationDetail,Error>.failure(error))
+                completion(.failure(error))
             }
         }
-        completion(Result<ApplicationDetail,Error>.success(application))
     }
     
-    func performNetworkRequest(placementUuid: F4SUUID, completion: @escaping (Result<ExpandedAssociationPlacementJson, Error>) -> Void) {
+    func performNetworkRequest(placementUuid: F4SUUID, completion: @escaping (Result<PlacementJson, Error>) -> Void) {
         let relativePath = "placements/\(placementUuid)"
         let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
         do {
@@ -30,7 +29,7 @@ class ApplicationDetailService: WorkfinderService, ApplicationDetailServiceProto
                         completion: completion,
                         attempting: #function)
         } catch {
-            completion(Result<ExpandedAssociationPlacementJson,Error>.failure(error))
+            completion(Result<PlacementJson,Error>.failure(error))
         }
     }
 }

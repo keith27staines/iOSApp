@@ -45,11 +45,15 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     let appModel: AppModel
     let objectUuid: F4SUUID
     let showBackButton: Bool
+    var log: F4SAnalyticsAndDebugging { injected.log }
+    
     func onSkip() {
+        log.track(.document_upload_skip)
         delegate?.onSkipDocumentUpload()
     }
     
     func onUploadComplete() {
+        log.track(.document_upload_convert)
         navigationRouter.dismiss(animated: true, completion: nil)
         delegate?.onUploadComplete()
     }
@@ -75,6 +79,7 @@ public class DocumentUploadCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     public override func start() {
+        log.track(.document_upload_start)
         let presenter = AddFilePresenter(coordinator: self)
         let vc = AddFileViewController(
             coordinator: self,

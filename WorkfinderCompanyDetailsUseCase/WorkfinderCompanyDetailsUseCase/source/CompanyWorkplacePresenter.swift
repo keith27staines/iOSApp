@@ -8,7 +8,7 @@ import WorkfinderServices
 
 protocol CompanyDetailsPresenterProtocol: class {
     var view: CompanyDetailsViewProtocol? { get set }
-    var selectedHost: Host? { get }
+    var selectedHost: HostJson? { get }
     var mainViewPresenter: CompanyMainViewPresenter { get }
     func onTapBack()
     func onTapApply()
@@ -33,20 +33,20 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
         }
     }
     
-    var selectedHost: Host? { mainViewPresenter.hostsSectionPresenter.selectedAssociation?.host }
+    var selectedHost: HostJson? { mainViewPresenter.hostsSectionPresenter.selectedAssociation?.host }
     
     var companyPostcode: String? {
         didSet { view?.refresh() }
     }
 
-    var workplace: Workplace {
+    var companyAndPin: CompanyAndPin {
         didSet {
             view?.refresh()
         }
     }
     
     var companyLocation: CLLocation {
-        let pin = workplace.pinJson
+        let pin = companyAndPin.locationPin
         return CLLocation(latitude: pin.lat, longitude: pin.lon)
     }
     
@@ -94,20 +94,27 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     
     func onTapApply() {
         guard let host = mainViewPresenter.hostsSectionPresenter.selectedAssociation else { return }
-        coordinator?.applyTo(workplace: workplace, hostLocationAssociation: host)
+        coordinator?.applyTo(workplace: companyAndPin, association: host)
     }
     
     init(coordinator: CompanyDetailsCoordinator,
-         workplace: Workplace,
+         workplace: CompanyAndPin,
          recommendedAssociationUuid: F4SUUID?,
          associationsService: AssociationsServiceProtocol,
-         log: F4SAnalyticsAndDebugging?) {
+         log: F4SAnalyticsAndDebugging?,
+         appSource: AppSource
+    ) {
         self.associationsService = associationsService
-        self.workplace = workplace
+        self.companyAndPin = workplace
         self.recommendedAssociationUuid = recommendedAssociationUuid
         self.coordinator = coordinator
         self.log = log
-        self.mainViewPresenter = CompanyMainViewPresenter(workplace: workplace, coordinator: coordinator, log: log)
+        self.mainViewPresenter = CompanyMainViewPresenter(
+            workplace: workplace,
+            coordinator: coordinator,
+            log: log,
+            appSource: appSource
+        )
         super.init()
     }
     
@@ -139,7 +146,7 @@ class WorkplacePresenter : NSObject, CompanyDetailsPresenterProtocol {
     
     func beginLoadHosts() {
         view?.showLoadingIndicator()
-        let locationUuid = workplace.pinJson.workplaceUuid
+        let locationUuid = companyAndPin.locationPin.locationUuid
         associationsService.fetchAssociations(for: locationUuid) { [weak self] (result) in
             guard let self = self else { return }
             self.view?.hideLoadingIndicator(self)

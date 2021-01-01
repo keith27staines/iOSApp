@@ -11,7 +11,7 @@ class TextModel {
         for association in associations {
             let host = association.host
             var state = ExpandableLabelState()
-            state.text = host.description ?? ""
+            state.text = host?.description ?? ""
             state.isExpanded = false
             state.isExpandable = false
             expandableLabelStates.append(state)

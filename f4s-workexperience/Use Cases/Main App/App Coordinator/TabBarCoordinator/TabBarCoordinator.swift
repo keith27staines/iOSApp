@@ -7,14 +7,15 @@ import WorkfinderOnboardingUseCase
 import WorkfinderApplications
 import WorkfinderRecommendationsList
 import WorkfinderCompanyDetailsUseCase
+import WorkfinderHome
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
+    
     var parentCoordinator: Coordinating?
     var appCoordinator: AppCoordinatorProtocol?
     
     let injected: CoreInjectionProtocol
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
-    let interestsRepository: F4SSelectedInterestsRepositoryProtocol
     
     let uuid: UUID = UUID()
     let navigationRouter: NavigationRoutingProtocol?
@@ -24,19 +25,16 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     var tabBarViewController: TabBarViewController!
     var drawerController: DrawerController?
-    var shouldAskOperatingSystemToAllowLocation = false
     
     required init(parent: AppCoordinatorProtocol?,
                   navigationRouter: NavigationRoutingProtocol,
                   inject: CoreInjectionProtocol,
-                  companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol,
-                  interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
+                  companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol) {
         self.appCoordinator = parent
         self.parentCoordinator = parent
         self.navigationRouter = navigationRouter
         self.injected = inject
         self.companyCoordinatorFactory = companyCoordinatorFactory
-        self.interestsRepository = interestsRepository
     }
     
     func start() {
@@ -45,80 +43,51 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window else { return }
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
-        navigateToMostAppropriateInitialTab()
+        switchToTab(.home)
+        requestPushNotificationsIsSignedIn()
     }
     
-    private var recommendationsService: RecommendationsServiceProtocol?
-    public func navigateToMostAppropriateInitialTab() {
-        guard injected.userRepository.loadUser().candidateUuid != nil else {
-            navigateToMap()
-            return
-        }
-        recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)
-        recommendationsService?.fetchRecommendations { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let recommendations):
-                if recommendations.count == 0 {
-                    self.navigateToMap()
-                } else {
-                    self.navigateToRecommendations()
-                    self.appCoordinator?.requestPushNotifications(from:self.topNavigationController)
-                }
-            case .failure(_):
-                self.navigateToMap()
-            }
-        }
-        
+    func requestPushNotificationsIsSignedIn() {
+        guard injected.userRepository.isCandidateLoggedIn else { return }
+        appCoordinator?.requestPushNotifications(from:self.topNavigationController)
     }
     
     public func updateBadges() {
 
     }
-
-    public func dispatchRecommendationToSearchTab(uuid: F4SUUID) {
-        closeMenu { [weak self] (success) in
-            self?.navigateToMap()
-            self?.searchCoordinator.processRecommendation(uuid: uuid)
+    
+    public func switchToTab(_ tab: TabIndex) {
+        closeMenu() { [ weak self]  (success) in
+            guard let self = self else { return }
+            self.tabBarViewController.selectedIndex = tab.rawValue
         }
     }
     
-    public func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: ApplicationSource) {
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
+        closeMenu { [weak self] (success) in
+            guard let self = self, let uuid = placementUuid else { return }
+            self.switchToTab(.applications)
+            self.applicationsCoordinator.routeToApplication(uuid, appSource: appSource)
+        }
+    }
+    
+    public func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource) {
+        closeMenu { [weak self] (success) in
+            self?.switchToTab(.home)
+            self?.homeCoordinator.processRecommendedAssociation(recommendationUuid: recommendationUuid, source: appSource)
+        }
+    }
+    
+    public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
         closeMenu() { [ weak self]  (success) in
             guard let self = self else { return }
             self.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
             DispatchQueue.main.async {
                 self.recommendationsCoordinator.processProjectViewRequest(
                     projectUuid,
-                    applicationSource: applicationSource)
+                    appSource: appSource)
             }
         }
-    }
-    
-    public func navigateToApplications() {
-        closeMenu() { [ weak self]  (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.applications.rawValue
-        }
-    }
-    
-    public func navigateToRecommendations() {
-        closeMenu() { [ weak self]  (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
-        }
-    }
-    
-    public func navigateToMap() {
-        closeMenu { [weak self] (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.map.rawValue
-        }
-    }
-    
-    public func topMostViewController() -> UIViewController? {
-        let vc = drawerController?.topMostViewController
-        return vc
     }
     
     public func openMenu(completion: ((Bool) -> ())? = nil) {
@@ -131,6 +100,11 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     public func toggleMenu(completion: ((Bool) -> ())? = nil) {
         drawerController?.toggleLeftDrawerSide(animated: true, completion: completion)
+    }
+    
+    public func topMostViewController() -> UIViewController? {
+        let vc = drawerController?.topMostViewController
+        return vc
     }
     
     public func closeMenu(completion: ((Bool) -> ())? = nil) {
@@ -172,35 +146,27 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         return coordinator
     }()
     
-    lazy var searchCoordinator: SearchCoordinator = {
-        let router = TabIndex.map.makeRouter()
-        let coordinator = SearchCoordinator(
+    lazy var homeCoordinator: HomeCoordinator = {
+        let router = TabIndex.home.makeRouter()
+        let coordinator = HomeCoordinator(
             parent: self,
             navigationRouter: router,
             inject: injected,
             companyCoordinatorFactory: companyCoordinatorFactory,
-            interestsRepository: interestsRepository)
-        coordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
+            tabNavigator: self
+        )
         addChildCoordinator(coordinator)
         return coordinator
     }()
     
     lazy var recommendationsCoordinator: RecommendationsCoordinator = {
         let router = TabIndex.recommendations.makeRouter()
-        let coordinator = RecommendationsCoordinator(parent: nil, navigationRouter: router, inject: injected, navigateToSearch: self.navigateToMap, navigateToApplications: self.navigateToApplications)
-        coordinator.onRecommendationSelected = { uuid in
-            self.dispatchRecommendationToSearchTab(uuid: uuid)
-        }
-        addChildCoordinator(coordinator)
-        return coordinator
-    }()
-    
-    lazy var homeCoordinator: HomeCoordinator = {
-        let navigationController = UINavigationController()
-        let icon = UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        navigationController.tabBarItem = UITabBarItem(title: "Home", image: icon, selectedImage: nil)
-        let router = NavigationRouter(navigationController: navigationController)
-        let coordinator = HomeCoordinator(parent: nil, navigationRouter: router, inject: injected)
+        let coordinator = RecommendationsCoordinator(
+            parent: nil,
+            navigationRouter: router,
+            inject: injected,
+            switchToTab: { [weak self] tab in self?.switchToTab(tab) }
+        )
         addChildCoordinator(coordinator)
         return coordinator
     }()
@@ -240,14 +206,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         parentCtrl.present(navigationController, animated: true, completion: nil)
     }
     
-    func showApplications(uuid: F4SUUID?) {
-        navigateToApplications()
-    }
-    
-    func showSearch() {
-        navigateToMap()
-    }
-    
     func updateUnreadMessagesCount(_ count: Int) {
         tabBarViewController.configureTimelineTabBarWithCount(count: count)
     }
@@ -257,31 +215,20 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 extension TabBarCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let log = injected.log
+        drawerController!.openDrawerGestureModeMask = .all
+        drawerController!.closeDrawerGestureModeMask = .all
         switch viewController {
-        case searchCoordinator.navigationRouter.navigationController:
-            log.track(TrackingEvent.makeTabTap(tab: .search))
+        case homeCoordinator.navigationRouter.navigationController:
+            log.track(.tab_tap(tabName: "home"))
+            drawerController!.openDrawerGestureModeMask = .panningNavigationBar
+            drawerController!.closeDrawerGestureModeMask = .all
         case applicationsCoordinator.navigationRouter.navigationController:
-            log.track(TrackingEvent.makeTabTap(tab: .applications))
+            log.track(.tab_tap(tabName: "applications"))
         case recommendationsCoordinator.navigationRouter.navigationController:
             appCoordinator?.requestPushNotifications(from: viewController)
-            log.track(TrackingEvent.makeTabTap(tab: .recommendations))
+            log.track(.tab_tap(tabName: "recommendations"))
         default:
             fatalError("unknown coordinator")
         }
-    }
-}
-
-fileprivate extension TrackingEvent {
-    enum TabName: String {
-        case applications
-        case recommendations
-        case notifications
-        case search
-    }
-    static func makeTabTap(tab: TabName) -> TrackingEvent {
-        TrackingEvent(
-            type: .tabTap,
-            additionalProperties: ["navigation_item": tab.rawValue]
-        )
     }
 }

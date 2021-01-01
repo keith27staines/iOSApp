@@ -66,35 +66,28 @@ class ProjectPresenter: ProjectPresenterProtocol {
     weak var coordinator: ProjectApplyCoordinator?
     weak var view: ProjectViewProtocol?
     let projectUuid: F4SUUID
-    let service: ProjectAndAssociationDetailsServiceProtocol
+    let service: ProjectServiceProtocol
     
-    var detail: ProjectAndAssociationDetail = ProjectAndAssociationDetail() {
-        didSet { view?.refreshFromPresenter() }
-    }
-    
-    private var company: CompanyJson? { detail.associationDetail?.company }
-    private var association: AssociationDetail? { detail.associationDetail }
-    private var host: Host? { detail.associationDetail?.host }
-    private var projectType: String? { detail.projectType }
-    private var project: ProjectJson? { detail.project }
-    var projectName: String? { project?.name }
+    private var company: CompanyJson? { association?.location?.company }
+    var association: RoleNestedAssociation? { project.association }
+    var host: HostJson? { association?.host }
+    var projectType: String? { project.type }
+    var project: ProjectJson = ProjectJson() { didSet { view?.refreshFromPresenter() } }
+    var projectName: String? { project.name }
     var companyName: String? { company?.name }
     var companyLogoUrl: String? { company?.logo }
-    var additionalRequirements: String? { detail.project?.additionalComments }
-    var skills: [String] { project?.skillsAcquired ?? [] }
-    private var activities: [String] { project?.candidateActivities ?? [] }
+    var additionalRequirements: String? { project.additionalComments }
+    var skills: [String] { project.skillsAcquired ?? [] }
+    var activities: [String] { project.candidateActivities ?? [] }
     
-    var isOpenForApplication: Bool {
-        detail.project?.status == "open" ? true : false
-    }
-    
-    var status: String? {
-        detail.project?.status
-    }
+    var isOpenForApplication: Bool { project.status == "open" ? true : false }
+    var status: String? { project.status }
     
     init(coordinator: ProjectApplyCoordinator,
          projectUuid: F4SUUID,
-         projectService: ProjectAndAssociationDetailsServiceProtocol) {
+         projectService: ProjectServiceProtocol,
+         source: AppSource,
+         log: F4SAnalyticsAndDebugging) {
         self.coordinator = coordinator
         self.projectUuid = projectUuid
         self.service = projectService
@@ -105,10 +98,10 @@ class ProjectPresenter: ProjectPresenterProtocol {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        service.fetch(projectUuid: projectUuid) { (result) in
+        service.fetchProject(uuid: projectUuid) { (result) in
             switch result {
-            case .success(let detail):
-                self.detail = detail
+            case .success(let project):
+                self.project = project
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -165,10 +158,10 @@ class ProjectPresenter: ProjectPresenterProtocol {
             var locationString: String = "n/a"
             switch indexPath.row {
             case 0:
-                if detail.project?.isRemote == true {
+                if project.isRemote == true {
                     locationString = "This is a remote project"
                 } else {
-                    if let city = detail.associationDetail?.location?.address_city {
+                    if let city = association?.location?.addressCity {
                         locationString = "The company is based in \(city)"
                     }
                 }
@@ -176,21 +169,21 @@ class ProjectPresenter: ProjectPresenterProtocol {
                 title: "Location",
                 text: locationString)
             case 1:
-                let isPaid = detail.project?.isPaid ?? false
+                let isPaid = project.isPaid ?? false
                 let text = isPaid ? "This is a paid work placement at £6.45-8.21 p/h depending on age" : "This is a voluntary project."
                 return ProjectBulletPointsPresenter(
                     title: "Salary",
                     text: text)
             case 2:
                 let defaultText = "80 hours"
-                var text = detail.project?.duration ?? defaultText
+                var text = project.duration ?? defaultText
                 if text.isEmpty { text = defaultText }
                 return ProjectBulletPointsPresenter(
                     title: "Duration",
                     text: text)
             case 3:
                 guard
-                    let workfinderDateString = detail.project?.startDate,
+                    let workfinderDateString = project.startDate,
                     let date = Date.workfinderDateStringToDate(workfinderDateString)
                 else {
                     return ProjectBulletPointsPresenter(title: "", text: "", isHidden: true)
@@ -206,7 +199,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutPlacementSectionHeading:
             return SectionHeadingPresenter(title: "About \(projectName ?? "Project")")
         case .aboutPlacement:
-            return AboutPresenter(text: project?.description, defaultText: "No description available")
+            return AboutPresenter(text: project.description, defaultText: "No description available")
         case .additionalCommentsHeading:
             let presenter = SectionHeadingPresenter(title: "Additional requirements")
             presenter.isHidden = hideAdditionalRequirements
@@ -226,7 +219,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         case .aboutYouSectionHeading:
             return SectionHeadingPresenter(title: "About you")
         case .aboutYou:
-            return AboutPresenter(text: detail.project?.aboutCandidate, defaultText: "No candidate qualities are specified")
+            return AboutPresenter(text: project.aboutCandidate, defaultText: "No candidate qualities are specified")
         case .projectContactSectionheading:
             return SectionHeadingPresenter(title: "Project contact")
         case .projectContact:

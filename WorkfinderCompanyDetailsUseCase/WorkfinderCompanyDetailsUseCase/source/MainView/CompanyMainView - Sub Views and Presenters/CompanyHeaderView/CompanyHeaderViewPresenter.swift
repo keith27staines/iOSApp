@@ -14,9 +14,9 @@ protocol CompanyHeaderViewPresenterProtocol: class {
 class CompanyHeaderViewPresenter: CompanyHeaderViewPresenterProtocol {
     
     weak var view: CompanyHeaderViewProtocol?
-    let model: Workplace
+    let model: CompanyAndPin
     
-    init(workplace: Workplace) {
+    init(workplace: CompanyAndPin) {
         self.model = workplace
     }
     

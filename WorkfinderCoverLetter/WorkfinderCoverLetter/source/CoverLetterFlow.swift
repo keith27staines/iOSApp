@@ -13,7 +13,7 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
     weak var originViewController: UIViewController?
     var picklistsDidUpdate: ((PicklistsDictionary) -> Void)?
     let logic: CoverLetterLogic
-    
+    var log: F4SAnalyticsAndDebugging { injected.log }
     var editorCompletion: ((Error?) -> Void)?
     
     init(parent: CoverLetterParentCoordinatorProtocol?,
@@ -39,8 +39,10 @@ public class CoverLetterFlow: CoreInjectionNavigationCoordinator, UserMessageHan
     func finishWorkflow(cancelled: Bool) {
         logic.save()
         if cancelled {
+            log.track(.letter_cancel(isComplete: logic.isLetterComplete))
             applyCoordinator?.coverLetterDidCancel()
         } else {
+            log.track(.letter_convert)
             applyCoordinator?.coverLetterCoordinatorDidComplete(
                 coverLetterText: logic.letterDisplayString,
                 picklistsDictionary: logic.allPicklistsDictionary

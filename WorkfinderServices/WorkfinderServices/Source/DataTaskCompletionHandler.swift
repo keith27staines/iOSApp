@@ -15,11 +15,15 @@ public class DataTaskCompletionHandler {
                                     responseData: Data?,
                                     httpResponse: HTTPURLResponse?,
                                     error: Error?,
-                                    completion: @escaping((Result<Data,Error>) -> Void)) {
-        if let error = error as NSError?, error.code == -999 {
-            return // request was cancelled
-        }
+                                    verbose: Bool,
+                                    completion: @escaping((Result<Data,Error>) -> Void)
+    ) {
         DispatchQueue.main.async { [weak self] in
+            if let error = error as NSError?, error.code == -999 {
+                completion(.failure(WorkfinderError.init(errorType: .operationCancelled, attempting: "Network request")))
+                return // request was cancelled
+            }
+        
             guard let response = httpResponse, let data = responseData else {
                 var workfinderError: WorkfinderError?
                 if let error = error {
@@ -49,7 +53,7 @@ public class DataTaskCompletionHandler {
             }
             
             let result = Result<Data,Error>.success(data)
-            self?.logger.logDataTaskSuccess(request: request, response: response, responseData: data)
+            self?.logger.logDataTaskSuccess(request: request, response: response, responseData: data, verbose: verbose)
             completion(result)
         }
     }

@@ -13,5 +13,6 @@ public protocol NetworkCallLoggerProtocol {
     /// Logs successes locally
     func logDataTaskSuccess(request: URLRequest,
                             response: HTTPURLResponse,
-                            responseData: Data)
+                            responseData: Data,
+                            verbose: Bool)
 }

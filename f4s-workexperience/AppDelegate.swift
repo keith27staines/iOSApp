@@ -8,7 +8,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var deviceToken: String?
     var masterBuilder: MasterBuilder!
-    var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol!
     var appCoordinator: AppCoordinatorProtocol!
     
     var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
@@ -20,14 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.applicationIconBadgeNumber = 0
         masterBuilder = MasterBuilder(launchOptions: launchOptions)
         window = masterBuilder.window
-        startApp()
+        startApp(launchOptions: launchOptions)
         return true
     }
     
-    func startApp() {
-        appCoordinator = self.masterBuilder.buildAppCoordinator()
+    func startApp(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        let suppressOnboarding = shouldSuppressOnboarding(launchOptions: launchOptions)
+        appCoordinator = self.masterBuilder.buildAppCoordinator(suppressOnboarding: suppressOnboarding)
         appCoordinator.start()
-        companyFileDownloadManager = self.masterBuilder.companyFileDownloadManager
+    }
+    
+    func shouldSuppressOnboarding(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        guard let options = launchOptions else { return false }
+        let isPush = options[.remoteNotification] == nil ? false :  true
+        let isDeeplink = options[.url] == nil ? false : true
+        let isUserActivity = options[.userActivityDictionary] == nil ? false : true
+        return isPush || isDeeplink || isUserActivity
     }
     
     func application(_ application: UIApplication,
@@ -92,8 +99,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      handleEventsForBackgroundURLSession identifier: String,
                      completionHandler: @escaping () -> Void) {
-        companyFileDownloadManager?.backgroundSessionCompletionHandler = completionHandler
-        companyFileDownloadManager?.start()
+
+        
     }
 
 }

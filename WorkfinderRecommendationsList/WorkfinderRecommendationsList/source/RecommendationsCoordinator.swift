@@ -20,8 +20,8 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func workplaceServiceFactory() -> WorkplaceAndAssociationService {
-        WorkplaceAndAssociationService(networkConfig: injected.networkConfig)
+    func workplaceServiceFactory() -> ApplicationContextService {
+        ApplicationContextService(networkConfig: injected.networkConfig)
     }
     
     func projectServiceFactory() -> ProjectServiceProtocol {
@@ -34,37 +34,32 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         
     weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
-    public func processProjectViewRequest(_ projectUuid: F4SUUID?, applicationSource: ApplicationSource) {
+    public func processProjectViewRequest(_ projectUuid: F4SUUID?, appSource: AppSource) {
         guard let projectUuid = projectUuid else { return }
         let projectApplyCoordinator = ProjectApplyCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
             projectUuid: projectUuid,
-            applicationSource: applicationSource,
-            navigateToSearch: navigateToSearch,
-            navigateToApplications: navigateToApplications)
+            appSource: appSource,
+            switchToTab: switchToTab
+        )
         addChildCoordinator(projectApplyCoordinator)
         self.projectApplyCoordinator = projectApplyCoordinator
         projectApplyCoordinator.start()
     }
     
-    var navigateToSearch: (() -> Void)?
-    var navigateToApplications: (() -> Void)?
-    
-    public var onRecommendationSelected: ((F4SUUID) -> Void)?
+    var switchToTab: ((TabIndex) -> Void)?
     
     public init(
         parent: Coordinating?,
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
-        navigateToSearch: (() -> Void)?,
-        navigateToApplications: (() -> Void)?) {
-        self.navigateToSearch = navigateToSearch
-        self.navigateToApplications = navigateToApplications
+        switchToTab: ((TabIndex) -> Void)?
+    ) {
+        self.switchToTab = switchToTab
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
-    
 }
 
 extension RecommendationsCoordinator: ProjectApplyCoordinatorDelegate {

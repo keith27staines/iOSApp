@@ -3,7 +3,7 @@
 //  WorkfinderCommonTests
 //
 //  Created by Keith Dev on 08/08/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
+//  Copyright © 2019 Workfinder Ltd. All rights reserved.
 //
 
 import XCTest
@@ -22,7 +22,7 @@ class F4SUserRepositoryTests: XCTestCase {
         let sut = UserRepository(localStore: store)
         var candidate = Candidate()
         candidate.dateOfBirth = "some date string"
-        sut.save(candidate: candidate)
+        sut.saveCandidate(candidate)
         let retrievedCandidate = sut.loadCandidate()
         XCTAssertEqual(retrievedCandidate.dateOfBirth, candidate.dateOfBirth)
     }

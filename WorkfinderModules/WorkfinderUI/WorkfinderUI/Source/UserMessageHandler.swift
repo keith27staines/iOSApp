@@ -29,6 +29,7 @@ public class UserMessageHandler {
             assertionFailure("Cannot convert error to WorkfinderError")
             return
         }
+        if case WorkfinderErrorType.operationCancelled = workfinderError.errorType { return }
         displayWorkfinderError(workfinderError,
                                cancelHandler: cancelHandler,
                                retryHandler: retryHandler)

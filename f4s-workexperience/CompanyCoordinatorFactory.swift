@@ -14,36 +14,34 @@ class CompanyCoordinatorFactory: CompanyCoordinatorFactoryProtocol {
     let applyService: PostPlacementServiceProtocol
     let environment: EnvironmentType
     let associationsProvider: AssociationsServiceProtocol
-    let interestsRepository: F4SSelectedInterestsRepositoryProtocol
 
     init(applyService: PostPlacementServiceProtocol,
          associationsProvider: AssociationsServiceProtocol,
-         environment: EnvironmentType,
-         interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
+         environment: EnvironmentType) {
         self.applyService = applyService
         self.associationsProvider = associationsProvider
         self.environment = environment
-        self.interestsRepository = interestsRepository
     }
 
     func buildCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        workplace: Workplace,
+        companyAndPin: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
-        applicationFinished: @escaping ((PreferredDestination) -> Void)
+        appSource: AppSource,
+        applicationFinished: @escaping ((TabIndex) -> Void)
         ) -> CoreInjectionNavigationCoordinatorProtocol {
         return CompanyDetailsCoordinator(
             parent: parent,
             navigationRouter: navigationRouter,
-            workplace: workplace,
+            workplace: companyAndPin,
             recommendedAssociationUuid: recommendedAssociationUuid,
             inject: inject,
             environment: environment,
-            interestsRepository: interestsRepository,
             applyService: applyService,
             associationsProvider: associationsProvider,
-            applicationFinished: applicationFinished)
+            applicationFinished: applicationFinished,
+            appSource: appSource)
     }
 }

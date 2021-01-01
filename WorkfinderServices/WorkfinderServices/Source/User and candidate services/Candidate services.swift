@@ -45,7 +45,7 @@ public class UpdateCandidateService: WorkfinderService, UpdateCandidateServicePr
     
     public func update(candidate: Candidate, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
         do {
-            let relativePath = "candidate/"
+            let relativePath = "candidates/"
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: candidate)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {

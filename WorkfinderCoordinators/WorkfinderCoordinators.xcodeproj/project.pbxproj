@@ -115,13 +115,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FC93DBD2231F8D9700F1CE23 /* Routing */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Routing;
-			sourceTree = "<group>";
-		};
 		FC93DBD3231F8DA300F1CE23 /* Coordinating */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +127,6 @@
 		FC93DBD4231F8DBC00F1CE23 /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBD2231F8D9700F1CE23 /* Routing */,
 				FC93DBD3231F8DA300F1CE23 /* Coordinating */,
 				FC93DBD8231F94B600F1CE23 /* Injection.swift */,
 			);

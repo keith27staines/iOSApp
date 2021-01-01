@@ -39,7 +39,7 @@ class HostViewController: UIViewController, UITableViewDataSource {
             self.userMessageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.loadData()
             }
-            self.hostView.association = self.presenter.association
+            self.hostView.configureWith(host: self.presenter.host, association: self.presenter.association)
             self.hostView.expandableLabelState.isExpanded = true
         }
     }

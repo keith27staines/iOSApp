@@ -24,7 +24,7 @@ public class MockNetworkCallLogger: NetworkCallLoggerProtocol {
         self.responseData = error.responseData
     }
     
-    public func logDataTaskSuccess(request: URLRequest, response: HTTPURLResponse, responseData: Data) {
+    public func logDataTaskSuccess(request: URLRequest, response: HTTPURLResponse, responseData: Data, verbose: Bool = true) {
         logDataTaskSuccessWasCalled = true
         self.request = request
         self.response = response
@@ -39,18 +39,7 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
     
     public init() {}
     
-    public struct AnalyticsItem {
-        enum ItemType {
-            case screen
-            case track
-        }
-        var type: ItemType
-        var name: String
-        var properties: [String : Any]?
-        var options: [String :  Any]?
-    }
-    
-    public var analyticsItems = [AnalyticsItem]()
+    public var analyticsItems = [TrackingEvent]()
     public var identities: [F4SUUID] = []
     
     public func updateIdentity() {
@@ -63,25 +52,10 @@ public class MockF4SAnalyticsAndDebugging : F4SAnalyticsAndDebugging {
         aliases.append(userId)
     }
 
-    public func track(_ event: TrackingEvent) {
-        let notNilProperties = event.additionalProperties ?? [:]
-        analyticsItems.append(AnalyticsItem(type: .track, name: event.type.name, properties: notNilProperties))
-    }
-    
-    public func screen(_ name: ScreenName) {
-        analyticsItems.append(AnalyticsItem(type: .screen, name: name.rawValue))
-    }
-    
-    public func screen(_ name: ScreenName, originScreen: ScreenName) {
-        let item = AnalyticsItem(
-            type: .screen,
-            name: name.rawValue,
-            properties: ["origin" : originScreen.rawValue])
-        analyticsItems.append(item)
-    }
-    
-    public func screen(title: String, properties: [String : Any]) {
-        analyticsItems.append(AnalyticsItem(type: .screen, name: title, properties: properties))
+    public func track(_ eventType: TrackingEventType) {
+        analyticsItems.append(
+            TrackingEvent(type: eventType)
+        )
     }
     
     // MARK:- debuggin and error reporting

@@ -14,7 +14,9 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     
     public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
     
-    public var isFirstLaunch: Bool = true
+    lazy public var isOnboardingRequired: Bool = {
+        (localStore.value(key: .isOnboardingRequired) as? Bool) ?? true
+    }()
     
     let log: F4SAnalytics
     
@@ -31,22 +33,15 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     }
     
     public override func start() {
-        guard isFirstLaunch else {
+        guard isOnboardingRequired else {
             self.onboardingDidFinish?(self)
             return
         }
-        log.track(TrackingEvent(type: .uc_onboarding_start))
+        log.track(.onboarding_start)
         let onboardingViewController = UIStoryboard(name: "Onboarding", bundle: __bundle).instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
         self.onboardingViewController = onboardingViewController
-        onboardingViewController.hideOnboardingControls = !isFirstLaunch
+        onboardingViewController.hideOnboardingControls = !isOnboardingRequired
         onboardingViewController.coordinator = self
-        onboardingViewController.shouldEnableLocation = { [weak self] enable in
-            guard let self = self else { return }
-            self.delegate?.shouldEnableLocation(enable)
-            LocalStore().setValue(false, for: LocalStore.Key.isFirstLaunch)
-            self.log.track(TrackingEvent(type: .uc_onboarding_convert))
-            self.onboardingDidFinish?(self)
-        }
         onboardingViewController.isLoggedIn = injected.userRepository.loadUser().candidateUuid != nil
         onboardingViewController.modalPresentationStyle = .fullScreen
         onboardingViewController.coordinator = self
@@ -54,6 +49,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     }
     
     func loginButtonTapped(viewController: UIViewController) {
+        log.track(.onboarding_tap_sign_in)
         let loginHandler = LoginHandler(
             parentCoordinator: self,
             navigationRouter: navigationRouter,
@@ -62,7 +58,21 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
         loginHandler.startLoginWorkflow(screenOrder: .loginThenRegister) { [weak self] (isLoggedIn) in
             guard let self = self else { return }
             self.onboardingViewController?.isLoggedIn = isLoggedIn
+            if isLoggedIn {
+                self.finishOnboarding()
+            }
         }
+    }
+    
+    func justGetStartedButtonTapped(viewController: UIViewController) {
+        log.track(.onboarding_tap_just_get_started)
+        finishOnboarding()
+    }
+    
+    func finishOnboarding() {
+        LocalStore().setValue(false, for: LocalStore.Key.isOnboardingRequired)
+        self.log.track(.onboarding_convert)
+        self.onboardingDidFinish?(self)
     }
     
 }

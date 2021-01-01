@@ -7,6 +7,7 @@ import WorkfinderAppLogic
 import WorkfinderDocumentUpload
 import WorkfinderUI
 import ErrorHandlingUI
+import WorkfinderRegisterCandidate
 
 protocol ProjectApplyCoordinatorProtocol: AnyObject, ErrorHandlerProviderProtocol {
     func onCoverLetterWorkflowCancelled()
@@ -25,14 +26,16 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     weak var originalVC: UIViewController?
     var projectPresenter: ProjectPresenter?
     var newNavigationRouter:NavigationRouter!
-    var navigateToSearch: (() -> Void)?
-    var navigateToApplications: (() -> Void)?
+    var switchToTab: ((TabIndex) -> Void)?
     weak var successViewController: UIViewController?
     var placementService: PostPlacementServiceProtocol?
     var delegate: ProjectApplyCoordinatorDelegate?
     var projectType: String = ""
-    var log: F4SAnalytics { injected.log }
-    let applicationSource: ApplicationSource
+    var log: F4SAnalyticsAndDebugging { injected.log }
+    let appSource: AppSource
+    var coverLetterText: String = ""
+    var picklistsDictionary = PicklistsDictionary()
+    
     lazy public var errorHandler: ErrorHandlerProtocol = {
         ErrorHandler(
             navigationRouter: self.newNavigationRouter,
@@ -45,13 +48,12 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
         projectUuid: F4SUUID,
-        applicationSource: ApplicationSource,
-        navigateToSearch: (() -> Void)?,
-        navigateToApplications: (() -> Void)?) {
+        appSource: AppSource,
+        switchToTab: ((TabIndex) -> Void)?
+    ) {
         self.delegate = parent
-        self.applicationSource = applicationSource
-        self.navigateToSearch = navigateToSearch
-        self.navigateToApplications = navigateToApplications
+        self.appSource = appSource
+        self.switchToTab = switchToTab
         self.projectUuid = projectUuid
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
@@ -61,10 +63,17 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         let presenter = ProjectPresenter(
             coordinator: self,
             projectUuid: projectUuid,
-            projectService: ProjectAndAssociationDetailsService(networkConfig: injected.networkConfig)
+            projectService: ProjectService(networkConfig: injected.networkConfig),
+            source: appSource,
+            log: injected.log
         )
         self.projectPresenter = presenter
-        let vc = ProjectViewController(coordinator: self, presenter: presenter)
+        let vc = ProjectViewController(
+            coordinator: self,
+            presenter: presenter,
+            appSource: appSource,
+            log: log
+        )
         let newNav = UINavigationController(rootViewController: vc)
         newNav.modalPresentationStyle = .fullScreen
         originalVC?.present(newNav, animated: true, completion: nil)
@@ -74,11 +83,11 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     
     func startCoverLetterFlow() {
         let candidate = UserRepository().loadCandidate()
-        let associationDetail = projectPresenter?.detail.associationDetail
-        let projectTitle = projectPresenter?.detail.project?.name
+        let association = projectPresenter?.association
+        let projectTitle = projectPresenter?.project.name
         guard
-            let companyName = associationDetail?.company?.name,
-            let hostName = associationDetail?.host?.displayName
+            let companyName = association?.location?.company?.name,
+            let hostName = association?.host?.fullName
             else { return }
         
         let coordinator = CoverLetterFlowFactory.makeFlow(
@@ -111,28 +120,43 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
 extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onTapApply() {
-        projectType = projectPresenter?.projectName ?? ""
-        let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
-        log.track(TrackingEvent(type: .projectApplyStart, additionalProperties: properties))
-        log.track(TrackingEvent(type: .uc_projectApply_start(applicationSource)))
+        log.track(.project_apply_start(appSource))
+        log.track(.placement_funnel_start(appSource))
         startCoverLetterFlow()
     }
     
     func onModalFinished() {
         originalVC?.dismiss(animated: true, completion: nil)
-        let properties: [String:String] = ["application_type" : "project", "project_type" : projectType]
-        log.track(TrackingEvent(type: .projectApplySubmit, additionalProperties: properties))
         delegate?.onProjectApplyDidFinish()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
     func onCoverLetterWorkflowCancelled() {
-        log.track(TrackingEvent(type: .uc_projectApply_cancel(applicationSource)))
+        log.track(.placement_funnel_cancel(appSource))
+        log.track(.project_apply_cancel(appSource))
     }
     
-    func submitApplication(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
+    func onCoverLetterDidComplete() {
+        switch UserRepository().isCandidateLoggedIn {
+        case true: submitApplication()
+        case false: startLogin()
+        }
+    }
+    
+    func startLogin() {
+        let coordinator = RegisterAndSignInCoordinator(
+            parent: self,
+            navigationRouter: newNavigationRouter,
+            inject: injected,
+            firstScreenHidesBackButton: true)
+        addChildCoordinator(coordinator)
+        coordinator.startLoginFirst()
+    }
+    
+    func submitApplication() {
+        self.log.track(.placement_funnel_convert(self.appSource))
         guard let vc = modalVC, let view = vc.view else { return }
-        var picklistsDictionary = picklistsDictionary
+        var picklistsDictionary = self.picklistsDictionary
         picklistsDictionary[.availabilityPeriod] = nil
         picklistsDictionary[.duration] = nil
         let messageHandler = vc.messageHandler
@@ -141,8 +165,8 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         let builder = DraftPlacementPreparer()
         builder.update(candidateUuid: UserRepository().loadCandidate().uuid)
         builder.update(picklists: picklistsDictionary)
-        builder.update(associationUuid: projectPresenter?.detail.project?.association)
-        builder.update(associatedProject: projectPresenter?.detail.project?.uuid)
+        builder.update(associationUuid: projectPresenter?.association?.uuid)
+        builder.update(associatedProject: projectPresenter?.project.uuid)
         builder.update(coverletter: coverLetterText)
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         placementService?.postPlacement(draftPlacement: builder.draft) { [weak self] (result) in
@@ -150,13 +174,13 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
             messageHandler.hideLoadingOverlay()
             switch result {
             case .success(let placement):
-                self.log.track(TrackingEvent(type: .uc_onboarding_convert))
+                self.log.track(.project_apply_convert(self.appSource))
                 self.onApplicationSubmitted(placement: placement)
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {
                     // just dismiss
                 }, retryHandler: {
-                    self.submitApplication(coverLetterText: coverLetterText, picklistsDictionary: picklistsDictionary)
+                    self.submitApplication()
                 })
             }
         }
@@ -182,14 +206,13 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
                 guard let self = self else { return }
                 self.successViewController?.dismiss(animated: true, completion: nil)
                 self.onModalFinished()
-                self.navigateToApplications?()
-                
+                self.switchToTab?(.applications)
         },
             searchButtonTap: { [weak self] in
                 guard let self = self else { return }
                 self.successViewController?.dismiss(animated: true, completion: nil)
                 self.onModalFinished()
-                self.navigateToSearch?()
+                self.switchToTab?(.home)
         })
         vc.modalPresentationStyle = .overCurrentContext
         modalVC?.present(vc, animated: false, completion: nil)
@@ -203,7 +226,9 @@ extension ProjectApplyCoordinator: CoverLetterParentCoordinatorProtocol {
         onCoverLetterWorkflowCancelled()
     }
     public func coverLetterCoordinatorDidComplete(coverLetterText: String, picklistsDictionary: PicklistsDictionary) {
-        submitApplication(coverLetterText: coverLetterText, picklistsDictionary: picklistsDictionary)
+        self.coverLetterText = coverLetterText
+        self.picklistsDictionary = picklistsDictionary
+        onCoverLetterDidComplete()
     }
 }
 
@@ -215,4 +240,16 @@ extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
     public func onUploadComplete() {
         showSuccess()
     }
+}
+
+extension ProjectApplyCoordinator: RegisterAndSignInCoordinatorParent {
+    public func onCandidateIsSignedIn() {
+        submitApplication()
+    }
+    
+    public func onRegisterAndSignInCancelled() {
+        newNavigationRouter.pop(animated: true)
+    }
+    
+    
 }

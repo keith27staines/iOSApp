@@ -22,6 +22,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     @objc func onDidTapSwitchMode() { presenter.onDidTapSwitchMode() }
     @objc func onPrimaryButtonTap() {
         updatePresenter()
+        view.endEditing(true)
         messageHandler.showLoadingOverlay(self.view)
         presenter.onDidTapPrimaryButton { [weak self] (optionalError) in
             guard let self = self else { return }

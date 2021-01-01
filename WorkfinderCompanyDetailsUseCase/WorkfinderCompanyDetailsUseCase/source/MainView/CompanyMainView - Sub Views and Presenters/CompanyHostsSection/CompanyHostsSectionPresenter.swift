@@ -25,7 +25,8 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
     private weak var view: CompanyHostsSectionViewProtocol?
     var numberOfRows: Int { return associations.count }
     var associationsTextModel: TextModel
-
+    var associations: [HostAssociationJson] = []
+    
     func cellforRow(_ row: Int, in tableView: UITableView) -> UITableViewCell {
         let association = associations[row]
         let state = associationsTextModel.expandableLabelStates[row]
@@ -92,8 +93,6 @@ class CompanyHostsSectionPresenter: CompanyHostsSectionPresenterProtocol {
     func onViewDidLoad(_ view: CompanyHostsSectionViewProtocol) {
         self.view = view
     }
-    
-    var associations: [HostAssociationJson] = []
     
     func onHostsDidLoad(_ associations: [HostAssociationJson]) {
         self.associations = associations

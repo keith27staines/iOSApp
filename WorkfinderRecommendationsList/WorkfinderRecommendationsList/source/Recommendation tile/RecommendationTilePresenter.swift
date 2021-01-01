@@ -25,12 +25,6 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var hostName: String? { recommendation.association?.host?.fullName }
     var hostRole: String? { recommendation.association?.title }
 
-    var defaultImage: UIImage? {
-        UIImage.imageWithFirstLetter(
-            string: companyName,
-            backgroundColor: WorkfinderColors.primaryColor,
-            width: 70)
-    }
     var companyLogoUrlString: String? { recommendation.association?.location?.company?.logo }
     var downloadedImage: UIImage?
     var companyImage: UIImage? { downloadedImage ?? defaultImage }
@@ -38,6 +32,13 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     var isProject: Bool { recommendation.project != nil }
     var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
     var projectTitle: String?  { isProject ? recommendation.project?.name : nil }
+    
+    var defaultImage: UIImage? {
+        UIImage.imageWithFirstLetter(
+            string: companyName,
+            backgroundColor: WorkfinderColors.primaryColor,
+            width: 70)
+    }
     
     func loadImage() {
         imageService.fetchImage(
@@ -55,7 +56,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
 
     init(parent: RecommendationsPresenter,
          recommendation: RecommendationsListItem,
-         workplaceService: WorkplaceAndAssociationService?,
+         workplaceService: ApplicationContextService?,
          projectService: ProjectServiceProtocol?,
          hostService: HostsProviderProtocol?,
          row: Int) {

@@ -6,11 +6,11 @@ class WorkfinderVersionCheckerTests: XCTestCase {
     
     func makeSut(
         appVersionString: String,
-        minimumVersionString: String) -> WorkfinderVersionChecker {
+        minimumVersionString: String) -> WorkfinderEnvironmentConsistencyChecker {
         let serverVersion = VersionJson(platform: "iOS", min_version: minimumVersionString)
         let fetchResult = Result<VersionJson,Error>.success(serverVersion)
         let service = MockVersionCheckService(fetchResult: fetchResult)
-        let sut = WorkfinderVersionChecker(
+        let sut = WorkfinderEnvironmentConsistencyChecker(
             serverEnvironmentType: .staging,
             currentVersion: appVersionString,
             versionCheckService: service)

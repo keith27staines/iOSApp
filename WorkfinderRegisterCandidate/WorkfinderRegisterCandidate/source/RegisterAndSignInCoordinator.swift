@@ -36,19 +36,19 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     }
     
     public func startLoginFirst() {
-        injected.log.track(TrackingEvent(type: .uc_register_user_start))
+        injected.log.track(.register_user_start)
         screenOrder = .loginThenRegister
         presentSignInUserViewController()
     }
     
     func startRegisterFirst() {
-        injected.log.track(TrackingEvent(type: .uc_register_user_start))
+        injected.log.track(.register_user_start)
         screenOrder = .registerThenLogin
         presentRegisterUserViewController()
     }
     
     func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
-        injected.log.track(TrackingEvent(type: .uc_register_user_convert))
+        injected.log.track(.register_user_convert)
         injected.log.updateIdentity()
         if let previous = firstViewController?.previousViewController {
             // for pushed vcs
@@ -62,7 +62,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     }
     
     func onRegisterAndSignInCancelled() {
-        injected.log.track(TrackingEvent(type: .uc_register_user_cancel))
+        injected.log.track(.register_user_cancel)
         (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onRegisterAndSignInCancelled()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }

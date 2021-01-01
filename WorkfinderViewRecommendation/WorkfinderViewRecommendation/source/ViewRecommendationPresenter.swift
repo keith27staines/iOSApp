@@ -4,9 +4,9 @@ import WorkfinderServices
 
 class LoadingViewPresenter {
     weak var view: LoadingViewController?
-    weak var coordinator: ViewRecommendationCoordinator?
+    weak var coordinator: RecommendedAssociationCoordinator?
     let recommendationUuid: F4SUUID
-    let service: WorkplaceAndAssociationService
+    let service: ApplicationContextService
     
     func onViewDidLoad(_ view: LoadingViewController) {
         self.view = view
@@ -17,14 +17,14 @@ class LoadingViewPresenter {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        service.fetchCompanyWorkplace(recommendationUuid: recommendationUuid) { result in
+        service.fetchStartingFrom(recommendationUuid: recommendationUuid) { result in
             switch result {
-            case .success(let value):
+            case .success(let context):
                 // leave screen spinning for a short time otherwise looks too transient
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) { [weak self] in
                     guard let self = self else { return }
                     completion(nil)
-                    self.coordinator?.onWorkplaceAndHostObtainedFromRecommendation(value)
+                    self.coordinator?.onApplicationContextObtainedFromRecommendation(context)
                 }
             case .failure(let error):
                 completion(error)
@@ -33,8 +33,8 @@ class LoadingViewPresenter {
     }
         
     init(recommendationUuid: F4SUUID,
-         service: WorkplaceAndAssociationService,
-         coordinator: ViewRecommendationCoordinator) {
+         service: ApplicationContextService,
+         coordinator: RecommendedAssociationCoordinator) {
         self.recommendationUuid = recommendationUuid
         self.service = service
         self.coordinator = coordinator

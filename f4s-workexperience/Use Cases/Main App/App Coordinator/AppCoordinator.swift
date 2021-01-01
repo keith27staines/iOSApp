@@ -7,8 +7,6 @@ import WorkfinderUserDetailsUseCase
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderOnboardingUseCase
 import WorkfinderRegisterCandidate
-import GoogleMaps
-import GooglePlaces
 
 extension UIApplication {}
 
@@ -17,10 +15,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
-    var shouldAskOperatingSystemToAllowLocation: Bool = false
     var tabBarCoordinator: TabBarCoordinatorProtocol?
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
-    var deepLinkDispatcher: DeepLinkDispatcher?
+    var deepLinkRouter: DeepLinkRouter?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
@@ -28,10 +25,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     let tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol
     var user: Candidate { return injected.userRepository.loadCandidate() }
-    var databaseDownloadManager: F4SCompanyDownloadManagerProtocol { return injected.companyDownloadFileManager }
     var userNotificationService: UNService!
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol
+    var suppressOnboarding: Bool
     
     public init(navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
@@ -41,7 +38,9 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 localStore: LocalStorageProtocol,
                 onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol,
                 tabBarCoordinatorFactory: TabbarCoordinatorFactoryProtocol,
-                window: UIWindow) {
+                window: UIWindow,
+                suppressOnboarding: Bool = false
+    ) {
         
         self.window = window
         self.injected = inject
@@ -51,25 +50,54 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.deviceRegistrar = deviceRegistrar
         self.onboardingCoordinatorFactory = onboardingCoordinatorFactory
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
+        self.suppressOnboarding = suppressOnboarding
         super.init(parent:nil, navigationRouter: navigationRouter)
-        self.deepLinkDispatcher = DeepLinkDispatcher(log: inject.log, coordinator: self)
+        self.deepLinkRouter = DeepLinkRouter(log: inject.log, coordinator: self)
         self.injected.appCoordinator = self
         userNotificationService = UNService(appCoordinator: self, userRepository: injected.userRepository)
     }
     
     override func start() {
+        trackAppStart()
+        printUserInfo()
         injected.versionChecker.performChecksWithHardStop { [weak self] (optionalError) in
             guard let self = self else { return }
-            GMSServices.provideAPIKey(GoogleApiKeys.googleApiKey)
-            GMSPlacesClient.provideAPIKey(GoogleApiKeys.googleApiKey)
-            self.startOnboarding()
-            if self.launchOptions?[.remoteNotification] != nil {
+            switch self.suppressOnboarding {
+            case true:
+                self.localStore.setValue(false, for: .isOnboardingRequired)
                 self.startTabBarCoordinator()
+            case false:
+                self.startOnboarding()
             }
-            if let _ = self.injected.userRepository.loadUser().uuid {
+            if self.injected.userRepository.isCandidateLoggedIn {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+    }
+    
+    func trackAppStart() {
+        let localStore = LocalStore()
+        let isFirstLaunch = localStore.value(key: .isFirstLaunch) as? Bool ?? true
+        if isFirstLaunch { log.track(.first_use) }
+        localStore.setValue(false, for: .isFirstLaunch)
+        log.track(.app_open)
+    }
+    
+    func printUserInfo() {
+        let userRepo = injected.userRepository
+        let user = userRepo.loadUser()
+        let candidate = userRepo.loadCandidate()
+        print("\n\n-----------------------------------------------------------")
+        switch userRepo.isCandidateLoggedIn {
+        case true:
+            print("Candidate \(candidate.fullName)")
+            print("Email \(user.email ?? "unknown")")
+            print("User uuid \(user.uuid ?? "unknown")")
+            print("Candidate uuid \(candidate.uuid ?? "unknown")")
+        case false:
+            print("Candidate not signed in")
+        }
+        print("-----------------------------------------------------------\n\n")
     }
     
     func startOnboarding() {
@@ -80,8 +108,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             log: log)
         self.onboardingCoordinator = onboardingCoordinator
         onboardingCoordinator.parentCoordinator = self
-        onboardingCoordinator.delegate = self
-        onboardingCoordinator.isFirstLaunch = localStore.value(key: LocalStore.Key.isFirstLaunch) as? Bool ?? true
         onboardingCoordinator.onboardingDidFinish = onboardingDidFinish
         addChildCoordinator(onboardingCoordinator)
         onboardingCoordinator.start()
@@ -89,7 +115,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     private func onboardingDidFinish(onboardingCoordinator: OnboardingCoordinatorProtocol) {
-        localStore.setValue(false, for: LocalStore.Key.isFirstLaunch)
         navigationRouter.dismiss(animated: false, completion: nil)
         removeChildCoordinator(onboardingCoordinator)
         startTabBarCoordinator()
@@ -98,7 +123,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     private func onUserIsRegistered(userUuid: F4SUUID) {
         injected.user.uuid = userUuid
         logStartupInformation(userId: userUuid)
-        databaseDownloadManager.start()
     }
     
     private func startTabBarCoordinator() {
@@ -106,15 +130,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             parent: self,
             router: navigationRouter,
             inject: injected)
-        tabBarCoordinator.shouldAskOperatingSystemToAllowLocation = shouldAskOperatingSystemToAllowLocation
         addChildCoordinator(tabBarCoordinator)
         self.tabBarCoordinator = tabBarCoordinator
         tabBarCoordinator.start()
     }
-    
-    func showApplications(uuid: F4SUUID?) { tabBarCoordinator?.showApplications(uuid: uuid) }
-    
-    func showSearch() { tabBarCoordinator?.showSearch() }
     
     func requestPushNotifications(from viewController: UIViewController) {
         userNotificationService.authorize(from: viewController)
@@ -125,36 +144,40 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         return service
     }()
     
-    func showProject(uuid: F4SUUID?, applicationSource: ApplicationSource) {
-        guard let uuid = uuid else { return }
+    func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
+        tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
+    }
+    
+    func switchToTab(_ tab: TabIndex) { tabBarCoordinator?.switchToTab(tab) }
+    
+    func routeProject(projectUuid: F4SUUID?, appSource: AppSource) {
+        guard let projectUuid = projectUuid else { return }
         if let tabBarCoordinator = self.tabBarCoordinator {
-            tabBarCoordinator.dispatchProjectViewRequest(uuid, applicationSource: applicationSource)
+            tabBarCoordinator.routeProject(projectUuid: projectUuid, appSource: appSource)
             return
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-            self?.showProject(uuid: uuid, applicationSource: applicationSource)
+            self?.routeProject(projectUuid: projectUuid, appSource: appSource)
         }
     }
     
-    func showRecommendation(uuid: F4SUUID?, applicationSource: ApplicationSource) {
+    func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource) {
         guard let tabBarCoordinator = tabBarCoordinator else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-                self?.showRecommendation(uuid: uuid, applicationSource: applicationSource)
+                self?.routeRecommendation(recommendationUuid: recommendationUuid, appSource: appSource)
             }
             return
         }
-        guard let uuid = uuid else {
-            tabBarCoordinator.navigateToRecommendations()
-            return
-        }
+        tabBarCoordinator.switchToTab(.recommendations)
+        guard let uuid = recommendationUuid else { return }
         recommendationService.fetchRecommendation(uuid: uuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let recommendation):
                 if let projectUuid = recommendation.project?.uuid {
-                    self.showProject(uuid: projectUuid, applicationSource: applicationSource)
+                    self.routeProject(projectUuid: projectUuid, appSource: appSource)
                 } else {
-                    tabBarCoordinator.dispatchRecommendationToSearchTab(uuid: uuid)
+                    tabBarCoordinator.routeRecommendationForAssociation(recommendationUuid: uuid, appSource: appSource)
                 }
             case .failure(let error):
                 guard let workfinderError = error as? WorkfinderError else { return }
@@ -163,15 +186,17 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                     self.signIn(screenOrder: .loginThenRegister) { loggedIn in
                         switch loggedIn {
                         case true:
-                            self.showRecommendation(uuid: uuid, applicationSource: applicationSource)
+                            self.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
                         case false:
                             return
                         }
                     }
                 default:
-                    guard workfinderError.retry else { return }
+                    guard workfinderError.retry else {
+                        return
+                    }
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                        self.showRecommendation(uuid: uuid, applicationSource: applicationSource)
+                        self.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
                     }
                 }
             }
@@ -234,29 +259,23 @@ extension AppCoordinator {
     }
 }
 
-extension AppCoordinator : OnboardingCoordinatorDelegate {
-    func shouldEnableLocation(_ enable: Bool) {
-        shouldAskOperatingSystemToAllowLocation = enable
-    }
-}
-
 extension AppCoordinator {
     
     func handlePushNotification(_ pushNotification: PushNotification?) {
         guard
             let pushNotification = pushNotification,
-            let deepLinkInfo = DeeplinkDispatchInfo(pushNotification: pushNotification),
-            let dispatcher = deepLinkDispatcher
+            let deepLinkInfo = DeeplinkRoutingInfo(pushNotification: pushNotification),
+            let dispatcher = deepLinkRouter
         else { return }
-        dispatcher.dispatch(info: deepLinkInfo)
+        dispatcher.route(routingInfo: deepLinkInfo)
     }
     
     func handleDeepLinkUrl(url: URL) -> Bool {
         guard
-            let deeplinkInfo = DeeplinkDispatchInfo(deeplinkUrl: url),
-            let dispatcher = deepLinkDispatcher
+            let routingInfo = DeeplinkRoutingInfo(deeplinkUrl: url),
+            let router = deepLinkRouter
         else { return false }
-        dispatcher.dispatch(info: deeplinkInfo)
+        router.route(routingInfo: routingInfo)
         return true
     }
 

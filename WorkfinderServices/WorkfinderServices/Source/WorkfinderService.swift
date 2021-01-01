@@ -30,19 +30,24 @@ open class WorkfinderService {
     
     public func performTask<A:Decodable>(
         with request: URLRequest,
+        verbose: Bool = false,
         completion: @escaping (Result<A,Error>) -> Void,
-        attempting: String) {
+        attempting: String
+    ) {
         task?.cancel()
         task = buildTask(
             request: request,
             completion: completion,
-            attempting: attempting)
+            attempting: attempting,
+            verbose: verbose
+        )
         task?.resume()
     }
     
     public func buildRequest<A: Encodable>(
         relativePath: String?,
-        verb: RequestVerb, body: A) throws -> URLRequest {
+        verb: RequestVerb, body: A
+    ) throws -> URLRequest {
         var request = try buildRequest(
             relativePath: relativePath,
             queryItems: nil,
@@ -53,7 +58,8 @@ open class WorkfinderService {
     
     public func buildRequest(
         relativePath: String?,
-        queryItems: [URLQueryItem]?, verb: RequestVerb) throws -> URLRequest {
+        queryItems: [URLQueryItem]?, verb: RequestVerb
+    ) throws -> URLRequest {
         var components = urlComponents
         components.path += relativePath ?? ""
         components.queryItems = queryItems
@@ -64,11 +70,37 @@ open class WorkfinderService {
                 retryHandler: nil) }
         return networkConfig.buildUrlRequest(url: url, verb: verb, body: nil)
     }
+    
+    public func buildRequest(
+        path: String?,
+        queryItems: [URLQueryItem]?, verb: RequestVerb
+    ) throws -> URLRequest {
+        let isAbsolute = (path ?? "").starts(with: "http")
+        switch isAbsolute {
+        case true: return try buildRequest(absolutePath: path, queryItems: queryItems, verb: .get)
+        case false: return try buildRequest(relativePath: path, queryItems: queryItems, verb: .get)
+        }
+    }
+    
+    func buildRequest(
+        absolutePath: String?,
+        queryItems: [URLQueryItem]?, verb: RequestVerb
+    ) throws -> URLRequest {
+        guard var components = URLComponents(string: absolutePath ?? ""), let url = components.url else {
+            throw WorkfinderError(
+                errorType: .invalidUrl(absolutePath ?? ""),
+                attempting: #function,
+                retryHandler: nil) }
+        components.queryItems = queryItems
+        return networkConfig.buildUrlRequest(url: url, verb: verb, body: nil)
+    }
 
     private func buildTask<ResponseJson:Decodable>(
         request: URLRequest,
         completion: @escaping ((Result<ResponseJson,Error>) -> Void),
-        attempting: String) -> URLSessionDataTask {
+        attempting: String,
+        verbose: Bool
+    ) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
             guard let self = self else { return }
             self.taskHandler.convertToDataResult(
@@ -76,9 +108,12 @@ open class WorkfinderService {
                 request: request,
                 responseData: data,
                 httpResponse: response as? HTTPURLResponse,
-                error: error) { [weak self] (result) in
-                    self?.deserialise(dataResult: result, completion: completion)
-                
+                error: error, verbose: verbose
+            ) { [weak self] (result) in
+                self?.deserialise(
+                    dataResult: result,
+                    verbose: verbose,
+                    completion: completion)
             }
         })
         return task
@@ -86,17 +121,13 @@ open class WorkfinderService {
     
     private func deserialise<ResponseJson:Decodable>(
         dataResult: Result<Data,Error>,
+        verbose: Bool,
         completion: ((Result<ResponseJson,Error>) -> Void)) {
         switch dataResult {
         case .success(let data):
             do {
                 #if DEBUG
-                print()
-                print("--------------- Start Json capture --------------------")
-                print("Deserialising \(ResponseJson.self) from...")
-                prettyPrint(data: data)
-                print("--------------- End Json capture ----------------------")
-                print()
+                captureJson(data: data, type: "\(ResponseJson.self)", verbose: verbose)
                 #endif
                 let json = try decoder.decode(ResponseJson.self, from: data)
                 completion(Result<ResponseJson,Error>.success(json))
@@ -116,7 +147,17 @@ open class WorkfinderService {
         }
     }
     
-    func prettyPrint(data: Data?) {
+    private func captureJson(data: Data?, type: String, verbose: Bool) {
+        guard verbose else { return }
+        print()
+        print("--------------- Start Json capture --------------------")
+        print("Deserialising \(type) from...")
+        prettyPrint(data: data)
+        print("--------------- End Json capture ----------------------")
+        print()
+    }
+    
+    private func prettyPrint(data: Data?) {
         guard let data = data else { return }
         if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
             if let prettyPrintedData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {

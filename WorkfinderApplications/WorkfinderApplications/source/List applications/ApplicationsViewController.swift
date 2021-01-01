@@ -8,6 +8,10 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     weak var coordinator: ApplicationsCoordinatorProtocol?
     let presenter: ApplicationsPresenter
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     init(coordinator: ApplicationsCoordinatorProtocol, presenter: ApplicationsPresenter) {
         self.coordinator = coordinator
         self.presenter = presenter

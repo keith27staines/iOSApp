@@ -2,7 +2,7 @@
 public struct RecommendationsListItem: Codable, Hashable {
     public var uuid: F4SUUID?
     public var user: F4SUUID?
-    public var association: ExpandedAssociation?
+    public var association: RoleNestedAssociation?
     public var createdAt: String?
     public var sentAt: String?
     public var confidence: Double?
@@ -30,7 +30,8 @@ public struct RecommendationsListItem: Codable, Hashable {
         public var duration: String?
         public var type: F4SUUID?
         public var additionalComments: String?
-        public var association: ExpandedAssociation?
+        public var association: RoleNestedAssociation?
+        public var employmentType: String?
         
         enum CodingKeys: String, CodingKey {
             case uuid
@@ -43,6 +44,7 @@ public struct RecommendationsListItem: Codable, Hashable {
             case type
             case additionalComments = "additional_comments"
             case association
+            case employmentType = "employment_type"
         }
         
         public struct Activity: Codable, Equatable, Hashable {
@@ -53,30 +55,3 @@ public struct RecommendationsListItem: Codable, Hashable {
     }
     
 }
-
-public struct ExpandedAssociation: Codable, Equatable, Hashable {
-    public var uuid: F4SUUID?
-    public var title: String?
-    public var host: Host?
-    public var location: Location?
-    
-    public struct Host: Codable, Equatable, Hashable {
-        public var uuid: F4SUUID?
-        public var photo: String?
-        public var fullName: String?
-        enum CodingKeys: String, CodingKey {
-            case uuid
-            case photo
-            case fullName = "full_name"
-        }
-    }
-    
-    public struct Location: Codable, Equatable, Hashable {
-        public var company: Company?
-        public struct Company: Codable, Equatable, Hashable  {
-            public var name: String?
-            public var logo: String?
-        }
-    }
-}
-

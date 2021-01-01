@@ -11,10 +11,10 @@ class CompanyViewPresenter: NSObject {
     var view: CompanyViewController?
     var companyJson: CompanyJson?
     
-    var workplace: Workplace?
+    var companyAndPin: CompanyAndPin?
     var companyName: String? { application.companyName }
     var logoUrlString: String? { application.logoUrl }
-    var pin: PinJson? { self.workplace?.pinJson }
+    var pin: LocationPin? { self.companyAndPin?.locationPin }
     
     lazy var locManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -85,24 +85,24 @@ class CompanyViewPresenter: NSObject {
         let location = companyJson.locations?.first(where: { (location) -> Bool in
             location.uuid == association.locationUuid
         })
-        let pinJson = PinJson(
-            workplaceUuid: location?.uuid ?? "",
+        let pin = LocationPin(
+            locationUuid: location?.uuid ?? "",
             latitude: Double(location?.geometry?.latitude ?? 0),
             longitude: Double(location?.geometry?.longitude ?? 0))
-        workplace = Workplace(companyJson: companyJson, pinJson: pinJson)
-        summarySectionPresenter = CompanySummarySectionPresenter(workplace: workplace)
-        dataSectionPresenter = CompanyDataSectionPresenter(workplace: workplace)
+        companyAndPin = CompanyAndPin(companyJson: companyJson, locationPin: pin)
+        summarySectionPresenter = CompanySummarySectionPresenter(workplace: companyAndPin)
+        dataSectionPresenter = CompanyDataSectionPresenter(workplace: companyAndPin)
         dataSectionPresenter.onDidTapDuedil = {
             self.coordinator.openUrl(companyJson.duedilUrlString)
         }
     }
     
     lazy var summarySectionPresenter: CompanySummarySectionPresenterProtocol = {
-        return CompanySummarySectionPresenter(workplace: self.workplace)
+        return CompanySummarySectionPresenter(workplace: self.companyAndPin)
     }()
     
     lazy var dataSectionPresenter: CompanyDataSectionPresenterProtocol = {
-        return CompanyDataSectionPresenter(workplace: self.workplace)
+        return CompanyDataSectionPresenter(workplace: self.companyAndPin)
     }()
     
     init(coordinator: ApplicationsCoordinator,

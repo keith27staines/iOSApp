@@ -1,9 +1,12 @@
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
 class ApplicationDetailViewController: UIViewController, WorkfinderViewControllerProtocol {
     let presenter: ApplicationDetailPresenterProtocol
     lazy var messageHandler = UserMessageHandler(presenter: self)
+    let appSource: AppSource
+    let log: F4SAnalytics
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -51,17 +54,27 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     }()
     
     init(coordinator: ApplicationsCoordinatorProtocol,
-         presenter: ApplicationDetailPresenterProtocol) {
+         presenter: ApplicationDetailPresenterProtocol,
+         appSource: AppSource,
+         log: F4SAnalyticsAndDebugging
+    ) {
         self.presenter = presenter
+        self.appSource = appSource
+        self.log = log
         super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
+        log.track(.application_page_view(appSource))
         configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
         refreshFromPresenter()
         loadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if isMovingFromParent { log.track(.application_page_dismiss(appSource)) }
     }
     
     func loadData() {

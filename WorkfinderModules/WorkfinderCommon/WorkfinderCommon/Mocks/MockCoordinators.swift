@@ -3,22 +3,24 @@ import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
     
-    public func dispatchProjectViewRequest(_ projectUuid: F4SUUID, applicationSource: ApplicationSource) {
+    
+    public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
+        
+    }
+    
+    public func switchToTab(_ tab: TabIndex) {
         
     }
     
     public func navigateToRecommendations() {}
     
-    
-    public var shouldAskOperatingSystemToAllowLocation: Bool = false
-    
     var showApplicationsCallCount: Int = 0
-    public func showApplications(uuid: F4SUUID?) {
+    public func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
         
     }
     
     var dispatchRecommendationToSearchTabCount = 0
-    public func dispatchRecommendationToSearchTab(uuid: F4SUUID) {
+    public func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource) {
         dispatchRecommendationToSearchTabCount += 1
     }
     
@@ -28,7 +30,7 @@ public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, Tab
     }
     
     var showSearchCallCount: Int = 0
-    public func showSearch() {
+    public func showHomeTab() {
         showSearchCallCount += 1
     }
     
@@ -86,8 +88,7 @@ public class MockCoreInjectionNavigationCoordinator : CoreInjectionNavigationCoo
 }
 
 public class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
-    
-    public var isFirstLaunch: Bool = true
+    public var isOnboardingRequired: Bool = true
     
     public var delegate: OnboardingCoordinatorDelegate?
     

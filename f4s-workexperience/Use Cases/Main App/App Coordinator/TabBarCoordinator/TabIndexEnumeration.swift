@@ -1,19 +1,15 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderCoordinators
 
-enum TabIndex : Int, CaseIterable {
-    
-    // The order of the cases will determine the order of the tabs on the tab bar
-    case applications
-    case map
-    case recommendations
+extension TabIndex {
     
     var title: String {
         switch self {
         case .applications: return "Applications"
-        case .map: return "Search"
+        case .home: return "Home"
         case .recommendations: return "Recommendations"
         }
     }
@@ -22,8 +18,8 @@ enum TabIndex : Int, CaseIterable {
         switch self {
         case .applications:
             return UIImage(named: "applications")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        case .map:
-            return UIImage(named: "searchIcon")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        case .home:
+            return UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         case .recommendations:
             return UIImage(named: "recommendations")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         }
@@ -32,7 +28,7 @@ enum TabIndex : Int, CaseIterable {
     func tabCoordinator(from tabBarCoordinator: TabBarCoordinator) -> CoreInjectionNavigationCoordinator {
         switch self {
         case .applications: return tabBarCoordinator.applicationsCoordinator
-        case .map: return tabBarCoordinator.searchCoordinator
+        case .home: return tabBarCoordinator.homeCoordinator
         case .recommendations: return tabBarCoordinator.recommendationsCoordinator
         }
     }

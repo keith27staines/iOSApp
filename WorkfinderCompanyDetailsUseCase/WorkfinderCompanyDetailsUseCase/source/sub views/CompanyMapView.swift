@@ -3,7 +3,7 @@
 //  f4s-workexperience
 //
 //  Created by Keith Dev on 01/02/2019.
-//  Copyright © 2019 Founders4Schools. All rights reserved.
+//  Copyright © 2019 Workfinder Ltd. All rights reserved.
 //
 
 import MapKit
@@ -55,7 +55,7 @@ class F4SCompanyAnnotation : MKPointAnnotation  {
 }
 
 extension CLLocation {
-    convenience init(pin: PinJson) {
+    convenience init(pin: LocationPin) {
         self.init(latitude: pin.lat, longitude: pin.lon)
     }
     
@@ -67,7 +67,7 @@ extension CLLocation {
 }
 
 extension CLLocationCoordinate2D {
-    init(pin: PinJson) {
+    init(pin: LocationPin) {
         self.init(latitude: pin.lat, longitude: pin.lon)
     }
 }

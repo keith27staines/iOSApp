@@ -16,9 +16,9 @@ enum OfferState {
     
     init(applicationState: ApplicationState) {
         switch applicationState {
-        case .offerMade: self = .hostOfferOpen
-        case .offerAccepted: self = .candidateAccepted
-        case .candidateWithdrew: self = .candidateWithdrew
+        case .offered: self = .hostOfferOpen
+        case .accepted: self = .candidateAccepted
+        case .withdrawn: self = .candidateWithdrew
         default: self = .unknown
         }
     }
@@ -34,8 +34,8 @@ enum OfferState {
     
     var description: String {
         switch self {
-        case .hostOfferOpen: return "Congratulations you have been offered a placement"
-        case .candidateAccepted: return "Congratulations you have accepted this placement"
+        case .hostOfferOpen: return "You have been offered a placement!"
+        case .candidateAccepted: return "Congratulations! You have accepted this placement!"
         case .candidateWithdrew: return "You declined this offer"
         case .unknown: return "Offer"
         }

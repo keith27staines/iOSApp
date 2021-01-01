@@ -11,7 +11,7 @@ class HostLocationAssociationCell: UITableViewCell {
                            summaryState: ExpandableLabelState ,
                            profileLinkTap: @escaping ((HostAssociationJson) -> Void),
                            selectAction: @escaping (HostAssociationJson) -> Void) {
-        hostView.association = association
+        hostView.configureWith(host: association.host, association: association)
         hostView.expandableLabelState = summaryState
         hostView.profileLinkTap = profileLinkTap
         hostView.selectAction = { isSelectedView in

@@ -186,9 +186,9 @@
 		FC751767246C170D00ECBA84 /* View offer */ = {
 			isa = PBXGroup;
 			children = (
-				FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */,
 				FC751768246C175900ECBA84 /* OfferPresenter.swift */,
 				FC6AA522246C4EB4002CC1C7 /* OfferService.swift */,
+				FC9C0AC0246BA6DE00CF7A48 /* OfferViewController.swift */,
 				FC4BC35E2470F8DA00299993 /* DeclineOptionsModel.swift */,
 			);
 			path = "View offer";

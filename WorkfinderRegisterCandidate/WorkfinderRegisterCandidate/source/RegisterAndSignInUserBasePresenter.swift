@@ -60,7 +60,7 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     func onViewDidLoad(_ view: WorkfinderViewControllerProtocol) { self.view = view }
     
     func onDidTapPrimaryButton(onFailure: @escaping ((Error) -> Void)) {
-        userRepository.save(user: user)
+        userRepository.saveUser(user)
         registerLogic.start { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -91,7 +91,7 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set {
             var candidate = userRepository.loadCandidate()
             candidate.guardianEmail = newValue
-            userRepository.save(candidate: candidate)
+            userRepository.saveCandidate(candidate)
         }
     }
     
@@ -100,7 +100,7 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set {
             var candidate = userRepository.loadCandidate()
             candidate.allowedSharingWithEmployers = newValue
-            userRepository.save(candidate: candidate)
+            userRepository.saveCandidate(candidate)
         }
     }
     
@@ -109,7 +109,7 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set {
             var candidate = userRepository.loadCandidate()
             candidate.allowedSharingWithEducationInstitution = newValue
-            userRepository.save(candidate: candidate)
+            userRepository.saveCandidate(candidate)
         }
     }
     
@@ -118,7 +118,7 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set {
             var candidate = userRepository.loadCandidate()
             candidate.phone = newValue
-            userRepository.save(candidate: candidate)
+            userRepository.saveCandidate(candidate)
         }
     }
     

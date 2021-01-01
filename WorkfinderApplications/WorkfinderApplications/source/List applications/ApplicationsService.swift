@@ -6,6 +6,7 @@ protocol ApplicationsServiceProtocol: AnyObject {
 }
 
 class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
+
     func fetchApplications(completion: @escaping (Result<[Application],Error>) -> Void) {
         performNetworkRequest { [weak self] (networkResult) in
             guard let self = self else { return }
@@ -13,8 +14,8 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
             completion(applicationsResult)
         }
     }
-    typealias ExpandedList = ServerListJson<ExpandedAssociationPlacementJson>
-    func performNetworkRequest(completion: @escaping (Result<ExpandedList,Error>) -> Void) {
+
+    private func performNetworkRequest(completion: @escaping (Result<ServerListJson<PlacementJson>,Error>) -> Void) {
         do {
             let relativePath = "placements/"
             let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
@@ -24,11 +25,11 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
                 completion: completion,
                 attempting: #function)
         } catch {
-            completion(Result<ExpandedList,Error>.failure(error))
+            completion(.failure(error))
         }
     }
     
-    func buildApplicationsResult(networkResult: Result<ExpandedList,Error>)
+    private func buildApplicationsResult(networkResult: Result<ServerListJson<PlacementJson>,Error>)
         -> Result<[Application], Error> {
             switch networkResult {
             case .success(let serverList):
@@ -44,50 +45,12 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
     }
 }
 
-extension Application {
-    init(json: ExpandedAssociationPlacementJson) {
-        self.placementUuid = json.uuid ?? "unknown uuid"
-        self.companyUuid = json.association?.location?.company?.uuid
-        self.hostUuid = json.association?.host?.uuid
-        self.associationUuid = json.association?.uuid
-        self.state = ApplicationState(string: json.status)
-        self.hostName = json.association?.host?.displayName ?? "unknown name"
-        self.hostRole = json.association?.title ?? "unknown role"
-        self.companyName = json.association?.location?.company?.name ?? "unknown company"
-        self.industry = json.association?.location?.company?.industries?.first?.name
-        self.logoUrl = json.association?.location?.company?.logo
-        self.appliedDate = json.created_at ?? "1700-01-01"
-        self.coverLetterString = json.cover_letter ?? ""
-    }
-}
-
-extension ApplicationState {
-    init(string: String?) {
-        guard let string = string else {
-            self = .unknown
-            return
-        }
-        switch string {
-        case "pending": self = .applied
-        case "expired": self = .expired
-        case "viewed": self = .viewedByHost
-        case "declined": self = .applicationDeclined
-        case "saved": self = .savedByHost
-        case "offered": self = .offerMade
-        case "accepted": self = .offerAccepted
-        case "withdrawn": self = .candidateWithdrew
-        case "cancelled": self = .cancelled
-        default: self = .unknown
-        }
-    }
-}
-
-struct ExpandedAssociationPlacementJson: Codable {
+struct PlacementJson: Codable {
     var uuid: F4SUUID?
     var status: String?
     var created_at: String?
     var cover_letter: String?
-    var association: Association?
+    var association: ExpandedAssociation?
     var start_date: String?
     var end_date: String?
     var offered_duration: Int?
@@ -95,26 +58,4 @@ struct ExpandedAssociationPlacementJson: Codable {
     var is_remote: Bool?
     var salary: String?
     var supporting_link: String?
-    
-    struct Association: Codable {
-        var uuid: F4SUUID?
-        var title: String?
-        var host: Host?
-        var location: Location?
-        struct Location: Codable {
-            var uuid: F4SUUID?
-            var company: CompanyJson?
-            var address_unit: String?
-            var address_building: String?
-            var address_street: String?
-            var address_city: String?
-            var address_region: String?
-            var address_postcode: String?
-            var address_country: CodeAndName?
-            struct CodeAndName: Codable {
-                var code: String
-                var name: String
-            }
-        }
-    }
 }

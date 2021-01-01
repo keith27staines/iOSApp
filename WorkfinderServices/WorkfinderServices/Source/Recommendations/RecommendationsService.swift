@@ -9,7 +9,7 @@ public class RecommendationsService: WorkfinderService, RecommendationsServicePr
     
     public func fetchRecommendation(uuid: F4SUUID, completion: @escaping (Result<RecommendationsListItem,Error>) -> Void) {
         do {
-            let relativePath = "recommendations/\(uuid)"
+            let relativePath = "recommendations/\(uuid)/"
             let request = try buildRequest(relativePath: relativePath, queryItems: nil, verb: .get)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
@@ -21,7 +21,7 @@ public class RecommendationsService: WorkfinderService, RecommendationsServicePr
         do {
             let query = [URLQueryItem(name: "ordering", value: "-created_at")]
             let request = try buildRequest(relativePath: "recommendations/", queryItems: query, verb: .get)
-            performTask(with: request, completion: completion, attempting: #function)
+            performTask(with: request, verbose: false, completion: completion, attempting: #function)
         } catch {
             completion(.failure(error))
         }

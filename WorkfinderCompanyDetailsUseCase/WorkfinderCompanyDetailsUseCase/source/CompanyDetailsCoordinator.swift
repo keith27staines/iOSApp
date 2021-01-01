@@ -11,53 +11,55 @@ public protocol CompanyCoordinatorFactoryProtocol {
     func buildCoordinator(
         parent: CompanyCoordinatorParentProtocol,
         navigationRouter: NavigationRoutingProtocol,
-        workplace: Workplace,
+        companyAndPin: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
-        applicationFinished: @escaping ((PreferredDestination) -> Void)
+        appSource: AppSource,
+        applicationFinished: @escaping ((TabIndex) -> Void)
     ) -> CoreInjectionNavigationCoordinatorProtocol
 }
 
 protocol CompanyDetailsCoordinatorProtocol: CoreInjectionNavigationCoordinatorProtocol {
-    var originScreen: ScreenName { get set }
+   
     func companyDetailsPresenterDidFinish(_ presenter: CompanyDetailsPresenterProtocol)
-    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: Workplace)
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor: CompanyAndPin)
     func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestOpenLink link: String)
-    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson)
+    func applyTo(workplace: CompanyAndPin, association: HostAssociationJson)
     func onDidTapLinkedin(association: HostAssociationJson)
 }
 
 public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, CompanyDetailsCoordinatorProtocol, CompanyMainViewCoordinatorProtocol {
-    public var originScreen = ScreenName.notSpecified
+
     let environment: EnvironmentType
     var companyViewController: CompanyDetailsViewController!
     var workplacePresenter: WorkplacePresenter!
-    var workplace: Workplace
+    var workplace: CompanyAndPin
     var recommendedAssociationUuid: F4SUUID?
-    var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let applyService: PostPlacementServiceProtocol
     let associationsProvider: AssociationsServiceProtocol
-
-    var applicationFinishedWithPreferredDestination: ((PreferredDestination) -> Void)
+    let appSource: AppSource
+    var applicationFinishedWithPreferredDestination: ((TabIndex) -> Void)
+    weak var rootViewController: UIViewController?
     
     public init(
         parent: CompanyCoordinatorParentProtocol?,
         navigationRouter: NavigationRoutingProtocol,
-        workplace: Workplace,
+        workplace: CompanyAndPin,
         recommendedAssociationUuid: F4SUUID?,
         inject: CoreInjectionProtocol,
         environment: EnvironmentType,
-        interestsRepository: F4SSelectedInterestsRepositoryProtocol,
         applyService: PostPlacementServiceProtocol,
         associationsProvider: AssociationsServiceProtocol,
-        applicationFinished: @escaping ((PreferredDestination) -> Void)) {
+        applicationFinished: @escaping ((TabIndex) -> Void),
+        appSource: AppSource
+    ) {
         self.environment = environment
-        self.interestsRepository = interestsRepository
         self.workplace = workplace
         self.recommendedAssociationUuid = recommendedAssociationUuid
         self.applyService = applyService
         self.associationsProvider = associationsProvider
         self.applicationFinishedWithPreferredDestination = applicationFinished
+        self.appSource = appSource
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -68,11 +70,13 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
             workplace: workplace,
             recommendedAssociationUuid: recommendedAssociationUuid,
             associationsService: associationsProvider,
-            log: injected.log)
+            log: injected.log,
+            appSource: appSource
+        )
         companyViewController = CompanyDetailsViewController(
-            presenter: workplacePresenter)
+            presenter: workplacePresenter, appSource: appSource)
         companyViewController.log = self.injected.log
-        companyViewController.originScreen = originScreen
+        rootViewController = navigationRouter.navigationController.topViewController
         navigationRouter.push(viewController: companyViewController, animated: true)
     }
     
@@ -82,11 +86,14 @@ public class CompanyDetailsCoordinator : CoreInjectionNavigationCoordinator, Com
 }
 
 extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
-    public func applicationDidFinish(preferredDestination: PreferredDestination) {
-        applicationFinishedWithPreferredDestination(preferredDestination)
+    public func applicationDidFinish(preferredDestination: TabIndex) {
+        if let rootViewController = rootViewController {
+            navigationRouter.popToViewController(rootViewController, animated: false)
+        }
         cleanup()
         navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
+        applicationFinishedWithPreferredDestination(preferredDestination)
     }
     public func applicationDidCancel() {
         cleanup()
@@ -96,19 +103,19 @@ extension CompanyDetailsCoordinator : ApplyCoordinatorDelegate {
 
 extension CompanyDetailsCoordinator {
     
-    func applyTo(workplace: Workplace, hostLocationAssociation: HostAssociationJson) {
+    func applyTo(workplace: CompanyAndPin, association: HostAssociationJson) {
         guard let _ = workplacePresenter.selectedHost else { return }
         let applyCoordinator = ApplyCoordinator(
             applyCoordinatorDelegate: self,
             updateCandidateService:UpdateCandidateService(networkConfig: injected.networkConfig),
             applyService: applyService,
             workplace: workplace,
-            association: hostLocationAssociation,
+            association: association,
             parent: self,
             navigationRouter: navigationRouter,
             inject: injected,
             environment: environment,
-            interestsRepository: interestsRepository)
+            appSource: appSource)
         addChildCoordinator(applyCoordinator)
         applyCoordinator.start()
     }
@@ -126,14 +133,14 @@ extension CompanyDetailsCoordinator {
     }
     
     func onDidTapLinkedin(association: HostAssociationJson) {
-        openUrl(association.host.linkedinUrlString)
+        openUrl(association.host?.linkedinUrlString)
     }
     
     func onDidTapDuedil() {
         openUrl(workplace.companyJson.duedilUrlString)
     }
     
-    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor workplace: Workplace) {
+    func companyDetailsPresenter(_ presenter: CompanyDetailsPresenterProtocol, requestedShowDuedilFor workplace: CompanyAndPin) {
         guard
             let urlString = workplace.companyJson.duedilUrlString,
             let url = URL(string: urlString) else { return }

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderHome/WorkfinderHome.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ErrorHandlingUI/ErrorHandlingUI.xcodeproj">
    </FileRef>
    <FileRef
@@ -15,12 +18,6 @@
    </FileRef>
    <FileRef
       location = "group:WorkfinderProjectApply/WorkfinderProjectApply.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:KSQuadTree/KSQuadTree.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:KSGeometry/KSGeometry.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:WorkfinderRecommendationsList/WorkfinderRecommendationsList.xcodeproj">

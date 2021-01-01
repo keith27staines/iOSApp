@@ -12,16 +12,29 @@ import WorkfinderVersionCheck
 import UIKit
 
 class MasterBuilder: TabbarCoordinatorFactoryProtocol {
-    func makeTabBarCoordinator(parent: AppCoordinatorProtocol,
-                               router: NavigationRoutingProtocol,
-                               inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol {
-        return TabBarCoordinator(
-            parent: parent,
-            navigationRouter: router,
-            inject: inject,
-            companyCoordinatorFactory: self.companyCoordinatorFactory,
-            interestsRepository: interestsRepository)
-    }
+    
+    let workfinderEndpoint: WorkfinderEndpoint
+    var log: F4SLog
+    
+    lazy var localStore: LocalStorageProtocol = {
+        return LocalStore()
+    }()
+    
+    lazy var userRepo: UserRepositoryProtocol = {
+        return UserRepository(localStore: self.localStore)
+    }()
+    
+    lazy var hostsProvider: HostsProviderProtocol = {
+        return HostsProvider(networkConfig: self.networkConfiguration)
+    }()
+    
+    lazy var associationsProvider: AssociationsServiceProtocol = {
+        return AssociationsService(networkConfig: self.networkConfiguration)
+    }()
+    
+    lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
+         return OnboardingCoordinatorFactory(localStore: self.localStore)
+     }()
     
     let launchOptions: [UIApplication.LaunchOptionsKey : Any]?
     let apnsEnvironment: String = Config.apnsEnv
@@ -34,15 +47,24 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         self.workfinderEndpoint = try! WorkfinderEndpoint(baseUrlString: Config.workfinderApiBase)
     }
     
-    let workfinderEndpoint: WorkfinderEndpoint
+    func makeTabBarCoordinator(parent: AppCoordinatorProtocol,
+                               router: NavigationRoutingProtocol,
+                               inject: CoreInjectionProtocol) -> TabBarCoordinatorProtocol {
+        return TabBarCoordinator(
+            parent: parent,
+            navigationRouter: router,
+            inject: inject,
+            companyCoordinatorFactory: self.companyCoordinatorFactory
+        )
+    }
     
     lazy var appVersion: String = {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }()
     
-    lazy var versionChecker: WorkfinderVersionChecker = {
+    lazy var versionChecker: WorkfinderEnvironmentConsistencyChecker = {
         
-        let versionChecker = WorkfinderVersionChecker(
+        let versionChecker = WorkfinderEnvironmentConsistencyChecker(
             serverEnvironmentType: Config.environment,
             currentVersion: appVersion,
             networkConfig: self.networkConfiguration,
@@ -78,8 +100,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             versionChecker: self.versionChecker,
             user: self.userRepo.loadCandidate(),
             userRepository: self.userRepo,
-            companyDownloadFileManager: self.companyFileDownloadManager,
-            log: self.log)
+            log: self.log
+        )
     }()
     
     lazy var window: UIWindow = {
@@ -94,7 +116,15 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return window
     }()
     
-    func buildAppCoordinator() -> AppCoordinatorProtocol {
+    lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
+        let applyService = PostPlacementService(networkConfig: self.networkConfiguration)
+        return CompanyCoordinatorFactory(applyService: applyService,
+                                         associationsProvider: self.associationsProvider,
+                                         environment: environment
+        )
+    }()
+    
+    func buildAppCoordinator(suppressOnboarding: Bool) -> AppCoordinatorProtocol {
         return  AppCoordinator(
             navigationRouter: rootNavigationRouter,
             inject: injection,
@@ -104,45 +134,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             localStore: localStore,
             onboardingCoordinatorFactory: onboardingCoordinatorFactory,
             tabBarCoordinatorFactory: self,
-            window: self.window)
+            window: self.window,
+            suppressOnboarding: suppressOnboarding)
     }
-    
-    lazy var companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol = {
-        let applyService = PostPlacementService(networkConfig: self.networkConfiguration)
-        return CompanyCoordinatorFactory(applyService: applyService,
-                                         associationsProvider: self.associationsProvider,
-                                         environment: environment,
-                                         interestsRepository: interestsRepository)
-    }()
-    
-    var log: F4SLog
-    
-    lazy var localStore: LocalStorageProtocol = {
-        return LocalStore()
-    }()
-    
-    lazy var userRepo: UserRepositoryProtocol = {
-        return UserRepository(localStore: self.localStore)
-    }()
-    
-    lazy var companyFileDownloadManager: F4SCompanyDownloadManagerProtocol = {
-        return F4SCompanyDownloadManager()
-    }()
-    
-    lazy var hostsProvider: HostsProviderProtocol = {
-        return HostsProvider(networkConfig: self.networkConfiguration)
-    }()
-    
-    lazy var associationsProvider: AssociationsServiceProtocol = {
-        return AssociationsService(networkConfig: self.networkConfiguration)
-    }()
-    
-    lazy var interestsRepository: F4SSelectedInterestsRepositoryProtocol = {
-        return F4SSelectedInterestsRepository(localStore: self.localStore)
-    }()
-    
-    lazy var onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol = {
-         return OnboardingCoordinatorFactory(localStore: self.localStore)
-     }()
 
 }

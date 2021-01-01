@@ -1,13 +1,5 @@
 PODS:
   - Bugsnag (6.1.4)
-  - DataCompression (3.6.0)
-  - GoogleMaps (3.10.0):
-    - GoogleMaps/Maps (= 3.10.0)
-  - GoogleMaps/Base (3.10.0)
-  - GoogleMaps/Maps (3.10.0):
-    - GoogleMaps/Base
-  - GooglePlaces (3.10.0):
-    - GoogleMaps/Base (= 3.10.0)
   - KeychainSwift (19.0.0)
   - Mixpanel-swift (2.7.7):
     - Mixpanel-swift/Complete (= 2.7.7)
@@ -15,7 +7,6 @@ PODS:
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - ReachabilitySwift (5.0.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -23,37 +14,25 @@ PODS:
 
 DEPENDENCIES:
   - Bugsnag
-  - DataCompression
-  - GoogleMaps
-  - GooglePlaces
   - KeychainSwift
   - Mixpanel-swift
-  - ReachabilitySwift
   - XCGLogger
 
 SPEC REPOS:
   trunk:
     - Bugsnag
-    - DataCompression
-    - GoogleMaps
-    - GooglePlaces
     - KeychainSwift
     - Mixpanel-swift
     - ObjcExceptionBridging
-    - ReachabilitySwift
     - XCGLogger
 
 SPEC CHECKSUMS:
   Bugsnag: 955a7d5372789b4db5964a8e131ebc20e96ddd3a
-  DataCompression: 06628f9c807b6f152e0da37635633f62fc51dc77
-  GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
-  GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mixpanel-swift: 3a8fb9ce791e9c64d556b9446aa470b469c6fa7d
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 96a2800bd6977a40909ba137f082440d470b50cf
+PODFILE CHECKSUM: 98488956dcc9cf942267da9e3e9af04f5970bd7b
 
 COCOAPODS: 1.8.3

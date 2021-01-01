@@ -8,14 +8,14 @@ class RecommendationsPresenter {
     var recommendations = [RecommendationsListItem]()
     var tilePresenters = [RecommendationTilePresenter]()
     let userRepo: UserRepositoryProtocol
-    var workplaceServiceFactory: (() -> WorkplaceAndAssociationService)?
+    var workplaceServiceFactory: (() -> ApplicationContextService)?
     var hostServiceFactory: (() -> HostsProviderProtocol)?
     var projectServiceFactory: (() -> ProjectServiceProtocol)?
     
     init(coordinator: RecommendationsCoordinator,
          service: RecommendationsServiceProtocol,
          userRepo:UserRepositoryProtocol,
-         workplaceServiceFactory: @escaping (() -> WorkplaceAndAssociationService),
+         workplaceServiceFactory: @escaping (() -> ApplicationContextService),
          projectServiceFactory: @escaping (() -> ProjectServiceProtocol),
          hostServiceFactory: @escaping (() -> HostsProviderProtocol)) {
         self.coordinator = coordinator
@@ -82,13 +82,15 @@ class RecommendationsPresenter {
     }
     
     func onTileTapped(_ tile: RecommendationTilePresenter) {
-        guard let uuid = tile.recommendation.uuid else { return }
+        
         if tile.isProject {
             coordinator?.processProjectViewRequest(
                 tile.recommendation.project?.uuid,
-                applicationSource: .recommendationsTab)
+                appSource: .recommendationsTab)
         } else {
-            coordinator?.onRecommendationSelected?(uuid)
+            #warning("incomplete implementation")
+            // guard let uuid = tile.recommendation.uuid else { return }
+            // coordinator?.onRecommendationForAssociationSelected?(uuid)
         }
     }
     

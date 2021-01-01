@@ -13,7 +13,7 @@ import WorkfinderDocumentUpload
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
 public protocol ApplyCoordinatorDelegate : class {
-    func applicationDidFinish(preferredDestination: PreferredDestination)
+    func applicationDidFinish(preferredDestination: TabIndex)
     func applicationDidCancel()
 }
 
@@ -23,41 +23,36 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     var coverletterCoordinator: CoverLetterFlow?
     var rootViewController: UIViewController?
     let environment: EnvironmentType
-    var interestsRepository: F4SSelectedInterestsRepositoryProtocol
     let startingViewController: UIViewController!
     let applyService: PostPlacementServiceProtocol
     weak var applyCoordinatorDelegate: ApplyCoordinatorDelegate?
-    lazy var userInterests: [F4SInterest] = { return interestsRepository.loadSelectedInterestsArray() }()
     lazy var draftPlacementLogic: DraftPlacementPreparer = {
         return DraftPlacementPreparer()
     }()
     var log: F4SAnalytics { injected.log }
     var picklistsDictionary: PicklistsDictionary?
-    var applicationSource: ApplicationSource = .searchTab
+    let appSource: AppSource
+    let association: HostAssociationJson
+    let workplace: CompanyAndPin
+    let updateCandidateService: UpdateCandidateServiceProtocol
+    var didCaptureDOB = false
     
     public var coverLetterPrimaryButtonText: String {
-        let candidate = injected.userRepository.loadCandidate()
-        guard let candidateUuid = candidate.uuid, !candidateUuid.isEmpty else {
-            return NSLocalizedString("Next", comment: "")
-        }
-        return NSLocalizedString("Submit application", comment: "")
+        let isCandidateSignedIn = injected.userRepository.isCandidateLoggedIn
+        return isCandidateSignedIn ? NSLocalizedString("Submit application", comment: "") : NSLocalizedString("Next", comment: "")
     }
 
     lazy var successPopup: SuccessPopupView = {
         return SuccessPopupView(leftButtonTapped: { [weak self] in
-            self?.removeApplicationSubmittedSuccessfully()
-            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .applications)
+            self?.finishApply(destination: .applications)
         }) { [weak self] in
-            self?.removeApplicationSubmittedSuccessfully()
-            self?.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: .search)
+            self?.finishApply(destination: .home)
         }
     }()
     
     private func showApplicationSubmittedSuccessfully() {
         guard let window = UIApplication.shared.keyWindow
             else { return }
-        let log = injected.log
-        log.track(TrackingEvent(type: .applyComplete))
         let navigationController = navigationRouter.navigationController
         window.addSubview(successPopup)
         navigationController.navigationBar.layer.zPosition = -1
@@ -75,51 +70,54 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         let candidate = userRepository.loadCandidate()
         return candidate.uuid == nil
     }
-    
-    let association: HostAssociationJson
-    let workplace: Workplace
-    let updateCandidateService: UpdateCandidateServiceProtocol
+
     public init(applyCoordinatorDelegate: ApplyCoordinatorDelegate? = nil,
                 updateCandidateService: UpdateCandidateServiceProtocol,
                 applyService: PostPlacementServiceProtocol,
-                workplace: Workplace,
+                workplace: CompanyAndPin,
                 association: HostAssociationJson,
                 parent: CoreInjectionNavigationCoordinator?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 environment: EnvironmentType,
-                interestsRepository: F4SSelectedInterestsRepositoryProtocol) {
+                appSource: AppSource) {
         self.applyCoordinatorDelegate = applyCoordinatorDelegate
         self.applyService = applyService
         self.updateCandidateService = updateCandidateService
         self.environment = environment
         self.startingViewController = navigationRouter.navigationController.topViewController
-        self.interestsRepository = interestsRepository
         self.workplace = workplace
         self.association = association
+        self.appSource = appSource
+        self.rootViewController = navigationRouter.navigationController.topViewController
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
         draftPlacementLogic.update(associationUuid: association.uuid)
     }
     
     override public func start() {
         super.start()
-        log.track(TrackingEvent(type: .uc_apply_start(.searchTab)))
+        log.track(.passive_apply_start(appSource))
+        log.track(.placement_funnel_start(appSource))
         startDateOfBirthIfNecessary()
     }
-    
+
     func startDateOfBirthIfNecessary() {
         guard let dateOfBirthString = userRepository.loadCandidate().dateOfBirth,
             let dob = Date.workfinderDateStringToDate(dateOfBirthString)
             else {
-            let dobVC = DateOfBirthCollectorViewController(coordinator: self)
-            navigationRouter.push(viewController: dobVC, animated: true)
+            let vc = DateOfBirthCollectorViewController(
+                coordinator: self,
+                log: injected.log
+            )
+            navigationRouter.push(viewController: vc, animated: true)
+            didCaptureDOB = true
             return
         }
         onDidSelectDataOfBirth(date: dob)
     }
     
     func startCoverLetterCoordinator(candidateAge: Int) {
-        guard let hostName = association.host.displayName else { return }
+        guard let hostName = association.host?.fullName else { return }
         let candidateName = injected.user.fullName
         let companyName = workplace.companyJson.name ?? "Unknown company"
         coverletterCoordinator = CoverLetterFlowFactory.makeFlow(
@@ -147,7 +145,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     public func coverLetterDidCancel() {
-        log.track(TrackingEvent(type: .uc_apply_cancel(applicationSource)))
+        switch didCaptureDOB {
+        case true: break
+        case false: cancelApply()
+        }
     }
     public func coverLetterCoordinatorDidComplete(
         coverLetterText: String,
@@ -159,9 +160,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }
     
     func submitApplication() {
-        let navigationController = navigationRouter.navigationController
         guard let messageHandler = coverletterCoordinator?.messageHandler
             else { return }
+        log.track(.placement_funnel_convert(appSource))
+        let navigationController = navigationRouter.navigationController
         let draft = draftPlacementLogic.draft
         applicationSubmitter = ApplicationSubmitter(
             applyService: applyService,
@@ -169,11 +171,10 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             navigationController: navigationController,
             messageHandler: messageHandler,
             onSuccess: { placementUuid in
-                self.log.track(TrackingEvent(type: .uc_apply_convert(self.applicationSource)))
                 self.addSupportingDocument(placementUuid)
             },
             onCancel: {
-                self.cancelButtonWasTapped(sender: self)
+                self.cancelApply()
             })
         applicationSubmitter?.submitApplication()
     }
@@ -215,7 +216,6 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
         navigationRouter.pop(animated: true)
         coverletterCoordinator?.messageHandler?.hideLoadingOverlay()
     }
-    
     
     public func onCandidateIsSignedIn() {
         let uuid = userRepository.loadCandidate().uuid!
@@ -284,9 +284,18 @@ extension ApplyCoordinator {
         navigationRouter.present(alert, animated: true, completion: nil)
     }
     
-    func cancelButtonWasTapped(sender: Any?) {
+    func finishApply(destination: TabIndex) {
+        log.track(.passive_apply_convert(appSource))
         cleanup()
-        navigationRouter.pop(animated: true)
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: destination)
+        self.removeApplicationSubmittedSuccessfully()
+    }
+    
+    func cancelApply() {
+        log.track(.placement_funnel_cancel(appSource))
+        log.track(.passive_apply_cancel(appSource))
+        cleanup()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
@@ -298,13 +307,12 @@ extension ApplyCoordinator {
 
 extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
     
-    func onDidCancel() {
-    }
+    func onDidCancel() { cancelApply() }
     
     func onDidSelectDataOfBirth(date: Date) {
         var candidate = userRepository.loadCandidate()
         candidate.dateOfBirth = date.workfinderDateString
-        userRepository.save(candidate: candidate)
+        userRepository.saveCandidate(candidate)
         if candidate.uuid != nil {
             // persist the candidate's dob to the server
             updateCandidateService.update(candidate: candidate) { (result) in

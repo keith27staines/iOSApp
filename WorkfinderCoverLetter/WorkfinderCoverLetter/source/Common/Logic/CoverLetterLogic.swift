@@ -211,14 +211,27 @@ class CoverLetterLogic {
     }
     
     func nullifyOutofDateAvailability(picklists: PicklistsDictionary) {
+        let now = Date()
+        let yearLater = now.addingTimeInterval(TimeInterval(360*24*3600))
         guard
             let availabilityPicklist = picklists[.availabilityPeriod],
-            let availabilityItem = availabilityPicklist.selectedItems.first,
-            let startDateString = availabilityItem.value,
+            let availabilityStartItem = availabilityPicklist.selectedItems.first,
+            let startDateString = availabilityStartItem.value,
             let startDate = Date.workfinderDateStringToDate(startDateString)
             else { return }
-        if startDate.startOfDay < Date().startOfDay {
+        if startDate.startOfDay < now.startOfDay || startDate.isGreaterThanDate(dateToCompare: yearLater) {
             availabilityPicklist.deselectAll()
+            return
         }
+
+        if availabilityPicklist.selectedItems.count == 2 {
+            let availabilityEndItem = availabilityPicklist.selectedItems[1]
+            let endDateString = availabilityEndItem.value!
+            let endDate = Date.workfinderDateStringToDate(endDateString)!
+            if endDate.isLessThanDate(dateToCompare: startDate) || endDate.isGreaterThanDate(dateToCompare: yearLater) {
+                availabilityPicklist.deselectAll()
+            }
+        }
+
     }
 }

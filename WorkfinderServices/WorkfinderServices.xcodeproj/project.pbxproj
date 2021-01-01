@@ -16,7 +16,7 @@
 		FC20BD4C2450747900FC6C9A /* WorkfinderNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */; };
 		FC3BCA5D2434DF0700C5A96A /* PicklistProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA5C2434DF0700C5A96A /* PicklistProvider.swift */; };
 		FC3BCA612434E04E00C5A96A /* DataTaskCompletionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */; };
-		FC459CE724960EF000D6CE46 /* WorkplaceAndAssociationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE624960EF000D6CE46 /* WorkplaceAndAssociationService.swift */; };
+		FC459CE724960EF000D6CE46 /* ApplicationContextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE624960EF000D6CE46 /* ApplicationContextService.swift */; };
 		FC473E8F2451CE50004CEA17 /* TemplateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC473E8E2451CE50004CEA17 /* TemplateProvider.swift */; };
 		FC473E912451D2CD004CEA17 /* HostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC473E902451D2CD004CEA17 /* HostProvider.swift */; };
 		FC473E932451D331004CEA17 /* WorkplaceListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC473E922451D331004CEA17 /* WorkplaceListService.swift */; };
@@ -53,7 +53,7 @@
 		FC20BD4B2450747900FC6C9A /* WorkfinderNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3BCA5C2434DF0700C5A96A /* PicklistProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistProvider.swift; sourceTree = "<group>"; };
 		FC3BCA602434E04E00C5A96A /* DataTaskCompletionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTaskCompletionHandler.swift; sourceTree = "<group>"; };
-		FC459CE624960EF000D6CE46 /* WorkplaceAndAssociationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkplaceAndAssociationService.swift; sourceTree = "<group>"; };
+		FC459CE624960EF000D6CE46 /* ApplicationContextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContextService.swift; sourceTree = "<group>"; };
 		FC473E8E2451CE50004CEA17 /* TemplateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateProvider.swift; sourceTree = "<group>"; };
 		FC473E902451D2CD004CEA17 /* HostProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostProvider.swift; sourceTree = "<group>"; };
 		FC473E922451D331004CEA17 /* WorkplaceListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkplaceListService.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		FC459CE524960EC600D6CE46 /* Workplace and host combined service */ = {
 			isa = PBXGroup;
 			children = (
-				FC459CE624960EF000D6CE46 /* WorkplaceAndAssociationService.swift */,
+				FC459CE624960EF000D6CE46 /* ApplicationContextService.swift */,
 			);
 			path = "Workplace and host combined service";
 			sourceTree = "<group>";
@@ -301,7 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC459CE724960EF000D6CE46 /* WorkplaceAndAssociationService.swift in Sources */,
+				FC459CE724960EF000D6CE46 /* ApplicationContextService.swift in Sources */,
 				FC473E912451D2CD004CEA17 /* HostProvider.swift in Sources */,
 				FCCA4E2D2456E77500DFA696 /* User services.swift in Sources */,
 				FC473E932451D331004CEA17 /* WorkplaceListService.swift in Sources */,

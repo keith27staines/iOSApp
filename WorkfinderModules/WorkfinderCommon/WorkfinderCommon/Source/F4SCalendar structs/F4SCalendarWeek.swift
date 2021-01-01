@@ -3,7 +3,7 @@
 //  HoursPicker2
 //
 //  Created by Keith Dev on 20/03/2018.
-//  Copyright © 2018 Founders4Schools. All rights reserved.
+//  Copyright © 2018 Workfinder Ltd. All rights reserved.
 //
 
 import Foundation
