@@ -97,6 +97,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     override public func start() {
         super.start()
         log.track(.passive_apply_start(appSource))
+        log.track(.placement_funnel_start(appSource))
         startDateOfBirthIfNecessary()
     }
 
@@ -161,7 +162,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     func submitApplication() {
         guard let messageHandler = coverletterCoordinator?.messageHandler
             else { return }
-        log.track(.passive_apply_submit(appSource))
+        log.track(.placement_funnel_convert(appSource))
         let navigationController = navigationRouter.navigationController
         let draft = draftPlacementLogic.draft
         applicationSubmitter = ApplicationSubmitter(
@@ -292,6 +293,7 @@ extension ApplyCoordinator {
     }
     
     func cancelApply() {
+        log.track(.placement_funnel_cancel(appSource))
         log.track(.passive_apply_cancel(appSource))
         cleanup()
         parentCoordinator?.childCoordinatorDidFinish(self)

@@ -121,6 +121,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onTapApply() {
         log.track(.project_apply_start(appSource))
+        log.track(.placement_funnel_start(appSource))
         startCoverLetterFlow()
     }
     
@@ -131,6 +132,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func onCoverLetterWorkflowCancelled() {
+        log.track(.placement_funnel_cancel(appSource))
         log.track(.project_apply_cancel(appSource))
     }
     
@@ -152,7 +154,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func submitApplication() {
-        self.log.track(.project_apply_submit(self.appSource))
+        self.log.track(.placement_funnel_convert(self.appSource))
         guard let vc = modalVC, let view = vc.view else { return }
         var picklistsDictionary = self.picklistsDictionary
         picklistsDictionary[.availabilityPeriod] = nil

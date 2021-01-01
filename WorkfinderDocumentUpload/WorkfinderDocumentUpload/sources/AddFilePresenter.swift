@@ -7,7 +7,7 @@ protocol AddFilePresenterProtocol {
 }
 
 class AddFilePresenter: AddFilePresenterProtocol {
-    
+    var log: F4SAnalyticsAndDebugging? { coordinator?.injected.log}
     var uploadBytes: Data?
     var filename: String?
     var mime: String?
@@ -83,6 +83,9 @@ class AddFilePresenter: AddFilePresenterProtocol {
                 self.fractionComplete = fractionComplete
             case .uploadSucceeded:
                 self.fractionComplete = 1
+            case .selectionGood:
+                log?.track(.document_upload_document_selected)
+                self.fractionComplete = 0
             default:
                 self.fractionComplete = 0
             }

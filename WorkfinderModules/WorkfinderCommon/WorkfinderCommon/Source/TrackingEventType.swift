@@ -48,11 +48,12 @@ public enum TrackingEventType {
     case recommendation_pushnotification_cancel                                 // not used
     case recommendation_pushnotification_convert                                // ok
 
-    // MARK:-  Passive apply                                                    // checking
+    // MARK:-  Passive apply                                                    // checked
     case passive_apply_start(AppSource)                                         // ok
     case passive_apply_cancel(AppSource)                                        // ok
-    case passive_apply_submit(AppSource)                                        // ok
     case passive_apply_convert(AppSource)                                       // ok
+    
+    // MARK:- DOB capture                                                       // checked
     case date_of_birth_capture_start                                            // ok
     case date_of_birth_capture_cancel                                           // ok
     case date_of_birth_capture_convert(Date)                                    // ok
@@ -60,10 +61,14 @@ public enum TrackingEventType {
     // MARK:- Project apply                                                     // checked
     case project_apply_start(AppSource)                                         // ok
     case project_apply_cancel(AppSource)                                        // ok
-    case project_apply_submit(AppSource)                                        // ok
     case project_apply_convert(AppSource)                                       // ok
     
-    // MARK:- Cover letter events                                               // checking
+    // MARK:- Placement funnel                                                  // checking
+    case placement_funnel_start(AppSource)                                      //
+    case placement_funnel_convert(AppSource)                                    // ok
+    case placement_funnel_cancel(AppSource)                                     //
+    
+    // MARK:- Cover letter events                                               // checked
     case letter_start                                                           // ok
     case letter_viewed(isComplete: Bool)                                        // ok
     case letter_editor_opened                                                   // ok
@@ -72,6 +77,12 @@ public enum TrackingEventType {
     case question_closed(PicklistType, isAnswered: Bool)                        // ok
     case letter_convert                                                         // ok
     case letter_cancel(isComplete: Bool)                                        // ok
+    
+    // MARK:- Document upload                                                   // checking
+    case document_upload_start
+    case document_upload_document_selected
+    case document_upload_convert
+    case document_upload_skip
     
     // MARK:- Offer                                                             // checked
     case offer_accept                                                           // ok
@@ -141,16 +152,21 @@ public enum TrackingEventType {
         // MARK: Passive apply
         case .passive_apply_start: return "ios_passive_apply_start"
         case .passive_apply_cancel: return "ios_passive_apply_cancel"
-        case .passive_apply_submit: return "ios_passive_apply_submitted"        
-        case .passive_apply_convert: return  "ios_passive_apply_convert"        
+        case .passive_apply_convert: return  "ios_passive_apply_convert"
+            
+        // MARK:- DOB capture
         case .date_of_birth_capture_start: return "ios_dob_capture_start"       
         case .date_of_birth_capture_cancel: return "ios_dob_capture_cancel"     
-        case .date_of_birth_capture_convert: return "ios_dob_capture_convert"   
+        case .date_of_birth_capture_convert: return "ios_dob_capture_convert"
+            
+        // MARK:- Placement funnel
+        case .placement_funnel_start: return "ios_placement_funnel_start"
+        case .placement_funnel_convert: return "ios_placement_funnel_convert"
+        case .placement_funnel_cancel: return "ios_placement_funnel_cancel"
             
         // MARK: Project apply
         case .project_apply_start: return "ios_project_apply_start"
         case .project_apply_cancel: return "ios_project_apply_cancel"
-        case .project_apply_submit: return "ios_project_apply-submitted"
         case .project_apply_convert: return "ios_project_apply_convert"
             
         // MARK:- Cover letter events
@@ -162,6 +178,12 @@ public enum TrackingEventType {
         case .question_closed: return "ios_question_closed"
         case .letter_cancel: return "ios_letter_cancel"
         case .letter_convert: return "ios_letter_convert"
+            
+        // MARK:- Document upload
+        case .document_upload_start: return "ios_document_upload_start"
+        case .document_upload_skip: return "ios_document_upload_skip"
+        case .document_upload_convert: return "ios_document_upload_convert"
+        case .document_upload_document_selected: return "ios_document_upload_document_selected"
             
         // MARK:- Offer
         case .offer_accept: return "ios_offer_accept"

@@ -26,11 +26,12 @@ public struct TrackingEvent {
         case .search_home_apply_filters(let filters): properties["search_filters"] = filters
         case .passive_apply_start(let source): properties["source"] = source.rawValue
         case .passive_apply_cancel(let source): properties["source"] = source.rawValue
-        case .passive_apply_submit(let source): properties["source"] = source.rawValue
+        case .placement_funnel_start(let source): properties["source"] = source.rawValue
+        case .placement_funnel_convert(let source): properties["source"] = source.rawValue
+        case .placement_funnel_cancel(let source): properties["source"] = source.rawValue
         case .passive_apply_convert(let source): properties["source"] = source.rawValue
         case .project_apply_start(let source): properties["source"] = source.rawValue
         case .project_apply_cancel(let source): properties["source"] = source.rawValue
-        case .project_apply_submit(let source): properties["source"] = source.rawValue
         case .project_apply_convert(let source): properties["source"] = source.rawValue
         case .question_opened(let question): properties["question"] = question.title
         case .question_closed(let question, let isAnswered):
@@ -83,6 +84,10 @@ public struct TrackingEvent {
         case .search_home_selected_typeahead_item: break
         case .date_of_birth_capture_start: break
         case .date_of_birth_capture_cancel: break
+        case .document_upload_start: break
+        case .document_upload_skip: break
+        case .document_upload_document_selected: break
+        case .document_upload_convert: break
         }
         return properties
     }
