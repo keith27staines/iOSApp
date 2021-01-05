@@ -44,12 +44,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         switchToTab(.home)
-        requestPushNotificationsIsSignedIn()
-    }
-    
-    func requestPushNotificationsIsSignedIn() {
-        guard injected.userRepository.isCandidateLoggedIn else { return }
-        appCoordinator?.requestPushNotifications(from:self.topNavigationController)
     }
     
     public func updateBadges() {
@@ -225,7 +219,9 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         case applicationsCoordinator.navigationRouter.navigationController:
             log.track(.tab_tap(tabName: "applications"))
         case recommendationsCoordinator.navigationRouter.navigationController:
-            appCoordinator?.requestPushNotifications(from: viewController)
+            appCoordinator?.requestPushNotifications(from: viewController, completion: {
+                
+            })
             log.track(.tab_tap(tabName: "recommendations"))
         default:
             fatalError("unknown coordinator")

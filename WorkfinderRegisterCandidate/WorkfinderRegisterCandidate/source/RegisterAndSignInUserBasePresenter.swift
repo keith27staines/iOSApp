@@ -21,7 +21,7 @@ protocol RegisterAndSignInPresenterProtocol: class {
     var nicknameValidityState: UnderlineView.State { get }
     var isGuardianEmailRequired: Bool { get }
     var isPrimaryButtonEnabled: Bool { get }
-    func onDidTapPrimaryButton(onFailure: @escaping ((Error) -> Void))
+    func onDidTapPrimaryButton(from vc: UIViewController, onFailure: @escaping ((Error) -> Void))
     func onDidTapSwitchMode()
     func onViewDidLoad(_ view: WorkfinderViewControllerProtocol)
     var isTermsAndConditionsAgreed: Bool { get set }
@@ -59,13 +59,13 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     
     func onViewDidLoad(_ view: WorkfinderViewControllerProtocol) { self.view = view }
     
-    func onDidTapPrimaryButton(onFailure: @escaping ((Error) -> Void)) {
+    func onDidTapPrimaryButton(from vc: UIViewController, onFailure: @escaping ((Error) -> Void)) {
         userRepository.saveUser(user)
         registerLogic.start { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(_):
-                self.coordinator?.onUserRegisteredAndCandidateCreated(pop: true)
+                self.coordinator?.onUserRegisteredAndCandidateCreated(from: vc, pop: true)
             case .failure(let error):
                 onFailure(error)
             }

@@ -49,7 +49,7 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     @objc func register() {
         updatePresenter()
         messageHandler.showLoadingOverlay(self.view)
-        presenter.onDidTapPrimaryButton { [weak self] (error) in
+        presenter.onDidTapPrimaryButton(from: self) { [weak self] (error) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(

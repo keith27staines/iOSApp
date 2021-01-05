@@ -8,7 +8,8 @@ protocol TypeAheadServiceProtocol {
 
 class TypeAheadService: WorkfinderService, TypeAheadServiceProtocol {
     
-    func fetch(queryItems: [URLQueryItem], completion: @escaping (Result<TypeAheadJson,Error>) -> Void) {
+    func
+    fetch(queryItems: [URLQueryItem], completion: @escaping (Result<TypeAheadJson,Error>) -> Void) {
         do {
             let endpoint = "search/typeahead/"
             let request = try buildRequest(relativePath: endpoint, queryItems: queryItems, verb: .get)

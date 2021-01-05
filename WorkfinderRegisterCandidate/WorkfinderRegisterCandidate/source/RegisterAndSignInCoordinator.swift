@@ -7,7 +7,7 @@ import WorkfinderUI
 
 protocol RegisterAndSignInCoordinatorProtocol {
     func switchMode(_ mode: RegisterAndSignInMode)
-    func onUserRegisteredAndCandidateCreated(pop: Bool)
+    func onUserRegisteredAndCandidateCreated(from vc: UIViewController?, pop: Bool)
     func onRegisterAndSignInCancelled()
     func startRegisterFirst()
     func startLoginFirst()
@@ -47,9 +47,19 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         presentRegisterUserViewController()
     }
     
-    func onUserRegisteredAndCandidateCreated(pop: Bool = true) {
+    func onUserRegisteredAndCandidateCreated(from vc: UIViewController?, pop: Bool = true) {
         injected.log.track(.register_user_convert)
         injected.log.updateIdentity()
+        guard let vc = vc else {
+            onRegisterComplete()
+            return
+        }
+        injected.appCoordinator?.requestPushNotifications(from: vc, completion: { [weak self] in
+            self?.onRegisterComplete()
+        })
+    }
+    
+    func onRegisterComplete() {
         if let previous = firstViewController?.previousViewController {
             // for pushed vcs
             navigationRouter.popToViewController(previous, animated: true)
@@ -91,7 +101,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         let userRepository = injected.userRepository
         let candidate = userRepository.loadCandidate()
         guard candidate.uuid == nil else {
-            onUserRegisteredAndCandidateCreated(pop: false)
+            onUserRegisteredAndCandidateCreated(from: nil, pop: false)
             return
         }
         let registerUserLogic = RegisterUserLogic(

@@ -91,7 +91,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
         case .duration: return "placement-durations/"
         case .experience: return ""
         case .attributes: return "placement-attributes/"
-        case .skills: return "placement-attributes/"
+        case .skills: return "placement-skills/"
         case .strongestSkills: return "placement-skills/"
         }
     }
@@ -132,7 +132,7 @@ public enum PicklistType: Int, CaseIterable, Codable {
     
     public var maxItems: Int {
         switch self {
-        case .strongestSkills, .attributes: return 3
+        case .strongestSkills, .skills, .attributes: return 3
         case .availabilityPeriod: return 2
         default: return 1
         }

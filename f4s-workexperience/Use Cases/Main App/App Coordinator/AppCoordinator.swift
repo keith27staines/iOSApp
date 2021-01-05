@@ -11,7 +11,6 @@ import WorkfinderRegisterCandidate
 extension UIApplication {}
 
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
-
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
@@ -135,8 +134,12 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         tabBarCoordinator.start()
     }
     
-    func requestPushNotifications(from viewController: UIViewController) {
-        userNotificationService.authorize(from: viewController)
+    func requestPushNotifications(from viewController: UIViewController, completion: @escaping () -> Void) {
+        guard injected.userRepository.isCandidateLoggedIn else {
+            completion()
+            return
+        }
+        userNotificationService.authorize(from: viewController, completion: completion)
     }
     
     lazy var recommendationService: RecommendationsServiceProtocol = {

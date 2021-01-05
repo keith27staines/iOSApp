@@ -24,7 +24,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         updatePresenter()
         view.endEditing(true)
         messageHandler.showLoadingOverlay(self.view)
-        presenter.onDidTapPrimaryButton { [weak self] (optionalError) in
+        presenter.onDidTapPrimaryButton(from: self) { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.handleError(optionalError: optionalError)

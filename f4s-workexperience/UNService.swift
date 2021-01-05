@@ -9,8 +9,8 @@ class UNService : NSObject {
     private let userRepository: UserRepositoryProtocol
     weak var appCoordinator: AppCoordinatorProtocol!
     let center = UNUserNotificationCenter.current()
-    var log: F4SAnalyticsAndDebugging { return appCoordinator.log }
     var permissionHasBeenRequested = false
+    var log: F4SAnalyticsAndDebugging { appCoordinator.log }
     
     init(appCoordinator: AppCoordinatorProtocol, userRepository: UserRepositoryProtocol) {
         self.appCoordinator = appCoordinator
@@ -19,7 +19,7 @@ class UNService : NSObject {
         center.delegate = self
     }
     
-    func authorize(from viewController: UIViewController) {
+    func authorize(from viewController: UIViewController, completion: @escaping () -> Void) {
         center.getNotificationSettings(completionHandler: { (settings) in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -27,13 +27,15 @@ class UNService : NSObject {
                 case .notDetermined:
                     guard self.permissionHasBeenRequested == false else { return }
                     self.permissionHasBeenRequested = true
-                    self.suggestEnableRecommendations(from: viewController)
+                    self.suggestEnableRecommendations(from: viewController, completion: completion)
                 case .denied:
                     guard self.permissionHasBeenRequested == false else { return }
                     self.permissionHasBeenRequested = true
                     self.directUserToSettings(from: viewController)
+                    completion()
                 case .authorized, .provisional, .ephemeral:
                     UIApplication.shared.registerForRemoteNotifications()
+                    completion()
                 @unknown default:
                     break
                 }
@@ -41,20 +43,35 @@ class UNService : NSObject {
         })
     }
     
-    private func suggestEnableRecommendations(from viewController: UIViewController) {
-        guard let _ = userRepository.loadUser().uuid else { return }
+    private func suggestEnableRecommendations(from viewController: UIViewController, completion: @escaping () -> Void) {
+        log.track(.allow_notifications_start)
+        guard let _ = userRepository.loadUser().uuid else {
+            completion()
+            return
+        }
         let alertController = UIAlertController (title: "Would you like to receive notifications when you have new recommendations?", message: "We recommend positions matched to you", preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: {_ in
+            self.log.track(.allow_notifications_cancel)
+            completion()
+        })
         alertController.addAction(cancelAction)
         
         let settingsAction = UIAlertAction(title: "Enable notifications", style: .default) { (_) -> Void in
             
-
-            self.center.requestAuthorization(options: [.alert,.badge, .sound]) { [weak self] isAuthorized, _ in
-                guard let self = self, isAuthorized else { return }
-                DispatchQueue.main.async { UIApplication.shared.registerForRemoteNotifications() }
-                self.permissionHasBeenRequested = true
+            self.center.requestAuthorization(options: [.alert,.badge, .sound]) {isAuthorized, _ in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.permissionHasBeenRequested = true
+                    guard isAuthorized else {
+                        self.log.track(.allow_notifications_cancel)
+                        completion()
+                        return
+                    }
+                    self.log.track(.allow_notifications_convert)
+                    UIApplication.shared.registerForRemoteNotifications()
+                    completion()
+                }
             }
         }
         alertController.addAction(settingsAction)
@@ -62,7 +79,7 @@ class UNService : NSObject {
     }
     
     private func directUserToSettings(from viewController: UIViewController) {
-        let alertController = UIAlertController (title: "You haven't enabled notifications", message: "Notifications will alert immediately you when we have a new recommendation matched to you. You can enable notifications for Workfinder in settings", preferredStyle: .alert)
+        let alertController = UIAlertController (title: "You haven't enabled notifications", message: "Notifications will alert you immediately whenever we have a new recommendation matched to you. You can enable notifications for Workfinder in settings", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Not now", style: .default, handler: nil)
         alertController.addAction(cancelAction)
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in

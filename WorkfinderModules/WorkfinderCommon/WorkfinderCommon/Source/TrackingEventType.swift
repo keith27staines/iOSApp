@@ -28,10 +28,10 @@ public enum TrackingEventType {
     case search_home_perform_popular(search: String)                            // ok
     case search_home_apply_filters(search: String)                              // ok
 
-    // MARK:- Allow notifications
-    case allow_notifications_start
-    case allow_notifications_cancel
-    case allow_notifications_convert
+    // MARK:- Allow notifications                                               // checking
+    case allow_notifications_start                                              // not firing
+    case allow_notifications_cancel                                             // not firing
+    case allow_notifications_convert                                            // not firing
 
     // MARK:- Recommendations deeplink processing                               // checked
     case recommendation_deeplink_start                                          // ok
@@ -63,10 +63,10 @@ public enum TrackingEventType {
     case project_apply_cancel(AppSource)                                        // ok
     case project_apply_convert(AppSource)                                       // ok
     
-    // MARK:- Placement funnel                                                  // checking
-    case placement_funnel_start(AppSource)                                      //
+    // MARK:- Placement funnel                                                  // checked
+    case placement_funnel_start(AppSource)                                      // ok
     case placement_funnel_convert(AppSource)                                    // ok
-    case placement_funnel_cancel(AppSource)                                     //
+    case placement_funnel_cancel(AppSource)                                     // ok
     
     // MARK:- Cover letter events                                               // checked
     case letter_start                                                           // ok
@@ -78,17 +78,17 @@ public enum TrackingEventType {
     case letter_convert                                                         // ok
     case letter_cancel(isComplete: Bool)                                        // ok
     
-    // MARK:- Document upload                                                   // checking
-    case document_upload_start
-    case document_upload_document_selected
-    case document_upload_convert
-    case document_upload_skip
+    // MARK:- Document upload                                                   // checked
+    case document_upload_start                                                  // ok
+    case document_upload_document_selected                                      // ok
+    case document_upload_convert                                                // ok
+    case document_upload_skip                                                   // ok
     
     // MARK:- Offer                                                             // checked
     case offer_accept                                                           // ok
     case offer_decline(reason: String)                                          // ok
     
-    // MARK:- Object viewing                                                    // checking
+    // MARK:- Object viewing                                                    // checked
     case company_hosts_page_view(AppSource)                                     // ok
     case company_hosts_page_dismiss(AppSource)                                  // ok
     case project_page_view(AppSource)                                           // ok

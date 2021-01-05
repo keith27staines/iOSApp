@@ -20,7 +20,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func handleDeepLinkUrl(url: URL) -> Bool
     func handlePushNotification(_ pushNotification: PushNotification?)
     func registerDevice(token: Data)
-    func requestPushNotifications(from viewController: UIViewController)
+    func requestPushNotifications(from viewController: UIViewController, completion: @escaping () -> Void )
 }
 
 public protocol OnboardingCoordinatorDelegate : class {
