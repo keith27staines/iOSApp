@@ -57,8 +57,10 @@ class SearchResultsController {
         
     var queryItems = [URLQueryItem]() {
         didSet {
+            datasources.forEach { (datasource) in
+                datasource.queryItems = queryItems
+            }
             let roleDatasource = datasources[0]
-            roleDatasource.queryItems = queryItems
             messageHandler?.showLoadingOverlay(style: .transparent)
             roleDatasource.loadData() { [weak self] error in
                 guard let self = self else { return }

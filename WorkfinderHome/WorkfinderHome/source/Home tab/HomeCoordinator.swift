@@ -39,7 +39,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
         guard let objectType = item.objectType, let uuid = item.uuid else { return }
         log.track(.search_home_selected_typeahead_item)
         switch objectType {
-        case "association", "company":
+        case "derivedassociation", "company":
             startAssociationApply(associationUuid: uuid, source: item.appSource)
         case "project":
             startProjectApply(projectUuid: uuid, source: item.appSource)
