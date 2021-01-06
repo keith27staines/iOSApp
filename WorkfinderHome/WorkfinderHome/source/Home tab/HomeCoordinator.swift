@@ -198,7 +198,7 @@ public class HomeCoordinator : CoreInjectionNavigationCoordinator {
 extension HomeCoordinator: CompanyCoordinatorParentProtocol {
     
     public func switchToTab(_ tab: TabIndex) {
-        tabNavigator?.switchToTab(.home)
+        tabNavigator?.switchToTab(tab)
     }
 }
 
