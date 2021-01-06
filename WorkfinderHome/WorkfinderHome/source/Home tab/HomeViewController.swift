@@ -149,11 +149,6 @@ class HomeViewController: UIViewController {
         configureViews()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //refresh()
-    }
-    
     @objc func animateTrayToTop() {
         trayTopConstraintConstant = 0
         animateTrayToFinalPosition()

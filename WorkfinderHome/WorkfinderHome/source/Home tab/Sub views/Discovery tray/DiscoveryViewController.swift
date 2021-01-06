@@ -92,6 +92,7 @@ class DiscoveryTrayController: NSObject {
         }
         recentRolesPresenter.loadFirstPage { [weak self] in
             self?.refreshControl.endRefreshing()
+            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
     
@@ -102,7 +103,7 @@ class DiscoveryTrayController: NSObject {
         tableView.performBatchUpdates({
             tableView.insertSections(indexSet, with: .none)
         }) { (update) in
-            print("Update SUccess")
+            self.layoutTable()
         }
     }
     

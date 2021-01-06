@@ -30,9 +30,8 @@ class DiscoveryTrayView : UIView {
         addSubview(tableView)
         addSubview(searchDetail)
         searchBarStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
-        tableView.anchor(top: searchBarStack.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+        tableView.anchor(top: searchBarStack.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
         searchDetail.anchor(top: tableView.topAnchor, leading: tableView.leadingAnchor, bottom: tableView.bottomAnchor, trailing: tableView.trailingAnchor)
-        tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
     }
     
     init(searchBarStack: UIStackView, searchDetail: SearchDetailView) {

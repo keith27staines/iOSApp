@@ -37,7 +37,7 @@ class SectionFooterView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor.white
+        //contentView.backgroundColor = UIColor.white
         contentView.addSubview(separator)
         separator.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
         isLineHidden = false
