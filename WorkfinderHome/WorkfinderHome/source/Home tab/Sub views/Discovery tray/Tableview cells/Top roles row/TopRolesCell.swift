@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderUI
 
-class TopRolesCell: HorizontallyScrollingCell, Presentable {
+class TopRolesCell: HorizontallyScrollingCellWithPageControl, Presentable {
     static let identifier = "TopRolesView"
     let cardWidth = CGFloat(158)
     let cardHeight = CGFloat(262)
@@ -35,14 +35,5 @@ class TopRolesCell: HorizontallyScrollingCell, Presentable {
         card.widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
         card.heightAnchor.constraint(equalToConstant: cardHeight).isActive = true
         addCard(card)
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        isPagingEnabled = true
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

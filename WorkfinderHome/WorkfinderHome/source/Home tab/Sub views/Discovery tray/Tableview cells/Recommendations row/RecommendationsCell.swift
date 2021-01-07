@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderUI
 
-class RecommendationsCell: HorizontallyScrollingCell, Presentable {
+class RecommendationsCell: HorizontallyScrollingCellWithPageControl, Presentable {
     static let identifier = "RecommendationsView"
     let cardWidth = CGFloat(158)
     let cardHeight = CGFloat(262)
@@ -51,15 +51,7 @@ class RecommendationsCell: HorizontallyScrollingCell, Presentable {
         card.heightAnchor.constraint(equalToConstant: cardHeight).isActive = true
         addCard(card)
     }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        isPagingEnabled = true
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
 }
 
 

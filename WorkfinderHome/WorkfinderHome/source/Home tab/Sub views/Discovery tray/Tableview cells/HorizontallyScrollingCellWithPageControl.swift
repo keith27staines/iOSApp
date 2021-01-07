@@ -1,11 +1,12 @@
+
 import UIKit
 import WorkfinderUI
 
-class HorizontallyScrollingCell: UITableViewCell {
+class HorizontallyScrollingCellWithPageControl: UITableViewCell {
     private var verticalMargin = CGFloat(20)
-    private var scrollViewHeight = CGFloat(45)
+    private var scrollViewHeight = CGFloat(262)
     
-    func adjustMarginsAndGutter(verticalMargin: CGFloat = 20, scrollViewHeight: CGFloat = 45, gutter: CGFloat) {
+    func adjustMarginsAndGutter(verticalMargin: CGFloat = 20, scrollViewHeight: CGFloat = 262, gutter: CGFloat) {
         self.verticalMargin = verticalMargin
         self.scrollViewHeight = scrollViewHeight
         scrollViewHeightConstraint.constant = scrollViewHeight
@@ -35,48 +36,49 @@ class HorizontallyScrollingCell: UITableViewCell {
         cardCount = 0
     }
     
-    var isPagingEnabled: Bool = false {
-        didSet {
-            scrollView.isPagingEnabled = isPagingEnabled
-            switch isPagingEnabled {
-            case false:
-                scrollAndPageControlStack.removeArrangedSubview(pageControl)
-            case true:
-                scrollAndPageControlStack.addArrangedSubview(pageControl)
-            }
-        }
-    }
-    
     override func layoutMarginsDidChange() {
         super.layoutMarginsDidChange()
-        guard isPagingEnabled else { return }
         layoutSubviews()
     }
     
     lazy var scrollAndPageControlStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [scrollView]
+        let stack = UIStackView(arrangedSubviews: [
+                scrollView,
+                pageControlContainer
+            ]
         )
         stack.axis = .vertical
-        stack.alignment = .fill
-        stack.spacing = 30
+        stack.distribution = .fill
+        stack.spacing = 0
         return stack
     }()
 
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
+        view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        view.isPagingEnabled = true
         view.delegate = self
         return view
     }()
     
+    private lazy var pageControlContainer: UIView = {
+        let view = UIView()
+        view.addSubview(pageControl)
+        pageControl.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
+        view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        pageControl.centerYAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        return view
+    }()
+    
     private lazy var pageControl: UIPageControl = {
-        let control = UIPageControl(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
+        let control = UIPageControl(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         control.pageIndicatorTintColor = UIColor.init(white: 216/255, alpha: 1)
         control.currentPageIndicatorTintColor = WorkfinderColors.primaryColor
         control.numberOfPages = 5
         control.currentPage = 0
-        control.heightAnchor.constraint(equalToConstant: 10).isActive = true
         control.addTarget(self, action: #selector(changePage), for: .valueChanged)
         control.hidesForSinglePage = true
+        control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
     
@@ -139,7 +141,7 @@ class HorizontallyScrollingCell: UITableViewCell {
 
 }
 
-extension HorizontallyScrollingCell: UIScrollViewDelegate {
+extension HorizontallyScrollingCellWithPageControl: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)

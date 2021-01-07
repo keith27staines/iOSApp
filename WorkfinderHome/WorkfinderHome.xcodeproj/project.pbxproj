@@ -44,6 +44,7 @@
 		537F5229257E3BB3003C5699 /* EmploymentTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */; };
 		537F522D257E3E78003C5699 /* SkillAcquiredTypesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */; };
 		537F8ADA257B4A5D00C5F2EB /* TypeAheadDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */; };
+		5385C9D925A7543100B9A811 /* HorizontallyScrollingCellWithPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5385C9D825A7543100B9A811 /* HorizontallyScrollingCellWithPageControl.swift */; };
 		538C1DDA257F8EE800E34F95 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538C1DD9257F8EE800E34F95 /* SearchResultsController.swift */; };
 		53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */; };
 		53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */; };
@@ -126,6 +127,7 @@
 		537F5228257E3BB3003C5699 /* EmploymentTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentTypesService.swift; sourceTree = "<group>"; };
 		537F522C257E3E78003C5699 /* SkillAcquiredTypesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillAcquiredTypesService.swift; sourceTree = "<group>"; };
 		537F8AD9257B4A5D00C5F2EB /* TypeAheadDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAheadDataSource.swift; sourceTree = "<group>"; };
+		5385C9D825A7543100B9A811 /* HorizontallyScrollingCellWithPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyScrollingCellWithPageControl.swift; sourceTree = "<group>"; };
 		538C1DD9257F8EE800E34F95 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
 		53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinderPresenter.swift; sourceTree = "<group>"; };
 		53BCD7DD256D22B500CC8FF4 /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 			children = (
 				53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */,
 				533A0F5D256E3905008D67D1 /* HorizontallyScrollingCell.swift */,
+				5385C9D825A7543100B9A811 /* HorizontallyScrollingCellWithPageControl.swift */,
 				53BCD7D1256D224600CC8FF4 /* Popular on workfinder row */,
 				53BCD7DA256D229800CC8FF4 /* Recommendations row */,
 				53BCD7E1256D22BF00CC8FF4 /* Top roles row */,
@@ -616,6 +619,7 @@
 				53D94BBF256A3A3700A2127C /* HomeViewController.swift in Sources */,
 				53BCD7DE256D22B500CC8FF4 /* RecommendationsPresenter.swift in Sources */,
 				537F5229257E3BB3003C5699 /* EmploymentTypesService.swift in Sources */,
+				5385C9D925A7543100B9A811 /* HorizontallyScrollingCellWithPageControl.swift in Sources */,
 				53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */,
 				532DD109256FA8B900CFD525 /* PortraitRoleCard.swift in Sources */,
 				533D544F25794F3C006B6F0C /* FiltersSectionHeaderCell.swift in Sources */,

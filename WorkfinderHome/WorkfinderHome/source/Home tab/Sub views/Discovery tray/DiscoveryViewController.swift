@@ -179,11 +179,11 @@ extension DiscoveryTrayController: UITableViewDataSource {
         case .recommendations:
             cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier)
             cell?.backgroundColor = UIColor.white
-            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGetter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
+            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
         case .topRoles:
             cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier)
             cell?.backgroundColor = topRolesBackgroundColor
-            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGetter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
+            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
         case .recentRoles:
             cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
             cell?.backgroundColor = UIColor.white
