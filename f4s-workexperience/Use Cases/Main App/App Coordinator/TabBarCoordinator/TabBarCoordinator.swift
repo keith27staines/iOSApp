@@ -214,8 +214,6 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
         switch viewController {
         case homeCoordinator.navigationRouter.navigationController:
             log.track(.tab_tap(tabName: "home"))
-            drawerController!.openDrawerGestureModeMask = .panningNavigationBar
-            drawerController!.closeDrawerGestureModeMask = .all
         case applicationsCoordinator.navigationRouter.navigationController:
             log.track(.tab_tap(tabName: "applications"))
         case recommendationsCoordinator.navigationRouter.navigationController:
