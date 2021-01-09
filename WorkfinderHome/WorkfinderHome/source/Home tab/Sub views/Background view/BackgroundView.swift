@@ -7,8 +7,7 @@ class BackgroundView: UIImageView {
     
     init() {
         super.init(frame: CGRect.zero)
-        backgroundColor = UIColor.init(white: 0.9, alpha: 1)
-        image = UIImage(named: "home_screen_background")
+        backgroundColor = WorkfinderColors.primaryColor
         isUserInteractionEnabled = true
     }
     
