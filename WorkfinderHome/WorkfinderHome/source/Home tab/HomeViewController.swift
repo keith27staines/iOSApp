@@ -8,9 +8,7 @@ class HomeViewController: UIViewController {
     weak var coordinator: HomeCoordinator?
 
     var homeView: HomeView { view as! HomeView }
-    var headerView: HeaderView { homeView.headerView }
     var backgroundView: BackgroundView { homeView.backgroundView }
-    
     let trayController: DiscoveryTrayController
     
     var tray: DiscoveryTrayView { trayController.tray }
@@ -31,6 +29,7 @@ class HomeViewController: UIViewController {
         scrollHijackOverlay.removeFromSuperview()
         trayTopConstraintConstant = 0
         animateTrayToFinalPosition()
+        navigationItem.title = "Discover"
     }
     
     lazy var trayTopConstraint: NSLayoutConstraint = {
@@ -39,20 +38,20 @@ class HomeViewController: UIViewController {
         return constraint
     }()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
+    func configureNavigationBar() {
+        styleNavigationController()
+    }
+    
     var trayTopConstraintConstant: CGFloat = 0 {
         didSet {
             let guide = homeView.backgroundView.safeAreaLayoutGuide
             trayTopConstraintConstant = max(guide.layoutFrame.minY + 0, trayTopConstraintConstant)
             trayTopConstraintConstant = min(guide.layoutFrame.maxY - 40, trayTopConstraintConstant)
             trayTopConstraint.constant = trayTopConstraintConstant
-            if trayTopConstraintConstant < 100 {
-                homeView.headerVerticalOffset = -(100 - trayTopConstraintConstant)/2
-                headerView.alpha = 1 // - (100 - trayTopConstraintConstant)/100
-                
-            } else {
-                homeView.headerVerticalOffset = 0
-                headerView.alpha = 1
-            }
         }
     }
     
@@ -96,13 +95,10 @@ class HomeViewController: UIViewController {
                 tray.layer.cornerRadius = 0
                 tray.layer.shadowRadius = 0
                 tray.layer.shadowColor = UIColor.clear.cgColor
-                self.headerView.alpha = 0
                 self.homeView.layoutIfNeeded()
             },
             completion: {_ in
-                if self.trayTopConstraintConstant == 0 {
-                    self.headerView.isHidden = true
-                }
+                if self.trayTopConstraintConstant == 0 {}
             }
         )
     }
@@ -160,20 +156,15 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.trayController.loadFirstPage()
         }
-        
     }
     
     var isConfigured = false
     func configureViews() {
-        adjustNavigationBar()
+        configureNavigationBar()
         guard !isConfigured else { return }
         isConfigured = true
         configureHomeView()
         configureTray()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
     }
     
     init(
@@ -198,6 +189,7 @@ class HomeViewController: UIViewController {
         )
         super.init(nibName: nil, bundle: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleErrorNotification), name: .wfHomeScreenErrorNotification, object: nil)
+        backgroundView.upArrowTapped = { self.hijackScroll() }
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -206,30 +198,10 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     var navigationBar: UINavigationBar? { navigationController?.navigationBar }
-    var statusBarHeight: CGFloat {
-        var height: CGFloat = 0
-        if #available(iOS 13.0, *) {
-            let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-            height = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        } else {
-            height = UIApplication.shared.statusBarFrame.height
-        }
-        return height
-    }
-    
-    func adjustNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationBar?.barTintColor = WorkfinderColors.primaryColor
-        navigationBar?.tintColor = UIColor.white
-        navigationBar?.isTranslucent = false
-        setNeedsStatusBarAppearanceUpdate()
-    }
     
     func configureHomeView() {
         homeView.isUserInteractionEnabled = true
         homeView.configureViews()
-        homeView.headerView.height = (navigationBar?.frame.height ?? 0) + statusBarHeight
-        homeView.headerVerticalOffset = 0
         homeView.layoutSubviews()
     }
     
@@ -237,7 +209,7 @@ extension HomeViewController {
         backgroundView.addSubview(tray)
         tray.anchor(top: nil, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor)
         tray.heightAnchor.constraint(equalTo: backgroundView.heightAnchor).isActive = true
-        trayTopConstraintConstant = backgroundView.frame.height/2
+        trayTopConstraintConstant = backgroundView.frame.height/2 - 56
         tray.addSubview(scrollHijackOverlay)
         scrollHijackOverlay.anchor(top: tray.topAnchor, leading: tray.leadingAnchor, bottom: tray.bottomAnchor, trailing: tray.trailingAnchor)
     }

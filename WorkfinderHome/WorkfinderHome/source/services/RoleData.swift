@@ -50,6 +50,6 @@ public extension RoleData {
         locationHeader = "Location"
         location = project?.isRemote == false ?  "On site" : "Remote"
         workingHours = project?.employmentType 
-        actionButtonText = "Discover more"
+        actionButtonText = "Apply now"
     }
 }

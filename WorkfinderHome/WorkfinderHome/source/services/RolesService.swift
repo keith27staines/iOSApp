@@ -138,7 +138,7 @@ fileprivate extension RoleData {
         location = role.is_remote == true ? "Remote" : ""
         paidHeader = "Paid (ph)"
         paidAmount = role.is_paid == true ? "£6 - 8.21" : "Voluntary"
-        actionButtonText = "Apply now"
+        actionButtonText = "Learn more"
         workingHours = role.employment_type
     }
 }

@@ -23,9 +23,6 @@ class DiscoveryTrayView : UIView {
         backgroundColor = UIColor.white
         layer.cornerRadius = 16
         layer.masksToBounds = false
-        layer.shadowRadius = 2
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.3
         addSubview(searchBarStack)
         addSubview(tableView)
         addSubview(searchDetail)

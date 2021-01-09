@@ -67,11 +67,11 @@ class KSSearchBar: UIView {
     private lazy var textField: UITextField = {
         let view = UITextField()
         view.accessibilityIdentifier = "search_text"
-        view.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        view.font = UIFont.systemFont(ofSize: 17, weight: .light)
         view.setContentHuggingPriority(.defaultHigh, for: .vertical)
         view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 40).isActive = true
         view.placeholder = "placeholder"
         view.delegate = self
         view.returnKeyType = .search
@@ -130,18 +130,16 @@ class KSSearchBar: UIView {
     private lazy var capsuleContainer: UIView = {
         let view = UIView()
         view.accessibilityIdentifier = "capsule_container"
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
         view.layer.backgroundColor = UIColor.init(white: 0.95, alpha: 1).cgColor
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 12
         capsuleStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(capsuleStack)
         NSLayoutConstraint.activate([
-            capsuleStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: gap),
+            capsuleStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: gap/2),
             capsuleStack.topAnchor.constraint(equalTo: view.topAnchor),
             capsuleStack.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            capsuleStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -gap),
+            capsuleStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -gap/2),
             searchIcon.heightAnchor.constraint(equalTo: textField.heightAnchor, multiplier: 0.5),
             clearButton.heightAnchor.constraint(equalTo: textField.heightAnchor, multiplier: 0.5),
             searchIcon.widthAnchor.constraint(equalTo: searchIcon.heightAnchor),

@@ -15,7 +15,7 @@ class TopRolesPresenter: CellPresenter {
                 let maxRoles = min(10, roles.count)
                 self.roles = ([RoleData](roles[0..<maxRoles])).map({ (roleData) -> RoleData in
                     var adaptedData = roleData
-                    adaptedData.actionButtonText = "Discover more"
+                    adaptedData.actionButtonText = roleData.actionButtonText
                     return adaptedData
                 }).settingAppSource(.homeTabTopRolesList)
                 completion(nil)

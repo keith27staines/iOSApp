@@ -9,7 +9,7 @@ extension TabIndex {
     var title: String {
         switch self {
         case .applications: return "Applications"
-        case .home: return "Home"
+        case .home: return "Discover"
         case .recommendations: return "Recommendations"
         }
     }
@@ -19,7 +19,7 @@ extension TabIndex {
         case .applications:
             return UIImage(named: "applications")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         case .home:
-            return UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            return UIImage(named: "discover_tab")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         case .recommendations:
             return UIImage(named: "recommendations")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         }
