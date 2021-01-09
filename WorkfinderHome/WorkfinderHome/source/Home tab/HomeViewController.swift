@@ -228,7 +228,7 @@ extension HomeViewController {
         backgroundView.addSubview(tray)
         tray.anchor(top: nil, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor)
         tray.heightAnchor.constraint(equalTo: backgroundView.heightAnchor).isActive = true
-        trayTopConstraintConstant = backgroundView.frame.height/2 - 56
+        trayTopConstraintConstant = backgroundView.frame.height/2 - 25
         tray.addSubview(scrollHijackOverlay)
         scrollHijackOverlay.anchor(top: tray.topAnchor, leading: tray.leadingAnchor, bottom: tray.bottomAnchor, trailing: tray.trailingAnchor)
     }

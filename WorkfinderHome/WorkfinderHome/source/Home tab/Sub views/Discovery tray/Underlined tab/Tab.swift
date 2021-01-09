@@ -1,12 +1,17 @@
 
 import UIKit
-
+import WorkfinderUI
 
 class Tab: UIView {
     let index: Int
     let selectedColor: UIColor
     let deselectedUnderlineColor = UIColor(white: 0.85, alpha: 1)
     let title: String
+    var badgeText: String? = "" {
+        didSet {
+            titleBadge.text = badgeText
+        }
+    }
     let underlineHeight: CGFloat = 3
     var tapped: ((Tab) -> Void)?
     
@@ -17,13 +22,31 @@ class Tab: UIView {
                 titleLabel.textColor = selectedColor
                 selectedUnderline.backgroundColor = selectedColor
                 deselectedUnderline.backgroundColor = UIColor.clear
+                titleBadge.textColor = UIColor.white
+                titleBadge.backgroundColor = selectedColor
             case false:
                 titleLabel.textColor = UIColor.darkText
                 selectedUnderline.backgroundColor = UIColor.clear
                 deselectedUnderline.backgroundColor = deselectedUnderlineColor
+                titleBadge.textColor = UIColor.black
+                titleBadge.backgroundColor = deselectedUnderlineColor
             }
         }
     }
+    
+    lazy var textStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            UIView(),
+            titleLabel,
+            titleBadge,
+            UIView()
+        ])
+        stack.axis = .horizontal
+        stack.spacing = 4
+        stack.distribution = .equalCentering
+        stack.alignment = .center
+        return stack
+    }()
     
     init(index: Int,
          title: String,
@@ -35,7 +58,7 @@ class Tab: UIView {
         self.tapped = tapped
         super.init(frame: CGRect.zero)
         let stack = UIStackView(arrangedSubviews: [
-            titleLabel,
+            textStack,
             selectedUnderline,
             tableView
         ])
@@ -54,10 +77,22 @@ class Tab: UIView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = self.title
-        label.textAlignment = .center
+        label.textAlignment = .right
         label.textColor = UIColor.darkText
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        return label
+    }()
+    
+    lazy var titleBadge: UILabel = {
+        let label = UILabel()
+        label.text = badgeText
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = true
+        label.layer.cornerRadius = 4
+        label.layer.masksToBounds = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        label.widthAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
         return label
     }()
     

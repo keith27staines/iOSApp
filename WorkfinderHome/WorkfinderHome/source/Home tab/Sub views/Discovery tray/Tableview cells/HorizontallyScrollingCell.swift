@@ -120,7 +120,7 @@ class HorizontallyScrollingCell: UITableViewCell {
     
     private func configureViews() {
         contentView.addSubview(scrollAndPageControlStack)
-        scrollAndPageControlStack.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
+        scrollAndPageControlStack.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         scrollAndPageControlStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         scrollView.addSubview(scrollContentStack)
         scrollView.isScrollEnabled = true

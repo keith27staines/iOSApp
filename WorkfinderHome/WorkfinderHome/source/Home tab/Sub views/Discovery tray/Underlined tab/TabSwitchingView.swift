@@ -10,6 +10,10 @@ class TabSwitchingView: UIView {
         tabs.first { (tab) -> Bool in tab.isSelected }
     }
     
+    func setTabBadgeText(_ text: String?, index: Int) {
+        tabs[index].badgeText = text
+    }
+    
     func selectTab(_ index: Int) {
         let tab = tabs[0]
         selectTab(tab)

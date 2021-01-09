@@ -6,7 +6,6 @@ class SearchResultsController {
     var messageHandler: HSUserMessageHandler?
     enum TabName: String, CaseIterable {
         case roles = "Roles"
-//        case companies = "Companies"
         case people = "People"
     }
     
@@ -30,9 +29,12 @@ class SearchResultsController {
                 searchResultsController: self,
                 service: rolesService,
                 appSource: .homeTabSearchResultsProjectsList),
-//            CompaniesDatasource(tag: 1, table: tables[1], searchResultsController: self),
-
-            PeopleDatasource(tag: 1, table: tables[1], searchResultsController: self, associationsService: associationsService, appSource: .homeTabSearchResultsPeopleList)
+            PeopleDatasource(
+                tag: 1,
+                table: tables[1],
+                searchResultsController: self,
+                associationsService: associationsService,
+                appSource: .homeTabSearchResultsPeopleList)
         ]
     }()
     
@@ -46,11 +48,14 @@ class SearchResultsController {
     
     var typeAheadJson: TypeAheadJson? {
         didSet {
-            (datasources[1] as? TypeAheadItemsDatasource)?.typeAheadItems = []
+            let peopeDataSource = datasources[1]
+            (peopeDataSource as? TypeAheadItemsDatasource)?.typeAheadItems = []
             self.messageHandler?.showLoadingOverlay(style: .transparent)
-            datasources[1].loadData { [weak self] (error) in
+            peopeDataSource.loadData { [weak self] (error) in
                 guard let self = self else { return }
                 self.messageHandler?.hideLoadingOverlay()
+                let count = String(peopeDataSource.data.count)
+                self.view?.tabSwitchingView.setTabBadgeText(count, index: 1)
             }
         }
     }
@@ -65,6 +70,8 @@ class SearchResultsController {
             roleDatasource.loadData() { [weak self] error in
                 guard let self = self else { return }
                 self.messageHandler?.hideLoadingOverlay()
+                let count = String(roleDatasource.data.count)
+                self.view?.tabSwitchingView.setTabBadgeText(count, index: 0)
             }
         }
     }
