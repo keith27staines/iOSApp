@@ -3,7 +3,6 @@ import UIKit
 
 class SectionHeaderView: UITableViewHeaderFooterView {
     static let identifier = "SectionHeaderView"
-    
     lazy var sectionTitle: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -18,7 +17,6 @@ class SectionHeaderView: UITableViewHeaderFooterView {
 
 class SectionFooterView: UITableViewHeaderFooterView {
     static let identifier = "SectionFooterView"
-    
     private lazy var separator: UIView = {
         let separator = UIView()
         separator.backgroundColor = UIColor.init(white: 216/255, alpha: 1)

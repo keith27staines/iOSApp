@@ -51,8 +51,14 @@ class KSSearchBar: UIView {
         textField.resignFirstResponder()
     }
     
+    @discardableResult
+    override func becomeFirstResponder() -> Bool {
+        textField.becomeFirstResponder()
+    }
+    
     private lazy var searchIcon: UIImageView = {
         let view = UIImageView()
+        view.accessibilityIdentifier = "search_icon"
         view.image = UIImage(named: "search")?.withRenderingMode(.alwaysTemplate)
         view.contentMode = .scaleAspectFit
         return view
@@ -60,6 +66,7 @@ class KSSearchBar: UIView {
     
     private lazy var textField: UITextField = {
         let view = UITextField()
+        view.accessibilityIdentifier = "search_text"
         view.font = UIFont.systemFont(ofSize: 15, weight: .light)
         view.setContentHuggingPriority(.defaultHigh, for: .vertical)
         view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
@@ -76,6 +83,7 @@ class KSSearchBar: UIView {
     
     private lazy var clearButton: UIView = {
         let view = UIImageView(image: UIImage(named: "circle_with_cross")?.withRenderingMode(.alwaysTemplate))
+        view.accessibilityIdentifier = "clear_button"
         view.isUserInteractionEnabled = true
         view.contentMode = .scaleAspectFit
         view.isHidden = true
@@ -85,6 +93,7 @@ class KSSearchBar: UIView {
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
+        button.accessibilityIdentifier = "cancel_button"
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(UIColor.green, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -107,6 +116,7 @@ class KSSearchBar: UIView {
     
     private lazy var capsuleStack: UIStackView = {
         let stack = UIStackView()
+        stack.accessibilityIdentifier = "capsule_stack"
         stack.addArrangedSubview(searchIcon)
         stack.addArrangedSubview(textField)
         stack.addArrangedSubview(clearButton)
@@ -119,6 +129,7 @@ class KSSearchBar: UIView {
     
     private lazy var capsuleContainer: UIView = {
         let view = UIView()
+        view.accessibilityIdentifier = "capsule_container"
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.lightGray.cgColor
         view.layer.backgroundColor = UIColor.init(white: 0.95, alpha: 1).cgColor
@@ -140,7 +151,7 @@ class KSSearchBar: UIView {
     }()
     
     override init(frame: CGRect) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+        super.init(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
         clipsToBounds = true
         addSubview(capsuleContainer)
         addSubview(cancelButton)
@@ -193,7 +204,7 @@ class KSSearchBar: UIView {
         }
     }
     
-    private func animateInCancelButton() {
+    func animateInCancelButton() {
         let button = cancelButton
         guard button.isHidden else { return }
         button.alpha = 0

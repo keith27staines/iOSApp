@@ -157,6 +157,7 @@ class SearchController: NSObject {
         else { return }
         log?.track(.search_home_perform_popular(search: searchString))
         searchBar.text = searchString
+        searchBar.animateInCancelButton()
         performSearch()
     }
 }
