@@ -41,6 +41,8 @@ class SearchController: NSObject {
                 filtersButton.alpha = 0
                 filtersButton.isHidden = false
             }
+
+            NotificationCenter.default.post(name: .wfHomeScreenSearchIsActive, object: self, userInfo: ["isSearchActive": !searchDetail.isHidden])
             
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
                 self.searchBarStack.layoutIfNeeded()

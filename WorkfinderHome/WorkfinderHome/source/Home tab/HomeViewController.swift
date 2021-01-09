@@ -133,7 +133,13 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSearchIsActive), name: .wfHomeScreenSearchIsActive, object: nil)
         refresh()
+    }
+    
+    @objc func handleSearchIsActive(notification: Notification) {
+        let isHidden = (notification.userInfo?["isSearchActive"] as? Bool) ?? false
+        navigationController?.setNavigationBarHidden(isHidden, animated: true)
     }
     
     @objc func handleLogin() {
@@ -160,8 +166,8 @@ class HomeViewController: UIViewController {
     
     var isConfigured = false
     func configureViews() {
-        configureNavigationBar()
         guard !isConfigured else { return }
+        configureNavigationBar()
         isConfigured = true
         configureHomeView()
         configureTray()
