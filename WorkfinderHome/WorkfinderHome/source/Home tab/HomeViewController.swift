@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
         scrollHijackOverlay.removeFromSuperview()
         trayTopConstraintConstant = 0
         animateTrayToFinalPosition()
+        backgroundView.backgroundColor = UIColor.white
         navigationItem.title = "Discover"
     }
     
@@ -39,7 +40,7 @@ class HomeViewController: UIViewController {
     }()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
+        return isSearchActive ? .default : .lightContent
     }
     
     func configureNavigationBar() {
@@ -135,22 +136,22 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSearchIsActive), name: .wfHomeScreenSearchIsActive, object: nil)
         refresh()
-        isSearchActive = true
+        isSearchActive = false
     }
     
     @objc func handleSearchIsActive(notification: Notification) {
         isSearchActive = (notification.userInfo?["isSearchActive"] as? Bool) ?? false
     }
     
-    var isSearchActive: Bool {
+    var isSearchActive: Bool = false {
         didSet {
             updateNavigationBar()
         }
     }
     
     func updateNavigationBar() {
-        navigationItem.title = isSearchActive ? "" : "Discover"
-        navigationController?.setNavigationBarHidden(isSearchActive, animated: true)
+        navigationController?.navigationBar.barTintColor = isSearchActive ? UIColor.white : WorkfinderColors.primaryColor
+        self.navigationController?.setNavigationBarHidden(self.isSearchActive, animated: true)
     }
     
     @objc func handleLogin() {
