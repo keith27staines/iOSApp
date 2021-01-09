@@ -135,11 +135,22 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSearchIsActive), name: .wfHomeScreenSearchIsActive, object: nil)
         refresh()
+        isSearchActive = true
     }
     
     @objc func handleSearchIsActive(notification: Notification) {
-        let isHidden = (notification.userInfo?["isSearchActive"] as? Bool) ?? false
-        navigationController?.setNavigationBarHidden(isHidden, animated: true)
+        isSearchActive = (notification.userInfo?["isSearchActive"] as? Bool) ?? false
+    }
+    
+    var isSearchActive: Bool {
+        didSet {
+            updateNavigationBar()
+        }
+    }
+    
+    func updateNavigationBar() {
+        navigationItem.title = isSearchActive ? "" : "Discover"
+        navigationController?.setNavigationBarHidden(isSearchActive, animated: true)
     }
     
     @objc func handleLogin() {
@@ -149,6 +160,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureViews()
+        updateNavigationBar()
     }
     
     @objc func animateTrayToTop() {
@@ -193,6 +205,7 @@ class HomeViewController: UIViewController {
             searchResultsController: searchResultsController,
             messageHandler: nil
         )
+        isSearchActive = false
         super.init(nibName: nil, bundle: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleErrorNotification), name: .wfHomeScreenErrorNotification, object: nil)
         backgroundView.upArrowTapped = { self.hijackScroll() }
