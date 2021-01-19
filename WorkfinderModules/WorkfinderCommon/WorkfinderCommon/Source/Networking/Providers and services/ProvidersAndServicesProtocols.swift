@@ -5,6 +5,7 @@ public protocol AssociationsServiceProtocol {
     func fetchAssociation(uuid: F4SUUID, completion:  @escaping((Result<AssociationJson,Error>) -> Void))
     func fetchAssociations(queryItems: [URLQueryItem], completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
     func fetchAssociations(for locationUuid: F4SUUID, completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
+    func fetchAssociationsWithUrl(_ urlString: String, completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void))
 }
 
 public struct ServerListJson<A:Decodable>: Decodable {

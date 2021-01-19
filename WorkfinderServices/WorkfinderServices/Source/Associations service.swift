@@ -33,6 +33,17 @@ public class AssociationsService: WorkfinderService, AssociationsServiceProtocol
         }
     }
     
+    public func fetchAssociationsWithUrl(
+        _ urlString: String,
+        completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void)) {
+        do {
+            let request = try buildRequest(path: urlString, queryItems: nil, verb: .get)
+            performTask(with: request, completion: completion, attempting: #function)
+        } catch {
+            completion(Result<HostAssociationListJson,Error>.failure(error))
+        }
+    }
+    
     public func fetchAssociations(
         for locationUuid: F4SUUID,
         completion:  @escaping((Result<HostAssociationListJson,Error>) -> Void)) {

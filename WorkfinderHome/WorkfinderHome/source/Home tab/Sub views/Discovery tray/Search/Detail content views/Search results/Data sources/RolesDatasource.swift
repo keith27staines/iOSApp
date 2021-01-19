@@ -5,8 +5,6 @@ import WorkfinderUI
 class RolesDatasource: Datasource, UITableViewDelegate {
     
     let service: RolesServiceProtocol?
-    var nextPageUrl: String?
-    let pageSize: Int = 40
     
     override func loadData(completion: @escaping (Error?) -> Void) {
         data = []
@@ -28,16 +26,20 @@ class RolesDatasource: Datasource, UITableViewDelegate {
         })
     }
     
-    func loadNextPage(completion: @escaping () -> Void) {
+    override func loadNextPage() {
         guard let nextPageUrl = nextPageUrl else { return }
         service?.fetchRolesWithUrl(urlString: nextPageUrl) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let serverList):
                 self.nextPageUrl = serverList.next
+                let lower = self.data.count
+                let upper = lower + serverList.results.count - 1
+                let changeSet = Array(lower ... upper).map { (index) -> IndexPath in
+                    IndexPath(row: index, section: 0)
+                }
                 self.data += serverList.results.settingAppSource(self.appSource)
-                self.table?.reloadData()
-                completion()
+                self.table?.insertRows(at:changeSet, with: .automatic)
             case .failure(_): break
             }
         }
@@ -51,9 +53,7 @@ class RolesDatasource: Datasource, UITableViewDelegate {
         cell.presentWith(roleData)
         cell.accessoryType = .disclosureIndicator
         cell.tintColor = WorkfinderColors.primaryColor
-        if indexPath.row > data.count - pageSize / 3 {
-            loadNextPage {}
-        }
+        loadNextPageIfNearEnd(row: indexPath.row)
         return cell
     }
     

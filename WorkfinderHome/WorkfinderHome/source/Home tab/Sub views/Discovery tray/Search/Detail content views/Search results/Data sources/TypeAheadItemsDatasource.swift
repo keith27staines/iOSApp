@@ -15,7 +15,7 @@ class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
     override func loadData(completion: @escaping (Error?) -> Void) {
         table?.reloadData()
     }
-    
+        
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: TypeAheadCell.reuseIdentifier) as? TypeAheadCell,
@@ -23,6 +23,7 @@ class TypeAheadItemsDatasource: Datasource, UITableViewDelegate {
         else { return UITableViewCell() }
         cell.updateFrom(item)
         cell.accessoryType = .disclosureIndicator
+        loadNextPageIfNearEnd(row: indexPath.row)
         return cell
     }
     

@@ -7,6 +7,8 @@ class Datasource: NSObject, UITableViewDataSource {
     var queryItems = [URLQueryItem]()
     weak var table: UITableView?
     var data = [Any]()
+    var nextPageUrl: String?
+    let pageSize: Int = 40
     var count: Int = 0
     let tag: Int
     let appSource: AppSource
@@ -29,6 +31,14 @@ class Datasource: NSObject, UITableViewDataSource {
     /// override this method
     func loadData(completion: @escaping (Error?) -> Void) {
         completion(nil)
+    }
+    
+    func loadNextPage() {
+        fatalError("override this method")
+    }
+    
+    func loadNextPageIfNearEnd(row: Int) {
+        if row == data.count - pageSize / 2 { loadNextPage() }
     }
     
     /// override this method

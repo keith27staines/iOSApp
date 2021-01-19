@@ -54,8 +54,8 @@ class SearchResultsController {
             peopeDataSource.loadData { [weak self] (error) in
                 guard let self = self else { return }
                 self.messageHandler?.hideLoadingOverlay()
-                let count = String(peopeDataSource.data.count)
-                self.view?.tabSwitchingView.setTabBadgeText(count, index: 1)
+                let countString = String(peopeDataSource.count)
+                self.view?.tabSwitchingView.setTabBadgeText(countString, index: 1)
             }
         }
     }
