@@ -7,6 +7,7 @@ class Datasource: NSObject, UITableViewDataSource {
     var queryItems = [URLQueryItem]()
     weak var table: UITableView?
     var data = [Any]()
+    var count: Int = 0
     let tag: Int
     let appSource: AppSource
     

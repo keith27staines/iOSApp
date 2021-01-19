@@ -7,8 +7,9 @@ protocol RolesServiceProtocol {
     func fetchRecommendedRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
     func fetchRolesWithQueryItems(
         _ queryItems: [URLQueryItem],
-        completion: @escaping (Result<[RoleData], Error>) -> Void
+        completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void
     )
+    func fetchRolesWithUrl(urlString: String, completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void)
     func fetchRecentRoles(urlString: String?, completion: @escaping (Result<ServerListJson<RoleData>,Error>) -> Void)
 }
 
@@ -24,8 +25,8 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
         FetchRolesResultWorkerService(networkConfig: networkConfig)
     }()
     
-    fileprivate lazy var rolesWorkerService: FetchRolesWorkerService = {
-        FetchRolesWorkerService(networkConfig: networkConfig)
+    fileprivate lazy var rolesWorkerService: FetchRolesResultWorkerService = {
+        FetchRolesResultWorkerService(networkConfig: networkConfig)
     }()
     
     fileprivate lazy var recommendationsService: RecommendationsServiceProtocol = {
@@ -42,11 +43,17 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     
     public func fetchRolesWithQueryItems(
         _ queryItems: [URLQueryItem],
-        completion: @escaping (Result<[RoleData], Error>) -> Void
+        completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void
     ) {
         let queryItems = [URLQueryItem(name: "status", value: "open")] + queryItems
         rolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: queryItems) { (result) in
            completion(result)
+        }
+    }
+    
+    public func fetchRolesWithUrl(urlString: String, completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void) {
+        rolesWorkerService.fetchRoles(endpoint: urlString, queryItems: nil) { (result) in
+            completion(result)
         }
     }
 
@@ -104,7 +111,7 @@ fileprivate class FetchRolesResultWorkerService: WorkfinderService {
 }
 
 fileprivate class FetchRolesWorkerService: WorkfinderService {
-    
+
     func fetchRoles(endpoint: String, queryItems: [URLQueryItem]?, completion: @escaping (Result<[RoleData], Error>) -> Void) {
         let innerResultHandler: ((Result<ServerListJson<RoleJson>, Error>) -> Void) = { result in
             switch result {
@@ -117,7 +124,7 @@ fileprivate class FetchRolesWorkerService: WorkfinderService {
                 completion(.failure(error))
             }
         }
-        
+
         do {
             let request = try buildRequest(relativePath: endpoint, queryItems: queryItems, verb: .get)
             performTask(with: request, completion: innerResultHandler, attempting: #function)

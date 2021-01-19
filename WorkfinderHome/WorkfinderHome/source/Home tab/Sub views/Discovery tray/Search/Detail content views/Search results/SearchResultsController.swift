@@ -70,8 +70,8 @@ class SearchResultsController {
             roleDatasource.loadData() { [weak self] error in
                 guard let self = self else { return }
                 self.messageHandler?.hideLoadingOverlay()
-                let count = String(roleDatasource.data.count)
-                self.view?.tabSwitchingView.setTabBadgeText(count, index: 0)
+                let countString = String(roleDatasource.count)
+                self.view?.tabSwitchingView.setTabBadgeText(countString, index: 0)
             }
         }
     }
