@@ -34,7 +34,7 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     }()
     
     func fetchRecentRoles(urlString: String?, completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "status", value: "open"), URLQueryItem(name: "limit", value: "20")]
+        let queryItems = [URLQueryItem(name: "status", value: "open"), URLQueryItem(name: "limit", value: "40")]
         let urlString = urlString?.replacingOccurrences(of: "http:", with: "https:") ?? rolesEndpoint
         recentRolesWorkerService.fetchRoles(endpoint: urlString, queryItems: queryItems) { (result) in
             completion(result)

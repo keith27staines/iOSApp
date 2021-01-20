@@ -26,9 +26,10 @@ class PeopleDatasource: TypeAheadItemsDatasource {
             }
         }
     }
-    
+    var loadingURL: String?
     override func loadNextPage() {
-        guard let nextPageUrl = nextPageUrl else { return }
+        guard let nextPageUrl = nextPageUrl, nextPageUrl != loadingURL else { return }
+        loadingURL = nextPageUrl
         associationsService.fetchAssociationsWithUrl(nextPageUrl) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -45,6 +46,7 @@ class PeopleDatasource: TypeAheadItemsDatasource {
                 self.table?.insertRows(at:changeSet, with: .automatic)
             case .failure(_): break
             }
+            self.loadingURL = nil
         }
     }
     

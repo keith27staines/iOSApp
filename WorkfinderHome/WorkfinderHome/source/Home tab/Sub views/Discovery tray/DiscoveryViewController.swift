@@ -188,10 +188,8 @@ extension DiscoveryTrayController: UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
             cell?.backgroundColor = UIColor.white
             (cell as? LandscapeRoleCell)?.row = indexPath.row
-            if indexPath.row == recentRolesPresenter.numberOfRows - 1 {
-                recentRolesPresenter.loadNextPage {
-                    
-                }
+            if indexPath.row == recentRolesPresenter.numberOfRows - recentRolesPresenter.pageSize / 2 {
+                recentRolesPresenter.loadNextPage()
             }
         }
         let presentable = cell as? Presentable

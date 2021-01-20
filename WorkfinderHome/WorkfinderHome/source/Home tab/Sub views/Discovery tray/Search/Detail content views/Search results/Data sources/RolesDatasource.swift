@@ -25,9 +25,10 @@ class RolesDatasource: Datasource, UITableViewDelegate {
             }
         })
     }
-    
+    var loadingURL: String? = nil
     override func loadNextPage() {
-        guard let nextPageUrl = nextPageUrl else { return }
+        guard let nextPageUrl = nextPageUrl, loadingURL != nextPageUrl else { return }
+        loadingURL = nextPageUrl
         service?.fetchRolesWithUrl(urlString: nextPageUrl) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -42,6 +43,7 @@ class RolesDatasource: Datasource, UITableViewDelegate {
                 self.table?.insertRows(at:changeSet, with: .automatic)
             case .failure(_): break
             }
+            self.loadingURL = nil
         }
     }
     

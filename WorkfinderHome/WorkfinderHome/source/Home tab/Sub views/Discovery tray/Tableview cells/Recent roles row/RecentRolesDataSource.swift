@@ -35,38 +35,54 @@ class RecentRolesDataSource: CellPresenter {
         self.rolesService = rolesService
         self.messageHandler = messageHandler
     }
-
-    func loadFirstPage(completion: @escaping () -> Void) {
-        clear()
-        loadNextPage(completion: completion)
-    }
     
-    private var allResultsCount: Int = 0
+    var pageSize: Int = 40
+    var allRecentRolesCount: Int = 0
     private var nextPageUrlString: String?
     
     func clear() {
         error = nil
-        allResultsCount = 0
+        allRecentRolesCount = 0
         nextPageUrlString = nil
         result = nil
         roles = []
         images = []
     }
     
-    func loadNextPage(completion: @escaping () -> Void) {
-        guard roles.count < allResultsCount || roles.count == 0 else { return }
-        messageHandler?.showLoadingOverlay(style: .transparent)
-        rolesService.fetchRecentRoles(urlString: nextPageUrlString) { [weak self] (result) in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
+    func loadFirstPage(completion: @escaping () -> Void) {
+        clear()
+        rolesService.fetchRecentRoles(urlString: nil) { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.messageHandler?.hideLoadingOverlay()
                 switch result {
                 case .success(_):
                     self.result = result
-                    completion()
                 case .failure(let error):
-                    self.handleError(error: error, retry: {self.loadNextPage(completion: completion)})
+                    self.handleError(error: error, retry: {self.loadFirstPage(completion: completion)})
                 }
+                self.loadingUrl = nil
+                completion()
+            }
+        }
+    }
+
+    var loadingUrl: String? = nil
+    func loadNextPage() {
+        guard let nextPageUrlString = nextPageUrlString, loadingUrl != nextPageUrlString else { return }
+        loadingUrl = nextPageUrlString
+        messageHandler?.showLoadingOverlay(style: .transparent)
+        rolesService.fetchRecentRoles(urlString: nextPageUrlString) { (result) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.messageHandler?.hideLoadingOverlay()
+                switch result {
+                case .success(_):
+                    self.result = result
+                case .failure(_):
+                    break
+                }
+                self.loadingUrl = nil
             }
         }
     }
@@ -80,7 +96,7 @@ class RecentRolesDataSource: CellPresenter {
             case .success(let serverListJson):
                 self.serverListJson = serverListJson
                 self.nextPageUrlString = serverListJson.next
-                self.allResultsCount = serverListJson.count ?? 0
+                self.allRecentRolesCount = serverListJson.count ?? 0
                 let lower = self.roles.count
                 let upper = lower + serverListJson.results.count - 1
                 lastIndexChangeSet = Array(lower ... upper)
