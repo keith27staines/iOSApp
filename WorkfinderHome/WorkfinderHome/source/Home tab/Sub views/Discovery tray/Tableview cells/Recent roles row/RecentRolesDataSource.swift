@@ -80,7 +80,12 @@ class RecentRolesDataSource: CellPresenter {
                 case .success(_):
                     self.result = result
                 case .failure(_):
-                    break
+                    DispatchQueue.main.asyncAfter(deadline: .now()+2) { [weak self] in
+                        guard let self = self else { return }
+                        self.loadingUrl = nil
+                        self.loadNextPage()
+                    }
+
                 }
                 self.loadingUrl = nil
             }

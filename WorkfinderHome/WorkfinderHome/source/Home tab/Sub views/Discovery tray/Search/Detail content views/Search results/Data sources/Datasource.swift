@@ -38,7 +38,7 @@ class Datasource: NSObject, UITableViewDataSource {
     }
     
     func loadNextPageIfNearEnd(row: Int) {
-        if row == data.count - pageSize / 2 { loadNextPage() }
+        if row >= data.count - pageSize / 2 { loadNextPage() }
     }
     
     /// override this method

@@ -25,10 +25,10 @@ class RolesDatasource: Datasource, UITableViewDelegate {
             }
         })
     }
-    var loadingURL: String? = nil
+    var loadingUrl: String? = nil
     override func loadNextPage() {
-        guard let nextPageUrl = nextPageUrl, loadingURL != nextPageUrl else { return }
-        loadingURL = nextPageUrl
+        guard let nextPageUrl = nextPageUrl, loadingUrl != nextPageUrl else { return }
+        loadingUrl = nextPageUrl
         service?.fetchRolesWithUrl(urlString: nextPageUrl) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -41,9 +41,14 @@ class RolesDatasource: Datasource, UITableViewDelegate {
                 }
                 self.data += serverList.results.settingAppSource(self.appSource)
                 self.table?.insertRows(at:changeSet, with: .automatic)
-            case .failure(_): break
+            case .failure(_):
+                DispatchQueue.main.asyncAfter(deadline: .now()+2) { [weak self] in
+                    guard let self = self else { return }
+                    self.loadingUrl = nil
+                    self.loadNextPage()
+                }
             }
-            self.loadingURL = nil
+            self.loadingUrl = nil
         }
     }
     

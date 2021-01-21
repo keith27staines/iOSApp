@@ -197,7 +197,10 @@ extension SearchController: KSSearchBarDelegate {
     
     func searchBarShouldReturn(_ searchbar: KSSearchBar) -> Bool {
         let shouldReturn = searchFieldShouldReturn
-        if shouldReturn { performSearch() }
+        if shouldReturn {
+            searchBar.resignFirstResponder()
+            performSearch()
+        }
         return shouldReturn
     }
 }

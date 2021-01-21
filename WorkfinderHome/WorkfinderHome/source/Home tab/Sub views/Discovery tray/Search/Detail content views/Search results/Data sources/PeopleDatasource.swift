@@ -26,10 +26,10 @@ class PeopleDatasource: TypeAheadItemsDatasource {
             }
         }
     }
-    var loadingURL: String?
+    var loadingUrl: String?
     override func loadNextPage() {
-        guard let nextPageUrl = nextPageUrl, nextPageUrl != loadingURL else { return }
-        loadingURL = nextPageUrl
+        guard let nextPageUrl = nextPageUrl, nextPageUrl != loadingUrl else { return }
+        loadingUrl = nextPageUrl
         associationsService.fetchAssociationsWithUrl(nextPageUrl) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -44,9 +44,14 @@ class PeopleDatasource: TypeAheadItemsDatasource {
                     TypeAheadItem(uuid: association.uuid, title: association.host?.fullName, subtitle: association.title, searchTerm: "", objectType: "association", iconUrlString: association.host?.photoUrlString, appSource: self.appSource)
                 }
                 self.table?.insertRows(at:changeSet, with: .automatic)
-            case .failure(_): break
+            case .failure(_):
+                DispatchQueue.main.asyncAfter(deadline: .now()+2) { [weak self] in
+                    guard let self = self else { return }
+                    self.loadingUrl = nil
+                    self.loadNextPage()
+                }
             }
-            self.loadingURL = nil
+            self.loadingUrl = nil
         }
     }
     
