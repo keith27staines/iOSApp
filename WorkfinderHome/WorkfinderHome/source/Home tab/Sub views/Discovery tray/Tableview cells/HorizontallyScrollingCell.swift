@@ -124,8 +124,10 @@ class HorizontallyScrollingCell: UITableViewCell {
         scrollAndPageControlStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         scrollView.addSubview(scrollContentStack)
         scrollView.isScrollEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
         scrollContentStack.anchor(top: scrollView.topAnchor, leading: nil, bottom: scrollView.bottomAnchor, trailing: nil)
         scrollViewHeightConstraint.isActive = true
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         heightConstraint.isActive = true
         leftInsetConstraint.isActive = true
         rightInsetConstraint.isActive = true

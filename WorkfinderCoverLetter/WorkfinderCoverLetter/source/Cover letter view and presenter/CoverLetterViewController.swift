@@ -1,6 +1,7 @@
 
 import UIKit
 import WorkfinderUI
+import WorkfinderCommon
 
 protocol CoverLetterViewProtocol {
     var messageHandler: UserMessageHandler { get }
@@ -11,6 +12,14 @@ protocol CoverLetterViewProtocol {
 class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     
     let presenter: CoverLetterViewPresenterProtocol
+    var showOverlay: Bool {
+        get {
+            return LocalStore().value(key: .showCoverLetterExplainer) as? Bool ?? true
+        }
+        set {
+            LocalStore().setValue(false, for: .showCoverLetterExplainer)
+        }
+    }
     
     func refreshFromPresenter() {
         coverLetterTextView.attributedText = presenter.attributedDisplayString
@@ -20,6 +29,28 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
         editButton.configureForLetterIsCompleteState(presenter.isLetterComplete)
         nextButton.setTitle(presenter.primaryButtonTitle, for: .normal)
     }
+    
+    lazy var overlay: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.alpha = 0.5
+        view.isUserInteractionEnabled = false
+        let label = UILabel()
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 0))
+        label.numberOfLines = 0
+        label.text = "Time to write your cover letter! We have given you a head start. To finish it, simply tap on the fields to edit them\n\nGo ahead, tap a field!"
+        label.textAlignment = .center
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+        let top = label.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 0)
+        top.priority = .defaultHigh
+        top.isActive = true
+        label.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -100).isActive = true
+        return view
+    }()
     
     lazy var coverLetterTextView: UITextView = {
         let textView = UITextView()
@@ -57,7 +88,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
     @objc func didTapShowEditor(sender: UITapGestureRecognizer) {
         guard let fieldName = fieldNameFromTapGesture(sender: sender)
         else {
-            didTapShowQuestionList()
+            removeOverlay()
             return
         }
         showEditorForTappedFieldName(fieldName)
@@ -102,6 +133,7 @@ class CoverLetterViewController: UIViewController, CoverLetterViewProtocol {
             retryHandler: nil
         )
         if !isLoading { hideLoadingIndicator() }
+        if showOverlay { addOverlay() } else { removeOverlay() }
     }
     var isLoading = false
     func loadData() {
@@ -148,13 +180,28 @@ extension CoverLetterViewController {
         styleNavigationController()
     }
     
+    func addOverlay() {
+        guard showOverlay else { return }
+        view.addSubview(overlay)
+        overlay.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+        showOverlay = false
+    }
+    
+    func removeOverlay() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: []) { [weak self] in
+            self?.overlay.alpha = 0
+        } completion: { [weak self] (_) in
+            self?.overlay.removeFromSuperview()
+        }
+    }
+    
     func configurePageStack() {
         pageStack.translatesAutoresizingMaskIntoConstraints = false
         let guide = view.safeAreaLayoutGuide
         view.addSubview(self.pageStack)
         pageStack.leftAnchor.constraint(equalTo: guide.leftAnchor, constant: 12).isActive = true
         pageStack.rightAnchor.constraint(equalTo: guide.rightAnchor, constant: -12).isActive = true
-        pageStack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12).isActive = true
+        pageStack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 26).isActive = true
         pageStack.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12).isActive = true
     }
     

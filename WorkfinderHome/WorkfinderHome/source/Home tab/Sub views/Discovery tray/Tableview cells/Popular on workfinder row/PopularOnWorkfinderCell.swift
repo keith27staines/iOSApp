@@ -42,7 +42,7 @@ class CapsuleView: UIView {
         layer.masksToBounds = true
         layer.borderColor = UIColor(red: 151, green: 151, blue: 151).cgColor
         layer.borderWidth = 1
-        tintColor = WorkfinderColors.primaryColor //UIColor(red: 33, green: 33, blue: 33)
+        tintColor = WorkfinderColors.primaryColor
         addSubview(stack)
         stack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
         isUserInteractionEnabled = true

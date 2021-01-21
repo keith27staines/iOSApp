@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import WorkfinderUI
 
 public protocol TemplateRendererProtocol: class {
     var isComplete: Bool { get }
@@ -8,7 +9,7 @@ public protocol TemplateRendererProtocol: class {
 }
 
 public class TemplateRenderer: TemplateRendererProtocol {
-    let fontSize: CGFloat = 20
+    let fontSize: CGFloat = 19
     let parser: TemplateParserProtocol
     
     public init(parser: TemplateParserProtocol) {
@@ -40,48 +41,94 @@ public class TemplateRenderer: TemplateRendererProtocol {
         return renderedString
     }
     
+    let fieldForegroundColor = UIColor.black
+    let fieldBackgroundColor = UIColor(red:1, green:0.96, blue:0.82, alpha:1)
+    
     public func renderToAttributedString(with keyValues: [String : String?]) -> NSAttributedString {
+
         var fieldRanges = parser.allFieldRanges()
         var fieldNames = parser.allFieldNames()
         fieldRanges.reverse()
         fieldNames.reverse()
-        let renderedString = NSMutableAttributedString(string: parser.templateString, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
+        
+        let renderedString = NSMutableAttributedString(string: parser.templateString)
+    
         for index in 0..<fieldRanges.count {
-            let name = fieldNames[index]
+            let fieldName = fieldNames[index]
+            let fieldValue = keyValues[fieldName]
             let range = fieldRanges[index]
             let nsRange = NSRange(range, in: parser.templateString)
-            guard let value = keyValues[name] else {
-                let color = UIColor.systemOrange
-                let attributes = [
-                    NSAttributedString.Key.foregroundColor : color,
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
-                    NSAttributedString.Key.coverLetterField: name
-                ] as [NSAttributedString.Key : Any]
+            guard let value = fieldValue else {
+                let attributes = attributesForField(fieldName: fieldName, hasValue: false)
                 renderedString.setAttributes(attributes, range: nsRange)
                 let suffixRange = NSRange(location: nsRange.location + nsRange.length-2, length: 2)
                 let prefixRange = NSRange(location: nsRange.location, length: 2)
-                let suffix = NSAttributedString(string: "]", attributes: attributes)
-                let prefix = NSAttributedString(string: "[", attributes: attributes)
-                renderedString.replaceCharacters(in: suffixRange, with: suffix)
-                renderedString.replaceCharacters(in: prefixRange, with: prefix)
+                if isFieldFixed(name: fieldName) {
+                    let prefix = NSAttributedString(string: " ", attributes: attributes)
+                    let suffix = NSAttributedString(string: " ", attributes: attributes)
+                    renderedString.replaceCharacters(in: suffixRange, with: suffix)
+                    renderedString.replaceCharacters(in: prefixRange, with: prefix)
+                } else {
+                    let prefix = NSAttributedString(string: "[", attributes: attributes)
+                    let suffix = NSAttributedString(string: "]", attributes: attributes)
+                    renderedString.replaceCharacters(in: suffixRange, with: suffix)
+                    renderedString.replaceCharacters(in: prefixRange, with: prefix)
+                }
                 continue
             }
             guard let replacementText = value else { continue }
             let replacementAttributedText = replacementText
-            let color = UIColor.systemGreen
-            let attributes = [
-                NSAttributedString.Key.foregroundColor : color,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
-                NSAttributedString.Key.coverLetterField: name
-            ] as [NSAttributedString.Key : Any]
+            let attributes = attributesForField(fieldName: fieldName, hasValue: true)
             renderedString.setAttributes(attributes, range: nsRange)
             renderedString.replaceCharacters(in: nsRange, with: replacementAttributedText)
 
         }
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 0.5 * fontSize
+        renderedString.addAttributes(
+            [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+                NSAttributedString.Key.paragraphStyle: paragraphStyle
+            ],
+            range:NSMakeRange(0, renderedString.length)
+        )
         return renderedString
     }
+    
+    func attributesForField(fieldName: String, hasValue: Bool) -> [NSAttributedString.Key: Any] {
+        let isFixed = self.isFieldFixed(name: fieldName)
+        switch isFixed {
+        case true:
+            return [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)
+            ] as [NSAttributedString.Key : Any]
+        case false:
+            switch hasValue {
+            case true:
+                return [
+                    NSAttributedString.Key.foregroundColor : WorkfinderColors.primaryColor,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+                    NSAttributedString.Key.coverLetterField: fieldName
+                ] as [NSAttributedString.Key : Any]
+            case false:
+                return [
+                    NSAttributedString.Key.foregroundColor : UIColor.orange,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+                    NSAttributedString.Key.coverLetterField: fieldName
+                ] as [NSAttributedString.Key : Any]
+            }
+
+        }
+    }
+    
+    func isFieldFixed(name: String) -> Bool {
+        ["host", "project title", "company"].contains(name)
+    }
+    
+    
 }
 
 extension NSAttributedString.Key {
     static let coverLetterField = NSAttributedString.Key(rawValue: "coverLetterField")
 }
+
