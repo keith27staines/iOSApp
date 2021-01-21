@@ -212,9 +212,7 @@ extension SearchController {
             beginTypingLabel.isHidden = true
             return
         }
-        if searchBar.text?.count ?? 0 > 0 {
-            beginTypingLabel.isHidden = true
-        }
+        beginTypingLabel.isHidden = searchFieldShouldReturn
     }
     
     func configureKeyboardReturnKey() {
@@ -248,6 +246,7 @@ extension SearchController {
 extension SearchController {
     
     func performSearch() {
+        setStateFromSearchText()
         let searchText = searchBar.text
         var queryItems = [URLQueryItem(name: "q", value: searchText)]
         queryItems.append(contentsOf: self.queryItems)

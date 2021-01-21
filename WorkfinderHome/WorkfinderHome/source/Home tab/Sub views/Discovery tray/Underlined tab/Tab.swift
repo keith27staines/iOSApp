@@ -45,6 +45,8 @@ class Tab: UIView {
         stack.spacing = 8
         stack.distribution = .equalCentering
         stack.alignment = .center
+        stack.isUserInteractionEnabled = true
+        stack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         return stack
     }()
     
@@ -91,6 +93,8 @@ class Tab: UIView {
         titleBadge.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2))
         view.layer.cornerRadius = 4
         view.layer.masksToBounds = true
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         return view
     }()
     
