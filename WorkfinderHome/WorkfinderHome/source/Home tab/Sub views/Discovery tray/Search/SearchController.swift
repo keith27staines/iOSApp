@@ -17,6 +17,7 @@ class SearchController: NSObject {
         case showingFilters
         case showingResults
     }
+    var searchFieldShouldReturn: Bool { searchBar.text?.count ?? 0 > 2 ? true : false }
     
     var state = SearchState.hidden {
         didSet {
@@ -195,14 +196,14 @@ extension SearchController: KSSearchBarDelegate {
     }
     
     func searchBarShouldReturn(_ searchbar: KSSearchBar) -> Bool {
-        return false
+        let shouldReturn = searchFieldShouldReturn
+        if shouldReturn { performSearch() }
+        return shouldReturn
     }
 }
 
 
 extension SearchController {
-    
-    var shouldEnableReturnKey: Bool { searchBar.text?.count ?? 0 > 0 ? true : false }
     
     func setStateFromSearchText() {
         state = .showingTypeAhead
@@ -218,7 +219,7 @@ extension SearchController {
     
     func configureKeyboardReturnKey() {
         guard let keyboard = getKeyboard() else { return }
-        keyboard.setValue(shouldEnableReturnKey, forKey: "returnKeyEnabled")
+        keyboard.setValue(searchFieldShouldReturn, forKey: "returnKeyEnabled")
     }
     
     func getKeyboard() -> UIView?

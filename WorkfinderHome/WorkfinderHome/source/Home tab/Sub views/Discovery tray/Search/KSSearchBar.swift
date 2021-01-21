@@ -247,10 +247,7 @@ extension KSSearchBar: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let shouldReturn = delegate?.searchBarShouldReturn(self) ?? false
-        if !shouldReturn {delegate?.searchBarButtonTapped(self)}
-        return shouldReturn
-        
+        delegate?.searchBarShouldReturn(self) ?? false
     }
     
 }
