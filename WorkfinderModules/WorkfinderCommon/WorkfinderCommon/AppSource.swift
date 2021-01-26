@@ -1,5 +1,5 @@
 
-public enum AppSource: String {
+public enum AppSource: String, Codable {
     case deeplink
     case pushnotification
     case homeTabTypeaheadProjectsList

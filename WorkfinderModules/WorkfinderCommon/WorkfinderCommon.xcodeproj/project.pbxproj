@@ -12,6 +12,7 @@
 		53770B6125933BFC0085928E /* TrackEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53770B6025933BFC0085928E /* TrackEvent.swift */; };
 		53786B142586015100B671EB /* DecodeRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53786B132586015100B671EB /* DecodeRoleJson.swift */; };
 		53A23DF2254844AE00BB21B7 /* SignInScreenOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */; };
+		53BC508625C0884A00D84EE0 /* TrackEventTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */; };
 		53C76059251B6F9A0072281E /* DeeplinkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C76058251B6F9A0072281E /* DeeplinkInfo.swift */; };
 		53C7605D251B704B0072281E /* DeeplinkInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */; };
 		53C9CADA256B93EB00F567B2 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9CAD9256B93EB00F567B2 /* NotificationNames.swift */; };
@@ -129,6 +130,7 @@
 		53770B6025933BFC0085928E /* TrackEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEvent.swift; sourceTree = "<group>"; };
 		53786B132586015100B671EB /* DecodeRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeRoleJson.swift; sourceTree = "<group>"; };
 		53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenOrder.swift; sourceTree = "<group>"; };
+		53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEventTypeTests.swift; sourceTree = "<group>"; };
 		53C76058251B6F9A0072281E /* DeeplinkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfo.swift; sourceTree = "<group>"; };
 		53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkInfoTests.swift; sourceTree = "<group>"; };
 		53C9CAD9256B93EB00F567B2 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FCEE3EF5249A645A0034C226 /* CandidateTests.swift */,
 				53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */,
+				53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53BC508625C0884A00D84EE0 /* TrackEventTypeTests.swift in Sources */,
 				FC7FF7D2249A410D00F9093B /* DateExtensionTests.swift in Sources */,
 				FCCA9831249A62BD00427899 /* F4SDisplayableMonthTests.swift in Sources */,
 				FC7FF7D1249A410300F9093B /* StringExtensionsTests.swift in Sources */,
