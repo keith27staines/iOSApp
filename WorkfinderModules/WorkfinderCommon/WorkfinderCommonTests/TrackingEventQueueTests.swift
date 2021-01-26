@@ -18,7 +18,7 @@ class TrackingEventQueueTests: XCTestCase {
         sut = TrackingEventQueue(persistentStore: mockPersistentStore)
     }
     
-    func test_loadFromPersistentStore() {
+    func test_items_load_from_persistent_store() {
         mockPersistentStore.setValue(
             [
                 TrackingEventType.first_use,
