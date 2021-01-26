@@ -42,6 +42,7 @@ public class LocalStore : LocalStorageProtocol {
         
         case companyDatabaseCreatedDate = "companyDatabaseCreatedDate"
         case showCoverLetterExplainer
+        case trackingEvents
     }
     
     public init(userDefaults: UserDefaults = .standard) {
