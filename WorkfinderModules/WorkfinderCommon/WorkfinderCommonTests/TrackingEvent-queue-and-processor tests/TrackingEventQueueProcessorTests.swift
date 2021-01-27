@@ -12,19 +12,22 @@ import XCTest
 class TrackingEventQueueProcessorTests: XCTestCase {
     
     var persistentStore: MockPersistentStore!
-    var timer: MockRepeatingTimer!
     var eventQueue: TrackingEventQueue!
     var sut: TrackingEventQueueProcessor!
     
     override func setUp() {
         persistentStore = MockPersistentStore()
-        timer = MockRepeatingTimer()
         eventQueue = TrackingEventQueue(persistentStore: persistentStore)
         sut = TrackingEventQueueProcessor(
             eventQueue: eventQueue,
-            timer: timer,
-            itemHandler: {_ in }
+            interval: 0.01,
+            itemHandler: { _ in }
         )
+    }
+    
+    override func tearDown() {
+        sut.suspend()
+        sut = nil
     }
 
     func test_queue_is_processed() {
@@ -52,24 +55,9 @@ class TrackingEventQueueProcessorTests: XCTestCase {
             expectations[index].fulfill()
             index += 1
         }
-        (0...4).forEach { (_) in
-            timer.fire()
-        }
+        sut.resume()
         wait(for: expectations, timeout: 1, enforceOrder: false)
         XCTAssertEqual(inputEvents, processedEvents)
     }
 
-}
-
-class MockRepeatingTimer: RepeatingTimerProtocol {
-    
-    var eventHandler: (() -> Void)?
-    
-    func resume() {}
-    
-    func suspend() {}
-    
-    func fire() {
-        eventHandler?()
-    }
 }

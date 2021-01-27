@@ -11,9 +11,9 @@ import Foundation
 public class TrackingEventQueue {
     let isolation = DispatchQueue(label: "TrackingEventQueue.isolation")
     let persistentStore: LocalStorageProtocol
-    var items = [TrackingEventType]()
-    private var isDirty: Bool = false
-    
+    public internal(set) var items = [TrackingEventType]()
+    public internal(set) var isDirty: Bool = false
+        
     public func enqueue(item: TrackingEventType) {
         items.insert(item, at: 0)
         isDirty = true
@@ -24,7 +24,7 @@ public class TrackingEventQueue {
         return items.isEmpty ? nil : items.removeLast()
     }
     
-    private func loadFromPersistentStore() -> [TrackingEventType] {
+    func loadFromPersistentStore() -> [TrackingEventType] {
         var persistedItems = [TrackingEventType]()
         guard let data = persistentStore.value(key: LocalStore.Key.trackingEvents) as? Data else {
             return persistedItems
@@ -39,7 +39,7 @@ public class TrackingEventQueue {
         return persistedItems
     }
     
-    @objc public func writeToPersistentStore() {
+    @objc func writeToPersistentStore() {
         guard isDirty else { return }
         do {
             let data = try JSONEncoder().encode(items)

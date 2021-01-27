@@ -19,20 +19,25 @@ class TrackingEventQueueTests: XCTestCase {
     }
     
     func test_items_load_from_persistent_store() {
+        let events = [
+            TrackingEventType.first_use,
+            TrackingEventType.app_open
+        ]
+        let data = try! JSONEncoder().encode(events)
         mockPersistentStore.setValue(
-            [
-                TrackingEventType.first_use,
-                TrackingEventType.app_open
-            ],
+            data,
             for: .trackingEvents
         )
         let sut = TrackingEventQueue(persistentStore: mockPersistentStore)
-        XCTAssertEqual(sut.items, mockPersistentStore.value(key: .trackingEvents) as! [TrackingEventType])
+        XCTAssertEqual(sut.items, events)
     }
     
     func test_enqueue_dequeue() {
+        XCTAssertFalse(sut.isDirty)
         sut.enqueue(item: .first_use)
+        XCTAssertTrue(sut.isDirty)
         sut.enqueue(item: .app_open)
+        XCTAssertTrue(sut.isDirty)
         XCTAssertEqual(sut.items.count, 2)
         XCTAssertEqual(sut.dequeue(), .first_use)
         XCTAssertEqual(sut.dequeue(), .app_open)
@@ -40,11 +45,18 @@ class TrackingEventQueueTests: XCTestCase {
     }
     
     func test_writeToPersistentStore() {
-        sut.enqueue(item: .first_use)
-        sut.enqueue(item: .app_open)
+        [TrackingEventType.first_use, TrackingEventType.app_open]
+            .forEach { (event) in
+            sut.enqueue(item: event)
+        }
+        let enqueuedItems = sut.items
         XCTAssertNil(mockPersistentStore.value(key: .trackingEvents))
+        XCTAssertTrue(sut.isDirty)
         sut.writeToPersistentStore()
-        XCTAssertEqual((mockPersistentStore.value(key: .trackingEvents) as? [TrackingEventType])?.count, 2)
+        XCTAssertFalse(sut.isDirty)
+        sut.items = []
+        let recoveredItems = sut.loadFromPersistentStore()
+        XCTAssertEqual(recoveredItems, enqueuedItems)
     }
     
     func test_deinit() {
@@ -52,7 +64,7 @@ class TrackingEventQueueTests: XCTestCase {
         sut.enqueue(item: .app_open)
         XCTAssertNil(mockPersistentStore.value(key: .trackingEvents))
         sut = nil
-        XCTAssertEqual((mockPersistentStore.value(key: .trackingEvents) as? [TrackingEventType])?.count, 2)
+        XCTAssertNotNil(mockPersistentStore.value(key: .trackingEvents))
     }
     
 }

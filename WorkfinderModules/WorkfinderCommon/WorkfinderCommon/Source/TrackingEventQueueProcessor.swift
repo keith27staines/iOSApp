@@ -14,7 +14,7 @@ public class TrackingEventQueueProcessor {
     let eventQueue: TrackingEventQueue
     var itemHandler: ((TrackingEventType) -> Void)?
     let interval: TimeInterval
-    public private(set)var isPaused: Bool = true
+    public private(set)var isSuspended: Bool = true
     
     public init(
         eventQueue: TrackingEventQueue,
@@ -32,22 +32,22 @@ public class TrackingEventQueueProcessor {
         }
     }
     
-    public func pause() {
+    public func suspend() {
         isolation.async { [weak self] in
-            self?.isPaused = true
+            self?.isSuspended = true
         }
     }
     
     public func resume() {
         isolation.async { [weak self] in
-            self?.isPaused = false
+            self?.isSuspended = false
             self?.pollUntilPaused()
         }
     }
     
     private func pollUntilPaused() {
         isolation.asyncAfter(deadline: .now() + interval) { [weak self] in
-            guard let self = self, self.isPaused == false else { return }
+            guard let self = self, self.isSuspended == false else { return }
             guard let event = self.eventQueue.dequeue() else {
                 print("TEQ is empty at \(Date())")
                 self.pollUntilPaused()

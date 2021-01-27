@@ -20,7 +20,7 @@ public class F4SLog {
     private lazy var teqp: TrackingEventQueueProcessor = {
         TrackingEventQueueProcessor(
             eventQueue: TrackingEventQueue(persistentStore: LocalStore()),
-            interval: 3.001
+            interval: 1.1
         ) { [weak self] (eventType) in
             self?.commitEvent(eventType)
         }
