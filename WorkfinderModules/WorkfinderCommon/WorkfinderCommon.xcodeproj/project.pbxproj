@@ -283,6 +283,16 @@
 			path = "API Json deserialization tests";
 			sourceTree = "<group>";
 		};
+		53964E9A25C13E780061FDB5 /* TrackingEvent-queue-and-processor tests */ = {
+			isa = PBXGroup;
+			children = (
+				53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */,
+				53BC509325C0B9EF00D84EE0 /* TrackingEventQueueTests.swift */,
+				5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */,
+			);
+			path = "TrackingEvent-queue-and-processor tests";
+			sourceTree = "<group>";
+		};
 		FC04B865233276960034A60E /* Coordinator protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,9 +464,7 @@
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FCEE3EF5249A645A0034C226 /* CandidateTests.swift */,
 				53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */,
-				53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */,
-				53BC509325C0B9EF00D84EE0 /* TrackingEventQueueTests.swift */,
-				5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */,
+				53964E9A25C13E780061FDB5 /* TrackingEvent-queue-and-processor tests */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";

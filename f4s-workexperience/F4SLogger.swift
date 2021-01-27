@@ -16,6 +16,15 @@ import UIKit
 public class F4SLog {
 
     var mixPanel: MixpanelInstance { return Mixpanel.mainInstance() }
+        
+    private lazy var teqp: TrackingEventQueueProcessor = {
+        TrackingEventQueueProcessor(
+            eventQueue: TrackingEventQueue(persistentStore: LocalStore()),
+            interval: 3.001
+        ) { [weak self] (eventType) in
+            self?.commitEvent(eventType)
+        }
+    }()
     
     public func updateIdentity() {
         let user = UserRepository().loadUser()
@@ -29,7 +38,8 @@ public class F4SLog {
     public init() {
         let environment = Config.environment
         startBugsnag(for: environment)
-        startMixpanel(for: environment)
+        startMixpanel (for: environment)
+        teqp.resume()
         updateIdentity()
     }
     
@@ -65,16 +75,35 @@ public class F4SLog {
 }
 
 extension F4SLog : F4SAnalytics {
-    
+    /// Submits an event to be tracked in the cloud
+    ///
     public func track(_ eventType: TrackingEventType) {
+        /*
+         This method does not pass the event on to MixpanelSDK  immediately
+         because Mixpanel cannot order events passed with less than 1 second
+         gaps. Therefore, we hold the event in a queue. The queue is serviced
+         on a background thread by the `teqp` processor that fires at intervals
+         of greater than 1s, removes the item at the front of the queue and
+         submits it to Mixpanel SDK.
+         */
+        print("\n\n-----------------------------------------------------------------------")
+        print("Tracked event \(eventType)")
+        print("-----------------------------------------------------------------------\n\n")
+        enqueueEvent(eventType)
+    }
+    
+    private func enqueueEvent(_ eventType: TrackingEventType) {
+        print("TEQ is enqueueing event \(eventType) at \(Date())")
+        teqp.enqueueEventType(eventType)
+    }
+    
+    private func commitEvent(_ eventType: TrackingEventType) {
+        print("TEQP is comitting event \(eventType) at \(Date())")
         let event = TrackingEvent(type: eventType)
         let mixpanelProperties = event.additionalProperties.compactMapValues({ (value) -> MixpanelType? in
             value as? MixpanelType
         })
         assert(mixpanelProperties.count == event.additionalProperties.count)
-        print("\n\n-----------------------------------------------------------------------")
-        print("Tracked event \(eventType)")
-        print("-----------------------------------------------------------------------\n\n")
         mixPanel.track(event: eventType.name, properties: mixpanelProperties)
     }
 }

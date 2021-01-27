@@ -10,78 +10,52 @@ import Foundation
 
 public class TrackingEventQueueProcessor {
     
+    let isolation = DispatchQueue(label: "TrackingEventQueueProcessor.isolation")
     let eventQueue: TrackingEventQueue
-    let isolation = DispatchQueue.init(label: "isolation")
-    let timer: RepeatingTimerProtocol
-    
-    public func startProcessing() { timer.resume() }
-    public func stopProcessing() { timer.suspend() }
     var itemHandler: ((TrackingEventType) -> Void)?
+    let interval: TimeInterval
+    public private(set)var isPaused: Bool = true
     
-    public init(eventQueue: TrackingEventQueue, timer: RepeatingTimerProtocol, itemHandler: @escaping (TrackingEventType) -> Void) {
+    public init(
+        eventQueue: TrackingEventQueue,
+        interval: TimeInterval,
+        itemHandler: @escaping (TrackingEventType) -> Void
+    ) {
         self.eventQueue = eventQueue
-        self.timer = RepeatingTimer(timeInterval: 1.001)
-        timer.eventHandler = { [weak self] in
-            guard let self = self, let event = eventQueue.dequeue() else { return }
-            self.itemHandler?(event)
+        self.itemHandler = itemHandler
+        self.interval = interval
+    }
+    
+    public func enqueueEventType(_ event: TrackingEventType) {
+        isolation.async { [weak self] in
+            self?.eventQueue.enqueue(item: event)
         }
     }
-}
-
-
-public protocol RepeatingTimerProtocol: AnyObject {
-    var eventHandler: (() -> Void)? { get set }
-    func resume()
-    func suspend()
     
-}
-
-/// A "crash-proof" wrapper for GCD's DispatchSourceTimer
-class RepeatingTimer: RepeatingTimerProtocol {
-    
-    let timeInterval: TimeInterval
-    private(set) var state: State = .suspended
-    var eventHandler: (() -> Void)?
-    
-    private lazy var timer: DispatchSourceTimer = {
-        let t = DispatchSource.makeTimerSource()
-        t.schedule(deadline: .now() + self.timeInterval, repeating: self.timeInterval)
-        t.setEventHandler(handler: { [weak self] in
-            self?.eventHandler?()
-        })
-        return t
-    }()
-    
-    enum State {
-        case suspended
-        case resumed
+    public func pause() {
+        isolation.async { [weak self] in
+            self?.isPaused = true
+        }
     }
     
-    init(timeInterval: TimeInterval) {
-        self.timeInterval = timeInterval
+    public func resume() {
+        isolation.async { [weak self] in
+            self?.isPaused = false
+            self?.pollUntilPaused()
+        }
     }
     
-    func resume() {
-        if state == .resumed { return }
-        state = .resumed
-        timer.resume()
-    }
-    
-    func suspend() {
-        if state == .suspended { return }
-        state = .suspended
-        timer.suspend()
-    }
-    
-    deinit {
-        timer.setEventHandler {}
-        timer.cancel()
-       /*
-        If the timer is suspended, calling cancel without resuming
-        triggers a crash. This is documented here
-        https://forums.developer.apple.com/thread/15902
-        */
-        resume()
-        eventHandler = nil
+    private func pollUntilPaused() {
+        isolation.asyncAfter(deadline: .now() + interval) { [weak self] in
+            guard let self = self, self.isPaused == false else { return }
+            guard let event = self.eventQueue.dequeue() else {
+                print("TEQ is empty at \(Date())")
+                self.pollUntilPaused()
+                return
+            }
+            print("TEQP dequeued \(event) at \(Date())")
+            self.itemHandler?(event)
+            self.pollUntilPaused()
+        }
     }
 }
