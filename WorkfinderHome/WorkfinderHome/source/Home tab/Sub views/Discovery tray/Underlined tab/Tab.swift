@@ -35,15 +35,23 @@ class Tab: UIView {
     }
     
     lazy var textStack: UIStackView = {
+        let spacer1 = UIView()
+        let spacer2 = UIView()
+        spacer1.translatesAutoresizingMaskIntoConstraints = false
+        spacer2.translatesAutoresizingMaskIntoConstraints = false
+        spacer1.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        spacer2.setContentHuggingPriority(.defaultLow, for: .horizontal)
         let stack = UIStackView(arrangedSubviews: [
-            UIView(),
+            spacer1,
             titleLabel,
             titleBadgeContainer,
-            UIView()
+            spacer2
         ])
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        spacer1.widthAnchor.constraint(equalTo: spacer2.widthAnchor).isActive = true
         stack.axis = .horizontal
         stack.spacing = 8
-        stack.distribution = .equalCentering
+        stack.distribution = .fill
         stack.alignment = .center
         stack.isUserInteractionEnabled = true
         stack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
@@ -80,7 +88,6 @@ class Tab: UIView {
         let label = UILabel()
         label.text = self.title
         label.textAlignment = .right
-        label.textAlignment = .right
         label.textColor = UIColor.darkText
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
@@ -102,7 +109,7 @@ class Tab: UIView {
         let label = UILabel()
         label.text = badgeText
         label.font = UIFont.systemFont(ofSize: UIFont.labelFontSize - 2)
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         label.widthAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
