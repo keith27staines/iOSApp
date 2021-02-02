@@ -102,7 +102,7 @@ class RecommendationsViewController: UIViewController {
     func loadData() {
         refresh()
         messageHandler.showLoadingOverlay(self.view)
-        presenter.loadData() { [weak self] (optionalError) in
+        presenter.loadFirstPage() { [weak self] (optionalError) in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
@@ -136,6 +136,7 @@ extension RecommendationsViewController: UITableViewDataSource {
         }
         let tilePresenter = presenter.recommendationTilePresenterForIndexPath(indexPath)
         cell.presenter = tilePresenter
+        if indexPath.row >= presenter.triggerRow { presenter.loadNextPage(tableView: tableview) }
         return cell
     }
 }
