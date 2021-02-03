@@ -9,7 +9,6 @@ class SearchResultsView: UIView {
             controller?.view = self
             configureViews()
             tabSwitchingView.didSelectTab = controller?.tabTapped
-            tabSwitchingView.selectTab(0)
         }
     }
     
@@ -40,6 +39,10 @@ class SearchResultsView: UIView {
     
     init() {
         super.init(frame: CGRect.zero)
+    }
+    
+    func selectTab(index: Int) {
+        tabSwitchingView.selectTab(index, notify: true)
     }
     
     func updateFromController() {

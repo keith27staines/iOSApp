@@ -15,7 +15,8 @@ class SearchController: NSObject {
         case hidden
         case showingTypeAhead
         case showingFilters
-        case showingResults
+        case showingRoleResults
+        case showingPeopleResults
     }
     var searchFieldShouldReturn: Bool { searchBar.text?.count ?? 0 > 2 ? true : false }
     
@@ -37,9 +38,13 @@ class SearchController: NSObject {
                 filtersButton.alpha = 0
                 filtersButton.isHidden = false
                 searchDetail.filtersView.isHidden = false
-            case .showingResults:
+            case .showingRoleResults:
                 searchDetail.searchResultsView.isHidden = false
                 filtersButton.alpha = 0
+                filtersButton.isHidden = false
+            case .showingPeopleResults:
+                searchDetail.searchResultsView.isHidden = false
+                filtersButton.alpha = 1
                 filtersButton.isHidden = false
             }
 
@@ -57,9 +62,12 @@ class SearchController: NSObject {
                 case .showingFilters:
                     self.filtersButton.isHidden = false
                     self.searchDetail.filtersView.isHidden = false
-                case .showingResults:
+                case .showingRoleResults:
                     self.searchDetail.searchResultsView.isHidden = false
                     self.filtersButton.isHidden = false
+                case .showingPeopleResults:
+                    self.searchDetail.searchResultsView.isHidden = false
+                    self.filtersButton.isHidden = true
                 }
             }
         }
@@ -86,7 +94,7 @@ class SearchController: NSObject {
         switch state {
         case .showingFilters:
             applyFilters()
-        case .showingResults: state = .showingFilters
+        case .showingRoleResults: state = .showingFilters
         default: break
         }
     }
@@ -151,8 +159,19 @@ class SearchController: NSObject {
         addNotificationListeners()
     }
     
+    
     func addNotificationListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(popularOnWorkfinderTapListener), name: .wfHomeScreenPopularOnWorkfinderTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rolesTabWasSelected), name: .wfSearchResultsRoleTabSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(peopleTabWasSelected), name: .wfSearchResultsPeopleTabSelected, object: nil)
+    }
+    @objc func rolesTabWasSelected() {
+        guard searchBar.window != nil else { return }
+        state = .showingRoleResults
+    }
+    @objc func peopleTabWasSelected() {
+        guard searchBar.window != nil else { return }
+        state = .showingPeopleResults
     }
     
     @objc func popularOnWorkfinderTapListener(notification: Notification) {
@@ -260,7 +279,7 @@ extension SearchController {
         case .failure(_), .none:
             searchResultsController.typeAheadJson = nil
         }
-        state = .showingResults
+        searchResultsController.selectTab(index: 0)
     }
     
     func performTypeAhead(string: String?) {
