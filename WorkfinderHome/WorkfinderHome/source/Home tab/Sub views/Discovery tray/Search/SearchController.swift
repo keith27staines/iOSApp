@@ -22,14 +22,15 @@ class SearchController: NSObject {
     
     var state = SearchState.hidden {
         didSet {
-            filtersButton.isHidden = true
             searchDetail.isHidden = false
             searchDetail.filtersView.isHidden = true
             searchDetail.searchResultsView.isHidden = true
             searchDetail.typeAheadView.isHidden = true
             switch state {
             case .hidden:
+                filtersButton.isHidden = true
                 searchDetail.isHidden = true
+                filtersButton.alpha = 0
             case .showingTypeAhead:
                 searchDetail.typeAheadView.isHidden = false
                 filtersButton.alpha = 1
@@ -41,7 +42,7 @@ class SearchController: NSObject {
             case .showingRoleResults:
                 searchDetail.searchResultsView.isHidden = false
                 filtersButton.alpha = 0
-                filtersButton.isHidden = false
+                filtersButton.isHidden = true
             case .showingPeopleResults:
                 searchDetail.searchResultsView.isHidden = false
                 filtersButton.alpha = 1
@@ -51,8 +52,20 @@ class SearchController: NSObject {
             NotificationCenter.default.post(name: .wfHomeScreenSearchIsActive, object: self, userInfo: ["isSearchActive": !searchDetail.isHidden])
             
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-                self.searchBarStack.layoutIfNeeded()
+                switch self.state {
+                case .hidden:
+                    break
+                case .showingTypeAhead:
+                    break
+                case .showingFilters:
+                    break
+                case .showingRoleResults:
+                    self.filtersButton.isHidden = false
+                case .showingPeopleResults:
+                    self.filtersButton.isHidden = true
+                }
                 self.filtersButton.alpha = self.filtersButton.isHidden ? 0 : 1
+                self.searchBarStack.layoutIfNeeded()
             } completion: { (complete) in
                 switch self.state {
                 case .hidden:
