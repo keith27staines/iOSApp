@@ -5,6 +5,7 @@ import WorkfinderUI
 import WorkfinderServices
 
 class RecentRolesDataSource: CellPresenter {
+    
     private var roles = [RoleData]()
     private var images = [UIImage]()
     

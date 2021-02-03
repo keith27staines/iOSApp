@@ -21,7 +21,7 @@ public class RecommendationsService: WorkfinderService, RecommendationsServicePr
     public func fetchRecommendations(completion: @escaping (Result<ServerListJson<RecommendationsListItem>, Error>) -> Void) {
         do {
             let verbose = false
-            let query = [URLQueryItem(name: "ordering", value: "-created_at"), URLQueryItem(name: "limit", value: "10")]
+            let query = [URLQueryItem(name: "ordering", value: "-created_at"), URLQueryItem(name: "limit", value: "30")]
             let request = try buildRequest(relativePath: "recommendations/", queryItems: query, verb: .get)
             performTask(with: request, verbose: verbose, completion: completion, attempting: #function)
         } catch {

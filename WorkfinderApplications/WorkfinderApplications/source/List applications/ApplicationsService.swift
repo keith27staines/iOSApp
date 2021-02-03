@@ -2,17 +2,22 @@ import WorkfinderCommon
 import WorkfinderServices
 
 protocol ApplicationsServiceProtocol: AnyObject {
-    func fetchApplications(completion: @escaping (Result<[Application],Error>) -> Void)
+    func fetchApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
+    func fetchNextPage(urlString: String, completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void )
 }
 
 class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
 
-    func fetchApplications(completion: @escaping (Result<[Application],Error>) -> Void) {
+    func fetchApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void) {
         performNetworkRequest { [weak self] (networkResult) in
             guard let self = self else { return }
             let applicationsResult = self.buildApplicationsResult(networkResult: networkResult)
             completion(applicationsResult)
         }
+    }
+    
+    func fetchNextPage(urlString: String, completion: @escaping (Result<ServerListJson<Application>, Error>) -> Void) {
+        
     }
 
     private func performNetworkRequest(completion: @escaping (Result<ServerListJson<PlacementJson>,Error>) -> Void) {
@@ -30,7 +35,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
     }
     
     private func buildApplicationsResult(networkResult: Result<ServerListJson<PlacementJson>,Error>)
-        -> Result<[Application], Error> {
+        -> Result<ServerListJson<Application>, Error> {
             switch networkResult {
             case .success(let serverList):
                 var applications = [Application]()
@@ -38,9 +43,9 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
                 expandedPlacements.forEach { (placement) in
                     applications.append(Application(json: placement))
                 }
-                return Result<[Application],Error>.success(applications)
+                return .success(ServerListJson<Application>(count: serverList.count, next: serverList.next, previous: serverList.previous, results: applications))
             case .failure(let error):
-                return Result<[Application],Error>.failure(error)
+                return .failure(error)
             }
     }
 }

@@ -1,12 +1,12 @@
 import Foundation
 import WorkfinderUI
+import WorkfinderCommon
 
 class ApplicationsPresenter {
     weak var coordinator: ApplicationsCoordinatorProtocol?
     let numberOfSections: Int = 1
     let service: ApplicationsServiceProtocol
-    var applications = [Application]()
-    var applicationTilePresenters = [ApplicationTilePresenter]()
+    var applications: [Application] { pager.items }
     weak var view: WorkfinderViewControllerProtocol?
     var isCandidateSignedIn: () -> Bool
     
@@ -19,11 +19,12 @@ class ApplicationsPresenter {
     }
     
     func numberOfRows(section: Int) -> Int {
-        return applicationTilePresenters.count
+        return pager.items.count
     }
     
     func applicationTilePresenterForIndexPath(_ indexPath: IndexPath) -> ApplicationTilePresenter {
-        return applicationTilePresenters[indexPath.row]
+        let application = applicationForIndexPath(indexPath)
+        return ApplicationTilePresenter(application: application)
     }
     
     func applicationForIndexPath(_ indexPath: IndexPath) -> Application {
@@ -34,26 +35,30 @@ class ApplicationsPresenter {
         self.view = view
     }
     
-    func loadData(completion: @escaping (Error?) -> Void) {
+    func loadData(table: UITableView, completion: @escaping (Error?) -> Void) {
         guard isCandidateSignedIn() else {
             completion(nil)
             return
         }
-        service.fetchApplications { result in
-            self.applicationTilePresenters = []
-            switch result {
-            case .success(let applications):
-                self.applications = applications
-                self.coordinator?.applicationsDidLoad(applications)
-                self.applicationTilePresenters = applications.map({ (application) -> ApplicationTilePresenter in
-                    ApplicationTilePresenter(application: application)
-                })
-                completion(nil)
-            case .failure(let error):
+        pager.isLoading = true
+        service.fetchApplications { [weak self] result in
+            guard let self = self else { return }
+            self.pager.update(table: table, with: result) { error in
                 completion(error)
             }
         }
     }
+    
+    func loadNextPage(tableView: UITableView) {
+        guard let nextPage = pager.nextPage else { return }
+        pager.isLoading = true
+        service.fetchNextPage(urlString: nextPage) { [weak self] (result) in
+            guard let self = self else { return }
+            self.pager.update(table: tableView, with: result)
+        }
+    }
+    
+    var pager = ServerListPager<Application>()
     
     func onTapApplication(at indexPath: IndexPath) {
         let application = applicationForIndexPath(indexPath)

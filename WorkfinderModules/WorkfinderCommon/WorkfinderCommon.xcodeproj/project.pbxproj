@@ -11,6 +11,7 @@
 		5307B2F9259468150080F2EF /* TrackingEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5307B2F8259468150080F2EF /* TrackingEventType.swift */; };
 		53770B6125933BFC0085928E /* TrackEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53770B6025933BFC0085928E /* TrackEvent.swift */; };
 		53786B142586015100B671EB /* DecodeRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53786B132586015100B671EB /* DecodeRoleJson.swift */; };
+		5383D53725CABF790058D02C /* ServerListPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383D53625CABF790058D02C /* ServerListPager.swift */; };
 		5389E97925C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */; };
 		53A23DF2254844AE00BB21B7 /* SignInScreenOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */; };
 		53BC508625C0884A00D84EE0 /* TrackEventTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */; };
@@ -133,6 +134,7 @@
 		5307B2F8259468150080F2EF /* TrackingEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventType.swift; sourceTree = "<group>"; };
 		53770B6025933BFC0085928E /* TrackEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEvent.swift; sourceTree = "<group>"; };
 		53786B132586015100B671EB /* DecodeRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeRoleJson.swift; sourceTree = "<group>"; };
+		5383D53625CABF790058D02C /* ServerListPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListPager.swift; sourceTree = "<group>"; };
 		5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventQueueProcessorTests.swift; sourceTree = "<group>"; };
 		53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenOrder.swift; sourceTree = "<group>"; };
 		53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEventTypeTests.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				53C76058251B6F9A0072281E /* DeeplinkInfo.swift */,
 				53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */,
 				53C9CAD9256B93EB00F567B2 /* NotificationNames.swift */,
+				5383D53625CABF790058D02C /* ServerListPager.swift */,
 			);
 			path = WorkfinderCommon;
 			sourceTree = "<group>";
@@ -765,6 +768,7 @@
 				FC083F7B230FF01000641F17 /* F4SDocument.swift in Sources */,
 				FCCA4E282456CC1500DFA696 /* AppInstallationLogicProtocol.swift in Sources */,
 				FCCA4E2B2456DADD00DFA696 /* Candidate.swift in Sources */,
+				5383D53725CABF790058D02C /* ServerListPager.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,

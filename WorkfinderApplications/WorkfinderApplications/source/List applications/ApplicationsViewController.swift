@@ -31,7 +31,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     func loadData() {
         messageHandler.showLoadingOverlay(view)
-        presenter.loadData { [weak self] optionalError in
+        presenter.loadData(table: tableView) { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.refreshFromPresenter()
@@ -101,6 +101,7 @@ extension ApplicationsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile else { return UITableViewCell() }
         let application = presenter.applicationTilePresenterForIndexPath(indexPath)
         cell.configureWithApplication(application)
+        if indexPath.row >= presenter.pager.triggerRow { presenter.loadNextPage(tableView: tableView) }
         return cell
     }
 }

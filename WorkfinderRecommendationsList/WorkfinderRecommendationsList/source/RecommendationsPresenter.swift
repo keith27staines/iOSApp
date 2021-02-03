@@ -3,17 +3,16 @@ import WorkfinderCommon
 import WorkfinderServices
 
 class RecommendationsPresenter {
+
+    let pager = ServerListPager<RecommendationsListItem>()
     weak var coordinator: RecommendationsCoordinator?
     let service: RecommendationsServiceProtocol
-    var recommendations = [RecommendationsListItem]()
+    var recommendations: [RecommendationsListItem] { pager.items }
     var tilePresenters = [RecommendationTilePresenter]()
     let userRepo: UserRepositoryProtocol
     var workplaceServiceFactory: (() -> ApplicationContextService)?
     var hostServiceFactory: (() -> HostsProviderProtocol)?
     var projectServiceFactory: (() -> ProjectServiceProtocol)?
-    
-    var count: Int = 0
-    var nextPage: String?
     
     init(coordinator: RecommendationsCoordinator,
          service: RecommendationsServiceProtocol,
@@ -43,48 +42,24 @@ class RecommendationsPresenter {
         view?.reloadRow([IndexPath(row: row, section: 0)])
     }
     
-    func loadFirstPage(completion: @escaping (Error?) -> Void) {
+    func loadFirstPage(table: UITableView, completion: @escaping (Error?) -> Void) {
         guard let _ = userRepo.loadAccessToken()
             else {
                 completion(nil)
                 return
         }
+        pager.isLoading = true
         service.fetchRecommendations() { [weak self] (result) in
             guard let self = self else { return }
-            switch result {
-            case .success(let serverList):
-                self.count = serverList.count ?? 0
-                self.nextPage = serverList.next
-                self.recommendations = serverList.results
-                completion(nil)
-            case .failure(let error):
-                completion(error)
-            }
+            self.pager.update(table: table, with: result, completion: completion)
         }
     }
     
-    var isLoading = false
-    var triggerRow: Int { recommendations.count - 40 / 2}
-    
     func loadNextPage(tableView: UITableView) {
-        guard let nextPage = nextPage, recommendations.count < count, isLoading == false else { return }
-        isLoading = true
+        guard let nextPage = pager.nextPage else { return }
         service.fetchNextPage(urlString: nextPage) { [weak self] (result) in
             guard let self = self else { return }
-            switch result {
-            case .success(let serverList):
-                self.count = serverList.count ?? 0
-                self.nextPage = serverList.next
-                let currentCount = self.recommendations.count
-                let addedIndexPaths = IndexSet(integersIn:
-                    currentCount..<currentCount+serverList.results.count).map {
-                    IndexPath(row: $0, section: 0)
-                }
-                self.recommendations += serverList.results
-                tableView.insertRows(at: addedIndexPaths, with: .bottom)
-            case .failure(_): break
-            }
-            self.isLoading = false
+            self.pager.update(table: tableView, with: result)
         }
     }
     
