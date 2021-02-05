@@ -18,7 +18,7 @@ class SearchController: NSObject {
         case showingRoleResults
         case showingPeopleResults
     }
-    var searchFieldShouldReturn: Bool { searchBar.text?.count ?? 0 > 2 ? true : false }
+    var searchFieldShouldReturn: Bool { searchBar.text?.count ?? 0 > 0 }
     
     var state = SearchState.hidden {
         didSet {

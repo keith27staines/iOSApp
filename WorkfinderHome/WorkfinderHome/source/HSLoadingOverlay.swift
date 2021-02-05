@@ -64,7 +64,7 @@ class HSLoadingOverlay: UIView {
     }
     
     func applyStyle(style: LoadingOverlayStyle) {
-        activityIndicator.color = WorkfinderColors.primaryColor
+        activityIndicator.color = UIColor.black
         switch style {
         case .dark:
             isUserInteractionEnabled = false

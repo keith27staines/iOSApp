@@ -48,10 +48,9 @@ class RecommendationsPresenter {
                 completion(nil)
                 return
         }
-        pager.isLoading = true
         service.fetchRecommendations() { [weak self] (result) in
             guard let self = self else { return }
-            self.pager.update(table: table, with: result, completion: completion)
+            self.pager.loadFirstPage(table: table, with: result, completion: completion)
         }
     }
     
@@ -59,7 +58,7 @@ class RecommendationsPresenter {
         guard let nextPage = pager.nextPage else { return }
         service.fetchNextPage(urlString: nextPage) { [weak self] (result) in
             guard let self = self else { return }
-            self.pager.update(table: tableView, with: result)
+            self.pager.loadNextPage(table: tableView, with: result)
         }
     }
     
