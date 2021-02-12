@@ -48,7 +48,11 @@ public class RequestAppReviewLogic {
     
     /// Returns `true` if the current versionof the app  is different from the version at the last review
     public var isCurrentVersionDifferentFromLastReviewedVersion: Bool {
-        currentAppVersion != lastReviewedVersion
+        let current = SemanticVersion(versionString: currentAppVersion)
+        guard
+            let lastReviewed = SemanticVersion(versionString: lastReviewedVersion ?? "0.0.0")
+        else { return true }
+        return !(current ~= lastReviewed)
     }
     
     /// Returns true if the candidate has made sufficient applications to warrant another review

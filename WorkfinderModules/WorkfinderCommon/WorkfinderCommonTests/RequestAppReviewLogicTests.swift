@@ -11,7 +11,7 @@ import WorkfinderCommon
 
 class RequestAppReviewLogicTests: XCTestCase {
     
-    let currentAppVersion: String = "a.b.c"
+    let currentAppVersion: String = "3.2.1"
     let ninetyDays: TimeInterval = 90 * 24 * 3600
     
     func test_isLastRequestOlderThan90Days_when_never_requested() {
@@ -39,7 +39,7 @@ class RequestAppReviewLogicTests: XCTestCase {
     }
     
     func test_isCurrentVersionDifferentFromLastReview_when_last_reviewed_against_different_version() {
-        let sut = makeSUT(lastReviewRequestDate: nil, lastReviewedVersion: "x.y.z")
+        let sut = makeSUT(lastReviewRequestDate: nil, lastReviewedVersion: "1.2.3")
         XCTAssertTrue(sut.isCurrentVersionDifferentFromLastReviewedVersion)
     }
     
@@ -69,7 +69,7 @@ class RequestAppReviewLogicTests: XCTestCase {
         let now = Date()
         let sut = makeSUT(
             lastReviewRequestDate: now.addingTimeInterval(-ninetyDays+1),
-            lastReviewedVersion: "x.y.z"
+            lastReviewedVersion: "1.2.3"
         )
         XCTAssertFalse(sut.isLastRequestOlderThan90Days)
         XCTAssertTrue(sut.isCurrentVersionDifferentFromLastReviewedVersion)
