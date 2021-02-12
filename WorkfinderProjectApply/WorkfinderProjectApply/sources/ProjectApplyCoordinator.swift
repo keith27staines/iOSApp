@@ -8,6 +8,7 @@ import WorkfinderDocumentUpload
 import WorkfinderUI
 import ErrorHandlingUI
 import WorkfinderRegisterCandidate
+import StoreKit
 
 protocol ProjectApplyCoordinatorProtocol: AnyObject, ErrorHandlerProviderProtocol {
     func onCoverLetterWorkflowCancelled()
@@ -203,20 +204,21 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     func showSuccess() {
         let vc = SuccessViewController(
             applicationsButtonTap: { [weak self] in
-                guard let self = self else { return }
-                self.successViewController?.dismiss(animated: true, completion: nil)
-                self.onModalFinished()
-                self.switchToTab?(.applications)
+                self?.dismissSuccessSwitchingTo(.applications)
         },
             searchButtonTap: { [weak self] in
-                guard let self = self else { return }
-                self.successViewController?.dismiss(animated: true, completion: nil)
-                self.onModalFinished()
-                self.switchToTab?(.home)
+                self?.dismissSuccessSwitchingTo(.home)
         })
         vc.modalPresentationStyle = .overCurrentContext
         modalVC?.present(vc, animated: false, completion: nil)
         successViewController = vc
+    }
+    
+    func dismissSuccessSwitchingTo(_ tabIndex: TabIndex) {
+        successViewController?.dismiss(animated: true, completion: nil)
+        onModalFinished()
+        switchToTab?(tabIndex)
+        injected.requestAppReviewLogic.makeRequest()
     }
 }
 

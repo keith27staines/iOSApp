@@ -65,6 +65,7 @@ public protocol CoreInjectionProtocol : class {
     var userRepository: UserRepositoryProtocol { get }
     var log: F4SAnalyticsAndDebugging { get }
     var versionChecker: WorkfinderEnvironmentConsistencyCheckerProtocol { get }
+    var requestAppReviewLogic: RequestAppReviewLogic { get }
 }
 
 public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinating {
