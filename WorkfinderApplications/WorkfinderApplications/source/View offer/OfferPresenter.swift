@@ -39,6 +39,7 @@ class OfferPresenter: OfferPresenterProtocol {
     var hostContact: String? { offer?.hostContact }
     var email: String? { offer?.email }
     var salary: String { offer?.salary ?? "This is a voluntary project." }
+    var location: String { offer?.location ?? "" }
     var notes: String?  { offer?.offerNotes }
     var screenTitle: String { offerState?.screenTitle ?? "Offer"}
     var stateDescription: String? { return offerState?.description }
@@ -119,6 +120,8 @@ class OfferPresenter: OfferPresenterProtocol {
             return OfferDetailCellInfo(firstLine: "Email", secondLine: email)
         case .salary:
             return OfferDetailCellInfo(firstLine: "Salary", secondLine: salary)
+        case .location:
+            return OfferDetailCellInfo(firstLine: "Location", secondLine: location, hideRow: location.isEmpty)
         case .notes:
             return OfferDetailCellInfo(firstLine: "Notes", secondLine: notes)
         }
@@ -133,6 +136,7 @@ class OfferPresenter: OfferPresenterProtocol {
         case .host: coordinator?.showCompanyHost(application: application)
         case .email: break
         case .salary: break
+        case .location: break
         case .notes: break
         }
     }
@@ -146,6 +150,7 @@ class OfferPresenter: OfferPresenterProtocol {
         case .host: return .disclosureIndicator
         case .email: return .none
         case .salary: return .none
+        case .location: return .none
         case .notes: return .none
         }
     }
@@ -158,7 +163,7 @@ fileprivate enum OfferTableRowType: Int, CaseIterable {
     case host
     case email
     case salary
-//    case location
+    case location
     case notes
 }
 

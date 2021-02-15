@@ -41,7 +41,19 @@ class SearchResultsController {
     var selectedTabIndex: Int = 0 {
         didSet {
             view?.updateFromController()
+            switch selectedTabIndex {
+            case 0:
+                NotificationCenter.default.post(name: .wfSearchResultsRoleTabSelected, object: nil)
+            case 1:
+                NotificationCenter.default.post(name: .wfSearchResultsPeopleTabSelected, object: nil)
+            default:
+                break
+            }
         }
+    }
+    
+    func selectTab(index: Int) {
+        view?.selectTab(index: index)
     }
     
     func tabTapped(tab: Tab) { selectedTabIndex = tab.index }
@@ -92,6 +104,9 @@ class RolePresenter: CellPresenter {
     }
 }
 
-
+extension Notification.Name {
+    static let wfSearchResultsRoleTabSelected = Notification.Name("SearchResults_RoleTabSelected")
+    static let wfSearchResultsPeopleTabSelected = Notification.Name("SearchResults_PeopleTabSelected")
+}
 
 

@@ -210,11 +210,18 @@ extension OfferViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let info = presenter.cellInfoForIndexPath(indexPath)
+        guard !info.hideRow else {
+            let cell = UITableViewCell()
+            cell.contentView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            return cell
+        }
+        let isNotesField = presenter.isNotesField(indexPath)
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? OfferDetailCell else {
             return UITableViewCell()
         }
-        let info = presenter.cellInfoForIndexPath(indexPath)
-        let isNotesField = presenter.isNotesField(indexPath)
+
         cell.accessoryType = presenter.accessoryTypeForIndexPath(indexPath)
         cell.configure(info: info, isNoteField: isNotesField)
         return cell
@@ -236,6 +243,7 @@ extension OfferViewController: UITableViewDelegate {
 struct OfferDetailCellInfo {
     var firstLine: String?
     var secondLine: String?
+    var hideRow: Bool = false
 }
 
 class OfferDetailCell: UITableViewCell {

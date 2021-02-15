@@ -36,7 +36,7 @@ class OfferService: OfferServiceProtocol{
                     hostCompany: json.association?.location?.company?.name,
                     hostContact: json.association?.host?.fullName,
                     email: json.association?.host?.emails?.first,
-                    location: self.addressStringFromOfferJson(json),
+                    location: self.locationTextFromPlacement(from: json),
                     logoUrl: json.association?.location?.company?.logo,
                     reasonWithdrawn: nil,
                     offerNotes: json.offer_notes,
@@ -46,9 +46,17 @@ class OfferService: OfferServiceProtocol{
             case .failure(let error):
                 completion(Result<Offer,Error>.failure(error))
             }
+            
         }
     }
-    
+
+    func locationTextFromPlacement(from json: PlacementJson) -> String {
+        guard let isRemote = json.is_remote, isRemote == true else {
+            return json.association?.location?.addressCity ?? ""
+        }
+        return "This is a remote project"
+    }
+
     func addressStringFromOfferJson(_ json: PlacementJson) -> String {
         let loc = json.association?.location
         var addressElements = [String]()

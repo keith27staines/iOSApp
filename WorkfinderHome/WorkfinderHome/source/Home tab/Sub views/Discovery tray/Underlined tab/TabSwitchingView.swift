@@ -14,17 +14,17 @@ class TabSwitchingView: UIView {
         tabs[index].badgeText = text
     }
     
-    func selectTab(_ index: Int) {
+    func selectTab(_ index: Int, notify: Bool) {
         let tab = tabs[0]
-        selectTab(tab)
+        selectTab(tab, notify: notify)
     }
     
-    func selectTab(_ tab: Tab) {
+    func selectTab(_ tab: Tab, notify: Bool) {
         tabs.forEach { (otherTab) in
             otherTab.isSelected = false
         }
         tab.isSelected = true
-        didSelectTab?(tab)
+        if notify {didSelectTab?(tab)}
     }
     
     init(titles: [String]) {
@@ -45,8 +45,7 @@ class TabSwitchingView: UIView {
     
     @discardableResult func appendTab(title: String) -> Tab {
         let tab = Tab(index: tabs.count, title: title) { [weak self] (tab) in
-            self?.selectTab(tab)
-            self?.didSelectTab?(tab)
+            self?.selectTab(tab, notify: true)
         }
         tabs.append(tab)
         tabStack.addArrangedSubview(tab)

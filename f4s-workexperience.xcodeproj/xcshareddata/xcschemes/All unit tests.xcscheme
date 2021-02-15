@@ -293,18 +293,6 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FC229A722326C50200F7B5CD"
-               BuildableName = "WorkfinderDocumentUploadUseCaseTests.xctest"
-               BlueprintName = "WorkfinderDocumentUploadUseCaseTests"
-               ReferencedContainer = "container:WorkfinderDocumentUploadUseCase/WorkfinderDocumentUploadUseCase.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "FCF4B618232BC090001340DF"
                BuildableName = "WorkfinderOnboardingUseCaseTests.xctest"
                BlueprintName = "WorkfinderOnboardingUseCaseTests"
@@ -345,30 +333,6 @@
                BuildableName = "WorkfinderCoverLetterTests.xctest"
                BlueprintName = "WorkfinderCoverLetterTests"
                ReferencedContainer = "container:WorkfinderCoverLetter/WorkfinderCoverLetter.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FC632FBE24B4792A00C1499B"
-               BuildableName = "KSGeometryTests.xctest"
-               BlueprintName = "KSGeometryTests"
-               ReferencedContainer = "container:KSGeometry/KSGeometry.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FC632FFC24B482AD00C1499B"
-               BuildableName = "KSQuadTreeTests.xctest"
-               BlueprintName = "KSQuadTreeTests"
-               ReferencedContainer = "container:KSQuadTree/KSQuadTree.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

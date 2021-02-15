@@ -23,14 +23,33 @@ public class ServerListPager<A> where A: Codable {
 
     public init() {}
 
-    public func reset() {
+    private func reset(table: UITableView) {
         count = 0
         _nextPage = nil
         isLoading = false
         items = []
+        table.reloadData()
     }
     
-    public func update(
+    public func loadFirstPage(
+        table: UITableView,
+        with serverListResult: Result<ServerListJson<A>,Error>,
+        completion: @escaping ((Error?) -> Void) = {_ in }
+    ) {
+        reset(table: table)
+        load(table: table, with: serverListResult, completion: completion)
+    }
+    
+    public func loadNextPage(
+        table: UITableView,
+        with serverListResult: Result<ServerListJson<A>,Error>,
+        completion: @escaping ((Error?) -> Void) = {_ in }
+    ) {
+        precondition(count > 0)
+        load(table: table, with: serverListResult, completion: completion)
+    }
+    
+    private func load(
         table: UITableView,
         with serverListResult: Result<ServerListJson<A>,Error>,
         completion: @escaping ((Error?) -> Void) = {_ in }
@@ -53,4 +72,5 @@ public class ServerListPager<A> where A: Codable {
             completion(error)
         }
     }
+
 }

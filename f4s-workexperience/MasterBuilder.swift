@@ -10,6 +10,7 @@ import WorkfinderCompanyDetailsUseCase
 import WorkfinderUI
 import WorkfinderVersionCheck
 import UIKit
+import StoreKit
 
 class MasterBuilder: TabbarCoordinatorFactoryProtocol {
     
@@ -72,6 +73,16 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         return versionChecker
     }()
     
+    lazy var requestAppReviewLogic: RequestAppReviewLogic = {
+        RequestAppReviewLogic(
+            localStore: localStore,
+            currentAppVersion: appVersion,
+            requiredApplicationsSinceLastReview: 3
+        ) {
+            SKStoreReviewController.requestReview()
+        }
+    }()
+    
     lazy var networkConfiguration: NetworkConfig = {
         let sessionManager = F4SNetworkSessionManager(appVersion: appVersion)
         let endpoint = self.workfinderEndpoint
@@ -99,6 +110,7 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
             networkConfig: self.networkConfiguration,
             versionChecker: self.versionChecker,
             user: self.userRepo.loadCandidate(),
+            requestAppReviewLogic: requestAppReviewLogic,
             userRepository: self.userRepo,
             log: self.log
         )

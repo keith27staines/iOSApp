@@ -15,20 +15,22 @@ class SearchController: NSObject {
         case hidden
         case showingTypeAhead
         case showingFilters
-        case showingResults
+        case showingRoleResults
+        case showingPeopleResults
     }
-    var searchFieldShouldReturn: Bool { searchBar.text?.count ?? 0 > 2 ? true : false }
+    var searchFieldShouldReturn: Bool { searchBar.text?.count ?? 0 > 0 }
     
     var state = SearchState.hidden {
         didSet {
-            filtersButton.isHidden = true
             searchDetail.isHidden = false
             searchDetail.filtersView.isHidden = true
             searchDetail.searchResultsView.isHidden = true
             searchDetail.typeAheadView.isHidden = true
             switch state {
             case .hidden:
+                filtersButton.isHidden = true
                 searchDetail.isHidden = true
+                filtersButton.alpha = 0
             case .showingTypeAhead:
                 searchDetail.typeAheadView.isHidden = false
                 filtersButton.alpha = 1
@@ -37,17 +39,33 @@ class SearchController: NSObject {
                 filtersButton.alpha = 0
                 filtersButton.isHidden = false
                 searchDetail.filtersView.isHidden = false
-            case .showingResults:
+            case .showingRoleResults:
                 searchDetail.searchResultsView.isHidden = false
                 filtersButton.alpha = 0
+                filtersButton.isHidden = true
+            case .showingPeopleResults:
+                searchDetail.searchResultsView.isHidden = false
+                filtersButton.alpha = 1
                 filtersButton.isHidden = false
             }
 
             NotificationCenter.default.post(name: .wfHomeScreenSearchIsActive, object: self, userInfo: ["isSearchActive": !searchDetail.isHidden])
             
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-                self.searchBarStack.layoutIfNeeded()
+                switch self.state {
+                case .hidden:
+                    break
+                case .showingTypeAhead:
+                    break
+                case .showingFilters:
+                    break
+                case .showingRoleResults:
+                    self.filtersButton.isHidden = false
+                case .showingPeopleResults:
+                    self.filtersButton.isHidden = true
+                }
                 self.filtersButton.alpha = self.filtersButton.isHidden ? 0 : 1
+                self.searchBarStack.layoutIfNeeded()
             } completion: { (complete) in
                 switch self.state {
                 case .hidden:
@@ -57,9 +75,12 @@ class SearchController: NSObject {
                 case .showingFilters:
                     self.filtersButton.isHidden = false
                     self.searchDetail.filtersView.isHidden = false
-                case .showingResults:
+                case .showingRoleResults:
                     self.searchDetail.searchResultsView.isHidden = false
                     self.filtersButton.isHidden = false
+                case .showingPeopleResults:
+                    self.searchDetail.searchResultsView.isHidden = false
+                    self.filtersButton.isHidden = true
                 }
             }
         }
@@ -86,7 +107,7 @@ class SearchController: NSObject {
         switch state {
         case .showingFilters:
             applyFilters()
-        case .showingResults: state = .showingFilters
+        case .showingRoleResults: state = .showingFilters
         default: break
         }
     }
@@ -151,8 +172,19 @@ class SearchController: NSObject {
         addNotificationListeners()
     }
     
+    
     func addNotificationListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(popularOnWorkfinderTapListener), name: .wfHomeScreenPopularOnWorkfinderTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rolesTabWasSelected), name: .wfSearchResultsRoleTabSelected, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(peopleTabWasSelected), name: .wfSearchResultsPeopleTabSelected, object: nil)
+    }
+    @objc func rolesTabWasSelected() {
+        guard searchBar.window != nil else { return }
+        state = .showingRoleResults
+    }
+    @objc func peopleTabWasSelected() {
+        guard searchBar.window != nil else { return }
+        state = .showingPeopleResults
     }
     
     @objc func popularOnWorkfinderTapListener(notification: Notification) {
@@ -260,7 +292,7 @@ extension SearchController {
         case .failure(_), .none:
             searchResultsController.typeAheadJson = nil
         }
-        state = .showingResults
+        searchResultsController.selectTab(index: 0)
     }
     
     func performTypeAhead(string: String?) {

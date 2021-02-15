@@ -35,15 +35,14 @@ class ApplicationsPresenter {
         self.view = view
     }
     
-    func loadData(table: UITableView, completion: @escaping (Error?) -> Void) {
+    func loadFirstPage(table: UITableView, completion: @escaping (Error?) -> Void) {
         guard isCandidateSignedIn() else {
             completion(nil)
             return
         }
-        pager.isLoading = true
         service.fetchApplications { [weak self] result in
             guard let self = self else { return }
-            self.pager.update(table: table, with: result) { error in
+            self.pager.loadFirstPage(table: table, with: result) { error in
                 completion(error)
             }
         }
@@ -54,7 +53,7 @@ class ApplicationsPresenter {
         pager.isLoading = true
         service.fetchNextPage(urlString: nextPage) { [weak self] (result) in
             guard let self = self else { return }
-            self.pager.update(table: tableView, with: result)
+            self.pager.loadNextPage(table: tableView, with: result)
         }
     }
     

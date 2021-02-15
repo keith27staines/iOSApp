@@ -290,6 +290,7 @@ extension ApplyCoordinator {
         parentCoordinator?.childCoordinatorDidFinish(self)
         self.applyCoordinatorDelegate?.applicationDidFinish(preferredDestination: destination)
         self.removeApplicationSubmittedSuccessfully()
+        self.injected.requestAppReviewLogic.makeRequest()
     }
     
     func cancelApply() {
