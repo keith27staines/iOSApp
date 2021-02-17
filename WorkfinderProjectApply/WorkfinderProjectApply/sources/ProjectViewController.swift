@@ -16,13 +16,6 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     let log: F4SAnalyticsAndDebugging
     let appSource: AppSource
     
-    var lastError: Error? {
-        didSet {
-            let title = lastError == nil ? "APPLY NOW" : "PLEASE SIGN IN"
-            applyNowButton.setTitle(title, for: .normal)
-        }
-    }
-    
     lazy var banner: UIImageView = {
         let image = UIImage(named: "projectPageBanner")
         let imageView = UIImageView(image: image)
@@ -68,18 +61,16 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     override func viewDidLoad() {
         log.track(.project_page_view(appSource))
         configureViews()
-        lastError = nil
+        
         presenter.onViewDidLoad(view: self)
         loadData()
     }
     
     func loadData() {
         self.refreshFromPresenter()
-        self.lastError = nil
         messageHandler.showLoadingOverlay(self.view)
         presenter.loadData { [weak self] (optionalError) in
             guard let self = self, let errorHandler = self.coordinator?.errorHandler else { return }
-            self.lastError = optionalError
             errorHandler.startHandleError(
                 optionalError,
                 presentingViewController: self,
@@ -103,7 +94,8 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
             companyName: presenter.companyName ?? "",
             urlString: presenter.companyLogoUrl,
             completion: nil)
-        applyNowButton.isEnabled = presenter.status == "open"
+        applyNowButton.isEnabled = presenter.status == "open" && !presenter.hasApplied
+        applyNowButton.setTitle(presenter.applyButtonTitle, for: .normal)
         showClosedForApplicationMessageIfNecessary(status: presenter.status)
     }
     
@@ -124,7 +116,7 @@ class ProjectViewController: UIViewController, ProjectViewProtocol {
     }
     
     @objc func onTapApply() {
-        if lastError != nil {
+        if presenter.lastError != nil {
             loadData()
             return
         }

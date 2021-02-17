@@ -15,6 +15,8 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var isRemote: Bool?
     public var duration: String?
     public var startDate: String?
+    public var hasApplied: Bool?
+    public var dateApplied: String?
     
     public init() {}
     
@@ -34,5 +36,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
         case additionalComments = "additional_comments"
         case duration
         case startDate = "start_date"
+        case hasApplied = "has_applied"
+        case dateApplied = "date_applied"
     }
 }

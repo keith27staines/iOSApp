@@ -40,7 +40,7 @@ class OfferService: OfferServiceProtocol{
                     logoUrl: json.association?.location?.company?.logo,
                     reasonWithdrawn: nil,
                     offerNotes: json.offer_notes,
-                    isRemote: json.is_remote,
+                    isRemote: json.associated_project?.isRemote,
                     salary: json.salary)
                 completion(Result<Offer,Error>.success(offer))
             case .failure(let error):
@@ -51,7 +51,7 @@ class OfferService: OfferServiceProtocol{
     }
 
     func locationTextFromPlacement(from json: PlacementJson) -> String {
-        guard let isRemote = json.is_remote, isRemote == true else {
+        guard let isRemote = json.associated_project?.isRemote, isRemote == true else {
             return json.association?.location?.addressCity ?? ""
         }
         return "This is a remote project"

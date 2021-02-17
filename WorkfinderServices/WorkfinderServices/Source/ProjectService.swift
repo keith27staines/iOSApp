@@ -11,7 +11,7 @@ public class ProjectService: WorkfinderService, ProjectServiceProtocol {
     public func fetchProject(uuid: String, completion: @escaping (Result<ProjectJson, Error>) -> Void) {
         do {
             let request = try buildRequest(relativePath: "projects/\(uuid)", queryItems: nil, verb: .get)
-            performTask(with: request, completion: completion, attempting: #function)
+            performTask(with: request, verbose: true ,completion: completion, attempting: #function)
         } catch {
             completion(Result<ProjectJson,Error>.failure(error))
         }

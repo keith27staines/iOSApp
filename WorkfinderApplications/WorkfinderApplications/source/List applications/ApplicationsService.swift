@@ -60,7 +60,21 @@ struct PlacementJson: Codable {
     var end_date: String?
     var offered_duration: Int?
     var offer_notes: String?
-    var is_remote: Bool?
     var salary: String?
     var supporting_link: String?
+    var associated_project: AssociatedProject?
+}
+
+struct AssociatedProject: Codable {
+    var uuid: F4SUUID?
+    var employmentType: String?
+    var isPaid: Bool?
+    var isRemote: Bool?
+    
+    private enum CodingKeys: String, CodingKey {
+        case uuid
+        case employmentType = "employment_type"
+        case isPaid = "is_paid"
+        case isRemote = "is_remote"
+    }
 }

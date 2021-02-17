@@ -49,7 +49,7 @@ public class TrackingEventQueueProcessor {
         isolation.asyncAfter(deadline: .now() + interval) { [weak self] in
             guard let self = self, self.isSuspended == false else { return }
             guard let event = self.eventQueue.dequeue() else {
-                print("TEQ is empty at \(Date())")
+                // print("TEQ is empty at \(Date())")
                 self.pollUntilPaused()
                 return
             }

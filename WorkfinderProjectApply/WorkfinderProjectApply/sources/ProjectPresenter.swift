@@ -17,9 +17,15 @@ protocol ProjectPresenterProtocol {
     func presenterForIndexPath(_ indexPath: IndexPath) -> CellPresenterProtocol?
     func reuseIdentifierForIndexPath(_ indexPath: IndexPath) -> String?
     func isHiddenRow(indexPath: IndexPath) -> Bool
+    var hasApplied: Bool { get }
+    var dateApplied: String { get }
+    var applyButtonTitle: String { get }
+    var lastError: Error? { get }
 }
 
 class ProjectPresenter: ProjectPresenterProtocol {
+    
+    var lastError: Error?
     
     enum Section: Int, CaseIterable {
         case projectHeader
@@ -81,6 +87,11 @@ class ProjectPresenter: ProjectPresenterProtocol {
     var activities: [String] { project.candidateActivities ?? [] }
     
     var isOpenForApplication: Bool { project.status == "open" ? true : false }
+    var hasApplied: Bool { project.hasApplied ?? false }
+    var dateApplied: String { project.dateApplied ?? ""}
+    var applyButtonTitle: String {
+        hasApplied ? "Already applied" : "Apply"
+    }
     var status: String? { project.status }
     
     init(coordinator: ProjectApplyCoordinator,
@@ -94,16 +105,19 @@ class ProjectPresenter: ProjectPresenterProtocol {
     }
     
     func onViewDidLoad(view: ProjectViewProtocol) {
+        lastError = nil
         self.view = view
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
+        self.lastError = nil
         service.fetchProject(uuid: projectUuid) { (result) in
             switch result {
             case .success(let project):
                 self.project = project
                 completion(nil)
             case .failure(let error):
+                self.lastError = error
                 completion(error)
             }
         }
@@ -113,7 +127,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         guard
             let section = Section(rawValue: indexPath.section),
             !isHiddenRow(indexPath: indexPath)
-        else { return reuseIdentifierForCollapsedRow }
+            else { return reuseIdentifierForCollapsedRow }
 
         return section.reuseIdentifer
     }
