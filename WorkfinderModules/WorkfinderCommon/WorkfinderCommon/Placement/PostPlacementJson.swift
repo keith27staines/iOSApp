@@ -33,7 +33,7 @@ public struct PlacementAvailability: Codable {
     }
 }
 
-public struct Placement: Codable {
+public struct PostPlacementJson: Codable {
     public var uuid: F4SUUID?
     public var candidateUuid: F4SUUID?
     public var associationUuid: F4SUUID?

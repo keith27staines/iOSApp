@@ -42,7 +42,7 @@ struct Application : Codable {
         self.coverLetterString = coverLetterString
     }
 
-    init(json: PlacementJson) {
+    init(json: ApplicationJson) {
         self.placementUuid = json.uuid ?? "unknown uuid"
         self.companyUuid = json.association?.location?.company?.uuid
         self.hostUuid = json.association?.host?.uuid

@@ -187,7 +187,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         }
     }
     
-    func onApplicationSubmitted(placement: Placement) {
+    func onApplicationSubmitted(placement: PostPlacementJson) {
         guard let placementUuid = placement.uuid else { return }
         let coordinator = DocumentUploadCoordinator(
             parent: self,

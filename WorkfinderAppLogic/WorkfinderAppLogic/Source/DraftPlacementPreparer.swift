@@ -3,38 +3,38 @@ import WorkfinderCommon
 
 public class DraftPlacementPreparer {
     
-    public var draft: Placement
+    public var draft: PostPlacementJson
     
     public init() {
-        draft = Placement()
+        draft = PostPlacementJson()
     }
     
     @discardableResult
-    public func update(associationUuid: F4SUUID?) -> Placement {
+    public func update(associationUuid: F4SUUID?) -> PostPlacementJson {
         draft.associationUuid = associationUuid
         return draft
     }
     
     @discardableResult
-    public func update(associatedProject: F4SUUID?) -> Placement {
+    public func update(associatedProject: F4SUUID?) -> PostPlacementJson {
         draft.associatedProject = associatedProject
         return draft
     }
     
     @discardableResult
-    public func update(candidateUuid: F4SUUID?) -> Placement {
+    public func update(candidateUuid: F4SUUID?) -> PostPlacementJson {
         draft.candidateUuid = candidateUuid
         return draft
     }
     
     @discardableResult
-    public func update(coverletter: String) -> Placement {
+    public func update(coverletter: String) -> PostPlacementJson {
         draft.coverLetterString = coverletter
         return draft
     }
     
     @discardableResult
-    public func update(picklists: PicklistsDictionary) -> Placement {
+    public func update(picklists: PicklistsDictionary) -> PostPlacementJson {
         for type in PicklistType.allCases {
             let selectedItems = picklists[type]?.selectedItems
             let firstItem = selectedItems?.first

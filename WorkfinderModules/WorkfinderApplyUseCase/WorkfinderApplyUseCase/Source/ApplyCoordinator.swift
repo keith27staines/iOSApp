@@ -225,7 +225,7 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
 }
 
 public class ApplicationSubmitter {
-    private var draft: Placement
+    private var draft: PostPlacementJson
     private let applyService: PostPlacementServiceProtocol
     private weak var navigationController: UINavigationController?
     private var onSuccess: (F4SUUID) -> Void
@@ -234,7 +234,7 @@ public class ApplicationSubmitter {
     
     init(
         applyService: PostPlacementServiceProtocol,
-        draft: Placement,
+        draft: PostPlacementJson,
         navigationController: UINavigationController,
         messageHandler: UserMessageHandler,
         onSuccess: @escaping (F4SUUID) -> Void,

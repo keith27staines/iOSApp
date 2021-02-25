@@ -20,7 +20,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         
     }
 
-    private func performNetworkRequest(completion: @escaping (Result<ServerListJson<PlacementJson>,Error>) -> Void) {
+    private func performNetworkRequest(completion: @escaping (Result<ServerListJson<ApplicationJson>,Error>) -> Void) {
         do {
             let relativePath = "placements/"
             let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
@@ -34,7 +34,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         }
     }
     
-    private func buildApplicationsResult(networkResult: Result<ServerListJson<PlacementJson>,Error>)
+    private func buildApplicationsResult(networkResult: Result<ServerListJson<ApplicationJson>,Error>)
         -> Result<ServerListJson<Application>, Error> {
             switch networkResult {
             case .success(let serverList):
@@ -78,3 +78,19 @@ struct AssociatedProject: Codable {
         case isRemote = "is_remote"
     }
 }
+
+struct ApplicationJson: Codable {
+    var uuid: F4SUUID?
+    var status: String?
+    var created_at: String?
+    var cover_letter: String?
+    var association: ExpandedAssociation?
+    var start_date: String?
+    var end_date: String?
+    var offered_duration: Int?
+    var offer_notes: String?
+    var salary: String?
+    var supporting_link: String?
+    var associated_project: F4SUUID?
+}
+

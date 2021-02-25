@@ -20,7 +20,7 @@ class ApplicationDetailService: WorkfinderService, PlacementDetailServiceProtoco
         }
     }
     
-    func performNetworkRequest(placementUuid: F4SUUID, completion: @escaping (Result<PlacementJson, Error>) -> Void) {
+    func performNetworkRequest(placementUuid: F4SUUID, completion: @escaping (Result<ApplicationJson, Error>) -> Void) {
         let relativePath = "placements/\(placementUuid)"
         let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
         do {
@@ -29,7 +29,7 @@ class ApplicationDetailService: WorkfinderService, PlacementDetailServiceProtoco
                         completion: completion,
                         attempting: #function)
         } catch {
-            completion(Result<PlacementJson,Error>.failure(error))
+            completion(Result<ApplicationJson,Error>.failure(error))
         }
     }
 }
