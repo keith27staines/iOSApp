@@ -1,4 +1,5 @@
 
+
 public struct ProjectJson: Codable, Equatable, Hashable {
     public var uuid: F4SUUID?
     public var name: String?
@@ -17,6 +18,8 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var startDate: String?
     public var hasApplied: Bool?
     public var dateApplied: String?
+    public var salary: Double?
+    public var employmentType: String?
     
     public init() {}
     
@@ -38,5 +41,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
         case startDate = "start_date"
         case hasApplied = "has_applied"
         case dateApplied = "date_applied"
+        case employmentType = "employment_type"
+        case salary
     }
 }

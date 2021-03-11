@@ -183,8 +183,17 @@ class ProjectPresenter: ProjectPresenterProtocol {
                 title: "Location",
                 text: locationString)
             case 1:
-                let isPaid = project.isPaid ?? false
-                let text = isPaid ? "This is a paid work placement at £6.45-8.21 p/h depending on age" : "This is a voluntary project."
+                let text: String
+                if let salary = project.salary {
+                    text = "This is a paid work placement at \(String(format: "£%.02f p/h", salary))"
+                } else {
+                    let isPaid = project.isPaid ?? false
+                    if isPaid {
+                        text = "This is a work placement paid dependent upon experience"
+                    } else {
+                        text = "This is a voluntary project"
+                    }
+                }
                 return ProjectBulletPointsPresenter(
                     title: "Salary",
                     text: text)

@@ -83,11 +83,11 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
 fileprivate class FetchRolesResultWorkerService: WorkfinderService {
     
     func fetchRoles(endpoint: String, queryItems: [URLQueryItem]?, completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void) {
-        let innerResultHandler: ((Result<ServerListJson<RoleJson>, Error>) -> Void) = { result in
+        let innerResultHandler: ((Result<ServerListJson<ProjectJson>, Error>) -> Void) = { result in
             switch result {
             case .success(let json):
-                let roleDataArray = json.results.map { (role) -> RoleData in
-                    RoleData(role: role)
+                let roleDataArray = json.results.map { (projectJson) -> RoleData in
+                    RoleData(project: projectJson)
                 }
                 let returnResult = ServerListJson<RoleData>(
                     count: json.count,
@@ -113,11 +113,11 @@ fileprivate class FetchRolesResultWorkerService: WorkfinderService {
 fileprivate class FetchRolesWorkerService: WorkfinderService {
 
     func fetchRoles(endpoint: String, queryItems: [URLQueryItem]?, completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        let innerResultHandler: ((Result<ServerListJson<RoleJson>, Error>) -> Void) = { result in
+        let innerResultHandler: ((Result<ServerListJson<ProjectJson>, Error>) -> Void) = { result in
             switch result {
             case .success(let json):
-                let roleDataArray = json.results.map { (role) -> RoleData in
-                    RoleData(role: role)
+                let roleDataArray = json.results.map { (projectJson) -> RoleData in
+                    RoleData(project: projectJson)
                 }
                 completion(.success(roleDataArray))
             case .failure(let error):
@@ -131,21 +131,5 @@ fileprivate class FetchRolesWorkerService: WorkfinderService {
         } catch {
             completion(.failure(error))
         }
-    }
-}
-
-fileprivate extension RoleData {
-    init(role: RoleJson) {
-        id = role.uuid
-        projectTitle = role.name
-        let company = role.association.location?.company
-        companyName = company?.name
-        companyLogoUrlString = company?.logo
-        locationHeader = "Location"
-        location = role.is_remote == true ? "Remote" : ""
-        paidHeader = "Paid (ph)"
-        paidAmount = role.is_paid == true ? "£6 - 8.21" : "Voluntary"
-        actionButtonText = "Learn more"
-        workingHours = role.employment_type
     }
 }

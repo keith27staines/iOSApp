@@ -98,7 +98,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         super.start()
         log.track(.passive_apply_start(appSource))
         log.track(.placement_funnel_start(appSource))
-        startDateOfBirthIfNecessary()
+        startCoverLetterCoordinator(candidateAge: 18)
+        //startDateOfBirthIfNecessary()
     }
 
     func startDateOfBirthIfNecessary() {
