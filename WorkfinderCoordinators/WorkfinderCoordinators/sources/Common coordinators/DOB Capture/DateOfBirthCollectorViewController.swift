@@ -13,7 +13,7 @@ public class DateOfBirthCollectorViewController: UIViewController {
     weak var coordinator: DateOfBirthCoordinatorProtocol?
     let minimumAge = 13
     
-    var under13Text: String { "Thank you for using Workfinder. Unfortunately we can only accept candidates who are over \(minimumAge) years old"}
+    var underageText: String { "Thank you for using Workfinder. Unfortunately we can only accept candidates who are over \(minimumAge) years old"}
     
     lazy var screenIcon: UIImageView = {
         let image = UIImage(named: "dob")
@@ -41,7 +41,7 @@ public class DateOfBirthCollectorViewController: UIViewController {
             if !isOldEnough {
                 let alert = UIAlertController(
                     title: "Under \(minimumAge)",
-                    message: under13Text,
+                    message: underageText,
                     preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
@@ -82,10 +82,10 @@ public class DateOfBirthCollectorViewController: UIViewController {
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
-        if isMovingFromParent {
-            log?.track(.date_of_birth_capture_cancel)
-            coordinator?.onDidCancel()
-        }
+//        if isMovingFromParent {
+//            log?.track(.date_of_birth_capture_cancel)
+//            coordinator?.onDidCancel()
+//        }
     }
     
     lazy var dateFieldStack: UnderlinedNextResponderTextFieldStack = {

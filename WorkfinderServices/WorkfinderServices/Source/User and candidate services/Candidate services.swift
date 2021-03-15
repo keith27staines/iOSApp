@@ -49,7 +49,7 @@ public class UpdateCandidateService: WorkfinderService, UpdateCandidateServicePr
         }
         let dob = DOB(date_of_birth: dobString)
         do {
-            let relativePath = "candidates/\(candidateUuid)"
+            let relativePath = "candidates/\(candidateUuid)/"
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: dob)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {

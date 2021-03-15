@@ -139,9 +139,23 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onCoverLetterDidComplete() {
         switch UserRepository().isCandidateLoggedIn {
-        case true: submitApplication()
+        case true: captureDOBIfNecessary()
         case false: startLogin()
         }
+    }
+    
+    func captureDOBIfNecessary() {
+        let updateCandidateService = UpdateCandidateService(networkConfig: injected.networkConfig)
+        let dobCoordinator = DOBCaptureCoordinator(
+            parent: self,
+            navigationRouter: newNavigationRouter,
+            inject: injected,
+            updateCandidateService: updateCandidateService
+        ) { [weak self] in
+            self?.submitApplication()
+        }
+        addChildCoordinator(dobCoordinator)
+        dobCoordinator.start()
     }
     
     func startLogin() {
@@ -246,7 +260,7 @@ extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
 
 extension ProjectApplyCoordinator: RegisterAndSignInCoordinatorParent {
     public func onCandidateIsSignedIn() {
-        submitApplication()
+        captureDOBIfNecessary()
     }
     
     public func onRegisterAndSignInCancelled() {
