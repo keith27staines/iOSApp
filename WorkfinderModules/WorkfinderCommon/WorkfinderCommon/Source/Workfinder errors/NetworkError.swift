@@ -19,6 +19,7 @@ public enum WorkfinderErrorType {
     case http(request:URLRequest?, response:HTTPURLResponse?, data: Data?)
     case networkConnectivity
     case operationCancelled
+    case badParameters
     case custom(title: String, description: String)
 
     public var code: Int {
@@ -33,6 +34,7 @@ public enum WorkfinderErrorType {
         case .noData: return 1004
         case .networkConnectivity: return 1005
         case .operationCancelled: return 1006
+        case .badParameters: return 1007
         case .custom(_,_): return unexpectedErrorCode - 1
         }
     }
@@ -53,6 +55,7 @@ public enum WorkfinderErrorType {
             }
         case .networkConnectivity: return "Cannot contact server" + code
         case .operationCancelled: return "Operation cancelled"
+        case .badParameters: return "Bad parameters"
         case .custom(let title,_): return title
         }
     }
@@ -67,6 +70,7 @@ public enum WorkfinderErrorType {
         case .http(request: _, response: _, data: _): return true
         case .networkConnectivity: return false
         case .operationCancelled: return false
+        case .badParameters: return true
         case .custom(title: _, description: _): return true
         }
     }
@@ -94,6 +98,7 @@ public enum WorkfinderErrorType {
             }
         case .networkConnectivity: return "Please make sure you have a good internet connection"
         case .operationCancelled: return "The operation was cancelled"
+        case .badParameters: return "One or more of the parameters sent to an api was invalid"
         case .custom(_,let description): return description
         }
     }

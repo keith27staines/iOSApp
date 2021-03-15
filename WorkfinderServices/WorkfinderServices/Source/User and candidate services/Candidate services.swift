@@ -10,7 +10,7 @@ public protocol FetchCandidateServiceProtocol {
 }
 
 public protocol UpdateCandidateServiceProtocol {
-    func update(candidate: Candidate, completion: @escaping ((Result<Candidate, Error>) -> Void))
+    func updateDOB(candidateUuid: F4SUUID, dobString: String, completion: @escaping ((Result<Candidate, Error>) -> Void))
 }
 
 public class CreateCandidateService: WorkfinderService, CreateCandidateServiceProtocol {
@@ -43,10 +43,14 @@ public class FetchCandidateService: WorkfinderService, FetchCandidateServiceProt
 
 public class UpdateCandidateService: WorkfinderService, UpdateCandidateServiceProtocol {
     
-    public func update(candidate: Candidate, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
+    public func updateDOB(candidateUuid: F4SUUID, dobString: String, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
+        struct DOB: Codable {
+            var date_of_birth: String
+        }
+        let dob = DOB(date_of_birth: dobString)
         do {
-            let relativePath = "candidates/"
-            let request = try buildRequest(relativePath: relativePath, verb: .patch, body: candidate)
+            let relativePath = "candidates/\(candidateUuid)"
+            let request = try buildRequest(relativePath: relativePath, verb: .patch, body: dob)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
             completion(Result<Candidate,Error>.failure(error))

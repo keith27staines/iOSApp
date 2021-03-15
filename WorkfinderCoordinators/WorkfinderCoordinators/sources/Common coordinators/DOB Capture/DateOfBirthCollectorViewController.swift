@@ -3,16 +3,17 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol DateOfBirthCoordinatorProtocol: class {
+public protocol DateOfBirthCoordinatorProtocol: class {
     func onDidCancel()
     func onDidSelectDataOfBirth(date: Date)
 }
 
-class DateOfBirthCollectorViewController: UIViewController {
+public class DateOfBirthCollectorViewController: UIViewController {
     
     weak var coordinator: DateOfBirthCoordinatorProtocol?
+    let minimumAge = 13
     
-    let under13Text = "Thank you for using Workfinder. Unfortunately we can only accept candidates who are over 13 years old."
+    var under13Text: String { "Thank you for using Workfinder. Unfortunately we can only accept candidates who are over \(minimumAge) years old"}
     
     lazy var screenIcon: UIImageView = {
         let image = UIImage(named: "dob")
@@ -22,7 +23,6 @@ class DateOfBirthCollectorViewController: UIViewController {
         return view
     }()
     
-    let minimumAge = 13
     var dateOfBirth: Date? {
         didSet {
             
@@ -64,7 +64,7 @@ class DateOfBirthCollectorViewController: UIViewController {
         return Calendar.current.dateComponents([.year], from: dob, to: now).year!
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureViews()
@@ -76,12 +76,12 @@ class DateOfBirthCollectorViewController: UIViewController {
         dateFieldStack.state = .bad
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         log?.track(.date_of_birth_capture_start)
         super.viewDidAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
             log?.track(.date_of_birth_capture_cancel)
             coordinator?.onDidCancel()
@@ -116,7 +116,7 @@ class DateOfBirthCollectorViewController: UIViewController {
     lazy var headingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.text = NSLocalizedString("Please set your date of birth", comment: "")
+        label.text = NSLocalizedString("Please enter your date of birth", comment: "")
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -174,8 +174,7 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     func configureNavigationBar() {
         title = "Date of Birth"
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backButton
+        navigationItem.hidesBackButton = true
     }
     
     func configureViews() {
@@ -216,13 +215,13 @@ class DateOfBirthCollectorViewController: UIViewController {
     
     weak var log: F4SAnalyticsAndDebugging?
     
-    init(coordinator: DateOfBirthCoordinatorProtocol, log: F4SAnalyticsAndDebugging) {
+    public init(coordinator: DateOfBirthCoordinatorProtocol, log: F4SAnalyticsAndDebugging) {
         self.coordinator = coordinator
         self.log = log
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
