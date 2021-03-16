@@ -124,7 +124,7 @@ public class DateOfBirthCollectorViewController: UIViewController {
     
     lazy var reasonLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("We tailor your application process\ndepending on your age", comment: "")
+        label.text = NSLocalizedString("Thank you for indicating your interest in this role, just before we send off your application, we can see that our records don’t yet contain your date of birth, which is required for us to process your application for this employer.  Please let us know and we’ll store this in your records, which you will have access to via your account preferences, at any time.", comment: "")
         label.numberOfLines = 0
         label.font = WorkfinderFonts.body2
         label.textAlignment = .center
@@ -196,8 +196,8 @@ public class DateOfBirthCollectorViewController: UIViewController {
         screenIcon.topAnchor.constraint(equalTo: guide.topAnchor, constant: 34).isActive = true
         headingLabel.topAnchor.constraint(equalTo: screenIcon.bottomAnchor, constant: 45).isActive = true
         reasonLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10).isActive = true
-        dateFieldStack.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 60).isActive = true
-        nextButton.topAnchor.constraint(equalTo: dateFieldStack.bottomAnchor, constant: 41).isActive = true
+        dateFieldStack.topAnchor.constraint(equalTo: reasonLabel.bottomAnchor, constant: 10).isActive = true
+        nextButton.topAnchor.constraint(equalTo: dateFieldStack.bottomAnchor, constant: 20).isActive = true
         
         screenIcon.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
         headingLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true

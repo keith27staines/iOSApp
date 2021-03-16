@@ -60,7 +60,7 @@ public class DOBCaptureCoordinator: CoreInjectionNavigationCoordinator, DateOfBi
             switch result {
             case .success(let updatedCandidate):
                 self.candidate = updatedCandidate
-                self.navigationRouter.pop(animated: true)
+                //self.navigationRouter.pop(animated: true)
                 self.parentCoordinator?.childCoordinatorDidFinish(self)
             case .failure(_):
                 self.navigationRouter.pop(animated: true)
