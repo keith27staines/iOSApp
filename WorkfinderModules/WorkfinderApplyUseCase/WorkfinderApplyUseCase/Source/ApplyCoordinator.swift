@@ -98,22 +98,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         super.start()
         log.track(.passive_apply_start(appSource))
         log.track(.placement_funnel_start(appSource))
-        startDateOfBirthIfNecessary()
-    }
-
-    func startDateOfBirthIfNecessary() {
-        guard let dateOfBirthString = userRepository.loadCandidate().dateOfBirth,
-            let dob = Date.workfinderDateStringToDate(dateOfBirthString)
-            else {
-            let vc = DateOfBirthCollectorViewController(
-                coordinator: self,
-                log: injected.log
-            )
-            navigationRouter.push(viewController: vc, animated: true)
-            didCaptureDOB = true
-            return
-        }
-        onDidSelectDataOfBirth(date: dob)
+        startCoverLetterCoordinator(candidateAge: 18)
     }
     
     func startCoverLetterCoordinator(candidateAge: Int) {
@@ -134,16 +119,6 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coverletterCoordinator?.start()
     }
     
-    func startSigninCoordinatorIfNecessary() {
-        guard isUserRegistrationWorkflowRequired
-            else {
-            onCandidateIsSignedIn()
-            return
-        }
-        let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: true)
-        addChildCoordinator(coordinator)
-        coordinator.start()
-    }
     public func coverLetterDidCancel() {
         switch didCaptureDOB {
         case true: break
@@ -157,6 +132,31 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         self.draftPlacementLogic.update(coverletter: coverLetterText)
         self.draftPlacementLogic.update(picklists: picklistsDictionary)
         self.startSigninCoordinatorIfNecessary()
+    }
+    
+    func startSigninCoordinatorIfNecessary() {
+        guard isUserRegistrationWorkflowRequired
+            else {
+            onCandidateIsSignedIn()
+            return
+        }
+        let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: true)
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func captureDOBIfNecessary() {
+        let updateCandidateService = UpdateCandidateService(networkConfig: injected.networkConfig)
+        let dobCoordinator = DOBCaptureCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            updateCandidateService: updateCandidateService
+        ) { [weak self] in
+            self?.submitApplication()
+        }
+        addChildCoordinator(dobCoordinator)
+        dobCoordinator.start()
     }
     
     func submitApplication() {
@@ -220,7 +220,7 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
     public func onCandidateIsSignedIn() {
         let uuid = userRepository.loadCandidate().uuid!
         draftPlacementLogic.update(candidateUuid: uuid)
-        submitApplication()
+        captureDOBIfNecessary()
     }
 }
 
@@ -304,22 +304,4 @@ extension ApplyCoordinator {
         childCoordinators = [:]
     }
 
-}
-
-extension ApplyCoordinator: DateOfBirthCoordinatorProtocol {
-    
-    func onDidCancel() { cancelApply() }
-    
-    func onDidSelectDataOfBirth(date: Date) {
-        var candidate = userRepository.loadCandidate()
-        candidate.dateOfBirth = date.workfinderDateString
-        userRepository.saveCandidate(candidate)
-        if candidate.uuid != nil {
-            // persist the candidate's dob to the server
-            updateCandidateService.update(candidate: candidate) { (result) in
-        
-            }
-        }
-        startCoverLetterCoordinator(candidateAge: candidate.age() ?? 0)
-    }
 }

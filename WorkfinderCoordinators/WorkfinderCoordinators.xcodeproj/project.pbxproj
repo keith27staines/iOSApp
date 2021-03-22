@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		531E2F02260361BC00BFAC08 /* AddressCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E2F01260361BC00BFAC08 /* AddressCaptureCoordinator.swift */; };
+		531E2F08260361D300BFAC08 /* AddressCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E2F07260361D300BFAC08 /* AddressCaptureViewController.swift */; };
+		531E2F0C2603647700BFAC08 /* UKAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E2F0B2603647700BFAC08 /* UKAddress.swift */; };
+		531E2F10260366B700BFAC08 /* ValidatePostcodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E2F0F260366B700BFAC08 /* ValidatePostcodeService.swift */; };
+		53CC322D25FF79D800970E43 /* DOBCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CC322C25FF79D800970E43 /* DOBCaptureCoordinator.swift */; };
+		53CC323625FF7B4700970E43 /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CC323525FF7B4700970E43 /* DateOfBirthCollectorViewController.swift */; };
 		FC93DBA5231F888C00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */; };
 		FC93DBAA231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBA9231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift */; };
 		FC93DBAC231F888C00F1CE23 /* WorkfinderCoordinators.h in Headers */ = {isa = PBXBuildFile; fileRef = FC93DB9E231F888C00F1CE23 /* WorkfinderCoordinators.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,6 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		531E2F01260361BC00BFAC08 /* AddressCaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCaptureCoordinator.swift; sourceTree = "<group>"; };
+		531E2F07260361D300BFAC08 /* AddressCaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCaptureViewController.swift; sourceTree = "<group>"; };
+		531E2F0B2603647700BFAC08 /* UKAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UKAddress.swift; sourceTree = "<group>"; };
+		531E2F0F260366B700BFAC08 /* ValidatePostcodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePostcodeService.swift; sourceTree = "<group>"; };
+		53CC322C25FF79D800970E43 /* DOBCaptureCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOBCaptureCoordinator.swift; sourceTree = "<group>"; };
+		53CC323525FF7B4700970E43 /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
 		FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC93DB9E231F888C00F1CE23 /* WorkfinderCoordinators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCoordinators.h; sourceTree = "<group>"; };
 		FC93DB9F231F888C00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +78,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		531E2F002603619600BFAC08 /* Address Capture */ = {
+			isa = PBXGroup;
+			children = (
+				531E2F01260361BC00BFAC08 /* AddressCaptureCoordinator.swift */,
+				531E2F07260361D300BFAC08 /* AddressCaptureViewController.swift */,
+				531E2F0B2603647700BFAC08 /* UKAddress.swift */,
+				531E2F0F260366B700BFAC08 /* ValidatePostcodeService.swift */,
+			);
+			path = "Address Capture";
+			sourceTree = "<group>";
+		};
+		53CC322B25FF798900970E43 /* Common coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				531E2F002603619600BFAC08 /* Address Capture */,
+				53CC323225FF7B3400970E43 /* DOB Capture */,
+			);
+			path = "Common coordinators";
+			sourceTree = "<group>";
+		};
+		53CC323225FF7B3400970E43 /* DOB Capture */ = {
+			isa = PBXGroup;
+			children = (
+				53CC322C25FF79D800970E43 /* DOBCaptureCoordinator.swift */,
+				53CC323525FF7B4700970E43 /* DateOfBirthCollectorViewController.swift */,
+			);
+			path = "DOB Capture";
+			sourceTree = "<group>";
+		};
 		FC93DB91231F888C00F1CE23 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +168,7 @@
 		FC93DBD4231F8DBC00F1CE23 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				53CC322B25FF798900970E43 /* Common coordinators */,
 				FC93DBD3231F8DA300F1CE23 /* Coordinating */,
 				FC93DBD8231F94B600F1CE23 /* Injection.swift */,
 			);
@@ -242,9 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531E2F0C2603647700BFAC08 /* UKAddress.swift in Sources */,
+				531E2F08260361D300BFAC08 /* AddressCaptureViewController.swift in Sources */,
 				FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */,
+				53CC323625FF7B4700970E43 /* DateOfBirthCollectorViewController.swift in Sources */,
+				531E2F02260361BC00BFAC08 /* AddressCaptureCoordinator.swift in Sources */,
+				531E2F10260366B700BFAC08 /* ValidatePostcodeService.swift in Sources */,
 				FC93DBC4231F8C7F00F1CE23 /* NavigationCoordinator.swift in Sources */,
 				FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */,
+				53CC322D25FF79D800970E43 /* DOBCaptureCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

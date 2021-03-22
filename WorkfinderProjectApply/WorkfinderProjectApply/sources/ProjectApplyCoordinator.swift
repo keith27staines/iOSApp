@@ -139,9 +139,47 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onCoverLetterDidComplete() {
         switch UserRepository().isCandidateLoggedIn {
-        case true: submitApplication()
+        case true: capturePostcodeIfNecessary()
         case false: startLogin()
         }
+    }
+    
+    func capturePostcodeIfNecessary() {
+        guard
+            UserRepository().loadCandidate().postcode == nil,
+            projectPresenter?.project.isCandidateLocationRequired == true else {
+            onPostcodeCaptureComplete()
+            return
+        }
+        
+        let coordinator = AddressCaptureCoordinator(
+            parent: self,
+            navigationRouter: newNavigationRouter,
+            inject: injected,
+            hidesBackButton: true
+        ) { [weak self] in
+            self?.onPostcodeCaptureComplete()
+        }
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func onPostcodeCaptureComplete() {
+        captureDOBIfNecessary()
+    }
+    
+    func captureDOBIfNecessary() {
+        let updateCandidateService = UpdateCandidateService(networkConfig: injected.networkConfig)
+        let dobCoordinator = DOBCaptureCoordinator(
+            parent: self,
+            navigationRouter: newNavigationRouter,
+            inject: injected,
+            updateCandidateService: updateCandidateService
+        ) { [weak self] in
+            self?.submitApplication()
+        }
+        addChildCoordinator(dobCoordinator)
+        dobCoordinator.start()
     }
     
     func startLogin() {
@@ -246,7 +284,7 @@ extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
 
 extension ProjectApplyCoordinator: RegisterAndSignInCoordinatorParent {
     public func onCandidateIsSignedIn() {
-        submitApplication()
+        capturePostcodeIfNecessary()
     }
     
     public func onRegisterAndSignInCancelled() {

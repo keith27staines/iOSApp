@@ -32,6 +32,7 @@ public struct RecommendationsListItem: Codable, Hashable {
         public var additionalComments: String?
         public var association: RoleNestedAssociation?
         public var employmentType: String?
+        public var salary: Double?
         
         enum CodingKeys: String, CodingKey {
             case uuid
@@ -45,6 +46,7 @@ public struct RecommendationsListItem: Codable, Hashable {
             case additionalComments = "additional_comments"
             case association
             case employmentType = "employment_type"
+            case salary
         }
         
         public struct Activity: Codable, Equatable, Hashable {

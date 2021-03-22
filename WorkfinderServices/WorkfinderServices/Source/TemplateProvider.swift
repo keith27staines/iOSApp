@@ -32,37 +32,30 @@ public class TemplateProvider: WorkfinderService, TemplateProviderProtocol {
     func processResult(_ result: Result<TemplateListJson,Error>) -> Void {
         switch result {
         case .success(let templateList):
-            let firstMatch = templateList.results.filter { (model) -> Bool in
-                if isProject {
-                    return model.isProject == true
-                } else {
-                    return model.isProject == false || model.isProject == nil
+            
+            if isProject {
+                guard let firstMatch = templateList.results.filter({ (model) -> Bool in
+                    model.isProject == true && model.minimumAge == 18
+                }).first else {
+                    completion?(.success([]))
+                    return
                 }
-            }.filter { (model) -> Bool in
-                guard let modelMinimumAge = model.minimumAge else { return false }
-                return modelMinimumAge <= candidateAge
-            }.sorted {
-                $0.minimumAge ?? 0 > $1.minimumAge ?? 0
-            }.first
-            if let match = firstMatch {
-                completion?(Result<[TemplateModel],Error>.success([match]))
+                completion?(Result.success([firstMatch]))
+                return
+                
             } else {
-                completion?(Result<[TemplateModel],Error>.success([]))
+                guard let firstMatch = templateList.results.filter({ (model) -> Bool in
+                    (model.isProject == false || model.isProject == nil) && model.minimumAge == 13
+                }).first else {
+                    completion?(.success([]))
+                    return
+                }
+                completion?(Result.success([firstMatch]))
             }
+
         case .failure(let error):
             completion?(Result<[TemplateModel],Error>.failure(error))
         }
     }
-    
-//    func buildFetchCoverLetterRequest() throws -> URLRequest {
-//        let minimumAgeString = candidateAge < 18 ? "13" : "18"
-//        return try buildRequest(
-//            relativePath: "coverletters/",
-//            queryItems: [
-//                URLQueryItem(name: "minimum_age__exact", value: minimumAgeString),
-//                URLQueryItem(name: "is_project", value: isProjectString)
-//            ],
-//            verb: .get)
-//    }
 }
 

@@ -45,7 +45,6 @@
 		FC426F04232FAEA9004F8A3E /* WorkfinderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */; };
 		FC426F08232FAFF0004F8A3E /* WorkfinderNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */; };
 		FC473E8D2451CCF1004CEA17 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC473E8C2451CCF1004CEA17 /* TemplateModel.swift */; };
-		FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */; };
 		FC5019652306A24500A26B53 /* F4SDayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5019642306A24500A26B53 /* F4SDayOfWeek.swift */; };
 		FC5CBA6A231D3E4700C2D3C5 /* F4SDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */; };
 		FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC69EBA82481371C00901A2B /* GlobalNotifications.swift */; };
@@ -184,7 +183,6 @@
 		FC426F03232FAEA9004F8A3E /* WorkfinderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderEndpoint.swift; sourceTree = "<group>"; };
 		FC426F07232FAFF0004F8A3E /* WorkfinderNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderNetworking.swift; sourceTree = "<group>"; };
 		FC473E8C2451CCF1004CEA17 /* TemplateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
-		FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SRoleJson.swift; sourceTree = "<group>"; };
 		FC5019642306A24500A26B53 /* F4SDayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDayOfWeek.swift; sourceTree = "<group>"; };
 		FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDateHelper.swift; sourceTree = "<group>"; };
 		FC69EBA82481371C00901A2B /* GlobalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNotifications.swift; sourceTree = "<group>"; };
@@ -516,7 +514,6 @@
 				FCE8DAA72320E80B00934E2F /* ScaledNumber.swift */,
 				FC5CBA69231D3E4700C2D3C5 /* F4SDateHelper.swift */,
 				FC083F7A230FF01000641F17 /* F4SDocument.swift */,
-				FC4EE713230EBC8100B40F6B /* F4SRoleJson.swift */,
 				FC0E5CFA224E1B5700615B4F /* LocalStore.swift */,
 				FCE5193C22494CEC00B550C9 /* F4SJsonValue.swift */,
 				FCE519312249483D00B550C9 /* F4SCalendar structs */,
@@ -791,7 +788,6 @@
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,
 				FC8F9583233BB5580027BE02 /* FactoriesProtocols.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
-				FC4EE714230EBC8100B40F6B /* F4SRoleJson.swift in Sources */,
 				FC473E8D2451CCF1004CEA17 /* TemplateModel.swift in Sources */,
 				FCA91E88223404AF007ED308 /* WorkfinderCommon.swift in Sources */,
 				FCE51939224948E400B550C9 /* WorkAvailabilityWindow.swift in Sources */,

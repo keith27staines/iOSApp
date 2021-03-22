@@ -9,12 +9,20 @@ public struct RoleData: Codable {
     public var companyName: String?
     public var companyLogoUrlString: String?
     public var paidHeader: String?
-    public var paidAmount: String?
+   
     public var workingHours: String?
     public var locationHeader: String?
     public var location: String?
     public var actionButtonText: String?
     public var appSource: AppSource = .unspecified
+    public var isPaid: Bool?
+    public var salary: Double?
+    
+    public var paidAmount: String {
+        guard let isPaid = isPaid, isPaid == true else { return "Voluntary"}
+        guard let salary = salary else { return "Paid" }
+        return String(format: "£%.02f p/h", salary)
+    }
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -24,7 +32,6 @@ public struct RoleData: Codable {
         case companyName
         case companyLogoUrlString
         case paidHeader
-        case paidAmount
         case workingHours
         case locationHeader
         case location
@@ -41,15 +48,34 @@ public extension RoleData {
     init(recommendation: RecommendationsListItem) {
         let project = recommendation.project
         id = project?.uuid
-        recommendationUuid = recommendation.uuid
         projectTitle = project?.name
         companyName = project?.association?.location?.company?.name
         companyLogoUrlString = project?.association?.location?.company?.logo
-        paidHeader = "Paid (ph)"
-        paidAmount = project?.isPaid == true ? "£6 - 8.21" : "Voluntary"
+        paidHeader = "Paid?"
+        salary = project?.salary
+        isPaid = project?.isPaid
         locationHeader = "Location"
         location = project?.isRemote == false ?  "On site" : "Remote"
         workingHours = project?.employmentType 
         actionButtonText = "Apply now"
+        recommendationUuid = recommendation.uuid
+
+    }
+    
+    init(project: ProjectJson) {
+        id = project.uuid
+        projectTitle = project.name
+        companyName = project.association?.location?.company?.name
+        companyLogoUrlString = project.association?.location?.company?.logo
+        paidHeader = "Paid?"
+        salary = project.salary
+        isPaid = project.isPaid
+        locationHeader = "Location"
+        location = project.isRemote == false ?  "On site" : "Remote"
+        workingHours = project.employmentType
+        actionButtonText = "Apply now"
     }
 }
+
+
+

@@ -97,14 +97,7 @@ class DiscoveryTrayController: NSObject {
     }
     
     @objc func handleCandidateSignedIn() {
-        guard tableView.numberOfSections > 1, sectionManager.isSignedIn, let recommendationsSectionIndex = sectionManager.sectionIndexForSection(.recommendations)
-        else { return }
-        let indexSet = IndexSet([recommendationsSectionIndex])
-        tableView.performBatchUpdates({
-            tableView.insertSections(indexSet, with: .none)
-        }) { (update) in
-            self.layoutTable()
-        }
+        tableView.reloadData()
     }
     
     @objc func searchEditingDidStart() {

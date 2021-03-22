@@ -7,7 +7,7 @@ fileprivate let primaryButtonCornerRadius = CGFloat(8)
 
 public class WorkfinderPrimaryButton: UIButton {
     
-    init() {
+    public init() {
         super.init(frame: CGRect.zero)
         layer.cornerRadius = primaryButtonCornerRadius
         layer.masksToBounds = true
