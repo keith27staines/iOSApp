@@ -7,17 +7,6 @@ class DecodeRoleJsonTests: XCTestCase {
     let roleJsonData = roleJsonString.data(using: .utf8)!
     let roleNestedAssociationData = roleNestedAssociationString.data(using: .utf8)!
     
-    func test_decodeRoleJson() {
-        let decoder = JSONDecoder()
-        do {
-            let sut = try decoder.decode(RoleJson.self, from: roleJsonData)
-            XCTAssertEqual(sut.uuid,"32a82c14-eeb6-4aea-b93e-15a191e19c0c")
-        } catch {
-            print(error)
-            XCTFail()
-        }
-    }
-    
     func test_decodeRoleNestedAssociation() {
         let decoder = JSONDecoder()
         do {

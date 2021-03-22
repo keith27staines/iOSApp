@@ -89,7 +89,7 @@ class WorkfinderCoordinatorsTests: XCTestCase {
     func test_regex() {
         XCTAssertTrue("HU8 9AG".isUKPostcode())
         XCTAssertFalse("HU89A".isUKPostcode())
-        XCTAssertTrue("TD9 0TUA".isUKPostcode())
+        XCTAssertTrue("TD9 0TU".isUKPostcode())
     }
 
 }

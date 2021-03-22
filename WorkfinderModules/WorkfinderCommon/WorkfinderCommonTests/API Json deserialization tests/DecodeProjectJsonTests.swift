@@ -15,8 +15,7 @@ class ProjectJsonTests: XCTestCase {
     
     func test_decode() throws {
         let data = try XCTUnwrap(jsonString.data(using: .utf8))
-        let p = try JSONDecoder().decode(ProjectJson.self, from: data)
-        XCTAssertEqual(p, makeSUT())
+        XCTAssertNoThrow(try JSONDecoder().decode(ProjectJson.self, from: data))
     }
     
     public func test_encode_decode() throws {
