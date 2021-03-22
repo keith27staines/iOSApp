@@ -20,6 +20,7 @@ public struct ProjectJson: Codable, Equatable, Hashable {
     public var dateApplied: String?
     public var salary: Double?
     public var employmentType: String?
+    public var isCandidateLocationRequired: Bool? = true
     
     public init() {}
     
@@ -43,5 +44,6 @@ public struct ProjectJson: Codable, Equatable, Hashable {
         case dateApplied = "date_applied"
         case employmentType = "employment_type"
         case salary
+        case isCandidateLocationRequired = "is_candidate_location_required"
     }
 }
