@@ -145,8 +145,9 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func capturePostcodeIfNecessary() {
+        let postcode = UserRepository().loadCandidate().postcode ?? ""
         guard
-            UserRepository().loadCandidate().postcode == nil,
+            postcode.isEmpty,
             projectPresenter?.project.isCandidateLocationRequired == true else {
             onPostcodeCaptureComplete()
             return
