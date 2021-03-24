@@ -3,232 +3,271 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC93DBA5231F888C00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */; };
-		FC93DBAA231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBA9231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift */; };
-		FC93DBAC231F888C00F1CE23 /* WorkfinderCoordinators.h in Headers */ = {isa = PBXBuildFile; fileRef = FC93DB9E231F888C00F1CE23 /* WorkfinderCoordinators.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC93DBC4231F8C7F00F1CE23 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBC1231F8C7E00F1CE23 /* NavigationCoordinator.swift */; };
-		FC93DBC7231F8CFF00F1CE23 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBC6231F8CFF00F1CE23 /* WorkfinderAppLogic.framework */; };
-		FC93DBC9231F8CFF00F1CE23 /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBC8231F8CFF00F1CE23 /* WorkfinderCommon.framework */; };
-		FC93DBCD231F8CFF00F1CE23 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC93DBCC231F8CFF00F1CE23 /* WorkfinderUI.framework */; };
-		FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBD8231F94B600F1CE23 /* Injection.swift */; };
-		FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */; };
+		531F131D260B624C00F0FA7E /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */; };
+		531F1322260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1321260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift */; };
+		531F1324260B624C00F0FA7E /* WorkfinderCandidateProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 531F1316260B624B00F0FA7E /* WorkfinderCandidateProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		531F135C260B659800F0FA7E /* ErrorHandlingUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F1355260B659800F0FA7E /* ErrorHandlingUI.framework */; };
+		531F1360260B659800F0FA7E /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F1357260B659800F0FA7E /* WorkfinderCommon.framework */; };
+		531F1362260B659800F0FA7E /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F1358260B659800F0FA7E /* WorkfinderCoordinators.framework */; };
+		531F1364260B659800F0FA7E /* WorkfinderDocumentUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F1359260B659800F0FA7E /* WorkfinderDocumentUpload.framework */; };
+		531F1366260B659800F0FA7E /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F135A260B659800F0FA7E /* WorkfinderServices.framework */; };
+		531F1368260B659800F0FA7E /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F135B260B659800F0FA7E /* WorkfinderUI.framework */; };
+		531F1373260B6B9000F0FA7E /* AddressCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F136F260B6B8F00F0FA7E /* AddressCaptureViewController.swift */; };
+		531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1370260B6B9000F0FA7E /* AddressCaptureCoordinator.swift */; };
+		531F1375260B6B9000F0FA7E /* UKAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1371260B6B9000F0FA7E /* UKAddress.swift */; };
+		531F1376260B6B9000F0FA7E /* ValidatePostcodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1372260B6B9000F0FA7E /* ValidatePostcodeService.swift */; };
+		531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137A260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift */; };
+		531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */; };
+		531F1381260B6C9B00F0FA7E /* PostcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FC93DBA6231F888C00F1CE23 /* PBXContainerItemProxy */ = {
+		531F131E260B624C00F0FA7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FC93DB92231F888C00F1CE23 /* Project object */;
+			containerPortal = 531F130A260B624B00F0FA7E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FC93DB9A231F888C00F1CE23;
-			remoteInfo = WorkfinderCoordinators;
+			remoteGlobalIDString = 531F1312260B624B00F0FA7E;
+			remoteInfo = WorkfinderCandidateProfile;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DB9E231F888C00F1CE23 /* WorkfinderCoordinators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCoordinators.h; sourceTree = "<group>"; };
-		FC93DB9F231F888C00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC93DBA4231F888C00F1CE23 /* WorkfinderCoordinatorsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderCoordinatorsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DBA9231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCoordinatorsTests.swift; sourceTree = "<group>"; };
-		FC93DBAB231F888C00F1CE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC93DBC1231F8C7E00F1CE23 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
-		FC93DBC6231F8CFF00F1CE23 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DBC8231F8CFF00F1CE23 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DBCA231F8CFF00F1CE23 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DBCC231F8CFF00F1CE23 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC93DBD8231F94B600F1CE23 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
-		FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreInjectionNavigationCoordinator.swift; sourceTree = "<group>"; };
+		531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F1316260B624B00F0FA7E /* WorkfinderCandidateProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCandidateProfile.h; sourceTree = "<group>"; };
+		531F1317260B624B00F0FA7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		531F131C260B624C00F0FA7E /* WorkfinderCandidateProfileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderCandidateProfileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F1321260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderCandidateProfileTests.swift; sourceTree = "<group>"; };
+		531F1323260B624C00F0FA7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		531F134A260B64AC00F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F134E260B64C600F0FA7E /* ErrorHandlingUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ErrorHandlingUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F134F260B64C600F0FA7E /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F1355260B659800F0FA7E /* ErrorHandlingUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ErrorHandlingUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F1356260B659800F0FA7E /* WorkfinderApplyUseCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderApplyUseCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F1357260B659800F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F1358260B659800F0FA7E /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F1359260B659800F0FA7E /* WorkfinderDocumentUpload.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderDocumentUpload.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F135A260B659800F0FA7E /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F135B260B659800F0FA7E /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531F136F260B6B8F00F0FA7E /* AddressCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCaptureViewController.swift; sourceTree = "<group>"; };
+		531F1370260B6B9000F0FA7E /* AddressCaptureCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCaptureCoordinator.swift; sourceTree = "<group>"; };
+		531F1371260B6B9000F0FA7E /* UKAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UKAddress.swift; sourceTree = "<group>"; };
+		531F1372260B6B9000F0FA7E /* ValidatePostcodeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatePostcodeService.swift; sourceTree = "<group>"; };
+		531F137A260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOBCaptureCoordinator.swift; sourceTree = "<group>"; };
+		531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
+		531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeTests.swift; sourceTree = "<group>"; };
+		531F1384260B6CDA00F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FC93DB98231F888C00F1CE23 /* Frameworks */ = {
+		531F1310260B624B00F0FA7E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DBC7231F8CFF00F1CE23 /* WorkfinderAppLogic.framework in Frameworks */,
-				FC93DBC9231F8CFF00F1CE23 /* WorkfinderCommon.framework in Frameworks */,
-				FC93DBCD231F8CFF00F1CE23 /* WorkfinderUI.framework in Frameworks */,
+				531F1362260B659800F0FA7E /* WorkfinderCoordinators.framework in Frameworks */,
+				531F1366260B659800F0FA7E /* WorkfinderServices.framework in Frameworks */,
+				531F1360260B659800F0FA7E /* WorkfinderCommon.framework in Frameworks */,
+				531F1364260B659800F0FA7E /* WorkfinderDocumentUpload.framework in Frameworks */,
+				531F1368260B659800F0FA7E /* WorkfinderUI.framework in Frameworks */,
+				531F135C260B659800F0FA7E /* ErrorHandlingUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC93DBA1231F888C00F1CE23 /* Frameworks */ = {
+		531F1319260B624C00F0FA7E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DBA5231F888C00F1CE23 /* WorkfinderCoordinators.framework in Frameworks */,
+				531F131D260B624C00F0FA7E /* WorkfinderCandidateProfile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC93DB91231F888C00F1CE23 = {
+		531F1309260B624B00F0FA7E = {
 			isa = PBXGroup;
 			children = (
-				FC93DB9D231F888C00F1CE23 /* WorkfinderCoordinators */,
-				FC93DBA8231F888C00F1CE23 /* WorkfinderCoordinatorsTests */,
-				FC93DB9C231F888C00F1CE23 /* Products */,
-				FC93DBC5231F8CFF00F1CE23 /* Frameworks */,
+				531F1315260B624B00F0FA7E /* WorkfinderCandidateProfile */,
+				531F1320260B624C00F0FA7E /* WorkfinderCandidateProfileTests */,
+				531F1314260B624B00F0FA7E /* Products */,
+				531F1349260B64AC00F0FA7E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		FC93DB9C231F888C00F1CE23 /* Products */ = {
+		531F1314260B624B00F0FA7E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */,
-				FC93DBA4231F888C00F1CE23 /* WorkfinderCoordinatorsTests.xctest */,
+				531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */,
+				531F131C260B624C00F0FA7E /* WorkfinderCandidateProfileTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FC93DB9D231F888C00F1CE23 /* WorkfinderCoordinators */ = {
+		531F1315260B624B00F0FA7E /* WorkfinderCandidateProfile */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBD4231F8DBC00F1CE23 /* sources */,
-				FC93DB9E231F888C00F1CE23 /* WorkfinderCoordinators.h */,
-				FC93DB9F231F888C00F1CE23 /* Info.plist */,
+				531F136B260B665D00F0FA7E /* source */,
+				531F1316260B624B00F0FA7E /* WorkfinderCandidateProfile.h */,
+				531F1317260B624B00F0FA7E /* Info.plist */,
 			);
-			path = WorkfinderCoordinators;
+			path = WorkfinderCandidateProfile;
 			sourceTree = "<group>";
 		};
-		FC93DBA8231F888C00F1CE23 /* WorkfinderCoordinatorsTests */ = {
+		531F1320260B624C00F0FA7E /* WorkfinderCandidateProfileTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBA9231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift */,
-				FC93DBAB231F888C00F1CE23 /* Info.plist */,
+				531F1321260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift */,
+				531F1323260B624C00F0FA7E /* Info.plist */,
+				531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */,
 			);
-			path = WorkfinderCoordinatorsTests;
+			path = WorkfinderCandidateProfileTests;
 			sourceTree = "<group>";
 		};
-		FC93DBC5231F8CFF00F1CE23 /* Frameworks */ = {
+		531F1349260B64AC00F0FA7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBC6231F8CFF00F1CE23 /* WorkfinderAppLogic.framework */,
-				FC93DBC8231F8CFF00F1CE23 /* WorkfinderCommon.framework */,
-				FC93DBCA231F8CFF00F1CE23 /* WorkfinderServices.framework */,
-				FC93DBCC231F8CFF00F1CE23 /* WorkfinderUI.framework */,
+				531F1384260B6CDA00F0FA7E /* WorkfinderCommon.framework */,
+				531F1355260B659800F0FA7E /* ErrorHandlingUI.framework */,
+				531F1356260B659800F0FA7E /* WorkfinderApplyUseCase.framework */,
+				531F1357260B659800F0FA7E /* WorkfinderCommon.framework */,
+				531F1358260B659800F0FA7E /* WorkfinderCoordinators.framework */,
+				531F1359260B659800F0FA7E /* WorkfinderDocumentUpload.framework */,
+				531F135A260B659800F0FA7E /* WorkfinderServices.framework */,
+				531F135B260B659800F0FA7E /* WorkfinderUI.framework */,
+				531F134E260B64C600F0FA7E /* ErrorHandlingUI.framework */,
+				531F134F260B64C600F0FA7E /* WorkfinderUI.framework */,
+				531F134A260B64AC00F0FA7E /* WorkfinderCommon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FC93DBD3231F8DA300F1CE23 /* Coordinating */ = {
+		531F136B260B665D00F0FA7E /* source */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBC1231F8C7E00F1CE23 /* NavigationCoordinator.swift */,
-				FC93DBE5231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift */,
+				531F1379260B6BA800F0FA7E /* DOB Capture */,
+				531F136E260B6B6800F0FA7E /* Address Capture */,
 			);
-			path = Coordinating;
+			path = source;
 			sourceTree = "<group>";
 		};
-		FC93DBD4231F8DBC00F1CE23 /* sources */ = {
+		531F136E260B6B6800F0FA7E /* Address Capture */ = {
 			isa = PBXGroup;
 			children = (
-				FC93DBD3231F8DA300F1CE23 /* Coordinating */,
-				FC93DBD8231F94B600F1CE23 /* Injection.swift */,
+				531F1370260B6B9000F0FA7E /* AddressCaptureCoordinator.swift */,
+				531F136F260B6B8F00F0FA7E /* AddressCaptureViewController.swift */,
+				531F1371260B6B9000F0FA7E /* UKAddress.swift */,
+				531F1372260B6B9000F0FA7E /* ValidatePostcodeService.swift */,
 			);
-			path = sources;
+			path = "Address Capture";
+			sourceTree = "<group>";
+		};
+		531F1379260B6BA800F0FA7E /* DOB Capture */ = {
+			isa = PBXGroup;
+			children = (
+				531F137A260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift */,
+				531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */,
+			);
+			path = "DOB Capture";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		FC93DB96231F888C00F1CE23 /* Headers */ = {
+		531F130E260B624B00F0FA7E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DBAC231F888C00F1CE23 /* WorkfinderCoordinators.h in Headers */,
+				531F1324260B624C00F0FA7E /* WorkfinderCandidateProfile.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FC93DB9A231F888C00F1CE23 /* WorkfinderCoordinators */ = {
+		531F1312260B624B00F0FA7E /* WorkfinderCandidateProfile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC93DBAF231F888C00F1CE23 /* Build configuration list for PBXNativeTarget "WorkfinderCoordinators" */;
+			buildConfigurationList = 531F1327260B624C00F0FA7E /* Build configuration list for PBXNativeTarget "WorkfinderCandidateProfile" */;
 			buildPhases = (
-				FC93DB96231F888C00F1CE23 /* Headers */,
-				FC93DB97231F888C00F1CE23 /* Sources */,
-				FC93DB98231F888C00F1CE23 /* Frameworks */,
-				FC93DB99231F888C00F1CE23 /* Resources */,
+				531F130E260B624B00F0FA7E /* Headers */,
+				531F130F260B624B00F0FA7E /* Sources */,
+				531F1310260B624B00F0FA7E /* Frameworks */,
+				531F1311260B624B00F0FA7E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = WorkfinderCoordinators;
-			productName = WorkfinderCoordinators;
-			productReference = FC93DB9B231F888C00F1CE23 /* WorkfinderCoordinators.framework */;
+			name = WorkfinderCandidateProfile;
+			productName = WorkfinderCandidateProfile;
+			productReference = 531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FC93DBA3231F888C00F1CE23 /* WorkfinderCoordinatorsTests */ = {
+		531F131B260B624C00F0FA7E /* WorkfinderCandidateProfileTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC93DBB2231F888C00F1CE23 /* Build configuration list for PBXNativeTarget "WorkfinderCoordinatorsTests" */;
+			buildConfigurationList = 531F132A260B624C00F0FA7E /* Build configuration list for PBXNativeTarget "WorkfinderCandidateProfileTests" */;
 			buildPhases = (
-				FC93DBA0231F888C00F1CE23 /* Sources */,
-				FC93DBA1231F888C00F1CE23 /* Frameworks */,
-				FC93DBA2231F888C00F1CE23 /* Resources */,
+				531F1318260B624C00F0FA7E /* Sources */,
+				531F1319260B624C00F0FA7E /* Frameworks */,
+				531F131A260B624C00F0FA7E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FC93DBA7231F888C00F1CE23 /* PBXTargetDependency */,
+				531F131F260B624C00F0FA7E /* PBXTargetDependency */,
 			);
-			name = WorkfinderCoordinatorsTests;
-			productName = WorkfinderCoordinatorsTests;
-			productReference = FC93DBA4231F888C00F1CE23 /* WorkfinderCoordinatorsTests.xctest */;
+			name = WorkfinderCandidateProfileTests;
+			productName = WorkfinderCandidateProfileTests;
+			productReference = 531F131C260B624C00F0FA7E /* WorkfinderCandidateProfileTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FC93DB92231F888C00F1CE23 /* Project object */ = {
+		531F130A260B624B00F0FA7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = Workfinder;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					FC93DB9A231F888C00F1CE23 = {
-						CreatedOnToolsVersion = 10.2;
+					531F1312260B624B00F0FA7E = {
+						CreatedOnToolsVersion = 12.4;
 					};
-					FC93DBA3231F888C00F1CE23 = {
-						CreatedOnToolsVersion = 10.2;
+					531F131B260B624C00F0FA7E = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = FC93DB95231F888C00F1CE23 /* Build configuration list for PBXProject "WorkfinderCoordinators" */;
-			compatibilityVersion = "Xcode 12.0";
+			buildConfigurationList = 531F130D260B624B00F0FA7E /* Build configuration list for PBXProject "WorkfinderCandidateProfile" */;
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = FC93DB91231F888C00F1CE23;
-			productRefGroup = FC93DB9C231F888C00F1CE23 /* Products */;
+			mainGroup = 531F1309260B624B00F0FA7E;
+			productRefGroup = 531F1314260B624B00F0FA7E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FC93DB9A231F888C00F1CE23 /* WorkfinderCoordinators */,
-				FC93DBA3231F888C00F1CE23 /* WorkfinderCoordinatorsTests */,
+				531F1312260B624B00F0FA7E /* WorkfinderCandidateProfile */,
+				531F131B260B624C00F0FA7E /* WorkfinderCandidateProfileTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		FC93DB99231F888C00F1CE23 /* Resources */ = {
+		531F1311260B624B00F0FA7E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC93DBA2231F888C00F1CE23 /* Resources */ = {
+		531F131A260B624C00F0FA7E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -238,36 +277,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FC93DB97231F888C00F1CE23 /* Sources */ = {
+		531F130F260B624B00F0FA7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DBD9231F94B600F1CE23 /* Injection.swift in Sources */,
-				FC93DBC4231F8C7F00F1CE23 /* NavigationCoordinator.swift in Sources */,
-				FC93DBE6231FA62900F1CE23 /* CoreInjectionNavigationCoordinator.swift in Sources */,
+				531F1376260B6B9000F0FA7E /* ValidatePostcodeService.swift in Sources */,
+				531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */,
+				531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */,
+				531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */,
+				531F1375260B6B9000F0FA7E /* UKAddress.swift in Sources */,
+				531F1373260B6B9000F0FA7E /* AddressCaptureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC93DBA0231F888C00F1CE23 /* Sources */ = {
+		531F1318260B624C00F0FA7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC93DBAA231F888C00F1CE23 /* WorkfinderCoordinatorsTests.swift in Sources */,
+				531F1381260B6C9B00F0FA7E /* PostcodeTests.swift in Sources */,
+				531F1322260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FC93DBA7231F888C00F1CE23 /* PBXTargetDependency */ = {
+		531F131F260B624C00F0FA7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FC93DB9A231F888C00F1CE23 /* WorkfinderCoordinators */;
-			targetProxy = FC93DBA6231F888C00F1CE23 /* PBXContainerItemProxy */;
+			target = 531F1312260B624B00F0FA7E /* WorkfinderCandidateProfile */;
+			targetProxy = 531F131E260B624C00F0FA7E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		FC93DBAD231F888C00F1CE23 /* DebugDevelop */ = {
+		531F1330260B62E700F0FA7E /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -300,7 +343,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -332,164 +374,52 @@
 			};
 			name = DebugDevelop;
 		};
-		FC93DBB0231F888C00F1CE23 /* DebugDevelop */ = {
+		531F1331260B62E700F0FA7E /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderCoordinators/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfile/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinators;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
-			};
-			name = DebugDevelop;
-		};
-		FC93DBB3231F888C00F1CE23 /* DebugDevelop */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderCoordinatorsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinatorsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = DebugDevelop;
-		};
-		FC93DBB5231F889A00F1CE23 /* DebugLive */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = DebugLive;
-		};
-		FC93DBB6231F889A00F1CE23 /* DebugLive */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderCoordinators/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinators;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfile;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
-			name = DebugLive;
+			name = DebugDevelop;
 		};
-		FC93DBB7231F889A00F1CE23 /* DebugLive */ = {
+		531F1332260B62E700F0FA7E /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderCoordinatorsTests/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfileTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinatorsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = DebugLive;
+			name = DebugDevelop;
 		};
-		FC93DBB8231F88A500F1CE23 /* DebugStaging */ = {
+		531F1333260B62F700F0FA7E /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -522,7 +452,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -554,53 +483,52 @@
 			};
 			name = DebugStaging;
 		};
-		FC93DBB9231F88A500F1CE23 /* DebugStaging */ = {
+		531F1334260B62F700F0FA7E /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderCoordinators/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfile/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinators;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfile;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = DebugStaging;
 		};
-		FC93DBBA231F88A500F1CE23 /* DebugStaging */ = {
+		531F1335260B62F700F0FA7E /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderCoordinatorsTests/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfileTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinatorsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = DebugStaging;
 		};
-		FC93DBBB231F88BD00F1CE23 /* ReleaseStaging */ = {
+		531F1336260B630700F0FA7E /* DebugLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -633,7 +561,115 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = DebugLive;
+		};
+		531F1337260B630700F0FA7E /* DebugLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WorkfinderCandidateProfile/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfile;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = DebugLive;
+		};
+		531F1338260B630700F0FA7E /* DebugLive */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YB7C23CK6Q;
+				INFOPLIST_FILE = WorkfinderCandidateProfileTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfileTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = DebugLive;
+		};
+		531F1339260B631500F0FA7E /* ReleaseStaging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -659,53 +695,52 @@
 			};
 			name = ReleaseStaging;
 		};
-		FC93DBBC231F88BD00F1CE23 /* ReleaseStaging */ = {
+		531F133A260B631500F0FA7E /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderCoordinators/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfile/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinators;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfile;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = ReleaseStaging;
 		};
-		FC93DBBD231F88BD00F1CE23 /* ReleaseStaging */ = {
+		531F133B260B631500F0FA7E /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderCoordinatorsTests/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfileTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinatorsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = ReleaseStaging;
 		};
-		FC93DBBE231F88D800F1CE23 /* ReleaseLive */ = {
+		531F133C260B632900F0FA7E /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -738,7 +773,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -764,46 +798,45 @@
 			};
 			name = ReleaseLive;
 		};
-		FC93DBBF231F88D800F1CE23 /* ReleaseLive */ = {
+		531F133D260B632900F0FA7E /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = WorkfinderCoordinators/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfile/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinators;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfile;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = ReleaseLive;
 		};
-		FC93DBC0231F88D800F1CE23 /* ReleaseLive */ = {
+		531F133E260B632900F0FA7E /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
-				INFOPLIST_FILE = WorkfinderCoordinatorsTests/Info.plist;
+				INFOPLIST_FILE = WorkfinderCandidateProfileTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCoordinatorsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderCandidateProfileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -813,43 +846,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FC93DB95231F888C00F1CE23 /* Build configuration list for PBXProject "WorkfinderCoordinators" */ = {
+		531F130D260B624B00F0FA7E /* Build configuration list for PBXProject "WorkfinderCandidateProfile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC93DBAD231F888C00F1CE23 /* DebugDevelop */,
-				FC93DBB8231F88A500F1CE23 /* DebugStaging */,
-				FC93DBB5231F889A00F1CE23 /* DebugLive */,
-				FC93DBBB231F88BD00F1CE23 /* ReleaseStaging */,
-				FC93DBBE231F88D800F1CE23 /* ReleaseLive */,
+				531F1330260B62E700F0FA7E /* DebugDevelop */,
+				531F1333260B62F700F0FA7E /* DebugStaging */,
+				531F1336260B630700F0FA7E /* DebugLive */,
+				531F1339260B631500F0FA7E /* ReleaseStaging */,
+				531F133C260B632900F0FA7E /* ReleaseLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseLive;
 		};
-		FC93DBAF231F888C00F1CE23 /* Build configuration list for PBXNativeTarget "WorkfinderCoordinators" */ = {
+		531F1327260B624C00F0FA7E /* Build configuration list for PBXNativeTarget "WorkfinderCandidateProfile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC93DBB0231F888C00F1CE23 /* DebugDevelop */,
-				FC93DBB9231F88A500F1CE23 /* DebugStaging */,
-				FC93DBB6231F889A00F1CE23 /* DebugLive */,
-				FC93DBBC231F88BD00F1CE23 /* ReleaseStaging */,
-				FC93DBBF231F88D800F1CE23 /* ReleaseLive */,
+				531F1331260B62E700F0FA7E /* DebugDevelop */,
+				531F1334260B62F700F0FA7E /* DebugStaging */,
+				531F1337260B630700F0FA7E /* DebugLive */,
+				531F133A260B631500F0FA7E /* ReleaseStaging */,
+				531F133D260B632900F0FA7E /* ReleaseLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseLive;
 		};
-		FC93DBB2231F888C00F1CE23 /* Build configuration list for PBXNativeTarget "WorkfinderCoordinatorsTests" */ = {
+		531F132A260B624C00F0FA7E /* Build configuration list for PBXNativeTarget "WorkfinderCandidateProfileTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC93DBB3231F888C00F1CE23 /* DebugDevelop */,
-				FC93DBBA231F88A500F1CE23 /* DebugStaging */,
-				FC93DBB7231F889A00F1CE23 /* DebugLive */,
-				FC93DBBD231F88BD00F1CE23 /* ReleaseStaging */,
-				FC93DBC0231F88D800F1CE23 /* ReleaseLive */,
+				531F1332260B62E700F0FA7E /* DebugDevelop */,
+				531F1335260B62F700F0FA7E /* DebugStaging */,
+				531F1338260B630700F0FA7E /* DebugLive */,
+				531F133B260B631500F0FA7E /* ReleaseStaging */,
+				531F133E260B632900F0FA7E /* ReleaseLive */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseLive;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FC93DB92231F888C00F1CE23 /* Project object */;
+	rootObject = 531F130A260B624B00F0FA7E /* Project object */;
 }

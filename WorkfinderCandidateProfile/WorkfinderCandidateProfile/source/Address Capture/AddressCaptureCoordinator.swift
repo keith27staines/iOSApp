@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderCoordinators
 
 public class AddressCaptureCoordinator: CoreInjectionNavigationCoordinator {
     

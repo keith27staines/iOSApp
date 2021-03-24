@@ -9,6 +9,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderServices
+import WorkfinderCoordinators
 
 public class DOBCaptureCoordinator: CoreInjectionNavigationCoordinator, DateOfBirthCoordinatorProtocol {
     

@@ -9,6 +9,7 @@ import WorkfinderUserDetailsUseCase
 import WorkfinderCoverLetter
 import WorkfinderRegisterCandidate
 import WorkfinderDocumentUpload
+import WorkfinderCandidateProfile
 
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
