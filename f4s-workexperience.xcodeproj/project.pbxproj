@@ -14,18 +14,6 @@
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
 		40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */; };
-		40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */; };
-		40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6C1DD32BD4000A3776 /* MenuHelper.swift */; };
-		40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6D1DD32BD4000A3776 /* SideMenuViewController.swift */; };
-		40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E721DD32BE7000A3776 /* AnimatedMenuButton.swift */; };
-		40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E731DD32BE7000A3776 /* DrawerBarButtonItem.swift */; };
-		40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E741DD32BE7000A3776 /* DrawerController.swift */; };
-		40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E751DD32BE7000A3776 /* DrawerVisualState.swift */; };
-		40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7A1DD32BF4000A3776 /* CenterTableViewCell.swift */; };
-		40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7B1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift */; };
-		40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7C1DD32BF4000A3776 /* SideDrawerTableViewCell.swift */; };
-		40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */; };
-		40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */; };
 		40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */; };
 		40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E8E1DD32C4E000A3776 /* Settings.bundle */; };
 		53131C7C260B70A100799629 /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */; };
@@ -169,18 +157,6 @@
 		40E78E201DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40E78E221DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
-		40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomMenuViewController.swift; path = Menu/CustomMenuViewController.swift; sourceTree = "<group>"; };
-		40E78E6C1DD32BD4000A3776 /* MenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuHelper.swift; path = Menu/MenuHelper.swift; sourceTree = "<group>"; };
-		40E78E6D1DD32BD4000A3776 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuViewController.swift; path = Menu/SideMenuViewController.swift; sourceTree = "<group>"; };
-		40E78E721DD32BE7000A3776 /* AnimatedMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimatedMenuButton.swift; path = Menu/DrawerController/AnimatedMenuButton.swift; sourceTree = "<group>"; };
-		40E78E731DD32BE7000A3776 /* DrawerBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerBarButtonItem.swift; path = Menu/DrawerController/DrawerBarButtonItem.swift; sourceTree = "<group>"; };
-		40E78E741DD32BE7000A3776 /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerController.swift; path = Menu/DrawerController/DrawerController.swift; sourceTree = "<group>"; };
-		40E78E751DD32BE7000A3776 /* DrawerVisualState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerVisualState.swift; path = Menu/DrawerController/DrawerVisualState.swift; sourceTree = "<group>"; };
-		40E78E7A1DD32BF4000A3776 /* CenterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CenterTableViewCell.swift; path = Menu/MenuTableViewHelpers/CenterTableViewCell.swift; sourceTree = "<group>"; };
-		40E78E7B1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideDrawerSectionHeaderView.swift; path = Menu/MenuTableViewHelpers/SideDrawerSectionHeaderView.swift; sourceTree = "<group>"; };
-		40E78E7C1DD32BF4000A3776 /* SideDrawerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideDrawerTableViewCell.swift; path = Menu/MenuTableViewHelpers/SideDrawerTableViewCell.swift; sourceTree = "<group>"; };
-		40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = Menu/MenuTableViewHelpers/TableViewCell.swift; sourceTree = "<group>"; };
-		40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExampleDrawerVisualStateManager.swift; path = Menu/VisualStateManager/ExampleDrawerVisualStateManager.swift; sourceTree = "<group>"; };
 		40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsHelper.swift; sourceTree = "<group>"; };
 		40E78E8E1DD32C4E000A3776 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -383,66 +359,6 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		40E78E501DD328E0000A3776 /* Side menu */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E521DD3292F000A3776 /* Side menu */,
-			);
-			name = "Side menu";
-			path = ..;
-			sourceTree = "<group>";
-		};
-		40E78E521DD3292F000A3776 /* Side menu */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E641DD32B87000A3776 /* Menu */,
-			);
-			name = "Side menu";
-			sourceTree = "<group>";
-		};
-		40E78E641DD32B87000A3776 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */,
-				40E78E6C1DD32BD4000A3776 /* MenuHelper.swift */,
-				40E78E6D1DD32BD4000A3776 /* SideMenuViewController.swift */,
-				40E78E691DD32BBC000A3776 /* DrawerController */,
-				40E78E681DD32BAD000A3776 /* MenuTableViewHelpers */,
-				40E78E671DD32BA2000A3776 /* VisualStateManager */,
-			);
-			name = Menu;
-			sourceTree = "<group>";
-		};
-		40E78E671DD32BA2000A3776 /* VisualStateManager */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */,
-			);
-			name = VisualStateManager;
-			sourceTree = "<group>";
-		};
-		40E78E681DD32BAD000A3776 /* MenuTableViewHelpers */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E7A1DD32BF4000A3776 /* CenterTableViewCell.swift */,
-				40E78E7B1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift */,
-				40E78E7C1DD32BF4000A3776 /* SideDrawerTableViewCell.swift */,
-				40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */,
-			);
-			name = MenuTableViewHelpers;
-			sourceTree = "<group>";
-		};
-		40E78E691DD32BBC000A3776 /* DrawerController */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E721DD32BE7000A3776 /* AnimatedMenuButton.swift */,
-				40E78E731DD32BE7000A3776 /* DrawerBarButtonItem.swift */,
-				40E78E741DD32BE7000A3776 /* DrawerController.swift */,
-				40E78E751DD32BE7000A3776 /* DrawerVisualState.swift */,
-			);
-			name = DrawerController;
-			sourceTree = "<group>";
-		};
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,7 +451,6 @@
 			isa = PBXGroup;
 			children = (
 				FC1DC06921FE1410009ABC60 /* Main App */,
-				40E78E501DD328E0000A3776 /* Side menu */,
 			);
 			path = "Use Cases";
 			sourceTree = "<group>";
@@ -849,38 +764,26 @@
 				FC5336782488CD0200DA3033 /* MigratorBase.swift in Sources */,
 				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
-				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
-				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
-				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
 				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
 				FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */,
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				FCCFC7CF224D2C110060F7EC /* LocalStoreMigrationsRunner.swift in Sources */,
 				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				FC53367A2488CD5000DA3033 /* Migrate_v2_all__to__v3_0_1.swift in Sources */,
-				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FC459CEA2496161B00D6CE46 /* DeepLinkRouter.swift in Sources */,
-				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC04B8642332751F0034A60E /* CoordinatorFactories.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */,
 				FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */,
-				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
-				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
-				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
 				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
-				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
-				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
-				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
 				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
 				FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */,
 				FC6C1CD824D1B359005E1936 /* Migrate_v3_0_1_to__v3_2_0.swift in Sources */,
 				FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */,
 				FC22F4F324B5CF020030924B /* TabIndexEnumeration.swift in Sources */,
-				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,7 +909,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3.2;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1101,7 +1004,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3.2;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1200,7 +1103,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3.2;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1294,7 +1197,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3.2;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1392,7 +1295,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3.2;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
