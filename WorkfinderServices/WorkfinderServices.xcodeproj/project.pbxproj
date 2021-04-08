@@ -19,7 +19,6 @@
 		FC459CE724960EF000D6CE46 /* ApplicationContextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE624960EF000D6CE46 /* ApplicationContextService.swift */; };
 		FC473E8F2451CE50004CEA17 /* TemplateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC473E8E2451CE50004CEA17 /* TemplateProvider.swift */; };
 		FC473E912451D2CD004CEA17 /* HostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC473E902451D2CD004CEA17 /* HostProvider.swift */; };
-		FC473E932451D331004CEA17 /* WorkplaceListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC473E922451D331004CEA17 /* WorkplaceListService.swift */; };
 		FC612B54248794B700C498ED /* Associations service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC612B53248794B700C498ED /* Associations service.swift */; };
 		FC64E54924C9D6DD008698F8 /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC64E54824C9D6DD008698F8 /* ProjectService.swift */; };
 		FC75B35524948169008B4FBB /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75B35424948169008B4FBB /* RecommendationsService.swift */; };
@@ -56,7 +55,6 @@
 		FC459CE624960EF000D6CE46 /* ApplicationContextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContextService.swift; sourceTree = "<group>"; };
 		FC473E8E2451CE50004CEA17 /* TemplateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateProvider.swift; sourceTree = "<group>"; };
 		FC473E902451D2CD004CEA17 /* HostProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostProvider.swift; sourceTree = "<group>"; };
-		FC473E922451D331004CEA17 /* WorkplaceListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkplaceListService.swift; sourceTree = "<group>"; };
 		FC612B53248794B700C498ED /* Associations service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Associations service.swift"; sourceTree = "<group>"; };
 		FC64E54824C9D6DD008698F8 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		FC75B35424948169008B4FBB /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				FC0100B5248A15B9007D8020 /* LocationService.swift */,
-				FC473E922451D331004CEA17 /* WorkplaceListService.swift */,
 				FC0100B3248A0789007D8020 /* CompanyService.swift */,
 			);
 			path = "Company and workplace";
@@ -304,7 +301,6 @@
 				FC459CE724960EF000D6CE46 /* ApplicationContextService.swift in Sources */,
 				FC473E912451D2CD004CEA17 /* HostProvider.swift in Sources */,
 				FCCA4E2D2456E77500DFA696 /* User services.swift in Sources */,
-				FC473E932451D331004CEA17 /* WorkplaceListService.swift in Sources */,
 				FC612B54248794B700C498ED /* Associations service.swift in Sources */,
 				FCEF9CFA24DFD5D00015F989 /* DocumentUploadService.swift in Sources */,
 				FC036BD024497FD5008C4A69 /* WorkfinderService.swift in Sources */,

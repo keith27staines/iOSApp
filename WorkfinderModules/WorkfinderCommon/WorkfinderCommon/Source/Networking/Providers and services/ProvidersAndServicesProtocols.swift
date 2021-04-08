@@ -31,12 +31,6 @@ public protocol PicklistProviderProtocol: class {
     func fetchPicklistItems(completion: @escaping ((Result<PicklistServerJson,Error>) -> Void))
 }
 
-public protocol WorkplaceListProviderProtocol: class {
-    func fetchWorkplaces(
-        locationUuids: [F4SUUID],
-        completion: @escaping ((Result<CompanyListJson,Error>) -> Void))
-}
-
 public protocol HostsProviderProtocol: class {
     func fetchHost(uuid: String, completion: @escaping (Result<HostJson,Error>) -> Void)
     func fetchHosts(locationUuid: F4SUUID, completion: @escaping((Result<HostListJson,Error>) -> Void) )

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53131C812611DCE900799629 /* AccountSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53131C802611DCE900799629 /* AccountSectionViewModel.swift */; };
+		53131CFB261EFBAD00799629 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53131CFA261EFBAD00799629 /* AccountCoordinator.swift */; };
+		53131D01261EFD5400799629 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53131D00261EFD5400799629 /* AccountViewController.swift */; };
+		53131D05261EFE5D00799629 /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53131D04261EFE5D00799629 /* AccountPresenter.swift */; };
 		531F131D260B624C00F0FA7E /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */; };
 		531F1322260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1321260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift */; };
 		531F1324260B624C00F0FA7E /* WorkfinderCandidateProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 531F1316260B624B00F0FA7E /* WorkfinderCandidateProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53131C802611DCE900799629 /* AccountSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionViewModel.swift; sourceTree = "<group>"; };
+		53131CFA261EFBAD00799629 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
+		53131D00261EFD5400799629 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		53131D04261EFE5D00799629 /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
 		531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		531F1316260B624B00F0FA7E /* WorkfinderCandidateProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCandidateProfile.h; sourceTree = "<group>"; };
 		531F1317260B624B00F0FA7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53131C7F2611DCC000799629 /* AccountSectionViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				53131C802611DCE900799629 /* AccountSectionViewModel.swift */,
+			);
+			path = AccountSectionViewModel;
+			sourceTree = "<group>";
+		};
 		531F1309260B624B00F0FA7E = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +163,10 @@
 		531F136B260B665D00F0FA7E /* source */ = {
 			isa = PBXGroup;
 			children = (
+				53131CFA261EFBAD00799629 /* AccountCoordinator.swift */,
+				53131D00261EFD5400799629 /* AccountViewController.swift */,
+				53131D04261EFE5D00799629 /* AccountPresenter.swift */,
+				53131C7F2611DCC000799629 /* AccountSectionViewModel */,
 				531F1379260B6BA800F0FA7E /* DOB Capture */,
 				531F136E260B6B6800F0FA7E /* Address Capture */,
 			);
@@ -284,9 +304,13 @@
 				531F1376260B6B9000F0FA7E /* ValidatePostcodeService.swift in Sources */,
 				531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */,
 				531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */,
+				53131C812611DCE900799629 /* AccountSectionViewModel.swift in Sources */,
+				53131CFB261EFBAD00799629 /* AccountCoordinator.swift in Sources */,
 				531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */,
+				53131D05261EFE5D00799629 /* AccountPresenter.swift in Sources */,
 				531F1375260B6B9000F0FA7E /* UKAddress.swift in Sources */,
 				531F1373260B6B9000F0FA7E /* AddressCaptureViewController.swift in Sources */,
+				53131D01261EFD5400799629 /* AccountViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

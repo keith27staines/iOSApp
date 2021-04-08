@@ -45,6 +45,7 @@ public enum TabIndex : Int, CaseIterable {
     case applications
     case home
     case recommendations
+    case account
 }
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {

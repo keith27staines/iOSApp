@@ -11,6 +11,7 @@ extension TabIndex {
         case .applications: return "Applications"
         case .home: return "Discover"
         case .recommendations: return "Recommendations"
+        case .account: return "Account"
         }
     }
     
@@ -22,6 +23,8 @@ extension TabIndex {
             return UIImage(named: "discover_tab")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         case .recommendations:
             return UIImage(named: "recommendations")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        case .account:
+            return UIImage(named: "account")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         }
     }
     
@@ -30,6 +33,7 @@ extension TabIndex {
         case .applications: return tabBarCoordinator.applicationsCoordinator
         case .home: return tabBarCoordinator.homeCoordinator
         case .recommendations: return tabBarCoordinator.recommendationsCoordinator
+        case .account: return tabBarCoordinator.accountCoordinator
         }
     }
     

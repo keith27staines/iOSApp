@@ -8,6 +8,7 @@ import WorkfinderApplications
 import WorkfinderRecommendationsList
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderHome
+import WorkfinderCandidateProfile
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
@@ -164,6 +165,18 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         addChildCoordinator(coordinator)
         return coordinator
     }()
+    
+    lazy var accountCoordinator: AccountCoordinator = {
+        let router = TabIndex.account.makeRouter()
+        let coordinator = AccountCoordinator(
+            parent: nil,
+            navigationRouter: router,
+            inject: injected,
+            switchToTab: { [weak self] tab in self?.switchToTab(tab) }
+        )
+        addChildCoordinator(coordinator)
+        return coordinator
+    }()
 
     private func setUpDrawerController(navigationController: UIViewController) -> DrawerController {
         navigationController.restorationIdentifier = "ExampleCenterNavigationControllerRestorationKey"
@@ -221,6 +234,8 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
                 
             })
             log.track(.tab_tap(tabName: "recommendations"))
+        case accountCoordinator.navigationRouter.navigationController:
+            log.track(.tab_tap(tabName: "account"))
         default:
             fatalError("unknown coordinator")
         }
