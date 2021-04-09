@@ -14,6 +14,17 @@ public enum WorkfinderContentType: String, Codable {
     case privacyPolicy
     case offerWorkExperience
     
+    public var title: String {
+        switch self {
+        
+        case .about: return "About Workfinder"
+        case .faqs: return "Frequently Asked Questions"
+        case .terms: return "Terms and Conditions"
+        case .privacyPolicy: return "Privacy Policy"
+        case .offerWorkExperience: return ""
+        }
+    }
+    
     public var url: URL {
         switch self {
         case .about: return URL(string: "https://workfinder.com")!

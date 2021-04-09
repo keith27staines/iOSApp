@@ -21,4 +21,9 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         self.switchToTab = switchToTab
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
+    
+    public override func start() {
+        let vc = AccountViewController(coordinator: self)
+        navigationRouter.push(viewController: vc, animated: true)
+    }
 }
