@@ -7,15 +7,39 @@
 
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 import UIKit
 
 class AccountPresenter: NSObject {
+
     var candidateRepository: UserRepositoryProtocol = UserRepository()
     weak var coordinator: AccountCoordinator?
+    weak var accountViewController: AccountViewController?
+    var service: AccountServiceProtocol
     
     var candidate: Candidate {
         get { candidateRepository.loadCandidate() }
         set { candidateRepository.saveCandidate(newValue) }
+    }
+    
+    var user: User {
+        get { candidateRepository.loadUser() }
+        set { candidateRepository.saveUser(newValue)}
+    }
+    
+    func reloadAccount(completion: @escaping (Error?) -> Void) {
+        let repo = UserRepository()
+        guard repo.isCandidateLoggedIn else { return }
+        service.getAccount { (result) in
+            switch result {
+            case .success(let account):
+                repo.saveUser(account.user)
+                repo.saveCandidate(account.candidate)
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
     }
     
     enum TableSection: Int, CaseIterable {
@@ -38,8 +62,34 @@ class AccountPresenter: NSObject {
         ),
     ]
     
-    init(coordinator: AccountCoordinator) {
+    var footerLabelText: String {
+        return "\(memberSince)• \(version)"
+    }
+    
+    private var memberSince: String {
+        guard let dateString = user.created, dateString.isEmpty == false, let date = Date.workfinderDateStringToDate(dateString)
+            else { return "" }
+        
+        let df = DateFormatter()
+        df.dateStyle = .long
+        df.timeStyle = .none
+        return "Member since \(df.string(from: date)) "
+    }
+    
+    private var version: String {
+        var appVersion = ""
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+           appVersion = "v \(version)"
+        }
+        if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+           appVersion += " (\(build))"
+        }
+        return appVersion
+    }
+    
+    init(coordinator: AccountCoordinator, accountService: AccountServiceProtocol) {
         self.coordinator = coordinator
+        self.service = accountService
         super.init()
     }
     
@@ -94,7 +144,6 @@ extension AccountPresenter: UITableViewDataSource {
             return result + (String(substring.first ?? " "))
         }
     }
-
 }
 
 

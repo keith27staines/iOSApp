@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53659CAA2620C89800CFF49E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA92620C89800CFF49E /* AccountService.swift */; };
 		FC0100B4248A0789007D8020 /* CompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0100B3248A0789007D8020 /* CompanyService.swift */; };
 		FC0100B6248A15B9007D8020 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0100B5248A15B9007D8020 /* LocationService.swift */; };
 		FC02D9F922EC70FD003C8148 /* WorkfinderServices.h in Headers */ = {isa = PBXBuildFile; fileRef = FC02D9EB22EC70FD003C8148 /* WorkfinderServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53659CA92620C89800CFF49E /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		FC0100B3248A0789007D8020 /* CompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyService.swift; sourceTree = "<group>"; };
 		FC0100B5248A15B9007D8020 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +176,7 @@
 		FCCA4E2E2456E7B700DFA696 /* User and candidate services */ = {
 			isa = PBXGroup;
 			children = (
+				53659CA92620C89800CFF49E /* AccountService.swift */,
 				FCCA4E2C2456E77500DFA696 /* User services.swift */,
 				FCCA4E2F245700F100DFA696 /* Candidate services.swift */,
 				FC105372245897AB00024706 /* Placement services.swift */,
@@ -307,6 +310,7 @@
 				FCCA4E30245700F100DFA696 /* Candidate services.swift in Sources */,
 				FC64E54924C9D6DD008698F8 /* ProjectService.swift in Sources */,
 				FCA13FBB24BC3C5D0009C30F /* SmallImageService.swift in Sources */,
+				53659CAA2620C89800CFF49E /* AccountService.swift in Sources */,
 				FC0100B4248A0789007D8020 /* CompanyService.swift in Sources */,
 				FC3BCA5D2434DF0700C5A96A /* PicklistProvider.swift in Sources */,
 				FC105373245897AB00024706 /* Placement services.swift in Sources */,

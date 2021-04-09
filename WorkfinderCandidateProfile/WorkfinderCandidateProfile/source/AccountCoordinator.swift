@@ -23,7 +23,9 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     public override func start() {
-        let vc = AccountViewController(coordinator: self)
+        let service = AccountService(networkConfig: injected.networkConfig)
+        let presenter = AccountPresenter(coordinator: self, accountService: service)
+        let vc = AccountViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }
 }
