@@ -79,10 +79,10 @@ class AccountPresenter: NSObject {
     private var version: String {
         var appVersion = ""
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-           appVersion = "v \(version)"
+           appVersion = "v\(version)"
         }
         if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-           appVersion += " (\(build))"
+           appVersion += "(\(build))"
         }
         return appVersion
     }
