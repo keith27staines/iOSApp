@@ -1,13 +1,13 @@
 //
-//  AccountPresenter.swift
+//  YourDetailsPresenter.swift
 //  WorkfinderCandidateProfile
 //
-//  Created by Keith Staines on 08/04/2021.
+//  Created by Keith Staines on 10/04/2021.
 //
 
 import WorkfinderCommon
 
-class AccountPresenter: BaseAccountPresenter {
+class YourDetailsPresenter: BaseAccountPresenter {
     
     enum TableSection: Int, CaseIterable {
         case header
@@ -29,35 +29,10 @@ class AccountPresenter: BaseAccountPresenter {
         ),
     ]
     
-    var footerLabelText: String {
-        return "\(memberSince)• \(version)"
-    }
-    
-    private var memberSince: String {
-        guard let dateString = user.created, dateString.isEmpty == false, let date = Date.workfinderDateStringToDate(dateString)
-            else { return "" }
-        
-        let df = DateFormatter()
-        df.dateStyle = .long
-        df.timeStyle = .none
-        return "Member since \(df.string(from: date)) "
-    }
-    
-    private var version: String {
-        var appVersion = ""
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-           appVersion = "v\(version)"
-        }
-        if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-           appVersion += "(\(build))"
-        }
-        return appVersion
-    }
-    
 }
 
 
-extension AccountPresenter: UITableViewDataSource {
+extension YourDetailsPresenter: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,7 +83,7 @@ extension AccountPresenter: UITableViewDataSource {
 }
 
 
-extension AccountPresenter: UITableViewDelegate {
+extension YourDetailsPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let section = TableSection(rawValue: indexPath.section) else { return }
@@ -129,3 +104,4 @@ extension AccountPresenter: UITableViewDelegate {
         }
     }
 }
+

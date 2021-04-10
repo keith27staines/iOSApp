@@ -27,9 +27,15 @@
 		531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137A260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift */; };
 		531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */; };
 		531F1381260B6C9B00F0FA7E /* PostcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */; };
+		5342E84226219E47001A56F5 /* BaseAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */; };
 		53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659C9626202AB400CFF49E /* AMPHeaderCell.swift */; };
 		53659C9E26202AF900CFF49E /* AMPLinksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659C9D26202AF900CFF49E /* AMPLinksCell.swift */; };
 		53659CA22620336E00CFF49E /* AMPAccountSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA12620336E00CFF49E /* AMPAccountSectionCell.swift */; };
+		53659CE6262192AF00CFF49E /* YourDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CE5262192AF00CFF49E /* YourDetailsViewController.swift */; };
+		53659CEA262192C200CFF49E /* YourDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CE9262192C200CFF49E /* YourDetailsPresenter.swift */; };
+		53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CED262192D300CFF49E /* PreferencesViewController.swift */; };
+		53659CF2262192E700CFF49E /* PreferencesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CF1262192E700CFF49E /* PreferencesPresenter.swift */; };
+		53659CF62621934600CFF49E /* WFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CF52621934600CFF49E /* WFViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,9 +77,15 @@
 		531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
 		531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeTests.swift; sourceTree = "<group>"; };
 		531F1384260B6CDA00F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccountPresenter.swift; sourceTree = "<group>"; };
 		53659C9626202AB400CFF49E /* AMPHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPHeaderCell.swift; sourceTree = "<group>"; };
 		53659C9D26202AF900CFF49E /* AMPLinksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPLinksCell.swift; sourceTree = "<group>"; };
 		53659CA12620336E00CFF49E /* AMPAccountSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPAccountSectionCell.swift; sourceTree = "<group>"; };
+		53659CE5262192AF00CFF49E /* YourDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourDetailsViewController.swift; sourceTree = "<group>"; };
+		53659CE9262192C200CFF49E /* YourDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourDetailsPresenter.swift; sourceTree = "<group>"; };
+		53659CED262192D300CFF49E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		53659CF1262192E700CFF49E /* PreferencesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesPresenter.swift; sourceTree = "<group>"; };
+		53659CF52621934600CFF49E /* WFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,9 +193,12 @@
 			children = (
 				53131CFA261EFBAD00799629 /* AccountCoordinator.swift */,
 				53131D13262029B600799629 /* Account main page */,
+				53659CE42621927200CFF49E /* Your Details */,
+				53659CE32621925900CFF49E /* Preferences */,
 				53131C7F2611DCC000799629 /* AccountSectionViewModel */,
 				531F1379260B6BA800F0FA7E /* DOB Capture */,
 				531F136E260B6B6800F0FA7E /* Address Capture */,
+				53659CF92621934C00CFF49E /* Common */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -216,6 +231,33 @@
 				53659CA12620336E00CFF49E /* AMPAccountSectionCell.swift */,
 			);
 			path = "Table cells";
+			sourceTree = "<group>";
+		};
+		53659CE32621925900CFF49E /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				53659CED262192D300CFF49E /* PreferencesViewController.swift */,
+				53659CF1262192E700CFF49E /* PreferencesPresenter.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		53659CE42621927200CFF49E /* Your Details */ = {
+			isa = PBXGroup;
+			children = (
+				53659CE5262192AF00CFF49E /* YourDetailsViewController.swift */,
+				53659CE9262192C200CFF49E /* YourDetailsPresenter.swift */,
+			);
+			path = "Your Details";
+			sourceTree = "<group>";
+		};
+		53659CF92621934C00CFF49E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				53659CF52621934600CFF49E /* WFViewController.swift */,
+				5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,17 +368,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53659CF2262192E700CFF49E /* PreferencesPresenter.swift in Sources */,
 				53659C9E26202AF900CFF49E /* AMPLinksCell.swift in Sources */,
 				53659CA22620336E00CFF49E /* AMPAccountSectionCell.swift in Sources */,
+				53659CE6262192AF00CFF49E /* YourDetailsViewController.swift in Sources */,
 				531F1376260B6B9000F0FA7E /* ValidatePostcodeService.swift in Sources */,
 				531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */,
 				531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */,
 				53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */,
+				53659CEA262192C200CFF49E /* YourDetailsPresenter.swift in Sources */,
 				53131C812611DCE900799629 /* AccountSectionViewModel.swift in Sources */,
 				53131CFB261EFBAD00799629 /* AccountCoordinator.swift in Sources */,
 				531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */,
+				53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */,
+				53659CF62621934600CFF49E /* WFViewController.swift in Sources */,
 				53131D05261EFE5D00799629 /* AccountPresenter.swift in Sources */,
 				531F1375260B6B9000F0FA7E /* UKAddress.swift in Sources */,
+				5342E84226219E47001A56F5 /* BaseAccountPresenter.swift in Sources */,
 				531F1373260B6B9000F0FA7E /* AddressCaptureViewController.swift in Sources */,
 				53131D01261EFD5400799629 /* AccountViewController.swift in Sources */,
 			);
