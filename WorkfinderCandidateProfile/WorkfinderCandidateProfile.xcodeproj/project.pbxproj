@@ -198,7 +198,7 @@
 				53131C7F2611DCC000799629 /* AccountSectionViewModel */,
 				531F1379260B6BA800F0FA7E /* DOB Capture */,
 				531F136E260B6B6800F0FA7E /* Address Capture */,
-				53659CF92621934C00CFF49E /* Common */,
+				53659CF92621934C00CFF49E /* Base classes */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -251,13 +251,13 @@
 			path = "Your Details";
 			sourceTree = "<group>";
 		};
-		53659CF92621934C00CFF49E /* Common */ = {
+		53659CF92621934C00CFF49E /* Base classes */ = {
 			isa = PBXGroup;
 			children = (
 				53659CF52621934600CFF49E /* WFViewController.swift */,
 				5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */,
 			);
-			path = Common;
+			path = "Base classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
