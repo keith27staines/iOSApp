@@ -107,7 +107,12 @@ class AccountPresenter: BaseAccountPresenter {
         guard let section = TableSection(rawValue: indexPath.section) else { return }
         switch section {
         case .header: return
-        case .accountSections: return
+        case .accountSections:
+            switch indexPath.row {
+            case 0: coordinator?.showDetails()
+            case 1: coordinator?.showPreferences()
+            default: break
+            }
         case .links: coordinator?.presentContent(links[indexPath.row])
         }
     }

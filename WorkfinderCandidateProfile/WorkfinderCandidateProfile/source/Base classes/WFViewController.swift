@@ -61,7 +61,7 @@ class WFViewController: UIViewController {
         tableView.delegate = presenter
     }
     
-    init(coordinator: AccountCoordinator, presenter: AccountPresenter) {
+    init(coordinator: AccountCoordinator, presenter: BaseAccountPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }

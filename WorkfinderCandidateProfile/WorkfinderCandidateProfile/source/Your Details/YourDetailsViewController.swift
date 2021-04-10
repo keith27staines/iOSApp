@@ -22,4 +22,12 @@ class YourDetailsViewController:  WFViewController {
         navigationItem.title = "Your Details"
     }
     
+    init(coordinator: AccountCoordinator, presenter: YourDetailsPresenter) {
+        super.init(coordinator: coordinator, presenter: presenter)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }

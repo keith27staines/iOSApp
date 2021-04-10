@@ -28,4 +28,18 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         let vc = AccountViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }
+    
+    func showPreferences() {
+        let service = AccountService(networkConfig: injected.networkConfig)
+        let presenter = PreferencesPresenter(coordinator: self, accountService: service)
+        let vc = PreferencesViewController(coordinator: self, presenter: presenter)
+        navigationRouter.push(viewController: vc, animated: true)
+    }
+    
+    func showDetails() {
+        let service = AccountService(networkConfig: injected.networkConfig)
+        let presenter = YourDetailsPresenter(coordinator: self, accountService: service)
+        let vc = YourDetailsViewController(coordinator: self, presenter: presenter)
+        navigationRouter.push(viewController: vc, animated: true)
+    }
 }

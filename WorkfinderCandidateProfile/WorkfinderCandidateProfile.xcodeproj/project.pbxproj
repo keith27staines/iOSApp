@@ -36,6 +36,10 @@
 		53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CED262192D300CFF49E /* PreferencesViewController.swift */; };
 		53659CF2262192E700CFF49E /* PreferencesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CF1262192E700CFF49E /* PreferencesPresenter.swift */; };
 		53659CF62621934600CFF49E /* WFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CF52621934600CFF49E /* WFViewController.swift */; };
+		53D7CDE32621CE2D00A9BE40 /* NotificationControlsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */; };
+		53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */; };
+		53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */; };
+		53D7CDF62621ED2900A9BE40 /* RemoveAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDF52621ED2900A9BE40 /* RemoveAccountCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +90,10 @@
 		53659CED262192D300CFF49E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		53659CF1262192E700CFF49E /* PreferencesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesPresenter.swift; sourceTree = "<group>"; };
 		53659CF52621934600CFF49E /* WFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFViewController.swift; sourceTree = "<group>"; };
+		53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationControlsCell.swift; sourceTree = "<group>"; };
+		53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableNotificationsCell.swift; sourceTree = "<group>"; };
+		53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingEmailCell.swift; sourceTree = "<group>"; };
+		53D7CDF52621ED2900A9BE40 /* RemoveAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAccountCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,9 +132,9 @@
 		53131D13262029B600799629 /* Account main page */ = {
 			isa = PBXGroup;
 			children = (
+				53659C9A26202AE000CFF49E /* Table cells */,
 				53131D00261EFD5400799629 /* AccountViewController.swift */,
 				53131D04261EFE5D00799629 /* AccountPresenter.swift */,
-				53659C9A26202AE000CFF49E /* Table cells */,
 			);
 			path = "Account main page";
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 		53659CE32621925900CFF49E /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				53D7CDE02621CD7D00A9BE40 /* Table cells */,
 				53659CED262192D300CFF49E /* PreferencesViewController.swift */,
 				53659CF1262192E700CFF49E /* PreferencesPresenter.swift */,
 			);
@@ -245,6 +254,7 @@
 		53659CE42621927200CFF49E /* Your Details */ = {
 			isa = PBXGroup;
 			children = (
+				53D7CDE12621CD9800A9BE40 /* Table cells */,
 				53659CE5262192AF00CFF49E /* YourDetailsViewController.swift */,
 				53659CE9262192C200CFF49E /* YourDetailsPresenter.swift */,
 			);
@@ -258,6 +268,32 @@
 				5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */,
 			);
 			path = "Base classes";
+			sourceTree = "<group>";
+		};
+		53D7CDE02621CD7D00A9BE40 /* Table cells */ = {
+			isa = PBXGroup;
+			children = (
+				53D7CDE82621D09800A9BE40 /* Notification controls */,
+			);
+			path = "Table cells";
+			sourceTree = "<group>";
+		};
+		53D7CDE12621CD9800A9BE40 /* Table cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Table cells";
+			sourceTree = "<group>";
+		};
+		53D7CDE82621D09800A9BE40 /* Notification controls */ = {
+			isa = PBXGroup;
+			children = (
+				53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */,
+				53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */,
+				53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */,
+				53D7CDF52621ED2900A9BE40 /* RemoveAccountCell.swift */,
+			);
+			path = "Notification controls";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +407,8 @@
 				53659CF2262192E700CFF49E /* PreferencesPresenter.swift in Sources */,
 				53659C9E26202AF900CFF49E /* AMPLinksCell.swift in Sources */,
 				53659CA22620336E00CFF49E /* AMPAccountSectionCell.swift in Sources */,
+				53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */,
+				53D7CDF62621ED2900A9BE40 /* RemoveAccountCell.swift in Sources */,
 				53659CE6262192AF00CFF49E /* YourDetailsViewController.swift in Sources */,
 				531F1376260B6B9000F0FA7E /* ValidatePostcodeService.swift in Sources */,
 				531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */,
@@ -378,12 +416,14 @@
 				53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */,
 				53659CEA262192C200CFF49E /* YourDetailsPresenter.swift in Sources */,
 				53131C812611DCE900799629 /* AccountSectionViewModel.swift in Sources */,
+				53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */,
 				53131CFB261EFBAD00799629 /* AccountCoordinator.swift in Sources */,
 				531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */,
 				53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */,
 				53659CF62621934600CFF49E /* WFViewController.swift in Sources */,
 				53131D05261EFE5D00799629 /* AccountPresenter.swift in Sources */,
 				531F1375260B6B9000F0FA7E /* UKAddress.swift in Sources */,
+				53D7CDE32621CE2D00A9BE40 /* NotificationControlsCell.swift in Sources */,
 				5342E84226219E47001A56F5 /* BaseAccountPresenter.swift in Sources */,
 				531F1373260B6B9000F0FA7E /* AddressCaptureViewController.swift in Sources */,
 				53131D01261EFD5400799629 /* AccountViewController.swift in Sources */,

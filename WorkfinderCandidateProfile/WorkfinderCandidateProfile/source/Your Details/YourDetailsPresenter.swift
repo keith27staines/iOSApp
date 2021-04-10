@@ -6,6 +6,7 @@
 //
 
 import WorkfinderCommon
+import WorkfinderServices
 
 class YourDetailsPresenter: BaseAccountPresenter {
     
@@ -96,5 +97,6 @@ class YourDetailsPresenter: BaseAccountPresenter {
         case .links: return true
         }
     }
+
 }
 
