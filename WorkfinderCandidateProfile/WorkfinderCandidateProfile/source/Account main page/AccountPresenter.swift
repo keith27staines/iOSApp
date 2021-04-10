@@ -54,13 +54,9 @@ class AccountPresenter: BaseAccountPresenter {
         return appVersion
     }
     
-}
-
-
-extension AccountPresenter: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
+    override func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = TableSection(rawValue: section) else { return 0 }
         switch section {
         case .header: return 1
@@ -69,7 +65,7 @@ extension AccountPresenter: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
         let repo = UserRepository()
         let user = repo.loadUser()
@@ -105,10 +101,7 @@ extension AccountPresenter: UITableViewDataSource {
             return result + (String(substring.first ?? " "))
         }
     }
-}
 
-
-extension AccountPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let section = TableSection(rawValue: indexPath.section) else { return }

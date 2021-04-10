@@ -29,13 +29,9 @@ class PreferencesPresenter: BaseAccountPresenter {
         ),
     ]
     
-}
-
-
-extension PreferencesPresenter: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
+    override func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = TableSection(rawValue: section) else { return 0 }
         switch section {
         case .header: return 1
@@ -44,7 +40,7 @@ extension PreferencesPresenter: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
         let repo = UserRepository()
         let user = repo.loadUser()
@@ -80,10 +76,7 @@ extension PreferencesPresenter: UITableViewDataSource {
             return result + (String(substring.first ?? " "))
         }
     }
-}
 
-
-extension PreferencesPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let section = TableSection(rawValue: indexPath.section) else { return }

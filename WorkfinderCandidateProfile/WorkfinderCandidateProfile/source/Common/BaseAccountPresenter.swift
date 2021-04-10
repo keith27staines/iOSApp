@@ -10,7 +10,8 @@ import WorkfinderCommon
 import WorkfinderServices
 import UIKit
 
-class BaseAccountPresenter: NSObject {
+class BaseAccountPresenter: NSObject, UITableViewDataSource, UITableViewDelegate {
+    
     var candidateRepository: UserRepositoryProtocol = UserRepository()
     weak var coordinator: AccountCoordinator?
     var service: AccountServiceProtocol
@@ -38,6 +39,18 @@ class BaseAccountPresenter: NSObject {
                 completion(error)
             }
         }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
     
     init(coordinator: AccountCoordinator, accountService: AccountServiceProtocol) {

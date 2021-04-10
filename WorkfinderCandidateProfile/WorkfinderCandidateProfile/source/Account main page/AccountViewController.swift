@@ -11,19 +11,9 @@ import WorkfinderUI
 
 class AccountViewController: WFViewController {
 
-    let presenter: AccountPresenter
+    var accountPresenter: AccountPresenter { presenter as! AccountPresenter }
     
-    lazy var tableView: UITableView = {
-        let table = UITableView(frame: CGRect.zero, style: .grouped)
-        table.dataSource = presenter
-        table.delegate = presenter
-        table.estimatedRowHeight = UITableView.automaticDimension
-        table.rowHeight = UITableView.automaticDimension
-        table.tableFooterView = footer
-        return table
-    }()
-    
-    func registerTableCells() {
+    override func registerTableCells() {
         tableView.register(AMPHeaderCell.self, forCellReuseIdentifier: AMPHeaderCell.reuseIdentifier)
         tableView.register(AMPAccountSectionCell.self, forCellReuseIdentifier: AMPAccountSectionCell.reuseIdentifier)
         tableView.register(AMPLinksCell.self, forCellReuseIdentifier: AMPLinksCell.reuseIdentifier)
@@ -46,50 +36,21 @@ class AccountViewController: WFViewController {
         return label
     }()
     
-    override func viewDidLoad() {
-        configureViews()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadPresenter), name: .wfDidLoginCandidate, object: nil)
+    override func reloadData() {
+        super.reloadData()
+        footerLabel.text = accountPresenter.footerLabelText
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        configureNavigationBar()
-        reloadPresenter()
+    override func configureViews() {
+        super.configureViews()
+        tableView.tableFooterView = footer
     }
     
-    @objc func reloadPresenter() {
-        reloadData()
-        presenter.reloadPresenter() { [weak self] (optionalError) in
-            guard let self = self else { return }
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
-                self.reloadPresenter()
-            }
-            self.reloadData()
-        }
-    }
-    
-    func reloadData() {
-        tableView.reloadData()
-        footerLabel.text = presenter.footerLabelText
-    }
-    
-    func configureNavigationBar() {
+    override func configureNavigationBar() {
+        super.configureNavigationBar()
         navigationItem.title = "Account"
-        styleNavigationController()
     }
     
-    func configureViews() {
-        let guide = view.safeAreaLayoutGuide
-        view.addSubview(tableView)
-        tableView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor)
-        registerTableCells()
-    }
-    
-    init(coordinator: AccountCoordinator, presenter: AccountPresenter) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
 
