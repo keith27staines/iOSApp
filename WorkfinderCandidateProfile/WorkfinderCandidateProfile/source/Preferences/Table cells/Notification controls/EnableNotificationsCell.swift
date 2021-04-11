@@ -13,7 +13,8 @@ class EnableNotificationsCell: UITableViewCell {
     static let reuseIdentifier = "EnableNotificationsCell"
     lazy var title: UILabel = {
         let label = UILabel()
-        label.text = "Enable Notifications"
+        label.numberOfLines = 0
+        label.text = "Enable notifications in iPhone settings"
         label.textAlignment = .left
         return label
     }()

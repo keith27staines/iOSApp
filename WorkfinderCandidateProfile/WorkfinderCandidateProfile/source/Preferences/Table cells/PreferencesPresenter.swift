@@ -11,6 +11,8 @@ import WorkfinderServices
 
 class PreferencesPresenter: BaseAccountPresenter {
     
+    var viewController: PreferencesViewController?
+    
     enum TableSection: Int, CaseIterable {
         case appNotifications
         case marketingEmails
@@ -29,8 +31,27 @@ class PreferencesPresenter: BaseAccountPresenter {
     private var isLoggedIn: Bool { UserRepository().isCandidateLoggedIn }
     private var isPushNotificationsEnabled: Bool = false
     private var isShowingOpenIOSSettings: Bool {
-        !isPushNotificationsEnabled // && isLoggedIn
+        guard isLoggedIn else { return false }
+        return !isPushNotificationsEnabled
     }
+    
+    lazy private var notificationPreferences: NotificationPreferences = {
+        NotificationPreferences(
+            isDirty: false,
+            isEnabled: isPushNotificationsEnabled,
+            allowApplicationUpdates: true,
+            allowInterviewUpdates: true,
+            allowRecommendations: true
+        )
+    }()
+    
+    lazy private var emailPreferences: EmailPreferences = {
+        EmailPreferences(
+            isDirty: false,
+            isEnabled: isLoggedIn,
+            allowMarketingEmails: true
+        )
+    }()
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         self.tableView = tableView
@@ -73,31 +94,26 @@ class PreferencesPresenter: BaseAccountPresenter {
     
     private func getNotificationControlsCell(_ table: UITableView) -> UITableViewCell {
         guard let cell = table.dequeueReusableCell(withIdentifier: NotificationControlsCell.reuseIdentifier) as? NotificationControlsCell else { return  UITableViewCell() }
-        let preferences = NotificationPreferences(
-            isDirty: false,
-            isEnabled: isPushNotificationsEnabled,
-            allowApplicationUpdates: true,
-            allowInterviewUpdates: true,
-            allowRecommendations: true
-        )
-        cell.configureWith(preferences: preferences)
+        cell.configureWith(preferences: notificationPreferences)
         return cell
     }
     
     private func getMarketingEMailCell(_ table: UITableView) -> UITableViewCell {
         guard let cell = table.dequeueReusableCell(withIdentifier: MarketingEmailCell.reuseIdentifier) as? MarketingEmailCell else { return  UITableViewCell() }
-        let preferences = EmailPreferences(
-            isDirty: false,
-            isEnabled: isLoggedIn,
-            allowMarketingEmails: true
-        )
-        cell.configureWith(preferences: preferences)
+        cell.configureWith(preferences: emailPreferences)
         return cell
     }
     
     private func getRemoveAccountCell(_ table: UITableView) -> UITableViewCell {
         guard let cell = table.dequeueReusableCell(withIdentifier: RemoveAccountCell.reuseIdentifier) as? RemoveAccountCell else { return  UITableViewCell() }
+        cell.configureWith(enabled: isLoggedIn) { [weak self] in
+            self?.removeAccountRequested()
+        }
         return cell
+    }
+    
+    private func removeAccountRequested() {
+        viewController?.removeAccountRequested()
     }
     
     private func openIOSSettings() {
@@ -122,10 +138,6 @@ class PreferencesPresenter: BaseAccountPresenter {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
-        let repo = UserRepository()
-        let user = repo.loadUser()
-        let candidate = repo.loadCandidate()
-        
         switch section {
         case .appNotifications:
             switch indexPath.row {

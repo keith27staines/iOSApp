@@ -9,14 +9,6 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-struct NotificationPreferences {
-    var isDirty: Bool = false
-    var isEnabled: Bool = false
-    var allowApplicationUpdates: Bool = true { didSet { isDirty = true } }
-    var allowInterviewUpdates: Bool = true  { didSet { isDirty = true } }
-    var allowRecommendations: Bool = true  { didSet { isDirty = true } }
-}
-
 class NotificationControlsCell: UITableViewCell {
     
     static let reuseIdentifier = "NotificationControlsCell"
@@ -31,11 +23,24 @@ class NotificationControlsCell: UITableViewCell {
         applicationUpdatesSwitch.switchButton.isOn = preferences.allowApplicationUpdates
         interviewUpdatesSwitch.switchButton.isOn = preferences.allowInterviewUpdates
         recommendationsSwitch.switchButton.isOn = preferences.allowRecommendations
+
+        applicationUpdatesSwitch.valueDidChange = { isAllowed in
+            preferences.allowApplicationUpdates = isAllowed
+        }
+        interviewUpdatesSwitch.valueDidChange = { isAllowed in
+            preferences.allowInterviewUpdates = isAllowed
+        }
+        recommendationsSwitch.valueDidChange = { isAllowed in
+            preferences.allowRecommendations = isAllowed
+        }
+        
     }
     
     lazy var label: UILabel = {
         let label = UILabel()
-        label.text = "Notify me when"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.textColor = UIColor.init(white: 0.56, alpha: 1)
+        label.text = "Notify me when..."
         return label
     }()
     
@@ -50,7 +55,7 @@ class NotificationControlsCell: UITableViewCell {
     }()
     
     lazy var recommendationsSwitch: LabelledSwitch = {
-        LabelledSwitch(text: "We have employers of interest", isOn: false)
+        LabelledSwitch(text: "We find employers of interest", isOn: false)
     }()
     
     lazy var stack: UIStackView = {
@@ -63,7 +68,7 @@ class NotificationControlsCell: UITableViewCell {
         )
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.spacing = 8
+        stack.spacing = 4
         return stack
     }()
     
@@ -87,18 +92,25 @@ class LabelledSwitch: UIView {
     lazy var switchButton: UISwitch = {
         let toggle = UISwitch()
         toggle.addTarget(self, action: #selector(onValueChanged), for: .valueChanged)
-        toggle.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        toggle.setContentHuggingPriority(.required, for: .horizontal)
         return toggle
     }()
     
     private var label:UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.textColor = UIColor.init(white: 0.56, alpha: 1)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     
     lazy var stack: UIStackView = {
+        let spacer = UIView()
+        spacer.widthAnchor.constraint(equalToConstant: 20).isActive = true
         let stack = UIStackView(arrangedSubviews: [
                 label,
+                spacer,
                 switchButton
             ]
         )

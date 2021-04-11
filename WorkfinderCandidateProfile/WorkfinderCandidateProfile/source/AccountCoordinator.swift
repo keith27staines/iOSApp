@@ -42,4 +42,8 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         let vc = YourDetailsViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }
+    
+    func permanentlyRemoveAccount(completion: @escaping (Error?) -> Void) {
+        completion(nil)
+    }
 }

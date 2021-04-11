@@ -9,12 +9,6 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-struct EmailPreferences {
-    var isDirty: Bool = false
-    var isEnabled: Bool = true
-    var allowMarketingEmails: Bool = true { didSet { isDirty = true } }
-}
-
 class MarketingEmailCell: UITableViewCell {
     
     static let reuseIdentifier = "MarketingEmailCell"
@@ -28,11 +22,15 @@ class MarketingEmailCell: UITableViewCell {
     func configureWith(preferences: EmailPreferences) {
         emailSwitch.switchButton.isEnabled = preferences.isEnabled
         emailSwitch.switchButton.isOn = preferences.allowMarketingEmails
+        emailSwitch.valueDidChange = { isAllowed in
+            preferences.allowMarketingEmails = isAllowed
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        textLabel?.text = "MarketingEmailCell"
+        contentView.addSubview(emailSwitch)
+        emailSwitch.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 17, left: 26, bottom: 17, right: 20))
     }
     
     required init?(coder: NSCoder) {

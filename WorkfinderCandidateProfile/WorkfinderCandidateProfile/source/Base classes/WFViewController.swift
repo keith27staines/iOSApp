@@ -12,6 +12,7 @@ import WorkfinderUI
 class WFViewController: UIViewController {
     lazy var messageHandler: UserMessageHandler = UserMessageHandler(presenter: self)
     let presenter: BaseAccountPresenter
+    var coordinator: AccountCoordinator?
     
     lazy var tableView: UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -62,6 +63,7 @@ class WFViewController: UIViewController {
     }
     
     init(coordinator: AccountCoordinator, presenter: BaseAccountPresenter) {
+        self.coordinator = coordinator
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
