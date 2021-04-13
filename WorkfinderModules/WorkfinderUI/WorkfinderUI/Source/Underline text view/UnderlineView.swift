@@ -4,8 +4,8 @@ import UIKit
 public class UnderlineView: UIView {
     
     var valueConstraint: NSLayoutConstraint!
-    let goodColor: UIColor
-    let badColor: UIColor
+    public let goodColor: UIColor
+    public let badColor: UIColor
     
     lazy var lineView: UIView = {
         let view = UIView()

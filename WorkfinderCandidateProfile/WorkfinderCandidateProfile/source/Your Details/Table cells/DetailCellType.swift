@@ -23,7 +23,7 @@ enum DetailCellType {
         return { string in
             guard let string = string else { return ValidityState.isNil }
             let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
-            if isRequired && trimmed.count == 0 { return .empty }
+            if !isRequired && trimmed.count == 0 { return .empty }
             return (textValidator?(trimmed) ?? true) ? .good : .bad
         }
     }

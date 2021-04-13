@@ -59,6 +59,7 @@ class DetailCell:  UITableViewCell {
         return label
     }()
     
+/*
     lazy var textfield:  UITextField = {
         let text = UITextField()
         text.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -69,6 +70,34 @@ class DetailCell:  UITableViewCell {
         text.delegate = self
         return text
     }()
+*/
+    
+    lazy var textfieldStack: ValidatedTextFieldStack = {
+        let stack = ValidatedTextFieldStack(state: .empty)
+        stack.textfield.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        stack.textfield.textColor = UIColor.init(white: 0.15, alpha: 1)
+        stack.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        stack.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        stack.textfield.delegate = self
+        stack.textfield.addTarget(self, action: #selector(textChanged), for: .editingChanged)
+        return stack
+    }()
+    
+    @objc func textChanged() {
+        guard let text = textfieldStack.textfield.text else {
+            textfieldStack.state = .empty
+            return
+        }
+        let validity = presenter?.type.textValidityState?(text) ?? ValidityState.empty
+        switch validity {
+        case .good:
+            textfieldStack.state = .good
+        case .bad:
+            textfieldStack.state = .bad
+        case .empty, .isNil:
+            textfieldStack.state = .empty
+        }
+    }
     
     lazy var dateField: UITextField = {
         let text = UITextField()
@@ -152,10 +181,10 @@ class DetailCell:  UITableViewCell {
         titleLabel.isHidden = type.title == nil
         titleAsterisk.isHidden = !type.isRequired || titleLabel.isHidden
         descriptionLabel.isHidden = type.description == nil
-        
+        let textfield = textfieldStack.textfield
         switch type.dataType {
         case .text(let textType):
-            leftStack.addArrangedSubview(textfield)
+            leftStack.addArrangedSubview(textfieldStack)
             textfield.placeholder = type.placeholderText
             switch textType {
             case .fullname:
@@ -206,11 +235,11 @@ class DetailCell:  UITableViewCell {
 
 extension DetailCell: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        presenter?.type.textValidator?(textfield.text) ?? true
+        presenter?.type.textValidator?(textfieldStack.textfield.text) ?? true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textfield.resignFirstResponder()
+        return textfieldStack.textfield.resignFirstResponder()
         
     }
 }

@@ -29,6 +29,7 @@
 		531F1381260B6C9B00F0FA7E /* PostcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */; };
 		532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DA2625B9360025F3E4 /* DetailCellType.swift */; };
 		532879DF2625B9C70025F3E4 /* Picklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DE2625B9C70025F3E4 /* Picklist.swift */; };
+		532879E92625F2760025F3E4 /* ValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879E82625F2760025F3E4 /* ValidatedTextField.swift */; };
 		5342E84226219E47001A56F5 /* BaseAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */; };
 		53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659C9626202AB400CFF49E /* AMPHeaderCell.swift */; };
 		53659C9E26202AF900CFF49E /* AMPLinksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659C9D26202AF900CFF49E /* AMPLinksCell.swift */; };
@@ -89,6 +90,7 @@
 		531F1384260B6CDA00F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532879DA2625B9360025F3E4 /* DetailCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellType.swift; sourceTree = "<group>"; };
 		532879DE2625B9C70025F3E4 /* Picklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picklist.swift; sourceTree = "<group>"; };
+		532879E82625F2760025F3E4 /* ValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedTextField.swift; sourceTree = "<group>"; };
 		5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccountPresenter.swift; sourceTree = "<group>"; };
 		53659C9626202AB400CFF49E /* AMPHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPHeaderCell.swift; sourceTree = "<group>"; };
 		53659C9D26202AF900CFF49E /* AMPLinksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPLinksCell.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				53659CE5262192AF00CFF49E /* YourDetailsViewController.swift */,
 				53659CE9262192C200CFF49E /* YourDetailsPresenter.swift */,
 				53D7CDE12621CD9800A9BE40 /* Table cells */,
+				532879E82625F2760025F3E4 /* ValidatedTextField.swift */,
 			);
 			path = "Your Details";
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				532879E92625F2760025F3E4 /* ValidatedTextField.swift in Sources */,
 				53659CF2262192E700CFF49E /* PreferencesPresenter.swift in Sources */,
 				53659C9E26202AF900CFF49E /* AMPLinksCell.swift in Sources */,
 				53659CA22620336E00CFF49E /* AMPAccountSectionCell.swift in Sources */,

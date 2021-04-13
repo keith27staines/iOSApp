@@ -1,17 +1,18 @@
+//
+//  ValidatedTextField.swift
+//  WorkfinderCandidateProfile
+//
+//  Created by Keith Staines on 13/04/2021.
+//
 
 import UIKit
+import WorkfinderCommon
+import WorkfinderUI
 
-public class UnderlinedNextResponderTextFieldStack: UIStackView {
+public class ValidatedTextFieldStack: UIStackView {
     
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor(red: 117, green: 117, blue: 117)
-        return label
-    }()
-    
-    public var textfield: NextResponderTextField = {
-        let textField = NextResponderTextField()
+    public lazy var textfield: UITextField = {
+        let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.addTarget(self, action: #selector(_textChanged), for: .editingChanged)
         textField.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
@@ -66,28 +67,27 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
     
     public var state: UnderlineView.State = .empty {
         didSet {
-            underline.state = state
-            greenTick.isHidden = !(state == .good)
+            setState(state)
         }
     }
     
-    public init(fieldName: String,
-                goodUnderlineColor: UIColor = WorkfinderColors.primaryColor,
+    func setState(_ state: UnderlineView.State) {
+        underline.state = state
+        greenTick.isHidden = !(state == .good)
+    }
+    
+    public init(goodUnderlineColor: UIColor = WorkfinderColors.primaryColor,
                 badUnderlineColor: UIColor = UIColor.orange,
-                state: UnderlineView.State,
-                nextResponderField: UIResponder? = nil) {
+                state: UnderlineView.State
+    ) {
         underline = UnderlineView(state: state, goodColor: goodUnderlineColor, badColor: badUnderlineColor)
         super.init(frame: CGRect.zero)
-        self.label.text = fieldName
-        textfield.nextResponderField = nextResponderField
-        addArrangedSubview(label)
         addArrangedSubview(textImageStack)
         addArrangedSubview(underline)
         spacing = 8
         axis = .vertical
+        setState(state)
     }
     
     required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
-
-
