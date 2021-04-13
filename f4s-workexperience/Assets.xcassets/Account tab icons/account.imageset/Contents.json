@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "tabbar_account.png",
+      "filename" : "AccountTab.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tabbar_account@2x.png",
+      "filename" : "AccountTab@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tabbar_account@3x.png",
+      "filename" : "AccountTab@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

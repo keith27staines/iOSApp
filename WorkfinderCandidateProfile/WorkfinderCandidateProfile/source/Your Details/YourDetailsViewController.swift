@@ -17,6 +17,32 @@ class YourDetailsViewController:  WFViewController {
 
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addNotificationListeners()
+    }
+    
+    private func addNotificationListeners() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            tableView.contentInset = .zero
+        } else {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        tableView.scrollIndicatorInsets = tableView.contentInset
+    }
+    
     override func configureNavigationBar() {
         super.configureNavigationBar()
         navigationItem.title = "Your Details"
@@ -30,4 +56,22 @@ class YourDetailsViewController:  WFViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+}
+
+extension UIView {
+    var firstResponder: UIView? {
+        guard !isFirstResponder else { return self }
+
+        for subview in subviews {
+            if let firstResponder = subview.firstResponder {
+                return firstResponder
+            }
+        }
+
+        return nil
+    }
 }

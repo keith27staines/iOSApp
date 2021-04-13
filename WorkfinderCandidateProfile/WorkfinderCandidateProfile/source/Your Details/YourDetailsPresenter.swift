@@ -10,93 +10,119 @@ import WorkfinderServices
 
 class YourDetailsPresenter: BaseAccountPresenter {
     
+    var viewController: YourDetailsViewController?
+    
     enum TableSection: Int, CaseIterable {
-        case header
-        case accountSections
-        case links
+        case yourInformation
+        case additionalInformation
+        
+        var title: String {
+            switch self {
+            case .yourInformation: return "Your Notifications"
+            case .additionalInformation: return "Additional information"
+            }
+        }
     }
     
-    let links: [WorkfinderContentType] = [.about, .faqs, .terms, .privacyPolicy]
-    let accountSections: [AccountSectionInfo] = [
-        AccountSectionInfo(
-            image: UIImage(named: "your_details_icon"),
-            title: "Your Details",
-            progress: 0.75
-        ),
-        AccountSectionInfo(
-            image: UIImage(named: "settings_icon"),
-            title: "Account Preferences",
-            progress: 0
-        ),
+    let allCellPresenters: [[DetailCellPresenter]] = [
+        [
+            DetailCellPresenter(type: .fullname, text: "Full name"),
+            DetailCellPresenter(type: .email, text: "Email@Address.com"),
+            DetailCellPresenter(type: .password),
+            DetailCellPresenter(type: .phone, text: "07757262284"),
+            DetailCellPresenter(type: .dob, date: Date())
+        ],
+        [
+            DetailCellPresenter(type: .postcode, text: "HU89AG"),
+            DetailCellPresenter(type: .languages, picklistItems: []),
+            DetailCellPresenter(type: .gender, picklistItems: []),
+            DetailCellPresenter(type: .ethnicity, picklistItems: [])
+        ]
     ]
     
-    override func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
+    private weak var tableView: UITableView?
+    private var isLoggedIn: Bool { UserRepository().isCandidateLoggedIn }
+    private var isPushNotificationsEnabled: Bool = false
+    private var isShowingOpenIOSSettings: Bool {
+        guard isLoggedIn else { return false }
+        return !isPushNotificationsEnabled
+    }
+    
+    lazy private var notificationPreferences: NotificationPreferences = {
+        NotificationPreferences(
+            isDirty: false,
+            isEnabled: isPushNotificationsEnabled,
+            allowApplicationUpdates: true,
+            allowInterviewUpdates: true,
+            allowRecommendations: true
+        )
+    }()
+    
+    lazy private var emailPreferences: EmailPreferences = {
+        EmailPreferences(
+            isDirty: false,
+            isEnabled: isLoggedIn,
+            allowMarketingEmails: true
+        )
+    }()
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        self.tableView = tableView
+        return TableSection.allCases.count
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = TableSection(rawValue: section) else { return 0 }
         switch section {
-        case .header: return 1
-        case .accountSections: return accountSections.count
-        case .links: return links.count
+        case .yourInformation: return 5
+        case .additionalInformation: return 4
+        }
+    }
+    
+    override init(coordinator: AccountCoordinator, accountService: AccountServiceProtocol) {
+        super.init(coordinator: coordinator, accountService: accountService)
+    
+    }
+            
+    private func getNotificationControlsCell(_ table: UITableView) -> UITableViewCell {
+        guard let cell = table.dequeueReusableCell(withIdentifier: NotificationControlsCell.reuseIdentifier) as? NotificationControlsCell else { return  UITableViewCell() }
+        cell.configureWith(preferences: notificationPreferences)
+        return cell
+    }
+
+        
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let section = TableSection(rawValue: section) else { return nil }
+        switch section {
+        case .yourInformation:
+            return "Your information"
+        case .additionalInformation:
+            return "Additional information"
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
-        let repo = UserRepository()
-        let user = repo.loadUser()
-        let candidate = repo.loadCandidate()
-        
-        switch section {
-        case .header:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AMPHeaderCell.reuseIdentifier) as? AMPHeaderCell else { return UITableViewCell() }
-            cell.configureWith(
-                avatar: UIImage(named: "avatar"),
-                fullName: candidate.fullName,
-                initials: initialsFromFullName(candidate.fullName),
-                email: user.email
-            )
-            return cell
-        case .accountSections:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AMPAccountSectionCell.reuseIdentifier) as? AMPAccountSectionCell else { return UITableViewCell() }
-            cell.configureWith(accountSections[indexPath.row])
-            return cell
-        
-        case .links:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AMPLinksCell.reuseIdentifier) as? AMPLinksCell else { return UITableViewCell() }
-            cell.configureWith(
-                contentType: links[indexPath.row])
-            return cell
-        }
+        let presenter = presenterForIndexPath(indexPath)
+        let cell = DetailCell()
+        cell.configureWith(presenter: presenter)
+        return cell
     }
     
-    func initialsFromFullName(_ name: String?) -> String {
-        guard let name = name, name.count > 0 else { return "" }
-        let names = name.split(separator: " ")
-        return names.reduce("") { (result, substring) -> String in
-            return result + (String(substring.first ?? " "))
-        }
+    func presenterForIndexPath(_ indexPath: IndexPath) -> DetailCellPresenter {
+        allCellPresenters[indexPath.section][indexPath.row]
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let section = TableSection(rawValue: indexPath.section) else { return }
-        switch section {
-        case .header: return
-        case .accountSections: return
-        case .links: coordinator?.presentContent(links[indexPath.row])
-        }
+        let presenter = presenterForIndexPath(indexPath)
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         guard let section = TableSection(rawValue: indexPath.section) else { return false }
-        switch section {
-        
-        case .header: return false
-        case .accountSections: return true
-        case .links: return true
-        }
+        return true
     }
-
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
-
