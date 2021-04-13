@@ -54,7 +54,7 @@ class DetailCellPresenter {
         switch self.type {
         case .fullname: return nil
         case .email: return nil
-        case .password: return nil
+        case .password: return "change"
         case .phone: return nil
         case .dob: return nil
         case .postcode: return nil

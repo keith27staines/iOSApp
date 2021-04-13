@@ -66,6 +66,7 @@ class DetailCell:  UITableViewCell {
         text.borderStyle = .roundedRect
         text.setContentHuggingPriority(.defaultLow, for: .horizontal)
         text.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        text.delegate = self
         return text
     }()
     
@@ -122,6 +123,7 @@ class DetailCell:  UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = WorkfinderColors.primaryColor
+        label.textColor = WorkfinderColors.primaryColor
         label.numberOfLines = 0
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
@@ -172,7 +174,7 @@ class DetailCell:  UITableViewCell {
                 textfield.textContentType = .telephoneNumber
                 textfield.keyboardType = .phonePad
             case .postcode:
-                textfield.autocapitalizationType = .none
+                textfield.autocapitalizationType = .allCharacters
                 textfield.autocorrectionType = .no
                 textfield.textContentType = .postalCode
                 textfield.keyboardType = .default
@@ -199,5 +201,16 @@ class DetailCell:  UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension DetailCell: UITextFieldDelegate {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        presenter?.type.textValidator?(textfield.text) ?? true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textfield.resignFirstResponder()
+        
     }
 }

@@ -12,10 +12,7 @@ class YourDetailsViewController:  WFViewController {
     
     var yourDetailsPresenter: YourDetailsPresenter { presenter as! YourDetailsPresenter }
     
-    override func registerTableCells() {
-        // tableView.register(AMPHeaderCell.self, forCellReuseIdentifier: AMPHeaderCell.reuseIdentifier)
-
-    }
+    override func registerTableCells() {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,18 +57,4 @@ class YourDetailsViewController:  WFViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-}
-
-extension UIView {
-    var firstResponder: UIView? {
-        guard !isFirstResponder else { return self }
-
-        for subview in subviews {
-            if let firstResponder = subview.firstResponder {
-                return firstResponder
-            }
-        }
-
-        return nil
-    }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WorkfinderCommon
 
 enum DetailCellType {
     case fullname
@@ -18,20 +19,37 @@ enum DetailCellType {
     case gender
     case ethnicity
     
+    var textValidityState: ((String?) -> ValidityState)? {
+        return { string in
+            guard let string = string else { return ValidityState.isNil }
+            let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+            if isRequired && trimmed.count == 0 { return .empty }
+            return (textValidator?(trimmed) ?? true) ? .good : .bad
+        }
+    }
+    
     var textValidator: ((String?) -> Bool)? {
         switch self {
         case .fullname:
-            return { string in true }
+            return { string in
+                string?.isValidFullname() ?? !self.isRequired
+            }
         case .email:
-            return { string in true }
+            return { string in
+                string?.isEmail() ?? !self.isRequired
+            }
         case .password:
             return nil
         case .phone:
-            return { string in true }
+            return { string in
+                string?.isPhoneNumber() ?? !self.isRequired
+            }
         case .dob:
             return nil
         case .postcode:
-            return { string in true }
+            return { string in
+                string?.isUKPostcode() ?? !self.isRequired
+            }
         case .languages:
             return nil
         case .gender:
@@ -45,7 +63,7 @@ enum DetailCellType {
         switch self {
         case .fullname: return "Full Name"
         case .email: return "Email Address"
-        case .password: return "Change Password"
+        case .password: return "Password"
         case .phone: return "Phone Number"
         case .dob: return "Date of Birth"
         case .postcode: return "Postcode"
@@ -153,4 +171,11 @@ enum StringType {
     case email
     case phone
     case postcode
+}
+
+enum ValidityState {
+    case good
+    case bad
+    case empty
+    case isNil
 }
