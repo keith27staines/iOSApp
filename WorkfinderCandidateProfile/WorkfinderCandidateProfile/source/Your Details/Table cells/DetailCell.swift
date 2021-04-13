@@ -235,7 +235,10 @@ class DetailCell:  UITableViewCell {
 
 extension DetailCell: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        presenter?.type.textValidator?(textfieldStack.textfield.text) ?? true
+        guard let text = textField.text, text.isEmpty == false else {
+            return (presenter?.type.isRequired ?? false) ? false : true
+        }
+        return presenter?.type.textValidator?(textfieldStack.textfield.text) ?? true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
