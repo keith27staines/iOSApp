@@ -41,7 +41,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
     ]
     
     lazy var picklists: [AccountPicklist] = {
-        AccountPicklistType.allCases.map { AccountPicklist(type: $0) }
+        AccountPicklistType.allCases.map { AccountPicklist(type: $0, service: service) }
     }()
     
     func picklistFor(type: AccountPicklistType) -> AccountPicklist {
