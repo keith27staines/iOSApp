@@ -126,6 +126,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
         switch presenter.type.dataType {
         case .picklist(let picklistType):
             coordinator?.showPicklist(picklistFor(type: picklistType))
+        case .none:
+            coordinator?.showChangePassword()
         default:
             return
         }

@@ -50,6 +50,13 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
+    func showChangePassword() {
+        let service = AccountService(networkConfig: injected.networkConfig)
+        let presenter = ChangePasswordPresenter(coordinator: self, accountService: service)
+        let vc = ChangePasswordViewController(coordinator: self, presenter: presenter)
+        navigationRouter.push(viewController: vc, animated: true)
+    }
+    
     func permanentlyRemoveAccount(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
