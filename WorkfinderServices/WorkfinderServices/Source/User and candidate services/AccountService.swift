@@ -11,6 +11,9 @@ import WorkfinderCommon
 
 public protocol AccountServiceProtocol {
     func getAccount(completion: @escaping (Result<Account,Error>) -> Void)
+    func getLanguagesPicklistcompletion(completion: @escaping (Result<[Language], Error>) -> Void)
+    func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void)
+    func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void)
 }
 
 public class AccountService: WorkfinderService, AccountServiceProtocol {
@@ -60,4 +63,64 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
             }
         }
     }
+    
+    public func getLanguagesPicklistcompletion(completion: @escaping (Result<[Language], Error>) -> Void) {
+        _languagesService.getLanguages(completion: completion)
+    }
+    
+    public func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void) {
+        _ethnicitiesService.getEthnicities(completion: completion)
+    }
+    
+    public func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void) {
+        _gendersService.getGenders() { result in
+            switch result {
+            case .success(let genderStrings):
+                let genders = genderStrings.map { (genderString) -> Gender in
+                    Gender(gender: genderString)
+                }
+                completion(.success(genders))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private lazy var _gendersService: GendersService = GendersService(networkConfig: networkConfig)
+    private lazy var _languagesService: LanguagesService = LanguagesService(networkConfig: networkConfig)
+    private lazy var _ethnicitiesService: EthnicitiesService = EthnicitiesService(networkConfig: networkConfig)
+
+    private class GendersService: WorkfinderService {
+        func getGenders(completion: @escaping (Result<[String], Error>) -> Void) {
+            do {
+                let request = try buildRequest(relativePath: "genders/", queryItems: nil, verb: .get)
+                performTask(with: request, verbose: true ,completion: completion, attempting: #function)
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    private class LanguagesService: WorkfinderService {
+        func getLanguages(completion: @escaping (Result<[Language], Error>) -> Void) {
+            do {
+                let request = try buildRequest(relativePath: "languages/", queryItems: nil, verb: .get)
+                performTask(with: request, verbose: true ,completion: completion, attempting: #function)
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    private class EthnicitiesService: WorkfinderService {
+        func getEthnicities(completion: @escaping (Result<[Ethnicity], Error>) -> Void) {
+            do {
+                let request = try buildRequest(relativePath: "ethnicities/", queryItems: nil, verb: .get)
+                performTask(with: request, verbose: true ,completion: completion, attempting: #function)
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
 }

@@ -28,7 +28,7 @@
 		531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */; };
 		531F1381260B6C9B00F0FA7E /* PostcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */; };
 		532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DA2625B9360025F3E4 /* DetailCellType.swift */; };
-		532879DF2625B9C70025F3E4 /* Picklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DE2625B9C70025F3E4 /* Picklist.swift */; };
+		532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DE2625B9C70025F3E4 /* AccountPicklist.swift */; };
 		532879E92625F2760025F3E4 /* ValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879E82625F2760025F3E4 /* ValidatedTextField.swift */; };
 		5342E84226219E47001A56F5 /* BaseAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */; };
 		53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659C9626202AB400CFF49E /* AMPHeaderCell.swift */; };
@@ -39,6 +39,8 @@
 		53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CED262192D300CFF49E /* PreferencesViewController.swift */; };
 		53659CF2262192E700CFF49E /* PreferencesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CF1262192E700CFF49E /* PreferencesPresenter.swift */; };
 		53659CF62621934600CFF49E /* WFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CF52621934600CFF49E /* WFViewController.swift */; };
+		53724B542627352800908D50 /* PicklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B532627352800908D50 /* PicklistViewController.swift */; };
+		53724B5A2627353800908D50 /* PicklistPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B592627353800908D50 /* PicklistPresenter.swift */; };
 		53D7CDE32621CE2D00A9BE40 /* NotificationControlsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */; };
 		53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */; };
 		53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */; };
@@ -89,7 +91,7 @@
 		531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeTests.swift; sourceTree = "<group>"; };
 		531F1384260B6CDA00F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532879DA2625B9360025F3E4 /* DetailCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellType.swift; sourceTree = "<group>"; };
-		532879DE2625B9C70025F3E4 /* Picklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picklist.swift; sourceTree = "<group>"; };
+		532879DE2625B9C70025F3E4 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
 		532879E82625F2760025F3E4 /* ValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedTextField.swift; sourceTree = "<group>"; };
 		5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAccountPresenter.swift; sourceTree = "<group>"; };
 		53659C9626202AB400CFF49E /* AMPHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPHeaderCell.swift; sourceTree = "<group>"; };
@@ -100,6 +102,8 @@
 		53659CED262192D300CFF49E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		53659CF1262192E700CFF49E /* PreferencesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesPresenter.swift; sourceTree = "<group>"; };
 		53659CF52621934600CFF49E /* WFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFViewController.swift; sourceTree = "<group>"; };
+		53724B532627352800908D50 /* PicklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistViewController.swift; sourceTree = "<group>"; };
+		53724B592627353800908D50 /* PicklistPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistPresenter.swift; sourceTree = "<group>"; };
 		53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationControlsCell.swift; sourceTree = "<group>"; };
 		53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableNotificationsCell.swift; sourceTree = "<group>"; };
 		53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingEmailCell.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				53131CFA261EFBAD00799629 /* AccountCoordinator.swift */,
+				53724B6A26273F1600908D50 /* models */,
 				53131D13262029B600799629 /* Account main page */,
 				53659CE42621927200CFF49E /* Your Details */,
 				53659CE32621925900CFF49E /* Preferences */,
@@ -270,6 +275,7 @@
 			children = (
 				53659CE5262192AF00CFF49E /* YourDetailsViewController.swift */,
 				53659CE9262192C200CFF49E /* YourDetailsPresenter.swift */,
+				53724B522627350100908D50 /* Picklist */,
 				53D7CDE12621CD9800A9BE40 /* Table cells */,
 				532879E82625F2760025F3E4 /* ValidatedTextField.swift */,
 			);
@@ -283,6 +289,23 @@
 				5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */,
 			);
 			path = "Base classes";
+			sourceTree = "<group>";
+		};
+		53724B522627350100908D50 /* Picklist */ = {
+			isa = PBXGroup;
+			children = (
+				53724B532627352800908D50 /* PicklistViewController.swift */,
+				53724B592627353800908D50 /* PicklistPresenter.swift */,
+			);
+			path = Picklist;
+			sourceTree = "<group>";
+		};
+		53724B6A26273F1600908D50 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				532879DE2625B9C70025F3E4 /* AccountPicklist.swift */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 		53D7CDE02621CD7D00A9BE40 /* Table cells */ = {
@@ -300,7 +323,6 @@
 				53E71D5D2624770A008E90AD /* DetailCell.swift */,
 				53E71D5926244606008E90AD /* DetailCellPresenter.swift */,
 				532879DA2625B9360025F3E4 /* DetailCellType.swift */,
-				532879DE2625B9C70025F3E4 /* Picklist.swift */,
 			);
 			path = "Table cells";
 			sourceTree = "<group>";
@@ -446,12 +468,14 @@
 				531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */,
 				53D7CDFC2622F1FC00A9BE40 /* NotificationPreferences.swift in Sources */,
 				532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */,
-				532879DF2625B9C70025F3E4 /* Picklist.swift in Sources */,
+				532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */,
 				53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */,
 				53659CEA262192C200CFF49E /* YourDetailsPresenter.swift in Sources */,
+				53724B5A2627353800908D50 /* PicklistPresenter.swift in Sources */,
 				53E71D5A26244606008E90AD /* DetailCellPresenter.swift in Sources */,
 				53131C812611DCE900799629 /* AccountSectionViewModel.swift in Sources */,
 				53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */,
+				53724B542627352800908D50 /* PicklistViewController.swift in Sources */,
 				53131CFB261EFBAD00799629 /* AccountCoordinator.swift in Sources */,
 				531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */,
 				53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */,

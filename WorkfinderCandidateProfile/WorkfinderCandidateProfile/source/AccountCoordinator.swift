@@ -43,6 +43,13 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
+    func showPicklist(_ picklist: AccountPicklist) {
+        let service = AccountService(networkConfig: injected.networkConfig)
+        let presenter = PicklistPresenter(coordinator: self, service: service, picklist: picklist)
+        let vc = PicklistViewController(coordinator: self, presenter: presenter)
+        navigationRouter.push(viewController: vc, animated: true)
+    }
+    
     func permanentlyRemoveAccount(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }

@@ -13,7 +13,7 @@ class DetailCellPresenter {
     var text: String?
     var date: Date?
     var selectedItems: [CodeAndName]?
-    var picklist: Picklist?
+    var picklist: AccountPicklist?
     
     init(type: DetailCellType) {
         self.type = type
@@ -27,8 +27,9 @@ class DetailCellPresenter {
         self.type = type
     }
     
-    init(type: DetailCellType, picklistItems: [CodeAndName]) {
+    init(type: DetailCellType, picklist: AccountPicklist) {
         self.type = type
+        self.picklist = picklist
     }
     
     var isValid: Bool {
@@ -44,9 +45,7 @@ class DetailCellPresenter {
         case .phone: return .none
         case .dob: return .none
         case .postcode: return .none
-        case .languages: return .disclosureIndicator
-        case .gender: return .disclosureIndicator
-        case .ethnicity: return .disclosureIndicator
+        case .picklist(_): return .disclosureIndicator
         }
     }
     
@@ -58,9 +57,10 @@ class DetailCellPresenter {
         case .phone: return nil
         case .dob: return nil
         case .postcode: return nil
-        case .languages: return "select"
-        case .gender: return "select"
-        case .ethnicity: return "select"
+        case .picklist(_):
+            guard let picklist = picklist else { return nil }
+            let numberSelected = picklist.selectedItems.count
+            return numberSelected == 0 ? "select" :  "\(numberSelected) selected"
         }
     }
 }

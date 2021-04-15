@@ -24,7 +24,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
         }
     }
     
-    let allCellPresenters: [[DetailCellPresenter]] = [
+    lazy var allCellPresenters: [[DetailCellPresenter]] = [
         [
             DetailCellPresenter(type: .fullname, text: "Full name"),
             DetailCellPresenter(type: .email, text: "Email@Address.com"),
@@ -34,11 +34,19 @@ class YourDetailsPresenter: BaseAccountPresenter {
         ],
         [
             DetailCellPresenter(type: .postcode, text: "HU89AG"),
-            DetailCellPresenter(type: .languages, picklistItems: []),
-            DetailCellPresenter(type: .gender, picklistItems: []),
-            DetailCellPresenter(type: .ethnicity, picklistItems: [])
+            DetailCellPresenter(type: .picklist(.language), picklist: picklistFor(type: .language)),
+            DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
+            DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity))
         ]
     ]
+    
+    lazy var picklists: [AccountPicklist] = {
+        AccountPicklistType.allCases.map { AccountPicklist(type: $0) }
+    }()
+    
+    func picklistFor(type: AccountPicklistType) -> AccountPicklist {
+        picklists[type.rawValue]
+    }
     
     private weak var tableView: UITableView?
     private var isLoggedIn: Bool { UserRepository().isCandidateLoggedIn }
@@ -115,6 +123,12 @@ class YourDetailsPresenter: BaseAccountPresenter {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let presenter = presenterForIndexPath(indexPath)
+        switch presenter.type.dataType {
+        case .picklist(let picklistType):
+            coordinator?.showPicklist(picklistFor(type: picklistType))
+        default:
+            return
+        }
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {

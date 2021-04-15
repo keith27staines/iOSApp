@@ -15,9 +15,7 @@ enum DetailCellType {
     case phone
     case dob
     case postcode
-    case languages
-    case gender
-    case ethnicity
+    case picklist(AccountPicklistType)
     
     var textValidityState: ((String?) -> ValidityState)? {
         return { string in
@@ -50,11 +48,7 @@ enum DetailCellType {
             return { string in
                 string?.isUKPostcode() ?? !self.isRequired
             }
-        case .languages:
-            return nil
-        case .gender:
-            return nil
-        case .ethnicity:
+        case .picklist:
             return nil
         }
     }
@@ -67,9 +61,7 @@ enum DetailCellType {
         case .phone: return "Phone Number"
         case .dob: return "Date of Birth"
         case .postcode: return "Postcode"
-        case .languages: return "Languages"
-        case .gender: return "Gender Identity"
-        case .ethnicity: return "Ethicity"
+        case .picklist(let type): return type.title
         }
     }
     
@@ -81,9 +73,7 @@ enum DetailCellType {
         case .phone: return .text(.phone)
         case .dob: return .date
         case .postcode: return .text(.postcode)
-        case .languages: return .picklist(.language)
-        case .gender: return .picklist(.gender)
-        case .ethnicity: return .picklist(.ethnicity)
+        case .picklist(let type): return .picklist(type)
         }
     }
     
@@ -95,9 +85,7 @@ enum DetailCellType {
         case .phone: return "Phone"
         case .dob: return "Date of birth"
         case .postcode: return "Postcode"
-        case .languages: return nil
-        case .gender: return nil
-        case .ethnicity: return nil
+        case .picklist(_): return nil
         }
     }
     
@@ -118,15 +106,13 @@ enum DetailCellType {
         case .phone: return nil
         case .dob: return "Required for us to process your application for certain roles"
         case .postcode: return "For employers who prefer candidates in certain localities"
-        case .languages: return "For employers who prefer candidates with certain language skills"
-        case .gender: return "We collect this information in line with our D&I policy"
-        case .ethnicity: return "We collect this information in line with our D&I policy"
+        case .picklist(let type): return type.reasonForCollection
         }
     }
     
     var isEditable: Bool {
         switch self {
-        case .password, .languages, .gender, .ethnicity:
+        case .password, .picklist(_):
             return false
         default:
             return true
@@ -135,7 +121,7 @@ enum DetailCellType {
     
     var isSelectable: Bool {
         switch self {
-        case .languages, .gender, .ethnicity:
+        case .picklist(_):
             return false
         default:
             return false
@@ -144,7 +130,7 @@ enum DetailCellType {
     
     var minimumSelections: Int? {
         switch self {
-        case .languages, .gender, .ethnicity:
+        case .picklist(_):
             return 0
         default:
             return nil
@@ -152,8 +138,7 @@ enum DetailCellType {
     }
     var maximumSelections: Int? {
         switch self {
-        case .languages: return 10
-        case .gender, .ethnicity: return 0
+        case .picklist(let type): return type.maxSelections
         default: return nil
         }
     }
@@ -163,7 +148,7 @@ enum DataType {
     case text(StringType)
     case date
     case none
-    case picklist(PicklistType)
+    case picklist(AccountPicklistType)
 }
 
 enum StringType {
