@@ -47,16 +47,32 @@ class PicklistPresenter: BaseAccountPresenter {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let id = picklist.itemForIndexPath(indexPath).id else { return }
+        guard let tappedId = picklist.itemForIndexPath(indexPath).id else { return }
         let cell = tableView.cellForRow(at: indexPath)
         let isCurrentlySelected = picklist.isItemSelectedAtIndexPath(indexPath)
         if isCurrentlySelected {
-            if picklist.deselectItemWithId(id) {
+            if picklist.deselectItemWithId(tappedId) {
                 cell?.accessoryType = .none
             }
         } else {
-            if picklist.selectItemHavingId(id) {
-                cell?.accessoryType = .checkmark
+            if picklist.type.maxSelections == 1 {
+                if let currentSelectionId = picklist.firstSelectedItem()?.id {
+                    let didDeselect = picklist.deselectItemWithId(currentSelectionId)
+                    if didDeselect {
+                        if let currentSelectionIndexPath = picklist.indexPathForItem(with: currentSelectionId) {
+                            let cell = tableView.cellForRow(at: currentSelectionIndexPath)
+                            cell?.accessoryType = .none
+                        }
+                    }
+                }
+                if picklist.selectItemHavingId(tappedId) {
+                    cell?.accessoryType = .checkmark
+                }
+                
+            } else {
+                if picklist.selectItemHavingId(tappedId) {
+                    cell?.accessoryType = .checkmark
+                }
             }
         }
     }

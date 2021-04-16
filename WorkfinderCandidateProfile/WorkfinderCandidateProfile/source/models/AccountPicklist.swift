@@ -111,6 +111,21 @@ extension AccountPicklist {
         return true
     }
     
+    func firstSelectedItem() -> IdentifiedAndNamed? {
+        selectedItems.first
+    }
+    
+    func indexPathForItem(with id: String) -> IndexPath? {
+        for sectionIndex in 0..<sections.count {
+            for rowIndex in 0..<itemsForSection(section: sectionIndex).count {
+                let indexPath = IndexPath(row: rowIndex, section: sectionIndex)
+                let item = itemForIndexPath(indexPath)
+                if item.id == id { return IndexPath(row: rowIndex, section: sectionIndex) }
+            }
+        }
+        return nil
+    }
+    
     func deselectItemWithId(_ id: String) -> Bool {
         guard isItemSelected(id: id) else { return false }
         selectedItems.removeAll() { (item) -> Bool in
