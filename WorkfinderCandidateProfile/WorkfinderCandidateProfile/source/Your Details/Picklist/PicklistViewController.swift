@@ -10,6 +10,9 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class PicklistViewController: WFViewController {
-    
+    override func configureNavigationBar() {
+        super.configureNavigationBar()
+        navigationItem.title = (presenter as? PicklistPresenter)?.picklist.type.title
+    }
 }
 

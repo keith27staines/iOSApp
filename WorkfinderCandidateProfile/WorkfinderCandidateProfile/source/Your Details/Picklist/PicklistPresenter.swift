@@ -21,16 +21,14 @@ class PicklistPresenter: BaseAccountPresenter {
     
     var table: UITableView? {
         didSet {
-            table?.tableHeaderView = tableheaderView
+            guard let table = table else { return }
+            let type = picklist.type
+            let header = TableHeaderView(for: table, title: type.instruction, showSearchBar: type.showSearchBar)
+            table.tableHeaderView = header
+            header.searchbar.delegate = self
         }
     }
-    
-    lazy var tableheaderView: UILabel = {
-        let label = UILabel()
-        label.text = picklist.type.instruction
-        return label
-    }()
-    
+        
     override func numberOfSections(in tableView: UITableView) -> Int {
         table = tableView
         return picklist.sections.count
@@ -47,11 +45,35 @@ class PicklistPresenter: BaseAccountPresenter {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let id = picklist.itemForIndexPath(indexPath).id else { return }
+        let cell = tableView.cellForRow(at: indexPath)
+        let isCurrentlySelected = picklist.isItemSelectedAtIndexPath(indexPath)
+        if isCurrentlySelected {
+            if picklist.deselectItemWithId(id) {
+                cell?.accessoryType = .none
+            }
+        } else {
+            if picklist.selectItemHavingId(id) {
+                cell?.accessoryType = .checkmark
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         picklist.sections[section]
     }
     
     override func reloadPresenter(completion: @escaping (Error?) -> Void) {
         picklist.reload(completion: completion)
+    }
+}
+
+extension PicklistPresenter: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        picklist.applyFilter(filter: searchText)
+        let indexSet = IndexSet(integersIn: 0..<picklist.sections.count)
+        table?.reloadSections(indexSet, with: .none)
     }
 }

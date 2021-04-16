@@ -12,12 +12,25 @@ import WorkfinderServices
 class AccountPicklist {
     var service: AccountServiceProtocol
     var type: AccountPicklistType
-    var items: [IdentifiedAndNamed] = []
+    var unFiltereditems: [IdentifiedAndNamed] = []
+    var filteredItems:  [IdentifiedAndNamed] = []
     private (set) var selectedItems: [IdentifiedAndNamed] = []
+    private var filterString: String? = nil
     
     init(type: AccountPicklistType, service: AccountServiceProtocol) {
         self.type = type
         self.service = service
+    }
+    
+    func applyFilter(filter: String?) {
+        self.filterString = filter
+        guard let filter = filter?.trimmingCharacters(in: .whitespaces), !filter.isEmpty else {
+            filteredItems = unFiltereditems
+            return
+        }
+        filteredItems = unFiltereditems.filter({ (item) -> Bool in
+            item.name?.lowercased().contains(filter.lowercased()) ?? false
+        })
     }
     
     func reload(completion: @escaping (Error?) -> Void) {
@@ -40,7 +53,8 @@ class AccountPicklist {
     private func handleServiceResult<A: IdentifiedAndNamed>(_ result: Result<[A], Error>, completion: (Error?) -> Void) {
         switch result {
         case .success(let items):
-            self.items = items
+            self.unFiltereditems = items
+            applyFilter(filter: filterString)
             completion(nil)
         case .failure(let error):
             completion(error)
@@ -53,24 +67,18 @@ class AccountPicklist {
         return itemsForSection(section: section)[row]
     }
     
-    func isItemSelectedAtIndexPath(_ indexPath: IndexPath) -> Bool {
-        guard let id = itemForIndexPath(indexPath).id else { return false }
-        return selectedItemFromId(id) == nil ? false : true
+    private func isItemSelected(id: String) -> Bool {
+        selectedItemFromId(id) == nil ? false : true
     }
     
-    func toggleSelectionAtIndexPath(_ indexPath: IndexPath) {
-        guard let id = itemForIndexPath(indexPath).id else { return }
-        switch isItemSelectedAtIndexPath(indexPath) {
-        case true:
-            deselectItemWithId(id)
-        case false:
-            selectItemHavingId(id)
-        }
+    func isItemSelectedAtIndexPath(_ indexPath: IndexPath) -> Bool {
+        guard let id = itemForIndexPath(indexPath).id else { return false }
+        return isItemSelected(id: id)
     }
 
     var sections: [String] {
         var sections = [String]()
-        items.forEach { (item) in
+        filteredItems.forEach { (item) in
             if !sections.contains(where: { (category) in
                 category == item.category ?? ""
             }) {
@@ -88,27 +96,31 @@ class AccountPicklist {
 extension AccountPicklist {
     private func itemsForSection(section: Int) -> [IdentifiedAndNamed] {
         let sectionName = sections[section]
-        return items.filter { (item) in
+        return filteredItems.filter { (item) in
             item.category ?? "" == sectionName
         }
     }
 
-    private func selectItemHavingId(_ id: String) {
+    func selectItemHavingId(_ id: String) -> Bool {
         let itemOrNil = itemFromId(id)
         let selectedItem = selectedItemFromId(id)
-        guard selectedItem == nil else { return } // already selected
-        guard let item = itemOrNil else { return } // no matching item to select
+        guard selectedItem == nil else { return false } // already selected
+        guard let item = itemOrNil else { return false } // no matching item to select
+        guard selectedItems.count < type.maxSelections else { return false }
         selectedItems.append(item)
+        return true
     }
     
-    private func deselectItemWithId(_ id: String) {
-        selectedItems.removeAll { (item) -> Bool in
+    func deselectItemWithId(_ id: String) -> Bool {
+        guard isItemSelected(id: id) else { return false }
+        selectedItems.removeAll() { (item) -> Bool in
             item.id == id
         }
+        return true
     }
     
     private func itemFromId(_ id: String) -> IdentifiedAndNamed? {
-        items.first { (item) -> Bool in
+        filteredItems.first { (item) -> Bool in
             item.id == id
         }
     }
@@ -130,6 +142,14 @@ enum AccountPicklistType: Int, CaseIterable {
         case .language: return "Languages"
         case .ethnicity: return "Ethnicity"
         case .gender: return "Gender identity"
+        }
+    }
+    
+    var showSearchBar: Bool {
+        switch self {
+        case .language: return true
+        case .gender: return false
+        case .ethnicity: return false
         }
     }
     

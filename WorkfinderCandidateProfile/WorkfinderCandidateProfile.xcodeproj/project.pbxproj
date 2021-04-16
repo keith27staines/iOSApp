@@ -43,6 +43,7 @@
 		53724B5A2627353800908D50 /* PicklistPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B592627353800908D50 /* PicklistPresenter.swift */; };
 		53724BD72628206800908D50 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BD62628206800908D50 /* ChangePasswordViewController.swift */; };
 		53724BDB262820A400908D50 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BDA262820A400908D50 /* ChangePasswordPresenter.swift */; };
+		53724BDF2628659300908D50 /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BDE2628659300908D50 /* TableHeaderView.swift */; };
 		53D7CDE32621CE2D00A9BE40 /* NotificationControlsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */; };
 		53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */; };
 		53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */; };
@@ -108,6 +109,7 @@
 		53724B592627353800908D50 /* PicklistPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicklistPresenter.swift; sourceTree = "<group>"; };
 		53724BD62628206800908D50 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		53724BDA262820A400908D50 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
+		53724BDE2628659300908D50 /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
 		53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationControlsCell.swift; sourceTree = "<group>"; };
 		53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableNotificationsCell.swift; sourceTree = "<group>"; };
 		53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingEmailCell.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			children = (
 				53659CF52621934600CFF49E /* WFViewController.swift */,
 				5342E84126219E47001A56F5 /* BaseAccountPresenter.swift */,
+				53724BDE2628659300908D50 /* TableHeaderView.swift */,
 			);
 			path = "Base classes";
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				53659CF2262192E700CFF49E /* PreferencesPresenter.swift in Sources */,
 				53659C9E26202AF900CFF49E /* AMPLinksCell.swift in Sources */,
 				53659CA22620336E00CFF49E /* AMPAccountSectionCell.swift in Sources */,
+				53724BDF2628659300908D50 /* TableHeaderView.swift in Sources */,
 				53724BDB262820A400908D50 /* ChangePasswordPresenter.swift in Sources */,
 				53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */,
 				53D7CDF62621ED2900A9BE40 /* RemoveAccountCell.swift in Sources */,

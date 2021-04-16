@@ -23,7 +23,6 @@ class WFViewController: UIViewController {
     
     func registerTableCells() {}
     
-    
     override func viewDidLoad() {
         configureViews()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPresenter), name: .wfDidLoginCandidate, object: nil)
