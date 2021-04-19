@@ -7,7 +7,7 @@ public class UnderlineView: UIView {
     public let goodColor: UIColor
     public let badColor: UIColor
     
-    lazy var lineView: UIView = {
+    public lazy var lineView: UIView = {
         let view = UIView()
         return view
     }()
@@ -30,7 +30,7 @@ public class UnderlineView: UIView {
         }
     }
     
-    var color: UIColor? {
+    public var color: UIColor? {
         switch state {
         case .good: return goodColor
         case .bad: return badColor

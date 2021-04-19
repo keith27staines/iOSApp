@@ -283,9 +283,9 @@
 		53659CE42621927200CFF49E /* Your Details */ = {
 			isa = PBXGroup;
 			children = (
-				53724BD52628204900908D50 /* Change password */,
 				53659CE5262192AF00CFF49E /* YourDetailsViewController.swift */,
 				53659CE9262192C200CFF49E /* YourDetailsPresenter.swift */,
+				53724BD52628204900908D50 /* Change password */,
 				53724B522627350100908D50 /* Picklist */,
 				53D7CDE12621CD9800A9BE40 /* Table cells */,
 				532879E82625F2760025F3E4 /* ValidatedTextField.swift */,

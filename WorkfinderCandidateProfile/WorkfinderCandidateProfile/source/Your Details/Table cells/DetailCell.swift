@@ -84,6 +84,10 @@ class DetailCell:  UITableViewCell {
     }()
     
     @objc func textChanged() {
+        updateValidityState()
+    }
+    
+    func updateValidityState() {
         guard let text = textfieldStack.textfield.text else {
             textfieldStack.state = .empty
             return
@@ -127,11 +131,15 @@ class DetailCell:  UITableViewCell {
         endEditing(true)
     }
     
-    @objc func onDateChosen() {
+    var dateFormatter:  DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .medium
         df.timeStyle = .none
-        dateField.text = df.string(from: datePicker.date)
+        return df
+    }()
+    
+    @objc func onDateChosen() {
+        dateField.text = dateFormatter.string(from: datePicker.date)
         dateField.endEditing(true)
     }
     
@@ -152,7 +160,6 @@ class DetailCell:  UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = WorkfinderColors.primaryColor
-        label.textColor = WorkfinderColors.primaryColor
         label.numberOfLines = 0
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
@@ -170,14 +177,12 @@ class DetailCell:  UITableViewCell {
         stack.distribution = .fill
         return stack
     }()
-
     
     func configureWith(presenter: DetailCellPresenter) {
         let type = presenter.type
         self.presenter = presenter
         titleLabel.text = type.title
         descriptionLabel.text = type.description
-        
         titleLabel.isHidden = type.title == nil
         titleAsterisk.isHidden = !type.isRequired || titleLabel.isHidden
         descriptionLabel.isHidden = type.description == nil
@@ -207,6 +212,7 @@ class DetailCell:  UITableViewCell {
                 textfield.autocorrectionType = .no
                 textfield.textContentType = .postalCode
                 textfield.keyboardType = .default
+
             }
         case .date:
             leftStack.addArrangedSubview(dateField)
@@ -214,12 +220,21 @@ class DetailCell:  UITableViewCell {
         case .none:
             break
         case .picklist(let picklistType):
-            break
+            switch picklistType {
+            case .language:
+                break
+            case .gender:
+                break
+            case .ethnicity:
+                break
+            }
         }
+        textfield.text = presenter.text
+        dateField.text = presenter.date?.workfinderDateString
+        updateValidityState()
         disclosureLabel.text = presenter.disclosureText
         disclosureLabel.isHidden = (presenter.disclosureText ?? "").isEmpty
         accessoryType = presenter.accessoryType
-        
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -235,10 +250,7 @@ class DetailCell:  UITableViewCell {
 
 extension DetailCell: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        guard let text = textField.text, text.isEmpty == false else {
-            return (presenter?.type.isRequired ?? false) ? false : true
-        }
-        return presenter?.type.textValidator?(textfieldStack.textfield.text) ?? true
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

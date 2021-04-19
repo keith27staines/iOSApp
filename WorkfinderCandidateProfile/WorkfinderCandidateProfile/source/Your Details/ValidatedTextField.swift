@@ -86,7 +86,7 @@ public class ValidatedTextFieldStack: UIStackView {
         addArrangedSubview(underline)
         spacing = 8
         axis = .vertical
-        setState(state)
+        //setState(state)
     }
     
     required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

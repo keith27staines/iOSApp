@@ -100,6 +100,10 @@ extension AccountPicklist {
             item.category ?? "" == sectionName
         }
     }
+    
+    func deselectAll() {
+        selectedItems = []
+    }
 
     func selectItemHavingId(_ id: String) -> Bool {
         let itemOrNil = itemFromId(id)

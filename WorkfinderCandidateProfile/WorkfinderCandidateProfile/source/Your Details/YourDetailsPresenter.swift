@@ -117,7 +117,45 @@ class YourDetailsPresenter: BaseAccountPresenter {
     }
     
     func presenterForIndexPath(_ indexPath: IndexPath) -> DetailCellPresenter {
-        allCellPresenters[indexPath.section][indexPath.row]
+        let presenter = allCellPresenters[indexPath.section][indexPath.row]
+        switch presenter.type {
+        case .fullname:
+            presenter.text = user.fullname
+        case .email:
+            presenter.text = user.email
+        case .password:
+            presenter.text = user.password
+        case .phone:
+            presenter.text = candidate.phone
+        case .dob:
+            presenter.date = nil
+            if let dob = candidate.dateOfBirth {
+                let df = DateFormatter()
+                df.timeStyle = .none
+                df.dateStyle = .long
+                presenter.date = Date.workfinderDateStringToDate(dob)
+            }
+        case .postcode:
+            presenter.text = candidate.postcode
+        case .picklist(let type):
+            switch type {
+            case .language:
+                selectItemsFromIds(candidate.languages ?? [], for: type)
+            case .gender:
+                selectItemsFromIds([candidate.gender ?? ""], for: type)
+            case .ethnicity:
+                selectItemsFromIds([candidate.ethnicity ?? ""], for: type)
+            }
+        }
+        return presenter
+    }
+    
+    func selectItemsFromIds(_ ids: [String], for picklistType: AccountPicklistType) {
+        let picklist = picklistFor(type: picklistType)
+        picklist.deselectAll()
+        ids.forEach { (id) in
+            _ = picklist.selectItemHavingId(id)
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
