@@ -32,7 +32,7 @@ class PicklistPresenter: BaseAccountPresenter {
     }
         
     override func numberOfSections(in tableView: UITableView) -> Int {
-        table = tableView
+        if table == nil { table = tableView }
         return picklist.sections.count
     }
     
@@ -44,6 +44,7 @@ class PicklistPresenter: BaseAccountPresenter {
         let item = picklist.itemForIndexPath(indexPath)
         let cell = UITableViewCell()
         cell.textLabel?.text = item.name
+        cell.accessoryType = picklist.isItemSelectedAtIndexPath(indexPath) ? .checkmark : .none
         return cell
     }
     
@@ -64,8 +65,7 @@ class PicklistPresenter: BaseAccountPresenter {
 extension PicklistPresenter: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         picklist.applyFilter(filter: searchText)
-        let indexSet = IndexSet(integersIn: 0..<picklist.sections.count)
-        table?.reloadSections(indexSet, with: .none)
+        table?.reloadData()
     }
 }
 
