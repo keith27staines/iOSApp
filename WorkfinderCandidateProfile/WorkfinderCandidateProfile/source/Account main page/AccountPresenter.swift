@@ -108,11 +108,13 @@ class AccountPresenter: BaseAccountPresenter {
         switch section {
         case .header: return
         case .accountSections:
+            
             switch indexPath.row {
             case 0: coordinator?.showDetails()
             case 1: coordinator?.showPreferences()
             default: break
             }
+
         case .links: coordinator?.presentContent(links[indexPath.row])
         }
     }
