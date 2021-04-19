@@ -9,4 +9,8 @@ import Foundation
 
 class ChangePasswordPresenter: BaseAccountPresenter {
     
+    func changePassword(newPassword: String, completion: (Error?) -> Void ) {
+        
+    }
+    
 }
