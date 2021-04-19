@@ -22,6 +22,8 @@ class AccountPicklist {
         self.service = service
     }
     
+    var isLocallySynchronised: Bool = false
+    
     func applyFilter(filter: String?) {
         self.filterString = filter
         guard let filter = filter?.trimmingCharacters(in: .whitespaces), !filter.isEmpty else {

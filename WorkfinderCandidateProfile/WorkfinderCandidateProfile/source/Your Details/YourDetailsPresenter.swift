@@ -138,20 +138,25 @@ class YourDetailsPresenter: BaseAccountPresenter {
         case .postcode:
             presenter.text = candidate.postcode
         case .picklist(let type):
-            switch type {
-            case .language:
-                selectItemsFromIds(candidate.languages ?? [], for: type)
-            case .gender:
-                selectItemsFromIds([candidate.gender ?? ""], for: type)
-            case .ethnicity:
-                selectItemsFromIds([candidate.ethnicity ?? ""], for: type)
+            let picklist = picklistFor(type: type)
+            if !picklist.isLocallySynchronised {
+                switch picklist.type {
+                case .language:
+                    selectItemsFromIds(candidate.languages ?? [], for: picklist)
+                case .gender:
+                    selectItemsFromIds([candidate.gender ?? ""], for: picklist)
+                case .ethnicity:
+                    selectItemsFromIds([candidate.ethnicity ?? ""], for: picklist)
+                }
             }
+            picklist.isLocallySynchronised = true
         }
         return presenter
     }
     
-    func selectItemsFromIds(_ ids: [String], for picklistType: AccountPicklistType) {
-        let picklist = picklistFor(type: picklistType)
+    func selectItemsFromIds(_ ids: [String], for picklist: AccountPicklist) {
+        
+        
         picklist.deselectAll()
         ids.forEach { (id) in
             _ = picklist.selectItemHavingId(id)
