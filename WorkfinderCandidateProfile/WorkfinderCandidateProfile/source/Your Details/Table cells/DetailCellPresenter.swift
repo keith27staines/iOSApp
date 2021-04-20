@@ -77,7 +77,7 @@ class DetailCellPresenter {
         case .postcode: return nil
         case .picklist(_):
             guard let picklist = picklist else { return nil }
-            let numberSelected = picklist.selectedItems.count
+            let numberSelected = picklist.selectionCount
             return numberSelected == 0 ? "select" :  "\(numberSelected) selected"
         }
     }

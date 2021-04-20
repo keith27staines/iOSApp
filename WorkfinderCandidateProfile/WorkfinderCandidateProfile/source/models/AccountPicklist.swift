@@ -14,6 +14,13 @@ class AccountPicklist {
     var type: AccountPicklistType
     var unFiltereditems: [IdentifiedAndNamed] = []
     var filteredItems:  [IdentifiedAndNamed] = []
+    var preselectedIds = Set<String>()
+    var selectionCount: Int {
+        let preselected = preselectedIds.count
+        let selected = selectedItems.count
+        return max(preselected, selected)
+    }
+    
     private (set) var selectedItems: [IdentifiedAndNamed] = []
     private var filterString: String? = nil
     
@@ -57,6 +64,10 @@ class AccountPicklist {
         case .success(let items):
             self.unFiltereditems = items
             applyFilter(filter: filterString)
+            preselectedIds.forEach { (id) in
+                _ = selectItemHavingId(id)
+                preselectedIds.remove(id)
+            }
             completion(nil)
         case .failure(let error):
             completion(error)
@@ -108,6 +119,7 @@ extension AccountPicklist {
     }
 
     func selectItemHavingId(_ id: String) -> Bool {
+        preselectedIds.insert(id)
         let itemOrNil = itemFromId(id)
         let selectedItem = selectedItemFromId(id)
         guard selectedItem == nil else { return false } // already selected

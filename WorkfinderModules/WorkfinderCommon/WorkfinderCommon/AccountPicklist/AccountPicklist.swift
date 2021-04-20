@@ -13,18 +13,21 @@ public protocol IdentifiedAndNamed {
 }
 
 public struct Language: IdentifiedAndNamed, Codable {
-    public var id: String?
+    public var id: String? {
+        get { return name }
+        set { }
+    }
     public var name: String?
     public var category: String?
     public var nativeName: String?
     
     private enum CodingKeys: String, CodingKey {
-        case id = "iso_639_1"
+        // case id = "iso_639_1" not needed because language uses the name as the id
         case name = "name_en"
         case nativeName = "name_native"
     }
-    public init(id: String, name: String, nativeName: String) {
-        self.id = id
+    public init(name: String, nativeName: String) {
+        self.id = name
         self.name = name
         self.nativeName = nativeName
         self.category = nil

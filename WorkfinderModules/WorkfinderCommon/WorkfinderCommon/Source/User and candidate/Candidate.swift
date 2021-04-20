@@ -81,6 +81,9 @@ public struct Candidate: Codable {
         case allowedSharingWithEducationInstitution = "has_allowed_sharing_with_educational_institution"
         case allowedSharingWithEmployers = "has_allowed_sharing_with_employers"
         case postcode
+        case languages
+        case ethnicity
+        case gender
     }
     
     struct UserSummary: Codable {
