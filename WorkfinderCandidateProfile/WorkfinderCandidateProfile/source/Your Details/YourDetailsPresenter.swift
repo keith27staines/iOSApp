@@ -74,6 +74,45 @@ class YourDetailsPresenter: BaseAccountPresenter {
         )
     }()
     
+    func saveAccount() {
+        let repo = UserRepository()
+        guard repo.isCandidateLoggedIn else { return }
+        var candidate = repo.loadCandidate()
+        var user = repo.loadUser()
+        allCellPresenters.forEach { (sectionPresenters) in
+            sectionPresenters.forEach { (presenter) in
+                switch presenter.type {
+                case .fullname:
+                    user.fullname = presenter.text ?? ""
+                case .email:
+                    user.email = presenter.text
+                case .password:
+                    break
+                case .phone:
+                    candidate.phone = presenter.text
+                case .dob:
+                    candidate.dateOfBirth = presenter.date?.workfinderDateString
+                case .postcode:
+                    candidate.postcode = presenter.text
+                case .picklist(let type):
+                    let picklist = picklistFor(type: type)
+                    switch type {
+                    case .language:
+                        candidate.languages = picklist.selectedItems.compactMap({ (item) -> String? in
+                            item.id
+                        })
+                    case .gender:
+                        candidate.gender = picklist.selectedItems.first?.id
+                    case .ethnicity:
+                        candidate.ethnicity = picklist.selectedItems.first?.id
+                    }
+                }
+            }
+        }
+        repo.saveUser(user)
+        repo.saveCandidate(candidate)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         self.tableView = tableView
         return TableSection.allCases.count

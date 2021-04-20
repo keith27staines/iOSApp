@@ -10,7 +10,8 @@ import UIKit
 struct AccountSectionInfo {
     var image: UIImage?
     var title: String?
-    var progress: Float?
+    var progress: Float? { calculator?.progress ?? 0 }
+    var calculator: ProgressCalculatorProtocol?
 }
 
 class AMPAccountSectionCell: UITableViewCell {

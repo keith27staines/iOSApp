@@ -28,7 +28,7 @@ class WFViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPresenter), name: .wfDidLoginCandidate, object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         configureNavigationBar()
         reloadPresenter()
     }

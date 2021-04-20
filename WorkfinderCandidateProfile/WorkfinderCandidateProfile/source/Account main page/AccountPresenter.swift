@@ -20,12 +20,12 @@ class AccountPresenter: BaseAccountPresenter {
         AccountSectionInfo(
             image: UIImage(named: "your_details_icon"),
             title: "Your Details",
-            progress: 0.75
+            calculator: YourDetailsSectionProgressCalculator()
         ),
         AccountSectionInfo(
             image: UIImage(named: "settings_icon"),
             title: "Account Preferences",
-            progress: 0
+            calculator: nil
         ),
     ]
     
@@ -54,7 +54,12 @@ class AccountPresenter: BaseAccountPresenter {
         return appVersion
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int { TableSection.allCases.count }
+    var table: UITableView?
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        table = tableView
+        return TableSection.allCases.count
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = TableSection(rawValue: section) else { return 0 }
@@ -128,4 +133,49 @@ class AccountPresenter: BaseAccountPresenter {
         case .links: return true
         }
     }
+}
+
+protocol ProgressCalculatorProtocol: AnyObject {
+    var progress: Float { get }
+}
+
+class YourDetailsSectionProgressCalculator: ProgressCalculatorProtocol {
+    
+    var repository: UserRepositoryProtocol = UserRepository()
+    
+    var progress: Float {
+        let isLoggedIn = repository.isCandidateLoggedIn
+        let candidate = repository.loadCandidate()
+        let user = repository.loadUser()
+        var total = isLoggedIn ? 1 : 0  // proxy for password
+        var max = 1
+        total += scoreForOptionalString(string: user.fullname)
+        max += 1
+        total += scoreForOptionalString(string: user.email)
+        max += 1
+        total += scoreForOptionalString(string: candidate.phone)
+        max += 1
+        total += scoreForOptionalString(string: candidate.dateOfBirth)
+        max += 1
+        total += scoreForOptionalString(string: candidate.postcode)
+        max += 1
+        total += scoreForOptionalCount(count: candidate.languages?.count)
+        max += 1
+        total += scoreForOptionalCount(count: candidate.gender?.count)
+        max += 1
+        total += scoreForOptionalCount(count: candidate.ethnicity?.count)
+        max += 1
+        return Float(total) / Float(max)
+    }
+    
+    func scoreForOptionalString(string: String?) -> Int {
+        guard let string = string, string.isEmpty == false else { return 0 }
+        return 1
+    }
+    
+    func scoreForOptionalCount(count: Int?) -> Int {
+        guard let count = count, count > 0 else {return 0 }
+        return 1
+    }
+    
 }

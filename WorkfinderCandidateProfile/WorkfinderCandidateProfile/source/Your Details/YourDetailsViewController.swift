@@ -19,6 +19,12 @@ class YourDetailsViewController:  WFViewController {
         addNotificationListeners()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if isMovingFromParent {
+            yourDetailsPresenter.saveAccount()
+        }
+    }
+    
     private func addNotificationListeners() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -43,6 +49,26 @@ class YourDetailsViewController:  WFViewController {
     override func configureNavigationBar() {
         super.configureNavigationBar()
         navigationItem.title = "Your Details"
+        navigationItem.rightBarButtonItem = updateButton
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+    
+    lazy var updateButton: UIBarButtonItem = {
+        UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(update))
+    }()
+    
+    lazy var cancelButton: UIBarButtonItem = {
+        UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+    }()
+    
+    
+    
+    @objc func update() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func cancel() {
+        navigationController?.popViewController(animated: true)
     }
     
     init(coordinator: AccountCoordinator, presenter: YourDetailsPresenter) {

@@ -25,6 +25,18 @@ public class SignInUserService: WorkfinderService, SignInUserServiceProtocol {
     }
 }
 
+public class UpdateUserService: WorkfinderService {
+    public func updateUser(user: User, completion: @escaping((Result<User,Error>) -> Void) ) {
+        do {
+            let uuid = user.uuid ?? ""
+            let request = try buildRequest(relativePath: "users/\(uuid)", verb: .patch, body: user)
+            performTask(with: request, completion: completion, attempting: #function)
+        } catch {
+            completion(Result<User,Error>.failure(error))
+        }
+    }
+}
+
 public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol {
     
     public func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) ) {

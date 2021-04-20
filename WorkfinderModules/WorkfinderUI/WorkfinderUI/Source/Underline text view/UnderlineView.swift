@@ -24,7 +24,7 @@ public class UnderlineView: UIView {
         switch state {
         case .good: return goodColor
         case .bad: return badColor
-        case .empty: return backgroundColor
+        case .empty: return emptyColor
         }
     }
     

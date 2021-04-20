@@ -45,6 +45,9 @@ public class FetchCandidateService: WorkfinderService, FetchCandidateServiceProt
 
 public class UpdateCandidateService: WorkfinderService, UpdateCandidateServiceProtocol {
     
+    public func updateCandidate(_ candidate: Candidate, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
+    }
+    
     public func updateDOB(candidateUuid: F4SUUID, dobString: String, completion: @escaping ((Result<Candidate, Error>) -> Void)) {
         struct DOB: Codable {
             var date_of_birth: String
