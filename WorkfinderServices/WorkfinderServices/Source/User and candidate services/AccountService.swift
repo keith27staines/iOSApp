@@ -15,8 +15,6 @@ public protocol AccountServiceProtocol {
     func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void)
     func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void)
     func updateAccount(_ account: Account, completion: @escaping (Result<Account,Error>) -> Void)
-    func updateUser(_ user: User, completion: @escaping (Result<User,Error>) -> Void)
-    func updateCandidate(_ candidate: Candidate, completion: @escaping (Result<Candidate, Error>) -> Void)
 }
 
 public class AccountService: WorkfinderService, AccountServiceProtocol {
@@ -56,16 +54,30 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
         }
     }
     
-    public func updateUser(_ user: User, completion: @escaping (Result<User,Error>) -> Void) {
-        
-    }
-    
     public func updateCandidate(_ candidate: Candidate, completion: @escaping (Result<Candidate, Error>) -> Void) {
         do {
             let uuid = candidate.uuid ?? ""
             let relativePath = "candidates/\(uuid)/"
-            let request = try buildRequest(relativePath: relativePath, verb: .patch, body: candidate)
-            performTask(with: request, completion: completion, attempting: #function)
+            
+            struct CandidatePatch: Codable {
+                var phone: String?
+                var postcode: String?
+                var date_of_birth: String?
+                var languages: [String]
+                var ethnicity: String?
+                var gender: String?
+            }
+            let patch = CandidatePatch(
+                phone: candidate.phone, //?? "",
+                postcode: candidate.postcode, // ?? "",
+                date_of_birth: candidate.dateOfBirth, //?? "",
+                languages: candidate.languages ?? [],
+                ethnicity: candidate.ethnicity, // //?? "",
+                gender: candidate.gender //?? ""
+            )
+            
+            let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {
             completion(Result<Candidate,Error>.failure(error))
         }

@@ -10,10 +10,15 @@ import WorkfinderCommon
 
 class DetailCellPresenter {
     let type: DetailCellType
-    var text: String?
-    var date: Date?
+    var text: String? {
+        didSet {
+            onValueChanged?(self)
+        }
+    }
+    var date: Date? { didSet { onValueChanged?(self) } }
     var selectedItems: [CodeAndName]?
     var picklist: AccountPicklist?
+    var onValueChanged: ((DetailCellPresenter) -> Void)?
     
     var formattedDate: String? {
         guard let date = date else { return nil }
@@ -24,12 +29,14 @@ class DetailCellPresenter {
         self.type = type
     }
     
-    init(type: DetailCellType, text: String) {
+    init(type: DetailCellType, text: String, onValueChanged: @escaping ((DetailCellPresenter) -> Void)) {
         self.type = type
+        self.onValueChanged = onValueChanged
     }
     
-    init(type: DetailCellType, date: Date) {
+    init(type: DetailCellType, date: Date, onValueChanged: @escaping ((DetailCellPresenter) -> Void)) {
         self.type = type
+        self.onValueChanged = onValueChanged
     }
     
     init(type: DetailCellType, picklist: AccountPicklist) {

@@ -16,6 +16,7 @@ class YourDetailsViewController:  WFViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        yourDetailsPresenter.viewController = self
         addNotificationListeners()
     }
     
@@ -55,19 +56,22 @@ class YourDetailsViewController:  WFViewController {
         UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
     }()
     
-    
+    func onDetailsChanged() {
+        updateButton.isEnabled = yourDetailsPresenter.isUpdateEnabled
+    }
     
     @objc func update() {
-        yourDetailsPresenter.synchAccount() { [weak self] optionalError in
+        messageHandler.showLightLoadingOverlay()
+        yourDetailsPresenter.syncAccountToServer() { [weak self] optionalError in
             guard let self = self else { return }
-            messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 return
             } retryHandler: {
                 self.update()
             }
-            navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
-        
     }
     
     @objc func cancel() {

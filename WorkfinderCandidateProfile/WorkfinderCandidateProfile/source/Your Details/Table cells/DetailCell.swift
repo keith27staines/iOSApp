@@ -85,6 +85,7 @@ class DetailCell:  UITableViewCell {
     
     @objc func textChanged() {
         updateValidityState()
+        presenter?.text = textfieldStack.textfield.text
     }
     
     func updateValidityState() {
@@ -141,6 +142,7 @@ class DetailCell:  UITableViewCell {
         print(Locale.current.identifier)
         dateField.text = presenter?.dateFormatter.string(from: datePicker.date)
         dateField.endEditing(true)
+        presenter?.date = datePicker.date
     }
     
     lazy var leftStack: UIStackView = {

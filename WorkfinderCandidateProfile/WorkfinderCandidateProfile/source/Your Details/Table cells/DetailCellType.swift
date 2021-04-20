@@ -46,11 +46,17 @@ enum DetailCellType {
             return nil
         case .postcode:
             return { string in
-                string?.isUKPostcode() ?? !self.isRequired
+                if !self.isRequired && optionalStringIsEmptyOrNil(string) { return true }
+                return string?.isUKPostcode() == true
             }
         case .picklist:
             return nil
         }
+    }
+    
+    private func optionalStringIsEmptyOrNil(_ string: String?) -> Bool {
+        guard let string = string, string.count > 0 else { return true }
+        return false
     }
     
     var title: String? {

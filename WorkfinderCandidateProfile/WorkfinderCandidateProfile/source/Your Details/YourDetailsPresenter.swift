@@ -26,19 +26,29 @@ class YourDetailsPresenter: BaseAccountPresenter {
     
     lazy var allCellPresenters: [[DetailCellPresenter]] = [
         [
-            DetailCellPresenter(type: .fullname, text: "Full name"),
-            DetailCellPresenter(type: .email, text: "Email@Address.com"),
+            DetailCellPresenter(type: .fullname, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .password),
-            DetailCellPresenter(type: .phone, text: "07757262284"),
-            DetailCellPresenter(type: .dob, date: Date())
+            DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:))
         ],
         [
-            DetailCellPresenter(type: .postcode, text: "HU89AG"),
+            DetailCellPresenter(type: .postcode, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .picklist(.language), picklist: picklistFor(type: .language)),
             DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
             DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity))
         ]
     ]
+    
+    func onDetailChanged(_ detail: DetailCellPresenter) {
+        viewController?.onDetailsChanged()
+    }
+    
+    var isUpdateEnabled: Bool {
+        allCellPresenters.joined().reduce(true) { (result, presenter) -> Bool in
+            return result && presenter.isValid
+        }
+    }
     
     lazy var picklists: [AccountPicklist] = {
         AccountPicklistType.allCases.map { AccountPicklist(type: $0, service: service) }
@@ -74,11 +84,30 @@ class YourDetailsPresenter: BaseAccountPresenter {
         )
     }()
     
-    func synchAccount(completion: (Error?) -> Void) {
+    func syncAccountToServer(completion: @escaping (Error?) -> Void) {
         let repo = UserRepository()
         guard repo.isCandidateLoggedIn else { return }
-        var candidate = repo.loadCandidate()
-        var user = repo.loadUser()
+        let candidate = repo.loadCandidate()
+        let user = repo.loadUser()
+        let oldAccount = Account(user: user, candidate: candidate)
+        let updatedAccount = updateAccount(account: oldAccount)
+        service.updateAccount(updatedAccount) {(result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let updatedAccount):
+                    repo.saveUser(updatedAccount.user)
+                    repo.saveCandidate(updatedAccount.candidate)
+                    completion(nil)
+                case .failure(let error):
+                    completion(error)
+                }
+            }
+        }
+    }
+    
+    func updateAccount(account: Account) -> Account {
+        var user = account.user
+        var candidate = account.candidate
         allCellPresenters.forEach { (sectionPresenters) in
             sectionPresenters.forEach { (presenter) in
                 switch presenter.type {
@@ -99,7 +128,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
                     switch type {
                     case .language:
                         candidate.languages = picklist.selectedItems.compactMap({ (item) -> String? in
-                            item.id
+                            item.name
                         })
                     case .gender:
                         candidate.gender = picklist.selectedItems.first?.id
@@ -109,8 +138,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
                 }
             }
         }
-        repo.saveUser(user)
-        repo.saveCandidate(candidate)
+        return Account(user: user, candidate: candidate)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

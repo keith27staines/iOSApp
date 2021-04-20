@@ -28,8 +28,11 @@ public class SignInUserService: WorkfinderService, SignInUserServiceProtocol {
 public class UpdateUserService: WorkfinderService {
     public func updateUser(user: User, completion: @escaping((Result<User,Error>) -> Void) ) {
         do {
-            let uuid = user.uuid ?? ""
-            let request = try buildRequest(relativePath: "users/\(uuid)", verb: .patch, body: user)
+            let userDetails = [
+                "full_name": user.fullname,
+                "email": user.email,
+            ]
+            let request = try buildRequest(relativePath: "users/me/", verb: .patch, body: userDetails)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
             completion(Result<User,Error>.failure(error))
