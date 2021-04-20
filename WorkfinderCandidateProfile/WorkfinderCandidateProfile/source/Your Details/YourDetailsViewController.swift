@@ -19,12 +19,6 @@ class YourDetailsViewController:  WFViewController {
         addNotificationListeners()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        if isMovingFromParent {
-            yourDetailsPresenter.saveAccount()
-        }
-    }
-    
     private func addNotificationListeners() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -64,7 +58,16 @@ class YourDetailsViewController:  WFViewController {
     
     
     @objc func update() {
-        navigationController?.popViewController(animated: true)
+        yourDetailsPresenter.synchAccount() { [weak self] optionalError in
+            guard let self = self else { return }
+            messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+                return
+            } retryHandler: {
+                self.update()
+            }
+            navigationController?.popViewController(animated: true)
+        }
+        
     }
     
     @objc func cancel() {

@@ -14,7 +14,7 @@ class DetailCell:  UITableViewCell {
     
     lazy var titleLabel:  UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = UIColor.init(white: 0.56, alpha: 1)
         label.numberOfLines = 1
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -24,7 +24,7 @@ class DetailCell:  UITableViewCell {
     lazy var titleAsterisk:  UILabel = {
         let asterisk = " *"
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.text = asterisk
         label.textColor = UIColor(red:0.86, green:0.25, blue:0.25, alpha:1)
         label.numberOfLines = 1
@@ -51,7 +51,7 @@ class DetailCell:  UITableViewCell {
     
     lazy var descriptionLabel:  UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = UIColor.init(white: 0.56, alpha: 1)
         label.numberOfLines = 0
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -74,7 +74,7 @@ class DetailCell:  UITableViewCell {
     
     lazy var textfieldStack: ValidatedTextFieldStack = {
         let stack = ValidatedTextFieldStack(state: .empty)
-        stack.textfield.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        stack.textfield.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         stack.textfield.textColor = UIColor.init(white: 0.15, alpha: 1)
         stack.setContentHuggingPriority(.defaultLow, for: .horizontal)
         stack.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -116,6 +116,12 @@ class DetailCell:  UITableViewCell {
         return text
     }()
     
+    lazy var passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "**********"
+        return label
+    }()
+    
     
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -131,15 +137,9 @@ class DetailCell:  UITableViewCell {
         endEditing(true)
     }
     
-    var dateFormatter:  DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        df.timeStyle = .none
-        return df
-    }()
-    
     @objc func onDateChosen() {
-        dateField.text = dateFormatter.string(from: datePicker.date)
+        print(Locale.current.identifier)
+        dateField.text = presenter?.dateFormatter.string(from: datePicker.date)
         dateField.endEditing(true)
     }
     
@@ -187,6 +187,7 @@ class DetailCell:  UITableViewCell {
         titleAsterisk.isHidden = !type.isRequired || titleLabel.isHidden
         descriptionLabel.isHidden = type.description == nil
         let textfield = textfieldStack.textfield
+        textfield.text = presenter.text
         switch type.dataType {
         case .text(let textType):
             leftStack.addArrangedSubview(textfieldStack)
@@ -212,13 +213,12 @@ class DetailCell:  UITableViewCell {
                 textfield.autocorrectionType = .no
                 textfield.textContentType = .postalCode
                 textfield.keyboardType = .default
-
             }
+        case .password:
+            leftStack.addArrangedSubview(passwordLabel)
         case .date:
             leftStack.addArrangedSubview(dateField)
             dateField.placeholder = type.placeholderText
-        case .none:
-            break
         case .picklist(let picklistType):
             switch picklistType {
             case .language:
@@ -229,8 +229,7 @@ class DetailCell:  UITableViewCell {
                 break
             }
         }
-        textfield.text = presenter.text
-        dateField.text = presenter.date?.workfinderDateString
+        dateField.text = presenter.formattedDate
         updateValidityState()
         disclosureLabel.text = presenter.disclosureText
         disclosureLabel.isHidden = (presenter.disclosureText ?? "").isEmpty

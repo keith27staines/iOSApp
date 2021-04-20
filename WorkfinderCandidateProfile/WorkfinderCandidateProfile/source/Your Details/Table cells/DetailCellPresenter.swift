@@ -15,6 +15,11 @@ class DetailCellPresenter {
     var selectedItems: [CodeAndName]?
     var picklist: AccountPicklist?
     
+    var formattedDate: String? {
+        guard let date = date else { return nil }
+        return dateFormatter.string(from: date)
+    }
+    
     init(type: DetailCellType) {
         self.type = type
     }
@@ -36,6 +41,12 @@ class DetailCellPresenter {
         guard let validator = type.textValidator else { return true }
         return validator(text)
     }
+    
+    lazy var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.setLocalizedDateFormatFromTemplate("MM/dd/yyyy")
+        return df
+    }()
     
     var accessoryType: UITableViewCell.AccessoryType {
         switch self.type {

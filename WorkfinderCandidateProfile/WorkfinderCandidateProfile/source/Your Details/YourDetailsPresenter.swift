@@ -74,7 +74,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
         )
     }()
     
-    func saveAccount() {
+    func synchAccount(completion: (Error?) -> Void) {
         let repo = UserRepository()
         guard repo.isCandidateLoggedIn else { return }
         var candidate = repo.loadCandidate()
@@ -208,7 +208,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
         switch presenter.type.dataType {
         case .picklist(let picklistType):
             coordinator?.showPicklist(picklistFor(type: picklistType))
-        case .none:
+        case .password:
             coordinator?.showChangePassword()
         default:
             return

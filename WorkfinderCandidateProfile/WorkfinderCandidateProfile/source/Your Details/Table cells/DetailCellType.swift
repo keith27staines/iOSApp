@@ -69,7 +69,7 @@ enum DetailCellType {
         switch self {
         case .fullname: return .text(.fullname)
         case .email: return .text(.email)
-        case .password: return .none
+        case .password: return .password
         case .phone: return .text(.phone)
         case .dob: return .date
         case .postcode: return .text(.postcode)
@@ -147,8 +147,8 @@ enum DetailCellType {
 enum DataType {
     case text(StringType)
     case date
-    case none
     case picklist(AccountPicklistType)
+    case password
 }
 
 enum StringType {
