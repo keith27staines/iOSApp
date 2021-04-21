@@ -95,7 +95,6 @@ class ForceEnvironmentSwitchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = WorkfinderColors.white
-        //configureViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
