@@ -16,11 +16,15 @@ extension UserDefaults : LocalStorageProtocol {
     public func setValue(_ value: Any?, for key: LocalStore.Key) {
         setValue(value, forKey: key.rawValue)
     }
+    
+    public func resetStore() {
+        
+    }
 }
 
 public class LocalStore : LocalStorageProtocol {
     let userDefaults: UserDefaults
-    public enum Key : String{
+    public enum Key: String, CaseIterable {
         case environment
         case appVersion
         case localStoreVersion
@@ -51,6 +55,12 @@ public class LocalStore : LocalStorageProtocol {
     
     public init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
+    }
+    
+    public func resetStore() {
+        Key.allCases.forEach { (key) in
+            setValue(nil, for: key)
+        }
     }
     
     public func value(key: Key) -> Any? {

@@ -24,6 +24,10 @@ public class MockLocalStore : LocalStorageProtocol {
     public func setValue(_ value: Any?, for key: LocalStore.Key) {
         store[key] = value
     }
+    
+    public func resetStore() {
+        store = [:]
+    }
 }
 
 public class MockUserRepository: UserRepositoryProtocol {

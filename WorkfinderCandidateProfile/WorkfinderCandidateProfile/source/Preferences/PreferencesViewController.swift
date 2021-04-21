@@ -22,9 +22,18 @@ class PreferencesViewController:  WFViewController {
         let alert = UIAlertController(title: "Are you sure you want us to remove your account?", message: "If you are sure, we will delete your details from our database.\nThis cannot be undone.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let removeAction = UIAlertAction(title: "Remove", style: .destructive) { [weak self] (action) in
-            self?.coordinator?.permanentlyRemoveAccount() { [weak self] optionalError in
+            self?.coordinator?.permanentlyRemoveAccountFromServer() { [weak self] result in
                 guard let self = self else { return }
-                self.removeAccountCompleted()
+                switch result {
+                case .success(_):
+                    self.removeAccountCompleted()
+                case .failure(let error):
+                    self.messageHandler.displayOptionalErrorIfNotNil(error) {
+                        return
+                    } retryHandler: {
+                        self.removeAccountRequested()
+                    }
+                }
             }
         }
         alert.addAction(cancelAction)
@@ -33,9 +42,9 @@ class PreferencesViewController:  WFViewController {
     }
     
     func removeAccountCompleted() {
-        let alert = UIAlertController(title: "Account deleted", message: "We have deleted your details as you requested, and you are now logged out. Thank you for using Workfinder.", preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Close", style: .default) { (action) in
-            
+        let alert = UIAlertController(title: "Account deleted", message: "We are arranging for the deletion of your details as you requested, and you are now logged out. Thank you for using Workfinder.", preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "Close", style: .default) { [weak self] (action) in
+            self?.navigationController?.popViewController(animated: true)
         }
         alert.addAction(closeAction)
         present(alert, animated: true, completion: nil)

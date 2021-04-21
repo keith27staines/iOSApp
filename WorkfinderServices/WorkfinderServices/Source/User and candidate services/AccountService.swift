@@ -15,6 +15,7 @@ public protocol AccountServiceProtocol {
     func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void)
     func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void)
     func updateAccount(_ account: Account, completion: @escaping (Result<Account,Error>) -> Void)
+    func deleteAccount(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void)
 }
 
 public class AccountService: WorkfinderService, AccountServiceProtocol {
@@ -31,6 +32,10 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
         updateCandidateService = UpdateCandidateService(networkConfig: networkConfig)
         updateUserService = UpdateUserService(networkConfig: networkConfig)
         super.init(networkConfig: networkConfig)
+    }
+    
+    public func deleteAccount(completion: @escaping (Result<DeleteAccountJson, Error>) -> Void) {
+        updateUserService.deleteAccount(completion: completion)
     }
     
     public func updateAccount(_ account: Account, completion: @escaping (Result<Account, Error>) -> Void) {

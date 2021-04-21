@@ -88,8 +88,17 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         coordinator.startLoginFirst()
     }
     
-    func permanentlyRemoveAccount(completion: @escaping (Error?) -> Void) {
-        completion(nil)
+    lazy var accountService: AccountServiceProtocol = {
+        AccountService(networkConfig: injected.networkConfig)
+    }()
+    
+    func permanentlyRemoveAccountFromServer(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
+        accountService.deleteAccount() { result in
+            if case .success(_) = result {
+                LocalStore().resetStore()
+            }
+            completion(result)
+        }
     }
 }
 

@@ -15,6 +15,7 @@
 		530C4DD825D6275F0032CFC8 /* SemanticVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */; };
 		53659CA62620C81700CFF49E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA52620C81700CFF49E /* Account.swift */; };
 		53724B6126273BAA00908D50 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B6026273BAA00908D50 /* AccountPicklist.swift */; };
+		53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BEE263065B000908D50 /* DeleteAccountJson.swift */; };
 		53770B6125933BFC0085928E /* TrackEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53770B6025933BFC0085928E /* TrackEvent.swift */; };
 		53786B142586015100B671EB /* DecodeRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53786B132586015100B671EB /* DecodeRoleJson.swift */; };
 		5383D53725CABF790058D02C /* ServerListPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383D53625CABF790058D02C /* ServerListPager.swift */; };
@@ -144,6 +145,7 @@
 		530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersionTests.swift; sourceTree = "<group>"; };
 		53659CA52620C81700CFF49E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		53724B6026273BAA00908D50 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
+		53724BEE263065B000908D50 /* DeleteAccountJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountJson.swift; sourceTree = "<group>"; };
 		53770B6025933BFC0085928E /* TrackEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEvent.swift; sourceTree = "<group>"; };
 		53786B132586015100B671EB /* DecodeRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeRoleJson.swift; sourceTree = "<group>"; };
 		5383D53625CABF790058D02C /* ServerListPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListPager.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				FCDB07372286F6640053347F /* User.swift */,
 				FCCA4E2A2456DADD00DFA696 /* Candidate.swift */,
 				53659CA52620C81700CFF49E /* Account.swift */,
+				53724BEE263065B000908D50 /* DeleteAccountJson.swift */,
 			);
 			path = "User and candidate";
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				FCEA245724EBF0DC0075A68B /* AssociationDetail.swift in Sources */,
 				53BC508A25C0936D00D84EE0 /* TrackingEventQueue.swift in Sources */,
 				FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */,
+				53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,

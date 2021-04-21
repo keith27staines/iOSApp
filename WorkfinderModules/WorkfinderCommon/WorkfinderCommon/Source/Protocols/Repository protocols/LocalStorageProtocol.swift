@@ -3,4 +3,5 @@
 public protocol LocalStorageProtocol : class {
     func value(key: LocalStore.Key) -> Any?
     func setValue(_ value: Any?, for key: LocalStore.Key)
+    func resetStore()
 }
