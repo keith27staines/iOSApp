@@ -59,9 +59,13 @@ class PreferencesPresenter: BaseAccountPresenter {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        numberOfRowsInSection(section)
+    }
+    
+    private func numberOfRowsInSection(_ section: Int) -> Int {
         guard let section = TableSection(rawValue: section) else { return 0 }
         switch section {
-        case .appNotifications: return isShowingOpenIOSSettings ? 2 : 1
+        case .appNotifications: return isShowingOpenIOSSettings ? 1 : 0 // 2 : 1
         case .marketingEmails: return 1
         case .removeAccount: return 1
         }
@@ -124,11 +128,10 @@ class PreferencesPresenter: BaseAccountPresenter {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let section = TableSection(rawValue: section) else { return nil }
-        switch section {
-
+        guard let sectionType = TableSection(rawValue: section) else { return nil }
+        switch sectionType {
         case .appNotifications:
-            return "App Notifications"
+            return  numberOfRowsInSection(section) == 0 ? "" : "App Notifications"
         case .marketingEmails:
             return "Marketing Emails"
         case .removeAccount:
