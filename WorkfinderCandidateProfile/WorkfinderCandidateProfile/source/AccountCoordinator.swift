@@ -72,10 +72,12 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     func showChangePassword() {
-        let service = AccountService(networkConfig: injected.networkConfig)
-        let presenter = ChangePasswordPresenter(coordinator: self, accountService: service)
-        let vc = ChangePasswordViewController(coordinator: self, presenter: presenter)
-        navigationRouter.push(viewController: vc, animated: true)
+        presentContent(.changePassword)
+        
+//        let service = AccountService(networkConfig: injected.networkConfig)
+//        let presenter = ChangePasswordPresenter(coordinator: self, accountService: service)
+//        let vc = ChangePasswordViewController(coordinator: self, presenter: presenter)
+//        navigationRouter.push(viewController: vc, animated: true)
     }
     
     var registerCoordinator: RegisterAndSignInCoordinator?

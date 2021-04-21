@@ -13,6 +13,7 @@ public struct User: Codable {
     public var lastLogin: String?
     public var created: String?
     public var preferredNotificationMethod: String?
+    public var optedIntoMarketing: Bool?
     
     public init() {}
     
@@ -26,6 +27,7 @@ public struct User: Codable {
         case lastLogin = "last_login"
         case created
         case preferredNotificationMethod = "preferred_notification_method"
+        case optedIntoMarketing = "opted_into_marketing"
     }
 }
 

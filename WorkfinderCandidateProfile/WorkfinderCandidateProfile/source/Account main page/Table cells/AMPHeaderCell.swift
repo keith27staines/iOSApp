@@ -6,17 +6,31 @@
 //
 
 import UIKit
+import WorkfinderUI
 
 class AMPHeaderCell: UITableViewCell {
     
     static let reuseIdentifier = "header"
     static let defaultImage: UIImage? = UIImage(named: "avatar")
     
-    func configureWith(avatar: UIImage?, fullName: String?, initials: String?, email: String?) {
+    var _onTap: (() -> Void)?
+    
+    func configureWith(avatar: UIImage?,
+                       title: String?,
+                       initials: String?,
+                       email: String?,
+                       onTap: (() -> Void)?
+    ) {
         _avatarView.image = avatar
-        _fullName.text = fullName
-        _email.text = email
+        _title.text = title
+        _subtitle.setTitle(email, for: .normal)
         _initials.text = initials
+        if let onTap = onTap {
+            _subtitle.addTarget(self, action: #selector(onButtonTap), for: .touchUpInside)
+            _subtitle.setTitle("Register or sign in to workfinder", for: .normal)
+            _subtitle.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
+            _onTap = onTap
+        }
     }
     
     private lazy var _initials: UILabel = {
@@ -44,22 +58,24 @@ class AMPHeaderCell: UITableViewCell {
         return view
     }()
     
-    private lazy var _fullName: UILabel = {
+    private lazy var _title: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 23, weight: .regular)
         label.textColor = UIColor(red:0.15, green:0.15, blue:0.15, alpha:1)
         return label
     }()
     
-    private lazy var _email: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = UIColor(red:0.56, green:0.56, blue:0.56, alpha:1)
-        return label
+    private lazy var _subtitle: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        button.setTitleColor(UIColor(red:0.56, green:0.56, blue:0.56, alpha:1), for: .normal)
+        return button
     }()
     
+    @objc func onButtonTap() { _onTap?() }
+    
     private lazy var _textStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [_fullName, _email])
+        let stack = UIStackView(arrangedSubviews: [_title, _subtitle])
         stack.axis = .vertical
         stack.alignment = .leading
         stack.spacing = 0

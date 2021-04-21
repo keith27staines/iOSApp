@@ -79,12 +79,23 @@ class AccountPresenter: BaseAccountPresenter {
         switch section {
         case .header:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AMPHeaderCell.reuseIdentifier) as? AMPHeaderCell else { return UITableViewCell() }
-            cell.configureWith(
-                avatar: UIImage(named: "avatar"),
-                fullName: candidate.fullName,
-                initials: initialsFromFullName(candidate.fullName),
-                email: user.email
-            )
+            if UserRepository().isCandidateLoggedIn {
+                cell.configureWith(
+                    avatar: UIImage(named: "avatar"),
+                    title: candidate.fullName,
+                    initials: initialsFromFullName(candidate.fullName),
+                    email: user.email,
+                    onTap: nil
+                )
+            } else {
+                cell.configureWith(
+                    avatar: UIImage(named: "avatar"),
+                    title: "Your Account",
+                    initials: initialsFromFullName(candidate.fullName),
+                    email: user.email,
+                    onTap: coordinator?.showRegisterAndSignin
+                )
+            }
             return cell
         case .accountSections:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AMPAccountSectionCell.reuseIdentifier) as? AMPAccountSectionCell else { return UITableViewCell() }
