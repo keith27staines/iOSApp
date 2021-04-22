@@ -49,9 +49,26 @@ class PreferencesPresenter: BaseAccountPresenter {
         EmailPreferences(
             isDirty: false,
             isEnabled: isLoggedIn,
-            allowMarketingEmails: true
+            allowMarketingEmails: true,
+            preferencesPresenter: self
         )
     }()
+    
+    func updateMarketingEmailPreference(newValue: Bool, completion: @escaping (Error?) -> Void) {
+        var user = self.user
+        user.optedIntoMarketing = newValue
+        let candidate = self.candidate
+        let account = Account(user: user, candidate: candidate)
+        service.updateAccount(account) { (result) in
+            switch result {
+            case .success(let account):
+                user.optedIntoMarketing = account.user.optedIntoMarketing
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         self.tableView = tableView

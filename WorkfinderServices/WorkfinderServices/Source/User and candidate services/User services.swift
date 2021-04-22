@@ -49,7 +49,7 @@ public class UpdateUserService: WorkfinderService {
                 opted_into_marketing: user.optedIntoMarketing ?? false
             )
             let request = try buildRequest(relativePath: "users/me/", verb: .patch, body: userPatch)
-            performTask(with: request, completion: completion, attempting: #function)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {
             completion(Result<User,Error>.failure(error))
         }

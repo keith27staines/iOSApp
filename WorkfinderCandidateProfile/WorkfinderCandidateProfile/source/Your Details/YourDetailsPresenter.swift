@@ -76,14 +76,6 @@ class YourDetailsPresenter: BaseAccountPresenter {
         )
     }()
     
-    lazy private var emailPreferences: EmailPreferences = {
-        EmailPreferences(
-            isDirty: false,
-            isEnabled: isLoggedIn,
-            allowMarketingEmails: true
-        )
-    }()
-    
     func syncAccountToServer(completion: @escaping (Error?) -> Void) {
         let repo = UserRepository()
         guard repo.isCandidateLoggedIn else { return }

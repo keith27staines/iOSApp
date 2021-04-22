@@ -21,6 +21,7 @@ public enum WorkfinderErrorType {
     case operationCancelled
     case badParameters
     case custom(title: String, description: String)
+    case programmingError
 
     public var code: Int {
         switch self {
@@ -35,6 +36,7 @@ public enum WorkfinderErrorType {
         case .networkConnectivity: return 1005
         case .operationCancelled: return 1006
         case .badParameters: return 1007
+        case .programmingError: return 1900
         case .custom(_,_): return unexpectedErrorCode - 1
         }
     }
@@ -56,6 +58,7 @@ public enum WorkfinderErrorType {
         case .networkConnectivity: return "Cannot contact server" + code
         case .operationCancelled: return "Operation cancelled"
         case .badParameters: return "Bad parameters"
+        case .programmingError: return "Something went wrong"
         case .custom(let title,_): return title
         }
     }
@@ -71,6 +74,7 @@ public enum WorkfinderErrorType {
         case .networkConnectivity: return false
         case .operationCancelled: return false
         case .badParameters: return true
+        case .programmingError: return true
         case .custom(title: _, description: _): return true
         }
     }
@@ -99,6 +103,7 @@ public enum WorkfinderErrorType {
         case .networkConnectivity: return "Please make sure you have a good internet connection"
         case .operationCancelled: return "The operation was cancelled"
         case .badParameters: return "One or more of the parameters sent to an api was invalid"
+        case .programmingError: return "An internal error occurred"
         case .custom(_,let description): return description
         }
     }

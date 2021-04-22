@@ -20,10 +20,15 @@ class MarketingEmailCell: UITableViewCell {
     }()
     
     func configureWith(preferences: EmailPreferences) {
-        emailSwitch.switchButton.isEnabled = preferences.isEnabled
-        emailSwitch.switchButton.isOn = preferences.allowMarketingEmails
+        let switchButton = emailSwitch.switchButton
+        switchButton.isEnabled = preferences.isEnabled
+        switchButton.isOn = preferences.allowMarketingEmails
         emailSwitch.valueDidChange = { isAllowed in
-            preferences.allowMarketingEmails = isAllowed
+            preferences.setMarketingEmailPreference(allow: switchButton.isOn) { (optionalError) in
+                if let error = optionalError {
+                    switchButton.isOn.toggle() // reset to original value if something went wrong
+                }
+            }
         }
     }
     
