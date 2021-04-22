@@ -111,7 +111,9 @@ class DetailCell:  UITableViewCell {
         text.setContentHuggingPriority(.defaultHigh, for: .vertical)
         let bar = UIToolbar()
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(forceEndEditing))
-        bar.items = [cancelButton]
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onDateChosen))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        bar.items = [cancelButton, space, doneButton]
         bar.sizeToFit()
         text.inputAccessoryView = bar
         text.delegate = self
@@ -131,16 +133,17 @@ class DetailCell:  UITableViewCell {
             datePicker.preferredDatePickerStyle = .wheels
         }
         datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(onDateChosen), for: .valueChanged)
+        datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: today) ?? today
         return datePicker
     }()
+    
+    var today: Date { Date() }
     
     @objc func forceEndEditing() {
         endEditing(true)
     }
     
     @objc func onDateChosen() {
-        print(Locale.current.identifier)
         dateField.text = presenter?.dateFormatter.string(from: datePicker.date)
         dateField.endEditing(true)
         presenter?.date = datePicker.date
@@ -262,8 +265,7 @@ extension DetailCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField === dateField {
-            let now = Date()
-            datePicker.date = presenter?.date ?? Calendar.current.date(byAdding: .year, value: -18, to: now) ?? Date()
+            datePicker.date = presenter?.date ?? Calendar.current.date(byAdding: .year, value: -18, to: today) ?? today
             return
         }
     }
