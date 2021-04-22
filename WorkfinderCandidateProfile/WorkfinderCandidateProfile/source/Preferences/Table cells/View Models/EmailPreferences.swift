@@ -10,6 +10,10 @@ import Foundation
 class EmailPreferences {
     var isDirty: Bool = false
     var isEnabled: Bool = true
+    
+    func setMarketingEmailPreference(allow: Bool, completion: @escaping (Error) -> Void) {
+        //allowMarketingEmails = allow
+    }
     var allowMarketingEmails: Bool = true { didSet { isDirty = true } }
     
     init() {}
