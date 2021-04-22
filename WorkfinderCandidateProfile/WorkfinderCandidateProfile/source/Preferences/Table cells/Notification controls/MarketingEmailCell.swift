@@ -25,9 +25,7 @@ class MarketingEmailCell: UITableViewCell {
         switchButton.isOn = preferences.allowMarketingEmails
         emailSwitch.valueDidChange = { isAllowed in
             preferences.setMarketingEmailPreference(allow: switchButton.isOn) { (optionalError) in
-                if let error = optionalError {
-                    switchButton.isOn.toggle() // reset to original value if something went wrong
-                }
+                switchButton.isOn = preferences.allowMarketingEmails
             }
         }
     }

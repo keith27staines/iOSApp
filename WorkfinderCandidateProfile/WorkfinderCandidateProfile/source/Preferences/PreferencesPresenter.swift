@@ -59,13 +59,18 @@ class PreferencesPresenter: BaseAccountPresenter {
         user.optedIntoMarketing = newValue
         let candidate = self.candidate
         let account = Account(user: user, candidate: candidate)
-        service.updateAccount(account) { (result) in
+        service.updateAccount(account) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let account):
                 user.optedIntoMarketing = account.user.optedIntoMarketing
                 completion(nil)
             case .failure(let error):
-                completion(error)
+                self.viewController?.messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {
+                    completion(error)
+                }, retryHandler: {
+                    self.updateMarketingEmailPreference(newValue: newValue, completion: completion)
+                })
             }
         }
     }
