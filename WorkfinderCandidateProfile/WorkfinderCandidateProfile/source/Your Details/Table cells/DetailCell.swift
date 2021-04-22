@@ -107,6 +107,7 @@ class DetailCell:  UITableViewCell {
     lazy var dateField: UITextField = {
         let text = UITextField()
         text.borderStyle = .roundedRect
+        text.placeholder = "Tap to add your date of birth"
         text.inputView = datePicker
         text.setContentHuggingPriority(.defaultHigh, for: .vertical)
         let bar = UIToolbar()
@@ -133,7 +134,7 @@ class DetailCell:  UITableViewCell {
             datePicker.preferredDatePickerStyle = .wheels
         }
         datePicker.datePickerMode = .date
-        datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: today) ?? today
+        datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -16, to: today) ?? today
         return datePicker
     }()
     

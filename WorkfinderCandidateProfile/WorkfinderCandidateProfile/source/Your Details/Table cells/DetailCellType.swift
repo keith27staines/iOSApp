@@ -89,7 +89,7 @@ enum DetailCellType {
         case .email: return "Email address"
         case .password: return nil
         case .phone: return "Phone"
-        case .dob: return "Date of birth"
+        case .dob: return "Tap to enter date of birth"
         case .postcode: return "Postcode"
         case .picklist(_): return nil
         }
