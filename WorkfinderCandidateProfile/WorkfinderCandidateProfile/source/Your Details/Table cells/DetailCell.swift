@@ -114,6 +114,7 @@ class DetailCell:  UITableViewCell {
         bar.items = [cancelButton]
         bar.sizeToFit()
         text.inputAccessoryView = bar
+        text.delegate = self
         return text
     }()
     
@@ -257,5 +258,17 @@ extension DetailCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textfieldStack.textfield.resignFirstResponder()
         
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField === dateField {
+            let now = Date()
+            datePicker.date = presenter?.date ?? Calendar.current.date(byAdding: .year, value: -18, to: now) ?? Date()
+            return
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textField === dateField ? false : true
     }
 }
