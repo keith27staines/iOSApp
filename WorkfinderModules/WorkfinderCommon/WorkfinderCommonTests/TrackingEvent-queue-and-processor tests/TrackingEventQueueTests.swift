@@ -70,6 +70,10 @@ class TrackingEventQueueTests: XCTestCase {
 }
 
 class MockPersistentStore: LocalStorageProtocol {
+    func resetStore() {
+        _store = [:]
+    }
+    
     
     var _store = [LocalStore.Key: Any]()
     
