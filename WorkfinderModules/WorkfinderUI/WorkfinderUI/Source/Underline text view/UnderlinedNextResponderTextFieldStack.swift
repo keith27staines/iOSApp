@@ -72,11 +72,12 @@ public class UnderlinedNextResponderTextFieldStack: UIStackView {
     }
     
     public init(fieldName: String,
-                goodUnderlineColor: UIColor = UIColor.blue,
+                goodUnderlineColor: UIColor = WorkfinderColors.primaryColor,
                 badUnderlineColor: UIColor = UIColor.orange,
+                emptyUnderlineColor: UIColor = UIColor.gray,
                 state: UnderlineView.State,
                 nextResponderField: UIResponder? = nil) {
-        underline = UnderlineView(state: state, goodColor: goodUnderlineColor, badColor: badUnderlineColor)
+        underline = UnderlineView(state: state, goodColor: goodUnderlineColor, badColor: badUnderlineColor, emptyColor: emptyUnderlineColor)
         super.init(frame: CGRect.zero)
         self.label.text = fieldName
         textfield.nextResponderField = nextResponderField

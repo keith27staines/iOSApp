@@ -8,6 +8,7 @@ import WorkfinderDocumentUpload
 import WorkfinderUI
 import ErrorHandlingUI
 import WorkfinderRegisterCandidate
+import WorkfinderCandidateProfile
 import StoreKit
 
 protocol ProjectApplyCoordinatorProtocol: AnyObject, ErrorHandlerProviderProtocol {

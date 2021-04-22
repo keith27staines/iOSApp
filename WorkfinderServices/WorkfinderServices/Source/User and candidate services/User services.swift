@@ -25,6 +25,37 @@ public class SignInUserService: WorkfinderService, SignInUserServiceProtocol {
     }
 }
 
+public class UpdateUserService: WorkfinderService {
+    
+    public func deleteAccount(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
+        do {
+            let request = try buildRequest(relativePath: "users/me/", queryItems: nil, verb: .delete)
+            performTask(with: request, completion: completion, attempting: #function)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    public func updateUser(user: User, completion: @escaping((Result<User,Error>) -> Void) ) {
+        do {
+            struct UserPatch: Codable {
+                var full_name: String?
+                var email: String?
+                var opted_into_marketing: Bool
+            }
+            let userPatch = UserPatch(
+                full_name: user.fullname,
+                email: user.email,
+                opted_into_marketing: user.optedIntoMarketing ?? false
+            )
+            let request = try buildRequest(relativePath: "users/me/", verb: .patch, body: userPatch)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
+        } catch {
+            completion(Result<User,Error>.failure(error))
+        }
+    }
+}
+
 public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol {
     
     public func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) ) {

@@ -45,27 +45,5 @@ class TabBarViewController: UITabBarController {
         tabBar.tintColor = WorkfinderColors.primaryColor
     }
 
-    override func viewWillAppear(_ animation: Bool) {
-        super.viewWillAppear(animation)
-    }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        removeMenuCustomGesture()
-    }
-}
-
-// MARK: - menu actions
-extension TabBarViewController {
-    func addMenuCustomGesture() {
-        self.evo_drawerController?.gestureShouldRecognizeTouchBlock = menuGestureShouldRecognizeTouch
-    }
-
-    func removeMenuCustomGesture() {
-        self.evo_drawerController?.gestureShouldRecognizeTouchBlock = nil
-    }
-
-    func menuGestureShouldRecognizeTouch(drawerController _: DrawerController, gestureRecognizer _: UIGestureRecognizer, touch _: UITouch) -> Bool {
-        return false
-    }
 }

@@ -14,20 +14,10 @@
 		40E78E1E1DD31A86000A3776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1D1DD31A86000A3776 /* Assets.xcassets */; };
 		40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E1F1DD31A86000A3776 /* LaunchScreen.storyboard */; };
 		40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */; };
-		40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */; };
-		40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6C1DD32BD4000A3776 /* MenuHelper.swift */; };
-		40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E6D1DD32BD4000A3776 /* SideMenuViewController.swift */; };
-		40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E721DD32BE7000A3776 /* AnimatedMenuButton.swift */; };
-		40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E731DD32BE7000A3776 /* DrawerBarButtonItem.swift */; };
-		40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E741DD32BE7000A3776 /* DrawerController.swift */; };
-		40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E751DD32BE7000A3776 /* DrawerVisualState.swift */; };
-		40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7A1DD32BF4000A3776 /* CenterTableViewCell.swift */; };
-		40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7B1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift */; };
-		40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7C1DD32BF4000A3776 /* SideDrawerTableViewCell.swift */; };
-		40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */; };
-		40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */; };
 		40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */; };
 		40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E8E1DD32C4E000A3776 /* Settings.bundle */; };
+		53131C7C260B70A100799629 /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */; };
+		53131C7D260B70A100799629 /* WorkfinderCandidateProfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5344850F256A5F020082889C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5344850E256A5F020082889C /* WorkfinderHome.framework */; };
 		53448510256A5F020082889C /* WorkfinderHome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5344850E256A5F020082889C /* WorkfinderHome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C760D6251C845B0072281E /* DeviceRegistrar.swift */; };
@@ -51,8 +41,6 @@
 		FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64942494D18700DA28DD /* WorkfinderAssociationDetails.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC2A64D92495026300DA28DD /* WorkfinderViewRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64D82495026300DA28DD /* WorkfinderViewRecommendation.framework */; };
 		FC2A64DA2495026300DA28DD /* WorkfinderViewRecommendation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A64D82495026300DA28DD /* WorkfinderViewRecommendation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */; };
-		FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC31F096204D54E3009DD526 /* Debug.storyboard */; };
 		FC459CEA2496161B00D6CE46 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC459CE92496161B00D6CE46 /* DeepLinkRouter.swift */; };
 		FC5336782488CD0200DA3033 /* MigratorBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336772488CD0200DA3033 /* MigratorBase.swift */; };
 		FC53367A2488CD5000DA3033 /* Migrate_v2_all__to__v3_0_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5336792488CD5000DA3033 /* Migrate_v2_all__to__v3_0_1.swift */; };
@@ -76,11 +64,8 @@
 		FCA1400124BC81C50009C30F /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */; };
 		FCA1400224BC81C50009C30F /* WorkfinderProjectApply.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FCA4E2AA2492438200BE87FC /* apple-app-site-association in Resources */ = {isa = PBXBuildFile; fileRef = FCA4E2A92492438200BE87FC /* apple-app-site-association */; };
-		FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */; };
-		FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */; };
 		FCAEEC0624E1909A00D6B579 /* ErrorHandlingUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */; };
 		FCAEEC0724E1909A00D6B579 /* ErrorHandlingUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */; };
 		FCB6D9361F75056100B8C268 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCB6D9351F75056000B8C268 /* Branding.plist */; };
 		FCBA983D24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; };
 		FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -130,6 +115,7 @@
 				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */,
 				FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */,
+				53131C7D260B70A100799629 /* WorkfinderCandidateProfile.framework in Embed Frameworks */,
 				FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */,
 				FCA1400224BC81C50009C30F /* WorkfinderProjectApply.framework in Embed Frameworks */,
 				FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
@@ -166,20 +152,9 @@
 		40E78E201DD31A86000A3776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40E78E221DD31A86000A3776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E78E651DD32B94000A3776 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
-		40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomMenuViewController.swift; path = Menu/CustomMenuViewController.swift; sourceTree = "<group>"; };
-		40E78E6C1DD32BD4000A3776 /* MenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuHelper.swift; path = Menu/MenuHelper.swift; sourceTree = "<group>"; };
-		40E78E6D1DD32BD4000A3776 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuViewController.swift; path = Menu/SideMenuViewController.swift; sourceTree = "<group>"; };
-		40E78E721DD32BE7000A3776 /* AnimatedMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimatedMenuButton.swift; path = Menu/DrawerController/AnimatedMenuButton.swift; sourceTree = "<group>"; };
-		40E78E731DD32BE7000A3776 /* DrawerBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerBarButtonItem.swift; path = Menu/DrawerController/DrawerBarButtonItem.swift; sourceTree = "<group>"; };
-		40E78E741DD32BE7000A3776 /* DrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerController.swift; path = Menu/DrawerController/DrawerController.swift; sourceTree = "<group>"; };
-		40E78E751DD32BE7000A3776 /* DrawerVisualState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawerVisualState.swift; path = Menu/DrawerController/DrawerVisualState.swift; sourceTree = "<group>"; };
-		40E78E7A1DD32BF4000A3776 /* CenterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CenterTableViewCell.swift; path = Menu/MenuTableViewHelpers/CenterTableViewCell.swift; sourceTree = "<group>"; };
-		40E78E7B1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideDrawerSectionHeaderView.swift; path = Menu/MenuTableViewHelpers/SideDrawerSectionHeaderView.swift; sourceTree = "<group>"; };
-		40E78E7C1DD32BF4000A3776 /* SideDrawerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideDrawerTableViewCell.swift; path = Menu/MenuTableViewHelpers/SideDrawerTableViewCell.swift; sourceTree = "<group>"; };
-		40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = Menu/MenuTableViewHelpers/TableViewCell.swift; sourceTree = "<group>"; };
-		40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExampleDrawerVisualStateManager.swift; path = Menu/VisualStateManager/ExampleDrawerVisualStateManager.swift; sourceTree = "<group>"; };
 		40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsHelper.swift; sourceTree = "<group>"; };
 		40E78E8E1DD32C4E000A3776 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5344850E256A5F020082889C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C3C51725333731002AFD98 /* DebugDevelop.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugDevelop.entitlements; path = Config/DebugDevelop.entitlements; sourceTree = "<group>"; };
 		53C3C51825333731002AFD98 /* DebugLive.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugLive.entitlements; path = Config/DebugLive.entitlements; sourceTree = "<group>"; };
@@ -211,8 +186,6 @@
 		FC2A64942494D18700DA28DD /* WorkfinderAssociationDetails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAssociationDetails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2A64D82495026300DA28DD /* WorkfinderViewRecommendation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderViewRecommendation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2E456A234CB5EF00121496 /* Bugsnag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bugsnag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SDebugViewController.swift; sourceTree = "<group>"; };
-		FC31F096204D54E3009DD526 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		FC459CE92496161B00D6CE46 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
 		FC5336772488CD0200DA3033 /* MigratorBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigratorBase.swift; sourceTree = "<group>"; };
 		FC5336792488CD5000DA3033 /* Migrate_v2_all__to__v3_0_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrate_v2_all__to__v3_0_1.swift; sourceTree = "<group>"; };
@@ -235,12 +208,9 @@
 		FC93DC5723202B8F00F1CE23 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FCA1400024BC81C50009C30F /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA4E2A92492438200BE87FC /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
-		FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SForceAppUpdateViewController.swift; sourceTree = "<group>"; };
-		FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = F4SForceAppUpdateViewController.xib; sourceTree = "<group>"; };
 		FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ErrorHandlingUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB4604024B53AA4001DAE2C /* KSGeometry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSGeometry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB4604124B53AA4001DAE2C /* KSQuadTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSQuadTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F4SLogViewController.swift; sourceTree = "<group>"; };
 		FCB6D9351F75056000B8C268 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		FCBA983024506D3E00C3D2E6 /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCBA983324506D8B00C3D2E6 /* WorkfinderAppLogic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderAppLogic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +246,7 @@
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FC18C5B524C1870B006D017D /* WorkfinderCoverLetter.framework in Frameworks */,
 				FC2A64952494D18700DA28DD /* WorkfinderAssociationDetails.framework in Frameworks */,
+				53131C7C260B70A100799629 /* WorkfinderCandidateProfile.framework in Frameworks */,
 				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
 				FCBA984324506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Frameworks */,
@@ -347,9 +318,7 @@
 				FC67711121258448000B0870 /* Assets */,
 				20B128121DDA1A2900CE3F1F /* Config */,
 				40E78E481DD32848000A3776 /* AppDelegate */,
-				FC31F093204D547E009DD526 /* HiddenDebugScreen */,
 				FC04B860233271720034A60E /* Builders */,
-				FCA53B931FE115E1009F6DB0 /* Force app update */,
 				FC2D975A22185D0C00763B06 /* Use Cases */,
 				FC1DFD87222B9CF2001951ED /* Utilities */,
 				40E78E441DD32100000A3776 /* SupportingFiles */,
@@ -378,69 +347,10 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		40E78E501DD328E0000A3776 /* Side menu */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E521DD3292F000A3776 /* Side menu */,
-			);
-			name = "Side menu";
-			path = ..;
-			sourceTree = "<group>";
-		};
-		40E78E521DD3292F000A3776 /* Side menu */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E641DD32B87000A3776 /* Menu */,
-			);
-			name = "Side menu";
-			sourceTree = "<group>";
-		};
-		40E78E641DD32B87000A3776 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E6B1DD32BD4000A3776 /* CustomMenuViewController.swift */,
-				40E78E6C1DD32BD4000A3776 /* MenuHelper.swift */,
-				40E78E6D1DD32BD4000A3776 /* SideMenuViewController.swift */,
-				40E78E691DD32BBC000A3776 /* DrawerController */,
-				40E78E681DD32BAD000A3776 /* MenuTableViewHelpers */,
-				40E78E671DD32BA2000A3776 /* VisualStateManager */,
-			);
-			name = Menu;
-			sourceTree = "<group>";
-		};
-		40E78E671DD32BA2000A3776 /* VisualStateManager */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E821DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift */,
-			);
-			name = VisualStateManager;
-			sourceTree = "<group>";
-		};
-		40E78E681DD32BAD000A3776 /* MenuTableViewHelpers */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E7A1DD32BF4000A3776 /* CenterTableViewCell.swift */,
-				40E78E7B1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift */,
-				40E78E7C1DD32BF4000A3776 /* SideDrawerTableViewCell.swift */,
-				40E78E7D1DD32BF4000A3776 /* TableViewCell.swift */,
-			);
-			name = MenuTableViewHelpers;
-			sourceTree = "<group>";
-		};
-		40E78E691DD32BBC000A3776 /* DrawerController */ = {
-			isa = PBXGroup;
-			children = (
-				40E78E721DD32BE7000A3776 /* AnimatedMenuButton.swift */,
-				40E78E731DD32BE7000A3776 /* DrawerBarButtonItem.swift */,
-				40E78E741DD32BE7000A3776 /* DrawerController.swift */,
-				40E78E751DD32BE7000A3776 /* DrawerVisualState.swift */,
-			);
-			name = DrawerController;
-			sourceTree = "<group>";
-		};
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */,
 				5344850E256A5F020082889C /* WorkfinderHome.framework */,
 				53D94B95256A37EE00A2127C /* WorkfinderHome.framework */,
 				FCAEEC0424E1903B00D6B579 /* ErrorHandlingUI.framework */,
@@ -529,7 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				FC1DC06921FE1410009ABC60 /* Main App */,
-				40E78E501DD328E0000A3776 /* Side menu */,
 			);
 			path = "Use Cases";
 			sourceTree = "<group>";
@@ -543,16 +452,6 @@
 				FC06605423265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift */,
 			);
 			path = TabBarCoordinator;
-			sourceTree = "<group>";
-		};
-		FC31F093204D547E009DD526 /* HiddenDebugScreen */ = {
-			isa = PBXGroup;
-			children = (
-				FC31F096204D54E3009DD526 /* Debug.storyboard */,
-				FC31F094204D54C6009DD526 /* F4SDebugViewController.swift */,
-				FCB46F01204FD86D00F0779F /* F4SLogViewController.swift */,
-			);
-			path = HiddenDebugScreen;
 			sourceTree = "<group>";
 		};
 		FC459CE8249615F900D6CE46 /* Deep link dispatch */ = {
@@ -591,15 +490,6 @@
 				FC72219C20FE248400F10953 /* Fastfile */,
 			);
 			path = fastlane;
-			sourceTree = "<group>";
-		};
-		FCA53B931FE115E1009F6DB0 /* Force app update */ = {
-			isa = PBXGroup;
-			children = (
-				FCA53B941FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift */,
-				FCA53B951FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib */,
-			);
-			name = "Force app update";
 			sourceTree = "<group>";
 		};
 		FCB49305222A5D1B00B88B8B /* App Coordinator */ = {
@@ -747,7 +637,6 @@
 				FCA4E2AA2492438200BE87FC /* apple-app-site-association in Resources */,
 				40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */,
 				FC7221A020FE248400F10953 /* Fastfile in Resources */,
-				FC31F097204D54E3009DD526 /* Debug.storyboard in Resources */,
 				D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */,
 				FCB6D9361F75056100B8C268 /* Branding.plist in Resources */,
 				40E78E211DD31A86000A3776 /* LaunchScreen.storyboard in Resources */,
@@ -758,7 +647,6 @@
 				FC72219F20FE248400F10953 /* Appfile in Resources */,
 				FC5D3C6E20FE1CEC00F89169 /* Gemfile in Resources */,
 				FC681C001F57473D0077BECA /* Podfile in Resources */,
-				FCA53B971FE117E9009F6DB0 /* F4SForceAppUpdateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,38 +731,23 @@
 				FC5336782488CD0200DA3033 /* MigratorBase.swift in Sources */,
 				20D51BE41E27710C003A8358 /* UNService.swift in Sources */,
 				40C1A4E61DDB356B000F80AA /* TabBarViewController.swift in Sources */,
-				40E78E801DD32BF4000A3776 /* SideDrawerTableViewCell.swift in Sources */,
-				40E78E791DD32BE7000A3776 /* DrawerVisualState.swift in Sources */,
-				40E78E771DD32BE7000A3776 /* DrawerBarButtonItem.swift in Sources */,
-				FCA53B961FE117E9009F6DB0 /* F4SForceAppUpdateViewController.swift in Sources */,
 				FCEE5E1E2219C97B00C99C41 /* AppCoordinatorBackgroundViewController.swift in Sources */,
 				FC1DC06B21FE142D009ABC60 /* AppCoordinator.swift in Sources */,
 				FCCFC7CF224D2C110060F7EC /* LocalStoreMigrationsRunner.swift in Sources */,
 				FC93DC5823202B8F00F1CE23 /* Config.swift in Sources */,
 				FC53367A2488CD5000DA3033 /* Migrate_v2_all__to__v3_0_1.swift in Sources */,
-				40E78E701DD32BD4000A3776 /* MenuHelper.swift in Sources */,
 				FC459CEA2496161B00D6CE46 /* DeepLinkRouter.swift in Sources */,
-				40E78E761DD32BE7000A3776 /* AnimatedMenuButton.swift in Sources */,
 				FC04B8642332751F0034A60E /* CoordinatorFactories.swift in Sources */,
 				40E78E171DD31A86000A3776 /* AppDelegate.swift in Sources */,
 				40E78E891DD32C3C000A3776 /* ExtensionsHelper.swift in Sources */,
 				40E78E661DD32B94000A3776 /* TabBarCoordinator.swift in Sources */,
 				53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */,
 				FC06605523265FC300496FE2 /* CompanyCoordinatorParentProtocol+extensions.swift in Sources */,
-				40E78E6F1DD32BD4000A3776 /* CustomMenuViewController.swift in Sources */,
-				40E78E7F1DD32BF4000A3776 /* SideDrawerSectionHeaderView.swift in Sources */,
-				40E78E831DD32C05000A3776 /* ExampleDrawerVisualStateManager.swift in Sources */,
-				FCB46F02204FD86D00F0779F /* F4SLogViewController.swift in Sources */,
-				40E78E781DD32BE7000A3776 /* DrawerController.swift in Sources */,
-				40E78E7E1DD32BF4000A3776 /* CenterTableViewCell.swift in Sources */,
-				40E78E711DD32BD4000A3776 /* SideMenuViewController.swift in Sources */,
 				FC8E303A20F4A60B006059DE /* F4SLogger.swift in Sources */,
-				FC31F095204D54C6009DD526 /* F4SDebugViewController.swift in Sources */,
 				FCC1DF5B232505640074D5C1 /* CompanyCoordinatorFactory.swift in Sources */,
 				FC6C1CD824D1B359005E1936 /* Migrate_v3_0_1_to__v3_2_0.swift in Sources */,
 				FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */,
 				FC22F4F324B5CF020030924B /* TabIndexEnumeration.swift in Sources */,
-				40E78E811DD32BF4000A3776 /* TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,7 +864,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1000,7 +873,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1086,7 +959,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1095,7 +968,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1185,7 +1058,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1194,7 +1067,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1279,7 +1152,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1288,7 +1161,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1377,7 +1250,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 8;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1386,7 +1259,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.4.0;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;

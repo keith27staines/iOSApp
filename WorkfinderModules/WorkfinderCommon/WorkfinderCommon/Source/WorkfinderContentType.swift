@@ -13,14 +13,27 @@ public enum WorkfinderContentType: String, Codable {
     case terms
     case privacyPolicy
     case offerWorkExperience
+    case changePassword
+    
+    public var title: String {
+        switch self {
+        case .about: return "About Workfinder"
+        case .faqs: return "Frequently Asked Questions"
+        case .terms: return "Terms and Conditions"
+        case .privacyPolicy: return "Privacy Policy"
+        case .offerWorkExperience: return ""
+        case .changePassword: return ""
+        }
+    }
     
     public var url: URL {
         switch self {
-        case .about: return URL(string: "https://workfinder.com")!
+        case .about: return URL(string: "https://workfinder.com/about")!
         case .faqs:  return URL(string: "https://workfinder.com/faqs")!
         case .terms: return URL(string: "https://workfinder.com/terms-and-conditions")!
         case .privacyPolicy: return URL(string: "https://workfinder.com/privacy")!
         case .offerWorkExperience: return URL(string: "https://workfinder.com/employers")!
+        case .changePassword: return URL(string: "https://workfinder.com/auth/password/reset/")!
         }
     }
     
@@ -31,6 +44,7 @@ public enum WorkfinderContentType: String, Codable {
         case .terms: return .inWorkfinder
         case .privacyPolicy: return .inWorkfinder
         case .offerWorkExperience: return .inBrowser
+        case .changePassword: return .inWorkfinder
         }
     }
 }

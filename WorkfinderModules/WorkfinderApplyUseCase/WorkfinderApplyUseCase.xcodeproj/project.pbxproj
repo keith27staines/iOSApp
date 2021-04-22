@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53131CC2261CB57700799629 /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53131CC1261CB57700799629 /* WorkfinderCandidateProfile.framework */; };
 		FC036BC9244973A8008C4A69 /* GrammarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BC5244973A7008C4A69 /* GrammarTests.swift */; };
 		FC036BCA244973A8008C4A69 /* TemplateRendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BC6244973A7008C4A69 /* TemplateRendererTests.swift */; };
 		FC036BCB244973A8008C4A69 /* CoverLetterTestsCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC036BC7244973A7008C4A69 /* CoverLetterTestsCommon.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53131CC1261CB57700799629 /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC036BC5244973A7008C4A69 /* GrammarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GrammarTests.swift; path = ../../../../WorkfinderCoverLetter/WorkfinderCoverLetterTests/GrammarTests.swift; sourceTree = "<group>"; };
 		FC036BC6244973A7008C4A69 /* TemplateRendererTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemplateRendererTests.swift; path = ../../../../WorkfinderCoverLetter/WorkfinderCoverLetterTests/TemplateRendererTests.swift; sourceTree = "<group>"; };
 		FC036BC7244973A7008C4A69 /* CoverLetterTestsCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoverLetterTestsCommon.swift; path = ../../../../WorkfinderCoverLetter/WorkfinderCoverLetterTests/CoverLetterTestsCommon.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				FC42C8AC243C9BB300F81232 /* WorkfinderServices.framework in Frameworks */,
 				FC0E566A24CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework in Frameworks */,
 				FC0B6B332323CDC800A1867D /* WorkfinderCoordinators.framework in Frameworks */,
+				53131CC2261CB57700799629 /* WorkfinderCandidateProfile.framework in Frameworks */,
 				FCE8DA9C2320E38200934E2F /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FC22DBFB22F97F330068C61C /* WorkfinderUI.framework in Frameworks */,
 				FC9B33B724BEC0FB00C075CE /* WorkfinderCoverLetter.framework in Frameworks */,
@@ -138,6 +141,7 @@
 		FC96263D2248C20E00D5F850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53131CC1261CB57700799629 /* WorkfinderCandidateProfile.framework */,
 				FC1DB37524ED1088006BFE8B /* WorkfinderDocumentUpload.framework */,
 				FC0E566924CBF79D004FDDFF /* WorkfinderRegisterCandidate.framework */,
 				FC9B33B624BEC0FB00C075CE /* WorkfinderCoverLetter.framework */,

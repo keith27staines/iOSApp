@@ -13,6 +13,9 @@
 		530C4DC925D5C0B40032CFC8 /* RequestAppReviewLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DC825D5C0B30032CFC8 /* RequestAppReviewLogicTests.swift */; };
 		530C4DD425D6273F0032CFC8 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DD325D6273F0032CFC8 /* SemanticVersion.swift */; };
 		530C4DD825D6275F0032CFC8 /* SemanticVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */; };
+		53659CA62620C81700CFF49E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA52620C81700CFF49E /* Account.swift */; };
+		53724B6126273BAA00908D50 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B6026273BAA00908D50 /* AccountPicklist.swift */; };
+		53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BEE263065B000908D50 /* DeleteAccountJson.swift */; };
 		53770B6125933BFC0085928E /* TrackEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53770B6025933BFC0085928E /* TrackEvent.swift */; };
 		53786B142586015100B671EB /* DecodeRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53786B132586015100B671EB /* DecodeRoleJson.swift */; };
 		5383D53725CABF790058D02C /* ServerListPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383D53625CABF790058D02C /* ServerListPager.swift */; };
@@ -140,6 +143,9 @@
 		530C4DC825D5C0B30032CFC8 /* RequestAppReviewLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppReviewLogicTests.swift; sourceTree = "<group>"; };
 		530C4DD325D6273F0032CFC8 /* SemanticVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
 		530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersionTests.swift; sourceTree = "<group>"; };
+		53659CA52620C81700CFF49E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		53724B6026273BAA00908D50 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
+		53724BEE263065B000908D50 /* DeleteAccountJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountJson.swift; sourceTree = "<group>"; };
 		53770B6025933BFC0085928E /* TrackEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEvent.swift; sourceTree = "<group>"; };
 		53786B132586015100B671EB /* DecodeRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeRoleJson.swift; sourceTree = "<group>"; };
 		5383D53625CABF790058D02C /* ServerListPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListPager.swift; sourceTree = "<group>"; };
@@ -272,6 +278,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53724B5F26273B8E00908D50 /* AccountPicklist */ = {
+			isa = PBXGroup;
+			children = (
+				53724B6026273BAA00908D50 /* AccountPicklist.swift */,
+			);
+			path = AccountPicklist;
+			sourceTree = "<group>";
+		};
 		53786B072585F53600B671EB /* API structs */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +344,8 @@
 			children = (
 				FCDB07372286F6640053347F /* User.swift */,
 				FCCA4E2A2456DADD00DFA696 /* Candidate.swift */,
+				53659CA52620C81700CFF49E /* Account.swift */,
+				53724BEE263065B000908D50 /* DeleteAccountJson.swift */,
 			);
 			path = "User and candidate";
 			sourceTree = "<group>";
@@ -432,6 +448,7 @@
 		FCA91E6D2234043D007ED308 /* WorkfinderCommon */ = {
 			isa = PBXGroup;
 			children = (
+				53724B5F26273B8E00908D50 /* AccountPicklist */,
 				5384694525DEB01F000654E7 /* Geocoding.swift */,
 				530C4DC025D5C0660032CFC8 /* RequestAppReviewLogic.swift */,
 				FCE4F4DF24740CF9005ED80D /* Placement */,
@@ -733,6 +750,7 @@
 				FCFE450E2250BA6700C38436 /* MockLocalStore.swift in Sources */,
 				FC7A4396224A3C0E00B2D693 /* NetworkError.swift in Sources */,
 				FCE519302249482A00B550C9 /* F4SDisplayableMonth.swift in Sources */,
+				53724B6126273BAA00908D50 /* AccountPicklist.swift in Sources */,
 				FC0E5CFB224E1B5700615B4F /* LocalStore.swift in Sources */,
 				FC6E42DD24556B97005E0D08 /* LocalStorageProtocol.swift in Sources */,
 				53C9CADA256B93EB00F567B2 /* NotificationNames.swift in Sources */,
@@ -740,6 +758,7 @@
 				FCE75CC6232F631C00C2E976 /* NetworkCallLoggerProtocol.swift in Sources */,
 				FCFC06AB23225765003C59C8 /* LatLon.swift in Sources */,
 				530C4DC125D5C0660032CFC8 /* RequestAppReviewLogic.swift in Sources */,
+				53659CA62620C81700CFF49E /* Account.swift in Sources */,
 				FC93DC56232026AA00F1CE23 /* CommonNotifications.swift in Sources */,
 				FC18C5B824C18E9A006D017D /* ProjectJson.swift in Sources */,
 				53BC508E25C09E6C00D84EE0 /* TrackingEventQueueProcessor.swift in Sources */,
@@ -771,6 +790,7 @@
 				FCEA245724EBF0DC0075A68B /* AssociationDetail.swift in Sources */,
 				53BC508A25C0936D00D84EE0 /* TrackingEventQueue.swift in Sources */,
 				FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */,
+				53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */,
 				FCE51938224948E400B550C9 /* F4SHoursType.swift in Sources */,
 				FC8F957D233BA6710027BE02 /* MockAnalyticsAndDebugging.swift in Sources */,
 				FCE5193E22494CED00B550C9 /* F4SJsonValue.swift in Sources */,

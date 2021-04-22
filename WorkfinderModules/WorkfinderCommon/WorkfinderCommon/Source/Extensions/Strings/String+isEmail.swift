@@ -23,3 +23,25 @@ public extension String {
         __ukPostcodePredicate.evaluate(with: self)
     }
 }
+
+public extension String {
+    func isPhoneNumber() -> Bool {
+        let trimmedSelf = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        let detector: NSDataDetector
+        do {
+            detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber.rawValue)
+        } catch { return false }
+        
+        let matches = detector.matches(in: trimmedSelf, options: [], range: NSMakeRange(0, trimmedSelf.count))
+        guard let res = matches.first else { return false }
+        return res.resultType == .phoneNumber &&
+            res.range.location == 0 &&
+            res.range.length == trimmedSelf.count
+    }
+}
+
+public extension String {
+    func isValidFullname() -> Bool {
+        self.trimmingCharacters(in: .whitespacesAndNewlines).count > 2
+    }
+}

@@ -13,7 +13,7 @@ class ForceEnvironmentSwitchViewController: UIViewController {
         let logo = UIImageView(image: workfinderLogo)
         logo.tintColor = WorkfinderColors.primaryColor
         logo.heightAnchor.constraint(equalToConstant: 128).isActive = true
-        logo.widthAnchor.constraint(equalToConstant: 128).isActive = true
+   //     logo.widthAnchor.constraint(equalToConstant: 128).isActive = true
         logo.contentMode = .scaleAspectFit
         return logo
     }()
@@ -95,14 +95,19 @@ class ForceEnvironmentSwitchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = WorkfinderColors.white
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         configureViews()
     }
     
     func configureViews() {
-        let guide = view.safeAreaLayoutGuide
         view.backgroundColor = WorkfinderColors.white
         view.addSubview(stack)
-        stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 20, bottom: 20, right: 20))
+        stack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 40, left: 20, bottom: 20, right: 20))
+        let w = stack.widthAnchor.constraint(equalToConstant: 300)
+        w.priority = .defaultLow
+        w.isActive = true
     }
     
     init(serverEnvironment: EnvironmentType,

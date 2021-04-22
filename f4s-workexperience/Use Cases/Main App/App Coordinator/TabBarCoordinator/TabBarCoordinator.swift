@@ -8,6 +8,7 @@ import WorkfinderApplications
 import WorkfinderRecommendationsList
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderHome
+import WorkfinderCandidateProfile
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
@@ -24,7 +25,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     var childCoordinators: [UUID : Coordinating] = [:]
     
     var tabBarViewController: TabBarViewController!
-    var drawerController: DrawerController?
     
     required init(parent: AppCoordinatorProtocol?,
                   navigationRouter: NavigationRoutingProtocol,
@@ -39,7 +39,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     func start() {
         createTabBar()
-        rootViewController = setUpDrawerController(navigationController: tabBarViewController)
+        rootViewController = tabBarViewController
         guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window else { return }
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
@@ -51,69 +51,32 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     public func switchToTab(_ tab: TabIndex) {
-        closeMenu() { [ weak self]  (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = tab.rawValue
-        }
+        tabBarViewController.selectedIndex = tab.rawValue
     }
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
-        closeMenu { [weak self] (success) in
-            guard let self = self, let uuid = placementUuid else { return }
-            self.switchToTab(.applications)
-            self.applicationsCoordinator.routeToApplication(uuid, appSource: appSource)
-        }
+        guard let uuid = placementUuid else { return }
+        switchToTab(.applications)
+        applicationsCoordinator.routeToApplication(uuid, appSource: appSource)
     }
     
     public func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource) {
-        closeMenu { [weak self] (success) in
-            self?.switchToTab(.home)
-            self?.homeCoordinator.processRecommendedAssociation(recommendationUuid: recommendationUuid, source: appSource)
-        }
+        switchToTab(.home)
+        homeCoordinator.processRecommendedAssociation(recommendationUuid: recommendationUuid, source: appSource)
     }
     
     public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
-        closeMenu() { [ weak self]  (success) in
-            guard let self = self else { return }
-            self.tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
-            DispatchQueue.main.async {
-                self.recommendationsCoordinator.processProjectViewRequest(
-                    projectUuid,
-                    appSource: appSource)
-            }
+        tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
+        DispatchQueue.main.async { [weak self] in
+            self?.recommendationsCoordinator.processProjectViewRequest(
+                projectUuid,
+                appSource: appSource)
         }
-    }
-    
-    public func openMenu(completion: ((Bool) -> ())? = nil) {
-        if isMenuVisible() {
-            completion?(true)
-        } else {
-            toggleMenu(completion: completion)
-        }
-    }
-    
-    public func toggleMenu(completion: ((Bool) -> ())? = nil) {
-        drawerController?.toggleLeftDrawerSide(animated: true, completion: completion)
     }
     
     public func topMostViewController() -> UIViewController? {
-        let vc = drawerController?.topMostViewController
+        let vc = rootViewController.topMostViewController
         return vc
-    }
-    
-    public func closeMenu(completion: ((Bool) -> ())? = nil) {
-        if isMenuVisible() {
-            toggleMenu(completion: completion)
-        } else {
-            completion?(true)
-        }
-    }
-    
-    public func isMenuVisible() -> Bool {
-        if (drawerController?.visibleLeftDrawerWidth)! > CGFloat(0) {
-            return true
-        }
-        return false
     }
     
     var topNavigationController: UINavigationController {
@@ -164,33 +127,18 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         addChildCoordinator(coordinator)
         return coordinator
     }()
-
-    private func setUpDrawerController(navigationController: UIViewController) -> DrawerController {
-        navigationController.restorationIdentifier = "ExampleCenterNavigationControllerRestorationKey"
-
-        let leftSideMenuViewController = SideMenuViewController()
-        leftSideMenuViewController.tabBarCoordinator = self
-        leftSideMenuViewController.appCoordinator = appCoordinator
-        leftSideMenuViewController.log = injected.log
-
-        let leftSideNavController = UINavigationController(rootViewController: leftSideMenuViewController)
-        leftSideNavController.restorationIdentifier = "ExampleLeftNavigationControllerRestorationKey"
-
-        drawerController = DrawerController(centerViewController: navigationController, leftDrawerViewController: leftSideNavController, rightDrawerViewController: nil)
-        drawerController!.showsShadows = true
-
-        drawerController!.restorationIdentifier = "Drawer"
-        drawerController!.maximumRightDrawerWidth = 200.0
-        drawerController!.maximumLeftDrawerWidth = UIScreen.main.bounds.width - 30
-        drawerController!.openDrawerGestureModeMask = .all
-        drawerController!.closeDrawerGestureModeMask = .all
-        drawerController!.drawerVisualStateBlock = { drawerController, drawerSide, percentVisible in
-            let block = ExampleDrawerVisualStateManager.sharedManager.drawerVisualStateBlockForDrawerSide(drawerSide: drawerSide)
-            block?(drawerController, drawerSide, percentVisible)
-        }
-        
-        return drawerController!
-    }
+    
+    lazy var accountCoordinator: AccountCoordinator = {
+        let router = TabIndex.account.makeRouter()
+        let coordinator = AccountCoordinator(
+            parent: nil,
+            navigationRouter: router,
+            inject: injected,
+            switchToTab: { [weak self] tab in self?.switchToTab(tab) }
+        )
+        addChildCoordinator(coordinator)
+        return coordinator
+    }()
     
     func presentHiddenDebugController(parentCtrl: UIViewController) {
         let debugStoryboard = UIStoryboard(name: "Debug", bundle: nil)
@@ -209,8 +157,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
 extension TabBarCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let log = injected.log
-        drawerController!.openDrawerGestureModeMask = .all
-        drawerController!.closeDrawerGestureModeMask = .all
         switch viewController {
         case homeCoordinator.navigationRouter.navigationController:
             log.track(.tab_tap(tabName: "home"))
@@ -221,6 +167,8 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
                 
             })
             log.track(.tab_tap(tabName: "recommendations"))
+        case accountCoordinator.navigationRouter.navigationController:
+            log.track(.tab_tap(tabName: "account"))
         default:
             fatalError("unknown coordinator")
         }

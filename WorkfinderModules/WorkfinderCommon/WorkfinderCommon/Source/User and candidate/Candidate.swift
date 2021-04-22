@@ -31,6 +31,9 @@ public struct Candidate: Codable {
     public var allowedSharingWithEducationInstitution: Bool?
     public var allowedSharingWithEmployers: Bool?
     public var postcode: String?
+    public var languages: [String]?
+    public var ethnicity: String?
+    public var gender: String?
     
     public func age(on date: Date = Date()) -> Int? {
         guard let dobString = dateOfBirth,
@@ -78,6 +81,9 @@ public struct Candidate: Codable {
         case allowedSharingWithEducationInstitution = "has_allowed_sharing_with_educational_institution"
         case allowedSharingWithEmployers = "has_allowed_sharing_with_employers"
         case postcode
+        case languages
+        case ethnicity
+        case gender
     }
     
     struct UserSummary: Codable {

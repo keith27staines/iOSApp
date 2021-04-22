@@ -45,6 +45,7 @@ public enum TabIndex : Int, CaseIterable {
     case applications
     case home
     case recommendations
+    case account
 }
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
@@ -53,7 +54,6 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID, appSource: AppSource)
     func updateBadges()
-    func toggleMenu(completion: ((Bool) -> ())?)
     func updateUnreadMessagesCount(_ count: Int)
 }
 
