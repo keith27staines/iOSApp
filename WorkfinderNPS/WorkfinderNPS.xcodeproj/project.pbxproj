@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		532344C22632C7C500966B7A /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BE2632C7C500966B7A /* WorkfinderCommon.framework */; };
+		532344C42632C7C500966B7A /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */; };
+		532344C62632C7C600966B7A /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344C02632C7C500966B7A /* WorkfinderServices.framework */; };
+		532344C82632C7C600966B7A /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344C12632C7C500966B7A /* WorkfinderUI.framework */; };
+		532344CD2632C93C00966B7A /* NPSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344CC2632C93C00966B7A /* NPSCoordinator.swift */; };
+		532344D12632CAEF00966B7A /* ChooseNPSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344D02632CAEF00966B7A /* ChooseNPSViewController.swift */; };
+		532344D52632CB2D00966B7A /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344D42632CB2D00966B7A /* FeedbackViewController.swift */; };
+		532344D92632CBC300966B7A /* NPSScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344D82632CBC300966B7A /* NPSScoreView.swift */; };
+		532344E92632CCC400966B7A /* OtherFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344E82632CCC400966B7A /* OtherFeedbackViewController.swift */; };
+		532344EF2632CD0B00966B7A /* OtherFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344EE2632CD0B00966B7A /* OtherFeedbackPresenter.swift */; };
+		532344F32632CD1C00966B7A /* FeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344F22632CD1C00966B7A /* FeedbackPresenter.swift */; };
+		532344F72632CD3000966B7A /* ChooseNPSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344F62632CD3000966B7A /* ChooseNPSPresenter.swift */; };
+		532344FB2632CD4E00966B7A /* NPSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344FA2632CD4E00966B7A /* NPSService.swift */; };
+		532345022632CF6C00966B7A /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532345012632CF6C00966B7A /* BasePresenter.swift */; };
+		532345082632CFDC00966B7A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532345072632CFDC00966B7A /* BaseViewController.swift */; };
+		532345102632E39100966B7A /* NPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323450F2632E39100966B7A /* NPS.swift */; };
 		53A98CEB2632C53700361033 /* WorkfinderNPS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A98CE12632C53700361033 /* WorkfinderNPS.framework */; };
 		53A98CF02632C53700361033 /* WorkfinderNPSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A98CEF2632C53700361033 /* WorkfinderNPSTests.swift */; };
 		53A98CF22632C53700361033 /* WorkfinderNPS.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A98CE42632C53700361033 /* WorkfinderNPS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +39,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		532344BE2632C7C500966B7A /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		532344C02632C7C500966B7A /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		532344C12632C7C500966B7A /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		532344CC2632C93C00966B7A /* NPSCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPSCoordinator.swift; sourceTree = "<group>"; };
+		532344D02632CAEF00966B7A /* ChooseNPSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNPSViewController.swift; sourceTree = "<group>"; };
+		532344D42632CB2D00966B7A /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		532344D82632CBC300966B7A /* NPSScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPSScoreView.swift; sourceTree = "<group>"; };
+		532344E82632CCC400966B7A /* OtherFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFeedbackViewController.swift; sourceTree = "<group>"; };
+		532344EE2632CD0B00966B7A /* OtherFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFeedbackPresenter.swift; sourceTree = "<group>"; };
+		532344F22632CD1C00966B7A /* FeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPresenter.swift; sourceTree = "<group>"; };
+		532344F62632CD3000966B7A /* ChooseNPSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNPSPresenter.swift; sourceTree = "<group>"; };
+		532344FA2632CD4E00966B7A /* NPSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPSService.swift; sourceTree = "<group>"; };
+		532345012632CF6C00966B7A /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
+		532345072632CFDC00966B7A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5323450F2632E39100966B7A /* NPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPS.swift; sourceTree = "<group>"; };
 		53A98CE12632C53700361033 /* WorkfinderNPS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderNPS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53A98CE42632C53700361033 /* WorkfinderNPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderNPS.h; sourceTree = "<group>"; };
 		53A98CE52632C53700361033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,6 +68,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				532344C42632C7C500966B7A /* WorkfinderCoordinators.framework in Frameworks */,
+				532344C62632C7C600966B7A /* WorkfinderServices.framework in Frameworks */,
+				532344C22632C7C500966B7A /* WorkfinderCommon.framework in Frameworks */,
+				532344C82632C7C600966B7A /* WorkfinderUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,12 +86,99 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		532344BD2632C7C500966B7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				532344BE2632C7C500966B7A /* WorkfinderCommon.framework */,
+				532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */,
+				532344C02632C7C500966B7A /* WorkfinderServices.framework */,
+				532344C12632C7C500966B7A /* WorkfinderUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		532344CB2632C92800966B7A /* source */ = {
+			isa = PBXGroup;
+			children = (
+				532344CC2632C93C00966B7A /* NPSCoordinator.swift */,
+				532344E12632CC0400966B7A /* Choose NPS */,
+				532344E42632CC1000966B7A /* Feedback */,
+				532344E72632CC9900966B7A /* OtherFeedback */,
+				532344DE2632CBF600966B7A /* Common views */,
+				532345002632CF5000966B7A /* Base classes */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		532344DE2632CBF600966B7A /* Common views */ = {
+			isa = PBXGroup;
+			children = (
+				5323450E2632E37900966B7A /* models and services */,
+				5323450B2632E36F00966B7A /* views */,
+			);
+			path = "Common views";
+			sourceTree = "<group>";
+		};
+		532344E12632CC0400966B7A /* Choose NPS */ = {
+			isa = PBXGroup;
+			children = (
+				532344D02632CAEF00966B7A /* ChooseNPSViewController.swift */,
+				532344F62632CD3000966B7A /* ChooseNPSPresenter.swift */,
+			);
+			path = "Choose NPS";
+			sourceTree = "<group>";
+		};
+		532344E42632CC1000966B7A /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				532344D42632CB2D00966B7A /* FeedbackViewController.swift */,
+				532344F22632CD1C00966B7A /* FeedbackPresenter.swift */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		532344E72632CC9900966B7A /* OtherFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				532344E82632CCC400966B7A /* OtherFeedbackViewController.swift */,
+				532344EE2632CD0B00966B7A /* OtherFeedbackPresenter.swift */,
+			);
+			path = OtherFeedback;
+			sourceTree = "<group>";
+		};
+		532345002632CF5000966B7A /* Base classes */ = {
+			isa = PBXGroup;
+			children = (
+				532345012632CF6C00966B7A /* BasePresenter.swift */,
+				532345072632CFDC00966B7A /* BaseViewController.swift */,
+			);
+			path = "Base classes";
+			sourceTree = "<group>";
+		};
+		5323450B2632E36F00966B7A /* views */ = {
+			isa = PBXGroup;
+			children = (
+				532344D82632CBC300966B7A /* NPSScoreView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		5323450E2632E37900966B7A /* models and services */ = {
+			isa = PBXGroup;
+			children = (
+				532344FA2632CD4E00966B7A /* NPSService.swift */,
+				5323450F2632E39100966B7A /* NPS.swift */,
+			);
+			path = "models and services";
+			sourceTree = "<group>";
+		};
 		53A98CD72632C53700361033 = {
 			isa = PBXGroup;
 			children = (
 				53A98CE32632C53700361033 /* WorkfinderNPS */,
 				53A98CEE2632C53700361033 /* WorkfinderNPSTests */,
 				53A98CE22632C53700361033 /* Products */,
+				532344BD2632C7C500966B7A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +194,7 @@
 		53A98CE32632C53700361033 /* WorkfinderNPS */ = {
 			isa = PBXGroup;
 			children = (
+				532344CB2632C92800966B7A /* source */,
 				53A98CE42632C53700361033 /* WorkfinderNPS.h */,
 				53A98CE52632C53700361033 /* Info.plist */,
 			);
@@ -147,6 +271,7 @@
 				TargetAttributes = {
 					53A98CE02632C53700361033 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 					53A98CE92632C53700361033 = {
 						CreatedOnToolsVersion = 12.4;
@@ -194,6 +319,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				532344D12632CAEF00966B7A /* ChooseNPSViewController.swift in Sources */,
+				532345022632CF6C00966B7A /* BasePresenter.swift in Sources */,
+				532345082632CFDC00966B7A /* BaseViewController.swift in Sources */,
+				532344D92632CBC300966B7A /* NPSScoreView.swift in Sources */,
+				532344EF2632CD0B00966B7A /* OtherFeedbackPresenter.swift in Sources */,
+				532345102632E39100966B7A /* NPS.swift in Sources */,
+				532344D52632CB2D00966B7A /* FeedbackViewController.swift in Sources */,
+				532344F32632CD1C00966B7A /* FeedbackPresenter.swift in Sources */,
+				532344FB2632CD4E00966B7A /* NPSService.swift in Sources */,
+				532344F72632CD3000966B7A /* ChooseNPSPresenter.swift in Sources */,
+				532344E92632CCC400966B7A /* OtherFeedbackViewController.swift in Sources */,
+				532344CD2632C93C00966B7A /* NPSCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +420,7 @@
 		532344AD2632C64200966B7A /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -299,6 +437,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderNPS;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -307,6 +446,7 @@
 		532344AE2632C64200966B7A /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderNPSTests/Info.plist;
@@ -389,6 +529,7 @@
 		532344B32632C66B00966B7A /* DebugLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -405,6 +546,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderNPS;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -413,6 +555,7 @@
 		532344B42632C66B00966B7A /* DebugLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderNPSTests/Info.plist;
@@ -489,6 +632,7 @@
 		532344B62632C68B00966B7A /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -513,6 +657,7 @@
 		532344B72632C68B00966B7A /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderNPSTests/Info.plist;
@@ -589,6 +734,7 @@
 		532344B92632C69900966B7A /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -613,6 +759,7 @@
 		532344BA2632C69900966B7A /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderNPSTests/Info.plist;
@@ -753,6 +900,7 @@
 		53A98CF62632C53700361033 /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -769,6 +917,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderNPS;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -777,6 +926,7 @@
 		53A98CF72632C53700361033 /* ReleaseDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
@@ -801,6 +951,7 @@
 		53A98CF92632C53700361033 /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderNPSTests/Info.plist;
@@ -819,6 +970,7 @@
 		53A98CFA2632C53700361033 /* ReleaseDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderNPSTests/Info.plist;

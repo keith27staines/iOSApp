@@ -42,6 +42,11 @@ public enum TrackingEventType: Equatable {
     case placement_deeplink_start                                               // ok
     case placement_deeplink_cancel                                              // not used
     case placement_deeplink_convert                                             // ok
+    
+    // MARK:- NPS score
+    case nps_deeplink_start
+    case nps_deeplink_cancel
+    case nps_deeplink_convert
 
     // MARK:- Recommendations push notification processing                      // checked
     case recommendation_pushnotification_start                                  // ok
@@ -139,6 +144,11 @@ public enum TrackingEventType: Equatable {
         case .recommendation_deeplink_cancel: return "ios_recommendation_deeplink_cancel"
         case .recommendation_deeplink_convert: return "ios_recommendation_deeplink_convert"
             
+        // MARK: nps processing
+        case .nps_deeplink_start: return "ios_nps_deeplink_start"
+        case .nps_deeplink_cancel: return "ios_nps_deeplink_cancel"
+        case .nps_deeplink_convert: return "ios_nps_deeplink_convert"
+
         // MARK:- Offer deeplink processing
         case .placement_deeplink_start: return "ios_placement_deeplink_start"
         case .placement_deeplink_cancel: return "ios_placement_deeplink_cancel"
@@ -545,6 +555,12 @@ extension TrackingEventType: Codable {
             try container.encode(true, forKey: .recommendation_deeplink_cancel)
         case .recommendation_deeplink_convert:
             try container.encode(true, forKey: .recommendation_deeplink_convert)
+        case .nps_deeplink_start:
+            try container.encode(true, forKey: .allow_notifications_start)
+        case .nps_deeplink_cancel:
+            try container.encode(true, forKey: .allow_notifications_cancel)
+        case .nps_deeplink_convert:
+            try container.encode(true, forKey: .allow_notifications_convert)
         case .placement_deeplink_start:
             try container.encode(true, forKey: .placement_deeplink_start)
         case .placement_deeplink_cancel:

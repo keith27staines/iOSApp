@@ -32,6 +32,10 @@ class DeepLinkRouter {
                 log.track(.placement_deeplink_start)
                 coordinator.routeApplication(placementUuid: routingInfo.objectId, appSource: source)
                 log.track(.placement_deeplink_convert)
+            case .nps:
+                log.track(.nps_deeplink_start)
+                coordinator.routeApplication(placementUuid: routingInfo.objectId, appSource: source)
+                log.track(.nps_deeplink_convert)
             }
         }
     }

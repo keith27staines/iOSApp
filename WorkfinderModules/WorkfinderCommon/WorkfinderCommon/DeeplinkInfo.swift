@@ -9,12 +9,16 @@ public struct DeeplinkRoutingInfo {
     public enum ObjectType: String {
         case recommendation
         case placement
+        case nps
+        
         public init?(urlPathComponent: String) {
             switch urlPathComponent {
             case "recommendation", "recommendations":
                 self = .recommendation
             case "placement", "placements":
                 self = .placement
+            case "candidate-nps":
+                self = .nps
             default:
                 return nil
             }

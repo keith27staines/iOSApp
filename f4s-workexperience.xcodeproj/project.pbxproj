@@ -18,6 +18,8 @@
 		40E78E8F1DD32C4E000A3776 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40E78E8E1DD32C4E000A3776 /* Settings.bundle */; };
 		53131C7C260B70A100799629 /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */; };
 		53131C7D260B70A100799629 /* WorkfinderCandidateProfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		532345182632EF1700966B7A /* WorkfinderNPS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532345172632EF1700966B7A /* WorkfinderNPS.framework */; };
+		532345192632EF1700966B7A /* WorkfinderNPS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 532345172632EF1700966B7A /* WorkfinderNPS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5344850F256A5F020082889C /* WorkfinderHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5344850E256A5F020082889C /* WorkfinderHome.framework */; };
 		53448510256A5F020082889C /* WorkfinderHome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5344850E256A5F020082889C /* WorkfinderHome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C760D6251C845B0072281E /* DeviceRegistrar.swift */; };
@@ -111,6 +113,7 @@
 				FCBA983E24506D8B00C3D2E6 /* WorkfinderAppLogic.framework in Embed Frameworks */,
 				FC06A19E24641C930023DE99 /* WorkfinderApplications.framework in Embed Frameworks */,
 				FC5DF50F24ACA22E0089E839 /* WorkfinderRecommendationsList.framework in Embed Frameworks */,
+				532345192632EF1700966B7A /* WorkfinderNPS.framework in Embed Frameworks */,
 				FC70C9D724DC2A4A007DF84D /* WorkfinderDocumentUpload.framework in Embed Frameworks */,
 				FCBA984024506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Embed Frameworks */,
 				FC2A64962494D18700DA28DD /* WorkfinderAssociationDetails.framework in Embed Frameworks */,
@@ -155,6 +158,7 @@
 		40E78E841DD32C3C000A3776 /* ExtensionsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsHelper.swift; sourceTree = "<group>"; };
 		40E78E8E1DD32C4E000A3776 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		532345172632EF1700966B7A /* WorkfinderNPS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderNPS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5344850E256A5F020082889C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C3C51725333731002AFD98 /* DebugDevelop.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugDevelop.entitlements; path = Config/DebugDevelop.entitlements; sourceTree = "<group>"; };
 		53C3C51825333731002AFD98 /* DebugLive.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DebugLive.entitlements; path = Config/DebugLive.entitlements; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				FCBA983F24506D8B00C3D2E6 /* WorkfinderApplyUseCase.framework in Frameworks */,
 				FC18C5B524C1870B006D017D /* WorkfinderCoverLetter.framework in Frameworks */,
 				FC2A64952494D18700DA28DD /* WorkfinderAssociationDetails.framework in Frameworks */,
+				532345182632EF1700966B7A /* WorkfinderNPS.framework in Frameworks */,
 				53131C7C260B70A100799629 /* WorkfinderCandidateProfile.framework in Frameworks */,
 				FC56A0F02455B62B00A7EC3F /* WorkfinderCommon.framework in Frameworks */,
 				FCBA984124506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Frameworks */,
@@ -350,6 +355,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				532345172632EF1700966B7A /* WorkfinderNPS.framework */,
 				53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */,
 				5344850E256A5F020082889C /* WorkfinderHome.framework */,
 				53D94B95256A37EE00A2127C /* WorkfinderHome.framework */,
