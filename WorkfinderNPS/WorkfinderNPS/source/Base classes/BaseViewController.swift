@@ -30,5 +30,6 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         presenter.onViewDidLoad(vc: self)
+        view.backgroundColor = UIColor.white
     }
 }

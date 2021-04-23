@@ -9,6 +9,7 @@ import WorkfinderRecommendationsList
 import WorkfinderCompanyDetailsUseCase
 import WorkfinderHome
 import WorkfinderCandidateProfile
+import WorkfinderNPS
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
@@ -140,6 +141,10 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         return coordinator
     }()
     
+    lazy var npsCoordinator: WorkfinderNPSCoordinator = {
+        WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter as! NavigationRoutingProtocol, inject: injected, npsUuid: "1234", score: nil)
+    }()
+    
     func presentHiddenDebugController(parentCtrl: UIViewController) {
         let debugStoryboard = UIStoryboard(name: "Debug", bundle: nil)
         guard let navigationController = debugStoryboard.instantiateInitialViewController() else {
@@ -168,7 +173,11 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
             })
             log.track(.tab_tap(tabName: "recommendations"))
         case accountCoordinator.navigationRouter.navigationController:
+            addChildCoordinator(npsCoordinator)
+            npsCoordinator.start()
+            
             log.track(.tab_tap(tabName: "account"))
+            
         default:
             fatalError("unknown coordinator")
         }

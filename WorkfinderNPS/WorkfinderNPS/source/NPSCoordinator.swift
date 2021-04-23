@@ -8,6 +8,7 @@
 import Foundation
 import WorkfinderCommon
 import WorkfinderCoordinators
+import WorkfinderUI
 
 public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     
@@ -57,18 +58,23 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
         NPSService(networkConfig: injected.networkConfig)
     }()
     
+    private var newNav: NavigationRoutingProtocol?
+    
     private func displayViewController(_ vc: BaseViewController) {
-        if firstVC == nil {
-            firstVC = vc
-            navigationRouter.present(vc, animated: true, completion: nil)
-        } else {
+//        if firstVC == nil {
+//            firstVC = vc
+//            let nvc = UINavigationController(rootViewController: vc)
+//            newNav = NavigationRouter(navigationController: nvc)
+//            navigationRouter.present(nvc, animated: true, completion: nil)
+//        } else {
             navigationRouter.push(viewController: vc, animated: true)
-        }
+//        }
     }
     
     private func finishedNPS() {
         parentCoordinator?.childCoordinatorDidFinish(self)
-        navigationRouter.dismiss(animated: true, completion: nil)
+//        navigationRouter.dismiss(animated: true, completion: nil)
+        navigationRouter.pop(animated: true)
     }
 }
 
