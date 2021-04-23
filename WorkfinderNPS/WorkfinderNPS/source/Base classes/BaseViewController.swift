@@ -13,9 +13,14 @@ class BaseViewController: UIViewController {
     var presenter: BasePresenter
     weak var coordinator: WorkfinderNPSCoordinator?
     
-    init(coordinator: WorkfinderNPSCoordinator, presenter: BasePresenter) {
+    var onComplete: (() -> Void)?
+    var onFinishNPS: (() -> Void)?
+    var onCancelNPS: (() -> Void)?
+    
+    init(coordinator: WorkfinderNPSCoordinator, presenter: BasePresenter, onComplete: @escaping (() -> Void)) {
         self.coordinator = coordinator
         self.presenter = presenter
+        self.onComplete = onComplete
         super.init(nibName: nil, bundle: nil)
     }
     

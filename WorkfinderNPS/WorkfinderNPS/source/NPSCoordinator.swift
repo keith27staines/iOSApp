@@ -10,6 +10,16 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 
 public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
+    
+    var score: Int?
+    var npsUuid: F4SUUID
+    var nps: NPS?
+    
+    var firstVC: BaseViewController? {
+        didSet {
+            firstVC?.onCancelNPS = finishedNPS
+        }
+    }
  
     public override func start() {
         if let _ = score {
@@ -21,34 +31,22 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     
     func showChoices() {
         let presenter = ChooseNPSPresenter(coordinator: self, service: self)
-        let vc = ChooseNPSViewController(coordinator: self, presenter: presenter)
-        navigationRouter.push(viewController: vc, animated: true)
+        let vc = ChooseNPSViewController(coordinator: self, presenter: presenter, onComplete: showFeedback)
+        displayViewController(vc)
     }
-    
+        
     func showFeedback() {
         let presenter = FeedbackPresenter(coordinator: self, service: self)
-        let vc = FeedbackViewController(coordinator: self, presenter: presenter)
-        navigationRouter.push(viewController: vc, animated: true)
+        let vc = FeedbackViewController(coordinator: self, presenter: presenter, onComplete: showOtherFeedback)
+        displayViewController(vc)
     }
     
     func showOtherFeedback() {
         let presenter = OtherFeedbackPresenter(coordinator: self, service: self)
-        let vc = OtherFeedbackViewController(coordinator: self, presenter: presenter)
-        navigationRouter.push(viewController: vc, animated: true)
+        let vc = OtherFeedbackViewController(coordinator: self, presenter: presenter, onComplete: finishedNPS)
+        displayViewController(vc)
     }
-    
-    func finishedNPS() {
-        
-    }
-    
-    func cancelNPS() {
-        
-    }
-    
-    var score: Int?
-    var npsUuid: F4SUUID
-    var nps: NPS?
-    
+                
     public init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, npsUuid: F4SUUID, score: Int? ) {
         self.npsUuid = npsUuid
         self.score = score
@@ -58,6 +56,20 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     private lazy var service: NPSServiceProtocol = {
         NPSService(networkConfig: injected.networkConfig)
     }()
+    
+    private func displayViewController(_ vc: BaseViewController) {
+        if firstVC == nil {
+            firstVC = vc
+            navigationRouter.present(vc, animated: true, completion: nil)
+        } else {
+            navigationRouter.push(viewController: vc, animated: true)
+        }
+    }
+    
+    private func finishedNPS() {
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        navigationRouter.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension WorkfinderNPSCoordinator: NPSServiceProtocol {
