@@ -10,11 +10,62 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderUI
 
+class NewWindowManager {
+    
+    let originalWindow: UIWindow?
+    
+    private lazy var rootViewController: UIViewController = {
+        let vc = UIViewController()
+        vc.view.backgroundColor = .clear
+        vc.navigationController?.navigationBar.isHidden = true
+        return vc
+    }()
+    
+    func loadWindow() {
+        newWindow?.makeKeyAndVisible()
+    }
+    
+    func unloadWindow() {
+        navigationController.popViewController(animated: true)
+        originalWindow?.makeKeyAndVisible()
+        newWindow?.isHidden = true
+        newWindow = nil
+    }
+    
+    private lazy var newWindow: UIWindow? = {
+        let window = UIWindow()
+        window.rootViewController = navigationController
+        window.backgroundColor = UIColor.clear
+        window.windowLevel = .statusBar
+        return window
+    }()
+    
+    public lazy var navigationController: UINavigationController = {
+        let nvc = UINavigationController(rootViewController: rootViewController)
+        return nvc
+    }()
+    
+    init(originalWindow: UIWindow?) {
+        self.originalWindow = originalWindow
+    }
+}
+
+
+
 public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     
     var score: Int?
     var npsUuid: F4SUUID
     var nps: NPS?
+
+    lazy var newWindowManager: NewWindowManager = {
+        return NewWindowManager(originalWindow: UIApplication.shared.windows.first)
+    }()
+    
+    private lazy var newNav: NavigationRoutingProtocol = {
+        let nav = newWindowManager.navigationController
+        return NavigationRouter(navigationController: nav)
+    }()
     
     var firstVC: BaseViewController? {
         didSet {
@@ -57,24 +108,20 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     private lazy var service: NPSServiceProtocol = {
         NPSService(networkConfig: injected.networkConfig)
     }()
-    
-    private var newNav: NavigationRoutingProtocol?
+
     
     private func displayViewController(_ vc: BaseViewController) {
-//        if firstVC == nil {
-//            firstVC = vc
-//            let nvc = UINavigationController(rootViewController: vc)
-//            newNav = NavigationRouter(navigationController: nvc)
-//            navigationRouter.present(nvc, animated: true, completion: nil)
-//        } else {
-            navigationRouter.push(viewController: vc, animated: true)
-//        }
+        let nvc = newWindowManager.navigationController
+        if firstVC == nil {
+            vc.isFirst = true
+            newWindowManager.loadWindow()
+            firstVC = vc
+        }
+        nvc.pushViewController(vc, animated: true)
     }
     
-    private func finishedNPS() {
-        parentCoordinator?.childCoordinatorDidFinish(self)
-//        navigationRouter.dismiss(animated: true, completion: nil)
-        navigationRouter.pop(animated: true)
+    func finishedNPS() {
+        newWindowManager.unloadWindow()
     }
 }
 
