@@ -100,7 +100,7 @@ class NPSScoreView: UIView {
         tiles = (0...10).compactMap({ (value) -> ScoreTile? in
             guard let score = Score(rawValue: value) else { return nil }
             return ScoreTile(score: score) { [weak self] score in
-                self?.setScore(score.rawValue, notify: false)
+                self?.setScore(score.rawValue, notify: true)
             }
         })
         addSubview(mainStack)
