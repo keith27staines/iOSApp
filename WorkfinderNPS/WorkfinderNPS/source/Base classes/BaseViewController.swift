@@ -10,6 +10,9 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class BaseViewController: UIViewController {
+    
+    lazy var messageHandler = UserMessageHandler(presenter: self)
+    
     var presenter: BasePresenter
     weak var coordinator: WorkfinderNPSCoordinator?
     

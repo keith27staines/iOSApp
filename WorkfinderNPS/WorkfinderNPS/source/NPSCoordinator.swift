@@ -56,7 +56,7 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     
     var score: Int?
     var npsUuid: F4SUUID
-    var nps: NPS?
+    var nps: NPSModel?
 
     lazy var newWindowManager: NewWindowManager = {
         return NewWindowManager(originalWindow: UIApplication.shared.windows.first)
@@ -127,7 +127,7 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
 
 extension WorkfinderNPSCoordinator: NPSServiceProtocol {
     
-    public func fetchNPS(uuid: String, completion: (Result<NPS, Error>) -> Void) {
+    public func fetchNPS(uuid: String, completion: (Result<NPSModel, Error>) -> Void) {
         guard let nps = nps else {
             service.fetchNPS(uuid: npsUuid) { result in
                 switch result {
@@ -143,7 +143,7 @@ extension WorkfinderNPSCoordinator: NPSServiceProtocol {
         completion(.success(nps))
     }
     
-    public func patchNPS(uuid: String, nps: NPS, completion: (Result<NPS, Error>) -> Void) {
+    public func patchNPS(uuid: String, nps: NPSModel, completion: (Result<NPSModel, Error>) -> Void) {
         service.patchNPS(uuid: uuid, nps: nps, completion: completion)
     }
 }

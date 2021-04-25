@@ -25,6 +25,12 @@ public struct WorkfinderColors {
     public static let textLight = UIColor.lightGray
     public static let textMedium = UIColor.gray
     public static let textDark = UIColor.darkGray
+    
+    public static let gray2 = UIColor.init(white: 0.200, alpha: 1)
+    public static let gray3 = UIColor.init(white: 0.388, alpha: 1)
+    public static let gray4 = UIColor.init(white: 0.663, alpha: 1)
+    public static let gray5 = UIColor.init(white: 0.749, alpha: 1)
+    public static let gray6 = UIColor.init(white: 0.945, alpha: 1)
 }
 
 

@@ -9,5 +9,4 @@ import Foundation
 import WorkfinderCommon
 
 class ChooseNPSPresenter: BasePresenter {
-    
 }

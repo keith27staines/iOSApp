@@ -7,7 +7,10 @@
 
 import Foundation
 
-public struct NPS {
+public struct NPSModel {
     public var reviewUuid: String?
     public var score: Int?
+    public var category: QuestionCategory?
+    public var hostName: String?
+    public var projectName: String?
 }

@@ -10,51 +10,106 @@ import WorkfinderUI
 
 class NPSScoreView: UIView {
     
-    private (set) var tiles: [ScoreTile] = []
+    private (set) var score: Score?
     
-    lazy var text: UILabel = {
+    func setScore(_ rawScore: Int?, notify: Bool) {
+        guard let rawScore = rawScore, let score = Score(rawValue: rawScore) else {
+            deselectAll()
+            if notify { onScoreChanged?(nil) }
+            return
+        }
+        setScore(score)
+        if notify {
+            onScoreChanged?(score)
+        }
+    }
+    
+    func setScore(_ score: Score) {
+        let tile = tiles[score.rawValue]
+        let tileWasAlreadySelected = tile.isSelected
+        deselectAll()
+        if tileWasAlreadySelected { return }
+        tile.isSelected = true
+        self.score = score
+    }
+    
+    private (set) var tiles: [ScoreTile] = []
+    var onScoreChanged: ((Score?) -> ())?
+    
+    func configureWith(introText: String?, score: Int?) {
+        self.introText.text = introText
+        setScore(score, notify: false)
+    }
+    
+    private lazy var introText: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Based on your experience with {{Host First Name}} on {{Project Name}}, on a scale of 0 to 10, how likely would you recommend {{Host First Name}} to other candidates?"
-        label.textColor = UIColor.darkText
+        label.textColor = WorkfinderColors.gray2
         return label
     }()
     
-    lazy private var tilesStack: UIStackView = {
+    private lazy var tilesWithLabels: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+                tileLabels,
+                tilesStack,
+            ]
+        )
+        stack.axis = .vertical
+        stack.spacing = 4
+        return stack
+    }()
+    
+    private lazy var tileLabels: UIStackView = {
+        let font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        let color = WorkfinderColors.gray2
+        let left = UILabel()
+        left.text = "Not likely at all"
+        let right = UILabel()
+        right.text = "Very likely"
+        left.font = font
+        right.font = font
+        left.textColor = color
+        right.textColor = color
+        let space = UIView()
+        let stack = UIStackView(arrangedSubviews: [
+                left,
+                space,
+                right
+            ]
+        )
+        stack.axis = .horizontal
+        return stack
+    }()
+    
+    private lazy var tilesStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: tiles)
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         return stack
     }()
     
-    lazy var mainStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [text, tilesStack])
+    private lazy var mainStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [introText, tilesWithLabels])
         stack.axis = .vertical
         stack.spacing = 20
         return stack
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        tiles = (0...9).compactMap({ (value) -> ScoreTile? in
-            guard let score = Score(rawValue: value+1) else { return nil }
-            return ScoreTile(score: score, onTap: onTap)
+    init(onScoreChanged: @escaping (Score?) -> ()) {
+        super.init(frame: CGRect.zero)
+        tiles = (0...10).compactMap({ (value) -> ScoreTile? in
+            guard let score = Score(rawValue: value) else { return nil }
+            return ScoreTile(score: score) { [weak self] score in
+                self?.setScore(score.rawValue, notify: false)
+            }
         })
         addSubview(mainStack)
-        mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
-    }
-    
-    func onTap(score: Score) {
-        let tile = tiles[score.rawValue - 1]
-        if tile.isSelected {
-            tile.isSelected = false
-            return
-        }
-        deselectAll()
-        tile.isSelected = true
+        mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        self.onScoreChanged = onScoreChanged
     }
     
     func deselectAll() {
+        score = nil
         tiles.forEach { (tile) in
             tile.isSelected = false
         }
@@ -104,8 +159,7 @@ class ScoreTile: UIView {
     
     var isSelected: Bool = false {
         didSet {
-            label.alpha = isSelected ? 1 : 0.7
-            let color = isSelected ? UIColor.black :  UIColor.init(white: 0.8, alpha: 1)
+            let color = isSelected ? UIColor.black :  WorkfinderColors.gray6
             label.textColor = color
             label.layer.borderWidth = isSelected ? 2 : 1
             label.layer.borderColor = color.cgColor
