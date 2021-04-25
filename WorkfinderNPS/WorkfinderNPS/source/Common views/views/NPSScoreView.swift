@@ -12,25 +12,21 @@ class NPSScoreView: UIView {
     
     private (set) var score: Score?
     
-    func setScore(_ rawScore: Int?, notify: Bool) {
-        guard let rawScore = rawScore, let score = Score(rawValue: rawScore) else {
-            deselectAll()
+    private func setScore(_ rawScore: Int?, notify: Bool) {
+        deselectAll()
+        guard
+            let rawScore = rawScore,
+            let score = Score(rawValue: rawScore)
+        else {
             if notify { onScoreChanged?(nil) }
             return
         }
-        setScore(score)
+        let tile = tiles[score.rawValue]
+        tile.isSelected = true
+        self.score = score
         if notify {
             onScoreChanged?(score)
         }
-    }
-    
-    func setScore(_ score: Score) {
-        let tile = tiles[score.rawValue]
-        let tileWasAlreadySelected = tile.isSelected
-        deselectAll()
-        if tileWasAlreadySelected { return }
-        tile.isSelected = true
-        self.score = score
     }
     
     private (set) var tiles: [ScoreTile] = []
@@ -157,6 +153,10 @@ class ScoreTile: UIView {
     
     var onTap: ((Score) -> Void)?
     
+    @objc private func tapped() {
+        onTap?(score)
+    }
+    
     var isSelected: Bool = false {
         didSet {
             let color = isSelected ? UIColor.black :  WorkfinderColors.gray6
@@ -166,22 +166,13 @@ class ScoreTile: UIView {
         }
     }
     
-    private func applyScore() {
-        label.text = String(score.rawValue)
-        label.backgroundColor = score.color
-        label.textAlignment = .center
-        label.isUserInteractionEnabled = true
-        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
-    }
-    
-    @objc private func tapped() {
-        onTap?(score)
-    }
-    
     private lazy var label: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = true
         label.font = UIFont.systemFont(ofSize: 24)
         label.heightAnchor.constraint(equalTo: label.widthAnchor).isActive = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped)))
         return label
     }()
     
@@ -191,7 +182,8 @@ class ScoreTile: UIView {
         super.init(frame: CGRect.zero)
         addSubview(label)
         label.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
-        applyScore()
+        label.text = String(score.rawValue)
+        label.backgroundColor = score.color
     }
     
     required init?(coder: NSCoder) {

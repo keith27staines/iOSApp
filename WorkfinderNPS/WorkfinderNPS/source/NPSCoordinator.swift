@@ -35,7 +35,7 @@ class NewWindowManager {
     private lazy var newWindow: UIWindow? = {
         let window = UIWindow()
         window.rootViewController = navigationController
-        window.backgroundColor = UIColor.clear
+        window.backgroundColor = UIColor.white
         window.windowLevel = .statusBar
         return window
     }()

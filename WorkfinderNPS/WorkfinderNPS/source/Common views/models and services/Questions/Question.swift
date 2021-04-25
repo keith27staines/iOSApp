@@ -18,12 +18,21 @@ let allQuestions = [
 ]
 
 
-public struct Question {
+public class Question {
     public var text: String
-    public var answer: Answer = .unchecked
+    public var answer: Answer = .unchecked(nil)
+    public func toggleAnswer() {
+        switch answer {
+        case .checked(let text): answer = .unchecked(text)
+        case .unchecked(let text): answer = .checked(text)
+        }
+    }
+    public init(text: String) {
+        self.text = text
+    }
 }
 
 public enum Answer {
-    case unchecked
+    case unchecked(String?)
     case checked(String?)
 }

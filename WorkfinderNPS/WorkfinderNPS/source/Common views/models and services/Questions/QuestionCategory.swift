@@ -7,8 +7,13 @@
 
 import Foundation
 
-public struct QuestionCategory {
-    public var title: String
-    public var summary: String
-    public var questions: [Question]
+public class QuestionCategory {
+    public var title: String = ""
+    public var summary: String = ""
+    public var questions = [Question]()
+    public init(title: String, summary: String, questions: [Question]) {
+        self.title = title
+        self.summary = summary
+        self.questions = questions
+    }
 }
