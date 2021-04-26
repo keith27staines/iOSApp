@@ -27,7 +27,7 @@ public class WorkfinderPrimaryButton: UIButton {
 
 public class WorkfinderSecondaryButton: UIButton {
     
-    init() {
+    public init() {
         super.init(frame: CGRect.zero)
         layer.cornerRadius = primaryButtonCornerRadius
         layer.masksToBounds = true

@@ -13,4 +13,5 @@ public struct NPSModel {
     public var category: QuestionCategory?
     public var hostName: String?
     public var projectName: String?
+    public var companyName: String?
 }

@@ -17,6 +17,7 @@ class BasePresenter {
     
     var hostName: String? { npsModel?.hostName }
     var projectName: String? { npsModel?.projectName }
+    var companyName: String? { npsModel?.companyName }
     var score: Int? { npsModel?.score }
     
     func setScore(_ score: Score?) {
@@ -45,10 +46,19 @@ class BasePresenter {
     }
     
     func reload(completion: (Error?) -> Void) {
-        let category = questionCategoriesBuilder(hostName: "Keith")[0]
-        npsModel = NPSModel(reviewUuid: "uuid", score: nil, category: category, hostName: "Keith", projectName: "Apollo")
-        categories = questionCategoriesBuilder(hostName: npsModel?.hostName ?? "unknown")
-        completion(nil)
+        
+        service.fetchNPS(uuid: "uuid") { (result) in
+            switch result {
+            case .success(var nps):
+                npsModel = nps
+                let category = questionCategoriesBuilder(hostName: "Keith")[0]
+                nps.category = category
+                categories = questionCategoriesBuilder(hostName: npsModel?.hostName ?? "unknown")
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
     }
     
     init(coordinator: WorkfinderNPSCoordinator, service: NPSServiceProtocol) {

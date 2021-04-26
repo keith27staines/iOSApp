@@ -15,9 +15,9 @@
 		532344D12632CAEF00966B7A /* ChooseNPSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344D02632CAEF00966B7A /* ChooseNPSViewController.swift */; };
 		532344D52632CB2D00966B7A /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344D42632CB2D00966B7A /* SubmitViewController.swift */; };
 		532344D92632CBC300966B7A /* NPSScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344D82632CBC300966B7A /* NPSScoreView.swift */; };
-		532344E92632CCC400966B7A /* OtherFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344E82632CCC400966B7A /* OtherFeedbackViewController.swift */; };
-		532344EF2632CD0B00966B7A /* OtherFeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344EE2632CD0B00966B7A /* OtherFeedbackPresenter.swift */; };
-		532344F32632CD1C00966B7A /* FeedbackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344F22632CD1C00966B7A /* FeedbackPresenter.swift */; };
+		532344E92632CCC400966B7A /* ThankyouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344E82632CCC400966B7A /* ThankyouViewController.swift */; };
+		532344EF2632CD0B00966B7A /* ThankyouPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344EE2632CD0B00966B7A /* ThankyouPresenter.swift */; };
+		532344F32632CD1C00966B7A /* SubmitPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344F22632CD1C00966B7A /* SubmitPresenter.swift */; };
 		532344F72632CD3000966B7A /* ChooseNPSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344F62632CD3000966B7A /* ChooseNPSPresenter.swift */; };
 		532344FB2632CD4E00966B7A /* NPSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532344FA2632CD4E00966B7A /* NPSService.swift */; };
 		532345022632CF6C00966B7A /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532345012632CF6C00966B7A /* BasePresenter.swift */; };
@@ -52,9 +52,9 @@
 		532344D02632CAEF00966B7A /* ChooseNPSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNPSViewController.swift; sourceTree = "<group>"; };
 		532344D42632CB2D00966B7A /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		532344D82632CBC300966B7A /* NPSScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPSScoreView.swift; sourceTree = "<group>"; };
-		532344E82632CCC400966B7A /* OtherFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFeedbackViewController.swift; sourceTree = "<group>"; };
-		532344EE2632CD0B00966B7A /* OtherFeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFeedbackPresenter.swift; sourceTree = "<group>"; };
-		532344F22632CD1C00966B7A /* FeedbackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPresenter.swift; sourceTree = "<group>"; };
+		532344E82632CCC400966B7A /* ThankyouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankyouViewController.swift; sourceTree = "<group>"; };
+		532344EE2632CD0B00966B7A /* ThankyouPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankyouPresenter.swift; sourceTree = "<group>"; };
+		532344F22632CD1C00966B7A /* SubmitPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitPresenter.swift; sourceTree = "<group>"; };
 		532344F62632CD3000966B7A /* ChooseNPSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseNPSPresenter.swift; sourceTree = "<group>"; };
 		532344FA2632CD4E00966B7A /* NPSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPSService.swift; sourceTree = "<group>"; };
 		532345012632CF6C00966B7A /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				532344D42632CB2D00966B7A /* SubmitViewController.swift */,
-				532344F22632CD1C00966B7A /* FeedbackPresenter.swift */,
+				532344F22632CD1C00966B7A /* SubmitPresenter.swift */,
 			);
 			path = Submit;
 			sourceTree = "<group>";
@@ -150,8 +150,8 @@
 		532344E72632CC9900966B7A /* Thank you */ = {
 			isa = PBXGroup;
 			children = (
-				532344E82632CCC400966B7A /* OtherFeedbackViewController.swift */,
-				532344EE2632CD0B00966B7A /* OtherFeedbackPresenter.swift */,
+				532344E82632CCC400966B7A /* ThankyouViewController.swift */,
+				532344EE2632CD0B00966B7A /* ThankyouPresenter.swift */,
 			);
 			path = "Thank you";
 			sourceTree = "<group>";
@@ -348,16 +348,16 @@
 				532345082632CFDC00966B7A /* BaseViewController.swift in Sources */,
 				532344D92632CBC300966B7A /* NPSScoreView.swift in Sources */,
 				53AA928F263539A800C3A083 /* Question.swift in Sources */,
-				532344EF2632CD0B00966B7A /* OtherFeedbackPresenter.swift in Sources */,
+				532344EF2632CD0B00966B7A /* ThankyouPresenter.swift in Sources */,
 				53AA929726353A8200C3A083 /* QuestionCategory.swift in Sources */,
 				53E9181426368F1C00BD77E5 /* TextEditorViewController.swift in Sources */,
 				532345102632E39100966B7A /* NPSModel.swift in Sources */,
 				532344D52632CB2D00966B7A /* SubmitViewController.swift in Sources */,
 				53AA929D2635477900C3A083 /* QuestionsView.swift in Sources */,
-				532344F32632CD1C00966B7A /* FeedbackPresenter.swift in Sources */,
+				532344F32632CD1C00966B7A /* SubmitPresenter.swift in Sources */,
 				532344FB2632CD4E00966B7A /* NPSService.swift in Sources */,
 				532344F72632CD3000966B7A /* ChooseNPSPresenter.swift in Sources */,
-				532344E92632CCC400966B7A /* OtherFeedbackViewController.swift in Sources */,
+				532344E92632CCC400966B7A /* ThankyouViewController.swift in Sources */,
 				532344CD2632C93C00966B7A /* NPSCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

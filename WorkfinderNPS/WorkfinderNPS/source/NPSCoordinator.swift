@@ -84,14 +84,14 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     }
         
     func showSubmit() {
-        let presenter = FeedbackPresenter(coordinator: self, service: self)
-        let vc = SubmitViewController(coordinator: self, presenter: presenter, onComplete: showOtherFeedback)
+        let presenter = SubmitPresenter(coordinator: self, service: self)
+        let vc = SubmitViewController(coordinator: self, presenter: presenter, onComplete: showThankyou)
         displayViewController(vc)
     }
     
-    func showOtherFeedback() {
-        let presenter = OtherFeedbackPresenter(coordinator: self, service: self)
-        let vc = OtherFeedbackViewController(coordinator: self, presenter: presenter, onComplete: finishedNPS)
+    func showThankyou() {
+        let presenter = ThankyouPresenter(coordinator: self, service: self)
+        let vc = ThankyouViewController(coordinator: self, presenter: presenter, onComplete: finishedNPS)
         displayViewController(vc)
     }
                 
@@ -118,6 +118,12 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     
     func finishedNPS() {
         newWindowManager.unloadWindow()
+    }
+    
+    func backToStart() {
+        guard let firstVC = firstVC else { return }
+        let nvc = newWindowManager.navigationController
+        nvc.popToViewController(firstVC, animated: true)
     }
 }
 

@@ -16,7 +16,8 @@ public protocol NPSServiceProtocol {
 
 public class NPSService: WorkfinderService, NPSServiceProtocol {
     public func fetchNPS(uuid: String, completion: (Result<NPSModel, Error>) -> Void) {
-        
+        let nps = NPSModel(reviewUuid: "uuid", score: nil, category: nil, hostName: "Keith", projectName: "Apollo", companyName: "Workfinder")
+        completion(.success(nps))
     }
     
     public func patchNPS(uuid: String, nps: NPSModel, completion: (Result<NPSModel, Error>) -> Void) {

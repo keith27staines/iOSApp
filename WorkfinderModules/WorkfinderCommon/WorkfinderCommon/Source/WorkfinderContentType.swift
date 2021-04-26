@@ -14,6 +14,7 @@ public enum WorkfinderContentType: String, Codable {
     case privacyPolicy
     case offerWorkExperience
     case changePassword
+    case whatMakesGoodFeedback
     
     public var title: String {
         switch self {
@@ -23,6 +24,7 @@ public enum WorkfinderContentType: String, Codable {
         case .privacyPolicy: return "Privacy Policy"
         case .offerWorkExperience: return ""
         case .changePassword: return ""
+        case .whatMakesGoodFeedback: return "Good feedback"
         }
     }
     
@@ -34,6 +36,7 @@ public enum WorkfinderContentType: String, Codable {
         case .privacyPolicy: return URL(string: "https://workfinder.com/privacy")!
         case .offerWorkExperience: return URL(string: "https://workfinder.com/employers")!
         case .changePassword: return URL(string: "https://workfinder.com/auth/password/reset/")!
+        case .whatMakesGoodFeedback: return URL(string: "https://workfinder.com/about")!
         }
     }
     
@@ -45,6 +48,7 @@ public enum WorkfinderContentType: String, Codable {
         case .privacyPolicy: return .inWorkfinder
         case .offerWorkExperience: return .inBrowser
         case .changePassword: return .inWorkfinder
+        case .whatMakesGoodFeedback: return .inWorkfinder
         }
     }
 }
