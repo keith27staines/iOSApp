@@ -9,32 +9,50 @@ import UIKit
 import WorkfinderUI
 
 
-class TextEditorViewController: UIViewController {
+class AnswerTextViewController: UIViewController {
     
     lazy var intro: UILabel = {
         let label = UILabel()
+        label.textColor = WorkfinderColors.gray2
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
     
     lazy var text: UITextView = {
         let view = UITextView()
+        view.backgroundColor = UIColor.white
+        view.textColor = WorkfinderColors.gray2
+        view.font = UIFont.systemFont(ofSize: 17)
+        view.layer.borderWidth = 1
+        view.layer.borderColor = WorkfinderColors.gray4.cgColor
+        view.layer.cornerRadius = 12
         return view
     }()
     
     lazy var stack: UIStackView = {
+        let spacer = UIView()
+        spacer.setContentHuggingPriority(.defaultLow, for: .vertical)
         let stack = UIStackView()
         stack.addArrangedSubview(intro)
         stack.addArrangedSubview(text)
+        stack.addArrangedSubview(spacer)
         stack.axis = .vertical
         stack.spacing = 20
         stack.heightAnchor.constraint(equalToConstant: 300).isActive = true
         return stack
     }()
     
+    
+    func fdafdas() {
+        intro.text = textString
+        text.text = textString
+    }
+    
     func configureViews() {
         view.addSubview(stack)
         let guide = view.safeAreaLayoutGuide
-        stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
     }
     
     func confiugureNavigationBar() {
@@ -60,6 +78,7 @@ class TextEditorViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         confiugureNavigationBar()
+        text.becomeFirstResponder()
     }
     
     var introString: String? {
@@ -73,10 +92,17 @@ class TextEditorViewController: UIViewController {
     }
     
     
-    init(title: String, info: String?, text: String?, onCancel: @escaping () -> Void, onDone: @escaping (String?) -> Void) {
+    init(title: String,
+         intro: String?,
+         text: String?,
+         onCancel: @escaping () -> Void,
+         onDone: @escaping (String?) -> Void
+    ) {
         super.init(nibName: nil, bundle: nil)
         configureViews()
         self.title = title
+        self.introString = intro
+        self.textString = text
         self.onCancel = onCancel
         self.onDone = onDone
     }

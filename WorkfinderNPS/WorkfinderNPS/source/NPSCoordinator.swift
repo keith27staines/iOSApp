@@ -74,22 +74,18 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     }
  
     public override func start() {
-        if let _ = score {
-            showFeedback()
-        } else {
-            showChoices()
-        }
+        showChoices()
     }
     
     func showChoices() {
         let presenter = ChooseNPSPresenter(coordinator: self, service: self)
-        let vc = ChooseNPSViewController(coordinator: self, presenter: presenter, onComplete: showFeedback)
+        let vc = ChooseNPSViewController(coordinator: self, presenter: presenter, onComplete: showSubmit)
         displayViewController(vc)
     }
         
-    func showFeedback() {
+    func showSubmit() {
         let presenter = FeedbackPresenter(coordinator: self, service: self)
-        let vc = FeedbackViewController(coordinator: self, presenter: presenter, onComplete: showOtherFeedback)
+        let vc = SubmitViewController(coordinator: self, presenter: presenter, onComplete: showOtherFeedback)
         displayViewController(vc)
     }
     

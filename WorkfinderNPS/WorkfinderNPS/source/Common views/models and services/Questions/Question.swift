@@ -17,14 +17,14 @@ let allQuestions = [
     Question(text: "Other"),
 ]
 
-
 public class Question {
+    
     public var text: String
-    public var answer: Answer = .unchecked(nil)
+    public var answer: Answer = .unchecked
     public func toggleAnswer() {
         switch answer {
-        case .checked(let text): answer = .unchecked(text)
-        case .unchecked(let text): answer = .checked(text)
+        case .checked: answer = .unchecked
+        case .unchecked: answer = .checked
         }
     }
     public init(text: String) {
@@ -33,6 +33,6 @@ public class Question {
 }
 
 public enum Answer {
-    case unchecked(String?)
-    case checked(String?)
+    case unchecked
+    case checked
 }

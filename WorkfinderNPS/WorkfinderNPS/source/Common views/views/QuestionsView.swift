@@ -67,7 +67,7 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
     }
     
-    override init(frame: CGRect) {
+    init() {
         super.init(frame: CGRect.zero)
         configureViews()
     }
@@ -121,19 +121,10 @@ class QuestionCell: UITableViewCell {
         return label
     }()
     
-    lazy var answer: UILabel = {
-        let label = UILabel()
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.textColor = WorkfinderColors.gray4
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        return label
-    }()
-    
     lazy var textStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.addArrangedSubview(question)
-        stack.addArrangedSubview(answer)
         return stack
     }()
     
@@ -149,14 +140,8 @@ class QuestionCell: UITableViewCell {
     func configureCellWithQuestion(_ question: Question) {
         self.question.text = question.text
         switch question.answer {
-        case .unchecked:
-            check.isHidden = true
-            answer.isHidden = true
-            answer.text = ""
-        case .checked(let text):
-            check.isHidden = false
-            answer.isHidden = text != nil && text?.isEmpty == false
-            answer.text = text
+        case .unchecked: check.isHidden = true
+        case .checked: check.isHidden = false
         }
     }
     

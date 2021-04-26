@@ -44,12 +44,26 @@ class ChooseNPSViewController: BaseViewController {
         self.presenter.setScore(score)
         self.refreshFromPresenter()
     }
-    private lazy var questionsView = QuestionsView()
+    private lazy var questionsView: QuestionsView = {
+        QuestionsView()
+    }()
+    
+    private lazy var nextButton: UIButton = {
+        let button = WorkfinderPrimaryButton()
+        button.setTitle("Next", for: .normal)
+        button.addTarget(self, action: #selector(onNext), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc private func onNext() {
+        coordinator?.showSubmit()
+    }
     
     private lazy var stack: UIStackView = {
         let stack = UIStackView()
         stack.addArrangedSubview(scoreView)
         stack.addArrangedSubview(questionsView)
+        stack.addArrangedSubview(nextButton)
         stack.spacing = 20
         stack.axis = .vertical
         return stack
