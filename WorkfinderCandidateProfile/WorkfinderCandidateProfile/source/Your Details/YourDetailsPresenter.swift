@@ -216,7 +216,9 @@ class YourDetailsPresenter: BaseAccountPresenter {
     func selectItemsFromIds(_ ids: [String], for picklist: AccountPicklist) {
         picklist.deselectAll()
         ids.forEach { (id) in
-            _ = picklist.selectItemHavingId(id)
+            if id != "" {
+                _ = picklist.selectItemHavingId(id)
+            }
         }
     }
 
