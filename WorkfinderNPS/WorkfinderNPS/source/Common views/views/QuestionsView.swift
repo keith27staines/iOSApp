@@ -11,6 +11,7 @@ import WorkfinderUI
 class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var category: QuestionCategory?
+    weak var parent: ChooseNPSViewController?
     
     func configureWith(category: QuestionCategory?) {
         self.category = category
@@ -67,7 +68,8 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
     }
     
-    init() {
+    init(parent: ChooseNPSViewController) {
+        self.parent = parent
         super.init(frame: CGRect.zero)
         configureViews()
     }
@@ -97,9 +99,11 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         question.toggleAnswer()
         tableView.reloadRows(at: [indexPath], with: .automatic)
         if question.answer.isChecked && question.answerPermitsText {
-
-            
-
+            parent?.showAnswerTextFor(question: question, onCancel: {
+                
+            }, onDone: { (string) in
+                
+            })
         }
     }
     
@@ -154,7 +158,7 @@ class QuestionCell: UITableViewCell {
     func configureCellWithQuestion(_ question: Question) {
         self.question.text = question.questionText
         check.isHidden = !question.answer.isChecked
-        answer.isHidden = check.isHidden
+        answer.isHidden = !question.answerPermitsText
         answer.text = question.answer.answerText ?? "Add some text"
     }
     

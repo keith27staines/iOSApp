@@ -39,16 +39,21 @@ class ChooseNPSViewController: BaseViewController {
         questionsView.configureWith(category: presenter.category)
     }
     
-    func showAnswerTextFor(question: Question) {
-        let vc = AnswerTextViewController(title: "Other", intro: "Some intro text", text: question.answer.answerText) {
-        } onDone: { [weak self] (newText) in
-            question.answer.answerText = newText
-        }
+    func showAnswerTextFor(question: Question,  onCancel: @escaping () -> Void, onDone: @escaping (String?) -> Void) {
+        let vc = AnswerTextViewController(
+            title: "Other",
+            intro: "Some intro text",
+            text: question.answer.answerText,
+            onCancel: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+                onCancel()
+            },
+            onDone: { [weak self] string in
+                self?.navigationController?.popViewController(animated: true)
+                onDone(string)
+            }
+        )
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func closeAnswerText() {
-        navigationController?.popViewController(animated: true)
     }
     
     private lazy var scoreView = NPSScoreView() { [weak self] score in
@@ -57,7 +62,7 @@ class ChooseNPSViewController: BaseViewController {
         self.refreshFromPresenter()
     }
     private lazy var questionsView: QuestionsView = {
-        QuestionsView()
+        QuestionsView(parent: self)
     }()
     
     private lazy var nextButton: UIButton = {
