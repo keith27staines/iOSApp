@@ -9,30 +9,31 @@ import Foundation
 
 
 let allQuestions = [
-    Question(text: "Communication"),
-    Question(text: "Task Delegation"),
-    Question(text: "Membership"),
-    Question(text: "Feedback"),
-    Question(text: "Hospitality"),
-    Question(text: "Other"),
+    Question(questionText: "Communication"),
+    Question(questionText: "Task Delegation"),
+    Question(questionText: "Membership"),
+    Question(questionText: "Feedback"),
+    Question(questionText: "Hospitality"),
+    Question(questionText: "Other"),
 ]
 
 public class Question {
-    
-    public var text: String
-    public var answer: Answer = .unchecked
+    public var answerPermitsText: Bool
+    public var questionText: String
+    public var answer: Answer
+
     public func toggleAnswer() {
-        switch answer {
-        case .checked: answer = .unchecked
-        case .unchecked: answer = .checked
-        }
+        answer.isChecked.toggle()
     }
-    public init(text: String) {
-        self.text = text
+
+    public init(questionText: String, answerPermitsText: Bool = false) {
+        self.questionText = questionText
+        self.answerPermitsText = answerPermitsText
+        self.answer = Answer(isChecked: false, answerText: nil)
     }
 }
 
-public enum Answer {
-    case unchecked
-    case checked
+public struct Answer {
+    var isChecked: Bool = false
+    var answerText: String? = nil
 }

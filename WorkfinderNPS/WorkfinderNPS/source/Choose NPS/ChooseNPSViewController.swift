@@ -39,6 +39,18 @@ class ChooseNPSViewController: BaseViewController {
         questionsView.configureWith(category: presenter.category)
     }
     
+    func showAnswerTextFor(question: Question) {
+        let vc = AnswerTextViewController(title: "Other", intro: "Some intro text", text: question.answer.answerText) {
+        } onDone: { [weak self] (newText) in
+            question.answer.answerText = newText
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func closeAnswerText() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private lazy var scoreView = NPSScoreView() { [weak self] score in
         guard let self = self else { return }
         self.presenter.setScore(score)

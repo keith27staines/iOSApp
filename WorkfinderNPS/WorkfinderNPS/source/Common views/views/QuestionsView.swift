@@ -96,6 +96,11 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         guard let question = category?.questions[indexPath.row] else { return }
         question.toggleAnswer()
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        if question.answer.isChecked && question.answerPermitsText {
+
+            
+
+        }
     }
     
 }
@@ -120,11 +125,20 @@ class QuestionCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         return label
     }()
+
+    lazy var answer: UILabel = {
+        let label = UILabel()
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.textColor = WorkfinderColors.gray4
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        return label
+    }()
     
     lazy var textStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.addArrangedSubview(question)
+        stack.addArrangedSubview(answer)
         return stack
     }()
     
@@ -138,11 +152,10 @@ class QuestionCell: UITableViewCell {
     }()
     
     func configureCellWithQuestion(_ question: Question) {
-        self.question.text = question.text
-        switch question.answer {
-        case .unchecked: check.isHidden = true
-        case .checked: check.isHidden = false
-        }
+        self.question.text = question.questionText
+        check.isHidden = !question.answer.isChecked
+        answer.isHidden = check.isHidden
+        answer.text = question.answer.answerText ?? "Add some text"
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

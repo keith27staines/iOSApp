@@ -30,7 +30,7 @@
 		53AA928F263539A800C3A083 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA928E263539A800C3A083 /* Question.swift */; };
 		53AA929726353A8200C3A083 /* QuestionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA929626353A8200C3A083 /* QuestionCategory.swift */; };
 		53AA929D2635477900C3A083 /* QuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA929C2635477900C3A083 /* QuestionsView.swift */; };
-		53E9181426368F1C00BD77E5 /* TextEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9181326368F1C00BD77E5 /* TextEditorViewController.swift */; };
+		53E9181426368F1C00BD77E5 /* AnswerTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +70,7 @@
 		53AA928E263539A800C3A083 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		53AA929626353A8200C3A083 /* QuestionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCategory.swift; sourceTree = "<group>"; };
 		53AA929C2635477900C3A083 /* QuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsView.swift; sourceTree = "<group>"; };
-		53E9181326368F1C00BD77E5 /* TextEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorViewController.swift; sourceTree = "<group>"; };
+		53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +170,7 @@
 			children = (
 				532344D82632CBC300966B7A /* NPSScoreView.swift */,
 				53AA929C2635477900C3A083 /* QuestionsView.swift */,
-				53E9181326368F1C00BD77E5 /* TextEditorViewController.swift */,
+				53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 				53AA928F263539A800C3A083 /* Question.swift in Sources */,
 				532344EF2632CD0B00966B7A /* ThankyouPresenter.swift in Sources */,
 				53AA929726353A8200C3A083 /* QuestionCategory.swift in Sources */,
-				53E9181426368F1C00BD77E5 /* TextEditorViewController.swift in Sources */,
+				53E9181426368F1C00BD77E5 /* AnswerTextViewController.swift in Sources */,
 				532345102632E39100966B7A /* NPSModel.swift in Sources */,
 				532344D52632CB2D00966B7A /* SubmitViewController.swift in Sources */,
 				53AA929D2635477900C3A083 /* QuestionsView.swift in Sources */,
