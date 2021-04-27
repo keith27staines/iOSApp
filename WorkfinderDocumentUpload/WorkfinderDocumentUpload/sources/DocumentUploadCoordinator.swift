@@ -24,7 +24,7 @@ enum MimeType: String {
     }
 }
 
-public protocol DocumentUploadCoordinatorParentProtocol: class {
+public protocol DocumentUploadCoordinatorParentProtocol: AnyObject {
     func onSkipDocumentUpload()
     func onUploadComplete()
 }

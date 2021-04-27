@@ -2,7 +2,7 @@
 import Foundation
 import WorkfinderServices
 
-public protocol ImageFetching: class {
+public protocol ImageFetching: AnyObject {
     func getImage(url: URL, completion: @escaping ((UIImage?) -> Void))
     func cancel()
 }

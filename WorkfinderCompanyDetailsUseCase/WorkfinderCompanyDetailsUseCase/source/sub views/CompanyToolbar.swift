@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderUI
 
-protocol CompanyToolbarDelegate : class {
+protocol CompanyToolbarDelegate : AnyObject {
     func companyToolbar(_ : CompanyToolbar, requestedAction: CompanyToolbar.ActionType)
 }
 

@@ -2,7 +2,7 @@
 import UIKit
 import WorkfinderUI
 
-protocol AddFileViewControllerProtocol: class {
+protocol AddFileViewControllerProtocol: AnyObject {
     func refresh()
 }
 

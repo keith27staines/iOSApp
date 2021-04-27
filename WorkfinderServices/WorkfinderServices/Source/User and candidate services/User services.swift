@@ -6,7 +6,7 @@ public protocol RegisterUserServiceProtocol: AnyObject {
     func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) )
 }
 
-public protocol SignInUserServiceProtocol: class {
+public protocol SignInUserServiceProtocol: AnyObject {
     func signIn(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void))
 }
 

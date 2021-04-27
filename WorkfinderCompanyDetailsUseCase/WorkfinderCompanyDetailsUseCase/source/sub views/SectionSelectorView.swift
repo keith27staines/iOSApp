@@ -1,7 +1,7 @@
 
 import Foundation
 
-public protocol SectionSelectorViewDelegate: class {
+public protocol SectionSelectorViewDelegate: AnyObject {
     func sectionSelectorView(_ view: SectionSelectorView, didTapOnDescriptor: CompanyTableSectionDescriptor)
 }
 

@@ -13,7 +13,7 @@ import WorkfinderCandidateProfile
 
 let __bundle = Bundle(identifier: "com.workfinder.WorkfinderApplyUseCase")!
 
-public protocol ApplyCoordinatorDelegate : class {
+public protocol ApplyCoordinatorDelegate : AnyObject {
     func applicationDidFinish(preferredDestination: TabIndex)
     func applicationDidCancel()
 }

@@ -20,7 +20,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     
     let uuid: UUID = UUID()
-    let navigationRouter: NavigationRoutingProtocol?
+    let navigationRouter: NavigationRoutingProtocol
     weak var rootViewController: UIViewController!
     
     var childCoordinators: [UUID : Coordinating] = [:]
@@ -142,7 +142,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }()
     
     lazy var npsCoordinator: WorkfinderNPSCoordinator = {
-        WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter as! NavigationRoutingProtocol, inject: injected, npsUuid: "1234", score: nil)
+        WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter , inject: injected, npsUuid: "1234", score: nil)
     }()
     
     func presentHiddenDebugController(parentCtrl: UIViewController) {

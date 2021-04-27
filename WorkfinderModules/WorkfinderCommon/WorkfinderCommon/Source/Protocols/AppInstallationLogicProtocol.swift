@@ -1,4 +1,4 @@
 
-public protocol AppInstallationLogicProtocol : class {
+public protocol AppInstallationLogicProtocol : AnyObject {
 
 }

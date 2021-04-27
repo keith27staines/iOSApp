@@ -21,17 +21,17 @@ public struct ServerListJson<A:Decodable>: Decodable {
     }
 }
 
-public protocol TemplateProviderProtocol: class {
+public protocol TemplateProviderProtocol: AnyObject {
     func fetchCoverLetterTemplateListJson(completion: @escaping ((Result<[TemplateModel],Error>) -> Void))
 }
 
-public protocol PicklistProviderProtocol: class {
+public protocol PicklistProviderProtocol: AnyObject {
     var picklistType: PicklistType { get }
     var filters: [URLQueryItem] { get set }
     func fetchPicklistItems(completion: @escaping ((Result<PicklistServerJson,Error>) -> Void))
 }
 
-public protocol HostsProviderProtocol: class {
+public protocol HostsProviderProtocol: AnyObject {
     func fetchHost(uuid: String, completion: @escaping (Result<HostJson,Error>) -> Void)
     func fetchHosts(locationUuid: F4SUUID, completion: @escaping((Result<HostListJson,Error>) -> Void) )
 }

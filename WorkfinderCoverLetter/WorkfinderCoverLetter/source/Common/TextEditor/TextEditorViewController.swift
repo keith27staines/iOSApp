@@ -3,7 +3,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol TextEditorCoordinatorProtocol: class {
+protocol TextEditorCoordinatorProtocol: AnyObject {
     func textEditorIsClosing(text: String)
 }
 

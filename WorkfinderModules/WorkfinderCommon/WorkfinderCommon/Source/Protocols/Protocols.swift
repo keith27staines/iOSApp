@@ -6,7 +6,7 @@ public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 
 
 
-public protocol F4SCompanyDownloadManagerProtocol : class {
+public protocol F4SCompanyDownloadManagerProtocol : AnyObject {
     var stagedCompanyDownloadFileUrl: URL { get }
     var backgroundSessionCompletionHandler: BackgroundSessionCompletionHandler? { get set }
     var companyDownloadFileDatestamp: Date? { get }
@@ -17,7 +17,7 @@ public protocol F4SCompanyDownloadManagerProtocol : class {
     func isCompanyDownloadFileAvailable() -> Bool
 }
 
-public protocol F4SCompanyDownloadFileAvailabilityObserving : class {
+public protocol F4SCompanyDownloadFileAvailabilityObserving : AnyObject {
     func newCompanyDownloadFileHasBeenStaged(url: URL)
     func newCompanyDownloadFileIsDownloading(progress: Double)
 }

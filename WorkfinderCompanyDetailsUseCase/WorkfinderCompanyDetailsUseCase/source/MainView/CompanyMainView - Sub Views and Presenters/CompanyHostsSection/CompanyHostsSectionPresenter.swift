@@ -3,7 +3,7 @@ import Foundation
 import WorkfinderCommon
 import UIKit
 
-protocol CompanyHostsSectionViewProtocol: class {
+protocol CompanyHostsSectionViewProtocol: AnyObject {
     func refresh()
 }
 

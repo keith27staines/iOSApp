@@ -238,7 +238,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        guard let section = TableSection(rawValue: indexPath.section) else { return false }
+        guard TableSection(rawValue: indexPath.section) != nil else { return false }
         return true
     }
     
