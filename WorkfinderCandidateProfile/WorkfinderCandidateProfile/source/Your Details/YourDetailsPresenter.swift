@@ -227,7 +227,9 @@ class YourDetailsPresenter: BaseAccountPresenter {
         let presenter = presenterForIndexPath(indexPath)
         switch presenter.type.dataType {
         case .picklist(let picklistType):
-            coordinator?.showPicklist(picklistFor(type: picklistType))
+            coordinator?.showPicklist(picklistFor(type: picklistType)) {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
         case .password:
             coordinator?.showChangePassword()
         default:

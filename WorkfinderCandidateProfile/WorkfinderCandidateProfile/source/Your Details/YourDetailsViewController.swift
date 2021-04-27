@@ -20,6 +20,14 @@ class YourDetailsViewController:  WFViewController {
         addNotificationListeners()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if isMovingToParent {
+            super.viewWillAppear(animated)
+        } else {
+            
+        }
+    }
+    
     private func addNotificationListeners() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
