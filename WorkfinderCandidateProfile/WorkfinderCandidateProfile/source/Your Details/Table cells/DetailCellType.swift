@@ -111,7 +111,7 @@ enum DetailCellType {
         case .password: return nil
         case .phone: return nil
         case .dob: return "Required for us to process your application for certain roles"
-        case .postcode: return "For employers who prefer candidates in certain localities"
+        case .postcode: return "This allows us to bring employers to your attention that are local to you"
         case .picklist(let type): return type.reasonForCollection
         }
     }

@@ -204,7 +204,7 @@ enum AccountPicklistType: Int, CaseIterable {
     
     var reasonForCollection: String {
         switch self {
-        case .language: return "For employers who prefer candidates with certain language skills"
+        case .language: return "Giving us this information allows us to bring to your attention roles from employers who have specific language needs"
         case .gender: return "We collect this information in line with our D&I policy"
         case .ethnicity: return "We collect this information in line with our D&I policy"
         }
