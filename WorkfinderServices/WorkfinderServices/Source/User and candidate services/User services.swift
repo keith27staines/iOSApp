@@ -2,7 +2,7 @@
 import Foundation
 import WorkfinderCommon
 
-public protocol RegisterUserServiceProtocol: class {
+public protocol RegisterUserServiceProtocol: AnyObject {
     func registerUser(user: User, completion: @escaping((Result<UserRegistrationToken,Error>) -> Void) )
 }
 
