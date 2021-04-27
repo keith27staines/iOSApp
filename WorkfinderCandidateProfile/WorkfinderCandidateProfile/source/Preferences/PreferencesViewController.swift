@@ -18,11 +18,6 @@ class PreferencesViewController:  WFViewController {
         preferencesPresenter.viewController = self
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//        tableView.reloadData()
-//    }
-    
     func removeAccountRequested() {
         let alert = UIAlertController(title: "Are you sure you want us to remove your account?", message: "If you are sure, we will delete your details from our database.\nThis cannot be undone.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
