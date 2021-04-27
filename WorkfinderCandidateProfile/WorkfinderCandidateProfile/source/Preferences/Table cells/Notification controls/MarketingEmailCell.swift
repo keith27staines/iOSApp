@@ -13,8 +13,6 @@ class MarketingEmailCell: UITableViewCell {
     
     static let reuseIdentifier = "MarketingEmailCell"
     
-    private var preferences = EmailPreferences()
-    
     lazy var emailSwitch: LabelledSwitch = {
         LabelledSwitch(text: "Receive marketing and promotional emails from us", isOn: true)
     }()

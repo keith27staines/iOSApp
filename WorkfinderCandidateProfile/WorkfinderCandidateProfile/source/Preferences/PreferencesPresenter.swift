@@ -75,6 +75,15 @@ class PreferencesPresenter: BaseAccountPresenter {
         }
     }
     
+    override func reloadPresenter(completion: @escaping (Error?) -> Void) {
+        super.reloadPresenter { [weak self] (optionalError) in
+            if optionalError == nil {
+                self?.emailPreferences.allowMarketingEmails = self?.user.optedIntoMarketing ?? false
+            }
+            completion(optionalError)
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         self.tableView = tableView
         return TableSection.allCases.count
