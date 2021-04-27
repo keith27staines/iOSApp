@@ -14,7 +14,7 @@ class MarketingEmailCell: UITableViewCell {
     static let reuseIdentifier = "MarketingEmailCell"
     
     lazy var emailSwitch: LabelledSwitch = {
-        LabelledSwitch(text: "Receive marketing and promotional emails from us", isOn: true)
+        LabelledSwitch(text: "Click this to opt in to receiving marketing and promotional emails from Workfinder", isOn: true)
     }()
     
     func configureWith(preferences: EmailPreferences) {
