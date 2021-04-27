@@ -16,6 +16,7 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     enum ActionRequiringSignin {
         case showDetails
         case showPreferences
+    
     }
     
     var actionRequiringSignin: ActionRequiringSignin?
@@ -64,9 +65,9 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func showPicklist(_ picklist: AccountPicklist) {
+    func showPicklist(_ picklist: AccountPicklist, onUpdate: @escaping () -> Void) {
         let service = AccountService(networkConfig: injected.networkConfig)
-        let presenter = PicklistPresenter(coordinator: self, service: service, picklist: picklist)
+        let presenter = PicklistPresenter(coordinator: self, service: service, picklist: picklist, onUpdate: onUpdate)
         let vc = PicklistViewController(coordinator: self, presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
     }
@@ -83,6 +84,7 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     var registerCoordinator: RegisterAndSignInCoordinator?
     
     func showRegisterAndSignin() {
+        guard !UserRepository().isCandidateLoggedIn else { return }
         let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: false)
         addChildCoordinator(coordinator)
         coordinator.startLoginFirst()
@@ -104,8 +106,8 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
 
 extension AccountCoordinator: RegisterAndSignInCoordinatorParent {
     public func onCandidateIsSignedIn() {
-        guard let action = actionRequiringSignin else { return }
         removeRegisterCoordinator()
+        guard let action = actionRequiringSignin else { return }
         switch action {
         case .showDetails: showDetails()
         case .showPreferences: showPreferences()

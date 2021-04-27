@@ -14,9 +14,11 @@ class PicklistPresenter: BaseAccountPresenter {
 
     let picklist: AccountPicklist
     var rowCheckManager: RowCheckManager?
+    var onUpdate: (() -> Void)?
     
-    init(coordinator: AccountCoordinator, service: AccountServiceProtocol, picklist: AccountPicklist) {
+    init(coordinator: AccountCoordinator, service: AccountServiceProtocol, picklist: AccountPicklist, onUpdate: @escaping () -> Void) {
         self.picklist = picklist
+        self.onUpdate = onUpdate
         super.init(coordinator: coordinator, accountService: service)
     }
     
@@ -51,6 +53,7 @@ class PicklistPresenter: BaseAccountPresenter {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         rowCheckManager?.onTap(indexPath: indexPath)
+        onUpdate?()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

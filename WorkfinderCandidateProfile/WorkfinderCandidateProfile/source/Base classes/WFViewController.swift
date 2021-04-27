@@ -29,8 +29,12 @@ class WFViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        configureNavigationBar()
-        reloadPresenter()
+        if isMovingToParent {
+            configureNavigationBar()
+            reloadPresenter()
+        } else {
+            reloadData()
+        }
     }
     
     @objc func reloadPresenter() {
