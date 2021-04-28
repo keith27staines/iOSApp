@@ -21,7 +21,9 @@ class BasePresenter {
     var score: Int? { npsModel?.score }
     
     var feedbackIntro: String {
-        "Your feedback is highly valuable to \(hostName), \(companyName) and us. This helps us improve our service so that you and other candidates won’t have similar experience again. You can choose to hide your name and details when sharing your feedback."
+        let hostName = self.hostName ?? ""
+        let companyName = self.companyName ?? ""
+        return "Your feedback is highly valuable to \(hostName), \(companyName) and us. This helps us improve our service so that you and other candidates won’t have similar experience again. You can choose to hide your name and details when sharing your feedback."
     }
     
     var allQuestions = [Question]() {

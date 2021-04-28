@@ -85,12 +85,14 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
         
     func showSubmit() {
         let presenter = SubmitPresenter(coordinator: self, service: self)
+        presenter.npsModel = nps
         let vc = SubmitViewController(coordinator: self, presenter: presenter, onComplete: showThankyou)
         displayViewController(vc)
     }
     
     func showThankyou() {
         let presenter = ThankyouPresenter(coordinator: self, service: self)
+        presenter.npsModel = nps
         let vc = ThankyouViewController(coordinator: self, presenter: presenter, onComplete: finishedNPS)
         displayViewController(vc)
     }
@@ -137,8 +139,9 @@ extension WorkfinderNPSCoordinator: NPSServiceProtocol {
         guard let nps = nps else {
             service.fetchNPS(uuid: npsUuid) { result in
                 switch result {
-                case .success(var nps):
+                case .success(let nps):
                     nps.score = nps.score ?? score
+                    self.nps = nps
                     completion(.success(nps))
                 case .failure(let error):
                     completion(.failure(error))

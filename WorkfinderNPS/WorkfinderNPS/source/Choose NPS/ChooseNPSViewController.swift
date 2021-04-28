@@ -10,14 +10,17 @@ import WorkfinderUI
 
 class ChooseNPSViewController: BaseViewController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationItem.title = "Review"
+    override func viewDidLoad() {
         view.addSubview(stack)
         let guide = view.safeAreaLayoutGuide
         stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         presenter.onViewDidLoad(vc: self)
         reload()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "Review"
     }
     
     func reload() {
@@ -61,6 +64,7 @@ class ChooseNPSViewController: BaseViewController {
         self.presenter.setScore(score)
         self.refreshFromPresenter()
     }
+    
     private lazy var questionsView: QuestionsView = {
         QuestionsView(parent: self)
     }()
