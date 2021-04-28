@@ -46,11 +46,12 @@ open class WorkfinderService {
     
     public func buildRequest<A: Encodable>(
         relativePath: String?,
-        verb: RequestVerb, body: A
+        verb: RequestVerb, body: A,
+        queryItems: [URLQueryItem]? = nil
     ) throws -> URLRequest {
         var request = try buildRequest(
             relativePath: relativePath,
-            queryItems: nil,
+            queryItems: queryItems,
             verb: verb)
         request.httpBody = try encoder.encode(body)
         return request

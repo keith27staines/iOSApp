@@ -8,6 +8,7 @@
 import Foundation
 
 public class NPSModel {
+    public var accessToken: String?
     public var reviewUuid: String?
     public var score: Int?
     public var category: QuestionCategory?
@@ -16,14 +17,16 @@ public class NPSModel {
     public var companyName: String?
     
     public init(
-        reviewUuid: String?,
+        accessToken: String?,
+        uuid: String?,
         score: Int?,
         category: QuestionCategory?,
         hostName: String?,
         projectName: String?,
         companyName: String?
     ) {
-        self.reviewUuid = reviewUuid
+        self.accessToken = accessToken
+        self.reviewUuid = uuid
         self.score = score
         self.category = category
         self.hostName = hostName

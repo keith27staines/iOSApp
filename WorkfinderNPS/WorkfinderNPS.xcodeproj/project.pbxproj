@@ -170,10 +170,10 @@
 		5323450E2632E37900966B7A /* models and services */ = {
 			isa = PBXGroup;
 			children = (
-				53B39B2A263806F300CA6C01 /* API Json */,
-				53AA92872635398700C3A083 /* Questions */,
-				532344FA2632CD4E00966B7A /* NPSService.swift */,
 				5323450F2632E39100966B7A /* NPSModel.swift */,
+				532344FA2632CD4E00966B7A /* NPSService.swift */,
+				53B39B2B2638070800CA6C01 /* API Json.swift */,
+				53AA92872635398700C3A083 /* Questions */,
 			);
 			path = "models and services";
 			sourceTree = "<group>";
@@ -223,14 +223,6 @@
 				53AA928E263539A800C3A083 /* Question.swift */,
 			);
 			path = Questions;
-			sourceTree = "<group>";
-		};
-		53B39B2A263806F300CA6C01 /* API Json */ = {
-			isa = PBXGroup;
-			children = (
-				53B39B2B2638070800CA6C01 /* API Json.swift */,
-			);
-			path = "API Json";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

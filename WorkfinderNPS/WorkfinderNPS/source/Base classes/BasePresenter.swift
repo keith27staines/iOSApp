@@ -13,12 +13,12 @@ class BasePresenter {
     weak var coordinator: WorkfinderNPSCoordinator?
     var service: NPSServiceProtocol
     weak var viewController: BaseViewController?
-    var npsModel: NPSModel?
+    var npsModel: NPSModel
     
-    var hostName: String? { npsModel?.hostName }
-    var projectName: String? { npsModel?.projectName }
-    var companyName: String? { npsModel?.companyName }
-    var score: Int? { npsModel?.score }
+    var hostName: String? { npsModel.hostName }
+    var projectName: String? { npsModel.projectName }
+    var companyName: String? { npsModel.companyName }
+    var score: Int? { npsModel.score }
     
     var feedbackIntro: String {
         let hostName = self.hostName ?? ""
@@ -36,7 +36,7 @@ class BasePresenter {
     
     func setScore(_ score: Score?) {
         let scoreValue = score?.rawValue
-        npsModel?.score = scoreValue
+        npsModel.score = scoreValue
     }
     
     var introText: String? {
@@ -70,7 +70,7 @@ class BasePresenter {
                         self.allQuestions = allQuestions
                         self.npsModel = nps
                         self.buildCategories(hostName: nps.hostName ?? "", allQuestions: allQuestions)
-                        self.npsModel?.category = self.category
+                        self.npsModel.category = self.category
                         completion(nil)
                     case .failure(let error):
                         completion(error)
@@ -98,7 +98,6 @@ class BasePresenter {
             }
         }
     }
-
     
     private func fetchNPS(uuid: String, completion: @escaping (Result<NPSModel,Error>) -> Void) {
         self.service.fetchNPS(uuid: "uuid") { (result) in
@@ -106,9 +105,10 @@ class BasePresenter {
         }
     }
     
-    init(coordinator: WorkfinderNPSCoordinator, service: NPSServiceProtocol) {
+    init(coordinator: WorkfinderNPSCoordinator, service: NPSServiceProtocol, nps: NPSModel) {
         self.coordinator = coordinator
         self.service = service
+        self.npsModel = nps
     }
     
     private func buildCategories(hostName: String, allQuestions: [Question]) {

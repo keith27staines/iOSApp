@@ -142,7 +142,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }()
     
     lazy var npsCoordinator: WorkfinderNPSCoordinator = {
-        WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter , inject: injected, npsUuid: "1234", score: nil)
+        WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter , inject: injected, npsUuid: "1234", accessToken: "7TomNR3W1OowciVeO2IZgpjMJph330oppq0OLylCDZM")
     }()
     
     func presentHiddenDebugController(parentCtrl: UIViewController) {

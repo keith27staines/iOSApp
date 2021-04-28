@@ -44,7 +44,7 @@ struct PatchReviewJson: Codable {
 
 
 // MARK:- GET /v3/reviews/<uuid>
-struct GetReviewJson {
+struct GetReviewJson: Decodable {
     var uuid: F4SUUID
     var hostReviewingCandidate: Bool
     var anonymous: Bool
@@ -52,13 +52,14 @@ struct GetReviewJson {
     var otherReason: String
     var reasons: [Int]
     var score: Int
+    var placement: Placement
     
     struct Placement: Decodable {
         
         var hostFullname: String { association.host.user.fullName }
         var candidateFullName: String { candidate.user.fullName }
         var companyName: String { association.location.company.name }
-        
+        var projectName: String { "unknown project" }
         var candidate: Person
         var association: Asssociation
         
@@ -94,6 +95,7 @@ struct GetReviewJson {
         case otherReason = "other_reason"
         case reasons
         case score
+        case placement
     }
     
 }
