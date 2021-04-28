@@ -20,8 +20,21 @@ class BasePresenter {
     var companyName: String? { npsModel?.companyName }
     var score: Int? { npsModel?.score }
     
+    var feedbackIntro: String {
+        "Your feedback is highly valuable to \(hostName), \(companyName) and us. This helps us improve our service so that you and other candidates won’t have similar experience again. You can choose to hide your name and details when sharing your feedback."
+    }
+    
+    var allQuestions = [Question]() {
+        didSet {
+            categories?.forEach({ category in
+                category.questions = allQuestions
+            })
+        }
+    }
+    
     func setScore(_ score: Score?) {
-        npsModel?.score = score?.rawValue
+        let scoreValue = score?.rawValue
+        npsModel?.score = scoreValue
     }
     
     var introText: String? {
@@ -45,19 +58,39 @@ class BasePresenter {
         self.viewController = vc
     }
     
-    func reload(completion: (Error?) -> Void) {
+    func reload(completion: @escaping (Error?) -> Void) {
         
-        service.fetchNPS(uuid: "uuid") { (result) in
+        service.fetchReasons { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            case .success(var nps):
-                npsModel = nps
-                let category = questionCategoriesBuilder(hostName: "Keith")[0]
-                nps.category = category
-                categories = questionCategoriesBuilder(hostName: npsModel?.hostName ?? "unknown")
-                completion(nil)
+            case .success(let reasons):
+                self.allQuestions = reasons.map({ reason in
+                    Question(reason: reason)
+                })
+                self.service.fetchNPS(uuid: "uuid") { [weak self] (result) in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(var nps):
+                        let category = self.categoryForScore(nps.score)
+                        nps.category = category
+                        self.npsModel = nps
+                        completion(nil)
+                    case .failure(let error):
+                        completion(error)
+                    }
+                }
             case .failure(let error):
                 completion(error)
             }
+        }
+    }
+    
+    func categoryForScore(_ score:Int?) -> QuestionCategory? {
+        guard let categories = categories, let score = score else { return nil }
+        switch score {
+        case 0..<7: return categories[0]
+        case 7:     return categories[1]
+        default:    return categories[2]
         }
     }
     
@@ -66,7 +99,7 @@ class BasePresenter {
         self.service = service
     }
     
-    private func questionCategoriesBuilder(hostName: String) -> [QuestionCategory] {
+    private func buildCategories(hostName: String) {
         var categories = [QuestionCategory]()
         let bad = QuestionCategory(
             title: "What went wrong?",
@@ -90,7 +123,7 @@ class BasePresenter {
         categories.append(ok)
         categories.append(good)
 
-        return categories
+        self.categories = categories
     }
     
 }

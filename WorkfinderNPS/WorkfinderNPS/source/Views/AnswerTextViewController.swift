@@ -50,6 +50,7 @@ class AnswerTextViewController: UIViewController {
     }
     
     func configureViews() {
+        view.backgroundColor = UIColor.white
         view.addSubview(stack)
         let guide = view.safeAreaLayoutGuide
         stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))

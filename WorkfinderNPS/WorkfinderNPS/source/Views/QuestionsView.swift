@@ -98,7 +98,8 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         guard let question = category?.questions[indexPath.row] else { return }
         question.toggleAnswer()
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        if question.answer.isChecked && question.answerPermitsText {
+        
+        if question.answerPermitsText && question.answer.isChecked {
             parent?.showAnswerTextFor(question: question, onCancel: {
                 
             }, onDone: { (string) in

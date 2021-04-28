@@ -24,8 +24,8 @@ class ChooseNPSViewController: BaseViewController {
         messageHandler.showLoadingOverlay()
         presenter.reload() { [weak self] optionalError in
             guard let self = self else { return }
-            messageHandler.hideLoadingOverlay()
-            messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.cancelButtonTap()
             } retryHandler: {
                 self.reload()

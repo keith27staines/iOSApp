@@ -174,7 +174,7 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
             log.track(.tab_tap(tabName: "recommendations"))
         case accountCoordinator.navigationRouter.navigationController:
             addChildCoordinator(npsCoordinator)
-            //npsCoordinator.start()
+            npsCoordinator.start()
             log.track(.tab_tap(tabName: "account"))
             
         default:

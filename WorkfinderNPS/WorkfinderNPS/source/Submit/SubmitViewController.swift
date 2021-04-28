@@ -20,7 +20,7 @@ class SubmitViewController: BaseViewController {
     
     lazy var intro: UILabel = {
         let label = UILabel()
-        label.text = "Your feedback is highly valuable to {{Host First Name}}, {{Company Name}} and us. This helps us improve our service so that you and other candidates won’t have similar experience again. You can choose to hide your name and details when sharing your feedback."
+        label.text = presenter.feedbackIntro
         label.textColor = WorkfinderColors.gray2
         label.numberOfLines = 0
         return label
@@ -38,7 +38,7 @@ class SubmitViewController: BaseViewController {
     
     lazy var goodFeedbackButton: UIButton = {
         let button = UIButton()
-        button.setTitle("(What makes a good feedback?)", for: .normal)
+        button.setTitle("(What makes good feedback?)", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
         button.addTarget(self, action: #selector(linkToFeedback), for: .touchUpInside)

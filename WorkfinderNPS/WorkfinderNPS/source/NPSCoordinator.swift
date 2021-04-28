@@ -129,7 +129,11 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
 
 extension WorkfinderNPSCoordinator: NPSServiceProtocol {
     
-    public func fetchNPS(uuid: String, completion: (Result<NPSModel, Error>) -> Void) {
+    func fetchReasons(completion: @escaping (Result<[ReasonJson], Error>) -> Void) {
+        service.fetchReasons(completion: completion)
+    }
+    
+    func fetchNPS(uuid: String, completion: (Result<NPSModel, Error>) -> Void) {
         guard let nps = nps else {
             service.fetchNPS(uuid: npsUuid) { result in
                 switch result {
@@ -145,7 +149,7 @@ extension WorkfinderNPSCoordinator: NPSServiceProtocol {
         completion(.success(nps))
     }
     
-    public func patchNPS(uuid: String, nps: NPSModel, completion: (Result<NPSModel, Error>) -> Void) {
+    func patchNPS(uuid: String, nps: NPSModel, completion: (Result<NPSModel, Error>) -> Void) {
         service.patchNPS(uuid: uuid, nps: nps, completion: completion)
     }
 }
