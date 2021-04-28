@@ -45,47 +45,6 @@ class BasePresenter {
     private var categories: [QuestionCategory]?
     
     var category: QuestionCategory? {
-        guard let categories = categories, let score = npsModel?.score else { return nil }
-        switch score {
-        case 0..<7: return categories[0]
-        case 7: return categories[1]
-        case 7... : return categories[2]
-        default: return nil
-        }
-    }
-    
-    func onViewDidLoad(vc: BaseViewController) {
-        self.viewController = vc
-    }
-    
-    func reload(completion: @escaping (Error?) -> Void) {
-        
-        service.fetchReasons { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let reasons):
-                self.allQuestions = reasons.map({ reason in
-                    Question(reason: reason)
-                })
-                self.service.fetchNPS(uuid: "uuid") { [weak self] (result) in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success(var nps):
-                        let category = self.categoryForScore(nps.score)
-                        nps.category = category
-                        self.npsModel = nps
-                        completion(nil)
-                    case .failure(let error):
-                        completion(error)
-                    }
-                }
-            case .failure(let error):
-                completion(error)
-            }
-        }
-    }
-    
-    func categoryForScore(_ score:Int?) -> QuestionCategory? {
         guard let categories = categories, let score = score else { return nil }
         switch score {
         case 0..<7: return categories[0]
@@ -94,12 +53,63 @@ class BasePresenter {
         }
     }
     
+    func onViewDidLoad(vc: BaseViewController) {
+        self.viewController = vc
+    }
+    
+    func reload(completion: @escaping (Error?) -> Void) {
+        fetchReasons { [weak self] reasonResult in
+            switch reasonResult {
+            case .success(let allQuestions):
+                self?.fetchNPS(uuid: "uuid") { [weak self] npsResult in
+                    guard let self = self else { return }
+                    switch npsResult {
+                    case .success(let nps):
+                        self.allQuestions = allQuestions
+                        self.npsModel = nps
+                        self.buildCategories(hostName: nps.hostName ?? "", allQuestions: allQuestions)
+                        self.npsModel?.category = self.category
+                        completion(nil)
+                    case .failure(let error):
+                        completion(error)
+                    }
+                }
+            case .failure(let error):
+                completion(error)
+            }
+            
+        }
+    }
+    
+    private func fetchReasons(completion: @escaping (Result<[Question],Error>) -> Void) {
+        service.fetchReasons { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let reasons):
+                    let allQuestions = reasons.map({ reason in
+                        Question(reason: reason)
+                    })
+                    completion(.success(allQuestions))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+    
+    private func fetchNPS(uuid: String, completion: @escaping (Result<NPSModel,Error>) -> Void) {
+        self.service.fetchNPS(uuid: "uuid") { (result) in
+            completion(result)
+        }
+    }
+    
     init(coordinator: WorkfinderNPSCoordinator, service: NPSServiceProtocol) {
         self.coordinator = coordinator
         self.service = service
     }
     
-    private func buildCategories(hostName: String) {
+    private func buildCategories(hostName: String, allQuestions: [Question]) {
         var categories = [QuestionCategory]()
         let bad = QuestionCategory(
             title: "What went wrong?",
