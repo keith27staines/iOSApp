@@ -51,17 +51,22 @@ struct GetReviewJson: Decodable {
     var feedback: String
     var otherReason: String
     var reasons: [Int]
-    var score: Int
+    var score: Int?
     var placement: Placement
     
     struct Placement: Decodable {
         
-        var hostFullname: String { association.host.user.fullName }
-        var candidateFullName: String { candidate.user.fullName }
-        var companyName: String { association.location.company.name }
-        var projectName: String { "unknown project" }
-        var candidate: Person
-        var association: Asssociation
+        var hostFullname: String? { association?.host.user.fullName }
+        var candidateFullName: String? { candidate?.user.fullName }
+        var companyName: String? { association?.location.company.name }
+        var projectName: String? { associatedProject?.name }
+        var candidate: Person?
+        var associatedProject: Project?
+        var association: Association?
+        
+        struct Project: Decodable {
+            var name: String?
+        }
         
         struct Person: Decodable {
             var user: User
@@ -74,7 +79,7 @@ struct GetReviewJson: Decodable {
             }
         }
         
-        struct Asssociation: Decodable {
+        struct Association: Decodable {
             var host: Person
             var location: Location
             
@@ -84,6 +89,12 @@ struct GetReviewJson: Decodable {
                     var name: String
                 }
             }
+        }
+        
+        private enum CodingKeys: String, CodingKey {
+            case candidate
+            case association
+            case associatedProject = "associated_project"
         }
     }
     

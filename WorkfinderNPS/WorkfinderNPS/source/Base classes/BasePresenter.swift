@@ -63,11 +63,13 @@ class BasePresenter {
         fetchReasons { [weak self] reasonResult in
             switch reasonResult {
             case .success(let allQuestions):
-                self?.fetchNPS(uuid: "uuid") { [weak self] npsResult in
+                let uuid = self?.npsModel.reviewUuid ?? ""
+                self?.fetchNPS(uuid: uuid) { [weak self] npsResult in
                     guard let self = self else { return }
                     switch npsResult {
                     case .success(let nps):
                         self.allQuestions = allQuestions
+                        nps.accessToken = self.npsModel.accessToken
                         self.npsModel = nps
                         self.buildCategories(hostName: nps.hostName ?? "", allQuestions: allQuestions)
                         self.npsModel.category = self.category
@@ -100,7 +102,7 @@ class BasePresenter {
     }
     
     private func fetchNPS(uuid: String, completion: @escaping (Result<NPSModel,Error>) -> Void) {
-        self.service.fetchNPS(uuid: "uuid") { (result) in
+        self.service.fetchNPS(uuid: uuid) { (result) in
             completion(result)
         }
     }
