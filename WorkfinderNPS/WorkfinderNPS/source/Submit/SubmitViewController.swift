@@ -22,9 +22,10 @@ class SubmitViewController: BaseViewController {
     
     lazy var intro: UILabel = {
         let label = UILabel()
-        label.text = submitPresenter?.feedbackText
         label.textColor = WorkfinderColors.gray2
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 0
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return label
     }()
     
@@ -50,10 +51,10 @@ class SubmitViewController: BaseViewController {
     lazy var hideDetailsLabel: UILabel = {
         let label = UILabel()
         label.text = "Hide my name and details when sharing feedback"
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 2
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.textColor = WorkfinderColors.gray4
         return label
     }()
     
@@ -163,6 +164,13 @@ class SubmitViewController: BaseViewController {
         configureViews()
         configureNavigationBar()
         addNotificationListeners()
+        reloadFromPresenter()
+    }
+    
+    func reloadFromPresenter() {
+        intro.text = submitPresenter?.feedbackIntro
+        feedback.text = submitPresenter?.feedbackText
+        hideDetailsSwitch.isOn = submitPresenter?.isAnonymous ?? true
     }
     
     func configureNavigationBar() {
