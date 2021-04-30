@@ -10,6 +10,8 @@ import WorkfinderUI
 
 class SubmitViewController: BaseViewController {
     
+    var submitPresenter: SubmitPresenter? { presenter as? SubmitPresenter }
+    
     lazy var table: UITableView = {
         let table = UITableView()
         table.dataSource = self
@@ -20,7 +22,7 @@ class SubmitViewController: BaseViewController {
     
     lazy var intro: UILabel = {
         let label = UILabel()
-        label.text = presenter.feedbackIntro
+        label.text = submitPresenter?.feedbackText
         label.textColor = WorkfinderColors.gray2
         label.numberOfLines = 0
         return label
@@ -58,6 +60,7 @@ class SubmitViewController: BaseViewController {
     lazy var hideDetailsSwitch: UISwitch = {
         let view = UISwitch()
         view.setContentHuggingPriority(.required, for: .horizontal)
+        view.addTarget(self, action: #selector(hideDetails), for: .valueChanged)
         return view
     }()
     
@@ -88,6 +91,7 @@ class SubmitViewController: BaseViewController {
         view.layer.cornerRadius = 12
         view.heightAnchor.constraint(equalToConstant: 300).isActive = true
         view.inputAccessoryView = keyboardToolbar
+        view.delegate = self
         return view
     }()
     
@@ -98,8 +102,21 @@ class SubmitViewController: BaseViewController {
         return button
     }()
     
+    @objc func hideDetails(switchControl: UISwitch) {
+        submitPresenter?.isAnonymous = switchControl.isOn
+    }
+    
     @objc func submitReview() {
-        coordinator?.showThankyou()
+        submitPresenter?.submitReview(completion: { [weak self] optionalError in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+                
+            } retryHandler: {
+                self.submitReview()
+            }
+            self.coordinator?.showThankyou()
+        })
     }
     
     lazy var keyboardToolbar: UIToolbar = {
@@ -191,7 +208,11 @@ extension SubmitViewController: UITableViewDataSource {
         stack.anchor(top: content.topAnchor, leading: content.leadingAnchor, bottom: content.bottomAnchor, trailing: content.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
         return cell
     }
-    
-    
+}
+
+extension SubmitViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        submitPresenter?.feedbackText = textView.text
+    }
 }
 

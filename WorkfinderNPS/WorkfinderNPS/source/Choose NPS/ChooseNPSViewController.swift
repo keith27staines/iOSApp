@@ -10,6 +10,8 @@ import WorkfinderUI
 
 class ChooseNPSViewController: BaseViewController {
     
+    var chooseNPSPresenter: ChooseNPSPresenter? { return presenter as? ChooseNPSPresenter }
+    
     override func viewDidLoad() {
         view.addSubview(stack)
         let guide = view.safeAreaLayoutGuide
@@ -25,7 +27,7 @@ class ChooseNPSViewController: BaseViewController {
     
     func reload() {
         messageHandler.showLoadingOverlay()
-        presenter.reload() { [weak self] optionalError in
+        chooseNPSPresenter?.reload() { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
@@ -38,7 +40,9 @@ class ChooseNPSViewController: BaseViewController {
     }
     
     func refreshFromPresenter() {
-        scoreView.configureWith(introText: presenter.introText, score: presenter.score)
+        let intro = chooseNPSPresenter?.introText
+        let score = chooseNPSPresenter?.score
+        scoreView.configureWith(introText: intro, score: score)
         questionsView.configureWith(category: presenter.category)
     }
     
@@ -61,7 +65,7 @@ class ChooseNPSViewController: BaseViewController {
     
     private lazy var scoreView = NPSScoreView() { [weak self] score in
         guard let self = self else { return }
-        self.presenter.setScore(score)
+        self.chooseNPSPresenter?.setScore(score)
         self.refreshFromPresenter()
     }
     

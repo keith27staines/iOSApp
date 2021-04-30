@@ -12,7 +12,7 @@ public class Question {
         case basic
         case other
     }
-
+    public var serverId: Int
     public var questionText: String
     public var answer: Answer
     public var type: QuestionType
@@ -28,6 +28,7 @@ public class Question {
     }
 
     public init(id: Int, questionText: String) {
+        self.serverId = id
         self.type = questionText.lowercased() == "other" ? .other : .basic
         self.questionText = questionText
         self.answer = Answer(isChecked: false, answerText: nil)

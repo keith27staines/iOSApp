@@ -11,7 +11,7 @@ import WorkfinderServices
 
 protocol NPSServiceProtocol {
     func fetchReasons(completion: @escaping (Result<[ReasonJson], Error>) -> Void)
-    func fetchNPS(uuid: String, completion: @escaping (Result<NPSModel, Error>) -> Void)
+    func fetchNPS(uuid: String, completion: @escaping (Result<GetReviewJson, Error>) -> Void)
     func patchNPS(nps: NPSModel, completion: @escaping (Result<NPSModel, Error>) -> Void)
 }
 
@@ -45,27 +45,7 @@ public class NPSService: WorkfinderService, NPSServiceProtocol {
         }
     }
     
-    public func fetchNPS(uuid: String, completion: @escaping (Result<NPSModel, Error>) -> Void) {
-        fetchNPSWorker(uuid: uuid) { result in
-            switch result {
-            case .success(let reviewJson):
-                let nps = NPSModel(
-                    accessToken: nil,
-                    uuid: uuid,
-                    score: reviewJson.score,
-                    category: nil,
-                    hostName: reviewJson.placement.hostFullname,
-                    projectName: reviewJson.placement.projectName,
-                    companyName: reviewJson.placement.companyName
-                )
-                completion(.success(nps))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    private func fetchNPSWorker(uuid: String, completion: @escaping (Result<GetReviewJson, Error>) -> Void) {
+    func fetchNPS(uuid: String, completion: @escaping (Result<GetReviewJson, Error>) -> Void) {
         do {
             let request = try buildRequest(relativePath: "reviews/\(uuid)", queryItems: nil, verb: .get)
             performTask(with: request, verbose: true, completion: completion, attempting: "fetchNPS")
@@ -79,11 +59,9 @@ public class NPSService: WorkfinderService, NPSServiceProtocol {
     }
     
     public func patchNPS(nps: NPSModel, completion: @escaping (Result<NPSModel, Error>) -> Void) {
-        let patch = PatchReviewJson()
-        patchNPSWorker(accessToken: nps.accessToken ?? "", uuid: nps.reviewUuid ?? "", patch: patch) { result in
+        patchNPSWorker(accessToken: nps.accessToken ?? "", uuid: nps.reviewUuid ?? "", patch: nps.patchJson) { result in
             switch result {
-            case .success(let returnedPatch):
-                print(returnedPatch)
+            case .success(_):
                 completion(.success(nps))
             case .failure(let error):
                 completion(.failure(error))

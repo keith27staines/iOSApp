@@ -30,15 +30,19 @@ struct ReasonJson: Decodable {
 
 
 // MARK:- PATCH /v3/reviews/<uuid>
-struct PatchReviewJson: Codable {
-    var anonymous: Bool = false
-    var feedback: String = ""
-    var otherReason: String = ""
-    var reasons: [Int] = []
-    var score: Int = 0
+public struct PatchReviewJson: Codable {
+    public var anonymous: Bool = false
+    public var feedbackText: String = ""
+    public var otherReasonText: String = ""
+    public var reasons: [Int] = []
+    public var score: Int = 0
     
     private enum CodingKeys: String, CodingKey {
-        case otherReason = "other_reason"
+        case anonymous
+        case reasons
+        case score
+        case feedbackText = "feedback"
+        case otherReasonText = "other_reason"
     }
 }
 

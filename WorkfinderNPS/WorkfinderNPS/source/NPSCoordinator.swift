@@ -99,15 +99,7 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
         npsUuid: F4SUUID,
         accessToken: String?
     ) {
-        self.nps = NPSModel(
-            accessToken: accessToken,
-            uuid: npsUuid,
-            score: nil,
-            category: nil,
-            hostName: nil,
-            projectName: nil,
-            companyName: nil
-        )
+        self.nps = NPSModel(accessToken: accessToken, uuid: npsUuid)
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -143,17 +135,8 @@ extension WorkfinderNPSCoordinator: NPSServiceProtocol {
         service.fetchReasons(completion: completion)
     }
     
-    func fetchNPS(uuid: String, completion: @escaping (Result<NPSModel, Error>) -> Void) {
-        service.fetchNPS(uuid: uuid) { result in
-            switch result {
-            case .success(let nps):
-                self.nps = nps
-                completion(.success(nps))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-        return
+    func fetchNPS(uuid: String, completion: @escaping (Result<GetReviewJson, Error>) -> Void) {
+        service.fetchNPS(uuid: uuid, completion: completion)
     }
     
     func patchNPS(nps: NPSModel, completion: @escaping (Result<NPSModel, Error>) -> Void) {
