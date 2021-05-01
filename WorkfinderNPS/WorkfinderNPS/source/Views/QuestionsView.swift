@@ -30,18 +30,27 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private lazy var title: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = WorkfinderColors.gray2
         label.numberOfLines = 0
         return label
     }()
     
     private lazy var textStack: UIStackView = {
+        var textStack: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .vertical
+            stack.addArrangedSubview(summary)
+            stack.addArrangedSubview(title)
+            stack.spacing = 20
+            return stack
+        }()
         let stack = UIStackView()
-        stack.axis = .vertical
-        stack.addArrangedSubview(summary)
-        stack.addArrangedSubview(title)
-        stack.spacing = 12
+        stack.axis = .horizontal
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.addArrangedSubview(textStack)
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.spacing = 0
         return stack
     }()
     
@@ -51,6 +60,8 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         table.dataSource = self
         table.delegate = self
         table.tableFooterView = UIView()
+        table.separatorStyle = .none
+        table.tableHeaderView = makeDivider()
         return table
     }()
     
@@ -59,7 +70,7 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         stack.axis = .vertical
         stack.addArrangedSubview(textStack)
         stack.addArrangedSubview(table)
-        stack.spacing = 16
+        stack.spacing = 8
         return stack
     }()
     
@@ -98,14 +109,11 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
         guard let question = category?.questions[indexPath.row] else { return }
         question.toggleAnswer()
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        
-        if question.answerPermitsText && question.answer.isChecked {
-            parent?.showAnswerTextFor(question: question, onCancel: {
-                
-            }, onDone: { (string) in
-                
-            })
-        }
+        guard let cell = tableView.cellForRow(at: indexPath) as? QuestionCell else { return }
+        let isChecked = question.answer.isChecked
+        cell.answer.isHidden = !isChecked || !question.answerPermitsText
+        cell.answer.isEnabled = isChecked
+        if isChecked { cell.answer.becomeFirstResponder() }
     }
     
 }
@@ -131,12 +139,15 @@ class QuestionCell: UITableViewCell {
         return label
     }()
 
-    lazy var answer: UILabel = {
-        let label = UILabel()
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.textColor = WorkfinderColors.gray4
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        return label
+    lazy var answer: UITextField = {
+        let text = UITextField()
+        text.autocapitalizationType = .none
+        text.borderStyle = .roundedRect
+        text.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        text.textColor = WorkfinderColors.gray2
+        text.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        text.backgroundColor = WorkfinderColors.gray6
+        return text
     }()
     
     lazy var textStack: UIStackView = {
@@ -147,11 +158,24 @@ class QuestionCell: UITableViewCell {
         return stack
     }()
     
-    lazy var mainStack: UIStackView = {
+    lazy var horizontalStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
         stack.addArrangedSubview(textStack)
         stack.addArrangedSubview(check)
+        let height = stack.heightAnchor.constraint(equalToConstant: 60)
+        height.priority = .defaultHigh
+        height.isActive = true
+        return stack
+    }()
+    
+    lazy var mainStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 4
+        stack.addArrangedSubview(horizontalStack)
+        stack.addArrangedSubview(makeDivider())
         stack.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return stack
     }()
@@ -160,7 +184,8 @@ class QuestionCell: UITableViewCell {
         self.question.text = question.questionText
         check.isHidden = !question.answer.isChecked
         answer.isHidden = !question.answerPermitsText
-        answer.text = question.answer.answerText ?? "Add some text"
+        answer.text = question.answer.answerText
+        answer.placeholder = "Add other reason"
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -170,7 +195,7 @@ class QuestionCell: UITableViewCell {
         backgroundColor = UIColor.white
         contentView.backgroundColor = UIColor.white
         contentView.addSubview(mainStack)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 0))
     }
     
     required init?(coder: NSCoder) {

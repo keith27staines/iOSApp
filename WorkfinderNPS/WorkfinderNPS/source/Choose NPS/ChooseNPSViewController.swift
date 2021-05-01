@@ -15,7 +15,7 @@ class ChooseNPSViewController: BaseViewController {
     override func viewDidLoad() {
         view.addSubview(stack)
         let guide = view.safeAreaLayoutGuide
-        stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
         presenter.onViewDidLoad(vc: self)
         reload()
     }
@@ -73,6 +73,16 @@ class ChooseNPSViewController: BaseViewController {
         QuestionsView(parent: self)
     }()
     
+    private lazy var nextButtonStack: UIStackView = {
+        let stack = UIStackView()
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.addArrangedSubview(nextButton)
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.spacing = 0
+        stack.axis = .horizontal
+        return stack
+    }()
+    
     private lazy var nextButton: UIButton = {
         let button = WorkfinderPrimaryButton()
         button.setTitle("Next", for: .normal)
@@ -88,7 +98,7 @@ class ChooseNPSViewController: BaseViewController {
         let stack = UIStackView()
         stack.addArrangedSubview(scoreView)
         stack.addArrangedSubview(questionsView)
-        stack.addArrangedSubview(nextButton)
+        stack.addArrangedSubview(nextButtonStack)
         stack.spacing = 20
         stack.axis = .vertical
         return stack

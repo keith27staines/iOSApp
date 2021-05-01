@@ -84,10 +84,20 @@ class NPSScoreView: UIView {
         return stack
     }()
     
-    private lazy var mainStack: UIStackView = {
+    private lazy var verticalStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [introText, tilesWithLabels])
         stack.axis = .vertical
         stack.spacing = 20
+        return stack
+    }()
+    
+    private lazy var mainStack: UIStackView = {
+        let stack = UIStackView()
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.addArrangedSubview(verticalStack)
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.axis = .horizontal
+        stack.spacing = 0
         return stack
     }()
     

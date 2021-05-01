@@ -23,7 +23,7 @@ class SubmitViewController: BaseViewController {
     lazy var intro: UILabel = {
         let label = UILabel()
         label.textColor = WorkfinderColors.gray2
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         label.numberOfLines = 0
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return label

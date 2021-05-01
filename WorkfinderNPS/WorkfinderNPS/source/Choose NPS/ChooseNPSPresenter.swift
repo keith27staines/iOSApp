@@ -12,7 +12,7 @@ class ChooseNPSPresenter: BasePresenter {
         
     var introText: String? {
         guard let hostName = hostName, let projectName = projectName else { return nil }
-        return "Based on your experience with \(hostName) on \(projectName), on a scale of 0 to 10, how likely would you recommend \(hostName) to other candidates?"
+        return "Based on your experience with \(hostName) on \(projectName), on a scale of 0 to 10, how likely would you be to recommend \(hostName) to other candidates?"
     }
     
     func setScore(_ score: Score?) {

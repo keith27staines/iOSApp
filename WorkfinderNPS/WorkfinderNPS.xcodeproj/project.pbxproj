@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5315DFE6263D40C80026E831 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5315DFE5263D40C80026E831 /* UtilityViews.swift */; };
 		532344C22632C7C500966B7A /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BE2632C7C500966B7A /* WorkfinderCommon.framework */; };
 		532344C42632C7C500966B7A /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */; };
 		532344C62632C7C600966B7A /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344C02632C7C500966B7A /* WorkfinderServices.framework */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5315DFE5263D40C80026E831 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		532344BE2632C7C500966B7A /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532344C02632C7C500966B7A /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 				53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */,
 				532344D82632CBC300966B7A /* NPSScoreView.swift */,
 				53AA929C2635477900C3A083 /* QuestionsView.swift */,
+				5315DFE5263D40C80026E831 /* UtilityViews.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				53E9181426368F1C00BD77E5 /* AnswerTextViewController.swift in Sources */,
 				532345102632E39100966B7A /* NPSModel.swift in Sources */,
 				532344D52632CB2D00966B7A /* SubmitViewController.swift in Sources */,
+				5315DFE6263D40C80026E831 /* UtilityViews.swift in Sources */,
 				53AA929D2635477900C3A083 /* QuestionsView.swift in Sources */,
 				532344F32632CD1C00966B7A /* SubmitPresenter.swift in Sources */,
 				532344FB2632CD4E00966B7A /* NPSService.swift in Sources */,
