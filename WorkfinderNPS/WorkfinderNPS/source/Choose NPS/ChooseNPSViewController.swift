@@ -99,7 +99,7 @@ class ChooseNPSViewController: BaseViewController {
         stack.addArrangedSubview(scoreView)
         stack.addArrangedSubview(questionsView)
         stack.addArrangedSubview(nextButtonStack)
-        stack.spacing = 20
+        stack.spacing = 12
         stack.axis = .vertical
         return stack
     }()

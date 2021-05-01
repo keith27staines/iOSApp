@@ -30,7 +30,7 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     private lazy var title: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 23, weight: .semibold)
         label.textColor = WorkfinderColors.gray2
         label.numberOfLines = 0
         return label
@@ -42,7 +42,7 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
             stack.axis = .vertical
             stack.addArrangedSubview(summary)
             stack.addArrangedSubview(title)
-            stack.spacing = 20
+            stack.spacing = 30
             return stack
         }()
         let stack = UIStackView()
@@ -120,6 +120,8 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
 
 class QuestionCell: UITableViewCell {
     
+    var question: Question?
+    
     lazy var check: UIView = {
         let iv = UIImageView(image: UIImage(named: "tick"))
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -131,7 +133,7 @@ class QuestionCell: UITableViewCell {
         return view
     }()
     
-    lazy var question: UILabel = {
+    lazy var questionTextField: UILabel = {
         let label = UILabel()
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.textColor = WorkfinderColors.gray2
@@ -147,14 +149,20 @@ class QuestionCell: UITableViewCell {
         text.textColor = WorkfinderColors.gray2
         text.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         text.backgroundColor = WorkfinderColors.gray6
+        text.addTarget(self, action: #selector(onAnswerFieldValueChanged), for: .editingChanged)
+        text.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        let width = text.widthAnchor.constraint(equalToConstant: 300)
+        width.priority = .defaultLow
+        width.isActive = true
         return text
     }()
     
     lazy var textStack: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
-        stack.addArrangedSubview(question)
+        stack.axis = .horizontal
+        stack.addArrangedSubview(questionTextField)
         stack.addArrangedSubview(answer)
+        stack.spacing = 8
         return stack
     }()
     
@@ -163,6 +171,7 @@ class QuestionCell: UITableViewCell {
         stack.axis = .horizontal
         stack.addArrangedSubview(Spacer(width: 20, height: 0))
         stack.addArrangedSubview(textStack)
+        stack.addArrangedSubview(UIView())
         stack.addArrangedSubview(check)
         let height = stack.heightAnchor.constraint(equalToConstant: 60)
         height.priority = .defaultHigh
@@ -170,22 +179,39 @@ class QuestionCell: UITableViewCell {
         return stack
     }()
     
+    lazy var verticalStack: UIStackView = {
+        let space1 = UIView()
+        let space2 = UIView()
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.addArrangedSubview(space1)
+        stack.addArrangedSubview(horizontalStack)
+        stack.addArrangedSubview(space2)
+        space1.heightAnchor.constraint(equalTo: space2.heightAnchor, multiplier: 1).isActive = true
+        return stack
+    }()
+    
     lazy var mainStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 4
-        stack.addArrangedSubview(horizontalStack)
+        stack.addArrangedSubview(verticalStack)
         stack.addArrangedSubview(makeDivider())
         stack.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return stack
     }()
     
     func configureCellWithQuestion(_ question: Question) {
-        self.question.text = question.questionText
+        self.question = question
+        self.questionTextField.text = question.questionText
         check.isHidden = !question.answer.isChecked
         answer.isHidden = !question.answerPermitsText
         answer.text = question.answer.answerText
         answer.placeholder = "Add other reason"
+    }
+    
+    @objc func onAnswerFieldValueChanged() {
+        question?.answer = .init(isChecked: true, answerText: answer.text)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

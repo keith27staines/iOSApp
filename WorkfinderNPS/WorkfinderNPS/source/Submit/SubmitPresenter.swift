@@ -16,7 +16,7 @@ class SubmitPresenter: BasePresenter {
         return "Your feedback is highly valuable to \(hostName), \(companyName) and us. This helps us improve our service so that you and other candidates won’t have similar experience again. You can choose to hide your name and details when sharing your feedback."
     }
     
-    var feedbackText: String {
+    var feedbackText: String? {
         get { npsModel.feedbackText }
         set { npsModel.feedbackText = newValue }
     }

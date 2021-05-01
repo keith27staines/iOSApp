@@ -15,9 +15,13 @@ public class NPSModel {
     public var hostName: String?
     public var projectName: String?
     public var companyName: String?
+    public var feedbackText: String?
     public var anonymous: Bool
-    public var otherReasonText: String
-    public var feedbackText: String
+    public var otherReasonText: String? {
+        category?.questions.first(where: { question in
+            question.questionText.lowercased() == "other"
+        })?.answer.answerText
+    }
     public private (set) var downloadedReasonIds: [Int] = []
     
     var categories: [QuestionCategory]?
@@ -36,7 +40,6 @@ public class NPSModel {
         projectName = reviewJson.placement.projectName
         companyName = reviewJson.placement.companyName
         feedbackText = reviewJson.feedback
-        otherReasonText = reviewJson.otherReason
         anonymous = reviewJson.anonymous
         self.buildCategories(hostName: hostName ?? "", allQuestions: allQuestions)
         setScore(reviewJson.score)
@@ -111,8 +114,8 @@ public class NPSModel {
     public var patchJson: PatchReviewJson {
         var patch = PatchReviewJson()
         patch.anonymous = self.anonymous
-        patch.feedbackText = self.feedbackText
-        patch.otherReasonText = self.otherReasonText
+        patch.feedbackText = self.feedbackText ?? ""
+        patch.otherReasonText = self.otherReasonText ?? ""
         patch.score = self.score ?? -1
         patch.reasons = []
         let questions: [Question] = self.category?.questions ?? []
@@ -143,7 +146,6 @@ public class NPSModel {
         self.projectName = projectName
         self.companyName = companyName
         self.anonymous = anonymous
-        self.otherReasonText = otherReasonText
         self.feedbackText = feedbackText
         self.downloadedReasonIds = downloadedReasons
     }
