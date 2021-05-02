@@ -9,7 +9,7 @@ public struct DeeplinkRoutingInfo {
     public enum ObjectType: String {
         case recommendation
         case placement
-        case nps
+        case review
         
         public init?(urlPathComponent: String) {
             switch urlPathComponent {
@@ -17,8 +17,8 @@ public struct DeeplinkRoutingInfo {
                 self = .recommendation
             case "placement", "placements":
                 self = .placement
-            case "candidate-nps":
-                self = .nps
+            case "reviews":
+                self = .review
             default:
                 return nil
             }
@@ -30,6 +30,7 @@ public struct DeeplinkRoutingInfo {
         case open
     }
     
+    public var queryItems: [String: String]
     public var source: Source
     public var objectType: ObjectType
     public var objectId: F4SUUID?
@@ -39,11 +40,13 @@ public struct DeeplinkRoutingInfo {
         source: Source,
         objectType: ObjectType,
         objectId: F4SUUID?,
-        action: Action) {
+        action: Action,
+        queryItems: [String:String]) {
         self.source = source
         self.objectType = objectType
         self.action = action
         self.objectId = objectId
+        self.queryItems = queryItems
     }
     
     public init?(pushNotification: PushNotification?) {
@@ -52,11 +55,14 @@ public struct DeeplinkRoutingInfo {
             let objectType = ObjectType(rawValue: pushNotification.objectType ?? ""),
             let action = Action(rawValue: pushNotification.action ?? "")
         else { return nil}
+        
         self.init(
             source: Source.pushNotification,
             objectType: objectType,
             objectId: pushNotification.objectId,
-            action: action)
+            action: action,
+            queryItems: [:]
+        )
     }
     
     public init?(deeplinkUrl: URL) {
@@ -65,7 +71,17 @@ public struct DeeplinkRoutingInfo {
             let objectType: ObjectType = ObjectType(urlPathComponent: objectTypeString)
         else { return nil }
         let action: Action = (objectId == nil) ? Action.list : Action.open
-        self.init(source: Source.deeplink, objectType: objectType, objectId: objectId, action: action)
+        var parameters = [String:String]()
+        URLComponents(url: deeplinkUrl, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
+            parameters[$0.name] = $0.value
+        }
+        self.init(
+            source: Source.deeplink,
+            objectType: objectType,
+            objectId: objectId,
+            action: action,
+            queryItems: parameters
+        )
     }
 }
 

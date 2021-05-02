@@ -66,6 +66,15 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         homeCoordinator.processRecommendedAssociation(recommendationUuid: recommendationUuid, source: appSource)
     }
     
+    public func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String : String]) {
+        guard let token = queryItems.first(where: { itemAndValue in
+            itemAndValue.key == "access_token"
+        })?.value else { return }
+        let coordinator = WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter , inject: injected, npsUuid: reviewUuid, accessToken: token)
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
     public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
         tabBarViewController.selectedIndex = TabIndex.recommendations.rawValue
         DispatchQueue.main.async { [weak self] in
@@ -141,14 +150,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         return coordinator
     }()
     
-    lazy var npsCoordinator: WorkfinderNPSCoordinator = {
-        
-        // https://develop.workfinder.com/reviews/cc59a4f4-0c2b-47e1-9c98-77b80c3f400f?access_token=7TomNR3W1OowciVeO2IZgpjMJph330oppq0OLylCDZM
-        let uuid = "cc59a4f4-0c2b-47e1-9c98-77b80c3f400f"
-        let token = "7TomNR3W1OowciVeO2IZgpjMJph330oppq0OLylCDZM"
-        return WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter , inject: injected, npsUuid: uuid, accessToken: token)
-    }()
-    
     func presentHiddenDebugController(parentCtrl: UIViewController) {
         let debugStoryboard = UIStoryboard(name: "Debug", bundle: nil)
         guard let navigationController = debugStoryboard.instantiateInitialViewController() else {
@@ -177,8 +178,6 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
             })
             log.track(.tab_tap(tabName: "recommendations"))
         case accountCoordinator.navigationRouter.navigationController:
-            addChildCoordinator(npsCoordinator)
-            npsCoordinator.start()
             log.track(.tab_tap(tabName: "account"))
             
         default:

@@ -32,9 +32,10 @@ class DeepLinkRouter {
                 log.track(.placement_deeplink_start)
                 coordinator.routeApplication(placementUuid: routingInfo.objectId, appSource: source)
                 log.track(.placement_deeplink_convert)
-            case .nps:
+            case .review:
                 log.track(.nps_deeplink_start)
-                coordinator.routeApplication(placementUuid: routingInfo.objectId, appSource: source)
+                guard let uuid = routingInfo.objectId else { return }
+                coordinator.routeReview(reviewUuid: uuid, appSource: source, queryItems: routingInfo.queryItems)
                 log.track(.nps_deeplink_convert)
             }
         }

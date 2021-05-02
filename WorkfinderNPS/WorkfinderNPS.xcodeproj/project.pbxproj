@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5315DFE6263D40C80026E831 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5315DFE5263D40C80026E831 /* UtilityViews.swift */; };
+		5315DFE8263EB9B90026E831 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5315DFE7263EB9B90026E831 /* TextViewController.swift */; };
 		532344C22632C7C500966B7A /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BE2632C7C500966B7A /* WorkfinderCommon.framework */; };
 		532344C42632C7C500966B7A /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */; };
 		532344C62632C7C600966B7A /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344C02632C7C500966B7A /* WorkfinderServices.framework */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		5315DFE5263D40C80026E831 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
+		5315DFE7263EB9B90026E831 /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		532344BE2632C7C500966B7A /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532344C02632C7C500966B7A /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				532344D82632CBC300966B7A /* NPSScoreView.swift */,
 				53AA929C2635477900C3A083 /* QuestionsView.swift */,
 				5315DFE5263D40C80026E831 /* UtilityViews.swift */,
+				5315DFE7263EB9B90026E831 /* TextViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				532344FB2632CD4E00966B7A /* NPSService.swift in Sources */,
 				532344F72632CD3000966B7A /* ChooseNPSPresenter.swift in Sources */,
 				532344E92632CCC400966B7A /* ThankyouViewController.swift in Sources */,
+				5315DFE8263EB9B90026E831 /* TextViewController.swift in Sources */,
 				532344CD2632C93C00966B7A /* NPSCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

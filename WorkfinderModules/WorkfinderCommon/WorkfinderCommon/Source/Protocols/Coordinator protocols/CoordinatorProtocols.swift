@@ -15,6 +15,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID?, appSource: AppSource)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
+    func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String: String])
     func switchToTab(_ tab: TabIndex)
     func updateBadges()
     func handleDeepLinkUrl(url: URL) -> Bool
@@ -53,6 +54,7 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
     func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID, appSource: AppSource)
+    func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems:[String:String])
     func updateBadges()
     func updateUnreadMessagesCount(_ count: Int)
 }

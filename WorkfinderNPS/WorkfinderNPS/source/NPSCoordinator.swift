@@ -10,6 +10,10 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderUI
 
+/*
+ https://develop.workfinder.com/reviews/cc59a4f4-0c2b-47e1-9c98-77b80c3f400f/?access_token=7TomNR3W1OowciVeO2IZgpjMJph330oppq0OLylCDZM
+ */
+
 class NewWindowManager {
     
     let originalWindow: UIWindow?
