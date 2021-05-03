@@ -18,6 +18,28 @@ class ChooseNPSViewController: BaseViewController {
         stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
         presenter.onViewDidLoad(vc: self)
         reload()
+        addNotificationListeners()
+    }
+    
+    private func addNotificationListeners() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            questionsView.table.contentInset = .zero
+        } else {
+            questionsView.table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        questionsView.table.scrollIndicatorInsets = questionsView.table.contentInset
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,4 +125,21 @@ class ChooseNPSViewController: BaseViewController {
         stack.axis = .vertical
         return stack
     }()
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension UIView {
+    
+    func findFirstResponder() -> UIView? {
+        if self.isFirstResponder { return self }
+        for view in subviews {
+            if let firstResponder = view.findFirstResponder() {
+                return firstResponder
+            }
+        }
+        return nil
+    }
 }
