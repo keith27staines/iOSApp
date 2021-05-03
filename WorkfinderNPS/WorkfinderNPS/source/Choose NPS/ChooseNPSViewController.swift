@@ -126,6 +126,22 @@ class ChooseNPSViewController: BaseViewController {
         return stack
     }()
     
+    func promptForReason(reason: String? ,completion: @escaping (String?) -> Void) {
+        let msg = (reason?.count ?? 0 == 0) ? "Enter your other reason" : "Edit your other reason"
+        let ac = UIAlertController(title: "Other Reason", message: msg, preferredStyle: .alert)
+        ac.addTextField()
+        ac.textFields?[0].text = reason
+        ac.textFields?[0].clearButtonMode = .always
+        let submitAction = UIAlertAction(title: "Done", style: .default) { [unowned ac] _ in
+            let answer = ac.textFields![0]
+            completion(answer.text)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        ac.addAction(cancelAction)
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

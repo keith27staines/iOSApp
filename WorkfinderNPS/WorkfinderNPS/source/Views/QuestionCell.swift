@@ -41,7 +41,7 @@ class QuestionCell: UITableViewCell {
         text.backgroundColor = WorkfinderColors.gray6
         text.addTarget(self, action: #selector(onAnswerFieldValueChanged), for: .editingChanged)
         text.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        let width = text.widthAnchor.constraint(equalToConstant: 300)
+        let width = text.widthAnchor.constraint(equalToConstant: 200)
         width.priority = .defaultLow
         width.isActive = true
         return text
@@ -95,9 +95,9 @@ class QuestionCell: UITableViewCell {
         self.question = question
         self.questionTextField.text = question.questionText
         check.isHidden = !question.answer.isChecked
-        answer.isHidden = !question.answerPermitsText
+        answer.isHidden = !question.answerPermitsText || question.answer.answerText?.count ?? 0 == 0
+        answer.isEnabled = false
         answer.text = question.answer.answerText
-        answer.placeholder = "Add other reason"
     }
     
     @objc func onAnswerFieldValueChanged() {

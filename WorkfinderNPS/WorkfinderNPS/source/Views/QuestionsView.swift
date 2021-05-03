@@ -107,13 +107,20 @@ class QuestionsView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let question = category?.questions[indexPath.row] else { return }
-        question.toggleAnswer()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
         guard let cell = tableView.cellForRow(at: indexPath) as? QuestionCell else { return }
-        let isChecked = question.answer.isChecked
-        cell.answer.isHidden = !isChecked || !question.answerPermitsText
-        cell.answer.isEnabled = isChecked
-        if isChecked && question.answerPermitsText { cell.answer.becomeFirstResponder() }
+        if question.answerPermitsText {
+            parent?.promptForReason(reason: cell.answer.text, completion: { reason in
+                cell.answer.text = reason
+                cell.question?.answer.answerText = reason
+                cell.question?.answer.isChecked = (reason?.count ?? 0) > 0
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            })
+        } else {
+            question.toggleAnswer()
+            cell.answer.isHidden = true
+            cell.answer.isEnabled = false
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
     
 }
