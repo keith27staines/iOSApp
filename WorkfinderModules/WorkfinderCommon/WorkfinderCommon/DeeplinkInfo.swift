@@ -11,7 +11,7 @@ public struct DeeplinkRoutingInfo {
         case placement
         case review
         
-        public init?(urlPathComponent: String) {
+        public init?(urlPathComponent: String?) {
             switch urlPathComponent {
             case "recommendation", "recommendations":
                 self = .recommendation
@@ -67,12 +67,12 @@ public struct DeeplinkRoutingInfo {
     
     public init?(deeplinkUrl: URL) {
         guard
-            let (objectTypeString, objectId) = DeeplinkRoutingInfo.deeplinkUrlToObjectAndId(url: deeplinkUrl),
+            let (objectTypeString, objectId, queryItems) = DeeplinkRoutingInfo.deeplinkUrlToObjectAndId(url: deeplinkUrl),
             let objectType: ObjectType = ObjectType(urlPathComponent: objectTypeString)
         else { return nil }
         let action: Action = (objectId == nil) ? Action.list : Action.open
         var parameters = [String:String]()
-        URLComponents(url: deeplinkUrl, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
+        queryItems?.forEach {
             parameters[$0.name] = $0.value
         }
         self.init(
@@ -86,17 +86,17 @@ public struct DeeplinkRoutingInfo {
 }
 
 extension DeeplinkRoutingInfo {
-    private static func deeplinkUrlToObjectAndId(url: URL) -> (String, String?)? {
+    private static func deeplinkUrlToObjectAndId(url: URL) -> (String?, String?, [URLQueryItem]?)? {
         if let placementUuid = placementViewRequestUuid(url: url) {
-            return ("placement", placementUuid)
+            return ("placement", placementUuid, nil)
         }
         guard
-            let path = URLComponents(url: url, resolvingAgainstBaseURL: true)?.path.split(separator: "/")
+            let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
             else { return nil }
-        guard let firstPathComponent = path.first else { return nil }
-        if path.count == 1 { return (String(firstPathComponent), nil) }
-        let secondPathComponent = String(path[1])
-        return (String(firstPathComponent), secondPathComponent)
+        var object = urlComponents.path
+        if object.first == "/" { object = String(object.dropFirst()) }
+        if object.last == "/" { object = String(object.dropLast())  }
+        return (urlComponents.host, object, urlComponents.queryItems)
     }
     
     private static func placementViewRequestUuid(url: URL) -> F4SUUID? {

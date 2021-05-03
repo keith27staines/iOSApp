@@ -56,8 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Handle being invoked from deep links or a smart banner somewhere out there on the web
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let reviewUrl = URL(string: "https://develop.workfinder.com/reviews/cc59a4f4-0c2b-47e1-9c98-77b80c3f400f/?access_token=7TomNR3W1OowciVeO2IZgpjMJph330oppq0OLylCDZM")
-        return appCoordinator.handleDeepLinkUrl(url: reviewUrl!)
+        return appCoordinator.handleDeepLinkUrl(url: url)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
