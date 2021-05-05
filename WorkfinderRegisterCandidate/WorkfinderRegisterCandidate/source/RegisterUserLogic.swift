@@ -3,7 +3,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderServices
 
-protocol RegisterUserLogicProtocol: class {
+protocol RegisterUserLogicProtocol: AnyObject {
     func start(completion: @escaping ((Result<Candidate,Error>) -> Void))
 }
 

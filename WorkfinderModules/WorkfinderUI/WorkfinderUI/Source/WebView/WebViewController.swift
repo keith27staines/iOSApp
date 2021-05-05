@@ -1,7 +1,7 @@
 
 import WebKit
 
-public protocol WebViewControllerDelegate : class {
+public protocol WebViewControllerDelegate : AnyObject {
     func webViewControllerDidFinish(_ vc: WebViewController)
 }
 

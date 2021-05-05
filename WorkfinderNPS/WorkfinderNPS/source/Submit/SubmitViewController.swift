@@ -10,6 +10,8 @@ import WorkfinderUI
 
 class SubmitViewController: BaseViewController {
     
+    var submitPresenter: SubmitPresenter? { presenter as? SubmitPresenter }
+    
     lazy var table: UITableView = {
         let table = UITableView()
         table.dataSource = self
@@ -20,9 +22,10 @@ class SubmitViewController: BaseViewController {
     
     lazy var intro: UILabel = {
         let label = UILabel()
-        label.text = "Your feedback is highly valuable to {{Host First Name}}, {{Company Name}} and us. This helps us improve our service so that you and other candidates won’t have similar experience again. You can choose to hide your name and details when sharing your feedback."
         label.textColor = WorkfinderColors.gray2
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         label.numberOfLines = 0
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return label
     }()
     
@@ -38,7 +41,7 @@ class SubmitViewController: BaseViewController {
     
     lazy var goodFeedbackButton: UIButton = {
         let button = UIButton()
-        button.setTitle("(What makes a good feedback?)", for: .normal)
+        button.setTitle("(What makes good feedback?)", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
         button.addTarget(self, action: #selector(linkToFeedback), for: .touchUpInside)
@@ -48,16 +51,17 @@ class SubmitViewController: BaseViewController {
     lazy var hideDetailsLabel: UILabel = {
         let label = UILabel()
         label.text = "Hide my name and details when sharing feedback"
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 2
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.textColor = WorkfinderColors.gray4
         return label
     }()
     
     lazy var hideDetailsSwitch: UISwitch = {
         let view = UISwitch()
         view.setContentHuggingPriority(.required, for: .horizontal)
+        view.addTarget(self, action: #selector(hideDetails), for: .valueChanged)
         return view
     }()
     
@@ -88,6 +92,7 @@ class SubmitViewController: BaseViewController {
         view.layer.cornerRadius = 12
         view.heightAnchor.constraint(equalToConstant: 300).isActive = true
         view.inputAccessoryView = keyboardToolbar
+        view.delegate = self
         return view
     }()
     
@@ -98,8 +103,21 @@ class SubmitViewController: BaseViewController {
         return button
     }()
     
+    @objc func hideDetails(switchControl: UISwitch) {
+        submitPresenter?.isAnonymous = switchControl.isOn
+    }
+    
     @objc func submitReview() {
-        coordinator?.showThankyou()
+        submitPresenter?.submitReview(completion: { [weak self] optionalError in
+            guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+                
+            } retryHandler: {
+                self.submitReview()
+            }
+            self.coordinator?.showThankyou()
+        })
     }
     
     lazy var keyboardToolbar: UIToolbar = {
@@ -146,6 +164,13 @@ class SubmitViewController: BaseViewController {
         configureViews()
         configureNavigationBar()
         addNotificationListeners()
+        reloadFromPresenter()
+    }
+    
+    func reloadFromPresenter() {
+        intro.text = submitPresenter?.feedbackIntro
+        feedback.text = submitPresenter?.feedbackText
+        hideDetailsSwitch.isOn = submitPresenter?.isAnonymous ?? true
     }
     
     func configureNavigationBar() {
@@ -191,7 +216,11 @@ extension SubmitViewController: UITableViewDataSource {
         stack.anchor(top: content.topAnchor, leading: content.leadingAnchor, bottom: content.bottomAnchor, trailing: content.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
         return cell
     }
-    
-    
+}
+
+extension SubmitViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        submitPresenter?.feedbackText = textView.text
+    }
 }
 

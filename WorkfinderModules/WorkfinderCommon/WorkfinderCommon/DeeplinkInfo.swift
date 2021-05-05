@@ -1,5 +1,11 @@
 
 public struct DeeplinkRoutingInfo {
+    public let url: URL?
+    public let queryItems: [String: String]
+    public let source: Source
+    public let objectType: ObjectType
+    public let objectId: F4SUUID?
+    public var action: Action { objectId == nil ? .list : .open }
     
     public enum Source: String {
         case deeplink
@@ -9,16 +15,16 @@ public struct DeeplinkRoutingInfo {
     public enum ObjectType: String {
         case recommendation
         case placement
-        case nps
+        case review
         
-        public init?(urlPathComponent: String) {
+        public init?(urlPathComponent: String?) {
             switch urlPathComponent {
             case "recommendation", "recommendations":
                 self = .recommendation
             case "placement", "placements":
                 self = .placement
-            case "candidate-nps":
-                self = .nps
+            case "reviews":
+                self = .review
             default:
                 return nil
             }
@@ -30,67 +36,70 @@ public struct DeeplinkRoutingInfo {
         case open
     }
     
-    public var source: Source
-    public var objectType: ObjectType
-    public var objectId: F4SUUID?
-    public var action: Action
-    
     public init(
         source: Source,
         objectType: ObjectType,
         objectId: F4SUUID?,
-        action: Action) {
+        queryItems: [String:String]) {
         self.source = source
         self.objectType = objectType
-        self.action = action
         self.objectId = objectId
+        self.queryItems = queryItems
+        self.url = nil
     }
     
     public init?(pushNotification: PushNotification?) {
         guard
             let pushNotification = pushNotification,
-            let objectType = ObjectType(rawValue: pushNotification.objectType ?? ""),
-            let action = Action(rawValue: pushNotification.action ?? "")
+            let objectType = ObjectType(rawValue: pushNotification.objectType ?? "")
         else { return nil}
+        
         self.init(
             source: Source.pushNotification,
             objectType: objectType,
             objectId: pushNotification.objectId,
-            action: action)
+            queryItems: [:]
+        )
     }
     
     public init?(deeplinkUrl: URL) {
-        guard
-            let (objectTypeString, objectId) = DeeplinkRoutingInfo.deeplinkUrlToObjectAndId(url: deeplinkUrl),
-            let objectType: ObjectType = ObjectType(urlPathComponent: objectTypeString)
-        else { return nil }
-        let action: Action = (objectId == nil) ? Action.list : Action.open
-        self.init(source: Source.deeplink, objectType: objectType, objectId: objectId, action: action)
-    }
-}
-
-extension DeeplinkRoutingInfo {
-    private static func deeplinkUrlToObjectAndId(url: URL) -> (String, String?)? {
-        if let placementUuid = placementViewRequestUuid(url: url) {
-            return ("placement", placementUuid)
+        self.source = .deeplink
+        self.url = deeplinkUrl
+        guard let components = URLComponents(url: deeplinkUrl, resolvingAgainstBaseURL: false) else {
+            return nil
         }
-        guard
-            let path = URLComponents(url: url, resolvingAgainstBaseURL: true)?.path.split(separator: "/")
+        let pathComponents = components.path.split(separator: "/")
+        switch components.scheme {
+        case "workfinderapp":
+            guard
+                let host = components.host,
+                let objectType = ObjectType(urlPathComponent: host)
             else { return nil }
-        guard let firstPathComponent = path.first else { return nil }
-        if path.count == 1 { return (String(firstPathComponent), nil) }
-        let secondPathComponent = String(path[1])
-        return (String(firstPathComponent), secondPathComponent)
-    }
-    
-    private static func placementViewRequestUuid(url: URL) -> F4SUUID? {
-        let prefix = "?placement="
-        guard
-            let path = url.absoluteString.removingPercentEncoding,
-            let index: String.Index = path.index(of: prefix)
-        else { return nil }
-        let offset = path.index(index, offsetBy: prefix.count)
-        let uuid = path[offset...]
-        return String(uuid)
+            self.objectType = objectType
+            if let firstPathComponent = pathComponents.first {
+                self.objectId = String(firstPathComponent)
+            } else {
+                self.objectId = nil
+            }
+        default:
+            guard
+                let host = components.host,
+                host.contains("workfinder.com"),
+                let firstPathComponent = pathComponents.first,
+                let objectType = ObjectType(urlPathComponent: String(firstPathComponent))
+            else { return nil }
+            self.objectType = objectType
+            if pathComponents.count == 2 {
+                self.objectId = String(pathComponents[1])
+            } else {
+                self.objectId = nil
+            }
+        }
+        
+        var parameters = [String:String]()
+        components.queryItems?.forEach {
+            parameters[$0.name] = $0.value
+        }
+        self.queryItems = parameters
     }
 }

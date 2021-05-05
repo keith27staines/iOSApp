@@ -10,6 +10,10 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderUI
 
+/*
+ https://develop.workfinder.com/reviews/cc59a4f4-0c2b-47e1-9c98-77b80c3f400f/?access_token=7TomNR3W1OowciVeO2IZgpjMJph330oppq0OLylCDZM
+ */
+
 class NewWindowManager {
     
     let originalWindow: UIWindow?
@@ -50,13 +54,9 @@ class NewWindowManager {
     }
 }
 
-
-
 public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
-    
-    var score: Int?
-    var npsUuid: F4SUUID
-    var nps: NPSModel?
+
+    var nps: NPSModel
 
     lazy var newWindowManager: NewWindowManager = {
         return NewWindowManager(originalWindow: UIApplication.shared.windows.first)
@@ -78,26 +78,32 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     func showChoices() {
-        let presenter = ChooseNPSPresenter(coordinator: self, service: self)
+        let presenter = ChooseNPSPresenter(coordinator: self, service: self, nps: nps)
         let vc = ChooseNPSViewController(coordinator: self, presenter: presenter, onComplete: showSubmit)
         displayViewController(vc)
     }
         
     func showSubmit() {
-        let presenter = SubmitPresenter(coordinator: self, service: self)
+        let presenter = SubmitPresenter(coordinator: self, service: self, nps: nps)
+        presenter.npsModel = nps
         let vc = SubmitViewController(coordinator: self, presenter: presenter, onComplete: showThankyou)
         displayViewController(vc)
     }
     
     func showThankyou() {
-        let presenter = ThankyouPresenter(coordinator: self, service: self)
+        let presenter = ThankyouPresenter(coordinator: self, service: self, nps: nps)
         let vc = ThankyouViewController(coordinator: self, presenter: presenter, onComplete: finishedNPS)
         displayViewController(vc)
     }
                 
-    public init(parent: Coordinating?, navigationRouter: NavigationRoutingProtocol, inject: CoreInjectionProtocol, npsUuid: F4SUUID, score: Int? ) {
-        self.npsUuid = npsUuid
-        self.score = score
+    public init(
+        parent: Coordinating?,
+        navigationRouter: NavigationRoutingProtocol,
+        inject: CoreInjectionProtocol,
+        npsUuid: F4SUUID,
+        accessToken: String?
+    ) {
+        self.nps = NPSModel(accessToken: accessToken, uuid: npsUuid)
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -129,23 +135,15 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
 
 extension WorkfinderNPSCoordinator: NPSServiceProtocol {
     
-    public func fetchNPS(uuid: String, completion: (Result<NPSModel, Error>) -> Void) {
-        guard let nps = nps else {
-            service.fetchNPS(uuid: npsUuid) { result in
-                switch result {
-                case .success(var nps):
-                    nps.score = nps.score ?? score
-                    completion(.success(nps))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-            return
-        }
-        completion(.success(nps))
+    func fetchReasons(completion: @escaping (Result<[ReasonJson], Error>) -> Void) {
+        service.fetchReasons(completion: completion)
     }
     
-    public func patchNPS(uuid: String, nps: NPSModel, completion: (Result<NPSModel, Error>) -> Void) {
-        service.patchNPS(uuid: uuid, nps: nps, completion: completion)
+    func fetchNPS(uuid: String, completion: @escaping (Result<GetReviewJson, Error>) -> Void) {
+        service.fetchNPS(uuid: uuid, completion: completion)
+    }
+    
+    func patchNPS(nps: NPSModel, completion: @escaping (Result<NPSModel, Error>) -> Void) {
+        service.patchNPS(nps: nps, completion: completion)
     }
 }

@@ -3,7 +3,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-public protocol DateOfBirthCoordinatorProtocol: class {
+public protocol DateOfBirthCoordinatorProtocol: AnyObject {
     func onDidCancel()
     func onDidSelectDataOfBirth(date: Date)
 }

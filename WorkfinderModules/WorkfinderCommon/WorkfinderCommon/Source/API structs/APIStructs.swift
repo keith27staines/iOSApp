@@ -15,18 +15,6 @@ public typealias CompanyListJson = ServerListJson<CompanyJson>
 /// Standard server paged array `[HostLocationAssociationJson]`
 public typealias HostAssociationListJson = ServerListJson<HostAssociationJson>
 
-// MARK: - Roles aka projects -
-
-//public struct RoleJson: Codable {
-//    public var uuid: F4SUUID?
-//    public var name: String?
-//    public var association: RoleNestedAssociation // ExpandedAssociation (because the api returns the country as a String, not a CodeName
-//    public var is_remote: Bool?
-//    public var is_paid: Bool?
-//    public var salary: Double?
-//    public var employment_type: String?
-//}
-
 // MARK: - Company -
 
 /// Represents JSON returned from the companies/uuid api

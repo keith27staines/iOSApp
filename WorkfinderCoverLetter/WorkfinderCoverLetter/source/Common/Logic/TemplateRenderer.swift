@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import WorkfinderUI
 
-public protocol TemplateRendererProtocol: class {
+public protocol TemplateRendererProtocol: AnyObject {
     var isComplete: Bool { get }
     func renderToPlainString(with keyValues: [String: String?]) -> String
     func renderToAttributedString(with keyValues: [String: String?]) -> NSAttributedString

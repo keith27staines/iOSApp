@@ -2,7 +2,9 @@
 import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
-    
+    public func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String : String]) {
+        
+    }
     
     public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
         

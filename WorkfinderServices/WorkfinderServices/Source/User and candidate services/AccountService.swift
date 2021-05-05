@@ -74,11 +74,11 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
             }
             let patch = CandidatePatch(
                 phone: candidate.phone, //?? "",
-                postcode: candidate.postcode, // ?? "",
+                postcode: candidate.postcode ?? "",
                 date_of_birth: candidate.dateOfBirth, //?? "",
                 languages: candidate.languages ?? [],
-                ethnicity: candidate.ethnicity, // //?? "",
-                gender: candidate.gender //?? ""
+                ethnicity: candidate.ethnicity ?? "",
+                gender: candidate.gender ?? ""
             )
             
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)

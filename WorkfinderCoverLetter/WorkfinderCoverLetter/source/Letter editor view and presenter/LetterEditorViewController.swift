@@ -4,7 +4,7 @@ import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderCoordinators
 
-protocol LetterEditorViewProtocol: class, UserMessageHandlingProtocol {
+protocol LetterEditorViewProtocol: AnyObject, UserMessageHandlingProtocol {
     func refresh()
 }
 

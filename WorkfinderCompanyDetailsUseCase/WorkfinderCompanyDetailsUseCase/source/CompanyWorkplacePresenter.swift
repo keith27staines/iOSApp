@@ -6,7 +6,7 @@ import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderServices
 
-protocol CompanyDetailsPresenterProtocol: class {
+protocol CompanyDetailsPresenterProtocol: AnyObject {
     var view: CompanyDetailsViewProtocol? { get set }
     var selectedHost: HostJson? { get }
     var mainViewPresenter: CompanyMainViewPresenter { get }

@@ -4,7 +4,7 @@ import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderServices
 
-protocol RegisterAndSignInPresenterProtocol: class {
+protocol RegisterAndSignInPresenterProtocol: AnyObject {
     var fullname: String? { get set }
     var nickname: String? { get set }
     var email: String? { get set }

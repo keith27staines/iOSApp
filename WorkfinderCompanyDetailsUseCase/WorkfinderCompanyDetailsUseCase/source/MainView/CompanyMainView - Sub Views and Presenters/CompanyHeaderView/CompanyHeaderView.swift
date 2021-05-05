@@ -3,7 +3,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyHeaderViewProtocol: class {
+protocol CompanyHeaderViewProtocol: AnyObject {
     var presenter: CompanyHeaderViewPresenterProtocol! { get set }
     func refresh(from presenter: CompanyHeaderViewPresenterProtocol)
 }

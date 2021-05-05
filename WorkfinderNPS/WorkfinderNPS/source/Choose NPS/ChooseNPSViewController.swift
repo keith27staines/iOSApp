@@ -10,22 +10,49 @@ import WorkfinderUI
 
 class ChooseNPSViewController: BaseViewController {
     
+    var chooseNPSPresenter: ChooseNPSPresenter? { return presenter as? ChooseNPSPresenter }
+    
+    override func viewDidLoad() {
+        view.addSubview(stack)
+        let guide = view.safeAreaLayoutGuide
+        stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+        presenter.onViewDidLoad(vc: self)
+        reload()
+        addNotificationListeners()
+    }
+    
+    private func addNotificationListeners() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            questionsView.table.contentInset = .zero
+        } else {
+            questionsView.table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        questionsView.table.scrollIndicatorInsets = questionsView.table.contentInset
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = "Review"
-        view.addSubview(stack)
-        let guide = view.safeAreaLayoutGuide
-        stack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-        presenter.onViewDidLoad(vc: self)
-        reload()
     }
     
     func reload() {
         messageHandler.showLoadingOverlay()
-        presenter.reload() { [weak self] optionalError in
+        chooseNPSPresenter?.reload() { [weak self] optionalError in
             guard let self = self else { return }
-            messageHandler.hideLoadingOverlay()
-            messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+            self.messageHandler.hideLoadingOverlay()
+            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 self.cancelButtonTap()
             } retryHandler: {
                 self.reload()
@@ -35,7 +62,9 @@ class ChooseNPSViewController: BaseViewController {
     }
     
     func refreshFromPresenter() {
-        scoreView.configureWith(introText: presenter.introText, score: presenter.score)
+        let intro = chooseNPSPresenter?.introText
+        let score = chooseNPSPresenter?.score
+        scoreView.configureWith(introText: intro, score: score)
         questionsView.configureWith(category: presenter.category)
     }
     
@@ -58,11 +87,22 @@ class ChooseNPSViewController: BaseViewController {
     
     private lazy var scoreView = NPSScoreView() { [weak self] score in
         guard let self = self else { return }
-        self.presenter.setScore(score)
+        self.chooseNPSPresenter?.setScore(score)
         self.refreshFromPresenter()
     }
+    
     private lazy var questionsView: QuestionsView = {
         QuestionsView(parent: self)
+    }()
+    
+    private lazy var nextButtonStack: UIStackView = {
+        let stack = UIStackView()
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.addArrangedSubview(nextButton)
+        stack.addArrangedSubview(Spacer(width: 20, height: 0))
+        stack.spacing = 0
+        stack.axis = .horizontal
+        return stack
     }()
     
     private lazy var nextButton: UIButton = {
@@ -80,9 +120,42 @@ class ChooseNPSViewController: BaseViewController {
         let stack = UIStackView()
         stack.addArrangedSubview(scoreView)
         stack.addArrangedSubview(questionsView)
-        stack.addArrangedSubview(nextButton)
-        stack.spacing = 20
+        stack.addArrangedSubview(nextButtonStack)
+        stack.spacing = 12
         stack.axis = .vertical
         return stack
     }()
+    
+    func promptForReason(reason: String? ,completion: @escaping (String?) -> Void) {
+        let msg = (reason?.count ?? 0 == 0) ? "Enter your other reason" : "Edit your other reason"
+        let ac = UIAlertController(title: "Other Reason", message: msg, preferredStyle: .alert)
+        ac.addTextField()
+        ac.textFields?[0].text = reason
+        ac.textFields?[0].clearButtonMode = .always
+        let submitAction = UIAlertAction(title: "Done", style: .default) { [unowned ac] _ in
+            let answer = ac.textFields![0]
+            completion(answer.text)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        ac.addAction(cancelAction)
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension UIView {
+    
+    func findFirstResponder() -> UIView? {
+        if self.isFirstResponder { return self }
+        for view in subviews {
+            if let firstResponder = view.findFirstResponder() {
+                return firstResponder
+            }
+        }
+        return nil
+    }
 }

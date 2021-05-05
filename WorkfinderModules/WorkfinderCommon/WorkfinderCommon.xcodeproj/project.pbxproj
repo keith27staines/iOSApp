@@ -469,6 +469,7 @@
 		FCA91E782234043D007ED308 /* WorkfinderCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */,
 				530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */,
 				530C4DC825D5C0B30032CFC8 /* RequestAppReviewLogicTests.swift */,
 				53786B102586004100B671EB /* API Json deserialization tests */,
@@ -496,7 +497,6 @@
 				FCE5194F2249645B00B550C9 /* F4SCalendarDayTests.swift */,
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FCEE3EF5249A645A0034C226 /* CandidateTests.swift */,
-				53C7605C251B704B0072281E /* DeeplinkInfoTests.swift */,
 				53964E9A25C13E780061FDB5 /* TrackingEvent-queue-and-processor tests */,
 			);
 			path = WorkfinderCommonTests;

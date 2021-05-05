@@ -21,7 +21,7 @@ class ThankyouViewController: BaseViewController {
 
     lazy var text: UILabel = {
         let label = UILabel()
-        label.text = "Your feedback will be used to help the host to improve and become better at hosting work experience"
+        label.text = "Your feedback will be used to help the host and the company improve and create better working experience for talented candidates like you."
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = WorkfinderColors.gray4
         label.textAlignment = .center

@@ -12,7 +12,7 @@ struct NameValueDescriptor {
     var link: URL? = nil
 }
 
-protocol CompanyDataSectionPresenterProtocol: class {
+protocol CompanyDataSectionPresenterProtocol: AnyObject {
     var numberOfRows: Int { get }
     var revenueString: String { get }
     var growthString: String { get }

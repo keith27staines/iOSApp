@@ -11,7 +11,7 @@ import MapKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyMainViewProtocol: class {
+protocol CompanyMainViewProtocol: AnyObject {
     var presenter: CompanyMainViewPresenterProtocol! { get set }
     func refresh()
 }

@@ -11,7 +11,7 @@ public extension DeviceRegisteringProtocol {
     }
 }
 
-public protocol F4SAnalyticsAndDebugging : class, F4SAnalytics & F4SDebugging {
+public protocol F4SAnalyticsAndDebugging : AnyObject, F4SAnalytics & F4SDebugging {
     func updateIdentity()
 }
 

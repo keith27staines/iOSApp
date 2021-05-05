@@ -3,13 +3,13 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyMainViewCoordinatorProtocol: class {
+protocol CompanyMainViewCoordinatorProtocol: AnyObject {
     func onDidTapDuedil()
     func onDidTapLinkedin(association: HostAssociationJson)
     func applyTo(workplace: CompanyAndPin, association: HostAssociationJson)
 }
 
-protocol CompanyMainViewPresenterProtocol: class {
+protocol CompanyMainViewPresenterProtocol: AnyObject {
     var view: CompanyMainViewProtocol? { get set }
     var companyName: String { get }
     var companyLocation: LatLon { get }

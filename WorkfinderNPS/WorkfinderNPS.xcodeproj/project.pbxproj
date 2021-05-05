@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5315DFE6263D40C80026E831 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5315DFE5263D40C80026E831 /* UtilityViews.swift */; };
+		5315DFE8263EB9B90026E831 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5315DFE7263EB9B90026E831 /* TextViewController.swift */; };
+		5315DFEA263FEAEB0026E831 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5315DFE9263FEAEB0026E831 /* QuestionCell.swift */; };
 		532344C22632C7C500966B7A /* WorkfinderCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BE2632C7C500966B7A /* WorkfinderCommon.framework */; };
 		532344C42632C7C500966B7A /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */; };
 		532344C62632C7C600966B7A /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532344C02632C7C500966B7A /* WorkfinderServices.framework */; };
@@ -26,10 +29,10 @@
 		53A98CEB2632C53700361033 /* WorkfinderNPS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A98CE12632C53700361033 /* WorkfinderNPS.framework */; };
 		53A98CF02632C53700361033 /* WorkfinderNPSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A98CEF2632C53700361033 /* WorkfinderNPSTests.swift */; };
 		53A98CF22632C53700361033 /* WorkfinderNPS.h in Headers */ = {isa = PBXBuildFile; fileRef = 53A98CE42632C53700361033 /* WorkfinderNPS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		53AA92892635399600C3A083 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA92882635399600C3A083 /* Questions.swift */; };
 		53AA928F263539A800C3A083 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA928E263539A800C3A083 /* Question.swift */; };
 		53AA929726353A8200C3A083 /* QuestionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA929626353A8200C3A083 /* QuestionCategory.swift */; };
 		53AA929D2635477900C3A083 /* QuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA929C2635477900C3A083 /* QuestionsView.swift */; };
+		53B39B2C2638070800CA6C01 /* API Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B39B2B2638070800CA6C01 /* API Json.swift */; };
 		53E9181426368F1C00BD77E5 /* AnswerTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5315DFE5263D40C80026E831 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
+		5315DFE7263EB9B90026E831 /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		5315DFE9263FEAEB0026E831 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		532344BE2632C7C500966B7A /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532344BF2632C7C500966B7A /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532344C02632C7C500966B7A /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,10 +72,10 @@
 		53A98CEA2632C53700361033 /* WorkfinderNPSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkfinderNPSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53A98CEF2632C53700361033 /* WorkfinderNPSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderNPSTests.swift; sourceTree = "<group>"; };
 		53A98CF12632C53700361033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		53AA92882635399600C3A083 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
 		53AA928E263539A800C3A083 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		53AA929626353A8200C3A083 /* QuestionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCategory.swift; sourceTree = "<group>"; };
 		53AA929C2635477900C3A083 /* QuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsView.swift; sourceTree = "<group>"; };
+		53B39B2B2638070800CA6C01 /* API Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Json.swift"; sourceTree = "<group>"; };
 		53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,23 +116,28 @@
 		532344CB2632C92800966B7A /* source */ = {
 			isa = PBXGroup;
 			children = (
+				532344DE2632CBF600966B7A /* Views */,
+				5323450E2632E37900966B7A /* models and services */,
 				532344CC2632C93C00966B7A /* NPSCoordinator.swift */,
 				532344E12632CC0400966B7A /* Choose NPS */,
 				532344E42632CC1000966B7A /* Submit */,
 				532344E72632CC9900966B7A /* Thank you */,
-				532344DE2632CBF600966B7A /* Common views */,
 				532345002632CF5000966B7A /* Base classes */,
 			);
 			path = source;
 			sourceTree = "<group>";
 		};
-		532344DE2632CBF600966B7A /* Common views */ = {
+		532344DE2632CBF600966B7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5323450E2632E37900966B7A /* models and services */,
-				5323450B2632E36F00966B7A /* views */,
+				53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */,
+				532344D82632CBC300966B7A /* NPSScoreView.swift */,
+				53AA929C2635477900C3A083 /* QuestionsView.swift */,
+				5315DFE9263FEAEB0026E831 /* QuestionCell.swift */,
+				5315DFE5263D40C80026E831 /* UtilityViews.swift */,
+				5315DFE7263EB9B90026E831 /* TextViewController.swift */,
 			);
-			path = "Common views";
+			path = Views;
 			sourceTree = "<group>";
 		};
 		532344E12632CC0400966B7A /* Choose NPS */ = {
@@ -165,22 +176,13 @@
 			path = "Base classes";
 			sourceTree = "<group>";
 		};
-		5323450B2632E36F00966B7A /* views */ = {
-			isa = PBXGroup;
-			children = (
-				532344D82632CBC300966B7A /* NPSScoreView.swift */,
-				53AA929C2635477900C3A083 /* QuestionsView.swift */,
-				53E9181326368F1C00BD77E5 /* AnswerTextViewController.swift */,
-			);
-			path = views;
-			sourceTree = "<group>";
-		};
 		5323450E2632E37900966B7A /* models and services */ = {
 			isa = PBXGroup;
 			children = (
-				53AA92872635398700C3A083 /* Questions */,
-				532344FA2632CD4E00966B7A /* NPSService.swift */,
 				5323450F2632E39100966B7A /* NPSModel.swift */,
+				532344FA2632CD4E00966B7A /* NPSService.swift */,
+				53B39B2B2638070800CA6C01 /* API Json.swift */,
+				53AA92872635398700C3A083 /* Questions */,
 			);
 			path = "models and services";
 			sourceTree = "<group>";
@@ -226,7 +228,6 @@
 		53AA92872635398700C3A083 /* Questions */ = {
 			isa = PBXGroup;
 			children = (
-				53AA92882635399600C3A083 /* Questions.swift */,
 				53AA929626353A8200C3A083 /* QuestionCategory.swift */,
 				53AA928E263539A800C3A083 /* Question.swift */,
 			);
@@ -342,22 +343,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53AA92892635399600C3A083 /* Questions.swift in Sources */,
 				532344D12632CAEF00966B7A /* ChooseNPSViewController.swift in Sources */,
 				532345022632CF6C00966B7A /* BasePresenter.swift in Sources */,
 				532345082632CFDC00966B7A /* BaseViewController.swift in Sources */,
 				532344D92632CBC300966B7A /* NPSScoreView.swift in Sources */,
+				53B39B2C2638070800CA6C01 /* API Json.swift in Sources */,
 				53AA928F263539A800C3A083 /* Question.swift in Sources */,
 				532344EF2632CD0B00966B7A /* ThankyouPresenter.swift in Sources */,
 				53AA929726353A8200C3A083 /* QuestionCategory.swift in Sources */,
 				53E9181426368F1C00BD77E5 /* AnswerTextViewController.swift in Sources */,
+				5315DFEA263FEAEB0026E831 /* QuestionCell.swift in Sources */,
 				532345102632E39100966B7A /* NPSModel.swift in Sources */,
 				532344D52632CB2D00966B7A /* SubmitViewController.swift in Sources */,
+				5315DFE6263D40C80026E831 /* UtilityViews.swift in Sources */,
 				53AA929D2635477900C3A083 /* QuestionsView.swift in Sources */,
 				532344F32632CD1C00966B7A /* SubmitPresenter.swift in Sources */,
 				532344FB2632CD4E00966B7A /* NPSService.swift in Sources */,
 				532344F72632CD3000966B7A /* ChooseNPSPresenter.swift in Sources */,
 				532344E92632CCC400966B7A /* ThankyouViewController.swift in Sources */,
+				5315DFE8263EB9B90026E831 /* TextViewController.swift in Sources */,
 				532344CD2632C93C00966B7A /* NPSCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

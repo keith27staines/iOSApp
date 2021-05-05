@@ -147,11 +147,11 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         return service
     }()
     
+    func switchToTab(_ tab: TabIndex) { tabBarCoordinator?.switchToTab(tab) }
+    
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
         tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
     }
-    
-    func switchToTab(_ tab: TabIndex) { tabBarCoordinator?.switchToTab(tab) }
     
     func routeProject(projectUuid: F4SUUID?, appSource: AppSource) {
         guard let projectUuid = projectUuid else { return }
@@ -161,6 +161,16 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
             self?.routeProject(projectUuid: projectUuid, appSource: appSource)
+        }
+    }
+    
+    func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String: String]) {
+        if let tabBarCoordinator = self.tabBarCoordinator {
+            tabBarCoordinator.routeReview(reviewUuid: reviewUuid, appSource: appSource, queryItems: queryItems)
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
+            self?.routeReview(reviewUuid: reviewUuid, appSource: appSource, queryItems: queryItems)
         }
     }
     

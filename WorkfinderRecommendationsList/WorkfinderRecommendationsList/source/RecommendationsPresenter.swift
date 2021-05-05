@@ -92,7 +92,6 @@ class RecommendationsPresenter {
                 tile.recommendation.project?.uuid,
                 appSource: .recommendationsTab)
         } else {
-            #warning("incomplete implementation")
             // guard let uuid = tile.recommendation.uuid else { return }
             // coordinator?.onRecommendationForAssociationSelected?(uuid)
         }

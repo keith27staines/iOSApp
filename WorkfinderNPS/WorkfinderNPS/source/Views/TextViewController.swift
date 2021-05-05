@@ -1,5 +1,10 @@
+//
+//  TextViewController.swift
+//  WorkfinderNPS
+//
+//  Created by Keith Staines on 02/05/2021.
+//
 
-import Foundation
 import WorkfinderCommon
 import WorkfinderUI
 
@@ -204,3 +209,4 @@ extension UITextView {
         self.inputAccessoryView = toolBar
     }
 }
+

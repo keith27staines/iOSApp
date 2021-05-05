@@ -48,7 +48,7 @@ public enum WorkfinderContentType: String, Codable {
         case .privacyPolicy: return .inWorkfinder
         case .offerWorkExperience: return .inBrowser
         case .changePassword: return .inWorkfinder
-        case .whatMakesGoodFeedback: return .inWorkfinder
+        case .whatMakesGoodFeedback: return .inBrowser
         }
     }
 }

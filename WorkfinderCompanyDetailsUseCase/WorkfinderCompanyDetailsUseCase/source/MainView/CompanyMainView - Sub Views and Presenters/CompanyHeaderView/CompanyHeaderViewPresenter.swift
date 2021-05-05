@@ -2,7 +2,7 @@ import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol CompanyHeaderViewPresenterProtocol: class {
+protocol CompanyHeaderViewPresenterProtocol: AnyObject {
     
     var companyName: String { get }
     var logoUrlString: String? { get }

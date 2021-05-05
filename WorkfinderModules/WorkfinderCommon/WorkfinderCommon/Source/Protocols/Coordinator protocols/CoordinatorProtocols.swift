@@ -15,6 +15,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID?, appSource: AppSource)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
+    func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String: String])
     func switchToTab(_ tab: TabIndex)
     func updateBadges()
     func handleDeepLinkUrl(url: URL) -> Bool
@@ -23,7 +24,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func requestPushNotifications(from viewController: UIViewController, completion: @escaping () -> Void )
 }
 
-public protocol OnboardingCoordinatorDelegate : class {
+public protocol OnboardingCoordinatorDelegate : AnyObject {
 }
 
 public protocol OnboardingCoordinatorProtocol : Coordinating {
@@ -53,11 +54,12 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
     func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID, appSource: AppSource)
+    func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems:[String:String])
     func updateBadges()
     func updateUnreadMessagesCount(_ count: Int)
 }
 
-public protocol CoreInjectionProtocol : class {
+public protocol CoreInjectionProtocol : AnyObject {
     var networkConfig: NetworkConfig { get set }
     var appCoordinator: AppCoordinatorProtocol? { get set }
     var launchOptions: LaunchOptions? { get set }
@@ -74,7 +76,7 @@ public protocol CoreInjectionNavigationCoordinatorProtocol : NavigationCoordinat
 
 public protocol NavigationCoordinating : Coordinating {}
 
-public protocol Coordinating : class {
+public protocol Coordinating : AnyObject {
     
     var parentCoordinator: Coordinating? { get set }
     var uuid: UUID { get }
@@ -93,7 +95,7 @@ public protocol NavigationRoutingProtocol : RoutingProtocol {
     func popToViewController(_ viewController: UIViewController, animated: Bool)
 }
 
-public protocol RoutingProtocol: class {
+public protocol RoutingProtocol: AnyObject {
     var rootViewController: UIViewController { get }
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func dismiss(animated: Bool, completion: (() -> Void)?)

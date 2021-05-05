@@ -20,7 +20,7 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     
     let uuid: UUID = UUID()
-    let navigationRouter: NavigationRoutingProtocol?
+    let navigationRouter: NavigationRoutingProtocol
     weak var rootViewController: UIViewController!
     
     var childCoordinators: [UUID : Coordinating] = [:]
@@ -64,6 +64,15 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     public func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource) {
         switchToTab(.home)
         homeCoordinator.processRecommendedAssociation(recommendationUuid: recommendationUuid, source: appSource)
+    }
+    
+    public func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String : String]) {
+        guard let token = queryItems.first(where: { itemAndValue in
+            itemAndValue.key == "access_token"
+        })?.value else { return }
+        let coordinator = WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter , inject: injected, npsUuid: reviewUuid, accessToken: token)
+        addChildCoordinator(coordinator)
+        coordinator.start()
     }
     
     public func routeProject(projectUuid: F4SUUID, appSource: AppSource) {
@@ -141,10 +150,6 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         return coordinator
     }()
     
-    lazy var npsCoordinator: WorkfinderNPSCoordinator = {
-        WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter as! NavigationRoutingProtocol, inject: injected, npsUuid: "1234", score: nil)
-    }()
-    
     func presentHiddenDebugController(parentCtrl: UIViewController) {
         let debugStoryboard = UIStoryboard(name: "Debug", bundle: nil)
         guard let navigationController = debugStoryboard.instantiateInitialViewController() else {
@@ -173,8 +178,6 @@ extension TabBarCoordinator: UITabBarControllerDelegate {
             })
             log.track(.tab_tap(tabName: "recommendations"))
         case accountCoordinator.navigationRouter.navigationController:
-            addChildCoordinator(npsCoordinator)
-            //npsCoordinator.start()
             log.track(.tab_tap(tabName: "account"))
             
         default:
