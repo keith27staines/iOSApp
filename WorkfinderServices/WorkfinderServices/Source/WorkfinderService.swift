@@ -63,7 +63,9 @@ open class WorkfinderService {
     ) throws -> URLRequest {
         var components = urlComponents
         components.path += relativePath ?? ""
-        components.queryItems = queryItems
+        if queryItems?.count ?? 0 > 0 {
+            components.queryItems = queryItems
+        }
         guard let url = components.url else {
             throw WorkfinderError(
                 errorType: .invalidUrl(components.path),
