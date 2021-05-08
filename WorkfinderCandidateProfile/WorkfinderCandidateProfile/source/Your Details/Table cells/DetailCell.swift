@@ -85,7 +85,7 @@ class DetailCell:  UITableViewCell {
     
     @objc func textChanged() {
         updateValidityState()
-        presenter?.text = textfieldStack.textfield.text
+        presenter?.text = textfieldStack.textfield.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     func updateValidityState() {
