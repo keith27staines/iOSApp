@@ -146,7 +146,13 @@ class SubmitViewController: BaseViewController {
     }()
     
     @objc func linkToFeedback() {
-        coordinator?.presentContent(.whatMakesGoodFeedback)
+        let title = "What makes good feedback?"
+        let goodFeedbackAdvice = "You could congratulate the host for things you think they did well, and/or suggest suggest things that might help the host offer others better work experience in the future."
+        let alert = UIAlertController(title: title, message: goodFeedbackAdvice, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+        //coordinator?.presentContent(.whatMakesGoodFeedback)
     }
     
     lazy var shareButton: UIButton = {

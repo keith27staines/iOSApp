@@ -101,9 +101,10 @@ public class WorkfinderNPSCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter: NavigationRoutingProtocol,
         inject: CoreInjectionProtocol,
         npsUuid: F4SUUID,
-        accessToken: String?
+        accessToken: String?,
+        score: Int?
     ) {
-        self.nps = NPSModel(accessToken: accessToken, uuid: npsUuid)
+        self.nps = NPSModel(accessToken: accessToken, uuid: npsUuid, score: score)
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     

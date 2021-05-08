@@ -42,7 +42,7 @@ public class NPSModel {
         feedbackText = reviewJson.feedback
         anonymous = reviewJson.anonymous
         self.buildCategories(hostName: hostName ?? "", allQuestions: allQuestions)
-        setScore(reviewJson.score)
+        setScore(reviewJson.score ?? score)
         synchronizeSelections(with: reviewJson.reasons, otherReasonText: reviewJson.otherReason)
     }
     

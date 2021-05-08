@@ -257,14 +257,15 @@ extension AppCoordinator : DeviceRegisteringProtocol {
 
 extension AppCoordinator {
     func logStartupInformation(userId: F4SUUID) {
+        let user = UserRepository().loadUser()
         let info = """
 
         
         ****************************************************************
         Environment name = \(Config.environmentName)
         Base api url = \(Config.workfinderApiBase)
-        Candidate email = \(UserRepository().loadUser().email ?? "not set")
-        Candidate password = \(UserRepository().loadUser().password ?? "not set")
+        Candidate email = \(user.email ?? "not set")
+        Candidate password = \(user.password ?? "not set")
         ****************************************************************
         
         """

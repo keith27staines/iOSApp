@@ -70,7 +70,18 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         guard let token = queryItems.first(where: { itemAndValue in
             itemAndValue.key == "access_token"
         })?.value else { return }
-        let coordinator = WorkfinderNPSCoordinator(parent: self, navigationRouter: navigationRouter , inject: injected, npsUuid: reviewUuid, accessToken: token)
+        let scoreString = queryItems.first { itemAndValue in
+            itemAndValue.key == "score"
+        }?.value
+        let score = Int(scoreString ?? "")
+        let coordinator = WorkfinderNPSCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter ,
+            inject: injected,
+            npsUuid: reviewUuid,
+            accessToken: token,
+            score: score
+        )
         addChildCoordinator(coordinator)
         coordinator.start()
     }
