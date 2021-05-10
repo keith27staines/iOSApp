@@ -212,7 +212,7 @@ class PreferencesPresenter: BaseAccountPresenter {
         switch section {
         case .appNotifications: return true
         case .marketingEmails: return true
-        case .removeAccount: return true
+        case .removeAccount: return false
         }
     }
     
