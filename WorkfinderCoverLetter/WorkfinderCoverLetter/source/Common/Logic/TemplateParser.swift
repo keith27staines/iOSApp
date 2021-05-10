@@ -93,7 +93,7 @@ class TemplateModelPreprocessor {
         "company"               : "company",            // fixedField value
         "candidate"             : "candidate",          // fixedField value
         "projectTitle"          : "project title",      // fixedField value
-        "skills"                : "skills",             // picklist type
+        "skills"                : "skills I want",      // picklist type
         "attributes"            : "attributes",         // picklist type
         "university"            : "university",         // picklist type
         "yearOfStudy"           : "year of study",      // picklist type
@@ -103,7 +103,8 @@ class TemplateModelPreprocessor {
         "subject"               : "subject",            // picklist type
         "placementType"         : "placement type",     // picklist type
         "project"               : "project",            // picklist type
-        "duration"              : "duration"            // picklist type
+        "duration"              : "duration",           // picklist type
+        "strongestSkills"       : "skills"
     ]
     
     func preprocess(templateModel: TemplateModel, fieldNameMapping: [String: String]? = TemplateModelPreprocessor.replacementMap) -> TemplateModel {

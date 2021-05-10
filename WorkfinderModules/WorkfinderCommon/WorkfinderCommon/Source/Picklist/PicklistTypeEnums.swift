@@ -98,8 +98,8 @@ public enum PicklistType: Int, CaseIterable, Codable {
     
     public var title: String {
         switch self {
-        case .skills: return "skills"
-        case .strongestSkills: return "your skills"
+        case .skills: return "skills I want"
+        case .strongestSkills: return "skills"
         case .attributes: return "attributes"
         case .institutions: return "university"
         case .year: return "year of study"
