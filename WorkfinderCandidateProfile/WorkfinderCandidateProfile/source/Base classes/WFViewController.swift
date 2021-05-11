@@ -8,6 +8,7 @@
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
+import ErrorHandlingUI
 
 class WFViewController: UIViewController {
     lazy var messageHandler: UserMessageHandler = UserMessageHandler(presenter: self)
@@ -41,7 +42,7 @@ class WFViewController: UIViewController {
         reloadData()
         presenter.reloadPresenter() { [weak self] (optionalError) in
             guard let self = self else { return }
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+            self.coordinator?.handleOptionalError(optionalError: optionalError, from: self) {
                 self.reloadPresenter()
             }
             self.reloadData()

@@ -9,6 +9,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderRegisterCandidate
+import ErrorHandlingUI
 
 public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     var switchToTab: ((TabIndex) -> Void)?
@@ -102,6 +103,17 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
             completion(result)
         }
     }
+    
+    func handleOptionalError(
+        optionalError: Error?,
+        from vc: WFViewController,
+        cancelHandler: @escaping (() -> Void) = {},
+        retryHandler: (() -> Void)?) {
+        guard let error = optionalError else { return }
+        let coord = ErrorHandler(navigationRouter: navigationRouter, coreInjection: injected, parentCoordinator: self)
+        addChildCoordinator(coord)
+        coord.startHandleError(error, presentingViewController: vc, messageHandler: vc.messageHandler, cancel: cancelHandler, retry: retryHandler ?? {})
+    }
 }
 
 extension AccountCoordinator: RegisterAndSignInCoordinatorParent {
@@ -127,3 +139,5 @@ extension AccountCoordinator: RegisterAndSignInCoordinatorParent {
         self.registerCoordinator = nil
     }
 }
+
+

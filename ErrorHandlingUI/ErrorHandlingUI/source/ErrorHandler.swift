@@ -54,7 +54,11 @@ public class ErrorHandler: ErrorHandlerProtocol, Coordinating {
             inject: coreInjection,
             firstScreenHidesBackButton: false)
         addChildCoordinator(register)
-        register.start()
+        if UserRepository().isCandidateLoggedIn {
+            register.startLoginFirst()
+        } else {
+            register.start()
+        }
     }
 }
 
