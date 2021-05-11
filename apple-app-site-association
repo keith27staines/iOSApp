@@ -14,5 +14,9 @@
                 ]
             }
         ]
+    },
+    
+    "webcredentials": {
+        "apps": [ "YB7C23CK6Q.com.f4s.workexperience.f4s" ]
     }
 }
