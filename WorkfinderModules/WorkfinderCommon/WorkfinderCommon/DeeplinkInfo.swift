@@ -16,6 +16,7 @@ public struct DeeplinkRoutingInfo {
         case recommendation
         case placement
         case review
+        case projects
         
         public init?(urlPathComponent: String?) {
             switch urlPathComponent {
@@ -25,6 +26,8 @@ public struct DeeplinkRoutingInfo {
                 self = .placement
             case "reviews":
                 self = .review
+            case "projects":
+                self = .projects
             default:
                 return nil
             }

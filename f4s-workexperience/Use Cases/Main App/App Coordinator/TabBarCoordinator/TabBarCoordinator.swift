@@ -95,6 +95,10 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         }
     }
     
+    func routeLiveProjects(appSource: AppSource) {
+        tabBarViewController.selectedIndex = TabIndex.home.rawValue
+    }
+    
     public func topMostViewController() -> UIViewController? {
         let vc = rootViewController.topMostViewController
         return vc

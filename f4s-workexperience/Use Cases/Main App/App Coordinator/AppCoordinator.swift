@@ -174,6 +174,16 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         }
     }
     
+    func routeLiveProjects(appSource: AppSource) {
+        if let tabBarCoordinator = self.tabBarCoordinator {
+            tabBarCoordinator.routeLiveProjects(appSource: appSource)
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
+            self?.routeLiveProjects(appSource: appSource)
+        }
+    }
+    
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource) {
         guard let tabBarCoordinator = tabBarCoordinator else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
@@ -284,13 +294,15 @@ extension AppCoordinator {
         dispatcher.route(routingInfo: deepLinkInfo)
     }
     
-    func handleDeepLinkUrl(url: URL) -> Bool {
+    func handleDeepLinkUrl(url: URL) {
         guard
             let routingInfo = DeeplinkRoutingInfo(deeplinkUrl: url),
             let router = deepLinkRouter
-        else { return false }
+        else {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            return
+        }
         router.route(routingInfo: routingInfo)
-        return true
     }
 
 }

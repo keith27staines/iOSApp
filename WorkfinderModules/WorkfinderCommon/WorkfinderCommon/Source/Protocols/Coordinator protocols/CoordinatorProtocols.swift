@@ -16,9 +16,10 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func routeProject(projectUuid: F4SUUID?, appSource: AppSource)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
     func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String: String])
+    func routeLiveProjects(appSource: AppSource)
     func switchToTab(_ tab: TabIndex)
     func updateBadges()
-    func handleDeepLinkUrl(url: URL) -> Bool
+    func handleDeepLinkUrl(url: URL)
     func handlePushNotification(_ pushNotification: PushNotification?)
     func registerDevice(token: Data)
     func requestPushNotifications(from viewController: UIViewController, completion: @escaping () -> Void )
@@ -55,6 +56,7 @@ public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorPr
     func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID, appSource: AppSource)
     func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems:[String:String])
+    func routeLiveProjects(appSource: AppSource)
     func updateBadges()
     func updateUnreadMessagesCount(_ count: Int)
 }

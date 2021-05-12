@@ -74,6 +74,9 @@ public struct TrackingEvent {
         case .placement_deeplink_start: break
         case .placement_deeplink_cancel: break
         case .placement_deeplink_convert: break
+        case .projects_deeplink_start: break
+        case .projects_deeplink_cancel: break
+        case .projects_deeplink_convert: break
         case .recommendation_pushnotification_start: break
         case .recommendation_pushnotification_cancel: break
         case .recommendation_pushnotification_convert: break
