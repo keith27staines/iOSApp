@@ -9,6 +9,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderRegisterCandidate
+import ErrorHandlingUI
 
 public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     var switchToTab: ((TabIndex) -> Void)?
@@ -75,6 +76,34 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     func showChangePassword() {
         presentContent(.changePassword)
         
+        
+//        guard
+//            let email = UserRepository().loadUser().email,
+//            let vc = navigationRouter.navigationController.topViewController as? WFViewController
+//        else { return }
+//        let alert = UIAlertController(title: "Change Password?", message: "You will receive an email with instructions on how to change your password", preferredStyle: .alert)
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        let changeAction = UIAlertAction(title: "Change", style: .default) { [weak self] action in
+//            self?.accountService.requestPasswordReset(email: email) { result in
+//                switch result {
+//                case .success(_):
+//                    let alert = UIAlertController(title: "Request sent", message: "Please check your email for further instructions", preferredStyle: .alert)
+//                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                    alert.addAction(okAction)
+//                    vc.present(alert, animated: true, completion: nil)
+//                case .failure(let error):
+//                    print(error)
+//                    let alert = UIAlertController(title: "An error occurred", message: "Please check your internet connection and try again", preferredStyle: .alert)
+//                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                    alert.addAction(okAction)
+//                    vc.present(alert, animated: true, completion: nil)
+//                }
+//            }
+//        }
+//        alert.addAction(cancelAction)
+//        alert.addAction(changeAction)
+//        vc.present(alert, animated: true)
+        
 //        let service = AccountService(networkConfig: injected.networkConfig)
 //        let presenter = ChangePasswordPresenter(coordinator: self, accountService: service)
 //        let vc = ChangePasswordViewController(coordinator: self, presenter: presenter)
@@ -102,6 +131,17 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
             completion(result)
         }
     }
+    
+    func handleOptionalError(
+        optionalError: Error?,
+        from vc: WFViewController,
+        cancelHandler: @escaping (() -> Void) = {},
+        retryHandler: (() -> Void)?) {
+        guard let error = optionalError else { return }
+        let coord = ErrorHandler(navigationRouter: navigationRouter, coreInjection: injected, parentCoordinator: self)
+        addChildCoordinator(coord)
+        coord.startHandleError(error, presentingViewController: vc, messageHandler: vc.messageHandler, cancel: cancelHandler, retry: retryHandler ?? {})
+    }
 }
 
 extension AccountCoordinator: RegisterAndSignInCoordinatorParent {
@@ -127,3 +167,5 @@ extension AccountCoordinator: RegisterAndSignInCoordinatorParent {
         self.registerCoordinator = nil
     }
 }
+
+

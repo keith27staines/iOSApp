@@ -60,6 +60,7 @@ class SubmitViewController: BaseViewController {
     
     lazy var hideDetailsSwitch: UISwitch = {
         let view = UISwitch()
+        view.widthAnchor.constraint(equalToConstant: 60).isActive = true
         view.setContentHuggingPriority(.required, for: .horizontal)
         view.addTarget(self, action: #selector(hideDetails), for: .valueChanged)
         return view
@@ -147,7 +148,7 @@ class SubmitViewController: BaseViewController {
     
     @objc func linkToFeedback() {
         let title = "What makes good feedback?"
-        let goodFeedbackAdvice = "You could congratulate the host for things you think they did well, and/or suggest suggest things that might help the host offer others better work experience in the future."
+        let goodFeedbackAdvice = "You could congratulate the host for things you think they did well, and/or suggest things that might help the host offer others better work experience in the future."
         let alert = UIAlertController(title: title, message: goodFeedbackAdvice, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)

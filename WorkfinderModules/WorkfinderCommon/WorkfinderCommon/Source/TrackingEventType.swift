@@ -43,10 +43,15 @@ public enum TrackingEventType: Equatable {
     case placement_deeplink_cancel                                              // not used
     case placement_deeplink_convert                                             // ok
     
-    // MARK:- NPS score
+    // MARK:- NPS score processing
     case nps_deeplink_start
     case nps_deeplink_cancel
     case nps_deeplink_convert
+    
+    // MARK:- Projects deepling processing
+    case projects_deeplink_start
+    case projects_deeplink_cancel
+    case projects_deeplink_convert
 
     // MARK:- Recommendations push notification processing                      // checked
     case recommendation_pushnotification_start                                  // ok
@@ -148,8 +153,13 @@ public enum TrackingEventType: Equatable {
         case .nps_deeplink_start: return "ios_nps_deeplink_start"
         case .nps_deeplink_cancel: return "ios_nps_deeplink_cancel"
         case .nps_deeplink_convert: return "ios_nps_deeplink_convert"
+            
+        // MARK: projects processing
+        case .projects_deeplink_start: return "ios_projects_start"
+        case .projects_deeplink_cancel: return "ios_projects_cancel"
+        case .projects_deeplink_convert: return "ios_projects_convert"
 
-        // MARK:- Offer deeplink processing
+        // MARK: Offer deeplink processing
         case .placement_deeplink_start: return "ios_placement_deeplink_start"
         case .placement_deeplink_cancel: return "ios_placement_deeplink_cancel"
         case .placement_deeplink_convert: return "ios_placement_deeplink_convert"
@@ -257,7 +267,12 @@ extension TrackingEventType: Codable {
         case placement_deeplink_start
         case placement_deeplink_cancel
         case placement_deeplink_convert
-
+        
+        // MARK:- Projects deeplink processing
+        case projects_deeplink_start
+        case projects_deeplink_cancel
+        case projects_deeplink_convert
+        
         // MARK:- Recommendations push notification processing
         case recommendation_pushnotification_start
         case recommendation_pushnotification_cancel
@@ -396,6 +411,12 @@ extension TrackingEventType: Codable {
             self = .placement_deeplink_cancel
         case .placement_deeplink_convert:
             self = .placement_deeplink_convert
+        case .projects_deeplink_start:
+            self = .projects_deeplink_start
+        case .projects_deeplink_cancel:
+            self = .projects_deeplink_cancel
+        case .projects_deeplink_convert:
+            self = .projects_deeplink_convert
         case .recommendation_pushnotification_start:
             self = .recommendation_pushnotification_start
         case .recommendation_pushnotification_cancel:
@@ -561,6 +582,12 @@ extension TrackingEventType: Codable {
             try container.encode(true, forKey: .allow_notifications_cancel)
         case .nps_deeplink_convert:
             try container.encode(true, forKey: .allow_notifications_convert)
+        case .projects_deeplink_start:
+            try container.encode(true, forKey: .projects_deeplink_start)
+        case .projects_deeplink_cancel:
+            try container.encode(true, forKey: .projects_deeplink_cancel)
+        case .projects_deeplink_convert:
+            try container.encode(true, forKey: .projects_deeplink_convert)
         case .placement_deeplink_start:
             try container.encode(true, forKey: .placement_deeplink_start)
         case .placement_deeplink_cancel:

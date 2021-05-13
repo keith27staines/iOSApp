@@ -16,26 +16,44 @@ public protocol AccountServiceProtocol {
     func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void)
     func updateAccount(_ account: Account, completion: @escaping (Result<Account,Error>) -> Void)
     func deleteAccount(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void)
+    func requestPasswordReset(email: String, completion: @escaping (Result<[String:String],Error>) -> Void)
+}
+
+class RequestPasswordResetService: WorkfinderService {
+    public func requestPasswordReset(email: String, completion: @escaping (Result<[String:String],Error>) -> Void) {
+        let emailDict = ["email": email]
+        do {
+            let request = try buildRequest(relativePath: "auth/password/reset/", verb: .post, body: emailDict)
+            performTask(with: request, completion: completion, attempting: "Request reset password")
+        } catch {
+            completion(.failure(error))
+        }
+    }
 }
 
 public class AccountService: WorkfinderService, AccountServiceProtocol {
-    
-    
+
     let userService: FetchMeService
     let candidateService: FetchCandidateService
     let updateCandidateService: UpdateCandidateServiceProtocol
     let updateUserService: UpdateUserService
+    let requestPasswordResetService: RequestPasswordResetService
     
     public override init(networkConfig: NetworkConfig) {
         userService = FetchMeService(networkConfig: networkConfig)
         candidateService = FetchCandidateService(networkConfig: networkConfig)
         updateCandidateService = UpdateCandidateService(networkConfig: networkConfig)
         updateUserService = UpdateUserService(networkConfig: networkConfig)
+        requestPasswordResetService = RequestPasswordResetService(networkConfig: networkConfig)
         super.init(networkConfig: networkConfig)
     }
     
     public func deleteAccount(completion: @escaping (Result<DeleteAccountJson, Error>) -> Void) {
         updateUserService.deleteAccount(completion: completion)
+    }
+    
+    public func requestPasswordReset(email: String, completion: @escaping (Result<[String : String], Error>) -> Void) {
+        requestPasswordResetService.requestPasswordReset(email: email, completion: completion)
     }
     
     public func updateAccount(_ account: Account, completion: @escaping (Result<Account, Error>) -> Void) {

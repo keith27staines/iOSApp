@@ -40,23 +40,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        // Get URL components from the incoming user activity
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let incomingURL = userActivity.webpageURL
             else { return false }
-        print("Incoming URL: \(incomingURL)")
-        let task = URLSession.shared.dataTask(with: incomingURL, completionHandler: { [weak self] (data, response, error) in
-            guard let resolvedURL = response?.url else { return }
-            // use the fully resolved link to navigate somewhere in the app.
-            _ = self?.appCoordinator.handleDeepLinkUrl(url: resolvedURL)
-        })
-        task.resume()
+        appCoordinator.handleDeepLinkUrl(url: incomingURL)
         return true
     }
     
     // Handle being invoked from deep links or a smart banner somewhere out there on the web
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return appCoordinator.handleDeepLinkUrl(url: url)
+        appCoordinator.handleDeepLinkUrl(url: url)
+        return true
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
