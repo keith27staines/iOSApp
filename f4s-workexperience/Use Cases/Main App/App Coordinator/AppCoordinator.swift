@@ -16,7 +16,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
     var tabBarCoordinator: TabBarCoordinatorProtocol?
     var onboardingCoordinator: OnboardingCoordinatorProtocol?
-    var deepLinkRouter: DeepLinkRouter?
     let companyCoordinatorFactory: CompanyCoordinatorFactoryProtocol
     let hostsProvider: HostsProviderProtocol
     let onboardingCoordinatorFactory: OnboardingCoordinatorFactoryProtocol
@@ -28,7 +27,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     var log: F4SAnalyticsAndDebugging { return injected.log }
     let localStore: LocalStorageProtocol
     var suppressOnboarding: Bool
-    
+
+    private lazy var deepLinkRouter = DeepLinkRouter(log: log, coordinator: self)
+    private lazy var deeplinkHandler = DeeplinkHandler(router: deepLinkRouter)
+
     public init(navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
                 deviceRegistrar: DeviceRegisteringProtocol?,
@@ -51,7 +53,6 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         self.tabBarCoordinatorFactory = tabBarCoordinatorFactory
         self.suppressOnboarding = suppressOnboarding
         super.init(parent:nil, navigationRouter: navigationRouter)
-        self.deepLinkRouter = DeepLinkRouter(log: inject.log, coordinator: self)
         self.injected.appCoordinator = self
         userNotificationService = UNService(appCoordinator: self, userRepository: injected.userRepository)
     }
@@ -286,25 +287,56 @@ extension AppCoordinator {
 extension AppCoordinator {
     
     func handlePushNotification(_ pushNotification: PushNotification?) {
-        guard
-            let pushNotification = pushNotification,
-            let deepLinkInfo = DeeplinkRoutingInfo(pushNotification: pushNotification),
-            let dispatcher = deepLinkRouter
-        else { return }
-        dispatcher.route(routingInfo: deepLinkInfo)
+        deeplinkHandler.handlePushNotification(pushNotification)
     }
     
     func handleDeepLinkUrl(url: URL) {
-        guard
-            let routingInfo = DeeplinkRoutingInfo(deeplinkUrl: url),
-            let router = deepLinkRouter
-        else {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            return
-        }
-        router.route(routingInfo: routingInfo)
+        deeplinkHandler.handleDeepLinkUrl(url: url)
     }
 
+}
+
+class DeeplinkHandler {
+    
+    let router: DeepLinkRouter
+    
+    init(router: DeepLinkRouter) {
+        self.router = router
+    }
+    
+    func handlePushNotification(_ pushNotification: PushNotification?) {
+        guard
+            let pushNotification = pushNotification,
+            let deepLinkInfo = DeeplinkRoutingInfo(pushNotification: pushNotification)
+        else { return }
+        router.route(routingInfo: deepLinkInfo)
+    }
+    
+    func handleDeepLinkUrl(url: URL) {
+        decodeUrl(url) { [weak self] decodedUrl in
+            guard
+                let routingInfo = DeeplinkRoutingInfo(deeplinkUrl: decodedUrl)
+            else {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                return
+            }
+            self?.router.route(routingInfo: routingInfo)
+        }
+    }
+    
+    private func decodeUrl(_ url: URL, completion: @escaping (URL) -> Void ) {
+        guard url.host?.lowercased().starts(with: "url4408") == true else {
+            completion(url)
+            return
+        }
+        print("Attempting to resolve url \(url)")
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            let resolvedUrl = response?.url ?? url
+            print("Resolved url to \(resolvedUrl)")
+            completion(resolvedUrl)
+        })
+        task.resume()
+    }
 }
 
 

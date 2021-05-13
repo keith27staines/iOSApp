@@ -40,17 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        // Get URL components from the incoming user activity
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let incomingURL = userActivity.webpageURL
             else { return false }
-        print("Incoming URL: \(incomingURL)")
-        let task = URLSession.shared.dataTask(with: incomingURL, completionHandler: { [weak self] (data, response, error) in
-            let resolvedURL = response?.url ?? incomingURL
-            print("Resolved ULR \(resolvedURL)")
-            self?.appCoordinator.handleDeepLinkUrl(url: resolvedURL)
-        })
-        task.resume()
+        appCoordinator.handleDeepLinkUrl(url: incomingURL)
         return true
     }
     
