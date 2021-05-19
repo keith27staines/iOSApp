@@ -13,6 +13,7 @@ enum DetailCellType {
     case email
     case password
     case phone
+    case smsPreference
     case dob
     case postcode
     case picklist(AccountPicklistType)
@@ -42,6 +43,8 @@ enum DetailCellType {
             return { string in
                 string?.isPhoneNumber() ?? !self.isRequired
             }
+        case .smsPreference:
+            return nil
         case .dob:
             return nil
         case .postcode:
@@ -65,6 +68,7 @@ enum DetailCellType {
         case .email: return "Email Address"
         case .password: return "Password"
         case .phone: return "Phone Number"
+        case .smsPreference: return "Messaging Preference"
         case .dob: return "Date of Birth"
         case .postcode: return "Postcode"
         case .picklist(let type): return type.title
@@ -77,6 +81,7 @@ enum DetailCellType {
         case .email: return .text(.email)
         case .password: return .password
         case .phone: return .text(.phone)
+        case .smsPreference: return .boolean
         case .dob: return .date
         case .postcode: return .text(.postcode)
         case .picklist(let type): return .picklist(type)
@@ -89,6 +94,7 @@ enum DetailCellType {
         case .email: return "Email address"
         case .password: return nil
         case .phone: return "Phone"
+        case .smsPreference: return "SMS preference"
         case .dob: return "Tap to enter date of birth"
         case .postcode: return "Postcode"
         case .picklist(_): return nil
@@ -110,6 +116,7 @@ enum DetailCellType {
         case .email: return nil
         case .password: return nil
         case .phone: return nil
+        case .smsPreference: return "I prefer Workfinder to contact me about personalised opportunities through text messages"
         case .dob: return "Required for us to process your application for certain roles"
         case .postcode: return "This allows us to bring employers to your attention that are local to you"
         case .picklist(let type): return type.reasonForCollection
@@ -155,6 +162,7 @@ enum DataType {
     case date
     case picklist(AccountPicklistType)
     case password
+    case boolean
 }
 
 enum StringType {

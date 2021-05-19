@@ -30,6 +30,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
             DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .password),
             DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .smsPreference),
             DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:))
         ],
         [
@@ -111,6 +112,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
                     break
                 case .phone:
                     candidate.phone = presenter.text
+                case .smsPreference:
+                    user.optedIntoSMS = presenter.isOn
                 case .dob:
                     candidate.dateOfBirth = presenter.date?.workfinderDateString
                 case .postcode:
@@ -186,6 +189,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
             presenter.text = user.password
         case .phone:
             presenter.text = candidate.phone
+        case .smsPreference:
+            presenter.isOn = user.optedIntoSMS ?? false
         case .dob:
             presenter.date = nil
             if let dob = candidate.dateOfBirth {

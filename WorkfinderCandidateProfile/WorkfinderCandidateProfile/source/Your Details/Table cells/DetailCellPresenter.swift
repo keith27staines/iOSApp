@@ -10,6 +10,11 @@ import WorkfinderCommon
 
 class DetailCellPresenter {
     let type: DetailCellType
+    var isOn: Bool = false {
+        didSet {
+            onValueChanged?(self)
+        }
+    }
     var text: String? {
         didSet {
             onValueChanged?(self)
@@ -61,6 +66,7 @@ class DetailCellPresenter {
         case .email: return .none
         case .password: return .disclosureIndicator
         case .phone: return .none
+        case .smsPreference: return .none
         case .dob: return .none
         case .postcode: return .none
         case .picklist(_): return .disclosureIndicator
@@ -73,6 +79,7 @@ class DetailCellPresenter {
         case .email: return nil
         case .password: return "change"
         case .phone: return nil
+        case .smsPreference: return nil
         case .dob: return nil
         case .postcode: return nil
         case .picklist(_):

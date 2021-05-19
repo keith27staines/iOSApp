@@ -45,6 +45,7 @@
 		53724BDB262820A400908D50 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BDA262820A400908D50 /* ChangePasswordPresenter.swift */; };
 		53724BDF2628659300908D50 /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BDE2628659300908D50 /* TableHeaderView.swift */; };
 		53724BE3262D77C800908D50 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53724BE2262D77C800908D50 /* WorkfinderRegisterCandidate.framework */; };
+		53D3E7E22654C9F2000249FF /* SMSPreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D3E7E12654C9F2000249FF /* SMSPreferenceCell.swift */; };
 		53D7CDE32621CE2D00A9BE40 /* NotificationControlsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */; };
 		53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */; };
 		53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */; };
@@ -112,6 +113,7 @@
 		53724BDA262820A400908D50 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
 		53724BDE2628659300908D50 /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
 		53724BE2262D77C800908D50 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53D3E7E12654C9F2000249FF /* SMSPreferenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSPreferenceCell.swift; sourceTree = "<group>"; };
 		53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationControlsCell.swift; sourceTree = "<group>"; };
 		53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableNotificationsCell.swift; sourceTree = "<group>"; };
 		53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingEmailCell.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */,
 				53D7CDEF2621ED0D00A9BE40 /* MarketingEmailCell.swift */,
 				53D7CDF52621ED2900A9BE40 /* RemoveAccountCell.swift */,
+				53D3E7E12654C9F2000249FF /* SMSPreferenceCell.swift */,
 			);
 			path = "Notification controls";
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */,
 				53D7CDFC2622F1FC00A9BE40 /* NotificationPreferences.swift in Sources */,
 				532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */,
+				53D3E7E22654C9F2000249FF /* SMSPreferenceCell.swift in Sources */,
 				532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */,
 				53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */,
 				53659CEA262192C200CFF49E /* YourDetailsPresenter.swift in Sources */,

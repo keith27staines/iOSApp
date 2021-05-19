@@ -49,13 +49,28 @@ class DetailCell:  UITableViewCell {
         return stack
     }()
     
-    lazy var descriptionLabel:  UILabel = {
+    lazy var descriptionStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+                descriptionLabel,
+                booleanSwitch
+            ]
+        )
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        stack.spacing = 12
+        return stack
+    }()
+    
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = UIColor.init(white: 0.56, alpha: 1)
         label.numberOfLines = 0
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        let width = label.widthAnchor.constraint(equalToConstant: 1000)
+        width.priority = .defaultHigh
+        width.isActive = true
         return label
     }()
     
@@ -127,7 +142,6 @@ class DetailCell:  UITableViewCell {
         return label
     }()
     
-    
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         if #available(iOS 13.4, *) {
@@ -153,14 +167,22 @@ class DetailCell:  UITableViewCell {
     lazy var leftStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
                 titleStack,
-                descriptionLabel
+                descriptionStack
             ]
         )
         stack.setContentHuggingPriority(.defaultLow, for: .horizontal)
         stack.axis = .vertical
         stack.spacing = 8
         stack.distribution = .fill
+        stack.alignment = .fill
         return stack
+    }()
+    
+    lazy var booleanSwitch: UISwitch = {
+        let view = UISwitch()
+        view.setContentHuggingPriority(.defaultLow, for: .vertical)
+        //view.setContentHuggingPriority(.required, for: .horizontal)
+        return view
     }()
     
     lazy var disclosureLabel:  UILabel = {
@@ -171,7 +193,6 @@ class DetailCell:  UITableViewCell {
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
-    
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -193,6 +214,7 @@ class DetailCell:  UITableViewCell {
         titleLabel.isHidden = type.title == nil
         titleAsterisk.isHidden = !type.isRequired || titleLabel.isHidden
         descriptionLabel.isHidden = type.description == nil
+        booleanSwitch.isHidden = true
         let textfield = textfieldStack.textfield
         textfield.text = presenter.text
         switch type.dataType {
@@ -223,6 +245,10 @@ class DetailCell:  UITableViewCell {
             }
         case .password:
             leftStack.addArrangedSubview(passwordLabel)
+        case .boolean:
+            descriptionLabel.numberOfLines = 3
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+            booleanSwitch.isHidden = false
         case .date:
             leftStack.addArrangedSubview(dateField)
             dateField.placeholder = type.placeholderText
@@ -241,6 +267,7 @@ class DetailCell:  UITableViewCell {
         disclosureLabel.text = presenter.disclosureText
         disclosureLabel.isHidden = (presenter.disclosureText ?? "").isEmpty
         accessoryType = presenter.accessoryType
+        layoutSubviews()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
