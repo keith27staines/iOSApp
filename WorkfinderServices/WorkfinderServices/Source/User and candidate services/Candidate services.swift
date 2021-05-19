@@ -36,7 +36,7 @@ public class FetchCandidateService: WorkfinderService, FetchCandidateServiceProt
         do {
             let relativePath = "candidates/\(uuid)/"
             let request = try buildRequest(relativePath: relativePath, queryItems: nil, verb: .get)
-            performTask(with: request, completion: completion, attempting: #function)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {
             completion(Result<Candidate,Error>.failure(error))
         }

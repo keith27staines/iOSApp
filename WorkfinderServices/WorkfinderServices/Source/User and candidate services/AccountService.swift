@@ -89,6 +89,7 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
                 var languages: [String]
                 var ethnicity: String?
                 var gender: String?
+                var prefer_sms: Bool?
             }
             let patch = CandidatePatch(
                 phone: candidate.phone, //?? "",
@@ -96,7 +97,8 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
                 date_of_birth: candidate.dateOfBirth, //?? "",
                 languages: candidate.languages ?? [],
                 ethnicity: candidate.ethnicity ?? "",
-                gender: candidate.gender ?? ""
+                gender: candidate.gender ?? "",
+                prefer_sms: candidate.preferSMS
             )
             
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)

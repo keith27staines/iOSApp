@@ -113,7 +113,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
                 case .phone:
                     candidate.phone = presenter.text
                 case .smsPreference:
-                    user.optedIntoSMS = presenter.isOn
+                    candidate.preferSMS = presenter.isOn
                 case .dob:
                     candidate.dateOfBirth = presenter.date?.workfinderDateString
                 case .postcode:
@@ -190,7 +190,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
         case .phone:
             presenter.text = candidate.phone
         case .smsPreference:
-            presenter.isOn = user.optedIntoSMS ?? false
+            presenter.isOn = candidate.preferSMS ?? false
         case .dob:
             presenter.date = nil
             if let dob = candidate.dateOfBirth {

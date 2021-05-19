@@ -181,9 +181,13 @@ class DetailCell:  UITableViewCell {
     lazy var booleanSwitch: UISwitch = {
         let view = UISwitch()
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
-        //view.setContentHuggingPriority(.required, for: .horizontal)
+        view.addTarget(self, action: #selector(onBoolValueChanged), for: .valueChanged)
         return view
     }()
+    
+    @objc func onBoolValueChanged(sender: UISwitch) {
+        presenter?.isOn = sender.isOn
+    }
     
     lazy var disclosureLabel:  UILabel = {
         let label = UILabel()
@@ -249,6 +253,7 @@ class DetailCell:  UITableViewCell {
             descriptionLabel.numberOfLines = 3
             descriptionLabel.widthAnchor.constraint(equalToConstant: 280).isActive = true
             booleanSwitch.isHidden = false
+            booleanSwitch.isOn = presenter.isOn
         case .date:
             leftStack.addArrangedSubview(dateField)
             dateField.placeholder = type.placeholderText

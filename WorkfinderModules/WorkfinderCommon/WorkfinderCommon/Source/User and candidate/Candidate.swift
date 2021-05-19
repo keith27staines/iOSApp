@@ -34,6 +34,7 @@ public struct Candidate: Codable {
     public var languages: [String]?
     public var ethnicity: String?
     public var gender: String?
+    public var preferSMS: Bool?
     
     public func age(on date: Date = Date()) -> Int? {
         guard let dobString = dateOfBirth,
@@ -84,6 +85,7 @@ public struct Candidate: Codable {
         case languages
         case ethnicity
         case gender
+        case preferSMS = "prefer_sms"
     }
     
     struct UserSummary: Codable {
