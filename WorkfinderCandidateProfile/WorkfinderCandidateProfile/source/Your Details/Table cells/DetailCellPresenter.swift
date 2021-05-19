@@ -88,5 +88,26 @@ class DetailCellPresenter {
             return numberSelected == 0 ? "select" :  "\(numberSelected) selected"
         }
     }
+    
+    var shouldSelectRow: Bool {
+        switch type {
+        case .fullname:
+            return false
+        case .email:
+            return false
+        case .password:
+            return true
+        case .phone:
+            return false
+        case .smsPreference:
+            return false
+        case .dob:
+            return false
+        case .postcode:
+            return false
+        case .picklist(_):
+            return true
+        }
+    }
 }
 

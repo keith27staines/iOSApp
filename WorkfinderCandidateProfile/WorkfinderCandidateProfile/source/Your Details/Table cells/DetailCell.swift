@@ -247,7 +247,7 @@ class DetailCell:  UITableViewCell {
             leftStack.addArrangedSubview(passwordLabel)
         case .boolean:
             descriptionLabel.numberOfLines = 3
-            descriptionLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 280).isActive = true
             booleanSwitch.isHidden = false
         case .date:
             leftStack.addArrangedSubview(dateField)

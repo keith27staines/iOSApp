@@ -243,8 +243,9 @@ class YourDetailsPresenter: BaseAccountPresenter {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        guard TableSection(rawValue: indexPath.section) != nil else { return false }
-        return true
+        let presenter = presenterForIndexPath(indexPath)
+        if presenter.shouldSelectRow { viewController?.view.endEditing(false) }
+        return presenter.shouldSelectRow
     }
     
     deinit {
