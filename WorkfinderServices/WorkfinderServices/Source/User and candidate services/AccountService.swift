@@ -11,11 +11,11 @@ import WorkfinderCommon
 
 public protocol AccountServiceProtocol {
     func getAccount(completion: @escaping (Result<Account,Error>) -> Void)
-    func getCountriesPicklistcompletion(completion: @escaping (Result<[Country], Error>) -> Void)
-    func getLanguagesPicklistcompletion(completion: @escaping (Result<[Language], Error>) -> Void)
-    func getEducationLevelsPicklistcompletion(completion: @escaping (Result<[EducationLevel], Error>) -> Void)
-    func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void)
-    func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void)
+    func getCountriesPicklist(completion: @escaping (Result<[Country], Error>) -> Void)
+    func getLanguagesPicklist(completion: @escaping (Result<[Language], Error>) -> Void)
+    func getEducationLevelsPicklist(completion: @escaping (Result<[EducationLevel], Error>) -> Void)
+    func getEthnicitiesPicklist(completion: @escaping (Result<[Ethnicity], Error>) -> Void)
+    func getGendersPicklist(completion: @escaping (Result<[Gender], Error>) -> Void)
     func updateAccount(_ account: Account, completion: @escaping (Result<Account,Error>) -> Void)
     func deleteAccount(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void)
     func requestPasswordReset(email: String, completion: @escaping (Result<[String:String],Error>) -> Void)
@@ -92,16 +92,23 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
                 var ethnicity: String?
                 var gender: String?
                 var prefer_sms: Bool?
+                var education_level: EducationLevel?
+                struct EducationLevel: Codable {
+                    var value: String
+                }
             }
-            let patch = CandidatePatch(
-                phone: candidate.phone, //?? "",
+            var patch = CandidatePatch(
+                phone: candidate.phone,
                 postcode: candidate.postcode ?? "",
-                date_of_birth: candidate.dateOfBirth, //?? "",
+                date_of_birth: candidate.dateOfBirth,
                 languages: candidate.languages ?? [],
                 ethnicity: candidate.ethnicity ?? "",
                 gender: candidate.gender ?? "",
                 prefer_sms: candidate.preferSMS
             )
+            if let education = candidate.educationLevel?.id {
+                patch.education_level = CandidatePatch.EducationLevel(value: education)
+            }
             
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)
             performTask(with: request, verbose: true, completion: completion, attempting: #function)
@@ -134,23 +141,23 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
         }
     }
     
-    public func getEducationLevelsPicklistcompletion(completion: @escaping (Result<[EducationLevel], Error>) -> Void) {
-        
+    public func getEducationLevelsPicklist(completion: @escaping (Result<[EducationLevel], Error>) -> Void) {
+        _educationLevelsService.getEducationLevels(completion: completion)
     }
     
-    public func getLanguagesPicklistcompletion(completion: @escaping (Result<[Language], Error>) -> Void) {
+    public func getLanguagesPicklist(completion: @escaping (Result<[Language], Error>) -> Void) {
         _languagesService.getLanguages(completion: completion)
     }
 
-    public func getCountriesPicklistcompletion(completion: @escaping (Result<[Country], Error>) -> Void) {
-        
+    public func getCountriesPicklist(completion: @escaping (Result<[Country], Error>) -> Void) {
+        _countriesService.getCountries(completion: completion)
     }
 
-    public func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void) {
+    public func getEthnicitiesPicklist(completion: @escaping (Result<[Ethnicity], Error>) -> Void) {
         _ethnicitiesService.getEthnicities(completion: completion)
     }
     
-    public func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void) {
+    public func getGendersPicklist(completion: @escaping (Result<[Gender], Error>) -> Void) {
         _gendersService.getGenders() { result in
             switch result {
             case .success(let genderStrings):
@@ -185,7 +192,7 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
     private class EducationLevelsService: WorkfinderService {
         func getEducationLevels(completion: @escaping (Result<[EducationLevel], Error>) -> Void) {
             do {
-                let request = try buildRequest(relativePath: "genders/", queryItems: nil, verb: .get)
+                let request = try buildRequest(relativePath: "education-requirements/", queryItems: nil, verb: .get)
                 performTask(with: request, verbose: true ,completion: completion, attempting: #function)
             } catch {
                 completion(.failure(error))
@@ -207,7 +214,7 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
     private class CountriesService: WorkfinderService {
         func getCountries(completion: @escaping (Result<[Country], Error>) -> Void) {
             do {
-                let request = try buildRequest(relativePath: "genders/", queryItems: nil, verb: .get)
+                let request = try buildRequest(relativePath: "countries/", queryItems: nil, verb: .get)
                 performTask(with: request, verbose: true ,completion: completion, attempting: #function)
             } catch {
                 completion(.failure(error))

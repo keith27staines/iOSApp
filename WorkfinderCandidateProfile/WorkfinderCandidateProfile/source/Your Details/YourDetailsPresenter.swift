@@ -223,7 +223,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
             if !picklist.isLocallySynchronised {
                 switch picklist.type {
                 case .countryOfResidence:
-                    selectItemsFromIds([candidate.countryOfResidence?.id ?? ""], for: picklist)
+                    selectItemsFromIds([user.countryOfResidence?.id ?? ""], for: picklist)
                 case .language:
                     selectItemsFromIds(candidate.languages ?? [], for: picklist)
                 case .educationLevel:

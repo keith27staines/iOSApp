@@ -6,8 +6,10 @@
 public struct User: Codable {
     public var uuid: F4SUUID?
     public var candidateUuid: F4SUUID?
-    public var fullname: String?
-    public var nickname: String?
+    public var fullname: String? {
+        "\(firstname ?? "") \(lastname ?? "")".trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    public var nickname: String? { firstname }
     public var firstname: String?
     public var lastname: String?
     public var email: String?
@@ -16,14 +18,13 @@ public struct User: Codable {
     public var created: String?
     public var preferredNotificationMethod: String?
     public var optedIntoMarketing: Bool?
+    public var countryOfResidence: Country?
     
     public init() {}
     
     private enum CodingKeys : String, CodingKey {
         case uuid
         case candidateUuid = "candidate"
-        case fullname = "full_name"
-        case nickname
         case firstname = "first_name"
         case lastname = "last_name"
         case email
@@ -32,6 +33,7 @@ public struct User: Codable {
         case created
         case preferredNotificationMethod = "preferred_notification_method"
         case optedIntoMarketing = "opted_into_marketing"
+        case countryOfResidence = "country"
     }
 }
 

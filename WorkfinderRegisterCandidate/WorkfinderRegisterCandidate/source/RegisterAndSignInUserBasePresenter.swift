@@ -122,10 +122,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         }
     }
     
-    var fullname: String {
-        get { "\(firstname ?? "") \(lastname ?? "")".trimmingCharacters(in: .whitespacesAndNewlines) }
-    }
-    
     var firstname: String? {
         get { user.firstname }
         set { user.firstname = newValue }
@@ -186,10 +182,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         let trimmed = string.trimmingCharacters(in: .whitespaces)
         guard trimmed.count > 0 else { return .empty }
         return trimmed.isEmail() ? .good : .bad
-    }
-    
-    let _fullnameValidator: (String) -> UnderlineView.State = { string in
-        return RegisterUserPresenter.validateCharacterCount(string: string, min: 1, max: 150)
     }
     
     let _nameComponentValidator: (String) -> UnderlineView.State = { string in

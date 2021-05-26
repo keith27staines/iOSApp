@@ -45,23 +45,23 @@ class AccountPicklist {
     func reload(completion: @escaping (Error?) -> Void) {
         switch type {
         case .countryOfResidence:
-            service.getLanguagesPicklistcompletion { [weak self] (result) in
+            service.getLanguagesPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .language:
-            service.getLanguagesPicklistcompletion { [weak self] (result) in
+            service.getLanguagesPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .educationLevel:
-            service.getLanguagesPicklistcompletion { [weak self] (result) in
+            service.getLanguagesPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .gender:
-            service.getGendersPicklistcompletion { [weak self] (result) in
+            service.getGendersPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .ethnicity:
-            service.getEthnicitiesPicklistcompletion { [weak self] (result) in
+            service.getEthnicitiesPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         }

@@ -42,6 +42,7 @@ public class UpdateUserService: WorkfinderService {
                 var full_name: String?
                 var first_name: String?
                 var last_name: String?
+                var nickname: String?
                 var email: String?
                 var opted_into_marketing: Bool
             }
@@ -49,6 +50,7 @@ public class UpdateUserService: WorkfinderService {
                 full_name: user.fullname,
                 first_name: user.firstname,
                 last_name: user.lastname,
+                nickname: user.firstname,
                 email: user.email,
                 opted_into_marketing: user.optedIntoMarketing ?? false
             )

@@ -18,16 +18,27 @@ public struct CreatableCandidate: Codable {
     }
 }
 
-public struct EducationLevel: Codable {
+public struct EducationLevel: IdentifiedAndNamed, Codable {
     public var id: String?
-    public var description: String?
+    public var name: String?
+    public var category: String?
     public init() {}
+    private enum CodingKeys: String, CodingKey {
+        case id = "iso"
+        case name
+    }
 }
 
-public struct Country: Codable {
+public struct Country: IdentifiedAndNamed, Codable {
     public var id: String?
-    public var description: String?
+    public var name: String?
+    public var category: String?
     public init() {}
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "value"
+        case name = "label"
+    }
 }
 
 public struct Candidate: Codable {
@@ -46,7 +57,6 @@ public struct Candidate: Codable {
     public var ethnicity: String?
     public var gender: String?
     public var preferSMS: Bool?
-    public var countryOfResidence: Country?
     public var educationLevel: EducationLevel?
     
     public func age(on date: Date = Date()) -> Int? {
@@ -99,6 +109,7 @@ public struct Candidate: Codable {
         case ethnicity
         case gender
         case preferSMS = "prefer_sms"
+        case educationLevel = "education_level"
     }
     
     struct UserSummary: Codable {
