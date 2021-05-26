@@ -12,16 +12,20 @@ class RegisterUserPresenter: RegisterAndSignInUserBasePresenter {
         let isValid = UnderlineView.State.good
         if self.isGuardianEmailRequired {
             return self.isTermsAndConditionsAgreed &&
-                isValid == fullnameValidityState &&
+                isValid == firstnameValidityState &&
+                isValid == lastnameValidityState &&
                 isValid == emailValidityState &&
                 isValid == guardianValidityState &&
                 isValid == passwordValidityState &&
-                isValid == phoneValidityState
+                isValid == phoneValidityState &&
+                fullname.count > 0
         }
         return self.isTermsAndConditionsAgreed &&
-            isValid == fullnameValidityState &&
+            isValid == firstnameValidityState &&
+            isValid == lastnameValidityState &&
             isValid == emailValidityState &&
             isValid == passwordValidityState &&
-            isValid == phoneValidityState
+            isValid == phoneValidityState &&
+            fullname.count > 0
     }
 }

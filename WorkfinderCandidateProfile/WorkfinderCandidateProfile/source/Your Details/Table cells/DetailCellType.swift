@@ -9,7 +9,8 @@ import Foundation
 import WorkfinderCommon
 
 enum DetailCellType {
-    case fullname
+    case firstname
+    case lastname
     case email
     case password
     case phone
@@ -29,9 +30,13 @@ enum DetailCellType {
     
     var textValidator: ((String?) -> Bool)? {
         switch self {
-        case .fullname:
+        case .firstname:
             return { string in
-                string?.isValidFullname() ?? !self.isRequired
+                string?.isValidNameComponent ?? !self.isRequired
+            }
+        case .lastname:
+            return { string in
+                string?.isValidNameComponent ?? !self.isRequired
             }
         case .email:
             return { string in
@@ -64,7 +69,8 @@ enum DetailCellType {
     
     var title: String? {
         switch self {
-        case .fullname: return "Full Name"
+        case .firstname: return "First Name"
+        case .lastname: return "Last Name"
         case .email: return "Email Address"
         case .password: return "Password"
         case .phone: return "Phone Number"
@@ -77,7 +83,8 @@ enum DetailCellType {
     
     var dataType: DataType {
         switch self {
-        case .fullname: return .text(.fullname)
+        case .firstname: return .text(.firstname)
+        case .lastname: return .text(.firstname)
         case .email: return .text(.email)
         case .password: return .password
         case .phone: return .text(.phone)
@@ -90,7 +97,8 @@ enum DetailCellType {
     
     var placeholderText: String? {
         switch self {
-        case .fullname: return "Full name"
+        case .firstname: return "First name"
+        case .lastname: return "Last name"
         case .email: return "Email address"
         case .password: return nil
         case .phone: return "Phone"
@@ -103,7 +111,7 @@ enum DetailCellType {
     
     var isRequired: Bool {
         switch self {
-        case .fullname, .email, .phone, .dob:
+        case .email, .phone, .dob:
             return true
         default:
             return false
@@ -112,7 +120,7 @@ enum DetailCellType {
     
     var description: String? {
         switch self {
-        case .fullname: return nil
+        case .firstname, .lastname: return nil
         case .email: return nil
         case .password: return nil
         case .phone: return nil
@@ -166,7 +174,8 @@ enum DataType {
 }
 
 enum StringType {
-    case fullname
+    case firstname
+    case lastname
     case email
     case phone
     case postcode

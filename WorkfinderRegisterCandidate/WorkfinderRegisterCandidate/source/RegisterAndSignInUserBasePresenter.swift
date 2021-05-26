@@ -5,20 +5,20 @@ import WorkfinderUI
 import WorkfinderServices
 
 protocol RegisterAndSignInPresenterProtocol: AnyObject {
-    var fullname: String? { get set }
-    var nickname: String? { get set }
+    var firstname: String? { get set }
+    var lastname: String? { get set }
     var email: String? { get set }
     var guardianEmail: String? { get set }
     var allowedSharingWithEmployers: Bool? { get set }
     var allowedSharingWithEducationInstitution: Bool? { get set }
     var password: String? { get set }
     var phone: String? { get set }
-    var fullnameValidityState: UnderlineView.State { get }
+    var firstnameValidityState: UnderlineView.State { get }
+    var lastnameValidityState: UnderlineView.State { get }
     var emailValidityState: UnderlineView.State { get }
     var guardianValidityState: UnderlineView.State { get }
     var passwordValidityState: UnderlineView.State { get }
     var phoneValidityState: UnderlineView.State { get }
-    var nicknameValidityState: UnderlineView.State { get }
     var isGuardianEmailRequired: Bool { get }
     var isPrimaryButtonEnabled: Bool { get }
     func onDidTapPrimaryButton(from vc: UIViewController, onFailure: @escaping ((Error) -> Void))
@@ -122,19 +122,23 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         }
     }
     
-    var fullname: String? {
-        get { user.fullname }
-        set { user.fullname = newValue }
+    var fullname: String {
+        get { "\(firstname ?? "") \(lastname ?? "")".trimmingCharacters(in: .whitespacesAndNewlines) }
+    }
+    
+    var firstname: String? {
+        get { user.firstname }
+        set { user.firstname = newValue }
+    }
+    
+    var lastname: String? {
+        get { user.lastname }
+        set { user.lastname = newValue }
     }
     
     var password: String?  {
         get { user.password }
         set { user.password = newValue }
-    }
-        
-    var nickname: String? {
-        get { user.nickname }
-        set { user.nickname = newValue }
     }
     
     var emailValidityState: UnderlineView.State {
@@ -148,17 +152,17 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     var passwordValidityState: UnderlineView.State {
         return _passwordValidator(password ?? "")
     }
-      
-    var fullnameValidityState: UnderlineView.State {
-        return _fullnameValidator(fullname ?? "")
+    
+    var firstnameValidityState: UnderlineView.State {
+        return _nameComponentValidator(firstname ?? "")
+    }
+    
+    var lastnameValidityState: UnderlineView.State {
+        return _nameComponentValidator(lastname ?? "")
     }
     
     var phoneValidityState: UnderlineView.State {
         return _phoneValidator(phone ?? "")
-    }
-    
-    var nicknameValidityState: UnderlineView.State {
-        return _nicknameValidator(nickname ?? "")
     }
 
     var isTermsAndConditionsAgreed: Bool = false
@@ -188,8 +192,8 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         return RegisterUserPresenter.validateCharacterCount(string: string, min: 3, max: 250)
     }
     
-    let _nicknameValidator: (String) -> UnderlineView.State = { string in
-        return RegisterUserPresenter.validateCharacterCount(string: string, min: 3, max: 250)
+    let _nameComponentValidator: (String) -> UnderlineView.State = { string in
+        return RegisterUserPresenter.validateCharacterCount(string: string, min: 0, max: 250)
     }
     
     let _phoneValidator: (String) -> UnderlineView.State = { string in

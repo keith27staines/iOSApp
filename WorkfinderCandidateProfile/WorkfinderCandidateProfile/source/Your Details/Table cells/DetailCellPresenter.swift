@@ -62,7 +62,7 @@ class DetailCellPresenter {
     
     var accessoryType: UITableViewCell.AccessoryType {
         switch self.type {
-        case .fullname: return .none
+        case .firstname, .lastname: return .none
         case .email: return .none
         case .password: return .disclosureIndicator
         case .phone: return .none
@@ -75,7 +75,7 @@ class DetailCellPresenter {
     
     var disclosureText: String? {
         switch self.type {
-        case .fullname: return nil
+        case .firstname, .lastname: return nil
         case .email: return nil
         case .password: return "change"
         case .phone: return nil
@@ -91,7 +91,7 @@ class DetailCellPresenter {
     
     var shouldSelectRow: Bool {
         switch type {
-        case .fullname:
+        case .firstname, .lastname:
             return false
         case .email:
             return false

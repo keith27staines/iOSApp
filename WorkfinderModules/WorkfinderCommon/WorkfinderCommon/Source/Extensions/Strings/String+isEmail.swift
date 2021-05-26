@@ -44,4 +44,8 @@ public extension String {
     func isValidFullname() -> Bool {
         self.trimmingCharacters(in: .whitespacesAndNewlines).count > 2
     }
+    
+    var isValidNameComponent: Bool {
+        return true
+    }
 }

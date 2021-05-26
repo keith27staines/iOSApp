@@ -226,7 +226,7 @@ class DetailCell:  UITableViewCell {
             leftStack.addArrangedSubview(textfieldStack)
             textfield.placeholder = type.placeholderText
             switch textType {
-            case .fullname:
+            case .firstname, .lastname:
                 textfield.autocapitalizationType = .words
                 textfield.autocorrectionType = .no
                 textfield.textContentType = .name

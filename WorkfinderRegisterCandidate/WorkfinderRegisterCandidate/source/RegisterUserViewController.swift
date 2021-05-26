@@ -25,21 +25,24 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         if showGuardianEmail {
             fieldStack.addArrangedSubview(guardianEmail)
         }
-        fieldStack.addArrangedSubview(fullname)
+        fieldStack.addArrangedSubview(firstname)
+        fieldStack.addArrangedSubview(lastname)
         fieldStack.addArrangedSubview(phone)
         fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)
         guardianEmail.textChanged?(self.presenter.guardianEmail)
-        fullname.textChanged?(self.presenter.fullname)
+        firstname.textChanged?(self.presenter.firstname)
+        lastname.textChanged?(self.presenter.lastname)
         phone.textChanged?(self.presenter.phone)
         password.textChanged?(self.presenter.password)
         if showGuardianEmail {
             email.textfield.nextResponderField = guardianEmail.textfield
-            guardianEmail.textfield.nextResponderField = fullname.textfield
+            guardianEmail.textfield.nextResponderField = firstname.textfield
         } else {
-            email.textfield.nextResponderField = fullname.textfield
+            email.textfield.nextResponderField = firstname.textfield
         }
-        fullname.textfield.nextResponderField = phone.textfield
+        firstname.textfield.nextResponderField = firstname.textfield
+        lastname.textfield.nextResponderField = phone.textfield
         phone.textfield.nextResponderField = password.textfield
         password.textfield.nextResponderField = nil
         bottomStack.addArrangedSubview(switchesStack)
@@ -59,8 +62,8 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     }
     
     override func updatePresenter()  {
-        presenter.fullname = trim(fullname.textfield.text)
-        presenter.nickname = trim(nickname.textfield.text)
+        presenter.firstname = trim(firstname.textfield.text)
+        presenter.lastname = trim(lastname.textfield.text)
         presenter.email = trim(email.textfield.text)
         presenter.guardianEmail = trim(guardianEmail.textfield.text)
         presenter.allowedSharingWithEducationInstitution = shareWithEducationalInstitutionSwitch.isOn
@@ -71,10 +74,10 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
         guardianEmail.state = presenter.guardianValidityState
-        fullname.state = presenter.fullnameValidityState
+        firstname.state = presenter.firstnameValidityState
+        lastname.state = presenter.lastnameValidityState
         password.state = presenter.passwordValidityState
         phone.state = presenter.phoneValidityState
-        presenter.nickname = String(presenter.fullname?.split(separator: " ").first ?? "")
     }
     
     private func trim(_ string:  String?) -> String? {

@@ -173,8 +173,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return stack
     }()
     
-    lazy var fullname: UnderlinedNextResponderTextFieldStack = {
-        let fieldName = NSLocalizedString("First and last name", comment: "")
+    lazy var firstname: UnderlinedNextResponderTextFieldStack = {
+        let fieldName = NSLocalizedString("First name", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.textColor = UIColor.darkText
@@ -188,8 +188,8 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return stack
     }()
     
-    lazy var nickname: UnderlinedNextResponderTextFieldStack = {
-        let fieldName = NSLocalizedString("nickname", comment: "The user's preferred short name")
+    lazy var lastname: UnderlinedNextResponderTextFieldStack = {
+        let fieldName = NSLocalizedString("Last name", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.textColor = UIColor.darkText
@@ -197,7 +197,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
         textField.autocorrectionType = .no
-        textField.textContentType = .nickname
+        textField.textContentType = .name
         textField.placeholder = fieldName
         textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
@@ -220,11 +220,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var password: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("password", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName, nextResponder: self.phone.textfield)
-        if #available(iOS 12.0, *)  {
-            stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
-        } else {
-            stack.textfield.textContentType = .password
-        }
+        stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
         stack.textfield.textColor = UIColor.darkText
         stack.textfield.autocapitalizationType = .none
         stack.textfield.autocorrectionType = .no

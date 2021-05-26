@@ -26,7 +26,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
     
     lazy var allCellPresenters: [[DetailCellPresenter]] = [
         [
-            DetailCellPresenter(type: .fullname, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .firstname, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .lastname, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .password),
             DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
@@ -104,8 +105,10 @@ class YourDetailsPresenter: BaseAccountPresenter {
         allCellPresenters.forEach { (sectionPresenters) in
             sectionPresenters.forEach { (presenter) in
                 switch presenter.type {
-                case .fullname:
-                    user.fullname = presenter.text ?? ""
+                case .firstname:
+                    user.firstname = presenter.text ?? ""
+                case .lastname:
+                    user.lastname = presenter.text ?? ""
                 case .email:
                     user.email = presenter.text
                 case .password:
@@ -181,8 +184,10 @@ class YourDetailsPresenter: BaseAccountPresenter {
     func presenterForIndexPath(_ indexPath: IndexPath) -> DetailCellPresenter {
         let presenter = allCellPresenters[indexPath.section][indexPath.row]
         switch presenter.type {
-        case .fullname:
-            presenter.text = user.fullname
+        case .firstname:
+            presenter.text = user.firstname
+        case .lastname:
+            presenter.text = user.lastname
         case .email:
             presenter.text = user.email
         case .password:
