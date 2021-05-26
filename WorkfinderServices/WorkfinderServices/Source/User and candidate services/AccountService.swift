@@ -11,7 +11,9 @@ import WorkfinderCommon
 
 public protocol AccountServiceProtocol {
     func getAccount(completion: @escaping (Result<Account,Error>) -> Void)
+    func getCountriesPicklistcompletion(completion: @escaping (Result<[Country], Error>) -> Void)
     func getLanguagesPicklistcompletion(completion: @escaping (Result<[Language], Error>) -> Void)
+    func getEducationLevelsPicklistcompletion(completion: @escaping (Result<[EducationLevel], Error>) -> Void)
     func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void)
     func getGendersPicklistcompletion(completion: @escaping (Result<[Gender], Error>) -> Void)
     func updateAccount(_ account: Account, completion: @escaping (Result<Account,Error>) -> Void)
@@ -132,10 +134,18 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
         }
     }
     
+    public func getEducationLevelsPicklistcompletion(completion: @escaping (Result<[EducationLevel], Error>) -> Void) {
+        
+    }
+    
     public func getLanguagesPicklistcompletion(completion: @escaping (Result<[Language], Error>) -> Void) {
         _languagesService.getLanguages(completion: completion)
     }
-    
+
+    public func getCountriesPicklistcompletion(completion: @escaping (Result<[Country], Error>) -> Void) {
+        
+    }
+
     public func getEthnicitiesPicklistcompletion(completion: @escaping (Result<[Ethnicity], Error>) -> Void) {
         _ethnicitiesService.getEthnicities(completion: completion)
     }
@@ -154,7 +164,9 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
         }
     }
     
+    private lazy var _educationLevelsService: EducationLevelsService = EducationLevelsService(networkConfig: networkConfig)
     private lazy var _gendersService: GendersService = GendersService(networkConfig: networkConfig)
+    private lazy var _countriesService: CountriesService = CountriesService(networkConfig: networkConfig)
     private lazy var _languagesService: LanguagesService = LanguagesService(networkConfig: networkConfig)
     private lazy var _ethnicitiesService: EthnicitiesService = EthnicitiesService(networkConfig: networkConfig)
     
@@ -169,9 +181,31 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
             completion(result)
         }
     }
+    
+    private class EducationLevelsService: WorkfinderService {
+        func getEducationLevels(completion: @escaping (Result<[EducationLevel], Error>) -> Void) {
+            do {
+                let request = try buildRequest(relativePath: "genders/", queryItems: nil, verb: .get)
+                performTask(with: request, verbose: true ,completion: completion, attempting: #function)
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
 
     private class GendersService: WorkfinderService {
         func getGenders(completion: @escaping (Result<[String], Error>) -> Void) {
+            do {
+                let request = try buildRequest(relativePath: "genders/", queryItems: nil, verb: .get)
+                performTask(with: request, verbose: true ,completion: completion, attempting: #function)
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private class CountriesService: WorkfinderService {
+        func getCountries(completion: @escaping (Result<[Country], Error>) -> Void) {
             do {
                 let request = try buildRequest(relativePath: "genders/", queryItems: nil, verb: .get)
                 performTask(with: request, verbose: true ,completion: completion, attempting: #function)

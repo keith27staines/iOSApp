@@ -18,6 +18,17 @@ public struct CreatableCandidate: Codable {
     }
 }
 
+public struct EducationLevel: Codable {
+    public var id: String?
+    public var description: String?
+    public init() {}
+}
+
+public struct Country: Codable {
+    public var id: String?
+    public var description: String?
+    public init() {}
+}
 
 public struct Candidate: Codable {
     public var uuid: F4SUUID?
@@ -35,6 +46,8 @@ public struct Candidate: Codable {
     public var ethnicity: String?
     public var gender: String?
     public var preferSMS: Bool?
+    public var countryOfResidence: Country?
+    public var educationLevel: EducationLevel?
     
     public func age(on date: Date = Date()) -> Int? {
         guard let dobString = dateOfBirth,

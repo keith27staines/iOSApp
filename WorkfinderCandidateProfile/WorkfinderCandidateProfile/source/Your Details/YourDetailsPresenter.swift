@@ -18,8 +18,15 @@ class YourDetailsPresenter: BaseAccountPresenter {
         
         var title: String {
             switch self {
-            case .yourInformation: return "Your Notifications"
-            case .additionalInformation: return "Additional information"
+            case .yourInformation: return "Profile Information"
+            case .additionalInformation: return "Account Management"
+            }
+        }
+        
+        var subtitle: String {
+            switch self {
+            case .yourInformation: return "Manage information associated with your profile. Asterisk (*) indicates required"
+            case .additionalInformation: return "Manage your account "
             }
         }
     }
@@ -29,18 +36,19 @@ class YourDetailsPresenter: BaseAccountPresenter {
             DetailCellPresenter(type: .firstname, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .lastname, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .smsPreference),
+            DetailCellPresenter(type: .picklist(.countryOfResidence), picklist: picklistFor(type: .countryOfResidence)),
             DetailCellPresenter(type: .postcode, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .picklist(.language), picklist: picklistFor(type: .language)),
-            DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .password),
-            DetailCellPresenter(type: .smsPreference),
+            DetailCellPresenter(type: .picklist(.educationLevel), picklist: picklistFor(type: .educationLevel)),
+            DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
+            DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity)),
             
         ],
         [
-            DetailCellPresenter(type: .postcode, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
-            DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity))
+            DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .password),
         ]
     ]
     
@@ -134,6 +142,10 @@ class YourDetailsPresenter: BaseAccountPresenter {
                         candidate.gender = picklist.selectedItems.first?.id
                     case .ethnicity:
                         candidate.ethnicity = picklist.selectedItems.first?.id
+                    case .countryOfResidence:
+                        break
+                    case .educationLevel:
+                        break
                     }
                 }
             }
@@ -148,10 +160,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = TableSection(rawValue: section) else { return 0 }
-        switch section {
-        case .yourInformation: return 5
-        case .additionalInformation: return 4
-        }
+        return allCellPresenters[section.rawValue].count
     }
     
     override init(coordinator: AccountCoordinator, accountService: AccountServiceProtocol) {
@@ -168,12 +177,13 @@ class YourDetailsPresenter: BaseAccountPresenter {
         
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let section = TableSection(rawValue: section) else { return nil }
-        switch section {
-        case .yourInformation:
-            return "Your information"
-        case .additionalInformation:
-            return "Additional information"
-        }
+        return section.title
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let section = TableSection(rawValue: section) else { return nil }
+        let view = SectionHeaderView(section: section)
+        return view
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -212,12 +222,17 @@ class YourDetailsPresenter: BaseAccountPresenter {
             let picklist = picklistFor(type: type)
             if !picklist.isLocallySynchronised {
                 switch picklist.type {
+                case .countryOfResidence:
+                    selectItemsFromIds([candidate.countryOfResidence?.id ?? ""], for: picklist)
                 case .language:
                     selectItemsFromIds(candidate.languages ?? [], for: picklist)
+                case .educationLevel:
+                    selectItemsFromIds([candidate.educationLevel?.id ?? ""], for: picklist)
                 case .gender:
                     selectItemsFromIds([candidate.gender ?? ""], for: picklist)
                 case .ethnicity:
                     selectItemsFromIds([candidate.ethnicity ?? ""], for: picklist)
+
                 }
             }
             picklist.isLocallySynchronised = true

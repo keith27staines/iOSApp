@@ -11,6 +11,7 @@
 		53131CFB261EFBAD00799629 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53131CFA261EFBAD00799629 /* AccountCoordinator.swift */; };
 		53131D01261EFD5400799629 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53131D00261EFD5400799629 /* AccountViewController.swift */; };
 		53131D05261EFE5D00799629 /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53131D04261EFE5D00799629 /* AccountPresenter.swift */; };
+		53135D65265E6AE400790049 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53135D64265E6AE400790049 /* SectionHeaderView.swift */; };
 		531F131D260B624C00F0FA7E /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */; };
 		531F1322260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1321260B624C00F0FA7E /* WorkfinderCandidateProfileTests.swift */; };
 		531F1324260B624C00F0FA7E /* WorkfinderCandidateProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 531F1316260B624B00F0FA7E /* WorkfinderCandidateProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -71,6 +72,7 @@
 		53131CFA261EFBAD00799629 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
 		53131D00261EFD5400799629 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		53131D04261EFE5D00799629 /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
+		53135D64265E6AE400790049 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		531F1313260B624B00F0FA7E /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		531F1316260B624B00F0FA7E /* WorkfinderCandidateProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderCandidateProfile.h; sourceTree = "<group>"; };
 		531F1317260B624B00F0FA7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				53E71D5D2624770A008E90AD /* DetailCell.swift */,
 				53E71D5926244606008E90AD /* DetailCellPresenter.swift */,
 				532879DA2625B9360025F3E4 /* DetailCellType.swift */,
+				53135D64265E6AE400790049 /* SectionHeaderView.swift */,
 			);
 			path = "Table cells";
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */,
 				53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */,
 				53659CEA262192C200CFF49E /* YourDetailsPresenter.swift in Sources */,
+				53135D65265E6AE400790049 /* SectionHeaderView.swift in Sources */,
 				53724B5A2627353800908D50 /* PicklistPresenter.swift in Sources */,
 				53E71D5A26244606008E90AD /* DetailCellPresenter.swift in Sources */,
 				53131C812611DCE900799629 /* AccountSectionViewModel.swift in Sources */,

@@ -44,7 +44,15 @@ class AccountPicklist {
     
     func reload(completion: @escaping (Error?) -> Void) {
         switch type {
+        case .countryOfResidence:
+            service.getLanguagesPicklistcompletion { [weak self] (result) in
+                self?.handleServiceResult(result, completion: completion)
+            }
         case .language:
+            service.getLanguagesPicklistcompletion { [weak self] (result) in
+                self?.handleServiceResult(result, completion: completion)
+            }
+        case .educationLevel:
             service.getLanguagesPicklistcompletion { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
@@ -216,7 +224,7 @@ enum AccountPicklistType: Int, CaseIterable {
         switch self {
         case .countryOfResidence: return "Select a country for personalised and localised opportunities"
         case .language: return "Giving us this information allows us to bring to your attention roles from employers who have specific language needs"
-        case .educationLevel: return ""
+        case .educationLevel: return "Some roles require candidates to have specific qualifications and we use this to recommend suitable roles and opportunitites to you"
         case .gender: return "We collect this information in line with our D&I policy"
         case .ethnicity: return "We collect this information in line with our D&I policy"
         }

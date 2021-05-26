@@ -15,9 +15,10 @@ class DetailCell:  UITableViewCell {
     lazy var titleLabel:  UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor.init(white: 0.56, alpha: 1)
+        label.textColor = UIColor.init(white: 0.46, alpha: 1)
         label.numberOfLines = 1
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
     
@@ -63,7 +64,7 @@ class DetailCell:  UITableViewCell {
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = UIColor.init(white: 0.56, alpha: 1)
         label.numberOfLines = 0
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -73,19 +74,6 @@ class DetailCell:  UITableViewCell {
         width.isActive = true
         return label
     }()
-    
-/*
-    lazy var textfield:  UITextField = {
-        let text = UITextField()
-        text.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        text.textColor = UIColor.init(white: 0.15, alpha: 1)
-        text.borderStyle = .roundedRect
-        text.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        text.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        text.delegate = self
-        return text
-    }()
-*/
     
     lazy var textfieldStack: ValidatedTextFieldStack = {
         let stack = ValidatedTextFieldStack(state: .empty)
@@ -259,7 +247,11 @@ class DetailCell:  UITableViewCell {
             dateField.placeholder = type.placeholderText
         case .picklist(let picklistType):
             switch picklistType {
+            case .countryOfResidence:
+                break
             case .language:
+                break
+            case .educationLevel:
                 break
             case .gender:
                 break

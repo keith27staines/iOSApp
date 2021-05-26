@@ -123,10 +123,10 @@ enum DetailCellType {
         case .firstname, .lastname: return nil
         case .email: return nil
         case .password: return nil
-        case .phone: return nil
-        case .smsPreference: return "I prefer Workfinder to contact me about personalised opportunities through text messages"
-        case .dob: return "Required for us to process your application for certain roles"
-        case .postcode: return "This allows us to bring employers to your attention that are local to you"
+        case .phone: return "Add your mobile number to help employers contact you when you are offered a role"
+        case .smsPreference: return "Allow Workfinder to contact me about personalised opportunities through text messages"
+        case .dob: return nil
+        case .postcode: return "This allows us to bring opportunities to your attention that are local to you"
         case .picklist(let type): return type.reasonForCollection
         }
     }
