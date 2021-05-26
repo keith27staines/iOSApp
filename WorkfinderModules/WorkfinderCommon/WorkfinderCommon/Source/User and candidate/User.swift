@@ -8,6 +8,8 @@ public struct User: Codable {
     public var candidateUuid: F4SUUID?
     public var fullname: String?
     public var nickname: String?
+    public var firstname: String?
+    public var lastname: String?
     public var email: String?
     public var password: String?
     public var lastLogin: String?
@@ -22,6 +24,8 @@ public struct User: Codable {
         case candidateUuid = "candidate"
         case fullname = "full_name"
         case nickname
+        case firstname = "first_name"
+        case lastname = "last_name"
         case email
         case password
         case lastLogin = "last_login"
