@@ -40,11 +40,15 @@ public class UpdateUserService: WorkfinderService {
         do {
             struct UserPatch: Codable {
                 var full_name: String?
+                var first_name: String?
+                var last_name: String?
                 var email: String?
                 var opted_into_marketing: Bool
             }
             let userPatch = UserPatch(
                 full_name: user.fullname,
+                first_name: user.firstname,
+                last_name: user.lastname,
                 email: user.email,
                 opted_into_marketing: user.optedIntoMarketing ?? false
             )
@@ -80,11 +84,15 @@ public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol
         var password2: String
         var nickname: String
         var full_name: String
+        var first_name: String
+        var last_name: String
         var referrer: F4SUUID?
         
         public init(user: User) {
             self.full_name = user.fullname ?? ""
             self.nickname = user.nickname ?? ""
+            self.first_name = user.firstname ?? ""
+            self.last_name = user.lastname ?? ""
             self.email = user.email ?? ""
             self.password1 = user.password ?? ""
             self.password2 = user.password ?? ""
