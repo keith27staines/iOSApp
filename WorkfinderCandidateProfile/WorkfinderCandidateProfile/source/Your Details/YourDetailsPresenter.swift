@@ -28,15 +28,17 @@ class YourDetailsPresenter: BaseAccountPresenter {
         [
             DetailCellPresenter(type: .firstname, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .lastname, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .postcode, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .picklist(.language), picklist: picklistFor(type: .language)),
+            DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .password),
-            DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .smsPreference),
-            DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:))
+            
         ],
         [
             DetailCellPresenter(type: .postcode, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .picklist(.language), picklist: picklistFor(type: .language)),
             DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
             DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity))
         ]

@@ -189,11 +189,11 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     }
     
     let _fullnameValidator: (String) -> UnderlineView.State = { string in
-        return RegisterUserPresenter.validateCharacterCount(string: string, min: 3, max: 250)
+        return RegisterUserPresenter.validateCharacterCount(string: string, min: 1, max: 150)
     }
     
     let _nameComponentValidator: (String) -> UnderlineView.State = { string in
-        return RegisterUserPresenter.validateCharacterCount(string: string, min: 0, max: 250)
+        return RegisterUserPresenter.validateCharacterCount(string: string, min: 1, max: 150)
     }
     
     let _phoneValidator: (String) -> UnderlineView.State = { string in

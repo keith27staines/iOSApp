@@ -17,15 +17,13 @@ class RegisterUserPresenter: RegisterAndSignInUserBasePresenter {
                 isValid == emailValidityState &&
                 isValid == guardianValidityState &&
                 isValid == passwordValidityState &&
-                isValid == phoneValidityState &&
-                fullname.count > 0
+                isValid == phoneValidityState
         }
         return self.isTermsAndConditionsAgreed &&
             isValid == firstnameValidityState &&
             isValid == lastnameValidityState &&
             isValid == emailValidityState &&
             isValid == passwordValidityState &&
-            isValid == phoneValidityState &&
-            fullname.count > 0
+            isValid == phoneValidityState
     }
 }

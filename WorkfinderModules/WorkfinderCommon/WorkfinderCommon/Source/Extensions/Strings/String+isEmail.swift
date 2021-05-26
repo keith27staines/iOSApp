@@ -46,6 +46,6 @@ public extension String {
     }
     
     var isValidNameComponent: Bool {
-        return true
+        self.trimmingCharacters(in: .whitespacesAndNewlines).count > 0
     }
 }
