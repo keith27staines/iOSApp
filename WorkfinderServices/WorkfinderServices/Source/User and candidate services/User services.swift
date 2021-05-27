@@ -45,8 +45,9 @@ public class UpdateUserService: WorkfinderService {
                 var nickname: String?
                 var email: String?
                 var opted_into_marketing: Bool
+                var country: Country?
             }
-            let userPatch = UserPatch(
+            var userPatch = UserPatch(
                 full_name: user.fullname,
                 first_name: user.firstname,
                 last_name: user.lastname,
@@ -54,6 +55,9 @@ public class UpdateUserService: WorkfinderService {
                 email: user.email,
                 opted_into_marketing: user.optedIntoMarketing ?? false
             )
+            if let iso = user.countryOfResidence?.id {
+                userPatch.country = Country(id: iso)
+            }
             let request = try buildRequest(relativePath: "users/me/", verb: .patch, body: userPatch)
             performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {

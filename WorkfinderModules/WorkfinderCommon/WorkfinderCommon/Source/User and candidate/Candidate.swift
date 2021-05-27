@@ -18,29 +18,6 @@ public struct CreatableCandidate: Codable {
     }
 }
 
-public struct EducationLevel: IdentifiedAndNamed, Codable {
-    public var id: String?
-    public var name: String?
-    public var category: String?
-    public init() {}
-    private enum CodingKeys: String, CodingKey {
-        case id = "iso"
-        case name
-    }
-}
-
-public struct Country: IdentifiedAndNamed, Codable {
-    public var id: String?
-    public var name: String?
-    public var category: String?
-    public init() {}
-    
-    private enum CodingKeys: String, CodingKey {
-        case id = "value"
-        case name = "label"
-    }
-}
-
 public struct Candidate: Codable {
     public var uuid: F4SUUID?
     public var dateOfBirth: String?

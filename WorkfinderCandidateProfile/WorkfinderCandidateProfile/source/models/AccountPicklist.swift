@@ -45,7 +45,7 @@ class AccountPicklist {
     func reload(completion: @escaping (Error?) -> Void) {
         switch type {
         case .countryOfResidence:
-            service.getLanguagesPicklist { [weak self] (result) in
+            service.getCountriesPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .language:
@@ -53,7 +53,7 @@ class AccountPicklist {
                 self?.handleServiceResult(result, completion: completion)
             }
         case .educationLevel:
-            service.getLanguagesPicklist { [weak self] (result) in
+            service.getEducationLevelsPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .gender:
