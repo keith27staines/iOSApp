@@ -123,8 +123,8 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         AccountService(networkConfig: injected.networkConfig)
     }()
     
-    func permanentlyRemoveAccountFromServer(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
-        accountService.deleteAccount() { result in
+    func permanentlyRemoveAccountFromServer(email: String, completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
+        accountService.deleteAccount(email: email) { result in
             if case .success(_) = result {
                 LocalStore().resetStore()
             }

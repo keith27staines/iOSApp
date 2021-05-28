@@ -17,7 +17,7 @@ public protocol AccountServiceProtocol {
     func getEthnicitiesPicklist(completion: @escaping (Result<[Ethnicity], Error>) -> Void)
     func getGendersPicklist(completion: @escaping (Result<[Gender], Error>) -> Void)
     func updateAccount(_ account: Account, completion: @escaping (Result<Account,Error>) -> Void)
-    func deleteAccount(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void)
+    func deleteAccount(email: String, completion: @escaping (Result<DeleteAccountJson,Error>) -> Void)
     func requestPasswordReset(email: String, completion: @escaping (Result<[String:String],Error>) -> Void)
 }
 
@@ -41,6 +41,12 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
     let updateUserService: UpdateUserService
     let requestPasswordResetService: RequestPasswordResetService
     
+    private lazy var _educationLevelsService: EducationLevelsService = EducationLevelsService(networkConfig: networkConfig)
+    private lazy var _gendersService: GendersService = GendersService(networkConfig: networkConfig)
+    private lazy var _countriesService: CountriesService = CountriesService(networkConfig: networkConfig)
+    private lazy var _languagesService: LanguagesService = LanguagesService(networkConfig: networkConfig)
+    private lazy var _ethnicitiesService: EthnicitiesService = EthnicitiesService(networkConfig: networkConfig)
+    
     public override init(networkConfig: NetworkConfig) {
         userService = FetchMeService(networkConfig: networkConfig)
         candidateService = FetchCandidateService(networkConfig: networkConfig)
@@ -50,8 +56,8 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
         super.init(networkConfig: networkConfig)
     }
     
-    public func deleteAccount(completion: @escaping (Result<DeleteAccountJson, Error>) -> Void) {
-        updateUserService.deleteAccount(completion: completion)
+    public func deleteAccount(email: String, completion: @escaping (Result<DeleteAccountJson, Error>) -> Void) {
+        updateUserService.deleteAccount(email: email, completion: completion)
     }
     
     public func requestPasswordReset(email: String, completion: @escaping (Result<[String : String], Error>) -> Void) {
@@ -92,23 +98,19 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
                 var ethnicity: String?
                 var gender: String?
                 var prefer_sms: Bool?
-                var education_level: EducationLevel?
-                struct EducationLevel: Codable {
-                    var value: String
-                }
+                var education_level: String
             }
-            var patch = CandidatePatch(
+            
+            let patch = CandidatePatch(
                 phone: candidate.phone,
                 postcode: candidate.postcode ?? "",
                 date_of_birth: candidate.dateOfBirth,
                 languages: candidate.languages ?? [],
                 ethnicity: candidate.ethnicity ?? "",
                 gender: candidate.gender ?? "",
-                prefer_sms: candidate.preferSMS
+                prefer_sms: candidate.preferSMS,
+                education_level: candidate.educationLevel ?? ""
             )
-            if let education = candidate.educationLevel?.id {
-                patch.education_level = CandidatePatch.EducationLevel(value: education)
-            }
             
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)
             performTask(with: request, verbose: true, completion: completion, attempting: #function)
@@ -170,12 +172,6 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
             }
         }
     }
-    
-    private lazy var _educationLevelsService: EducationLevelsService = EducationLevelsService(networkConfig: networkConfig)
-    private lazy var _gendersService: GendersService = GendersService(networkConfig: networkConfig)
-    private lazy var _countriesService: CountriesService = CountriesService(networkConfig: networkConfig)
-    private lazy var _languagesService: LanguagesService = LanguagesService(networkConfig: networkConfig)
-    private lazy var _ethnicitiesService: EthnicitiesService = EthnicitiesService(networkConfig: networkConfig)
     
     private func getUser(completion: @escaping (Result<User,Error>) -> Void) {
         userService.fetch { (result) in

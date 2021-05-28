@@ -202,9 +202,9 @@ enum AccountPicklistType: Int, CaseIterable {
     
     var instruction: String {
         switch self {
-        case .countryOfResidence: return self.reasonForCollection
+        case .countryOfResidence: return "Select your country of residence"
         case .language: return "Select up to 10 languages"
-        case .educationLevel: return self.reasonForCollection
+        case .educationLevel: return "Select your current education level"
         case .ethnicity: return "Select the ethnicity you most identify with"
         case .gender: return "Select the gender identity you most identify with"
         }

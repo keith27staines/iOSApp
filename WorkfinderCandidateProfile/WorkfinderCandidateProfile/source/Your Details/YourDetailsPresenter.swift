@@ -227,12 +227,11 @@ class YourDetailsPresenter: BaseAccountPresenter {
                 case .language:
                     selectItemsFromIds(candidate.languages ?? [], for: picklist)
                 case .educationLevel:
-                    selectItemsFromIds([candidate.educationLevel?.id ?? ""], for: picklist)
+                    selectItemsFromIds([candidate.educationLevel ?? ""], for: picklist)
                 case .gender:
                     selectItemsFromIds([candidate.gender ?? ""], for: picklist)
                 case .ethnicity:
                     selectItemsFromIds([candidate.ethnicity ?? ""], for: picklist)
-
                 }
             }
             picklist.isLocallySynchronised = true

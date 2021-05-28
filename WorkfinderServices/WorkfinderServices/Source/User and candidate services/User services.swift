@@ -27,9 +27,10 @@ public class SignInUserService: WorkfinderService, SignInUserServiceProtocol {
 
 public class UpdateUserService: WorkfinderService {
     
-    public func deleteAccount(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
+    public func deleteAccount(email: String, completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
         do {
-            let request = try buildRequest(relativePath: "users/me/", queryItems: nil, verb: .delete)
+            let body = ["email":email]
+            let request = try buildRequest(relativePath: "users/me/", verb: .delete, body: body)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
             completion(.failure(error))

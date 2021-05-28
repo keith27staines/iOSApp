@@ -34,7 +34,7 @@ public struct Candidate: Codable {
     public var ethnicity: String?
     public var gender: String?
     public var preferSMS: Bool?
-    public var educationLevel: EducationLevel?
+    public var educationLevel: String?
     
     public func age(on date: Date = Date()) -> Int? {
         guard let dobString = dateOfBirth,
