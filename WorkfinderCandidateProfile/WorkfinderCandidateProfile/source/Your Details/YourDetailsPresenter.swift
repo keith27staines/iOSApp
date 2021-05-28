@@ -11,6 +11,7 @@ import WorkfinderServices
 class YourDetailsPresenter: BaseAccountPresenter {
     
     var viewController: YourDetailsViewController?
+    var cellsForIndexPath = [IndexPath:DetailCell]()
     
     enum TableSection: Int, CaseIterable {
         case yourInformation
@@ -188,7 +189,13 @@ class YourDetailsPresenter: BaseAccountPresenter {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let presenter = presenterForIndexPath(indexPath)
-        let cell = DetailCell()
+        let cell: DetailCell
+        if let existingCell = cellsForIndexPath[indexPath] {
+            cell = existingCell
+        } else {
+            cell = DetailCell()
+            cellsForIndexPath[indexPath] = cell
+        }
         cell.configureWith(presenter: presenter)
         return cell
     }
