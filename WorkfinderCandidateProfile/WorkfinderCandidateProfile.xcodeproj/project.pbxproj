@@ -279,9 +279,9 @@
 		53659CE32621925900CFF49E /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				538BFD2F265FDAC10089CA44 /* RemoveAccountViewController.swift */,
 				53659CF1262192E700CFF49E /* PreferencesPresenter.swift */,
 				53659CED262192D300CFF49E /* PreferencesViewController.swift */,
+				538BFD2F265FDAC10089CA44 /* RemoveAccountViewController.swift */,
 				53D7CDE02621CD7D00A9BE40 /* Table cells */,
 			);
 			path = Preferences;

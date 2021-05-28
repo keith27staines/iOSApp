@@ -18,7 +18,7 @@ public struct User: Codable {
     public var created: String?
     public var preferredNotificationMethod: String?
     public var optedIntoMarketing: Bool?
-    public var countryOfResidence: Country?
+    public var countryOfResidence: String?
     
     public init() {}
     

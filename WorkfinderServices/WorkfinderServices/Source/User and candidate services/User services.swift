@@ -46,19 +46,17 @@ public class UpdateUserService: WorkfinderService {
                 var nickname: String?
                 var email: String?
                 var opted_into_marketing: Bool
-                var country: Country?
+                var country: String?
             }
-            var userPatch = UserPatch(
+            let userPatch = UserPatch(
                 full_name: user.fullname,
                 first_name: user.firstname,
                 last_name: user.lastname,
                 nickname: user.firstname,
                 email: user.email,
-                opted_into_marketing: user.optedIntoMarketing ?? false
+                opted_into_marketing: user.optedIntoMarketing ?? false,
+                country: user.countryOfResidence ?? ""
             )
-            if let iso = user.countryOfResidence?.id {
-                userPatch.country = Country(id: iso)
-            }
             let request = try buildRequest(relativePath: "users/me/", verb: .patch, body: userPatch)
             performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {
@@ -89,15 +87,11 @@ public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol
         var email: String
         var password1: String
         var password2: String
-        var nickname: String
-        var full_name: String
         var first_name: String
         var last_name: String
         var referrer: F4SUUID?
         
         public init(user: User) {
-            self.full_name = user.fullname ?? ""
-            self.nickname = user.nickname ?? ""
             self.first_name = user.firstname ?? ""
             self.last_name = user.lastname ?? ""
             self.email = user.email ?? ""
@@ -116,7 +110,7 @@ public class FetchMeService: WorkfinderService, FetchMeProtocol {
     public func fetch(completion: @escaping((Result<User,Error>) -> Void) ) {
         do {
             let request = try buildRequest(relativePath: "users/me", queryItems: [], verb: .get)
-            performTask(with: request, completion: completion, attempting: #function)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {
             completion(Result<User,Error>.failure(error))
         }

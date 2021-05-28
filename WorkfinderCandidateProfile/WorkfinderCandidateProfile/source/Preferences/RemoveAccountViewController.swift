@@ -23,13 +23,14 @@ class RemoveAccountViewController: UIViewController {
         return "\(name) we are sorry to see you go"
         
     }
-    let descriptionString = "You will lose your profile, job recommendations, and more from Workfinder. Are you sure you want to close your account?"
+    let descriptionString = "You will lose your profile, job recommendations, and more from Workfinder.\n\nAre you sure you want to close your account?"
     let confirmString = "Enter your email to confirm closure"
     
     lazy var headingLabel: UILabel = {
         let label = UILabel()
         label.text = headingString
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -37,7 +38,8 @@ class RemoveAccountViewController: UIViewController {
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = descriptionString
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.textColor = WorkfinderColors.gray3
         label.numberOfLines = 0
         return label
     }()
@@ -45,14 +47,22 @@ class RemoveAccountViewController: UIViewController {
     lazy var confirmLabel: UILabel = {
         let label = UILabel()
         label.text = confirmString
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.textColor = WorkfinderColors.gray3
+        label.numberOfLines = 0
         return label
     }()
     
     lazy var emailField: UITextField = {
         let email = UITextField()
-        email.placeholder = "your email "
+        email.font = UIFont.systemFont(ofSize: 19, weight: .regular)
+        email.placeholder = "your email"
         email.borderStyle = .roundedRect
+        email.autocapitalizationType = .none
+        email.autocorrectionType = .no
+        email.textContentType = .emailAddress
+        email.keyboardType = .emailAddress
+        email.addTarget(self, action: #selector(emailTextChanged), for: .editingChanged)
         return email
     }()
     
@@ -68,6 +78,7 @@ class RemoveAccountViewController: UIViewController {
     lazy var cancelButton: UIButton = {
         let button = WorkfinderSecondaryButton()
         button.setTitle("Cancel", for: .normal)
+        button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         return button
     }()
 
@@ -75,6 +86,7 @@ class RemoveAccountViewController: UIViewController {
         let button = WorkfinderPrimaryButton()
         button.setTitle("Remove", for: .normal)
         button.isEnabled = false
+        button.addTarget(self, action: #selector(removeAccount), for: .touchUpInside)
         return button
     }()
 
@@ -94,7 +106,7 @@ class RemoveAccountViewController: UIViewController {
         stack.addArrangedSubview(descriptionLabel)
         stack.addArrangedSubview(confirmStack)
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = 16
         return stack
     }()
 
@@ -103,12 +115,17 @@ class RemoveAccountViewController: UIViewController {
         stack.addArrangedSubview(textStack)
         stack.addArrangedSubview(buttonStack)
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = 16
         return stack
     }()
     
+    @objc func emailTextChanged(sender: UITextField) {
+        email = sender.text ?? ""
+        removeButton.isEnabled = email.isEmail()
+    }
+    
     @objc func cancel() {
-        navigationController?.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func removeAccount() {
@@ -117,7 +134,9 @@ class RemoveAccountViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(_):
-                self.removeAccountCompleted()
+                self.dismiss(animated: true) {
+                    self.onRemoveAccountSubmitted?()
+                }
             case .failure(let error):
                 self.messageHandler.displayOptionalErrorIfNotNil(error) {
                     return
@@ -128,25 +147,13 @@ class RemoveAccountViewController: UIViewController {
         })
     }
     
-    func removeAccountCompleted() {
-        let alert = UIAlertController(
-            title: "Account deleted",
-            message: "We are arranging for the deletion of your details as you requested, and you are now logged out. Thank you for using Workfinder.",
-            preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Close", style: .default) { [weak self] (action) in
-            guard let self = self else { return }
-            self.dismiss(animated: true) { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
-            }
-        }
-        alert.addAction(closeAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    init(coordinator: AccountCoordinator) {
+    init(coordinator: AccountCoordinator, onRemoveAccountSubmitted: @escaping () -> Void) {
         self.coordinator = coordinator
+        self.onRemoveAccountSubmitted = onRemoveAccountSubmitted
         super.init(nibName: nil, bundle: nil)
     }
+    
+    var onRemoveAccountSubmitted: (() -> Void)?
     
     override func viewDidLoad() {
         configureViews()

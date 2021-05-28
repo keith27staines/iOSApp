@@ -143,9 +143,9 @@ class YourDetailsPresenter: BaseAccountPresenter {
                     case .ethnicity:
                         candidate.ethnicity = picklist.selectedItems.first?.id
                     case .countryOfResidence:
-                        break
+                        user.countryOfResidence = picklist.selectedItems.first?.id
                     case .educationLevel:
-                        break
+                        candidate.educationLevel = picklist.selectedItems.first?.id
                     }
                 }
             }
@@ -223,7 +223,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
             if !picklist.isLocallySynchronised {
                 switch picklist.type {
                 case .countryOfResidence:
-                    selectItemsFromIds([user.countryOfResidence?.id ?? ""], for: picklist)
+                    selectItemsFromIds([user.countryOfResidence ?? ""], for: picklist)
                 case .language:
                     selectItemsFromIds(candidate.languages ?? [], for: picklist)
                 case .educationLevel:

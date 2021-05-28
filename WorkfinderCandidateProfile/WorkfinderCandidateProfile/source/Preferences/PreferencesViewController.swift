@@ -12,13 +12,6 @@ import WorkfinderCommon
 class PreferencesViewController:  WFViewController {
     
     var preferencesPresenter: PreferencesPresenter { presenter as! PreferencesPresenter }
-    weak var removeAction: UIAlertAction?
-    var capturedEmail: String = ""
-    
-    @objc func alertTextfieldChanged(textfield: UITextField) {
-        capturedEmail = textfield.text ?? ""
-        removeAction?.isEnabled = capturedEmail.isEmail()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,41 +20,9 @@ class PreferencesViewController:  WFViewController {
     
     func removeAccountRequested() {
         guard let coordinator = coordinator else { return }
-        let vc = RemoveAccountViewController(coordinator: coordinator)
+        let vc = RemoveAccountViewController(coordinator: coordinator, onRemoveAccountSubmitted: removeAccountCompleted)
         navigationController?.present(vc, animated: true, completion: nil)
         return
-        
-        let alert = UIAlertController(
-            title: "Are you sure you want us to remove your account?",
-            message: "We will delete your details from our database. This cannot be undone.\nPlease enter your email to confirm",
-            preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let removeAction = UIAlertAction(title: "Remove", style: .destructive) { [weak self] (action) in
-            guard let self = self else { return }
-            self.coordinator?.permanentlyRemoveAccountFromServer(email: self.capturedEmail) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(_):
-                    self.removeAccountCompleted()
-                case .failure(let error):
-                    self.messageHandler.displayOptionalErrorIfNotNil(error) {
-                        return
-                    } retryHandler: {
-                        self.removeAccountRequested()
-                    }
-                }
-            }
-        }
-        removeAction.isEnabled = false
-        self.removeAction = removeAction
-    
-        alert.addTextField { [weak self] textfield in
-            guard let self = self else { return }
-            textfield.addTarget(self, action: #selector(self.alertTextfieldChanged), for: .editingChanged)
-        }
-        alert.addAction(cancelAction)
-        alert.addAction(removeAction)
-        present(alert, animated: true, completion: nil)
     }
     
     func removeAccountCompleted() {

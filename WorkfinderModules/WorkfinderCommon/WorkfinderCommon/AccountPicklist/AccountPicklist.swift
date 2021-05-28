@@ -21,8 +21,8 @@ public struct EducationLevel: IdentifiedAndNamed, Codable {
         self.name = name
     }
     private enum CodingKeys: String, CodingKey {
-        case id = "iso"
-        case name
+        case id = "value"
+        case name = "label"
     }
 }
 
@@ -36,8 +36,8 @@ public struct Country: IdentifiedAndNamed, Codable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case id = "value"
-        case name = "label"
+        case id = "iso"
+        case name
     }
 }
 
