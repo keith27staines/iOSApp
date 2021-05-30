@@ -55,6 +55,7 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         self.registerLogic = registerUserLogic
         self.mode = mode
         self.user = userRepository.loadUser()
+        removeCookies()
     }
     
     func onViewDidLoad(_ view: WorkfinderViewControllerProtocol) { self.view = view }
