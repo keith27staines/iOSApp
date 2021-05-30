@@ -258,6 +258,8 @@ class DetailCell:  UITableViewCell {
             case .ethnicity:
                 break
             }
+        case .action:
+            break
         }
         dateField.text = presenter.formattedDate
         updateValidityState()

@@ -17,6 +17,7 @@ enum DetailCellType {
     case smsPreference
     case dob
     case postcode
+    case removeAccount
     case picklist(AccountPicklistType)
     
     var textValidityState: ((String?) -> ValidityState)? {
@@ -59,6 +60,8 @@ enum DetailCellType {
             }
         case .picklist:
             return nil
+        case .removeAccount:
+            return nil
         }
     }
     
@@ -78,6 +81,7 @@ enum DetailCellType {
         case .dob: return "Date of Birth"
         case .postcode: return "Postcode"
         case .picklist(let type): return type.title
+        case .removeAccount: return "Close your Workfinder account"
         }
     }
     
@@ -92,6 +96,7 @@ enum DetailCellType {
         case .dob: return .date
         case .postcode: return .text(.postcode)
         case .picklist(let type): return .picklist(type)
+        case .removeAccount: return .action
         }
     }
     
@@ -106,6 +111,7 @@ enum DetailCellType {
         case .dob: return "Tap to enter date of birth"
         case .postcode: return "Postcode"
         case .picklist(_): return nil
+        case .removeAccount: return nil
         }
     }
     
@@ -128,6 +134,7 @@ enum DetailCellType {
         case .dob: return nil
         case .postcode: return "This allows us to bring opportunities to your attention that are local to you"
         case .picklist(let type): return type.reasonForCollection
+        case .removeAccount: return "You can remove your account at any time. Please note that all previous applications and profile data will be lost."
         }
     }
     
@@ -171,6 +178,7 @@ enum DataType {
     case picklist(AccountPicklistType)
     case password
     case boolean
+    case action
 }
 
 enum StringType {

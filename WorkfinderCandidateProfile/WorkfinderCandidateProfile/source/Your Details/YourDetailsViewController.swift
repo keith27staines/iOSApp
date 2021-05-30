@@ -90,6 +90,26 @@ class YourDetailsViewController:  WFViewController {
         super.init(coordinator: coordinator, presenter: presenter)
     }
     
+    func removeAccountRequested() {
+        guard let coordinator = coordinator else { return }
+        let vc = RemoveAccountViewController(coordinator: coordinator, onRemoveAccountSubmitted: removeAccountCompleted)
+        navigationController?.present(vc, animated: true, completion: nil)
+        return
+    }
+    
+    func removeAccountCompleted() {
+        let alert = UIAlertController(
+            title: "Account deleted",
+            message: "We are arranging for the deletion of your details as you requested, and you are now logged out.\nThank you for using Workfinder.",
+            preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "Close", style: .default) { [weak self] (action) in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(closeAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

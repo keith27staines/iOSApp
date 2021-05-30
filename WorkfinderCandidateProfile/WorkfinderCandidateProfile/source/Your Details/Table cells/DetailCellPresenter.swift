@@ -70,6 +70,7 @@ class DetailCellPresenter {
         case .dob: return .none
         case .postcode: return .none
         case .picklist(_): return .disclosureIndicator
+        case .removeAccount: return .disclosureIndicator
         }
     }
     
@@ -86,6 +87,7 @@ class DetailCellPresenter {
             guard let picklist = picklist else { return nil }
             let numberSelected = picklist.selectionCount
             return numberSelected == 0 ? "select" :  "\(numberSelected) selected"
+        case .removeAccount: return nil
         }
     }
     
@@ -106,6 +108,8 @@ class DetailCellPresenter {
         case .postcode:
             return false
         case .picklist(_):
+            return true
+        case .removeAccount:
             return true
         }
     }

@@ -26,7 +26,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
         
         var subtitle: String {
             switch self {
-            case .yourInformation: return "Manage information associated with your profile. Asterisk (*) indicates required"
+            case .yourInformation: return "Manage information associated with your profile.\nAsterisk (*) indicates required"
             case .additionalInformation: return "Manage your account "
             }
         }
@@ -45,11 +45,11 @@ class YourDetailsPresenter: BaseAccountPresenter {
             DetailCellPresenter(type: .picklist(.educationLevel), picklist: picklistFor(type: .educationLevel)),
             DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
             DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity)),
-            
         ],
         [
             DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .password),
+            DetailCellPresenter(type: .removeAccount),
         ]
     ]
     
@@ -148,6 +148,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
                     case .educationLevel:
                         candidate.educationLevel = picklist.selectedItems.first?.id
                     }
+                case .removeAccount:
+                    break
                 }
             }
         }
@@ -242,6 +244,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
                 }
             }
             picklist.isLocallySynchronised = true
+        case .removeAccount:
+            break
         }
         return presenter
     }
@@ -265,6 +269,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
             }
         case .password:
             coordinator?.showChangePassword()
+        case .action:
+            viewController?.removeAccountRequested()
         default:
             return
         }

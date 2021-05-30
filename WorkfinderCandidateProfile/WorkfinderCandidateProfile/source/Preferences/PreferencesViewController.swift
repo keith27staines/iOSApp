@@ -28,7 +28,7 @@ class PreferencesViewController:  WFViewController {
     func removeAccountCompleted() {
         let alert = UIAlertController(
             title: "Account deleted",
-            message: "We are arranging for the deletion of your details as you requested, and you are now logged out. Thank you for using Workfinder.",
+            message: "We are arranging for the deletion of your details as you requested, and you are now logged out.\nThank you for using Workfinder.",
             preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "Close", style: .default) { [weak self] (action) in
             self?.navigationController?.popViewController(animated: true)
