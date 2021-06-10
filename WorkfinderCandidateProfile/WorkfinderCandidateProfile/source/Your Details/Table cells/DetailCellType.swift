@@ -9,12 +9,15 @@ import Foundation
 import WorkfinderCommon
 
 enum DetailCellType {
-    case fullname
+    case firstname
+    case lastname
     case email
     case password
     case phone
+    case smsPreference
     case dob
     case postcode
+    case removeAccount
     case picklist(AccountPicklistType)
     
     var textValidityState: ((String?) -> ValidityState)? {
@@ -28,9 +31,13 @@ enum DetailCellType {
     
     var textValidator: ((String?) -> Bool)? {
         switch self {
-        case .fullname:
+        case .firstname:
             return { string in
-                string?.isValidFullname() ?? !self.isRequired
+                string?.isValidNameComponent ?? !self.isRequired
+            }
+        case .lastname:
+            return { string in
+                string?.isValidNameComponent ?? !self.isRequired
             }
         case .email:
             return { string in
@@ -42,6 +49,8 @@ enum DetailCellType {
             return { string in
                 string?.isPhoneNumber() ?? !self.isRequired
             }
+        case .smsPreference:
+            return nil
         case .dob:
             return nil
         case .postcode:
@@ -50,6 +59,8 @@ enum DetailCellType {
                 return string?.isUKPostcode() == true
             }
         case .picklist:
+            return nil
+        case .removeAccount:
             return nil
         }
     }
@@ -61,43 +72,52 @@ enum DetailCellType {
     
     var title: String? {
         switch self {
-        case .fullname: return "Full Name"
+        case .firstname: return "First Name"
+        case .lastname: return "Last Name"
         case .email: return "Email Address"
         case .password: return "Password"
         case .phone: return "Phone Number"
+        case .smsPreference: return "Messaging Preference"
         case .dob: return "Date of Birth"
         case .postcode: return "Postcode"
         case .picklist(let type): return type.title
+        case .removeAccount: return "Close your Workfinder account"
         }
     }
     
     var dataType: DataType {
         switch self {
-        case .fullname: return .text(.fullname)
+        case .firstname: return .text(.firstname)
+        case .lastname: return .text(.firstname)
         case .email: return .text(.email)
         case .password: return .password
         case .phone: return .text(.phone)
+        case .smsPreference: return .boolean
         case .dob: return .date
         case .postcode: return .text(.postcode)
         case .picklist(let type): return .picklist(type)
+        case .removeAccount: return .action
         }
     }
     
     var placeholderText: String? {
         switch self {
-        case .fullname: return "Full name"
+        case .firstname: return "First name"
+        case .lastname: return "Last name"
         case .email: return "Email address"
         case .password: return nil
         case .phone: return "Phone"
+        case .smsPreference: return "SMS preference"
         case .dob: return "Tap to enter date of birth"
         case .postcode: return "Postcode"
         case .picklist(_): return nil
+        case .removeAccount: return nil
         }
     }
     
     var isRequired: Bool {
         switch self {
-        case .fullname, .email, .phone, .dob:
+        case .firstname, .lastname, .email, .phone, .dob:
             return true
         default:
             return false
@@ -106,13 +126,15 @@ enum DetailCellType {
     
     var description: String? {
         switch self {
-        case .fullname: return nil
+        case .firstname, .lastname: return nil
         case .email: return nil
         case .password: return nil
-        case .phone: return nil
-        case .dob: return "Required for us to process your application for certain roles"
-        case .postcode: return "This allows us to bring employers to your attention that are local to you"
+        case .phone: return "Add your mobile number to help employers contact you when you are offered a role"
+        case .smsPreference: return "Allow Workfinder to contact me about personalised opportunities through text messages"
+        case .dob: return nil
+        case .postcode: return "This allows us to bring opportunities to your attention that are local to you"
         case .picklist(let type): return type.reasonForCollection
+        case .removeAccount: return "You can remove your account at any time. Please note that all previous applications and profile data will be lost."
         }
     }
     
@@ -155,10 +177,13 @@ enum DataType {
     case date
     case picklist(AccountPicklistType)
     case password
+    case boolean
+    case action
 }
 
 enum StringType {
-    case fullname
+    case firstname
+    case lastname
     case email
     case phone
     case postcode

@@ -44,16 +44,24 @@ class AccountPicklist {
     
     func reload(completion: @escaping (Error?) -> Void) {
         switch type {
+        case .countryOfResidence:
+            service.getCountriesPicklist { [weak self] (result) in
+                self?.handleServiceResult(result, completion: completion)
+            }
         case .language:
-            service.getLanguagesPicklistcompletion { [weak self] (result) in
+            service.getLanguagesPicklist { [weak self] (result) in
+                self?.handleServiceResult(result, completion: completion)
+            }
+        case .educationLevel:
+            service.getEducationLevelsPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .gender:
-            service.getGendersPicklistcompletion { [weak self] (result) in
+            service.getGendersPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         case .ethnicity:
-            service.getEthnicitiesPicklistcompletion { [weak self] (result) in
+            service.getEthnicitiesPicklist { [weak self] (result) in
                 self?.handleServiceResult(result, completion: completion)
             }
         }
@@ -166,13 +174,17 @@ extension AccountPicklist {
 }
 
 enum AccountPicklistType: Int, CaseIterable {
+    case countryOfResidence
     case language
+    case educationLevel
     case gender
     case ethnicity
     
     var title: String {
         switch self {
-        case .language: return "Languages"
+        case .countryOfResidence: return "Country of Residence"
+        case .language: return "Languages you are proficient in"
+        case .educationLevel: return "Current Educational Level"
         case .ethnicity: return "Ethnicity"
         case .gender: return "Gender identity"
         }
@@ -180,7 +192,9 @@ enum AccountPicklistType: Int, CaseIterable {
     
     var showSearchBar: Bool {
         switch self {
+        case .countryOfResidence: return true
         case .language: return true
+        case .educationLevel: return false
         case .gender: return false
         case .ethnicity: return false
         }
@@ -188,7 +202,9 @@ enum AccountPicklistType: Int, CaseIterable {
     
     var instruction: String {
         switch self {
+        case .countryOfResidence: return "Select your country of residence"
         case .language: return "Select up to 10 languages"
+        case .educationLevel: return "Select your current education level"
         case .ethnicity: return "Select the ethnicity you most identify with"
         case .gender: return "Select the gender identity you most identify with"
         }
@@ -196,7 +212,9 @@ enum AccountPicklistType: Int, CaseIterable {
     
     var maxSelections: Int {
         switch self {
+        case .countryOfResidence: return 1
         case .ethnicity: return 1
+        case .educationLevel: return 1
         case .gender: return 1
         case .language: return 10
         }
@@ -204,7 +222,9 @@ enum AccountPicklistType: Int, CaseIterable {
     
     var reasonForCollection: String {
         switch self {
+        case .countryOfResidence: return "Select a country for personalised and localised opportunities"
         case .language: return "Giving us this information allows us to bring to your attention roles from employers who have specific language needs"
+        case .educationLevel: return "Some roles require candidates to have specific qualifications and we use this to recommend suitable roles and opportunitites to you"
         case .gender: return "We collect this information in line with our D&I policy"
         case .ethnicity: return "We collect this information in line with our D&I policy"
         }

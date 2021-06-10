@@ -19,30 +19,17 @@ class PreferencesViewController:  WFViewController {
     }
     
     func removeAccountRequested() {
-        let alert = UIAlertController(title: "Are you sure you want us to remove your account?", message: "If you are sure, we will delete your details from our database.\nThis cannot be undone.", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let removeAction = UIAlertAction(title: "Remove", style: .destructive) { [weak self] (action) in
-            self?.coordinator?.permanentlyRemoveAccountFromServer() { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(_):
-                    self.removeAccountCompleted()
-                case .failure(let error):
-                    self.messageHandler.displayOptionalErrorIfNotNil(error) {
-                        return
-                    } retryHandler: {
-                        self.removeAccountRequested()
-                    }
-                }
-            }
-        }
-        alert.addAction(cancelAction)
-        alert.addAction(removeAction)
-        present(alert, animated: true, completion: nil)
+        guard let coordinator = coordinator else { return }
+        let vc = RemoveAccountViewController(coordinator: coordinator, onRemoveAccountSubmitted: removeAccountCompleted)
+        navigationController?.present(vc, animated: true, completion: nil)
+        return
     }
     
     func removeAccountCompleted() {
-        let alert = UIAlertController(title: "Account deleted", message: "We are arranging for the deletion of your details as you requested, and you are now logged out. Thank you for using Workfinder.", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Account deleted",
+            message: "We are arranging for the deletion of your details as you requested, and you are now logged out.\nThank you for using Workfinder.",
+            preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "Close", style: .default) { [weak self] (action) in
             self?.navigationController?.popViewController(animated: true)
         }

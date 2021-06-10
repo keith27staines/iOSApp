@@ -27,9 +27,10 @@ public class SignInUserService: WorkfinderService, SignInUserServiceProtocol {
 
 public class UpdateUserService: WorkfinderService {
     
-    public func deleteAccount(completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
+    public func deleteAccount(email: String, completion: @escaping (Result<DeleteAccountJson,Error>) -> Void) {
         do {
-            let request = try buildRequest(relativePath: "users/me/", queryItems: nil, verb: .delete)
+            let body = ["email":email]
+            let request = try buildRequest(relativePath: "users/me/", verb: .delete, body: body)
             performTask(with: request, completion: completion, attempting: #function)
         } catch {
             completion(.failure(error))
@@ -40,13 +41,21 @@ public class UpdateUserService: WorkfinderService {
         do {
             struct UserPatch: Codable {
                 var full_name: String?
+                var first_name: String?
+                var last_name: String?
+                var nickname: String?
                 var email: String?
                 var opted_into_marketing: Bool
+                var country: String?
             }
             let userPatch = UserPatch(
                 full_name: user.fullname,
+                first_name: user.firstname,
+                last_name: user.lastname,
+                nickname: user.firstname,
                 email: user.email,
-                opted_into_marketing: user.optedIntoMarketing ?? false
+                opted_into_marketing: user.optedIntoMarketing ?? false,
+                country: user.countryOfResidence ?? ""
             )
             let request = try buildRequest(relativePath: "users/me/", verb: .patch, body: userPatch)
             performTask(with: request, verbose: true, completion: completion, attempting: #function)
@@ -78,13 +87,13 @@ public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol
         var email: String
         var password1: String
         var password2: String
-        var nickname: String
-        var full_name: String
+        var first_name: String
+        var last_name: String
         var referrer: F4SUUID?
         
         public init(user: User) {
-            self.full_name = user.fullname ?? ""
-            self.nickname = user.nickname ?? ""
+            self.first_name = user.firstname ?? ""
+            self.last_name = user.lastname ?? ""
             self.email = user.email ?? ""
             self.password1 = user.password ?? ""
             self.password2 = user.password ?? ""
@@ -101,7 +110,7 @@ public class FetchMeService: WorkfinderService, FetchMeProtocol {
     public func fetch(completion: @escaping((Result<User,Error>) -> Void) ) {
         do {
             let request = try buildRequest(relativePath: "users/me", queryItems: [], verb: .get)
-            performTask(with: request, completion: completion, attempting: #function)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {
             completion(Result<User,Error>.failure(error))
         }

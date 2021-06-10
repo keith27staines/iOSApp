@@ -11,6 +11,7 @@ import WorkfinderServices
 class YourDetailsPresenter: BaseAccountPresenter {
     
     var viewController: YourDetailsViewController?
+    var cellsForIndexPath = [IndexPath:DetailCell]()
     
     enum TableSection: Int, CaseIterable {
         case yourInformation
@@ -18,25 +19,37 @@ class YourDetailsPresenter: BaseAccountPresenter {
         
         var title: String {
             switch self {
-            case .yourInformation: return "Your Notifications"
-            case .additionalInformation: return "Additional information"
+            case .yourInformation: return "Profile Information"
+            case .additionalInformation: return "Account Management"
+            }
+        }
+        
+        var subtitle: String {
+            switch self {
+            case .yourInformation: return "Manage information associated with your profile.\nAsterisk (*) indicates required"
+            case .additionalInformation: return "Manage your account "
             }
         }
     }
     
     lazy var allCellPresenters: [[DetailCellPresenter]] = [
         [
-            DetailCellPresenter(type: .fullname, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .password),
+            DetailCellPresenter(type: .firstname, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .lastname, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:))
-        ],
-        [
+            DetailCellPresenter(type: .smsPreference),
+            DetailCellPresenter(type: .picklist(.countryOfResidence), picklist: picklistFor(type: .countryOfResidence)),
             DetailCellPresenter(type: .postcode, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .picklist(.language), picklist: picklistFor(type: .language)),
+            DetailCellPresenter(type: .picklist(.educationLevel), picklist: picklistFor(type: .educationLevel)),
             DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
-            DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity))
+            DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity)),
+        ],
+        [
+            DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
+            DetailCellPresenter(type: .password),
+            DetailCellPresenter(type: .removeAccount),
         ]
     ]
     
@@ -103,14 +116,18 @@ class YourDetailsPresenter: BaseAccountPresenter {
         allCellPresenters.forEach { (sectionPresenters) in
             sectionPresenters.forEach { (presenter) in
                 switch presenter.type {
-                case .fullname:
-                    user.fullname = presenter.text ?? ""
+                case .firstname:
+                    user.firstname = presenter.text ?? ""
+                case .lastname:
+                    user.lastname = presenter.text ?? ""
                 case .email:
                     user.email = presenter.text
                 case .password:
                     break
                 case .phone:
                     candidate.phone = presenter.text
+                case .smsPreference:
+                    candidate.preferSMS = presenter.isOn
                 case .dob:
                     candidate.dateOfBirth = presenter.date?.workfinderDateString
                 case .postcode:
@@ -126,7 +143,13 @@ class YourDetailsPresenter: BaseAccountPresenter {
                         candidate.gender = picklist.selectedItems.first?.id
                     case .ethnicity:
                         candidate.ethnicity = picklist.selectedItems.first?.id
+                    case .countryOfResidence:
+                        user.countryOfResidence = picklist.selectedItems.first?.id
+                    case .educationLevel:
+                        candidate.educationLevel = picklist.selectedItems.first?.id
                     }
+                case .removeAccount:
+                    break
                 }
             }
         }
@@ -140,10 +163,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = TableSection(rawValue: section) else { return 0 }
-        switch section {
-        case .yourInformation: return 5
-        case .additionalInformation: return 4
-        }
+        return allCellPresenters[section.rawValue].count
     }
     
     override init(coordinator: AccountCoordinator, accountService: AccountServiceProtocol) {
@@ -160,17 +180,24 @@ class YourDetailsPresenter: BaseAccountPresenter {
         
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let section = TableSection(rawValue: section) else { return nil }
-        switch section {
-        case .yourInformation:
-            return "Your information"
-        case .additionalInformation:
-            return "Additional information"
-        }
+        return section.title
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let section = TableSection(rawValue: section) else { return nil }
+        let view = SectionHeaderView(section: section)
+        return view
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let presenter = presenterForIndexPath(indexPath)
-        let cell = DetailCell()
+        let cell: DetailCell
+        if let existingCell = cellsForIndexPath[indexPath] {
+            cell = existingCell
+        } else {
+            cell = DetailCell()
+            cellsForIndexPath[indexPath] = cell
+        }
         cell.configureWith(presenter: presenter)
         return cell
     }
@@ -178,14 +205,18 @@ class YourDetailsPresenter: BaseAccountPresenter {
     func presenterForIndexPath(_ indexPath: IndexPath) -> DetailCellPresenter {
         let presenter = allCellPresenters[indexPath.section][indexPath.row]
         switch presenter.type {
-        case .fullname:
-            presenter.text = user.fullname
+        case .firstname:
+            presenter.text = user.firstname
+        case .lastname:
+            presenter.text = user.lastname
         case .email:
             presenter.text = user.email
         case .password:
             presenter.text = user.password
         case .phone:
             presenter.text = candidate.phone
+        case .smsPreference:
+            presenter.isOn = candidate.preferSMS ?? false
         case .dob:
             presenter.date = nil
             if let dob = candidate.dateOfBirth {
@@ -200,8 +231,12 @@ class YourDetailsPresenter: BaseAccountPresenter {
             let picklist = picklistFor(type: type)
             if !picklist.isLocallySynchronised {
                 switch picklist.type {
+                case .countryOfResidence:
+                    selectItemsFromIds([user.countryOfResidence ?? ""], for: picklist)
                 case .language:
                     selectItemsFromIds(candidate.languages ?? [], for: picklist)
+                case .educationLevel:
+                    selectItemsFromIds([candidate.educationLevel ?? ""], for: picklist)
                 case .gender:
                     selectItemsFromIds([candidate.gender ?? ""], for: picklist)
                 case .ethnicity:
@@ -209,6 +244,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
                 }
             }
             picklist.isLocallySynchronised = true
+        case .removeAccount:
+            break
         }
         return presenter
     }
@@ -232,14 +269,17 @@ class YourDetailsPresenter: BaseAccountPresenter {
             }
         case .password:
             coordinator?.showChangePassword()
+        case .action:
+            viewController?.removeAccountRequested()
         default:
             return
         }
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        guard TableSection(rawValue: indexPath.section) != nil else { return false }
-        return true
+        let presenter = presenterForIndexPath(indexPath)
+        if presenter.shouldSelectRow { viewController?.view.endEditing(false) }
+        return presenter.shouldSelectRow
     }
     
     deinit {

@@ -18,15 +18,15 @@ class AccountPresenter: BaseAccountPresenter {
     let links: [WorkfinderContentType] = [.about, .faqs, .terms, .privacyPolicy]
     let accountSections: [AccountSectionInfo] = [
         AccountSectionInfo(
-            image: UIImage(named: "your_details_icon"),
-            title: "Your Details",
+            image: UIImage(named: "settings_icon"),
+            title: "Account Settings",
             calculator: YourDetailsSectionProgressCalculator()
         ),
-        AccountSectionInfo(
-            image: UIImage(named: "settings_icon"),
-            title: "Account Preferences",
-            calculator: nil
-        ),
+//        AccountSectionInfo(
+//            image: UIImage(named: "settings_icon"),
+//            title: "Account Preferences",
+//            calculator: nil
+//        ),
     ]
     
     var footerLabelText: String {

@@ -15,9 +15,10 @@ class DetailCell:  UITableViewCell {
     lazy var titleLabel:  UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor.init(white: 0.56, alpha: 1)
+        label.textColor = UIColor.init(white: 0.46, alpha: 1)
         label.numberOfLines = 1
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
     
@@ -49,28 +50,30 @@ class DetailCell:  UITableViewCell {
         return stack
     }()
     
-    lazy var descriptionLabel:  UILabel = {
+    lazy var descriptionStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+                descriptionLabel,
+                booleanSwitch
+            ]
+        )
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        stack.spacing = 12
+        return stack
+    }()
+    
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = UIColor.init(white: 0.56, alpha: 1)
         label.numberOfLines = 0
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        let width = label.widthAnchor.constraint(equalToConstant: 1000)
+        width.priority = .defaultHigh
+        width.isActive = true
         return label
     }()
-    
-/*
-    lazy var textfield:  UITextField = {
-        let text = UITextField()
-        text.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        text.textColor = UIColor.init(white: 0.15, alpha: 1)
-        text.borderStyle = .roundedRect
-        text.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        text.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        text.delegate = self
-        return text
-    }()
-*/
     
     lazy var textfieldStack: ValidatedTextFieldStack = {
         let stack = ValidatedTextFieldStack(state: .empty)
@@ -127,7 +130,6 @@ class DetailCell:  UITableViewCell {
         return label
     }()
     
-    
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         if #available(iOS 13.4, *) {
@@ -153,15 +155,27 @@ class DetailCell:  UITableViewCell {
     lazy var leftStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
                 titleStack,
-                descriptionLabel
+                descriptionStack
             ]
         )
         stack.setContentHuggingPriority(.defaultLow, for: .horizontal)
         stack.axis = .vertical
         stack.spacing = 8
         stack.distribution = .fill
+        stack.alignment = .fill
         return stack
     }()
+    
+    lazy var booleanSwitch: UISwitch = {
+        let view = UISwitch()
+        view.setContentHuggingPriority(.defaultLow, for: .vertical)
+        view.addTarget(self, action: #selector(onBoolValueChanged), for: .valueChanged)
+        return view
+    }()
+    
+    @objc func onBoolValueChanged(sender: UISwitch) {
+        presenter?.isOn = sender.isOn
+    }
     
     lazy var disclosureLabel:  UILabel = {
         let label = UILabel()
@@ -171,7 +185,6 @@ class DetailCell:  UITableViewCell {
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
-    
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -193,6 +206,7 @@ class DetailCell:  UITableViewCell {
         titleLabel.isHidden = type.title == nil
         titleAsterisk.isHidden = !type.isRequired || titleLabel.isHidden
         descriptionLabel.isHidden = type.description == nil
+        booleanSwitch.isHidden = true
         let textfield = textfieldStack.textfield
         textfield.text = presenter.text
         switch type.dataType {
@@ -200,7 +214,7 @@ class DetailCell:  UITableViewCell {
             leftStack.addArrangedSubview(textfieldStack)
             textfield.placeholder = type.placeholderText
             switch textType {
-            case .fullname:
+            case .firstname, .lastname:
                 textfield.autocapitalizationType = .words
                 textfield.autocorrectionType = .no
                 textfield.textContentType = .name
@@ -223,24 +237,36 @@ class DetailCell:  UITableViewCell {
             }
         case .password:
             leftStack.addArrangedSubview(passwordLabel)
+        case .boolean:
+            descriptionLabel.numberOfLines = 3
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 280).isActive = true
+            booleanSwitch.isHidden = false
+            booleanSwitch.isOn = presenter.isOn
         case .date:
             leftStack.addArrangedSubview(dateField)
             dateField.placeholder = type.placeholderText
         case .picklist(let picklistType):
             switch picklistType {
+            case .countryOfResidence:
+                break
             case .language:
+                break
+            case .educationLevel:
                 break
             case .gender:
                 break
             case .ethnicity:
                 break
             }
+        case .action:
+            break
         }
         dateField.text = presenter.formattedDate
         updateValidityState()
         disclosureLabel.text = presenter.disclosureText
         disclosureLabel.isHidden = (presenter.disclosureText ?? "").isEmpty
         accessoryType = presenter.accessoryType
+        layoutSubviews()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

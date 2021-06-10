@@ -13,6 +13,8 @@
 		530C4DC925D5C0B40032CFC8 /* RequestAppReviewLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DC825D5C0B30032CFC8 /* RequestAppReviewLogicTests.swift */; };
 		530C4DD425D6273F0032CFC8 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DD325D6273F0032CFC8 /* SemanticVersion.swift */; };
 		530C4DD825D6275F0032CFC8 /* SemanticVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */; };
+		531D46DF265F7C1800B34453 /* NullEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D46DE265F7C1800B34453 /* NullEncodable.swift */; };
+		531D46E1265F7C4A00B34453 /* NullEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */; };
 		53659CA62620C81700CFF49E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA52620C81700CFF49E /* Account.swift */; };
 		53724B6126273BAA00908D50 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B6026273BAA00908D50 /* AccountPicklist.swift */; };
 		53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BEE263065B000908D50 /* DeleteAccountJson.swift */; };
@@ -143,6 +145,8 @@
 		530C4DC825D5C0B30032CFC8 /* RequestAppReviewLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppReviewLogicTests.swift; sourceTree = "<group>"; };
 		530C4DD325D6273F0032CFC8 /* SemanticVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
 		530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersionTests.swift; sourceTree = "<group>"; };
+		531D46DE265F7C1800B34453 /* NullEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullEncodable.swift; sourceTree = "<group>"; };
+		531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullEncodableTests.swift; sourceTree = "<group>"; };
 		53659CA52620C81700CFF49E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		53724B6026273BAA00908D50 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
 		53724BEE263065B000908D50 /* DeleteAccountJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountJson.swift; sourceTree = "<group>"; };
@@ -448,6 +452,7 @@
 		FCA91E6D2234043D007ED308 /* WorkfinderCommon */ = {
 			isa = PBXGroup;
 			children = (
+				531D46DE265F7C1800B34453 /* NullEncodable.swift */,
 				53724B5F26273B8E00908D50 /* AccountPicklist */,
 				5384694525DEB01F000654E7 /* Geocoding.swift */,
 				530C4DC025D5C0660032CFC8 /* RequestAppReviewLogic.swift */,
@@ -498,6 +503,7 @@
 				FC12B10422F341D500C33410 /* JsonDateFormatterExtensionTests.swift */,
 				FCEE3EF5249A645A0034C226 /* CandidateTests.swift */,
 				53964E9A25C13E780061FDB5 /* TrackingEvent-queue-and-processor tests */,
+				531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -770,6 +776,7 @@
 				FC8F9580233BA6710027BE02 /* MockDatabaseDownload.swift in Sources */,
 				5307B2F9259468150080F2EF /* TrackingEventType.swift in Sources */,
 				FCE5192122493D3300B550C9 /* Date+Extensions.swift in Sources */,
+				531D46DF265F7C1800B34453 /* NullEncodable.swift in Sources */,
 				FCA2901B247F636100588F6E /* String+isEmail.swift in Sources */,
 				FCC1DF5F232507530074D5C1 /* SocialShare.swift in Sources */,
 				FC18C5BA24C18EBB006D017D /* ProjectTypeJson.swift in Sources */,
@@ -851,6 +858,7 @@
 				530C4DC925D5C0B40032CFC8 /* RequestAppReviewLogicTests.swift in Sources */,
 				53C7605D251B704B0072281E /* DeeplinkInfoTests.swift in Sources */,
 				FC7FF7BF249A3F3A00F9093B /* F4SDateHelperTests.swift in Sources */,
+				531D46E1265F7C4A00B34453 /* NullEncodableTests.swift in Sources */,
 				53BC509425C0B9EF00D84EE0 /* TrackingEventQueueTests.swift in Sources */,
 				FC3C701D24ADF96E004869D0 /* DecodeJsonTests.swift in Sources */,
 				FC7FF7C2249A3F5900F9093B /* RequestVerbTests.swift in Sources */,

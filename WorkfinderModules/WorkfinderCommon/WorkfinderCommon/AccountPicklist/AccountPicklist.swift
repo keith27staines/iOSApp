@@ -12,6 +12,35 @@ public protocol IdentifiedAndNamed {
     var category: String? { get set }
 }
 
+public struct EducationLevel: IdentifiedAndNamed, Codable {
+    public var id: String?
+    public var name: String?
+    public var category: String?
+    public init(id: String?, name: String?) {
+        self.id = id
+        self.name = name
+    }
+    private enum CodingKeys: String, CodingKey {
+        case id = "value"
+        case name = "label"
+    }
+}
+
+public struct Country: IdentifiedAndNamed, Codable {
+    public var id: String?
+    public var name: String?
+    public var category: String?
+    public init(id: String?, name: String? = nil) {
+        self.id = id
+        self.name = name
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "iso"
+        case name
+    }
+}
+
 public struct Language: IdentifiedAndNamed, Codable {
     public var id: String? {
         get { return name }
