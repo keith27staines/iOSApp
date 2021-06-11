@@ -10,20 +10,11 @@ class RegisterUserPresenter: RegisterAndSignInUserBasePresenter {
     
     override var isPrimaryButtonEnabled: Bool {
         let isValid = UnderlineView.State.good
-        if self.isGuardianEmailRequired {
-            return self.isTermsAndConditionsAgreed &&
-                isValid == firstnameValidityState &&
-                isValid == lastnameValidityState &&
-                isValid == emailValidityState &&
-                isValid == guardianValidityState &&
-                isValid == passwordValidityState &&
-                isValid == phoneValidityState
-        }
+
         return self.isTermsAndConditionsAgreed &&
             isValid == firstnameValidityState &&
             isValid == lastnameValidityState &&
             isValid == emailValidityState &&
-            isValid == passwordValidityState &&
-            isValid == phoneValidityState
+            isValid == passwordValidityState
     }
 }

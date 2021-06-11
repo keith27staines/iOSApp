@@ -89,22 +89,12 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     // MARK:- Title stack
     lazy var titleStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            self.titleLabel,
             self.switchModeStack
         ])
         stack.axis = .vertical
         stack.spacing = 8
         stack.alignment = .center
         return stack
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.textColor = UIColor.darkText
-        label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.text = NSLocalizedString(mode.screenHeadingText, comment: "")
-        return label
     }()
     
     lazy var switchModeStack: UIStackView = {
@@ -158,21 +148,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return stack
     }()
     
-    lazy var guardianEmail: UnderlinedNextResponderTextFieldStack = {
-        let fieldName = NSLocalizedString("Parent or guardian email", comment: "")
-        let stack = self.makeTextStack(fieldName: fieldName)
-        let textField = stack.textfield
-        textField.textColor = UIColor.darkText
-        textField.returnKeyType = .next
-        textField.keyboardType = .emailAddress
-        textField.textContentType = .emailAddress
-        textField.autocorrectionType = .no
-        textField.placeholder = fieldName
-        textField.autocapitalizationType = .none
-        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
-        return stack
-    }()
-    
     lazy var firstname: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("First name", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName)
@@ -203,23 +178,9 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return stack
     }()
     
-    lazy var phone: UnderlinedNextResponderTextFieldStack = {
-        let fieldName = NSLocalizedString("Phone number", comment: "")
-        let stack = self.makeTextStack(fieldName: fieldName)
-        let textField = stack.textfield
-        textField.textColor = UIColor.darkText
-        textField.keyboardType = .phonePad
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
-        textField.textContentType = .telephoneNumber
-        textField.placeholder = fieldName
-        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField, showNextButton: true)
-        return stack
-    }()
-    
     lazy var password: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("password", comment: "")
-        let stack = self.makeTextStack(fieldName: fieldName, nextResponder: self.phone.textfield)
+        let stack = self.makeTextStack(fieldName: fieldName, nextResponder: nil)
         stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
         stack.textfield.textColor = UIColor.darkText
         stack.textfield.autocapitalizationType = .none
@@ -339,8 +300,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
     lazy var switchesStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             self.termsAndConditionsStack,
-            self.shareWithEmployers,
-            self.shareWithEducationalInstitutionStack
         ])
         stack.axis = .vertical
         stack.spacing = 28
@@ -356,26 +315,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let title = NSLocalizedString("I accept Workfinder's", comment: "I accept Workfinder's [e.g. terms of service]")
         let link = NSLocalizedString("Terms of service", comment: "")
         let selector = #selector(showTermsAndConditions)
-        return makeSwitchLinkLabel(text: title, linkText: link, selector: selector)
-    }()
-    
-    lazy var shareWithEmployers: UIStackView = {
-        let text = "I agree for Workfinder to share my profile with other relevant employers"
-        let label = makeSwitchLabel(text: text)
-        return makeSwitchStack(theSwitch: shareWithEmployersSwitch, label: label)
-    }()
-    
-    lazy var shareWithEmployersSwitch: UISwitch = { makeSwitch(selector: #selector(shareWithEmployersChanged)) }()
-    
-    lazy var shareWithEducationalInstitutionStack: UIStackView = {
-        makeSwitchStack(theSwitch: shareWithEducationalInstitutionSwitch, label: shareWithEducationalInstitutionLabel)
-    }()
-    lazy var shareWithEducationalInstitutionSwitch: UISwitch = { makeSwitch(selector: #selector(shareWithEducationalInstitutionChanged)) }()
-
-    lazy var shareWithEducationalInstitutionLabel: UILabel = {
-        let title = "I agree to share my information with my educational institution"
-        let link = "Find out more"
-        let selector = #selector(showFindOutMoreAlert)
         return makeSwitchLinkLabel(text: title, linkText: link, selector: selector)
     }()
 }

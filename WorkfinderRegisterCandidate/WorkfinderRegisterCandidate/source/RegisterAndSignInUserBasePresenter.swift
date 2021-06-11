@@ -8,18 +8,11 @@ protocol RegisterAndSignInPresenterProtocol: AnyObject {
     var firstname: String? { get set }
     var lastname: String? { get set }
     var email: String? { get set }
-    var guardianEmail: String? { get set }
-    var allowedSharingWithEmployers: Bool? { get set }
-    var allowedSharingWithEducationInstitution: Bool? { get set }
     var password: String? { get set }
-    var phone: String? { get set }
     var firstnameValidityState: UnderlineView.State { get }
     var lastnameValidityState: UnderlineView.State { get }
     var emailValidityState: UnderlineView.State { get }
-    var guardianValidityState: UnderlineView.State { get }
     var passwordValidityState: UnderlineView.State { get }
-    var phoneValidityState: UnderlineView.State { get }
-    var isGuardianEmailRequired: Bool { get }
     var isPrimaryButtonEnabled: Bool { get }
     func onDidTapPrimaryButton(from vc: UIViewController, onFailure: @escaping ((Error) -> Void))
     func onDidTapSwitchMode()
@@ -39,11 +32,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     
     var isPrimaryButtonEnabled: Bool {
         return false
-    }
-    
-    var isGuardianEmailRequired: Bool {
-        guard let age = self.userRepository.loadCandidate().age() else { return false }
-        return age < 18
     }
     
     init(coordinator: RegisterAndSignInCoordinatorProtocol,
@@ -87,42 +75,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set { user.email = newValue }
     }
     
-    var guardianEmail: String? {
-        get { userRepository.loadCandidate().guardianEmail }
-        set {
-            var candidate = userRepository.loadCandidate()
-            candidate.guardianEmail = newValue
-            userRepository.saveCandidate(candidate)
-        }
-    }
-    
-    var allowedSharingWithEmployers: Bool? {
-        get { userRepository.loadCandidate().allowedSharingWithEmployers }
-        set {
-            var candidate = userRepository.loadCandidate()
-            candidate.allowedSharingWithEmployers = newValue
-            userRepository.saveCandidate(candidate)
-        }
-    }
-    
-    var allowedSharingWithEducationInstitution: Bool? {
-        get { userRepository.loadCandidate().allowedSharingWithEducationInstitution }
-        set {
-            var candidate = userRepository.loadCandidate()
-            candidate.allowedSharingWithEducationInstitution = newValue
-            userRepository.saveCandidate(candidate)
-        }
-    }
-    
-    var phone: String? {
-        get { userRepository.loadCandidate().phone }
-        set {
-            var candidate = userRepository.loadCandidate()
-            candidate.phone = newValue
-            userRepository.saveCandidate(candidate)
-        }
-    }
-    
     var firstname: String? {
         get { user.firstname }
         set { user.firstname = newValue }
@@ -142,10 +94,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         return _emailValidator(email ?? "")
     }
     
-    var guardianValidityState: UnderlineView.State {
-        return _emailValidator(guardianEmail ?? "")
-    }
-    
     var passwordValidityState: UnderlineView.State {
         return _passwordValidator(password ?? "")
     }
@@ -156,10 +104,6 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
     
     var lastnameValidityState: UnderlineView.State {
         return _nameComponentValidator(lastname ?? "")
-    }
-    
-    var phoneValidityState: UnderlineView.State {
-        return _phoneValidator(phone ?? "")
     }
 
     var isTermsAndConditionsAgreed: Bool = false
