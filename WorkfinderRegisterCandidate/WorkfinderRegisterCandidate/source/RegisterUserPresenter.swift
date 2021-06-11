@@ -15,6 +15,7 @@ class RegisterUserPresenter: RegisterAndSignInUserBasePresenter {
             isValid == firstnameValidityState &&
             isValid == lastnameValidityState &&
             isValid == emailValidityState &&
-            isValid == passwordValidityState
+            isValid == passwordValidityState &&
+            isValid == password2ValidityState
     }
 }

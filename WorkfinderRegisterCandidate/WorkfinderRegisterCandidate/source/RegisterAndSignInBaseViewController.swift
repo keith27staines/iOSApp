@@ -191,6 +191,19 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return stack
     }()
     
+    lazy var password2: UnderlinedNextResponderTextFieldStack = {
+        let fieldName = NSLocalizedString("Confirm password", comment: "")
+        let stack = self.makeTextStack(fieldName: fieldName, nextResponder: nil)
+        stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
+        stack.textfield.textColor = UIColor.darkText
+        stack.textfield.autocapitalizationType = .none
+        stack.textfield.autocorrectionType = .no
+        stack.textfield.returnKeyType = .done
+        stack.textfield.isSecureTextEntry = true
+        stack.textfield.placeholder = NSLocalizedString("Confirm password", comment: "prompt user to enter password")
+        return stack
+    }()
+    
     lazy var passwordInstructionLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.darkText
@@ -200,11 +213,23 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         label.textColor = UIColor(red: 33, green: 33, blue: 33)
         return label
     }()
-    
+
+    lazy var password2InstructionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.darkText
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .caption2)
+        label.text = "Passwords must match!"
+        label.textColor = UIColor(red: 33, green: 33, blue: 33)
+        return label
+    }()
+
     lazy var passwordStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             self.password,
-            self.passwordInstructionLabel
+            self.passwordInstructionLabel,
+            self.password2,
+            self.password2InstructionLabel
         ])
         stack.axis = .vertical
         stack.spacing = 8

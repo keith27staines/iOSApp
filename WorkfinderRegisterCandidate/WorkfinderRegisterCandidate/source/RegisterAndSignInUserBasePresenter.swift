@@ -9,10 +9,12 @@ protocol RegisterAndSignInPresenterProtocol: AnyObject {
     var lastname: String? { get set }
     var email: String? { get set }
     var password: String? { get set }
+    var password2: String? { get set }
     var firstnameValidityState: UnderlineView.State { get }
     var lastnameValidityState: UnderlineView.State { get }
     var emailValidityState: UnderlineView.State { get }
     var passwordValidityState: UnderlineView.State { get }
+    var password2ValidityState: UnderlineView.State { get }
     var isPrimaryButtonEnabled: Bool { get }
     func onDidTapPrimaryButton(from vc: UIViewController, onFailure: @escaping ((Error) -> Void))
     func onDidTapSwitchMode()
@@ -90,12 +92,18 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
         set { user.password = newValue }
     }
     
+    var password2: String?
+    
     var emailValidityState: UnderlineView.State {
         return _emailValidator(email ?? "")
     }
     
     var passwordValidityState: UnderlineView.State {
         return _passwordValidator(password ?? "")
+    }
+    
+    var password2ValidityState: UnderlineView.State {
+        return _password2Validator(password2 ?? "")
     }
     
     var firstnameValidityState: UnderlineView.State {
@@ -121,6 +129,12 @@ class RegisterAndSignInUserBasePresenter: RegisterAndSignInPresenterProtocol {
             !numbersSet.intersection(passwordSet).isEmpty
             else { return UnderlineView.State.bad }
         return RegisterAndSignInUserBasePresenter.validateCharacterCount(string: password, min: 8, max: 20)
+    }
+    
+    lazy var _password2Validator: (String) -> UnderlineView.State = { password in
+        if self.passwordValidityState == .good && self.password == password { return .good }
+        if self.password2 == nil || self.password2 == "" { return .empty }
+        return .bad
     }
     
     let _emailValidator: (String) -> UnderlineView.State = { string in

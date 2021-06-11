@@ -31,9 +31,11 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         email.textfield.nextResponderField = firstname.textfield
         firstname.textfield.nextResponderField = lastname.textfield
         lastname.textfield.nextResponderField = password.textfield
-        password.textfield.nextResponderField = nil
+        password.textfield.nextResponderField = password2.textfield
         bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
+        password2.isHidden = false
+        password2InstructionLabel.isHidden = false
     }
     
     @objc func register() {
@@ -53,12 +55,14 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         presenter.lastname = trim(lastname.textfield.text)
         presenter.email = trim(email.textfield.text)
         presenter.password = trim(password.textfield.text)
+        presenter.password2 = trim(password2.textfield.text)
         presenter.isTermsAndConditionsAgreed = termsAgreedSwitch.isOn
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
         firstname.state = presenter.firstnameValidityState
         lastname.state = presenter.lastnameValidityState
         password.state = presenter.passwordValidityState
+        password2.state = presenter.password2ValidityState
     }
     
     private func trim(_ string:  String?) -> String? {
