@@ -4,6 +4,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderUI
+import WorkfinderLinkedinSync
 
 protocol RegisterAndSignInCoordinatorProtocol {
     func switchMode(_ mode: RegisterAndSignInMode)
@@ -54,9 +55,24 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
             onRegisterComplete()
             return
         }
-        injected.appCoordinator?.requestPushNotifications(from: vc, completion: { [weak self] in
-            self?.onRegisterComplete()
-        })
+        
+        if vc is RegisterUserViewController {
+            startSyncLinkedinData()
+        } else {
+            onRegisterComplete()
+        }
+    }
+    
+    func startSyncLinkedinData() {
+        let coordinator = SynchLinkedinCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        coordinator.syncDidComplete = self.syncLinkedInDataDidComplete
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func syncLinkedInDataDidComplete(coordinator: SynchLinkedinCoordinator) {
+        removeChildCoordinator(coordinator)
+        onRegisterComplete()
     }
     
     func onRegisterComplete() {
@@ -82,7 +98,8 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         case .register:
             switch screenOrder {
             case .loginThenRegister:
-                presentRegisterUserViewController()
+                startSyncLinkedinData()
+                // presentRegisterUserViewController()
             case .registerThenLogin:
                 navigationRouter.pop(animated: true)
             }
