@@ -138,7 +138,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     func startSigninCoordinatorIfNecessary() {
         guard isUserRegistrationWorkflowRequired
             else {
-            onCandidateIsSignedIn()
+            onCandidateIsSignedIn(preferredNextScreen: .noOpinion)
             return
         }
         let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: true)
@@ -218,7 +218,7 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
         coverletterCoordinator?.messageHandler?.hideLoadingOverlay()
     }
     
-    public func onCandidateIsSignedIn() {
+    public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
         let uuid = userRepository.loadCandidate().uuid!
         draftPlacementLogic.update(candidateUuid: uuid)
         captureDOBIfNecessary()

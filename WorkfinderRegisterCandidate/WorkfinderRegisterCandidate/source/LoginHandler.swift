@@ -7,7 +7,7 @@ import WorkfinderCoordinators
 public class LoginHandler: CoreInjectionNavigationCoordinator {
     
     let mainWindow: UIWindow?
-    var completion: ((Bool) -> Void)?
+    var completion: ((Bool, PreferredNextScreen) -> Void)?
     var registerCoordinator: RegisterAndSignInCoordinator?
     
     public init(parentCoordinator: Coordinating,
@@ -20,7 +20,7 @@ public class LoginHandler: CoreInjectionNavigationCoordinator {
     }
 
     
-    public func startLoginWorkflow(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void) {
+    public func startLoginWorkflow(screenOrder: SignInScreenOrder, completion: @escaping (Bool, PreferredNextScreen) -> Void) {
         self.completion = completion
         self.loginWindow.makeKeyAndVisible()
         let coordinator = RegisterAndSignInCoordinator(
@@ -38,13 +38,13 @@ public class LoginHandler: CoreInjectionNavigationCoordinator {
         }
     }
     
-    func complete(signedIn: Bool) {
+    func complete(signedIn: Bool, preferredNextScreen: PreferredNextScreen) {
         if let coordinator = registerCoordinator {
             removeChildCoordinator(coordinator)
         }
         loginWindow.isHidden = true
         mainWindow?.makeKeyAndVisible()
-        completion?(signedIn)
+        completion?(signedIn, preferredNextScreen)
     }
     
     lazy var rootViewController: UIViewController = {
@@ -65,8 +65,10 @@ public class LoginHandler: CoreInjectionNavigationCoordinator {
 
 extension LoginHandler: RegisterAndSignInCoordinatorParent {
     
-    public func onCandidateIsSignedIn() { complete(signedIn: true) }
+    public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
+        complete(signedIn: true, preferredNextScreen: preferredNextScreen)
+    }
     
-    public func onRegisterAndSignInCancelled() { complete(signedIn: false) }
+    public func onRegisterAndSignInCancelled() { complete(signedIn: false, preferredNextScreen: .noOpinion) }
     
 }

@@ -284,7 +284,7 @@ extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
 }
 
 extension ProjectApplyCoordinator: RegisterAndSignInCoordinatorParent {
-    public func onCandidateIsSignedIn() {
+    public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
         capturePostcodeIfNecessary()
     }
     

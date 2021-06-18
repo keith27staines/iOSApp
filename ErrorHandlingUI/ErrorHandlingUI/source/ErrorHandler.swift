@@ -68,7 +68,7 @@ extension ErrorHandler: RegisterAndSignInCoordinatorParent {
     }
     
     
-    public func onCandidateIsSignedIn() {
+    public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
         isSignedIn = true
         if let presentingViewController = presentingViewController {
             navigationRouter.popToViewController(presentingViewController, animated: true)

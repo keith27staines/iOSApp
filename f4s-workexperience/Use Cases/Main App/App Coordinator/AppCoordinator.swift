@@ -65,7 +65,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             switch self.suppressOnboarding {
             case true:
                 self.localStore.setValue(false, for: .isOnboardingRequired)
-                self.startTabBarCoordinator()
+                self.startTabBarCoordinator(preferredScreen: .noOpinion)
             case false:
                 self.startOnboarding()
             }
@@ -114,10 +114,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         onUserIsRegistered(userUuid: "")
     }
     
-    private func onboardingDidFinish(onboardingCoordinator: OnboardingCoordinatorProtocol) {
+    private func onboardingDidFinish(onboardingCoordinator: OnboardingCoordinatorProtocol, preferredNextScreen: PreferredNextScreen) {
         navigationRouter.dismiss(animated: false, completion: nil)
         removeChildCoordinator(onboardingCoordinator)
-        startTabBarCoordinator()
+        startTabBarCoordinator(preferredScreen: preferredNextScreen)
     }
     
     private func onUserIsRegistered(userUuid: F4SUUID) {
@@ -125,14 +125,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         logStartupInformation(userId: userUuid)
     }
     
-    private func startTabBarCoordinator() {
+    private func startTabBarCoordinator(preferredScreen: PreferredNextScreen) {
         let tabBarCoordinator = tabBarCoordinatorFactory.makeTabBarCoordinator(
             parent: self,
             router: navigationRouter,
             inject: injected)
         addChildCoordinator(tabBarCoordinator)
         self.tabBarCoordinator = tabBarCoordinator
-        tabBarCoordinator.start()
+        tabBarCoordinator.start(preferredScreen: preferredScreen)
     }
     
     func requestPushNotifications(from viewController: UIViewController, completion: @escaping () -> Void) {
@@ -207,7 +207,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
                 guard let workfinderError = error as? WorkfinderError else { return }
                 switch workfinderError.code {
                 case 401:
-                    self.signIn(screenOrder: .loginThenRegister) { loggedIn in
+                    self.signIn(screenOrder: .loginThenRegister) { loggedIn, _ in
                         switch loggedIn {
                         case true:
                             self.routeRecommendation(recommendationUuid: uuid, appSource: appSource)
@@ -236,7 +236,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         )
     }()
     
-    func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void) {
+    func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool, PreferredNextScreen) -> Void) {
         let loginCoordinator = LoginHandler(
             parentCoordinator: self,
             navigationRouter: self.navigationRouter,
@@ -244,10 +244,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
             coreInjection: self.injected
         )
         addChildCoordinator(loginCoordinator)
-        loginHandler.startLoginWorkflow(screenOrder: screenOrder) { [weak self] (loggedIn) in
+        loginHandler.startLoginWorkflow(screenOrder: screenOrder) { [weak self] (loggedIn, preferrednextScreen) in
             guard let self = self else { return }
             self.removeChildCoordinator(loginCoordinator)
-            completion(loggedIn)
+            completion(loggedIn, preferrednextScreen)
         }
     }
     

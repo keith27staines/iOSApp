@@ -25,23 +25,18 @@ class IntroController {
     private lazy var sheet: UIAlertController = {
         let sheet = UIAlertController(
             title: "Welcome, \(name)",
-            message: "Set up your profile by connecting to your linkedin account or enter your details manually",
-            preferredStyle: .actionSheet
+            message: "Set up your profile by connecting to your linkedin account",
+            preferredStyle: .alert
         )
         
-        let autoAction = UIAlertAction(title: "Sync with LinkedIn", style: .default) { [weak self] action in
-            self?.coordinator?.introChoseAuto()
+        let autoAction = UIAlertAction(title: "Sync profile with LinkedIn", style: .default) { [weak self] action in
+            self?.coordinator?.introChoseSync()
         }
         
-        let manualAction = UIAlertAction(title: "Set up manually", style: .default) { [weak self] action in
-            self?.coordinator?.introChoseManual()
-        }
-        
-        let skipAction = UIAlertAction(title: "Skip for now", style: .cancel) { [weak self] action in
+        let skipAction = UIAlertAction(title: "Skip", style: .cancel) { [weak self] action in
             self?.coordinator?.introChoseSkip()
         }
         sheet.addAction(autoAction)
-        sheet.addAction(manualAction)
         sheet.addAction(skipAction)
         return sheet
     }()

@@ -3,6 +3,9 @@ import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
     
+    public func start(preferredScreen: PreferredNextScreen) {
+        
+    }
     
     public func routeLiveProjects(appSource: AppSource) {
         
@@ -100,7 +103,7 @@ public class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
     
     public var delegate: OnboardingCoordinatorDelegate?
     
-    public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
+    public var onboardingDidFinish: ((OnboardingCoordinatorProtocol, PreferredNextScreen) -> Void)?
     
     public var parentCoordinator: Coordinating?
     public var uuid: UUID = UUID()
@@ -124,7 +127,7 @@ public class MockOnboardingCoordinator : OnboardingCoordinatorProtocol {
     
     /// Call this method to simulate the affect of the onboarding coordinator finishing its last user interaction
     public func completeOnboarding() {
-        onboardingDidFinish?(self)
+        onboardingDidFinish?(self, .noOpinion)
     }
 }
 

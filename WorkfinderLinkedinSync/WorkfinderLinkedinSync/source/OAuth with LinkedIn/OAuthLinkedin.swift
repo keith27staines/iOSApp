@@ -11,7 +11,7 @@ import WorkfinderUI
 import WorkfinderCommon
 
 protocol OAuthLinkedinCoordinator: AnyObject {
-    func oauthLinkedinDidComlete(_ cancelled: Bool)
+    func oauthLinkedinDidComplete(_ cancelled: Bool)
 }
 
 class OAuthLinkedinViewController: UIViewController {
@@ -60,7 +60,7 @@ class OAuthLinkedinViewController: UIViewController {
     private func onComplete() {
         removeCookies()
         dismiss(animated: true, completion: nil)
-        coordinator?.oauthLinkedinDidComlete(!isComplete)
+        coordinator?.oauthLinkedinDidComplete(!isComplete)
     }
     
     init(host: String, coordinator: OAuthLinkedinCoordinator) {
@@ -99,8 +99,7 @@ extension OAuthLinkedinViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         decisionHandler(.allow)
-        if let cancel = (navigationAction.request.url?.absoluteString ?? "").contains("user_cancelled_login") {
-            
-        }
+        let cancel = (navigationAction.request.url?.absoluteString ?? "").contains("user_cancelled_login")
+        if cancel { onComplete() }
     }
 }

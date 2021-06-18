@@ -121,9 +121,6 @@
 				537EB8792677542D00913C8E /* SyncLinkedinCoordinator.swift */,
 				537EB8932677666500913C8E /* Intro */,
 				537175542678A2DC007F7D05 /* OAuth with LinkedIn */,
-				537EB8962677670700913C8E /* Personalnfo */,
-				537EB895267766AB00913C8E /* ExperienceInfo */,
-				537EB8942677668F00913C8E /* EducationInfo */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -146,27 +143,6 @@
 				537EB88C267756A600913C8E /* IntroController.swift */,
 			);
 			path = Intro;
-			sourceTree = "<group>";
-		};
-		537EB8942677668F00913C8E /* EducationInfo */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EducationInfo;
-			sourceTree = "<group>";
-		};
-		537EB895267766AB00913C8E /* ExperienceInfo */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ExperienceInfo;
-			sourceTree = "<group>";
-		};
-		537EB8962677670700913C8E /* Personalnfo */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Personalnfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
