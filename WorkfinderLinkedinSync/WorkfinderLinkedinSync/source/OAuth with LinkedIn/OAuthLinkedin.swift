@@ -19,7 +19,7 @@ class OAuthLinkedinViewController: UIViewController {
     private let host: String?
     private lazy var url: URL? = {
         let host = self.host ?? "workfinder.com"
-        let url = "https://\(host)/auth/linkedin_oauth2/login/?next=%2f\(callBack)"
+        let url = "https://\(host)/auth/linkedin_oauth2/login/?process=connect&next=%2f\(callBack)"
         return URL(string: url)
     }()
     
@@ -58,7 +58,7 @@ class OAuthLinkedinViewController: UIViewController {
     }
     
     private func onComplete() {
-        removeCookies()
+        //removeCookies()
         dismiss(animated: true, completion: nil)
         coordinator?.oauthLinkedinDidComplete(!isComplete)
     }

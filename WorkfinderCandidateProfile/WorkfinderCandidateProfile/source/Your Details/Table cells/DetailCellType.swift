@@ -117,7 +117,7 @@ enum DetailCellType {
     
     var isRequired: Bool {
         switch self {
-        case .firstname, .lastname, .email, .phone, .dob:
+        case .firstname, .lastname, .email, .dob:
             return true
         default:
             return false
