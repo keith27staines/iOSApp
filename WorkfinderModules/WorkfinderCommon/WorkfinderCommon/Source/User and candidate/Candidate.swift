@@ -1,20 +1,10 @@
 
 /// This struct is required because the Candidate isn't of the right shape for creating a candidate. Due to an oddity of the api, candidate's user field is sometimes a uuid and sometimes a json. Use this struct for the json when POSTing to /v3/candidates
 public struct CreatableCandidate: Codable {
-    public var date_of_birth: String?
-    public var guardian_email: String?
     public var user: F4SUUID // NB in Candidate, user is a json object, not a uuid
-    public var phone: String?
-    public var has_allowed_sharing_with_educational_institution: Bool?
-    public var has_allowed_sharing_with_employers: Bool?
     
     public init(candidate: Candidate, userUuid: F4SUUID) {
         user = userUuid
-        date_of_birth = candidate.dateOfBirth
-        guardian_email = candidate.guardianEmail
-        phone = candidate.phone
-        has_allowed_sharing_with_employers = candidate.allowedSharingWithEmployers
-        has_allowed_sharing_with_educational_institution = candidate.allowedSharingWithEducationInstitution
     }
 }
 

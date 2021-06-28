@@ -27,7 +27,7 @@ class AMPHeaderCell: UITableViewCell {
         _initials.text = initials
         if let onTap = onTap {
             _subtitle.addTarget(self, action: #selector(onButtonTap), for: .touchUpInside)
-            _subtitle.setTitle("Register or sign in to workfinder", for: .normal)
+            _subtitle.setTitle("Sign in or sign up with workfinder", for: .normal)
             _subtitle.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
             _onTap = onTap
         }

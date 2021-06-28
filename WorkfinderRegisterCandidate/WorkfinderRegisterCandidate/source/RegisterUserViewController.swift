@@ -21,32 +21,21 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     override func configureViews() {
         super.configureViews()
         fieldStack.addArrangedSubview(email)
-        let showGuardianEmail = presenter.isGuardianEmailRequired
-        if showGuardianEmail {
-            fieldStack.addArrangedSubview(guardianEmail)
-        }
         fieldStack.addArrangedSubview(firstname)
         fieldStack.addArrangedSubview(lastname)
-        fieldStack.addArrangedSubview(phone)
         fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)
-        guardianEmail.textChanged?(self.presenter.guardianEmail)
         firstname.textChanged?(self.presenter.firstname)
         lastname.textChanged?(self.presenter.lastname)
-        phone.textChanged?(self.presenter.phone)
         password.textChanged?(self.presenter.password)
-        if showGuardianEmail {
-            email.textfield.nextResponderField = guardianEmail.textfield
-            guardianEmail.textfield.nextResponderField = firstname.textfield
-        } else {
-            email.textfield.nextResponderField = firstname.textfield
-        }
-        firstname.textfield.nextResponderField = firstname.textfield
-        lastname.textfield.nextResponderField = phone.textfield
-        phone.textfield.nextResponderField = password.textfield
-        password.textfield.nextResponderField = nil
+        email.textfield.nextResponderField = firstname.textfield
+        firstname.textfield.nextResponderField = lastname.textfield
+        lastname.textfield.nextResponderField = password.textfield
+        password.textfield.nextResponderField = password2.textfield
         bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
+        password2.isHidden = false
+        password2InstructionLabel.isHidden = false
     }
     
     @objc func register() {
@@ -65,19 +54,15 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         presenter.firstname = trim(firstname.textfield.text)
         presenter.lastname = trim(lastname.textfield.text)
         presenter.email = trim(email.textfield.text)
-        presenter.guardianEmail = trim(guardianEmail.textfield.text)
-        presenter.allowedSharingWithEducationInstitution = shareWithEducationalInstitutionSwitch.isOn
-        presenter.allowedSharingWithEmployers = shareWithEmployersSwitch.isOn
         presenter.password = trim(password.textfield.text)
-        presenter.phone = trim(phone.textfield.text)
+        presenter.password2 = trim(password2.textfield.text)
         presenter.isTermsAndConditionsAgreed = termsAgreedSwitch.isOn
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
-        guardianEmail.state = presenter.guardianValidityState
         firstname.state = presenter.firstnameValidityState
         lastname.state = presenter.lastnameValidityState
         password.state = presenter.passwordValidityState
-        phone.state = presenter.phoneValidityState
+        password2.state = presenter.password2ValidityState
     }
     
     private func trim(_ string:  String?) -> String? {

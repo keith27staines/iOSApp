@@ -12,7 +12,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     weak public var delegate: OnboardingCoordinatorDelegate?
     weak var onboardingViewController: OnboardingViewController?
     
-    public var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)?
+    public var onboardingDidFinish: ((OnboardingCoordinatorProtocol, PreferredNextScreen) -> Void)?
     
     lazy public var isOnboardingRequired: Bool = {
         (localStore.value(key: .isOnboardingRequired) as? Bool) ?? true
@@ -34,7 +34,7 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
     
     public override func start() {
         guard isOnboardingRequired else {
-            self.onboardingDidFinish?(self)
+            self.onboardingDidFinish?(self, .noOpinion)
             return
         }
         log.track(.onboarding_start)
@@ -55,24 +55,24 @@ public class OnboardingCoordinator : CoreInjectionNavigationCoordinator, Onboard
             navigationRouter: navigationRouter,
             mainWindow: UIApplication.shared.windows.first,
             coreInjection: injected)
-        loginHandler.startLoginWorkflow(screenOrder: .loginThenRegister) { [weak self] (isLoggedIn) in
+        loginHandler.startLoginWorkflow(screenOrder: .registerThenLogin) { [weak self] (isLoggedIn, preferredNextScreen) in
             guard let self = self else { return }
             self.onboardingViewController?.isLoggedIn = isLoggedIn
             if isLoggedIn {
-                self.finishOnboarding()
+                self.finishOnboarding(preferredNextScreen: preferredNextScreen)
             }
         }
     }
     
     func justGetStartedButtonTapped(viewController: UIViewController) {
         log.track(.onboarding_tap_just_get_started)
-        finishOnboarding()
+        finishOnboarding(preferredNextScreen: .noOpinion)
     }
     
-    func finishOnboarding() {
+    func finishOnboarding(preferredNextScreen: PreferredNextScreen) {
         LocalStore().setValue(false, for: LocalStore.Key.isOnboardingRequired)
         self.log.track(.onboarding_convert)
-        self.onboardingDidFinish?(self)
+        self.onboardingDidFinish?(self, preferredNextScreen)
     }
     
 }

@@ -11,7 +11,7 @@ import Foundation
 public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
-    func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool) -> Void)
+    func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool, PreferredNextScreen) -> Void)
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID?, appSource: AppSource)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
@@ -31,7 +31,7 @@ public protocol OnboardingCoordinatorDelegate : AnyObject {
 public protocol OnboardingCoordinatorProtocol : Coordinating {
     var isOnboardingRequired: Bool { get }
     var delegate: OnboardingCoordinatorDelegate? { get set }
-    var onboardingDidFinish: ((OnboardingCoordinatorProtocol) -> Void)? { get set }
+    var onboardingDidFinish: ((OnboardingCoordinatorProtocol, PreferredNextScreen) -> Void)? { get set }
 }
 
 public protocol CompanyCoordinatorParentProtocol : CoreInjectionNavigationCoordinatorProtocol {
@@ -51,6 +51,7 @@ public enum TabIndex : Int, CaseIterable {
 }
 
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
+    func start(preferredScreen: PreferredNextScreen)
     func switchToTab(_ tab: TabIndex)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
     func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)

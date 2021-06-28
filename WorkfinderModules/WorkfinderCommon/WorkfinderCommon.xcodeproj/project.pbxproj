@@ -22,6 +22,7 @@
 		53786B142586015100B671EB /* DecodeRoleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53786B132586015100B671EB /* DecodeRoleJson.swift */; };
 		5383D53725CABF790058D02C /* ServerListPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383D53625CABF790058D02C /* ServerListPager.swift */; };
 		5384694625DEB01F000654E7 /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5384694525DEB01F000654E7 /* Geocoding.swift */; };
+		5386A462267CA28100E8ED33 /* PreferredNextScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386A461267CA28100E8ED33 /* PreferredNextScreen.swift */; };
 		5389E97925C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */; };
 		53A23DF2254844AE00BB21B7 /* SignInScreenOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */; };
 		53BC508625C0884A00D84EE0 /* TrackEventTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */; };
@@ -154,6 +155,7 @@
 		53786B132586015100B671EB /* DecodeRoleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeRoleJson.swift; sourceTree = "<group>"; };
 		5383D53625CABF790058D02C /* ServerListPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListPager.swift; sourceTree = "<group>"; };
 		5384694525DEB01F000654E7 /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
+		5386A461267CA28100E8ED33 /* PreferredNextScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredNextScreen.swift; sourceTree = "<group>"; };
 		5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventQueueProcessorTests.swift; sourceTree = "<group>"; };
 		53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenOrder.swift; sourceTree = "<group>"; };
 		53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEventTypeTests.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				53C9CAD9256B93EB00F567B2 /* NotificationNames.swift */,
 				5383D53625CABF790058D02C /* ServerListPager.swift */,
 				530C4DD325D6273F0032CFC8 /* SemanticVersion.swift */,
+				5386A461267CA28100E8ED33 /* PreferredNextScreen.swift */,
 			);
 			path = WorkfinderCommon;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 			files = (
 				53022184253591C800C01B10 /* PushNotification.swift in Sources */,
 				FCE5191622493B4C00B550C9 /* String+Extensions.swift in Sources */,
+				5386A462267CA28100E8ED33 /* PreferredNextScreen.swift in Sources */,
 				FC8F957C233BA6710027BE02 /* MockCoordinators.swift in Sources */,
 				FC24F9132333CA88005C0A08 /* RequestVerb.swift in Sources */,
 				FCC85DC324517E0A00BC600E /* ProvidersAndServicesProtocols.swift in Sources */,

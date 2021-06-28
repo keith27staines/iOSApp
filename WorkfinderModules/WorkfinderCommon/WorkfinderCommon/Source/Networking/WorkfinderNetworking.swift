@@ -6,6 +6,7 @@ public struct NetworkConfig {
     /// The full url for the v2 api
     public var workfinderApiV3: String { workfinderApiEndpoint.workfinderApiUrlString }
     public var workfinderApiV3Url: URL
+    public var host: String? { URLComponents(string: workfinderApiV3)?.host }
     
     /// Manages network sessions
     public let sessionManager: F4SNetworkSessionManagerProtocol

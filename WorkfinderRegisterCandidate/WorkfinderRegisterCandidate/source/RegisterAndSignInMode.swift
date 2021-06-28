@@ -6,7 +6,7 @@ enum RegisterAndSignInMode {
     var screenTitle: String {
         switch self {
         case .register:
-            return NSLocalizedString("Register", comment: "")
+            return NSLocalizedString("Sign up", comment: "")
         case .signIn:
             return NSLocalizedString("Sign in", comment: "")
         }
@@ -15,7 +15,7 @@ enum RegisterAndSignInMode {
     var screenHeadingText: String {
         switch self {
         case .register:
-            return NSLocalizedString("Register", comment: "")
+            return NSLocalizedString("Sign up", comment: "")
         case .signIn:
             return NSLocalizedString("Sign in", comment: "")
         }
@@ -33,9 +33,9 @@ enum RegisterAndSignInMode {
     var switchModeActionText: String {
         switch self {
         case .register:
-            return NSLocalizedString("Sign in", comment: "log in with your existing account here")
+            return NSLocalizedString("Sign in", comment: "Sign in with your existing account here")
         case .signIn:
-            return NSLocalizedString("Register", comment: "register for your user account here")
+            return NSLocalizedString("Sign up", comment: "Sign up with us here")
         }
     }
     

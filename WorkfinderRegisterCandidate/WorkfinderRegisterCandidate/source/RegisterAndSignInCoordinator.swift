@@ -4,6 +4,7 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderUI
+import WorkfinderLinkedinSync
 
 protocol RegisterAndSignInCoordinatorProtocol {
     func switchMode(_ mode: RegisterAndSignInMode)
@@ -14,7 +15,7 @@ protocol RegisterAndSignInCoordinatorProtocol {
 }
 
 public protocol RegisterAndSignInCoordinatorParent: Coordinating {
-    func onCandidateIsSignedIn()
+    func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen)
     func onRegisterAndSignInCancelled()
 }
 
@@ -51,15 +52,44 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
         injected.log.track(.register_user_convert)
         injected.log.updateIdentity()
         guard let vc = vc else {
-            onRegisterComplete()
+            onRegisterComplete(nextScreen: .explore)
             return
         }
-        injected.appCoordinator?.requestPushNotifications(from: vc, completion: { [weak self] in
-            self?.onRegisterComplete()
-        })
+        
+        if vc is RegisterUserViewController {
+            startSyncLinkedinData()
+        } else {
+            onRegisterComplete(nextScreen: .explore)
+        }
     }
     
-    func onRegisterComplete() {
+    func startSyncLinkedinData() {
+        let coordinator = SynchLinkedinCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        coordinator.syncDidComplete = self.syncLinkedInDataDidComplete
+        addChildCoordinator(coordinator)
+        coordinator.startIntro()
+    }
+    
+    func syncLinkedInDataDidComplete(coordinator: SynchLinkedinCoordinator) {
+        removeChildCoordinator(coordinator)
+        guard let registerVC = navigationRouter.navigationController.topViewController as? RegisterUserViewController else {
+            onRegisterComplete(nextScreen: .explore)
+            return
+        }
+
+        let alert = UIAlertController(title: "Your profile is ready!", message: "You can complete your profile in Account Settings", preferredStyle: .alert)
+        let accountAction = UIAlertAction(title: "Account Settings", style: .default) { [weak self] action in
+            self?.onRegisterComplete(nextScreen: .account)
+        }
+        let exploreAction = UIAlertAction(title: "Explore Opportunities", style: .default) { [weak self] action in
+            self?.onRegisterComplete(nextScreen: .explore)
+        }
+        alert.addAction(accountAction)
+        alert.addAction(exploreAction)
+        registerVC.present(alert, animated: true, completion: nil)
+    }
+    
+    func onRegisterComplete(nextScreen: PreferredNextScreen) {
         if let previous = firstViewController?.previousViewController {
             // for pushed vcs
             navigationRouter.popToViewController(previous, animated: true)
@@ -67,7 +97,7 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
             // for presented vcs
             firstViewController?.dismiss(animated: true, completion: nil)
         }
-        (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onCandidateIsSignedIn()
+        (parentCoordinator as? RegisterAndSignInCoordinatorParent)?.onCandidateIsSignedIn(preferredNextScreen: nextScreen)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     

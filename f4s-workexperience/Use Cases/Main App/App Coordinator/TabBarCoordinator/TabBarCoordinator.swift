@@ -39,12 +39,23 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     func start() {
+        start(preferredScreen: .explore)
+    }
+    
+    func start(preferredScreen: PreferredNextScreen) {
         createTabBar()
         rootViewController = tabBarViewController
         guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window else { return }
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
-        switchToTab(.home)
+        switch preferredScreen {
+        case .noOpinion:
+            switchToTab(.home)
+        case .account:
+            switchToTab(.account)
+        case .explore:
+            switchToTab(.home)
+        }
     }
     
     public func updateBadges() {
