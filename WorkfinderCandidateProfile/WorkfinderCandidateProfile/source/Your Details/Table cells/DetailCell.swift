@@ -198,6 +198,8 @@ class DetailCell:  UITableViewCell {
         return stack
     }()
     
+    var postcodeTextfield: UITextField?
+    
     func configureWith(presenter: DetailCellPresenter) {
         let type = presenter.type
         self.presenter = presenter
@@ -234,6 +236,7 @@ class DetailCell:  UITableViewCell {
                 textfield.autocorrectionType = .no
                 textfield.textContentType = .postalCode
                 textfield.keyboardType = .default
+                postcodeTextfield = textfield
             }
         case .password:
             leftStack.addArrangedSubview(passwordLabel)
@@ -298,6 +301,20 @@ extension DetailCell: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        textField === dateField ? false : true
+        if textField === dateField { return false }
+
+        if textField == postcodeTextfield {
+            if string == "" {
+                // User presses backspace
+                textField.deleteBackward()
+            } else {
+                // User presses a key or pastes
+                textField.insertText(string.uppercased())
+            }
+            // Do not let specified text range to be changed
+            return false
+        }
+        
+        return true
     }
 }
