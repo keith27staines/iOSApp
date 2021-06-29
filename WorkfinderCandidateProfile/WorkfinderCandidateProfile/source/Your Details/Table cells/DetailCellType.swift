@@ -47,7 +47,7 @@ enum DetailCellType {
             return nil
         case .phone:
             return { string in
-                string?.isPhoneNumber() ?? !self.isRequired
+                string == "" || (string?.isPhoneNumber() ?? !self.isRequired)
             }
         case .smsPreference:
             return nil
@@ -117,7 +117,7 @@ enum DetailCellType {
     
     var isRequired: Bool {
         switch self {
-        case .firstname, .lastname, .email, .dob:
+        case .firstname, .lastname, .email:
             return true
         default:
             return false

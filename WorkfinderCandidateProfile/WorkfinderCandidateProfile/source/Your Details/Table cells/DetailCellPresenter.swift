@@ -30,8 +30,9 @@ class DetailCellPresenter {
         return dateFormatter.string(from: date)
     }
     
-    init(type: DetailCellType) {
+    init(type: DetailCellType, onValueChanged: ((DetailCellPresenter) -> Void)? = nil) {
         self.type = type
+        self.onValueChanged = onValueChanged
     }
     
     init(type: DetailCellType, text: String, onValueChanged: @escaping ((DetailCellPresenter) -> Void)) {

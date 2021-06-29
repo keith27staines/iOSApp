@@ -8,13 +8,12 @@ public struct CreatableCandidate: Codable {
     }
 }
 
-public struct Candidate: Codable {
+public struct Candidate: Codable, Equatable {
     public var uuid: F4SUUID?
     public var dateOfBirth: String?
     public var employmentSkills: [F4SUUID]?
     public var motivation: String?
     public var experience: String?
-    public var fullName: String { self.userSummary.full_name }
     public var guardianEmail: String?
     public var phone: String?
     public var allowedSharingWithEducationInstitution: Bool?
@@ -57,10 +56,10 @@ public struct Candidate: Codable {
         return age >= 0 ? age : nil
     }
     
-    var userSummary: UserSummary
+    var userSummary: UserUUID
     
     public init() {
-        self.userSummary = UserSummary()
+        self.userSummary = UserUUID()
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -79,8 +78,7 @@ public struct Candidate: Codable {
         case educationLevel = "education_level"
     }
     
-    struct UserSummary: Codable {
+    struct UserUUID: Codable, Equatable {
         public var uuid: F4SUUID = ""
-        public var full_name: String = ""
     }
 }

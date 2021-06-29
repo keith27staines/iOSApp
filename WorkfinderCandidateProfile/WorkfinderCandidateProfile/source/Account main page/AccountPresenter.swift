@@ -74,7 +74,6 @@ class AccountPresenter: BaseAccountPresenter {
         guard let section = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
         let repo = UserRepository()
         let user = repo.loadUser()
-        let candidate = repo.loadCandidate()
         
         switch section {
         case .header:
@@ -82,8 +81,8 @@ class AccountPresenter: BaseAccountPresenter {
             if UserRepository().isCandidateLoggedIn {
                 cell.configureWith(
                     avatar: UIImage(named: "avatar"),
-                    title: candidate.fullName,
-                    initials: initialsFromFullName(candidate.fullName),
+                    title: user.fullname,
+                    initials: initialsFromFullName(user.fullname),
                     email: user.email,
                     onTap: nil
                 )
@@ -91,7 +90,7 @@ class AccountPresenter: BaseAccountPresenter {
                 cell.configureWith(
                     avatar: UIImage(named: "avatar"),
                     title: "Your Account",
-                    initials: initialsFromFullName(candidate.fullName),
+                    initials: initialsFromFullName(user.fullname),
                     email: user.email,
                     onTap: coordinator?.showRegisterAndSignin
                 )

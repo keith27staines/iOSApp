@@ -104,7 +104,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     
     func startCoverLetterCoordinator(candidateAge: Int) {
         guard let hostName = association.host?.fullName else { return }
-        let candidateName = injected.user.fullName
+        let candidateName = injected.userRepository.loadUser().fullname
         let companyName = workplace.companyJson.name ?? "Unknown company"
         coverletterCoordinator = CoverLetterFlowFactory.makeFlow(
             type: .passiveApplication,

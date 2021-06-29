@@ -26,14 +26,27 @@ class BaseAccountPresenter: NSObject, UITableViewDataSource, UITableViewDelegate
         set { candidateRepository.saveUser(newValue)}
     }
     
+    var isDirty: Bool {
+        let savedAccount = Account(user: user, candidate: candidate)
+        return savedAccount != editedAccount
+    }
+    
+    lazy var editedAccount: Account = {
+        Account(
+            user: UserRepository().loadUser(),
+            candidate: UserRepository().loadCandidate()
+        )
+    }()
+    
     func reloadPresenter(completion: @escaping (Error?) -> Void) {
         let repo = UserRepository()
         guard repo.isCandidateLoggedIn else { return }
-        service.getAccount { (result) in
+        service.getAccount { [weak self] (result) in
             switch result {
             case .success(let account):
                 repo.saveUser(account.user)
                 repo.saveCandidate(account.candidate)
+                self?.editedAccount = account
                 completion(nil)
             case .failure(let error):
                 completion(error)

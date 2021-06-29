@@ -90,7 +90,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         print("\n\n-----------------------------------------------------------")
         switch userRepo.isCandidateLoggedIn {
         case true:
-            print("Candidate \(candidate.fullName)")
+            print("Candidate \(user.fullname)")
             print("Email \(user.email ?? "unknown")")
             print("User uuid \(user.uuid ?? "unknown")")
             print("Candidate uuid \(candidate.uuid ?? "unknown")")

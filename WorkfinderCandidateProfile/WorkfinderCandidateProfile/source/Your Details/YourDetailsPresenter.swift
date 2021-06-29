@@ -38,7 +38,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
             DetailCellPresenter(type: .lastname, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .dob, date: Date(), onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .phone, text: "", onValueChanged: onDetailChanged(_:)),
-            DetailCellPresenter(type: .smsPreference),
+            DetailCellPresenter(type: .smsPreference, onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .picklist(.countryOfResidence), picklist: picklistFor(type: .countryOfResidence)),
             DetailCellPresenter(type: .postcode, text: "", onValueChanged: onDetailChanged(_:)),
             DetailCellPresenter(type: .picklist(.language), picklist: picklistFor(type: .language)),
@@ -53,12 +53,13 @@ class YourDetailsPresenter: BaseAccountPresenter {
         ]
     ]
     
-    func onDetailChanged(_ detail: DetailCellPresenter) {
+    func onDetailChanged(_ presenter: DetailCellPresenter) {
+        informEditedAccountOfUpdatesFromUI(presenter: presenter)
         viewController?.onDetailsChanged()
     }
     
     var isUpdateEnabled: Bool {
-        allCellPresenters.joined().reduce(true) { (result, presenter) -> Bool in
+        allCellPresenters.joined().reduce(isDirty) { (result, presenter) -> Bool in
             return result && presenter.isValid
         }
     }
@@ -92,16 +93,14 @@ class YourDetailsPresenter: BaseAccountPresenter {
     func syncAccountToServer(completion: @escaping (Error?) -> Void) {
         let repo = UserRepository()
         guard repo.isCandidateLoggedIn else { return }
-        let candidate = repo.loadCandidate()
-        let user = repo.loadUser()
-        let oldAccount = Account(user: user, candidate: candidate)
-        let updatedAccount = updateAccount(account: oldAccount)
-        service.updateAccount(updatedAccount) {(result) in
-            DispatchQueue.main.async {
+        service.updateAccount(editedAccount) {(result) in
+            DispatchQueue.main.async { [weak self] in
                 switch result {
                 case .success(let updatedAccount):
                     repo.saveUser(updatedAccount.user)
                     repo.saveCandidate(updatedAccount.candidate)
+                    self?.editedAccount = updatedAccount
+                    self?.tableView?.reloadData()
                     completion(nil)
                 case .failure(let error):
                     completion(error)
@@ -110,50 +109,46 @@ class YourDetailsPresenter: BaseAccountPresenter {
         }
     }
     
-    func updateAccount(account: Account) -> Account {
-        var user = account.user
-        var candidate = account.candidate
-        allCellPresenters.forEach { (sectionPresenters) in
-            sectionPresenters.forEach { (presenter) in
-                switch presenter.type {
-                case .firstname:
-                    user.firstname = presenter.text ?? ""
-                case .lastname:
-                    user.lastname = presenter.text ?? ""
-                case .email:
-                    user.email = presenter.text
-                case .password:
-                    break
-                case .phone:
-                    candidate.phone = presenter.text
-                case .smsPreference:
-                    candidate.preferSMS = presenter.isOn
-                case .dob:
-                    candidate.dateOfBirth = presenter.date?.workfinderDateString
-                case .postcode:
-                    candidate.postcode = presenter.text
-                case .picklist(let type):
-                    let picklist = picklistFor(type: type)
-                    switch type {
-                    case .language:
-                        candidate.languages = picklist.selectedItems.compactMap({ (item) -> String? in
-                            item.name
-                        })
-                    case .gender:
-                        candidate.gender = picklist.selectedItems.first?.id
-                    case .ethnicity:
-                        candidate.ethnicity = picklist.selectedItems.first?.id
-                    case .countryOfResidence:
-                        user.countryOfResidence = picklist.selectedItems.first?.id
-                    case .educationLevel:
-                        candidate.educationLevel = picklist.selectedItems.first?.id
-                    }
-                case .removeAccount:
-                    break
-                }
+    private func informEditedAccountOfUpdatesFromUI(presenter: DetailCellPresenter) {
+        var user = editedAccount.user
+        var candidate = editedAccount.candidate
+        switch presenter.type {
+        case .firstname:
+            user.firstname = presenter.text ?? ""
+        case .lastname:
+            user.lastname = presenter.text ?? ""
+        case .email:
+            user.email = presenter.text
+        case .password:
+            break
+        case .phone:
+            candidate.phone = presenter.text
+        case .smsPreference:
+            candidate.preferSMS = presenter.isOn
+        case .dob:
+            candidate.dateOfBirth = presenter.date?.workfinderDateString
+        case .postcode:
+            candidate.postcode = presenter.text
+        case .picklist(let type):
+            let picklist = picklistFor(type: type)
+            switch type {
+            case .language:
+                candidate.languages = picklist.selectedItems.compactMap({ (item) -> String? in
+                    item.name
+                })
+            case .gender:
+                candidate.gender = picklist.selectedItems.first?.id
+            case .ethnicity:
+                candidate.ethnicity = picklist.selectedItems.first?.id
+            case .countryOfResidence:
+                user.countryOfResidence = picklist.selectedItems.first?.id
+            case .educationLevel:
+                candidate.educationLevel = picklist.selectedItems.first?.id
             }
+        case .removeAccount:
+            break
         }
-        return Account(user: user, candidate: candidate)
+        editedAccount = Account(user: user, candidate: candidate)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -203,6 +198,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
     }
     
     func presenterForIndexPath(_ indexPath: IndexPath) -> DetailCellPresenter {
+        let user = editedAccount.user
+        let candidate = editedAccount.candidate
         let presenter = allCellPresenters[indexPath.section][indexPath.row]
         switch presenter.type {
         case .firstname:
@@ -264,7 +261,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
         let presenter = presenterForIndexPath(indexPath)
         switch presenter.type.dataType {
         case .picklist(let picklistType):
-            coordinator?.showPicklist(picklistFor(type: picklistType)) {
+            coordinator?.showPicklist(picklistFor(type: picklistType)) { [weak self] in
+                self?.informEditedAccountOfUpdatesFromUI(presenter: presenter)
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         case .password:

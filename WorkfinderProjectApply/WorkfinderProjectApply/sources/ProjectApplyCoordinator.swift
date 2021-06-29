@@ -84,6 +84,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     }
     
     func startCoverLetterFlow() {
+        let user = UserRepository().loadUser()
         let candidate = UserRepository().loadCandidate()
         let association = projectPresenter?.association
         let projectTitle = projectPresenter?.project.name
@@ -97,7 +98,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
             navigationRouter: newNavigationRouter,
             inject: injected,
             candidateAge: candidate.age() ?? 18,
-            candidateName: candidate.fullName,
+            candidateName: user.fullname,
             isProject: true,
             projectTitle: projectTitle,
             companyName: companyName,

@@ -6,7 +6,7 @@
 //  Copyright © 2021 Workfinder. All rights reserved.
 //
 
-public struct Account: Codable {
+public struct Account: Codable, Equatable {
     public var user: User
     public var candidate: Candidate
     
