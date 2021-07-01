@@ -19,6 +19,43 @@ public protocol AccountServiceProtocol {
     func updateAccount(_ account: Account, completion: @escaping (Result<Account,Error>) -> Void)
     func deleteAccount(email: String, completion: @escaping (Result<DeleteAccountJson,Error>) -> Void)
     func requestPasswordReset(email: String, completion: @escaping (Result<[String:String],Error>) -> Void)
+    func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?,Error>) -> Void)
+}
+
+class SocialMediaService: WorkfinderService {
+    
+    func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?,Error>) -> Void) {
+        getSocialConnections { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let connections):
+                guard let id = connections.first(where: { connection in
+                    true
+                })?.id else {
+                    completion(.success(nil))
+                    return
+                }
+                do {
+                    let request = try self.buildRequest(relativePath: "auth/accounts/social/connections/\(id)", queryItems: nil, verb: .get)
+                    self.performTask(with: request, verbose: true, completion: completion, attempting: "GET linkedinData")
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func getSocialConnections(completion: @escaping (Result<[SocialConnection],Error>) -> Void) {
+        do {
+            let request = try buildRequest(relativePath: "auth/accounts/social/connections/", queryItems: nil, verb: .get)
+            performTask(with: request, verbose: true, completion: completion, attempting: "GET SocialConnections")
+        } catch {
+            completion(.failure(error))
+        }
+    }
+
 }
 
 class RequestPasswordResetService: WorkfinderService {
@@ -46,6 +83,7 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
     private lazy var _countriesService: CountriesService = CountriesService(networkConfig: networkConfig)
     private lazy var _languagesService: LanguagesService = LanguagesService(networkConfig: networkConfig)
     private lazy var _ethnicitiesService: EthnicitiesService = EthnicitiesService(networkConfig: networkConfig)
+    private lazy var _linkedinDataService: SocialMediaService = SocialMediaService(networkConfig: networkConfig)
     
     public override init(networkConfig: NetworkConfig) {
         userService = FetchMeService(networkConfig: networkConfig)
@@ -239,5 +277,10 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
             }
         }
     }
+}
 
+public extension AccountService {
+    func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?, Error>) -> Void) {
+        _linkedinDataService.getLinkedInData(completion: completion)
+    }
 }

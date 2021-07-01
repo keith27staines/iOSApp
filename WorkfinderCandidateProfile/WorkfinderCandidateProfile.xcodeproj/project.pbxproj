@@ -28,6 +28,7 @@
 		531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137A260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift */; };
 		531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */; };
 		531F1381260B6C9B00F0FA7E /* PostcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */; };
+		5323F61E268C712D00DD5875 /* SocialMediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F61D268C712D00DD5875 /* SocialMediaData.swift */; };
 		532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DA2625B9360025F3E4 /* DetailCellType.swift */; };
 		532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DE2625B9C70025F3E4 /* AccountPicklist.swift */; };
 		532879E92625F2760025F3E4 /* ValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879E82625F2760025F3E4 /* ValidatedTextField.swift */; };
@@ -98,6 +99,7 @@
 		531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
 		531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeTests.swift; sourceTree = "<group>"; };
 		531F1384260B6CDA00F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5323F61D268C712D00DD5875 /* SocialMediaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaData.swift; sourceTree = "<group>"; };
 		532879DA2625B9360025F3E4 /* DetailCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellType.swift; sourceTree = "<group>"; };
 		532879DE2625B9C70025F3E4 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
 		532879E82625F2760025F3E4 /* ValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedTextField.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		531F136B260B665D00F0FA7E /* source */ = {
 			isa = PBXGroup;
 			children = (
+				5323F61C268C710500DD5875 /* social media data */,
 				53131CFA261EFBAD00799629 /* AccountCoordinator.swift */,
 				53724B6A26273F1600908D50 /* models */,
 				53131D13262029B600799629 /* Account main page */,
@@ -264,6 +267,14 @@
 				531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */,
 			);
 			path = "DOB Capture";
+			sourceTree = "<group>";
+		};
+		5323F61C268C710500DD5875 /* social media data */ = {
+			isa = PBXGroup;
+			children = (
+				5323F61D268C712D00DD5875 /* SocialMediaData.swift */,
+			);
+			path = "social media data";
 			sourceTree = "<group>";
 		};
 		53659C9A26202AE000CFF49E /* Table cells */ = {
@@ -492,6 +503,7 @@
 				53659CA22620336E00CFF49E /* AMPAccountSectionCell.swift in Sources */,
 				53724BDF2628659300908D50 /* TableHeaderView.swift in Sources */,
 				53724BDB262820A400908D50 /* ChangePasswordPresenter.swift in Sources */,
+				5323F61E268C712D00DD5875 /* SocialMediaData.swift in Sources */,
 				53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */,
 				53D7CDF62621ED2900A9BE40 /* RemoveAccountCell.swift in Sources */,
 				53E71D5E2624770A008E90AD /* DetailCell.swift in Sources */,

@@ -52,6 +52,15 @@ class BaseAccountPresenter: NSObject, UITableViewDataSource, UITableViewDelegate
                 completion(error)
             }
         }
+        service.getLinkedInData { result in
+            switch result {
+            case .success(let linkedinData):
+                print(linkedinData)
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -15,6 +15,8 @@
 		530C4DD825D6275F0032CFC8 /* SemanticVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */; };
 		531D46DF265F7C1800B34453 /* NullEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D46DE265F7C1800B34453 /* NullEncodable.swift */; };
 		531D46E1265F7C4A00B34453 /* NullEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */; };
+		5323F621268C84EA00DD5875 /* SocialMediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F620268C84E900DD5875 /* SocialMediaData.swift */; };
+		5323F623268DC90000DD5875 /* LinkedinDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F622268DC90000DD5875 /* LinkedinDataTests.swift */; };
 		53659CA62620C81700CFF49E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA52620C81700CFF49E /* Account.swift */; };
 		53724B6126273BAA00908D50 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B6026273BAA00908D50 /* AccountPicklist.swift */; };
 		53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BEE263065B000908D50 /* DeleteAccountJson.swift */; };
@@ -148,6 +150,8 @@
 		530C4DD725D6275F0032CFC8 /* SemanticVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersionTests.swift; sourceTree = "<group>"; };
 		531D46DE265F7C1800B34453 /* NullEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullEncodable.swift; sourceTree = "<group>"; };
 		531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullEncodableTests.swift; sourceTree = "<group>"; };
+		5323F620268C84E900DD5875 /* SocialMediaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaData.swift; sourceTree = "<group>"; };
+		5323F622268DC90000DD5875 /* LinkedinDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinDataTests.swift; sourceTree = "<group>"; };
 		53659CA52620C81700CFF49E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		53724B6026273BAA00908D50 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
 		53724BEE263065B000908D50 /* DeleteAccountJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountJson.swift; sourceTree = "<group>"; };
@@ -284,6 +288,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5323F61F268C84D000DD5875 /* Social media data */ = {
+			isa = PBXGroup;
+			children = (
+				5323F620268C84E900DD5875 /* SocialMediaData.swift */,
+			);
+			path = "Social media data";
+			sourceTree = "<group>";
+		};
 		53724B5F26273B8E00908D50 /* AccountPicklist */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +466,7 @@
 		FCA91E6D2234043D007ED308 /* WorkfinderCommon */ = {
 			isa = PBXGroup;
 			children = (
+				5323F61F268C84D000DD5875 /* Social media data */,
 				531D46DE265F7C1800B34453 /* NullEncodable.swift */,
 				53724B5F26273B8E00908D50 /* AccountPicklist */,
 				5384694525DEB01F000654E7 /* Geocoding.swift */,
@@ -507,6 +520,7 @@
 				FCEE3EF5249A645A0034C226 /* CandidateTests.swift */,
 				53964E9A25C13E780061FDB5 /* TrackingEvent-queue-and-processor tests */,
 				531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */,
+				5323F622268DC90000DD5875 /* LinkedinDataTests.swift */,
 			);
 			path = WorkfinderCommonTests;
 			sourceTree = "<group>";
@@ -816,6 +830,7 @@
 				5383D53725CABF790058D02C /* ServerListPager.swift in Sources */,
 				FCE5192E2249482A00B550C9 /* F4SCalendar.swift in Sources */,
 				FC8F957F233BA6710027BE02 /* MockNavigationRouter.swift in Sources */,
+				5323F621268C84EA00DD5875 /* SocialMediaData.swift in Sources */,
 				FC0660572326635000496FE2 /* Protocols.swift in Sources */,
 				FC8F9583233BB5580027BE02 /* FactoriesProtocols.swift in Sources */,
 				FC93DC5A23202CFB00F1CE23 /* EnvironmentType.swift in Sources */,
@@ -851,6 +866,7 @@
 				FCCA982F249A62B500427899 /* F4SDayOfWeekTests.swift in Sources */,
 				FC7FF7C7249A3F8A00F9093B /* F4SDocumentTests.swift in Sources */,
 				FCCA9830249A62B900427899 /* F4SCalendarMonthTests.swift in Sources */,
+				5323F623268DC90000DD5875 /* LinkedinDataTests.swift in Sources */,
 				FC7FF7C1249A3F5000F9093B /* CoordinatingTests.swift in Sources */,
 				FC6A0B2B24F7C6E600053DF7 /* WorkfinderRecommendationsListTests.swift in Sources */,
 				FCCA982E249A629200427899 /* F4SCalendarWeekTests.swift in Sources */,
