@@ -16,6 +16,7 @@ class AccountViewController: WFViewController {
     override func registerTableCells() {
         tableView.register(AMPHeaderCell.self, forCellReuseIdentifier: AMPHeaderCell.reuseIdentifier)
         tableView.register(AMPAccountSectionCell.self, forCellReuseIdentifier: AMPAccountSectionCell.reuseIdentifier)
+        tableView.register(SocialMediaCell.self, forCellReuseIdentifier: SocialMediaCell.reuseIdentifier)
         tableView.register(AMPLinksCell.self, forCellReuseIdentifier: AMPLinksCell.reuseIdentifier)
     }
     

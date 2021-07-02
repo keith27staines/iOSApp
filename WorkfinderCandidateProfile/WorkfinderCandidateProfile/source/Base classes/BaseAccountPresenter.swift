@@ -15,6 +15,7 @@ class BaseAccountPresenter: NSObject, UITableViewDataSource, UITableViewDelegate
     var candidateRepository: UserRepositoryProtocol = UserRepository()
     weak var coordinator: AccountCoordinator?
     var service: AccountServiceProtocol
+    var linkedinConnection: LinkedinConnectionData?
     
     var candidate: Candidate {
         get { candidateRepository.loadCandidate() }
@@ -50,15 +51,6 @@ class BaseAccountPresenter: NSObject, UITableViewDataSource, UITableViewDelegate
                 completion(nil)
             case .failure(let error):
                 completion(error)
-            }
-        }
-        service.getLinkedInData { result in
-            switch result {
-            case .success(let linkedinData):
-                print(linkedinData)
-                break
-            case .failure(let error):
-                print(error)
             }
         }
     }

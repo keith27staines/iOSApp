@@ -191,7 +191,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         return stack
     }()
     
-    lazy var password2: UnderlinedNextResponderTextFieldStack = {
+    lazy var confirmPasswordTextField: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Confirm password", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName, nextResponder: nil)
         stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
@@ -228,7 +228,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let stack = UIStackView(arrangedSubviews: [
             self.password,
             self.passwordInstructionLabel,
-            self.password2,
+            self.confirmPasswordTextField,
             self.password2InstructionLabel
         ])
         stack.axis = .vertical

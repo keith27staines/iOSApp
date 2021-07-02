@@ -54,6 +54,13 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
+    func showLinkedin() {
+        let service = AccountService(networkConfig: injected.networkConfig)
+        let presenter = LinkedinConnectionPresenter(service: service)
+        let vc = LinkedinConnectionViewController(presenter: presenter)
+        navigationRouter.push(viewController: vc, animated: true)
+    }
+    
     func showDetails() {
         guard UserRepository().isCandidateLoggedIn else {
             actionRequiringSignin = .showDetails

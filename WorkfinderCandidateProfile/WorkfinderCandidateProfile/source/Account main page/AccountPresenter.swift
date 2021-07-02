@@ -12,6 +12,7 @@ class AccountPresenter: BaseAccountPresenter {
     enum TableSection: Int, CaseIterable {
         case header
         case accountSections
+        case socialMediaConnections
         case links
     }
     
@@ -66,6 +67,7 @@ class AccountPresenter: BaseAccountPresenter {
         switch section {
         case .header: return 1
         case .accountSections: return accountSections.count
+        case .socialMediaConnections: return 1
         case .links: return links.count
         }
     }
@@ -100,7 +102,13 @@ class AccountPresenter: BaseAccountPresenter {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AMPAccountSectionCell.reuseIdentifier) as? AMPAccountSectionCell else { return UITableViewCell() }
             cell.configureWith(accountSections[indexPath.row])
             return cell
-        
+            
+        case .socialMediaConnections:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SocialMediaCell.reuseIdentifier) as? SocialMediaCell else { return UITableViewCell() }
+            cell.configureWithLinkedinDataConnection(linkedinConnection)
+            cell.accessoryType = .disclosureIndicator
+            return cell
+            
         case .links:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AMPLinksCell.reuseIdentifier) as? AMPLinksCell else { return UITableViewCell() }
             cell.configureWith(
@@ -129,6 +137,8 @@ class AccountPresenter: BaseAccountPresenter {
             case 1: coordinator?.showPreferences()
             default: break
             }
+        case .socialMediaConnections:
+            coordinator?.showLinkedin()
 
         case .links: coordinator?.presentContent(links[indexPath.row])
         }
@@ -140,6 +150,7 @@ class AccountPresenter: BaseAccountPresenter {
         
         case .header: return false
         case .accountSections: return true
+        case .socialMediaConnections: return true
         case .links: return true
         }
     }

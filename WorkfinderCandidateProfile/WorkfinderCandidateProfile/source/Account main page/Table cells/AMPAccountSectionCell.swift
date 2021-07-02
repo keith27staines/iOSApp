@@ -6,12 +6,32 @@
 //
 
 import UIKit
+import WorkfinderCommon
 
 struct AccountSectionInfo {
     var image: UIImage?
     var title: String?
     var progress: Float? { calculator?.progress ?? 0 }
     var calculator: ProgressCalculatorProtocol?
+}
+
+class SocialMediaCell: UITableViewCell {
+    static let reuseIdentifier = "SocialMediaCell"
+    static let defaultImage: UIImage? = UIImage(named: "ui-linkedin-icon")
+    
+    func configureWithLinkedinDataConnection(_ data: LinkedinConnectionData?) {
+        imageView?.image = UIImage(named: "ui-linkedin-icon")
+        textLabel?.text = "LinkedIn"
+        detailTextLabel?.text = "View or connect your LinkedIn account"
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 class AMPAccountSectionCell: UITableViewCell {

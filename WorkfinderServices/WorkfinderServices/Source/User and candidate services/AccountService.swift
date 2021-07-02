@@ -22,34 +22,31 @@ public protocol AccountServiceProtocol {
     func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?,Error>) -> Void)
 }
 
-class SocialMediaService: WorkfinderService {
+public protocol LinkedinDataServiceProtocol: AnyObject {
+    func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?, Error>) -> Void)
+}
+
+public class SocialMediaService: WorkfinderService, LinkedinDataServiceProtocol {
     
-    func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?,Error>) -> Void) {
-        getSocialConnections { [weak self] result in
-            guard let self = self else { return }
+    private enum Provider: String {
+        case linkedin_oauth2
+    }
+    
+    public func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?,Error>) -> Void) {
+        getSocialConnections(provider: .linkedin_oauth2) { result in
             switch result {
             case .success(let connections):
-                guard let id = connections.first(where: { connection in
-                    true
-                })?.id else {
-                    completion(.success(nil))
-                    return
-                }
-                do {
-                    let request = try self.buildRequest(relativePath: "auth/accounts/social/connections/\(id)", queryItems: nil, verb: .get)
-                    self.performTask(with: request, verbose: true, completion: completion, attempting: "GET linkedinData")
-                } catch {
-                    completion(.failure(error))
-                }
+                completion(.success(connections.first))               
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
     
-    private func getSocialConnections(completion: @escaping (Result<[SocialConnection],Error>) -> Void) {
+    private func getSocialConnections(provider: Provider, completion: @escaping (Result<[LinkedinConnectionData],Error>) -> Void) {
         do {
-            let request = try buildRequest(relativePath: "auth/accounts/social/connections/", queryItems: nil, verb: .get)
+            let queryItems = [URLQueryItem(name: "provider", value: provider.rawValue)]
+            let request = try buildRequest(relativePath: "auth/accounts/social/connections/", queryItems: queryItems, verb: .get)
             performTask(with: request, verbose: true, completion: completion, attempting: "GET SocialConnections")
         } catch {
             completion(.failure(error))
@@ -279,8 +276,8 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
     }
 }
 
-public extension AccountService {
-    func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?, Error>) -> Void) {
+extension AccountService: LinkedinDataServiceProtocol {
+    public func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?, Error>) -> Void) {
         _linkedinDataService.getLinkedInData(completion: completion)
     }
 }

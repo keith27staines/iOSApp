@@ -23,7 +23,7 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         password.textfield.nextResponderField = email.textfield
         bottomStack.addArrangedSubview(forgotPasswordStack)
         bottomStack.addArrangedSubview(primaryButton)
-        password2.isHidden = true
+        confirmPasswordTextField.isHidden = true
         password2InstructionLabel.isHidden = true
     }
     

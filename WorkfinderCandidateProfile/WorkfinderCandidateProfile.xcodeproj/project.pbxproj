@@ -28,7 +28,9 @@
 		531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137A260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift */; };
 		531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */; };
 		531F1381260B6C9B00F0FA7E /* PostcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */; };
-		5323F61E268C712D00DD5875 /* SocialMediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F61D268C712D00DD5875 /* SocialMediaData.swift */; };
+		5323F625268F0C5F00DD5875 /* LinkedinConnectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F624268F0C5F00DD5875 /* LinkedinConnectionPresenter.swift */; };
+		5323F628268F171600DD5875 /* LinkedinConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F627268F171600DD5875 /* LinkedinConnectionViewController.swift */; };
+		5323F62A268F265D00DD5875 /* EducationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F629268F265D00DD5875 /* EducationCell.swift */; };
 		532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DA2625B9360025F3E4 /* DetailCellType.swift */; };
 		532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879DE2625B9C70025F3E4 /* AccountPicklist.swift */; };
 		532879E92625F2760025F3E4 /* ValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532879E82625F2760025F3E4 /* ValidatedTextField.swift */; };
@@ -99,7 +101,9 @@
 		531F137B260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOfBirthCollectorViewController.swift; sourceTree = "<group>"; };
 		531F1380260B6C9B00F0FA7E /* PostcodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostcodeTests.swift; sourceTree = "<group>"; };
 		531F1384260B6CDA00F0FA7E /* WorkfinderCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5323F61D268C712D00DD5875 /* SocialMediaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaData.swift; sourceTree = "<group>"; };
+		5323F624268F0C5F00DD5875 /* LinkedinConnectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinConnectionPresenter.swift; sourceTree = "<group>"; };
+		5323F627268F171600DD5875 /* LinkedinConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinConnectionViewController.swift; sourceTree = "<group>"; };
+		5323F629268F265D00DD5875 /* EducationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationCell.swift; sourceTree = "<group>"; };
 		532879DA2625B9360025F3E4 /* DetailCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellType.swift; sourceTree = "<group>"; };
 		532879DE2625B9C70025F3E4 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
 		532879E82625F2760025F3E4 /* ValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedTextField.swift; sourceTree = "<group>"; };
@@ -272,9 +276,19 @@
 		5323F61C268C710500DD5875 /* social media data */ = {
 			isa = PBXGroup;
 			children = (
-				5323F61D268C712D00DD5875 /* SocialMediaData.swift */,
+				5323F626268F16F600DD5875 /* Linkedin */,
 			);
 			path = "social media data";
+			sourceTree = "<group>";
+		};
+		5323F626268F16F600DD5875 /* Linkedin */ = {
+			isa = PBXGroup;
+			children = (
+				5323F627268F171600DD5875 /* LinkedinConnectionViewController.swift */,
+				5323F624268F0C5F00DD5875 /* LinkedinConnectionPresenter.swift */,
+				5323F629268F265D00DD5875 /* EducationCell.swift */,
+			);
+			path = Linkedin;
 			sourceTree = "<group>";
 		};
 		53659C9A26202AE000CFF49E /* Table cells */ = {
@@ -503,7 +517,6 @@
 				53659CA22620336E00CFF49E /* AMPAccountSectionCell.swift in Sources */,
 				53724BDF2628659300908D50 /* TableHeaderView.swift in Sources */,
 				53724BDB262820A400908D50 /* ChangePasswordPresenter.swift in Sources */,
-				5323F61E268C712D00DD5875 /* SocialMediaData.swift in Sources */,
 				53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */,
 				53D7CDF62621ED2900A9BE40 /* RemoveAccountCell.swift in Sources */,
 				53E71D5E2624770A008E90AD /* DetailCell.swift in Sources */,
@@ -513,6 +526,7 @@
 				531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */,
 				53D7CDFC2622F1FC00A9BE40 /* NotificationPreferences.swift in Sources */,
 				532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */,
+				5323F625268F0C5F00DD5875 /* LinkedinConnectionPresenter.swift in Sources */,
 				53D3E7E22654C9F2000249FF /* SMSPreferenceCell.swift in Sources */,
 				532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */,
 				53659C9726202AB400CFF49E /* AMPHeaderCell.swift in Sources */,
@@ -520,6 +534,7 @@
 				53135D65265E6AE400790049 /* SectionHeaderView.swift in Sources */,
 				53724B5A2627353800908D50 /* PicklistPresenter.swift in Sources */,
 				538BFD30265FDAC10089CA44 /* RemoveAccountViewController.swift in Sources */,
+				5323F628268F171600DD5875 /* LinkedinConnectionViewController.swift in Sources */,
 				53E71D5A26244606008E90AD /* DetailCellPresenter.swift in Sources */,
 				53131C812611DCE900799629 /* AccountSectionViewModel.swift in Sources */,
 				53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */,
@@ -528,6 +543,7 @@
 				531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */,
 				53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */,
 				53659CF62621934600CFF49E /* WFViewController.swift in Sources */,
+				5323F62A268F265D00DD5875 /* EducationCell.swift in Sources */,
 				53131D05261EFE5D00799629 /* AccountPresenter.swift in Sources */,
 				531F1375260B6B9000F0FA7E /* UKAddress.swift in Sources */,
 				53D7CDE32621CE2D00A9BE40 /* NotificationControlsCell.swift in Sources */,
