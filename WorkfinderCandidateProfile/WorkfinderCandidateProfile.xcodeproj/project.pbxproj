@@ -243,8 +243,8 @@
 		531F136B260B665D00F0FA7E /* source */ = {
 			isa = PBXGroup;
 			children = (
-				5323F61C268C710500DD5875 /* social media data */,
 				53131CFA261EFBAD00799629 /* AccountCoordinator.swift */,
+				5323F61C268C710500DD5875 /* social media data */,
 				53724B6A26273F1600908D50 /* models */,
 				53131D13262029B600799629 /* Account main page */,
 				53659CE42621927200CFF49E /* Your Details */,

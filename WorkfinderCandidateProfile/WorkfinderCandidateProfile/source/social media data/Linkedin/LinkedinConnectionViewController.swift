@@ -13,6 +13,8 @@ class LinkedinConnectionViewController: UIViewController {
     lazy var messageHandler: UserMessageHandler = UserMessageHandler(presenter: self)
     let presenter: LinkedinConnectionPresenter
     
+    @objc var doLinkedinSynch: (() -> Void)?
+    
     override func viewDidLoad() {
         presenter.onViewDidLoad(self)
         reloadFromPresenter()
@@ -51,8 +53,13 @@ class LinkedinConnectionViewController: UIViewController {
     lazy var connectButton: UIButton = {
         let button = WorkfinderPrimaryButton()
         button.setTitle("Connect LinkedIn", for: .normal)
+        button.addTarget(self, action: #selector(onConnectButtonTap), for: .touchUpInside)
         return button
     }()
+    
+    @objc func onConnectButtonTap() {
+        doLinkedinSynch?()
+    }
     
     lazy var connectVStack: UIStackView = {
         let stack = UIStackView()

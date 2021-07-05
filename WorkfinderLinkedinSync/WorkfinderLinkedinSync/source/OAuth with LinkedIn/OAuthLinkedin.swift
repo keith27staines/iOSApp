@@ -36,15 +36,27 @@ class OAuthLinkedinViewController: UIViewController {
         return view
     }()
     
+    lazy var navigationBar: UINavigationBar = {
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
+        view.addSubview(navBar)
+
+        let navItem = UINavigationItem(title: "Connect LinkedIn")
+        let doneItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: #selector(cancelButtonTapped))
+        navItem.rightBarButtonItem = doneItem
+
+        navBar.setItems([navItem], animated: false)
+        navBar.isTranslucent = false
+        navBar.barTintColor = WorkfinderColors.primaryColor
+        navBar.tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        return navBar
+    }()
+    
     override func viewWillDisappear(_ animated: Bool) {
         let cancelled = !isComplete
         if isMovingFromParent && cancelled {
             onComplete()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        configureNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,18 +80,19 @@ class OAuthLinkedinViewController: UIViewController {
         self.host = host
         super.init(nibName: nil, bundle: nil)
         configureViews()
-        modalPresentationStyle = .overCurrentContext
+        modalPresentationStyle = .overFullScreen
     }
     
     func configureViews() {
         let guide = view.safeAreaLayoutGuide
+        view.addSubview(navigationBar)
         view.addSubview(webView)
-        webView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor)
+        navigationBar.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor)
+        webView.anchor(top: navigationBar.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor)
     }
     
-    func configureNavigationBar() {
-        styleNavigationController()
-    
+    @objc func cancelButtonTapped() {
+        onComplete()
     }
     
     required init?(coder: NSCoder) {

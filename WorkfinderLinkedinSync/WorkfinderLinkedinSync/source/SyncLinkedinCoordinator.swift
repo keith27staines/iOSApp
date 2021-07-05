@@ -13,6 +13,7 @@ public class SynchLinkedinCoordinator: CoreInjectionNavigationCoordinator {
 
     private var introController: IntroController?
     public var syncDidComplete: ((SynchLinkedinCoordinator) -> Void)?
+    public var cancelled: Bool = false
     
     public override func start() {
         startIntro()
@@ -24,7 +25,14 @@ public class SynchLinkedinCoordinator: CoreInjectionNavigationCoordinator {
         introController?.present()
     }
     
-    private func coordinatorDidFinish() {
+    public func startSynch() {
+        guard let workfinderHost = injected.networkConfig.host else { return }
+        let oauthViewController = OAuthLinkedinViewController(host: workfinderHost, coordinator: self)
+        navigationRouter.present(oauthViewController, animated: true, completion: nil)
+    }
+    
+    private func coordinatorDidFinish(cancelled: Bool) {
+        self.cancelled = cancelled
         syncDidComplete?(self)
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
@@ -42,18 +50,16 @@ extension SynchLinkedinCoordinator: IntroCoordinator {
     var router: NavigationRoutingProtocol { navigationRouter }
     
     func introChoseSkip() {
-        coordinatorDidFinish()
+        coordinatorDidFinish(cancelled: true)
     }
     
     func introChoseSync() {
-        guard let workfinderHost = injected.networkConfig.host else { return }
-        let oauthViewController = OAuthLinkedinViewController(host: workfinderHost, coordinator: self)
-        navigationRouter.present(oauthViewController, animated: true, completion: nil)
+        startSynch()
     }
 }
 
 extension SynchLinkedinCoordinator: OAuthLinkedinCoordinator {
     func oauthLinkedinDidComplete(_ cancelled: Bool) {
-        coordinatorDidFinish()
+        coordinatorDidFinish(cancelled: cancelled)
     }
 }

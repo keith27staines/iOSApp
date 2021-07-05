@@ -55,20 +55,26 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
+    weak var linkedinDataVC: LinkedinConnectionViewController?
+
     func showLinkedinData() {
         let service = AccountService(networkConfig: injected.networkConfig)
         let presenter = LinkedinConnectionPresenter(service: service)
         let vc = LinkedinConnectionViewController(presenter: presenter)
+        vc.doLinkedinSynch = doLinkedinSynch
+        self.linkedinDataVC = vc
         navigationRouter.push(viewController: vc, animated: true)
     }
     
     func doLinkedinSynch() {
         let coordinator = SynchLinkedinCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
         addChildCoordinator(coordinator)
-        coordinator.syncDidComplete = { syncCoordinator in
-            
+        coordinator.syncDidComplete = { [weak self] syncCoordinator in
+            guard let self = self else { return }
+            self.removeChildCoordinator(syncCoordinator)
+            self.linkedinDataVC?.reloadFromPresenter()
         }
-        coordinator.startIntro()
+        coordinator.startSynch()
     }
     
     func showDetails() {

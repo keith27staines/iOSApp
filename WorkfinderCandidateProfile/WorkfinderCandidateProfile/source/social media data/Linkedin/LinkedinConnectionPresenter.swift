@@ -52,6 +52,7 @@ extension LinkedinConnectionPresenter: UITableViewDataSource {
         case skills
         case positions
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         Section.allCases.count
     }
