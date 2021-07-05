@@ -31,12 +31,19 @@ class LinkedinConnectionViewController: UIViewController {
                 cancelHandler: {},
                 retryHandler: self.reloadFromPresenter)
             self.table.reloadData()
+            
+            if let isDataAvailable = self.presenter.isLinkedinDataAvailable {
+                self.connectStack.isHidden = isDataAvailable
+                self.table.isHidden = !self.connectStack.isHidden
+            }
         }
     }
     
     lazy var connectLabel: UILabel = {
         let label = UILabel()
-        label.text = "Connect your LinkedIn account so that Workfinder can provide more information about you to employers"
+        label.text = "If you connect your LinkedIn account, Workfinder will be able to provide more information to employers"
+        label.textAlignment = .center
+        label.textColor = WorkfinderColors.gray3
         label.numberOfLines = 0
         return label
     }()
@@ -47,7 +54,7 @@ class LinkedinConnectionViewController: UIViewController {
         return button
     }()
     
-    lazy var connectStack: UIStackView = {
+    lazy var connectVStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 8
@@ -55,7 +62,22 @@ class LinkedinConnectionViewController: UIViewController {
         stack.addArrangedSubview(connectButton)
         return stack
     }()
-    
+
+    lazy var connectStack: UIStackView = {
+        let space1 = UIView()
+        let space2 = UIView()
+        space1.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        space2.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 0
+        stack.addArrangedSubview(space1)
+        stack.addArrangedSubview(connectVStack)
+        stack.addArrangedSubview(space2)
+        stack.isHidden = true
+        return stack
+    }()
+
     lazy var mainStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -67,6 +89,8 @@ class LinkedinConnectionViewController: UIViewController {
     
     lazy var table: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
+        table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = UITableView.automaticDimension
         return table
     }()
     
@@ -74,12 +98,12 @@ class LinkedinConnectionViewController: UIViewController {
         view.backgroundColor = UIColor.white
         let guide = view.safeAreaLayoutGuide
         view.addSubview(mainStack)
-        mainStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor)
+        mainStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor,padding: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
     }
     
     func configureNavBar() {
         styleNavigationController()
-        navigationItem.title = "LinkedIn data"
+        navigationItem.title = "LinkedIn connection"
     }
     
     init(presenter: LinkedinConnectionPresenter) {

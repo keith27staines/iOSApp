@@ -10,6 +10,7 @@ import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderRegisterCandidate
 import ErrorHandlingUI
+import WorkfinderLinkedinSync
 
 public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     var switchToTab: ((TabIndex) -> Void)?
@@ -54,11 +55,20 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func showLinkedin() {
+    func showLinkedinData() {
         let service = AccountService(networkConfig: injected.networkConfig)
         let presenter = LinkedinConnectionPresenter(service: service)
         let vc = LinkedinConnectionViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
+    }
+    
+    func doLinkedinSynch() {
+        let coordinator = SynchLinkedinCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        addChildCoordinator(coordinator)
+        coordinator.syncDidComplete = { syncCoordinator in
+            
+        }
+        coordinator.startIntro()
     }
     
     func showDetails() {

@@ -138,7 +138,7 @@ class AccountPresenter: BaseAccountPresenter {
             default: break
             }
         case .socialMediaConnections:
-            coordinator?.showLinkedin()
+            coordinator?.showLinkedinData()
 
         case .links: coordinator?.presentContent(links[indexPath.row])
         }
