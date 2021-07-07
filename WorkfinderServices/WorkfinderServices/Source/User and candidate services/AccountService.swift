@@ -20,6 +20,9 @@ public protocol AccountServiceProtocol {
     func deleteAccount(email: String, completion: @escaping (Result<DeleteAccountJson,Error>) -> Void)
     func requestPasswordReset(email: String, completion: @escaping (Result<[String:String],Error>) -> Void)
     func getLinkedInData(completion: @escaping (Result<LinkedinConnectionData?,Error>) -> Void)
+    func getSkillsPicklist(completion: @escaping (Result<[Skill], Error>) -> Void)
+    func getPersonalAttributesPicklist(completion: @escaping (Result<[PersonalAttribute], Error>) -> Void)
+
 }
 
 public protocol LinkedinDataServiceProtocol: AnyObject {
@@ -80,6 +83,8 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
     private lazy var _countriesService: CountriesService = CountriesService(networkConfig: networkConfig)
     private lazy var _languagesService: LanguagesService = LanguagesService(networkConfig: networkConfig)
     private lazy var _ethnicitiesService: EthnicitiesService = EthnicitiesService(networkConfig: networkConfig)
+    private lazy var _skillsService: SkillsService = SkillsService(networkConfig: networkConfig)
+    private lazy var _personalAttributesService: PersonalAttributesService = PersonalAttributesService(networkConfig: networkConfig)
     private lazy var _linkedinDataService: SocialMediaService = SocialMediaService(networkConfig: networkConfig)
     
     public override init(networkConfig: NetworkConfig) {
@@ -134,6 +139,8 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
                 var gender: String?
                 var prefer_sms: Bool?
                 var education_level: String
+                var strongest_skills: [String]
+                var attributes: [String]
             }
             
             let patch = CandidatePatch(
@@ -144,7 +151,9 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
                 ethnicity: candidate.ethnicity ?? "",
                 gender: candidate.gender ?? "",
                 prefer_sms: candidate.preferSMS,
-                education_level: candidate.educationLevel ?? ""
+                education_level: candidate.educationLevel ?? "",
+                strongest_skills: candidate.strongestSkills ?? [],
+                attributes: candidate.personalAttributes ?? []
             )
             
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)
@@ -192,6 +201,14 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
 
     public func getEthnicitiesPicklist(completion: @escaping (Result<[Ethnicity], Error>) -> Void) {
         _ethnicitiesService.getEthnicities(completion: completion)
+    }
+    
+    public func getSkillsPicklist(completion: @escaping (Result<[Skill], Error>) -> Void) {
+        _skillsService.getSkills(completion: completion)
+    }
+    
+    public func getPersonalAttributesPicklist(completion: @escaping (Result<[PersonalAttribute], Error>) -> Void) {
+        _personalAttributesService.getAttributes(completion: completion)
     }
     
     public func getGendersPicklist(completion: @escaping (Result<[Gender], Error>) -> Void) {
@@ -268,6 +285,50 @@ public class AccountService: WorkfinderService, AccountServiceProtocol {
         func getEthnicities(completion: @escaping (Result<[Ethnicity], Error>) -> Void) {
             do {
                 let request = try buildRequest(relativePath: "ethnicities/", queryItems: nil, verb: .get)
+                performTask(with: request, verbose: true ,completion: completion, attempting: #function)
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private class SkillsService: WorkfinderService {
+        func getSkills(completion: @escaping (Result<[Skill], Error>) -> Void) {
+            _getSkills { result in
+                switch result {
+                case .success(let serverlistJson):
+                    completion(.success(serverlistJson.results))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        
+        private func _getSkills(completion: @escaping (Result<ServerListJson<Skill>, Error>) -> Void) {
+            do {
+                let request = try buildRequest(relativePath: "placement-skills/", queryItems: nil, verb: .get)
+                performTask(with: request, verbose: true ,completion: completion, attempting: #function)
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private class PersonalAttributesService: WorkfinderService {
+        func getAttributes(completion: @escaping (Result<[PersonalAttribute], Error>) -> Void) {
+            _getAttributes { result in
+                switch result {
+                case .success(let serverlistJson):
+                    completion(.success(serverlistJson.results))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        
+        private func _getAttributes(completion: @escaping (Result<ServerListJson<PersonalAttribute>, Error>) -> Void) {
+            do {
+                let request = try buildRequest(relativePath: "placement-attributes/", queryItems: nil, verb: .get)
                 performTask(with: request, verbose: true ,completion: completion, attempting: #function)
             } catch {
                 completion(.failure(error))

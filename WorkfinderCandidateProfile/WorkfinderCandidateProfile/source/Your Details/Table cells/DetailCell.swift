@@ -248,19 +248,8 @@ class DetailCell:  UITableViewCell {
         case .date:
             leftStack.addArrangedSubview(dateField)
             dateField.placeholder = type.placeholderText
-        case .picklist(let picklistType):
-            switch picklistType {
-            case .countryOfResidence:
-                break
-            case .language:
-                break
-            case .educationLevel:
-                break
-            case .gender:
-                break
-            case .ethnicity:
-                break
-            }
+        case .picklist(_):
+           break
         case .action:
             break
         }

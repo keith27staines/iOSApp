@@ -31,7 +31,6 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         email.textfield.nextResponderField = firstname.textfield
         firstname.textfield.nextResponderField = lastname.textfield
         lastname.textfield.nextResponderField = password.textfield
-        password.textfield.nextResponderField = confirmPasswordTextField.textfield
         bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
         confirmPasswordTextField.isHidden = false

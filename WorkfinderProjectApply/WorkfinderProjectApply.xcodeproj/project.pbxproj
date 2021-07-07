@@ -171,7 +171,6 @@
 				FC15D78724C45AFC00543E6F /* aboutCompanyAndPlacement */,
 				FC15D78824C45B1C00543E6F /* skillsYouWillGain */,
 				FC15D78924C45B2D00543E6F /* keyActivities */,
-				FC15D78A24C45B3C00543E6F /* aboutYou */,
 				FC15D78B24C45B4B00543E6F /* projectContact */,
 			);
 			path = "Cells and cell presenters";
@@ -222,13 +221,6 @@
 				FC9B676F24C464630091A556 /* KeyActivityPresenter.swift */,
 			);
 			path = keyActivities;
-			sourceTree = "<group>";
-		};
-		FC15D78A24C45B3C00543E6F /* aboutYou */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = aboutYou;
 			sourceTree = "<group>";
 		};
 		FC15D78B24C45B4B00543E6F /* projectContact */ = {

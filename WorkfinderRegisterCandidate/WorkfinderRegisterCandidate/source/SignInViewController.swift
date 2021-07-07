@@ -19,8 +19,6 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         email.textChanged?(self.presenter.email)
         password.textChanged?(self.presenter.password)
         password.textfield.placeholder = "enter password"
-        email.textfield.nextResponderField = password.textfield
-        password.textfield.nextResponderField = email.textfield
         bottomStack.addArrangedSubview(forgotPasswordStack)
         bottomStack.addArrangedSubview(primaryButton)
         confirmPasswordTextField.isHidden = true
@@ -32,7 +30,6 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         presenter.password = trim(password.textfield.text)
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
-        password.state = presenter.passwordValidityState
     }
     
     private func trim(_ string:  String?) -> String? {

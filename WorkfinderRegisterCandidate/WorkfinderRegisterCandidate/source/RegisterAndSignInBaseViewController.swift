@@ -168,7 +168,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         let stack = self.makeTextStack(fieldName: fieldName)
         let textField = stack.textfield
         textField.textColor = UIColor.darkText
-        textField.returnKeyType = .next
+        textField.returnKeyType = .done
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
         textField.autocorrectionType = .no
@@ -188,8 +188,12 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         stack.textfield.returnKeyType = .done
         stack.textfield.isSecureTextEntry = true
         stack.textfield.placeholder = NSLocalizedString("enter new password", comment: "prompt user to enter password")
+        newPassword = stack.textfield
         return stack
     }()
+    
+    private var newPassword: UITextField?
+    private var confirmPassword: UITextField?
     
     lazy var confirmPasswordTextField: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Confirm password", comment: "")
@@ -201,6 +205,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         stack.textfield.returnKeyType = .done
         stack.textfield.isSecureTextEntry = true
         stack.textfield.placeholder = NSLocalizedString("Confirm password", comment: "prompt user to enter password")
+        confirmPassword = stack.textfield
         return stack
     }()
     
@@ -454,7 +459,6 @@ extension RegisterAndSignInBaseViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField === password.textfield { textField.resignFirstResponder() }
         return true
     }
 }

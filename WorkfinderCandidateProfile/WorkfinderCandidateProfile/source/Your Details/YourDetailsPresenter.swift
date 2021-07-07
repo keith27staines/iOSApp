@@ -45,6 +45,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
             DetailCellPresenter(type: .picklist(.educationLevel), picklist: picklistFor(type: .educationLevel)),
             DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
             DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity)),
+            DetailCellPresenter(type: .picklist(.strongestSkills), picklist: picklistFor(type: .strongestSkills)),
+            DetailCellPresenter(type: .picklist(.personalAttributes), picklist: picklistFor(type: .personalAttributes)),
         ],
         [
             DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
@@ -144,6 +146,14 @@ class YourDetailsPresenter: BaseAccountPresenter {
                 user.countryOfResidence = picklist.selectedItems.first?.id
             case .educationLevel:
                 candidate.educationLevel = picklist.selectedItems.first?.id
+            case .strongestSkills:
+                candidate.strongestSkills = picklist.selectedItems.compactMap({ (item) -> String? in
+                    item.id
+                })
+            case .personalAttributes:
+                candidate.personalAttributes = picklist.selectedItems.compactMap({ (item) -> String? in
+                    item.id
+                })
             }
         case .removeAccount:
             break
@@ -238,6 +248,10 @@ class YourDetailsPresenter: BaseAccountPresenter {
                     selectItemsFromIds([candidate.gender ?? ""], for: picklist)
                 case .ethnicity:
                     selectItemsFromIds([candidate.ethnicity ?? ""], for: picklist)
+                case .strongestSkills:
+                    selectItemsFromIds(candidate.strongestSkills ?? [], for: picklist)
+                case .personalAttributes:
+                    selectItemsFromIds(candidate.personalAttributes ?? [], for: picklist)
                 }
             }
             picklist.isLocallySynchronised = true

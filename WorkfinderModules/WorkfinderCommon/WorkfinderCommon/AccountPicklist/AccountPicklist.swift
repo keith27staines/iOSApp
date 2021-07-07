@@ -12,6 +12,35 @@ public protocol IdentifiedAndNamed {
     var category: String? { get set }
 }
 
+public struct Skill: IdentifiedAndNamed, Codable {
+    public var id: String?
+    public var name: String?
+    public var category: String?
+    public init(id: String?, name: String?) {
+        self.id = id
+        self.name = name
+    }
+    private enum CodingKeys: String, CodingKey {
+        case id = "uuid"
+        case name
+    }
+}
+
+public struct PersonalAttribute: IdentifiedAndNamed, Codable {
+    public var id: String?
+    public var name: String?
+    public var category: String?
+    public init(id: String?, name: String?) {
+        self.id = id
+        self.name = name
+    }
+    private enum CodingKeys: String, CodingKey {
+        case id = "uuid"
+        case name
+    }
+}
+
+
 public struct EducationLevel: IdentifiedAndNamed, Codable {
     public var id: String?
     public var name: String?
@@ -21,8 +50,8 @@ public struct EducationLevel: IdentifiedAndNamed, Codable {
         self.name = name
     }
     private enum CodingKeys: String, CodingKey {
-        case id = "value"
-        case name = "label"
+        case id = "uuid"
+        case name
     }
 }
 

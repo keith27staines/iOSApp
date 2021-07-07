@@ -9,6 +9,8 @@ import WorkfinderCommon
 
 class AccountPresenter: BaseAccountPresenter {
     
+    weak var accountViewController: AccountViewController?
+    
     enum TableSection: Int, CaseIterable {
         case header
         case accountSections
@@ -138,7 +140,15 @@ class AccountPresenter: BaseAccountPresenter {
             default: break
             }
         case .socialMediaConnections:
-            coordinator?.showLinkedinData()
+            if UserRepository().isCandidateLoggedIn {
+                coordinator?.showLinkedinData()
+            } else {
+                guard let vc = accountViewController else { return }
+                let alert = UIAlertController(title: "Sign in first", message: "You must sign into Workfinder before you can link your LinkedIn account", preferredStyle: .alert)
+                let okaction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okaction)
+                vc.present(alert, animated: true, completion: nil)
+            }
 
         case .links: coordinator?.presentContent(links[indexPath.row])
         }
@@ -185,6 +195,10 @@ class YourDetailsSectionProgressCalculator: ProgressCalculatorProtocol {
         total += scoreForOptionalCount(count: candidate.gender?.count)
         max += 1
         total += scoreForOptionalCount(count: candidate.ethnicity?.count)
+        max += 1
+        total += scoreForOptionalCount(count: candidate.strongestSkills?.count)
+        max += 1
+        total += scoreForOptionalCount(count: candidate.personalAttributes?.count)
         max += 1
         return Float(total) / Float(max)
     }

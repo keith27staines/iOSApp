@@ -44,6 +44,7 @@ class AccountViewController: WFViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        (presenter as? AccountPresenter)?.accountViewController = self
         tableView.reloadData()
     }
     

@@ -24,6 +24,8 @@ public struct Candidate: Codable, Equatable {
     public var gender: String?
     public var preferSMS: Bool?
     public var educationLevel: String?
+    public var personalAttributes: [F4SUUID]?
+    public var strongestSkills: [F4SUUID]?
     
     public func age(on date: Date = Date()) -> Int? {
         guard let dobString = dateOfBirth,
@@ -76,6 +78,8 @@ public struct Candidate: Codable, Equatable {
         case gender
         case preferSMS = "prefer_sms"
         case educationLevel = "education_level"
+        case strongestSkills = "strongest_skills"
+        case personalAttributes = "attributes"
     }
     
     struct UserUUID: Codable, Equatable {
