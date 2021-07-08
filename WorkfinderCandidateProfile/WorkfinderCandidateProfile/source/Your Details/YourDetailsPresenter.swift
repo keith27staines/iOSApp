@@ -45,8 +45,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
             DetailCellPresenter(type: .picklist(.educationLevel), picklist: picklistFor(type: .educationLevel)),
             DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
             DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity)),
-//            DetailCellPresenter(type: .picklist(.strongestSkills), picklist: picklistFor(type: .strongestSkills)),
-//            DetailCellPresenter(type: .picklist(.personalAttributes), picklist: picklistFor(type: .personalAttributes)),
+            DetailCellPresenter(type: .picklist(.strongestSkills), picklist: picklistFor(type: .strongestSkills)),
+            DetailCellPresenter(type: .picklist(.personalAttributes), picklist: picklistFor(type: .personalAttributes)),
         ],
         [
             DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
