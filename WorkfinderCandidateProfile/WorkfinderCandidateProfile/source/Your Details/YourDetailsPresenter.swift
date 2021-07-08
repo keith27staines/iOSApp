@@ -62,6 +62,15 @@ class YourDetailsPresenter: BaseAccountPresenter {
     
     var isUpdateEnabled: Bool {
         allCellPresenters.joined().reduce(isDirty) { (result, presenter) -> Bool in
+            if !presenter.isValid {
+                switch presenter.type {
+                case .email:
+                    print(presenter.isValid)
+                default:
+                    print(presenter.text ?? "nil text")
+                }
+                print("\(presenter.type) is invalid")
+            }
             return result && presenter.isValid
         }
     }
@@ -91,6 +100,17 @@ class YourDetailsPresenter: BaseAccountPresenter {
             allowRecommendations: true
         )
     }()
+    
+    override func reloadPresenter(completion: @escaping (Error?) -> Void) {
+        super.reloadPresenter { [weak self] error in
+            guard let self = self else { return }
+            if let error = error { completion(error) }
+            self.allCellPresenters.flatMap { $0 }.forEach { presenter in
+                self.updatePresenterData(presenter)
+            }        
+            completion(nil)
+        }
+    }
     
     func syncAccountToServer(completion: @escaping (Error?) -> Void) {
         let repo = UserRepository()
@@ -207,10 +227,9 @@ class YourDetailsPresenter: BaseAccountPresenter {
         return cell
     }
     
-    func presenterForIndexPath(_ indexPath: IndexPath) -> DetailCellPresenter {
+    func updatePresenterData(_ presenter: DetailCellPresenter) {
         let user = editedAccount.user
         let candidate = editedAccount.candidate
-        let presenter = allCellPresenters[indexPath.section][indexPath.row]
         switch presenter.type {
         case .firstname:
             presenter.text = user.firstname
@@ -258,6 +277,11 @@ class YourDetailsPresenter: BaseAccountPresenter {
         case .removeAccount:
             break
         }
+    }
+    
+    func presenterForIndexPath(_ indexPath: IndexPath) -> DetailCellPresenter {
+        let presenter = allCellPresenters[indexPath.section][indexPath.row]
+        updatePresenterData(presenter)
         return presenter
     }
     
