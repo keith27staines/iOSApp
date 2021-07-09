@@ -286,12 +286,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
     }
     
     func selectItemsFromIds(_ ids: [String], for picklist: AccountPicklist) {
-        picklist.deselectAll()
-        ids.forEach { (id) in
-            if id != "" {
-                _ = picklist.selectItemHavingId(id)
-            }
-        }
+        picklist.preselectItems(ids: ids)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

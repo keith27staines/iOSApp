@@ -133,9 +133,13 @@ extension AccountPicklist {
     func deselectAll() {
         selectedItems = []
     }
+    
+    func preselectItems(ids: [String]) {
+        deselectAll()
+        preselectedIds = Set<String>(ids)
+    }
 
     func selectItemHavingId(_ id: String) -> Bool {
-        preselectedIds.insert(id)
         let itemOrNil = itemFromId(id)
         let selectedItem = selectedItemFromId(id)
         guard selectedItem == nil else { return false } // already selected
