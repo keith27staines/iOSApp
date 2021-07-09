@@ -73,6 +73,11 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         refreshFromPresenter()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        password1Stack.state = .empty
+        password2Stack.state = .empty
+    }
+    
     func refreshFromPresenter() {
     
     }
@@ -157,7 +162,7 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
         textField.autocorrectionType = .no
-        textField.textContentType = .name
+        textField.textContentType = .givenName
         textField.placeholder = fieldName
         textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
@@ -172,37 +177,31 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         textField.keyboardType = .alphabet
         textField.autocapitalizationType = .words
         textField.autocorrectionType = .no
-        textField.textContentType = .name
+        textField.textContentType = .familyName
         textField.placeholder = fieldName
         textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
     }()
-    
-    lazy var password: UnderlinedNextResponderTextFieldStack = {
+        
+    lazy var password1Stack: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("password", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName, nextResponder: nil)
-        stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
+        stack.textfield.textContentType = (mode == .register) ? .password : .password
         stack.textfield.textColor = UIColor.darkText
-        stack.textfield.autocapitalizationType = .none
-        stack.textfield.autocorrectionType = .no
-        stack.textfield.returnKeyType = .done
         stack.textfield.isSecureTextEntry = true
-        stack.textfield.placeholder = NSLocalizedString("enter new password", comment: "prompt user to enter password")
-        newPassword = stack.textfield
+        stack.textfield.placeholder = NSLocalizedString("Password", comment: "prompt user to enter password")
+        password = stack.textfield
         return stack
     }()
     
-    private var newPassword: UITextField?
+    private var password: UITextField?
     private var confirmPassword: UITextField?
     
-    lazy var confirmPasswordTextField: UnderlinedNextResponderTextFieldStack = {
+    lazy var password2Stack: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("Confirm password", comment: "")
         let stack = self.makeTextStack(fieldName: fieldName, nextResponder: nil)
-        stack.textfield.textContentType = (mode == .register) ? .newPassword : .password
+        stack.textfield.textContentType = (mode == .register) ? .password : .password
         stack.textfield.textColor = UIColor.darkText
-        stack.textfield.autocapitalizationType = .none
-        stack.textfield.autocorrectionType = .no
-        stack.textfield.returnKeyType = .done
         stack.textfield.isSecureTextEntry = true
         stack.textfield.placeholder = NSLocalizedString("Confirm password", comment: "prompt user to enter password")
         confirmPassword = stack.textfield
@@ -231,9 +230,9 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
 
     lazy var passwordStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            self.password,
+            self.password1Stack,
             self.passwordInstructionLabel,
-            self.confirmPasswordTextField,
+            self.password2Stack,
             self.password2InstructionLabel
         ])
         stack.axis = .vertical
