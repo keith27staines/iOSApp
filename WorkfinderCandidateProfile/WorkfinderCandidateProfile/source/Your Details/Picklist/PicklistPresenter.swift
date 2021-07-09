@@ -96,33 +96,23 @@ class RowCheckManager {
         
         let isCurrentlySelected = picklist.isItemSelectedAtIndexPath(indexPath)
         if isCurrentlySelected {
-            updateCell(cell, tappedId: tappedId, picklist: picklist, isChecked: false)
+            _ = picklist.deselectItemWithId(tappedId)
+            updateCell(cell, itemId: tappedId, picklist: picklist)
         } else {
             if picklist.type.maxSelections == 1,
-               let currentSelectionId = picklist.firstSelectedItem()?.id {
-                let didDeselect = picklist.deselectItemWithId(currentSelectionId)
-                if didDeselect {
-                    if let currentSelectionIndexPath = picklist.indexPathForItem(with: currentSelectionId) {
-                        let cell = table.cellForRow(at: currentSelectionIndexPath)
-                        cell?.accessoryType = .none
-                    }
-                }
+               let previousSelectionId = picklist.firstSelectedItem()?.id,
+               let previouslySelectedIndexPath = picklist.indexPathForItem(with: previousSelectionId),
+               let previouslySelectedCell = table.cellForRow(at: previouslySelectedIndexPath) {
+                    _ = picklist.deselectItemWithId(previousSelectionId)
+                    updateCell(previouslySelectedCell, itemId: previousSelectionId, picklist: picklist)
             }
-            updateCell(cell, tappedId: tappedId, picklist: picklist, isChecked: true)
+            _ = picklist.selectItemHavingId(tappedId)
+            updateCell(cell, itemId: tappedId, picklist: picklist)
         }
     }
     
-    func updateCell(_ cell: UITableViewCell, tappedId: String, picklist: AccountPicklist, isChecked: Bool) {
-        switch isChecked {
-        case true:
-            if picklist.selectItemHavingId(tappedId) {
-                cell.accessoryType = .checkmark
-            }
-        case false:
-            if picklist.deselectItemWithId(tappedId) {
-                cell.accessoryType = .none
-            }
-        }
+    func updateCell(_ cell: UITableViewCell, itemId: String, picklist: AccountPicklist) {
+        let isChecked = picklist.isItemSelected(id: itemId)
+        cell.accessoryType = isChecked ? .checkmark : .none
     }
-    
 }

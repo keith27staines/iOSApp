@@ -96,7 +96,7 @@ class AccountPicklist {
         return itemsForSection(section: section)[row]
     }
     
-    private func isItemSelected(id: String) -> Bool {
+    func isItemSelected(id: String) -> Bool {
         selectedItemFromId(id) == nil ? false : true
     }
     
@@ -161,6 +161,7 @@ extension AccountPicklist {
     }
     
     func deselectItemWithId(_ id: String) -> Bool {
+        preselectedIds.remove(id)
         guard isItemSelected(id: id) else { return false }
         selectedItems.removeAll() { (item) -> Bool in
             item.id == id

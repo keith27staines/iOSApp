@@ -50,8 +50,8 @@ public struct EducationLevel: IdentifiedAndNamed, Codable {
         self.name = name
     }
     private enum CodingKeys: String, CodingKey {
-        case id = "uuid"
-        case name
+        case id = "value"
+        case name = "label"
     }
 }
 
