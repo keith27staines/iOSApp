@@ -15,6 +15,7 @@ protocol OAuthLinkedinCoordinator: AnyObject {
 }
 
 class OAuthLinkedinViewController: UIViewController {
+    lazy var messageHandler: UserMessageHandler = UserMessageHandler(presenter: self)
     private let callBack: String = "ios-auth-callback"
     private let host: String?
     private lazy var url: URL? = {
@@ -63,14 +64,16 @@ class OAuthLinkedinViewController: UIViewController {
         load()
     }
     
+    var mainNavigation: WKNavigation?
+    
     private func load() {
         guard let url = url else { return }
+        messageHandler.showLoadingOverlay()
         let request = URLRequest(url: url)
-        webView.load(request)
+        mainNavigation = webView.load(request)
     }
     
     private func onComplete() {
-        //removeCookies()
         dismiss(animated: true, completion: nil)
         coordinator?.oauthLinkedinDidComplete(!isComplete)
     }
@@ -114,5 +117,11 @@ extension OAuthLinkedinViewController: WKNavigationDelegate {
         decisionHandler(.allow)
         let cancel = (navigationAction.request.url?.absoluteString ?? "").contains("user_cancelled_login")
         if cancel { onComplete() }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if navigation == mainNavigation {
+            messageHandler.hideLoadingOverlay()
+        }
     }
 }

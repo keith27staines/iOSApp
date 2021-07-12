@@ -295,7 +295,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
         switch presenter.type.dataType {
         case .picklist(let picklistType):
             coordinator?.showPicklist(picklistFor(type: picklistType)) { [weak self] in
-                self?.informEditedAccountOfUpdatesFromUI(presenter: presenter)
+                guard let self = self else { return }
+                self.informEditedAccountOfUpdatesFromUI(presenter: presenter)
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         case .password:

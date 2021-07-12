@@ -136,7 +136,10 @@ extension AccountPicklist {
     
     func preselectItems(ids: [String]) {
         deselectAll()
-        preselectedIds = Set<String>(ids)
+        let nonEmptyIds = ids.compactMap { id in
+            return id.count == 0 ? nil : id
+        }
+        preselectedIds = Set<String>(nonEmptyIds)
     }
 
     func selectItemHavingId(_ id: String) -> Bool {

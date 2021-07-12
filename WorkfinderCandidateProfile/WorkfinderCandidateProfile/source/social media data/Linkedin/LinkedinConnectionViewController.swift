@@ -26,8 +26,10 @@ class LinkedinConnectionViewController: UIViewController {
     }
     
     func reloadFromPresenter() {
+        messageHandler.showLoadingOverlay()
         presenter.loadLinkedinConnection { [weak self] optionalError in
             guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
                 cancelHandler: {},

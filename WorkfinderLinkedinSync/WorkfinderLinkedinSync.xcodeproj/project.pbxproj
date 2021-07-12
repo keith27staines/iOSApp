@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		537175562678A317007F7D05 /* OAuthLinkedin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537175552678A317007F7D05 /* OAuthLinkedin.swift */; };
+		537175562678A317007F7D05 /* OAuthLinkedinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537175552678A317007F7D05 /* OAuthLinkedinViewController.swift */; };
 		537EB859267752F400913C8E /* WorkfinderLinkedinSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537EB84F267752F400913C8E /* WorkfinderLinkedinSync.framework */; };
 		537EB85E267752F400913C8E /* WorkfinderLinkedinSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537EB85D267752F400913C8E /* WorkfinderLinkedinSyncTests.swift */; };
 		537EB860267752F400913C8E /* WorkfinderLinkedinSync.h in Headers */ = {isa = PBXBuildFile; fileRef = 537EB852267752F400913C8E /* WorkfinderLinkedinSync.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,7 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		537175552678A317007F7D05 /* OAuthLinkedin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLinkedin.swift; sourceTree = "<group>"; };
+		537175552678A317007F7D05 /* OAuthLinkedinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLinkedinViewController.swift; sourceTree = "<group>"; };
 		537EB84F267752F400913C8E /* WorkfinderLinkedinSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderLinkedinSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		537EB852267752F400913C8E /* WorkfinderLinkedinSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderLinkedinSync.h; sourceTree = "<group>"; };
 		537EB853267752F400913C8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		537175542678A2DC007F7D05 /* OAuth with LinkedIn */ = {
 			isa = PBXGroup;
 			children = (
-				537175552678A317007F7D05 /* OAuthLinkedin.swift */,
+				537175552678A317007F7D05 /* OAuthLinkedinViewController.swift */,
 			);
 			path = "OAuth with LinkedIn";
 			sourceTree = "<group>";
@@ -255,7 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				537EB88D267756A600913C8E /* IntroController.swift in Sources */,
-				537175562678A317007F7D05 /* OAuthLinkedin.swift in Sources */,
+				537175562678A317007F7D05 /* OAuthLinkedinViewController.swift in Sources */,
 				537EB87A2677542D00913C8E /* SyncLinkedinCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -133,7 +133,7 @@ class AccountPresenter: BaseAccountPresenter {
         switch section {
         case .header: return
         case .accountSections:
-            
+            accountViewController?.messageHandler.showLoadingOverlay()
             switch indexPath.row {
             case 0: coordinator?.showDetails()
             case 1: coordinator?.showPreferences()
