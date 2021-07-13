@@ -14,8 +14,10 @@ class CoverLetterLogic {
     let fixedFieldValues: [String:String?]
     var embeddedFieldNames = [String]()
     var templateService: TemplateProviderProtocol
+    var candidateService: FetchCandidateServiceProtocol
     var isLetterComplete: Bool { renderer?.isComplete ?? false }
     var shouldHideAnsweredQuestions: Bool = true
+    var candidate = UserRepository().loadCandidate()
     
     lazy var allPicklistsDictionary: PicklistsDictionary = {
         let picklists = picklistsStore.load()
@@ -35,6 +37,7 @@ class CoverLetterLogic {
     
     init(picklistsStore: PicklistsStoreProtocol,
          templateService: TemplateProviderProtocol,
+         candidateService: FetchCandidateServiceProtocol,
          companyName: String,
          hostName: String,
          candidateName: String?,
@@ -44,6 +47,7 @@ class CoverLetterLogic {
         self.flowType = flowType
         self.picklistsStore = picklistsStore
         self.templateService = templateService
+        self.candidateService = candidateService
         self.fixedFieldValues = [
             "host": hostName,
             "company" : companyName,
@@ -53,6 +57,42 @@ class CoverLetterLogic {
     }
     
     func load(completion: @escaping (Error?) -> Void) {
+        guard let candidateUuid = candidate.uuid else {
+            loadTemplates(completion: completion)
+            completion(nil)
+            return
+        }
+        candidateService.fetchCandidate(uuid: candidateUuid) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let candidate):
+                UserRepository().saveCandidate(candidate)
+                let strongestSkillsPicklist = self.allPicklistsDictionary[.strongestSkills]
+                strongestSkillsPicklist?.preselectedUuids = self.candidate.strongestSkills ?? []
+                strongestSkillsPicklist?.fetchItems(completion: { _ , result in
+                    switch result {
+                    case .success(_):
+                        let attributesPicklist = self.allPicklistsDictionary[.attributes]
+                        attributesPicklist?.preselectedUuids = self.candidate.personalAttributes ?? []
+                        attributesPicklist?.fetchItems(completion: { _, result in
+                            switch result {
+                            case .success(_):
+                                self.loadTemplates(completion: completion)
+                            case .failure(let error):
+                                completion(error)
+                            }
+                        })
+                    case .failure(let error):
+                        completion(error)
+                    }
+                })
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
+    
+    private func loadTemplates(completion: @escaping (Error?) -> Void) {
         templateService.fetchCoverLetterTemplateListJson() { [weak self] (result) in
             switch result {
             case .success(let templates):

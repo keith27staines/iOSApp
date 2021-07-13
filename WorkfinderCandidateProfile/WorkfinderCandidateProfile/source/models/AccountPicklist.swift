@@ -205,7 +205,7 @@ enum AccountPicklistType: Int, CaseIterable {
         case .educationLevel: return "Current Educational Level"
         case .ethnicity: return "Ethnicity"
         case .gender: return "Gender identity"
-        case .strongestSkills: return "Strong skills"
+        case .strongestSkills: return "Strongest skills"
         case .personalAttributes: return "Personal attributes"
         }
     }
@@ -225,8 +225,8 @@ enum AccountPicklistType: Int, CaseIterable {
         case .educationLevel: return "Select your current education level"
         case .ethnicity: return "Select the ethnicity you most identify with"
         case .gender: return "Select the gender identity you most identify with"
-        case .strongestSkills: return "Select up to three of your strongest skills"
-        case .personalAttributes: return "Select up to three of your personal attributes"
+        case .strongestSkills: return "Select your strongest skills"
+        case .personalAttributes: return "Select your personal attributes"
         }
     }
     
@@ -237,8 +237,8 @@ enum AccountPicklistType: Int, CaseIterable {
         case .educationLevel: return 1
         case .gender: return 1
         case .language: return 10
-        case .strongestSkills: return 3
-        case .personalAttributes: return 3
+        case .strongestSkills: return 1000
+        case .personalAttributes: return 1000
         }
     }
     

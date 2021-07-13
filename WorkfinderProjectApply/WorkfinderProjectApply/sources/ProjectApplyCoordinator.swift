@@ -217,20 +217,6 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
             case .success(let placement):
                 self.log.track(.project_apply_convert(self.appSource))
                 self.onApplicationSubmitted(placement: placement)
-                let updateCandidateService = UpdateCandidateService(networkConfig: self.injected.networkConfig)
-                let candidateUuid = UserRepository().loadCandidate().uuid ?? ""
-                let strongestSkills = picklistsDictionary[.strongestSkills]?.selectedItems.map({ item in
-                    item.guaranteedUuid
-                })
-                let personalAttributes = picklistsDictionary[.attributes]?.selectedItems.map({ item in
-                    item.guaranteedUuid
-                })
-                updateCandidateService.updatePicklists(
-                    candidateUuid: candidateUuid,
-                    strongestSkills: strongestSkills ?? [],
-                    personalAttributes: personalAttributes ?? []) { result in
-                    
-                }
             case .failure(let error):
                 messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {
                     // just dismiss

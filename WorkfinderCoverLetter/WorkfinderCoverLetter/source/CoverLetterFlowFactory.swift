@@ -21,17 +21,21 @@ public class  CoverLetterFlowFactory {
             candidateAge: candidateAge,
             isProject: isProject
         )
+        let candidateService = FetchCandidateService(networkConfig: inject.networkConfig)
         let picklistStore = PicklistsStore(
             networkConfig: inject.networkConfig,
-            localStore: LocalStore())
+            localStore: LocalStore()
+        )
         let logic = CoverLetterLogic(
             picklistsStore: picklistStore,
             templateService: templateService,
+            candidateService: candidateService,
             companyName: companyName,
             hostName: hostName,
             candidateName: candidateName,
             projectTitle: projectTitle,
-            flowType: type)
+            flowType: type
+        )
         
         switch type {
         case .passiveApplication:
