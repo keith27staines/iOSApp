@@ -68,12 +68,12 @@ class CoverLetterLogic {
             case .success(let candidate):
                 UserRepository().saveCandidate(candidate)
                 let strongestSkillsPicklist = self.allPicklistsDictionary[.strongestSkills]
-                strongestSkillsPicklist?.preselectedUuids = self.candidate.strongestSkills ?? []
+                strongestSkillsPicklist?.preselectedUuids = Array((self.candidate.strongestSkills ?? []).prefix(3))
                 strongestSkillsPicklist?.fetchItems(completion: { _ , result in
                     switch result {
                     case .success(_):
                         let attributesPicklist = self.allPicklistsDictionary[.attributes]
-                        attributesPicklist?.preselectedUuids = self.candidate.personalAttributes ?? []
+                        attributesPicklist?.preselectedUuids = Array((self.candidate.personalAttributes ?? []).prefix(3))
                         attributesPicklist?.fetchItems(completion: { _, result in
                             switch result {
                             case .success(_):
