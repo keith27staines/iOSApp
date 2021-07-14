@@ -17,17 +17,17 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         fieldStack.addArrangedSubview(email)
         fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)
-        password.textChanged?(self.presenter.password)
-        password.textfield.placeholder = "enter password"
+        password1Stack.textChanged?(self.presenter.password)
+        password1Stack.textfield.placeholder = "enter password"
         bottomStack.addArrangedSubview(forgotPasswordStack)
         bottomStack.addArrangedSubview(primaryButton)
-        confirmPasswordTextField.isHidden = true
+        password2Stack.isHidden = true
         password2InstructionLabel.isHidden = true
     }
     
     override func updatePresenter()  {
         presenter.email = trim(email.textfield.text)
-        presenter.password = trim(password.textfield.text)
+        presenter.password = trim(password1Stack.textfield.text)
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
     }

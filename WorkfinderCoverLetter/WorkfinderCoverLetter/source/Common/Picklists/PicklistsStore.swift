@@ -30,17 +30,24 @@ class PicklistsStore: PicklistsStoreProtocol {
         typealias ItemsDictionary = [PicklistType: [PicklistItemJson]]
         guard
             let data = localStore.value(key: LocalStore.Key.picklistsSelectedValuesData) as? Data,
-            let items = try? JSONDecoder().decode(ItemsDictionary.self, from: data)
+            var items = try? JSONDecoder().decode(ItemsDictionary.self, from: data)
             else {
             return [:]
         }
+        items[.strongestSkills] = nil
+        items[.attributes] = nil
         return items
     }
     
     func save() {
         var items = [PicklistType:[PicklistItemJson]]()
         allPicklistsDictionary.forEach { (key, picklist) in
-            items[key] = picklist.selectedItems
+            switch key {
+            case .strongestSkills, .attributes:
+                break
+            default:
+                items[key] = picklist.selectedItems            
+            }
         }
         let data = try? JSONEncoder().encode(items)
         localStore.setValue(data, for: LocalStore.Key.picklistsSelectedValuesData)

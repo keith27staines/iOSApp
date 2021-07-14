@@ -29,6 +29,7 @@ public class Picklist: PicklistProtocol {
     public var provider: PicklistProviderProtocol?
     let networkConfig: NetworkConfig
     var filters = [URLQueryItem]()
+    public var preselectedUuids = [F4SUUID]()
 
     public func selectItems(_ items: [PicklistItemJson]) {
         items.forEach { (item) in
@@ -80,7 +81,10 @@ public class Picklist: PicklistProtocol {
     }
     
     public func fetchItems(completion: @escaping ((PicklistProtocol, Result<[PicklistItemJson],Error>)->Void) ) {
-        guard items.isEmpty else { return }
+        guard items.isEmpty else {
+            completion(self,Result<[PicklistItemJson],Error>.success(self.items))
+            return
+        }
         provider?.fetchPicklistItems { (result) in
             switch result {
             case .success(let responseBody):
@@ -93,6 +97,14 @@ public class Picklist: PicklistProtocol {
                 if self.type == .institutions {
                     self.items.sort { (item1, item2) -> Bool in
                         (item1.guarenteedName < item2.guarenteedName)
+                    }
+                }
+                self.preselectedUuids.forEach { uuid in
+                    let matchingItem = self.items.first(where: { item in
+                        item.uuid == uuid
+                    })
+                    if let item = matchingItem {
+                        self.selectItem(item)
                     }
                 }
                 if let otherItem = self.otherItem { self.items.append(otherItem) }

@@ -13,6 +13,7 @@ public protocol PicklistProtocol: AnyObject {
     var itemSelectedSummary: String { get }
     var isOtherSelected: Bool { get }
     func updateSelectedTextValue(_ text: String)
+    var preselectedUuids: [F4SUUID] { get set }
     func selectItem(_ item: PicklistItemJson)
     func selectItems(_ items: [PicklistItemJson])
     func deselectItem(_ item: PicklistItemJson)

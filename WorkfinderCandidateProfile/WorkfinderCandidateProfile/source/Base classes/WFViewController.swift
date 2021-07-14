@@ -32,16 +32,16 @@ class WFViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if isMovingToParent {
             configureNavigationBar()
-            reloadPresenter()
-        } else {
-            reloadData()
         }
+        reloadPresenter()
     }
     
     @objc func reloadPresenter() {
+        messageHandler.showLoadingOverlay()
         reloadData()
         presenter.reloadPresenter() { [weak self] (optionalError) in
             guard let self = self else { return }
+            self.messageHandler.hideLoadingOverlay()
             self.coordinator?.handleOptionalError(optionalError: optionalError, from: self) {
                 self.reloadPresenter()
             }

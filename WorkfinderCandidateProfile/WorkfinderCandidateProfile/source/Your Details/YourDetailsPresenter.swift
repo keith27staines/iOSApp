@@ -45,8 +45,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
             DetailCellPresenter(type: .picklist(.educationLevel), picklist: picklistFor(type: .educationLevel)),
             DetailCellPresenter(type: .picklist(.gender), picklist: picklistFor(type: .gender)),
             DetailCellPresenter(type: .picklist(.ethnicity), picklist: picklistFor(type: .ethnicity)),
-//            DetailCellPresenter(type: .picklist(.strongestSkills), picklist: picklistFor(type: .strongestSkills)),
-//            DetailCellPresenter(type: .picklist(.personalAttributes), picklist: picklistFor(type: .personalAttributes)),
+            DetailCellPresenter(type: .picklist(.strongestSkills), picklist: picklistFor(type: .strongestSkills)),
+            DetailCellPresenter(type: .picklist(.personalAttributes), picklist: picklistFor(type: .personalAttributes)),
         ],
         [
             DetailCellPresenter(type: .email, text: "", onValueChanged: onDetailChanged(_:)),
@@ -286,12 +286,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
     }
     
     func selectItemsFromIds(_ ids: [String], for picklist: AccountPicklist) {
-        picklist.deselectAll()
-        ids.forEach { (id) in
-            if id != "" {
-                _ = picklist.selectItemHavingId(id)
-            }
-        }
+        picklist.preselectItems(ids: ids)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -300,7 +295,8 @@ class YourDetailsPresenter: BaseAccountPresenter {
         switch presenter.type.dataType {
         case .picklist(let picklistType):
             coordinator?.showPicklist(picklistFor(type: picklistType)) { [weak self] in
-                self?.informEditedAccountOfUpdatesFromUI(presenter: presenter)
+                guard let self = self else { return }
+                self.informEditedAccountOfUpdatesFromUI(presenter: presenter)
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         case .password:

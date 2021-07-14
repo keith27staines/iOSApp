@@ -46,6 +46,7 @@ class AccountViewController: WFViewController {
         super.viewDidAppear(animated)
         (presenter as? AccountPresenter)?.accountViewController = self
         tableView.reloadData()
+        messageHandler.hideLoadingOverlay()
     }
     
     override func configureViews() {
