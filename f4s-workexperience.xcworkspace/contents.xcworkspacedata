@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WorkfinderInterviews/WorkfinderInterviews.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WorkfinderLinkedinSync/WorkfinderLinkedinSync.xcodeproj">
    </FileRef>
    <FileRef
