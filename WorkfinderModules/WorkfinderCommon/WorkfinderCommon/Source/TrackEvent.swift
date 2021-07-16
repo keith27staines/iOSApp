@@ -65,6 +65,9 @@ public struct TrackingEvent {
         case .allow_notifications_start: break
         case .allow_notifications_cancel: break
         case .allow_notifications_convert: break
+        case .interviewInvite_deeplink_start: break
+        case .interviewInvite_deeplink_cancel: break
+        case .interviewInvite_deeplink_convert: break
         case .recommendation_deeplink_start: break
         case .recommendation_deeplink_cancel: break
         case .recommendation_deeplink_convert: break

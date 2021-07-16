@@ -32,6 +32,11 @@ public enum TrackingEventType: Equatable {
     case allow_notifications_start                                              // not firing
     case allow_notifications_cancel                                             // not firing
     case allow_notifications_convert                                            // not firing
+    
+    // MARK:- InterviewInvite
+    case interviewInvite_deeplink_start
+    case interviewInvite_deeplink_cancel
+    case interviewInvite_deeplink_convert
 
     // MARK:- Recommendations deeplink processing                               // checked
     case recommendation_deeplink_start                                          // ok
@@ -144,6 +149,11 @@ public enum TrackingEventType: Equatable {
         case .allow_notifications_cancel: return  "ios_allow_notifications_cancel"
         case .allow_notifications_convert: return  "ios_allow_notifications_convert"
             
+        // MARK: Interview invites
+        case .interviewInvite_deeplink_start: return "ios_interview_invite_start"
+        case .interviewInvite_deeplink_cancel: return "ios_interview_invite_cancel"
+        case .interviewInvite_deeplink_convert: return "ios_interview_invite_convert"
+
         // MARK: Recommendations deeplink processing
         case .recommendation_deeplink_start: return "ios_recommendation_deeplink_start"
         case .recommendation_deeplink_cancel: return "ios_recommendation_deeplink_cancel"
@@ -257,6 +267,11 @@ extension TrackingEventType: Codable {
         case allow_notifications_start
         case allow_notifications_cancel
         case allow_notifications_convert
+        
+        // MARK:- Interview invite processing
+        case interviewInvite_deeplink_start
+        case interviewInvite_deeplink_cancel
+        case interviewInvite_deeplink_convert
 
         // MARK:- Recommendations deeplink processing
         case recommendation_deeplink_start
@@ -399,6 +414,12 @@ extension TrackingEventType: Codable {
             self = .allow_notifications_cancel
         case .allow_notifications_convert:
             self = .allow_notifications_convert
+        case .interviewInvite_deeplink_start:
+            self = .interviewInvite_deeplink_start
+        case .interviewInvite_deeplink_cancel:
+            self = .interviewInvite_deeplink_cancel
+        case .interviewInvite_deeplink_convert:
+            self = .interviewInvite_deeplink_convert
         case .recommendation_deeplink_start:
             self = .recommendation_deeplink_start
         case .recommendation_deeplink_cancel:
@@ -570,6 +591,12 @@ extension TrackingEventType: Codable {
             try container.encode(true, forKey: .allow_notifications_cancel)
         case .allow_notifications_convert:
             try container.encode(true, forKey: .allow_notifications_convert)
+        case .interviewInvite_deeplink_start:
+            try container.encode(true, forKey: .interviewInvite_deeplink_start)
+        case .interviewInvite_deeplink_cancel:
+            try container.encode(true, forKey: .interviewInvite_deeplink_cancel)
+        case .interviewInvite_deeplink_convert:
+            try container.encode(true, forKey: .interviewInvite_deeplink_convert)
         case .recommendation_deeplink_start:
             try container.encode(true, forKey: .recommendation_deeplink_start)
         case .recommendation_deeplink_cancel:
