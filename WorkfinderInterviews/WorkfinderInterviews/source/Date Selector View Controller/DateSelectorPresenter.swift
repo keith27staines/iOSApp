@@ -12,12 +12,18 @@ import WorkfinderCommon
 class DateSelectorPresenter: NSObject {
     
     weak var table: UITableView?
+    weak var coordinator: AcceptInviteCoordinatorProtocol?
+    var invite: InterviewInvite? {
+        get {
+            coordinator?.interviewInvite
+        }
+        set {
+            coordinator?.interviewInvite = newValue
+        }
+    }
     
-    let dates: [String]
-    var selectedIndex: Int?
-    
-    init(dates: [String]) {
-        self.dates = dates
+    init(coordinator: AcceptInviteCoordinatorProtocol) {
+        self.coordinator = coordinator
         super.init()
     }
     
@@ -25,6 +31,7 @@ class DateSelectorPresenter: NSObject {
         self.table = table
         table.register(DateCell.self, forCellReuseIdentifier: DateCell.reuseIdentifier)
         table.dataSource = self
+        table.delegate = self
         table.reloadData()
     }
     
@@ -36,16 +43,27 @@ extension DateSelectorPresenter: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dates.count
+        invite?.possibleDates?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DateCell.reuseIdentifier) as? DateCell else {
             return UITableViewCell()
         }
-        let datestring = dates[indexPath.row]
+        let datestring = invite?.possibleDates?[indexPath.row] ?? ""
         cell.configureWithDateString(datestring)
+        cell.accessoryType = (indexPath.row == invite?.selectedDateIndex ?? 0) ? .checkmark : .none
         return cell
+    }
+}
+
+extension DateSelectorPresenter: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if invite?.selectedDateIndex != indexPath.row {
+            invite?.selectedDateIndex = indexPath.row
+            tableView.reloadData()
+        }
     }
 }
 

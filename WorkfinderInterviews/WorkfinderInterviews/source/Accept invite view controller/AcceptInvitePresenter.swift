@@ -5,13 +5,12 @@
 //  Created by Keith on 14/07/2021.
 //
 
-import Foundation
-
+import UIKit
 
 protocol AcceptInviteCoordinatorProtocol: AnyObject {
     var interviewInvite: InterviewInvite? { get set }
     func acceptViewControllerDidCancel(_ vc: AcceptInviteViewController)
-    func interviewWasAccepted()
+    func interviewWasAccepted(from vc: UIViewController?)
     func showDateSelector()
     func showProjectDetails()
 }
@@ -22,6 +21,7 @@ class AcceptInvitePresenter {
     private let coordinator: AcceptInviteCoordinatorProtocol
     let interviewId: String
     var invite: InterviewInvite? { coordinator.interviewInvite }
+    weak var viewController: UIViewController?
     
     init(service: InviteService, coordinator: AcceptInviteCoordinatorProtocol, interviewId: String) {
         self.service = service
@@ -29,7 +29,15 @@ class AcceptInvitePresenter {
         self.interviewId =  interviewId
     }
     
+    func onViewDidLoad(_ vc: UIViewController) {
+        self.viewController = vc
+    }
+    
     func load(completion: @escaping (Error?) -> Void) {
+        guard invite == nil else {
+            completion(nil)
+            return
+        }
         service.loadInvite(id: interviewId) { result in
             switch result {
             case .success(let invite):
@@ -41,6 +49,10 @@ class AcceptInvitePresenter {
         }
     }
     
+    var dateString: String? {
+        invite?.selectedDate
+    }
+    
     func onDidTapAccept(completion: @escaping (Error?) -> Void) {
         guard let invite = invite else { return }
         service.acceptInvite(invite) { [weak self] error in
@@ -49,14 +61,12 @@ class AcceptInvitePresenter {
                 completion(error)
                 return
             }
-            self.coordinator.interviewWasAccepted()
+            self.coordinator.interviewWasAccepted(from: self.viewController)
         }
     }
     
     func didTapChooseDifferentDate(completion: @escaping (Error?) -> Void) {
         coordinator.showDateSelector()
     }
-    
-    
-    
+
 }

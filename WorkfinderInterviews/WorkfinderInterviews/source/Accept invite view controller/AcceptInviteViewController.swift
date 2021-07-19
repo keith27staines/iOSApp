@@ -19,6 +19,7 @@ class AcceptInviteViewController: UIViewController {
         self.coordinator = coordinator
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+        presenter.viewController = self
         configureViews()
         title = "Interview"
     }
@@ -37,20 +38,21 @@ class AcceptInviteViewController: UIViewController {
         return label
     }()
     
+    lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.textColor = WorkfinderColors.gray2
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        return label
+    }()
+    
     lazy var introLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = WorkfinderColors.gray3
         label.text = "You can select an alternative date if the suggested one isn't good for you"
         label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = WorkfinderColors.gray3
         label.numberOfLines = 0
         return label
     }()
@@ -115,9 +117,9 @@ class AcceptInviteViewController: UIViewController {
         stack.addArrangedSubview(titleLabel)
         stack.addArrangedSubview(projectDetailsButton)
         stack.addArrangedSubview(dateLabel)
-        stack.addArrangedSubview(acceptButton)
         stack.addArrangedSubview(introLabel)
         stack.addArrangedSubview(chooseDateButton)
+        stack.addArrangedSubview(acceptButton)
         return stack
     }()
     
@@ -136,9 +138,8 @@ class AcceptInviteViewController: UIViewController {
     }
     
     func presenterDidUpdate() {
-        
+        dateLabel.text = presenter.dateString
     }
-    
     
     func configureNaviationBar() {
         styleNavigationController()
