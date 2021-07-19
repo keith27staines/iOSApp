@@ -9,6 +9,7 @@ import Foundation
 
 
 protocol AcceptInviteCoordinatorProtocol: AnyObject {
+    var interviewInvite: InterviewInvite? { get set }
     func acceptViewControllerDidCancel(_ vc: AcceptInviteViewController)
     func interviewWasAccepted()
     func showDateSelector()
@@ -20,7 +21,7 @@ class AcceptInvitePresenter {
     private let service: InviteService
     private let coordinator: AcceptInviteCoordinatorProtocol
     let interviewId: String
-    var invite: InterviewInvite?
+    var invite: InterviewInvite? { coordinator.interviewInvite }
     
     init(service: InviteService, coordinator: AcceptInviteCoordinatorProtocol, interviewId: String) {
         self.service = service
@@ -32,12 +33,11 @@ class AcceptInvitePresenter {
         service.loadInvite(id: interviewId) { result in
             switch result {
             case .success(let invite):
-                self.invite = invite
+                self.coordinator.interviewInvite = invite
                 completion(nil)
             case .failure(let error):
                 completion(error)
             }
-        
         }
     }
     

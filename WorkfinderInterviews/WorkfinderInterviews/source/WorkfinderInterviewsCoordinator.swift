@@ -15,6 +15,7 @@ public class WorkfinderInterviewsCoordinator: CoreInjectionNavigationCoordinator
     var newNavigationRouter: NavigationRouter?
     var rootOfNewNavigation: UIViewController?
     var parentVC: UIViewController?
+    var interviewInvite: InterviewInvite?
     
     public override func start() {
         
@@ -25,8 +26,9 @@ public class WorkfinderInterviewsCoordinator: CoreInjectionNavigationCoordinator
         let service = InviteService(networkConfig: injected.networkConfig)
         let presenter = AcceptInvitePresenter(service: service, coordinator: self, interviewId: inviteId)
         let rootOfNewNavigation = AcceptInviteViewController(coordinator: self, presenter: presenter)
-        rootOfNewNavigation.modalPresentationStyle = .currentContext
+        rootOfNewNavigation.modalPresentationStyle = .overFullScreen
         let newNavigationController = UINavigationController(rootViewController: rootOfNewNavigation)
+        newNavigationController.modalPresentationStyle = .overFullScreen
         newNavigationRouter = NavigationRouter(navigationController: newNavigationController)
         parentVC.present(newNavigationController, animated: true, completion: nil)
     }
@@ -38,7 +40,10 @@ extension WorkfinderInterviewsCoordinator: AcceptInviteCoordinatorProtocol {
     }
     
     func showDateSelector() {
-        print("Show date selector")
+        guard let dates = interviewInvite?.possibleDates else { return }
+        let dateSelectorPresenter = DateSelectorPresenter(dates: dates)
+        let vc = DateSelectorViewController(presenter: dateSelectorPresenter)
+        newNavigationRouter?.push(viewController: vc, animated: true)
     }
     
     func showProjectDetails() {

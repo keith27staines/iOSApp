@@ -61,7 +61,7 @@ class YourDetailsPresenter: BaseAccountPresenter {
     }
     
     var isUpdateEnabled: Bool {
-        allCellPresenters.joined().reduce(isDirty) { (result, presenter) -> Bool in
+        return allCellPresenters.joined().reduce(isDirty) { (result, presenter) -> Bool in
             if !presenter.isValid {
                 switch presenter.type {
                 case .email:

@@ -32,6 +32,7 @@ class AcceptInviteViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.text = "You have been invited for an interview with Workfinder!"
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -41,6 +42,7 @@ class AcceptInviteViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor = WorkfinderColors.gray3
         label.text = "You can select an alternative date if the suggested one isn't good for you"
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -56,6 +58,7 @@ class AcceptInviteViewController: UIViewController {
     lazy var projectDetailsButton: UIButton = {
         let button = UIButton()
         button.setTitle("project details", for: .normal)
+        button.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
         button.addTarget(self, action: #selector(didTapSeeProjectDetails), for: .touchUpInside)
         return button
     }()
@@ -67,19 +70,20 @@ class AcceptInviteViewController: UIViewController {
     lazy var chooseDateButton: UIButton = {
         let button = UIButton()
         button.setTitle("Choose different date", for: .normal)
-        button.addTarget(self, action: #selector(didTapSeeProjectDetails), for: .touchUpInside)
+        button.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
+        button.addTarget(self, action: #selector(didTapChooseDifferentDate), for: .touchUpInside)
         return button
     }()
     
     @objc func didTapChooseDifferentDate() {
         messageHandler.showLoadingOverlay()
-        presenter.onDidTapAccept { [weak self] optionalError in
+        presenter.didTapChooseDifferentDate { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
                 
             } retryHandler: {
-                self.didTapAcceptButton()
+                self.didTapChooseDifferentDate()
             }
         }
     }
@@ -109,11 +113,11 @@ class AcceptInviteViewController: UIViewController {
         stack.axis = .vertical
         stack.spacing = 20
         stack.addArrangedSubview(titleLabel)
+        stack.addArrangedSubview(projectDetailsButton)
+        stack.addArrangedSubview(dateLabel)
+        stack.addArrangedSubview(acceptButton)
         stack.addArrangedSubview(introLabel)
-        stack.addSubview(projectDetailsButton)
-        stack.addSubview(dateLabel)
-        stack.addSubview(chooseDateButton)
-        stack.addSubview(acceptButton)
+        stack.addArrangedSubview(chooseDateButton)
         return stack
     }()
     
@@ -143,7 +147,8 @@ class AcceptInviteViewController: UIViewController {
     func configureViews() {
         view.backgroundColor = UIColor.white
         let guide = view.safeAreaLayoutGuide
-        mainStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        view.addSubview(mainStack)
+        mainStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
     }
     
     required init?(coder: NSCoder) {

@@ -17,6 +17,7 @@
 		531D46E1265F7C4A00B34453 /* NullEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */; };
 		5323F621268C84EA00DD5875 /* SocialMediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F620268C84E900DD5875 /* SocialMediaData.swift */; };
 		5323F623268DC90000DD5875 /* LinkedinDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F622268DC90000DD5875 /* LinkedinDataTests.swift */; };
+		534CF7A426A1CBA3007DF848 /* CalendarEventWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A326A1CBA3007DF848 /* CalendarEventWriter.swift */; };
 		53659CA62620C81700CFF49E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA52620C81700CFF49E /* Account.swift */; };
 		53724B6126273BAA00908D50 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B6026273BAA00908D50 /* AccountPicklist.swift */; };
 		53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BEE263065B000908D50 /* DeleteAccountJson.swift */; };
@@ -152,6 +153,7 @@
 		531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullEncodableTests.swift; sourceTree = "<group>"; };
 		5323F620268C84E900DD5875 /* SocialMediaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaData.swift; sourceTree = "<group>"; };
 		5323F622268DC90000DD5875 /* LinkedinDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinDataTests.swift; sourceTree = "<group>"; };
+		534CF7A326A1CBA3007DF848 /* CalendarEventWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventWriter.swift; sourceTree = "<group>"; };
 		53659CA52620C81700CFF49E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		53724B6026273BAA00908D50 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
 		53724BEE263065B000908D50 /* DeleteAccountJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountJson.swift; sourceTree = "<group>"; };
@@ -294,6 +296,14 @@
 				5323F620268C84E900DD5875 /* SocialMediaData.swift */,
 			);
 			path = "Social media data";
+			sourceTree = "<group>";
+		};
+		534CF7A226A1CB66007DF848 /* Calendar access */ = {
+			isa = PBXGroup;
+			children = (
+				534CF7A326A1CBA3007DF848 /* CalendarEventWriter.swift */,
+			);
+			path = "Calendar access";
 			sourceTree = "<group>";
 		};
 		53724B5F26273B8E00908D50 /* AccountPicklist */ = {
@@ -466,6 +476,7 @@
 		FCA91E6D2234043D007ED308 /* WorkfinderCommon */ = {
 			isa = PBXGroup;
 			children = (
+				534CF7A226A1CB66007DF848 /* Calendar access */,
 				5323F61F268C84D000DD5875 /* Social media data */,
 				531D46DE265F7C1800B34453 /* NullEncodable.swift */,
 				53724B5F26273B8E00908D50 /* AccountPicklist */,
@@ -813,6 +824,7 @@
 				FCE8DAA82320E80B00934E2F /* ScaledNumber.swift in Sources */,
 				FC69EBA92481371C00901A2B /* GlobalNotifications.swift in Sources */,
 				FCEA245724EBF0DC0075A68B /* AssociationDetail.swift in Sources */,
+				534CF7A426A1CBA3007DF848 /* CalendarEventWriter.swift in Sources */,
 				53BC508A25C0936D00D84EE0 /* TrackingEventQueue.swift in Sources */,
 				FCC85DCB245184B700BC600E /* PicklistProtocol.swift in Sources */,
 				53724BEF263065B000908D50 /* DeleteAccountJson.swift in Sources */,
