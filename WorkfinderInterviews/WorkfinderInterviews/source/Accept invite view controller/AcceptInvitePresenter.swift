@@ -50,7 +50,23 @@ class AcceptInvitePresenter {
     }
     
     var dateString: String? {
-        invite?.selectedDate
+        guard let date = selectedDate else { return "" }
+        let df = DateFormatter()
+        df.timeStyle = .none
+        df.dateStyle = .medium
+        return df.string(from: date)
+    }
+    
+    var timeString: String? {
+        guard let date = selectedDate else { return "" }
+        let df = DateFormatter()
+        df.timeStyle = .short
+        df.dateStyle = .none
+        return df.string(from: date)
+    }
+    
+    var selectedDate: Date? {
+        Date.dateFromRfc3339(string: invite?.selectedDate ?? "")
     }
     
     func onDidTapAccept(completion: @escaping (Error?) -> Void) {

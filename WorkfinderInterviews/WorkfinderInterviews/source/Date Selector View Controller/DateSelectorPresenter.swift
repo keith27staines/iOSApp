@@ -78,15 +78,20 @@ class DateCell: UITableViewCell {
         let df = DateFormatter()
         df.dateStyle = .long
         df.timeStyle = .none
+        let tf = DateFormatter()
+        tf.dateStyle = .none
+        tf.timeStyle = .short
         textLabel?.text = df.string(from: date)
+        detailTextLabel?.text = tf.string(from: date)
     }
     
     func clear() {
         textLabel?.text = ""
+        detailTextLabel?.text = ""
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder: NSCoder) {

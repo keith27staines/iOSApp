@@ -16,7 +16,8 @@ class DateSelectorViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.text = "Select the best date for your interview"
-        label.textColor = WorkfinderColors.gray2
+        label.textAlignment = .center
+        label.textColor = WorkfinderColors.gray3
         label.numberOfLines = 0
         return label
     }()

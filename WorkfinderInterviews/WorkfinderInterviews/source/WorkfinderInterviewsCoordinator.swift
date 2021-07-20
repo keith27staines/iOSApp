@@ -54,7 +54,7 @@ extension WorkfinderInterviewsCoordinator: AcceptInviteCoordinatorProtocol {
     
     private func askToWriteToCalendar(from vc: UIViewController?) {
         guard let vc = vc else { return }
-        let alert = UIAlertController(title: "Add Interview to your calendar?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Interview to your calendar?", message: "Workfinder can add this event to your calendar for your convenience", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             self?.writeInterviewToCalendar()
         }

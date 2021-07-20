@@ -32,28 +32,38 @@ class AcceptInviteViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.textColor = WorkfinderColors.gray3
         label.text = "You have been invited for an interview with Workfinder!"
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
     
+    lazy var dateStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.addArrangedSubview(dateLabel)
+        stack.addArrangedSubview(timeLabel)
+        stack.addArrangedSubview(chooseDateButton)
+        stack.spacing = 12
+        return stack
+    }()
+    
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        label.textColor = WorkfinderColors.gray2
+        label.textColor = WorkfinderColors.gray3
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
     }()
     
-    lazy var introLabel: UILabel = {
+    lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         label.textColor = WorkfinderColors.gray3
-        label.text = "You can select an alternative date if the suggested one isn't good for you"
         label.textAlignment = .center
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         return label
     }()
     
@@ -71,7 +81,8 @@ class AcceptInviteViewController: UIViewController {
     
     lazy var chooseDateButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Choose different date", for: .normal)
+        button.setTitle("Choose a different date", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.setTitleColor(WorkfinderColors.primaryColor, for: .normal)
         button.addTarget(self, action: #selector(didTapChooseDifferentDate), for: .touchUpInside)
         return button
@@ -115,10 +126,8 @@ class AcceptInviteViewController: UIViewController {
         stack.axis = .vertical
         stack.spacing = 20
         stack.addArrangedSubview(titleLabel)
+        stack.addArrangedSubview(dateStack)
         stack.addArrangedSubview(projectDetailsButton)
-        stack.addArrangedSubview(dateLabel)
-        stack.addArrangedSubview(introLabel)
-        stack.addArrangedSubview(chooseDateButton)
         stack.addArrangedSubview(acceptButton)
         return stack
     }()
@@ -139,6 +148,7 @@ class AcceptInviteViewController: UIViewController {
     
     func presenterDidUpdate() {
         dateLabel.text = presenter.dateString
+        timeLabel.text = presenter.timeString
     }
     
     func configureNaviationBar() {
