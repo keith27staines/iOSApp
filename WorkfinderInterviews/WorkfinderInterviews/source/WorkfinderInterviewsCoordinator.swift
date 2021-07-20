@@ -54,7 +54,7 @@ extension WorkfinderInterviewsCoordinator: AcceptInviteCoordinatorProtocol {
     
     private func askToWriteToCalendar(from vc: UIViewController?) {
         guard let vc = vc else { return }
-        let alert = UIAlertController(title: "Add Interview to your calendar?", message: "Workfinder can add this event to your calendar for your convenience", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add to Calendar?", message: "Workfinder can add this interview to your calendar for your convenience", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
             self?.writeInterviewToCalendar()
         }
@@ -85,7 +85,10 @@ extension WorkfinderInterviewsCoordinator: AcceptInviteCoordinatorProtocol {
     }
     
     func showProjectDetails() {
-        print("Show project details")
+        let service = InviteService(networkConfig: injected.networkConfig)
+        let presenter = ProjectPresenter(coordinator: self, service: service)
+        let vc = ProjectViewController(coordinator: self, presenter: presenter)
+        newNavigationRouter?.push(viewController: vc, animated: true)
     }
     
     func acceptViewControllerDidCancel(_ vc: AcceptInviteViewController) {

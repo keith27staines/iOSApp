@@ -33,7 +33,7 @@ class AcceptInviteViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.textColor = WorkfinderColors.gray3
-        label.text = "You have been invited for an interview with Workfinder!"
+        label.text = "Congratulations! You have been invited for an interview with Workfinder!"
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
