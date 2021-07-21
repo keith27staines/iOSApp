@@ -17,6 +17,10 @@ class DeepLinkRouter {
             let log = self.log
             
             switch routingInfo.objectType {
+            case .interviewInvite:
+                log.track(.recommendation_deeplink_start)
+                coordinator.routeInterviewInvite(id: routingInfo.objectId, appSource: source)
+                log.track(.interviewInvite_deeplink_convert)
             case .recommendation:
                 switch routingInfo.source {
                 case .deeplink:

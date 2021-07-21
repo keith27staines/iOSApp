@@ -3,6 +3,10 @@ import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
     
+    public func routeInterviewInvite(inviteUuid: F4SUUID, appSource: AppSource) {
+        
+    }
+    
     public func start(preferredScreen: PreferredNextScreen) {
         
     }

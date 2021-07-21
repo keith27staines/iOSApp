@@ -26,6 +26,8 @@
 		5392A6D326777A33008B1085 /* WorkfinderLinkedinSync.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5392A6D126777A33008B1085 /* WorkfinderLinkedinSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C760D7251C845B0072281E /* DeviceRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C760D6251C845B0072281E /* DeviceRegistrar.swift */; };
 		53D94B592569D61400A2127C /* f4s-workexperienceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */; };
+		53FB551226A174CA004417BA /* WorkfinderInterviews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FB551126A174C9004417BA /* WorkfinderInterviews.framework */; };
+		53FB551326A174CA004417BA /* WorkfinderInterviews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53FB551126A174C9004417BA /* WorkfinderInterviews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7DE4F9A693FA8C0A98C6A08D /* Pods_f4s_workexperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7DD6E9CDC56B84FEA51BE6 /* Pods_f4s_workexperience.framework */; };
 		D5E9EBE81DD60AB300BD796E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5E9EBEA1DD60AB300BD796E /* Localizable.strings */; };
 		FC04B862233271FE0034A60E /* MasterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04B861233271FE0034A60E /* MasterBuilder.swift */; };
@@ -122,6 +124,7 @@
 				FC56A0F12455B62B00A7EC3F /* WorkfinderCommon.framework in Embed Frameworks */,
 				53131C7D260B70A100799629 /* WorkfinderCandidateProfile.framework in Embed Frameworks */,
 				FCBA984424506D8B00C3D2E6 /* WorkfinderCoordinators.framework in Embed Frameworks */,
+				53FB551326A174CA004417BA /* WorkfinderInterviews.framework in Embed Frameworks */,
 				FCA1400224BC81C50009C30F /* WorkfinderProjectApply.framework in Embed Frameworks */,
 				FCBA984224506D8B00C3D2E6 /* WorkfinderCompanyDetailsUseCase.framework in Embed Frameworks */,
 				FC15BD0724CBF96900339A35 /* WorkfinderRegisterCandidate.framework in Embed Frameworks */,
@@ -172,6 +175,7 @@
 		53D94B572569D61300A2127C /* f4s-workexperienceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "f4s-workexperienceTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		53D94B582569D61400A2127C /* f4s-workexperienceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "f4s-workexperienceTests.swift"; sourceTree = "<group>"; };
 		53D94B95256A37EE00A2127C /* WorkfinderHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53FB551126A174C9004417BA /* WorkfinderInterviews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderInterviews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92EEC1B2F42AE23C370D87A1 /* Pods-f4s-workexperience.debugdevelop.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperience.debugdevelop.xcconfig"; path = "Target Support Files/Pods-f4s-workexperience/Pods-f4s-workexperience.debugdevelop.xcconfig"; sourceTree = "<group>"; };
 		A763C746C3A8C64064FFD78F /* Pods-f4s-workexperienceTests.debugstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-f4s-workexperienceTests.debugstaging.xcconfig"; path = "Target Support Files/Pods-f4s-workexperienceTests/Pods-f4s-workexperienceTests.debugstaging.xcconfig"; sourceTree = "<group>"; };
 		D5E9EBE91DD60AB300BD796E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 				FCBA984924506D8C00C3D2E6 /* WorkfinderOnboardingUseCase.framework in Frameworks */,
 				FCBA984B24506D8C00C3D2E6 /* WorkfinderServices.framework in Frameworks */,
 				FCBA984D24506D8C00C3D2E6 /* WorkfinderUI.framework in Frameworks */,
+				53FB551226A174CA004417BA /* WorkfinderInterviews.framework in Frameworks */,
 				FCBA984F24506D8C00C3D2E6 /* WorkfinderUserDetailsUseCase.framework in Frameworks */,
 				FCAEEC0624E1909A00D6B579 /* ErrorHandlingUI.framework in Frameworks */,
 				FC62B35B2494C00500013CFF /* WorkfinderVersionCheck.framework in Frameworks */,
@@ -360,6 +365,7 @@
 		74E1A74324CAFF4EF516E014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53FB551126A174C9004417BA /* WorkfinderInterviews.framework */,
 				5392A6D126777A33008B1085 /* WorkfinderLinkedinSync.framework */,
 				532345172632EF1700966B7A /* WorkfinderNPS.framework */,
 				53131C7B260B70A100799629 /* WorkfinderCandidateProfile.framework */,
@@ -876,7 +882,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -885,7 +891,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.7;
+				MARKETING_VERSION = 3.4.9;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -971,7 +977,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -980,7 +986,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.7;
+				MARKETING_VERSION = 3.4.9;
 				NAME_FOR_ENVIRONMENT = Workfinder;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1070,7 +1076,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1079,7 +1085,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.7;
+				MARKETING_VERSION = 3.4.9;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1164,7 +1170,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1173,7 +1179,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.7;
+				MARKETING_VERSION = 3.4.9;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;
@@ -1262,7 +1268,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = "f4s-workexperience/Info.plist";
@@ -1271,7 +1277,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.7;
+				MARKETING_VERSION = 3.4.9;
 				NAME_FOR_ENVIRONMENT = Staging;
 				PRODUCT_BUNDLE_IDENTIFIER = com.f4s.workexperience.f4s;
 				PRODUCT_BUNDLE_IDENTIFIER_DebugF4S = com.f4s.workexperience.f4s;

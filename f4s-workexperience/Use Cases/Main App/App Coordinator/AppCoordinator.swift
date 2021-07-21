@@ -90,7 +90,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         print("\n\n-----------------------------------------------------------")
         switch userRepo.isCandidateLoggedIn {
         case true:
-            print("Candidate \(user.fullname)")
+            print("Candidate \(user.fullname ?? "?")")
             print("Email \(user.email ?? "unknown")")
             print("User uuid \(user.uuid ?? "unknown")")
             print("Candidate uuid \(candidate.uuid ?? "unknown")")
@@ -152,6 +152,17 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
         tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
+    }
+    
+    func routeInterviewInvite(id: F4SUUID?, appSource: AppSource) {
+        guard let id = id else { return }
+        if let tabBarCoordinator = self.tabBarCoordinator {
+            tabBarCoordinator.routeInterviewInvite(inviteUuid: id, appSource: appSource)
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
+            self?.routeInterviewInvite(id: id, appSource: appSource)
+        }
     }
     
     func routeProject(projectUuid: F4SUUID?, appSource: AppSource) {

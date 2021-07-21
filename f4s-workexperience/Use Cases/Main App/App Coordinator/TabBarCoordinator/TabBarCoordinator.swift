@@ -10,6 +10,7 @@ import WorkfinderCompanyDetailsUseCase
 import WorkfinderHome
 import WorkfinderCandidateProfile
 import WorkfinderNPS
+import WorkfinderInterviews
 
 class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
@@ -64,6 +65,14 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     
     public func switchToTab(_ tab: TabIndex) {
         tabBarViewController.selectedIndex = tab.rawValue
+    }
+    
+    public func routeInterviewInvite(inviteUuid: F4SUUID, appSource: AppSource) {
+        guard let vc = tabBarViewController.selectedViewController else { return }
+        switchToTab(.applications)
+        let coordinator = WorkfinderInterviewsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        addChildCoordinator(coordinator)
+        coordinator.startFromAcceptInviteScreen(parentVC: vc, inviteId: inviteUuid)
     }
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {

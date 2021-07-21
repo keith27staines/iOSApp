@@ -22,6 +22,7 @@ public class TemplateProvider: WorkfinderService, TemplateProviderProtocol {
             let request = try buildRequest(relativePath: "coverletters/", queryItems: nil, verb: .get)
             performTask(
                 with: request,
+                verbose: true,
                 completion: processResult,
                 attempting: #function)
         } catch {
