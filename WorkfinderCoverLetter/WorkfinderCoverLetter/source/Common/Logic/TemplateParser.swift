@@ -104,7 +104,7 @@ class TemplateModelPreprocessor {
         "placementType"         : "placement type",     // picklist type
         "project"               : "project",            // picklist type
         "duration"              : "duration",           // picklist type
-        "strongestSkills"       : "skills"
+        "strongestSkills"       : "strongest skills"
     ]
     
     func preprocess(templateModel: TemplateModel, fieldNameMapping: [String: String]? = TemplateModelPreprocessor.replacementMap) -> TemplateModel {
