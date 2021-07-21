@@ -76,7 +76,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
     
     private var company: CompanyJson? { association?.location?.company }
     var association: RoleNestedAssociation? { project.association }
-    var host: HostJson? { association?.host }
+    var host: HostJson?
     var projectType: String? { project.type }
     var project: ProjectJson = ProjectJson() { didSet { view?.refreshFromPresenter() } }
     var projectName: String? { project.name }
@@ -111,11 +111,22 @@ class ProjectPresenter: ProjectPresenterProtocol {
     
     func loadData(completion: @escaping (Error?) -> Void) {
         self.lastError = nil
-        service.fetchProject(uuid: projectUuid) { (result) in
+        service.fetchProject(uuid: projectUuid) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let project):
                 self.project = project
-                completion(nil)
+                self.service.fetchHost(uuid: project.association?.host?.uuid ?? "", completion: { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(let hostJson):
+                        self.host = hostJson
+                        completion(nil)
+                    case .failure(let error):
+                        self.lastError = error
+                        completion(error)
+                    }
+                })
             case .failure(let error):
                 self.lastError = error
                 completion(error)
