@@ -12,7 +12,6 @@ class ForceAppUpdateViewController: UIViewController {
         let logo = UIImageView(image: workfinderLogo)
         logo.tintColor = WorkfinderColors.primaryColor
         logo.heightAnchor.constraint(equalToConstant: 128).isActive = true
-        logo.widthAnchor.constraint(equalToConstant: 128).isActive = true
         logo.contentMode = .scaleAspectFit
         return logo
     }()
