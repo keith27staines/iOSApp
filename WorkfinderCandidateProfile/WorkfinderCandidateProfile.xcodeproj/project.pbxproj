@@ -51,6 +51,8 @@
 		53724BDF2628659300908D50 /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724BDE2628659300908D50 /* TableHeaderView.swift */; };
 		53724BE3262D77C800908D50 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53724BE2262D77C800908D50 /* WorkfinderRegisterCandidate.framework */; };
 		538BFD30265FDAC10089CA44 /* RemoveAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538BFD2F265FDAC10089CA44 /* RemoveAccountViewController.swift */; };
+		53CFEB7726A8521F00E8F855 /* NameCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFEB7626A8521F00E8F855 /* NameCaptureCoordinator.swift */; };
+		53CFEB7926A8523900E8F855 /* NameCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFEB7826A8523900E8F855 /* NameCaptureViewController.swift */; };
 		53D3E7E22654C9F2000249FF /* SMSPreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D3E7E12654C9F2000249FF /* SMSPreferenceCell.swift */; };
 		53D7CDE32621CE2D00A9BE40 /* NotificationControlsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */; };
 		53D7CDEC2621D0B500A9BE40 /* EnableNotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */; };
@@ -125,6 +127,8 @@
 		53724BDE2628659300908D50 /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
 		53724BE2262D77C800908D50 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		538BFD2F265FDAC10089CA44 /* RemoveAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAccountViewController.swift; sourceTree = "<group>"; };
+		53CFEB7626A8521F00E8F855 /* NameCaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCaptureCoordinator.swift; sourceTree = "<group>"; };
+		53CFEB7826A8523900E8F855 /* NameCaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCaptureViewController.swift; sourceTree = "<group>"; };
 		53D3E7E12654C9F2000249FF /* SMSPreferenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSPreferenceCell.swift; sourceTree = "<group>"; };
 		53D7CDE22621CE2D00A9BE40 /* NotificationControlsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationControlsCell.swift; sourceTree = "<group>"; };
 		53D7CDEB2621D0B500A9BE40 /* EnableNotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableNotificationsCell.swift; sourceTree = "<group>"; };
@@ -251,6 +255,7 @@
 				53659CE32621925900CFF49E /* Preferences */,
 				53131C7F2611DCC000799629 /* AccountSectionViewModel */,
 				531F1379260B6BA800F0FA7E /* DOB Capture */,
+				53CFEB7526A851EC00E8F855 /* Name capture */,
 				531F136E260B6B6800F0FA7E /* Address Capture */,
 				53659CF92621934C00CFF49E /* Base classes */,
 			);
@@ -363,6 +368,15 @@
 				53724BDA262820A400908D50 /* ChangePasswordPresenter.swift */,
 			);
 			path = "Change password";
+			sourceTree = "<group>";
+		};
+		53CFEB7526A851EC00E8F855 /* Name capture */ = {
+			isa = PBXGroup;
+			children = (
+				53CFEB7626A8521F00E8F855 /* NameCaptureCoordinator.swift */,
+				53CFEB7826A8523900E8F855 /* NameCaptureViewController.swift */,
+			);
+			path = "Name capture";
 			sourceTree = "<group>";
 		};
 		53D7CDE02621CD7D00A9BE40 /* Table cells */ = {
@@ -531,6 +545,7 @@
 				531F137D260B6BBA00F0FA7E /* DateOfBirthCollectorViewController.swift in Sources */,
 				531F137C260B6BBA00F0FA7E /* DOBCaptureCoordinator.swift in Sources */,
 				53D7CDFC2622F1FC00A9BE40 /* NotificationPreferences.swift in Sources */,
+				53CFEB7926A8523900E8F855 /* NameCaptureViewController.swift in Sources */,
 				532879DB2625B9360025F3E4 /* DetailCellType.swift in Sources */,
 				53D3E7E22654C9F2000249FF /* SMSPreferenceCell.swift in Sources */,
 				532879DF2625B9C70025F3E4 /* AccountPicklist.swift in Sources */,
@@ -544,6 +559,7 @@
 				53D7CDF02621ED0D00A9BE40 /* MarketingEmailCell.swift in Sources */,
 				53724B542627352800908D50 /* PicklistViewController.swift in Sources */,
 				53131CFB261EFBAD00799629 /* AccountCoordinator.swift in Sources */,
+				53CFEB7726A8521F00E8F855 /* NameCaptureCoordinator.swift in Sources */,
 				531F1374260B6B9000F0FA7E /* AddressCaptureCoordinator.swift in Sources */,
 				53659CEE262192D300CFF49E /* PreferencesViewController.swift in Sources */,
 				53659CF62621934600CFF49E /* WFViewController.swift in Sources */,

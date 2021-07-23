@@ -12,8 +12,8 @@ class RegisterUserPresenter: RegisterAndSignInUserBasePresenter {
         let isValid = UnderlineView.State.good
 
         return self.isTermsAndConditionsAgreed &&
-            isValid == firstnameValidityState &&
-            isValid == lastnameValidityState &&
+//            isValid == firstnameValidityState &&
+//            isValid == lastnameValidityState &&
             isValid == emailValidityState &&
             isValid == passwordValidityState &&
             isValid == password2ValidityState

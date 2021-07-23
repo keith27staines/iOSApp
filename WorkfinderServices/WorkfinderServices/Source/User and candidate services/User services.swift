@@ -37,6 +37,23 @@ public class UpdateUserService: WorkfinderService {
         }
     }
     
+    public func updateUserName(firstName: String, lastName: String, completion: @escaping (Result<User,Error>) -> Void) {
+        struct UserPatch: Codable {
+            var first_name: String
+            var last_name: String
+        }
+        let userPatch = UserPatch(
+            first_name: firstName,
+            last_name: lastName
+        )
+        do {
+            let request = try buildRequest(relativePath: "users/me/", verb: .patch, body: userPatch)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
+        } catch {
+            completion(Result<User,Error>.failure(error))
+        }
+    }
+    
     public func updateUser(user: User, completion: @escaping((Result<User,Error>) -> Void) ) {
         do {
             struct UserPatch: Codable {
@@ -92,8 +109,8 @@ public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol
         var referrer: F4SUUID?
         
         public init(user: User) {
-            self.first_name = user.firstname ?? ""
-            self.last_name = user.lastname ?? ""
+            self.first_name = user.firstname ?? "aaaaa"
+            self.last_name = user.lastname ?? "bbbbb"
             self.email = user.email ?? ""
             self.password1 = user.password ?? ""
             self.password2 = user.password ?? ""

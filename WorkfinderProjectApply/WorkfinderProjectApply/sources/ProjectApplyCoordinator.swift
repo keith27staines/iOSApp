@@ -140,9 +140,33 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onCoverLetterDidComplete() {
         switch UserRepository().isCandidateLoggedIn {
-        case true: capturePostcodeIfNecessary()
+        case true: captureNameIfNeccessary()
         case false: startLogin()
         }
+    }
+    
+    func onNameCaptureComplete() {
+        capturePostcodeIfNecessary()
+    }
+    
+    func onPostcodeCaptureComplete() {
+        captureDOBIfNecessary()
+    }
+    
+    func captureNameIfNeccessary() {
+        guard NameCaptureCoordinator.isNameCaptureRequired else {
+            onNameCaptureComplete()
+            return
+        }
+        let coordinator = NameCaptureCoordinator(
+            parent: self,
+            navigationRouter: newNavigationRouter,
+            inject: injected
+        ) { [weak self] in
+            self?.onNameCaptureComplete()
+        }
+        addChildCoordinator(coordinator)
+        coordinator.start()
     }
     
     func capturePostcodeIfNecessary() {
@@ -164,10 +188,6 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         }
         addChildCoordinator(coordinator)
         coordinator.start()
-    }
-    
-    func onPostcodeCaptureComplete() {
-        captureDOBIfNecessary()
     }
     
     func captureDOBIfNecessary() {

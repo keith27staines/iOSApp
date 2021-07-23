@@ -146,6 +146,26 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
         coordinator.start()
     }
     
+    func captureNameIfNeccessary() {
+        guard NameCaptureCoordinator.isNameCaptureRequired else {
+            onNameCaptureComplete()
+            return
+        }
+        let coordinator = NameCaptureCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected
+        ) { [weak self] in
+            self?.onNameCaptureComplete()
+        }
+        addChildCoordinator(coordinator)
+        coordinator.start()
+    }
+    
+    func onNameCaptureComplete() {
+        captureDOBIfNecessary()
+    }
+    
     func captureDOBIfNecessary() {
         let updateCandidateService = UpdateCandidateService(networkConfig: injected.networkConfig)
         let dobCoordinator = DOBCaptureCoordinator(
@@ -221,7 +241,7 @@ extension ApplyCoordinator: RegisterAndSignInCoordinatorParent {
     public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
         let uuid = userRepository.loadCandidate().uuid!
         draftPlacementLogic.update(candidateUuid: uuid)
-        captureDOBIfNecessary()
+        captureNameIfNeccessary()
     }
 }
 
