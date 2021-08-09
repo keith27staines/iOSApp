@@ -30,7 +30,8 @@ public struct DeeplinkRoutingInfo {
             case "projects":
                 self = .projects
             case "interviews":
-                self = .interviewInvite
+                // iOS is not allowed to handle interview invites yet
+                return nil // self = .interviewInvite
             default:
                 return nil
             }
