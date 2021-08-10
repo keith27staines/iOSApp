@@ -104,13 +104,10 @@ public class RegisterUserService: WorkfinderService, RegisterUserServiceProtocol
         var email: String
         var password1: String
         var password2: String
-        var first_name: String
-        var last_name: String
         var referrer: F4SUUID?
         
         public init(user: User) {
-            self.first_name = user.firstname ?? "aaaaa"
-            self.last_name = user.lastname ?? "bbbbb"
+
             self.email = user.email ?? ""
             self.password1 = user.password ?? ""
             self.password2 = user.password ?? ""

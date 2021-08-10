@@ -25,9 +25,6 @@ public class NameCaptureCoordinator: CoreInjectionNavigationCoordinator {
         let user = UserRepository().loadUser()
         let first = user.firstname
         let last = user.lastname
-        guard first != "aaaaa" && last != "bbbbb" else {
-            return true
-        }
         let testString = (first ?? "") + (last ?? "")
         return testString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
