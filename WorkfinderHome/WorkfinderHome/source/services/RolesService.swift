@@ -58,7 +58,7 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     }
 
     public func fetchTopRoles(completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "promote_on_home_page", value: "True")]
+        let queryItems = [URLQueryItem(name: "promote_on_home_page", value: "True"), URLQueryItem(name: "status", value: "open")]
         topRolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: queryItems) { (result) in
            completion(result)
         }
@@ -127,7 +127,7 @@ fileprivate class FetchRolesWorkerService: WorkfinderService {
 
         do {
             let request = try buildRequest(relativePath: endpoint, queryItems: queryItems, verb: .get)
-            performTask(with: request, completion: innerResultHandler, attempting: #function)
+            performTask(with: request, verbose: true  , completion: innerResultHandler, attempting: #function)
         } catch {
             completion(.failure(error))
         }
