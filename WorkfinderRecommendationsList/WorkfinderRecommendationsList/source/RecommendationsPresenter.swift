@@ -45,12 +45,16 @@ class RecommendationsPresenter {
     func loadFirstPage(table: UITableView, completion: @escaping (Error?) -> Void) {
         guard let _ = userRepo.loadAccessToken()
             else {
-                completion(nil)
+                loadTopRoles(completion: completion)
                 return
         }
         service.fetchRecommendations() { [weak self] (result) in
             guard let self = self else { return }
-            self.pager.loadFirstPage(table: table, with: result, completion: completion)
+            self.pager.loadFirstPage(table: table, with: result) { error in
+                if error == nil {
+                    self.loadTopRoles(completion: completion)
+                }
+            }
         }
     }
     
@@ -60,6 +64,10 @@ class RecommendationsPresenter {
             guard let self = self else { return }
             self.pager.loadNextPage(table: tableView, with: result)
         }
+    }
+    
+    func loadTopRoles(completion: @escaping (Error?) -> Void) {
+        completion(nil)
     }
     
     func numberOfSections() -> Int { 1 }

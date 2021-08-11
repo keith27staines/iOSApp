@@ -81,19 +81,19 @@ class DiscoveryTrayController: NSObject {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
-        recentRolesPresenter.resultHandler = { optionalError in
-            guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
-            let indexSet = self.recentRolesPresenter.lastIndexChangeSet.map { (row) -> IndexPath in
-                IndexPath(row: row, section: sectionIndex)
-            }
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: indexSet, with: .automatic)
-            self.tableView.endUpdates()
-        }
-        recentRolesPresenter.loadFirstPage { [weak self] in
-            self?.refreshControl.endRefreshing()
-            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        }
+//        recentRolesPresenter.resultHandler = { optionalError in
+//            guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
+//            let indexSet = self.recentRolesPresenter.lastIndexChangeSet.map { (row) -> IndexPath in
+//                IndexPath(row: row, section: sectionIndex)
+//            }
+//            self.tableView.beginUpdates()
+//            self.tableView.insertRows(at: indexSet, with: .automatic)
+//            self.tableView.endUpdates()
+//        }
+//        recentRolesPresenter.loadFirstPage { [weak self] in
+//            self?.refreshControl.endRefreshing()
+//            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+//        }
     }
     
     @objc func handleCandidateSignedIn() {
@@ -134,7 +134,7 @@ class DiscoveryTrayController: NSObject {
         ]
         let control = UIRefreshControl()
         control.attributedTitle = NSAttributedString(string: title, attributes: attributes)
-        control.addTarget(self, action: #selector(loadFirstPage), for: .valueChanged)
+//        control.addTarget(self, action: #selector(loadFirstPage), for: .valueChanged)
         control.tintColor = WorkfinderColors.primaryColor
         control.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         return control
@@ -152,12 +152,12 @@ extension DiscoveryTrayController: UITableViewDataSource {
         switch section {
         case .popularOnWorkfinder:
             return 1
-        case .recommendations:
-            return 1
+//        case .recommendations:
+//            return 1
         case .topRoles:
             return 1
-        case .recentRoles:
-            return recentRolesPresenter.numberOfRows
+//        case .recentRoles:
+//            return recentRolesPresenter.numberOfRows
         }
     }
     
@@ -169,21 +169,21 @@ extension DiscoveryTrayController: UITableViewDataSource {
         case .popularOnWorkfinder:
             cell = tableView.dequeueReusableCell(withIdentifier: PopularOnWorkfinderCell.identifier)
             cell?.backgroundColor = UIColor.white
-        case .recommendations:
-            cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier)
-            cell?.backgroundColor = UIColor.white
-            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
+//        case .recommendations:
+//            cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier)
+//            cell?.backgroundColor = UIColor.white
+//            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
         case .topRoles:
             cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier)
             cell?.backgroundColor = topRolesBackgroundColor
             (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
-        case .recentRoles:
-            cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
-            cell?.backgroundColor = UIColor.white
-            (cell as? LandscapeRoleCell)?.row = indexPath.row
-            if indexPath.row >= recentRolesPresenter.numberOfRows - recentRolesPresenter.pageSize / 2 {
-                recentRolesPresenter.loadNextPage()
-            }
+//        case .recentRoles:
+//            cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
+//            cell?.backgroundColor = UIColor.white
+//            (cell as? LandscapeRoleCell)?.row = indexPath.row
+//            if indexPath.row >= recentRolesPresenter.numberOfRows - recentRolesPresenter.pageSize / 2 {
+//                recentRolesPresenter.loadNextPage()
+//            }
         }
         let presentable = cell as? Presentable
         let presenter = cellPresenter(indexPath)
@@ -201,9 +201,9 @@ extension DiscoveryTrayController: UITableViewDataSource {
         if presenter == nil {
             switch section {
             case .popularOnWorkfinder: presenter = popularOnWorkfinderPresenter
-            case .recommendations: presenter = recommendationsPresenter
+//            case .recommendations: presenter = recommendationsPresenter
             case .topRoles: presenter = topRolesPresenter
-            case .recentRoles: presenter = recentRolesPresenter
+//            case .recentRoles: presenter = recentRolesPresenter
             }
         }
         sectionPresenters[section] = presenter
@@ -221,11 +221,11 @@ extension DiscoveryTrayController: UITableViewDelegate {
         var text: String = ""
         switch section {
         case .popularOnWorkfinder: text = "Popular on Workfinder"
-        case .recommendations: text = "Recommendations"
+//        case .recommendations: text = "Recommendations"
         case .topRoles:
-            text = "Top roles"
+            text = "Featured Opportunities"
             cell?.contentView.backgroundColor = topRolesBackgroundColor
-        case .recentRoles: text = "Recent roles"
+//        case .recentRoles: text = "Recent roles"
         }
         (cell as? SectionHeaderView)?.sectionTitle.text = text
         return cell
@@ -235,16 +235,16 @@ extension DiscoveryTrayController: UITableViewDelegate {
         let section = sectionManager.sectionForSectionIndex(section)
         var view: UIView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
         switch section {
-        case .recommendations:
-            (view as? SectionFooterView)?.isLineHidden = true
+//        case .recommendations:
+//            (view as? SectionFooterView)?.isLineHidden = true
         case .popularOnWorkfinder:
             (view as? SectionFooterView)?.isLineHidden = true
         case .topRoles:
             view = UIView()
             view?.backgroundColor = topRolesBackgroundColor
-        case .recentRoles:
-            view = UIView()
-            view?.backgroundColor = UIColor.white
+//        case .recentRoles:
+//            view = UIView()
+//            view?.backgroundColor = UIColor.white
         }
         return view
     }
