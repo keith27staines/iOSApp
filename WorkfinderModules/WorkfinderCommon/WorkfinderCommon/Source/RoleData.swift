@@ -42,6 +42,8 @@ public struct RoleData: Codable {
         role.appSource = source
         return role
     }
+    
+    public init() {}
 }
 
 public extension RoleData {

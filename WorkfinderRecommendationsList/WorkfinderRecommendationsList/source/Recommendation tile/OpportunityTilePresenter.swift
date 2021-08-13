@@ -3,36 +3,30 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderUI
 
-protocol RecommendationTilePresenterProtocol {
+protocol OpportunityTilePresenterProtocol {
     var view: RecommendationTileViewProtocol? { get set }
     var companyName: String? { get }
     var companyImage: UIImage? { get }
-    var hostName: String? { get }
-    var hostRole: String? { get }
     var isProject: Bool { get }
     var projectHeader: String? { get }
     var projectTitle: String? { get }
     func onTileTapped()
 }
 
-class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
-    
+class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
     weak var view: RecommendationTileViewProtocol?
     let row: Int
     weak var parentPresenter: RecommendationsPresenter?
-    let recommendation: RecommendationsListItem
-    var companyName: String? { recommendation.association?.location?.company?.name }
-    var hostName: String? { recommendation.association?.host?.fullName }
-    var hostRole: String? { recommendation.association?.title }
+    let project: ProjectJson
+    var companyName: String? { project.association?.location?.company?.name }
 
-    var companyLogoUrlString: String? { recommendation.association?.location?.company?.logo }
+    var companyLogoUrlString: String? { project.association?.location?.company?.logo }
     var downloadedImage: UIImage?
     var companyImage: UIImage? { downloadedImage ?? defaultImage }
     var imageService: SmallImageServiceProtocol = SmallImageService()
-    var isProject: Bool { recommendation.project != nil }
+    var isProject = true
     var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
-    var projectTitle: String?  { isProject ? recommendation.project?.name : nil }
-    var projectUuid: F4SUUID? { recommendation.project?.uuid }
+    var projectTitle: String?  { project.name }
     
     var defaultImage: UIImage? {
         UIImage.imageWithFirstLetter(
@@ -42,7 +36,7 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     }
     
     func loadImage() {
-        let indexPath = IndexPath(row: self.row, section: 0)
+        let indexPath = IndexPath(row: self.row, section: 1)
         imageService.fetchImage(
             urlString: companyLogoUrlString,
             defaultImage: defaultImage) { [weak self] (image) in
@@ -57,20 +51,20 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     }
 
     init(parent: RecommendationsPresenter,
-         recommendation: RecommendationsListItem,
+         project: ProjectJson,
          workplaceService: ApplicationContextService?,
          projectService: ProjectServiceProtocol?,
          hostService: HostsProviderProtocol?,
          row: Int) {
         self.parentPresenter = parent
-        self.recommendation = recommendation
+        self.project = project
         self.row = row
         loadImage()
     }
 }
 
-protocol ProjectPointer {
-    var projectUuid: F4SUUID? { get }
+extension OpportunityTilePresenter: ProjectPointer {
+    var projectUuid: F4SUUID? {
+        project.uuid
+    }
 }
-
-extension RecommendationTilePresenter: ProjectPointer {}
