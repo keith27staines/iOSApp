@@ -11,6 +11,7 @@ import WorkfinderRegisterCandidate
 extension UIApplication {}
 
 class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
+    
     var window: UIWindow
     var injected: CoreInjectionProtocol
     var launchOptions: [UIApplication.LaunchOptionsKey: Any]? { return injected.launchOptions }
@@ -194,6 +195,10 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
             self?.routeLiveProjects(appSource: appSource)
         }
+    }
+    
+    func routeStudentsDashboard(appSource: AppSource) {
+        routeLiveProjects(appSource: appSource)
     }
     
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource) {

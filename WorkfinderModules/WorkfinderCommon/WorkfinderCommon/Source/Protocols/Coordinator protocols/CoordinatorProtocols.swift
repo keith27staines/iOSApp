@@ -18,6 +18,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
     func routeReview(reviewUuid: F4SUUID, appSource: AppSource, queryItems: [String: String])
     func routeLiveProjects(appSource: AppSource)
+    func routeStudentsDashboard(appSource: AppSource)
     func switchToTab(_ tab: TabIndex)
     func updateBadges()
     func handleDeepLinkUrl(url: URL)
