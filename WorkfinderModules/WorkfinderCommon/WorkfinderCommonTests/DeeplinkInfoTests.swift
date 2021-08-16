@@ -47,5 +47,12 @@ class DeeplinkInfoTests: XCTestCase {
         XCTAssertEqual(sut?.queryItems["query1"], "a")
         XCTAssertEqual(sut?.queryItems["query2"], "b")
     }
+    
+    func test_initialise_with_student_dashboard_url() {
+        let url = URL(string: "https://develop.workfinder.com/students/dashboard/something-else")!
+        let sut = DeeplinkRoutingInfo(deeplinkUrl: url)
+        XCTAssertEqual(sut?.objectType, .studentDashboard)
+        XCTAssertNil(sut?.objectId)
+    }
 
 }

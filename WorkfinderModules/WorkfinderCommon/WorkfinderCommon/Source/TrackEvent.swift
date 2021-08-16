@@ -97,6 +97,9 @@ public struct TrackingEvent {
         case .document_upload_skip: break
         case .document_upload_document_selected: break
         case .document_upload_convert: break
+        case .students_dashboard_deeplink_start: break
+        case .students_dashboard_deeplink_cancel: break
+        case .students_dashboard_deeplink_convert: break
         }
         return properties
     }

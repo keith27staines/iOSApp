@@ -12,30 +12,82 @@ public struct DeeplinkRoutingInfo {
         case pushNotification
     }
     
+    static func unifyUniversalandDeeplinkUrls(url: URL) -> URL? {
+        guard
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+            let host = components.host else {
+            return nil
+        }
+        switch components.scheme {
+        case "workfinderapp":
+            var unifiedComponents = URLComponents()
+            unifiedComponents.scheme = "https"
+            unifiedComponents.host = "workfinder.com"
+            unifiedComponents.path = "/" + (components.host ?? "unknown") + components.path
+            unifiedComponents.queryItems = components.queryItems
+            return unifiedComponents.url
+        default:
+            guard host.contains("workfinder.com") else { return nil }
+            return url
+        }
+    }
+    
+    static func objectIdFromUnifiedURL(_ url: URL) -> F4SUUID? {
+        let components = url.path.split(separator: "/").map { String($0) }
+        guard
+            let objectType = objectTypeFromUnifiedUrl(url),
+            components.count > 1
+        else {
+            return nil
+        }
+    
+        switch objectType {
+        case .recommendation:
+            return nil
+        case .placement:
+            return components[1]
+        case .review:
+            return components[1]
+        case .projects:
+            return components[1]
+        case .interviewInvite:
+            // iOS is not allowed to handle interview invites yet
+            return nil // self = .interviewInvite
+        case .studentDashboard:
+            return nil
+        }
+    }
+    
+    static func objectTypeFromUnifiedUrl(_ url: URL) -> ObjectType? {
+        let components = url.path.split(separator: "/")
+        guard let firstComponent = components.first else { return nil }
+        switch firstComponent {
+        case "recommendation", "recommendations":
+            return .recommendation
+        case "placement", "placements":
+            return .placement
+        case "reviews":
+            return .review
+        case "projects":
+            return .projects
+        case "interviews":
+            // iOS is not allowed to handle interview invites yet
+            return nil // self = .interviewInvite
+        case "students":
+            return .studentDashboard
+        default:
+            return nil
+        }
+
+    }
+    
     public enum ObjectType: String {
         case recommendation
         case placement
         case review
         case projects
         case interviewInvite
-        
-        public init?(urlPathComponent: String?) {
-            switch urlPathComponent {
-            case "recommendation", "recommendations":
-                self = .recommendation
-            case "placement", "placements":
-                self = .placement
-            case "reviews":
-                self = .review
-            case "projects":
-                self = .projects
-            case "interviews":
-                // iOS is not allowed to handle interview invites yet
-                return nil // self = .interviewInvite
-            default:
-                return nil
-            }
-        }
+        case studentDashboard
     }
     
     public enum Action: String {
@@ -70,39 +122,15 @@ public struct DeeplinkRoutingInfo {
     }
     
     public init?(deeplinkUrl: URL) {
+        guard
+            let unifiedUrl = Self.unifyUniversalandDeeplinkUrls(url: deeplinkUrl),
+            let components = URLComponents(url: unifiedUrl, resolvingAgainstBaseURL: false),
+            let objectType = Self.objectTypeFromUnifiedUrl(unifiedUrl)
+        else { return nil }
+        self.objectType = objectType
         self.source = .deeplink
         self.url = deeplinkUrl
-        guard let components = URLComponents(url: deeplinkUrl, resolvingAgainstBaseURL: false) else {
-            return nil
-        }
-        let pathComponents = components.path.split(separator: "/")
-        switch components.scheme {
-        case "workfinderapp":
-            guard
-                let host = components.host,
-                let objectType = ObjectType(urlPathComponent: host)
-            else { return nil }
-            self.objectType = objectType
-            if let firstPathComponent = pathComponents.first {
-                self.objectId = String(firstPathComponent)
-            } else {
-                self.objectId = nil
-            }
-        default:
-            guard
-                let host = components.host,
-                host.contains("workfinder.com"),
-                let firstPathComponent = pathComponents.first,
-                let objectType = ObjectType(urlPathComponent: String(firstPathComponent))
-            else { return nil }
-            self.objectType = objectType
-            if pathComponents.count == 2 {
-                self.objectId = String(pathComponents[1])
-            } else {
-                self.objectId = nil
-            }
-        }
-        
+        self.objectId = Self.objectIdFromUnifiedURL(unifiedUrl)
         var parameters = [String:String]()
         components.queryItems?.forEach {
             parameters[$0.name] = $0.value

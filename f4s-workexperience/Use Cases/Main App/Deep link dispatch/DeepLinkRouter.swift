@@ -45,6 +45,10 @@ class DeepLinkRouter {
                 log.track(.projects_deeplink_start)
                 coordinator.routeLiveProjects(appSource: source)
                 log.track(.projects_deeplink_convert)
+            case .studentDashboard:
+                log.track(.students_dashboard_deeplink_start)
+                coordinator.routeStudentsDashboard(appSource: source)
+                log.track(.students_dashboard_deeplink_convert)
             }
         }
     }

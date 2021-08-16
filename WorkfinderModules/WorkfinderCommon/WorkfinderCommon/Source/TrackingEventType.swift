@@ -1,4 +1,6 @@
 
+import Foundation
+
 public enum TrackingEventType: Equatable {
     
     // MARK:- App lifecycle                                                     // checked
@@ -42,6 +44,11 @@ public enum TrackingEventType: Equatable {
     case recommendation_deeplink_start                                          // ok
     case recommendation_deeplink_cancel                                         // not used
     case recommendation_deeplink_convert                                        // ok
+    
+    // MARK:- Students dashboard deeplink processing
+    case students_dashboard_deeplink_start
+    case students_dashboard_deeplink_cancel
+    case students_dashboard_deeplink_convert
     
     // MARK:- Placement deeplink processing                                     // checked
     case placement_deeplink_start                                               // ok
@@ -112,7 +119,7 @@ public enum TrackingEventType: Equatable {
     case application_page_dismiss(AppSource)                                    // ok
     case offer_page_view(AppSource)                                             // ok
     case offer_page_dismiss(AppSource)                                          // ok
- 
+
     public var name: String {
    
         switch self {
@@ -158,6 +165,11 @@ public enum TrackingEventType: Equatable {
         case .recommendation_deeplink_start: return "ios_recommendation_deeplink_start"
         case .recommendation_deeplink_cancel: return "ios_recommendation_deeplink_cancel"
         case .recommendation_deeplink_convert: return "ios_recommendation_deeplink_convert"
+            
+        // MARK:- students dashboard
+        case .students_dashboard_deeplink_start: return "ios_students_dashboard_deeplink_start"
+        case .students_dashboard_deeplink_cancel: return "ios_students_dashboard_deeplink_cancel"
+        case .students_dashboard_deeplink_convert: return "ios_students_dashboard_deeplink_convert"
             
         // MARK: nps processing
         case .nps_deeplink_start: return "ios_nps_deeplink_start"
@@ -278,6 +290,11 @@ extension TrackingEventType: Codable {
         case recommendation_deeplink_cancel
         case recommendation_deeplink_convert
         
+        // MARK:- Dashboard deeplink processing
+        case students_dashboard_deeplink_start
+        case students_dashboard_deeplink_cancel
+        case students_dashboard_deeplink_convert
+        
         // MARK:- Placement deeplink processing
         case placement_deeplink_start
         case placement_deeplink_cancel
@@ -356,20 +373,6 @@ extension TrackingEventType: Codable {
         }
         
         switch key {
-//        case .appStart:
-//            self = .appStart
-//        case .application:
-//            let source = try container.decode(
-//                AppSource.self,
-//                forKey: .application
-//            )
-//            self = .application(source: source)
-//        case .search:
-//            var nestedContainer = try container.nestedUnkeyedContainer(forKey: .search)
-//            let term = try nestedContainer.decode(String.self)
-//            let source = try nestedContainer.decode(AppSource.self)
-//            self = .search(term: term, source: source)
-        
         case .first_use:
             self = .first_use
         case .app_open:
@@ -426,6 +429,12 @@ extension TrackingEventType: Codable {
             self = .recommendation_deeplink_cancel
         case .recommendation_deeplink_convert:
             self = .recommendation_deeplink_convert
+        case .students_dashboard_deeplink_start:
+            self = .students_dashboard_deeplink_start
+        case .students_dashboard_deeplink_cancel:
+            self = .students_dashboard_deeplink_cancel
+        case .students_dashboard_deeplink_convert:
+            self = .students_dashboard_deeplink_convert
         case .placement_deeplink_start:
             self = .placement_deeplink_start
         case .placement_deeplink_cancel:
@@ -537,20 +546,18 @@ extension TrackingEventType: Codable {
         case .offer_page_dismiss:
             let source = try container.decode(AppSource.self, forKey: .offer_page_dismiss)
             self = .offer_page_dismiss(source)
+        case .students_dashboard_deeplink_start:
+            let source = try container.decode(AppSource.self, forKey: .students_dashboard_deeplink_start)
+            self = .students_dashboard_deeplink_start
+        case .students_dashboard_deeplink_cancel:
+            let source = try container.decode(AppSource.self, forKey: .students_dashboard_deeplink_cancel)
+            self = .students_dashboard_deeplink_cancel
         }
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
-//        case .appStart:
-//            try container.encode(true, forKey: .appStart)
-//        case .application(source: let source):
-//            try container.encode(source, forKey: .application)
-//        case .search(term: let term, source: let source):
-//            var nestedContainer = container.nestedUnkeyedContainer(forKey: .search)
-//            try nestedContainer.encode(term)
-//            try nestedContainer.encode(source)
         case .first_use:
             try container.encode(true, forKey: .first_use)
         case .app_open:
@@ -603,6 +610,12 @@ extension TrackingEventType: Codable {
             try container.encode(true, forKey: .recommendation_deeplink_cancel)
         case .recommendation_deeplink_convert:
             try container.encode(true, forKey: .recommendation_deeplink_convert)
+        case .students_dashboard_deeplink_start:
+            try container.encode(true, forKey: .students_dashboard_deeplink_start)
+        case .students_dashboard_deeplink_cancel:
+            try container.encode(true, forKey: .students_dashboard_deeplink_cancel)
+        case .students_dashboard_deeplink_convert:
+            try container.encode(true, forKey: .students_dashboard_deeplink_convert)
         case .nps_deeplink_start:
             try container.encode(true, forKey: .allow_notifications_start)
         case .nps_deeplink_cancel:
