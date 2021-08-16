@@ -7,14 +7,16 @@ import WorkfinderProjectApply
 public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     
     public override func start() {
-        let service = RecommendationsService(networkConfig: injected.networkConfig)
+        let recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)
+        let opportunitiesService = OpportuntiesService(networkConfig: injected.networkConfig)
         let userRepo = injected.userRepository
         let presenter = RecommendationsPresenter(
             coordinator: self,
-            service: service,
+            service: recommendationsService,
             userRepo: userRepo,
             workplaceServiceFactory: workplaceServiceFactory,
             projectServiceFactory: projectServiceFactory,
+            opportunitiesService: opportunitiesService,
             hostServiceFactory: hostServiceFactory)
         let vc = RecommendationsViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)

@@ -5,9 +5,9 @@ class DiscoverTraySectionManager {
     
     enum Section {
         case popularOnWorkfinder
-        case recommendations
+//        case recommendations
         case topRoles
-        case recentRoles
+//        case recentRoles
     }
     
     let userRepo: UserRepositoryProtocol
@@ -21,8 +21,9 @@ class DiscoverTraySectionManager {
     }
     
     var sections: [Section] {
-        isSignedIn ? [.popularOnWorkfinder, .recommendations, .topRoles, .recentRoles] :
-                     [.popularOnWorkfinder, .topRoles, .recentRoles]
+//        isSignedIn ? [.popularOnWorkfinder, .recommendations, .topRoles, .recentRoles] :
+//                     [.popularOnWorkfinder, .topRoles, .recentRoles]
+        [.popularOnWorkfinder, .topRoles]
     }
     
     func sectionForSectionIndex(_ index: Int) -> Section {

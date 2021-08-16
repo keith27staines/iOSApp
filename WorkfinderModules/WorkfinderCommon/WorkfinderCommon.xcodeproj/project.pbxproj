@@ -28,6 +28,7 @@
 		5386A462267CA28100E8ED33 /* PreferredNextScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5386A461267CA28100E8ED33 /* PreferredNextScreen.swift */; };
 		5389E97925C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */; };
 		53A23DF2254844AE00BB21B7 /* SignInScreenOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */; };
+		53B7C67126C65E9F005131DA /* RoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C67026C65E9F005131DA /* RoleData.swift */; };
 		53BC508625C0884A00D84EE0 /* TrackEventTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */; };
 		53BC508A25C0936D00D84EE0 /* TrackingEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC508925C0936D00D84EE0 /* TrackingEventQueue.swift */; };
 		53BC508E25C09E6C00D84EE0 /* TrackingEventQueueProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC508D25C09E6C00D84EE0 /* TrackingEventQueueProcessor.swift */; };
@@ -164,6 +165,7 @@
 		5386A461267CA28100E8ED33 /* PreferredNextScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredNextScreen.swift; sourceTree = "<group>"; };
 		5389E97825C0C78D00157B09 /* TrackingEventQueueProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventQueueProcessorTests.swift; sourceTree = "<group>"; };
 		53A23DF1254844AE00BB21B7 /* SignInScreenOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenOrder.swift; sourceTree = "<group>"; };
+		53B7C67026C65E9F005131DA /* RoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleData.swift; sourceTree = "<group>"; };
 		53BC508525C0884A00D84EE0 /* TrackEventTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEventTypeTests.swift; sourceTree = "<group>"; };
 		53BC508925C0936D00D84EE0 /* TrackingEventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventQueue.swift; sourceTree = "<group>"; };
 		53BC508D25C09E6C00D84EE0 /* TrackingEventQueueProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventQueueProcessor.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 		FCA91E8622340478007ED308 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				53B7C67026C65E9F005131DA /* RoleData.swift */,
 				53BC508D25C09E6C00D84EE0 /* TrackingEventQueueProcessor.swift */,
 				53BC508925C0936D00D84EE0 /* TrackingEventQueue.swift */,
 				53770B6025933BFC0085928E /* TrackEvent.swift */,
@@ -799,6 +802,7 @@
 				53BC508E25C09E6C00D84EE0 /* TrackingEventQueueProcessor.swift in Sources */,
 				FCB24A5F22E44AB100077DFF /* WorkfinderCommonStructs.swift in Sources */,
 				FC1F592222FDCD9D007164BA /* F4SCalendarDay.swift in Sources */,
+				53B7C67126C65E9F005131DA /* RoleData.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
 				FCC85DC624517EA500BC600E /* PicklistItemJson.swift in Sources */,
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,

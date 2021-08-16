@@ -1,4 +1,4 @@
-
+import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderServices
 

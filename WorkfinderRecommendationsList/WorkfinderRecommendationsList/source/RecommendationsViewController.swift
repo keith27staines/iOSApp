@@ -17,7 +17,7 @@ class RecommendationsViewController: UIViewController {
         label.textColor = UIColor.black
         label.heightAnchor.constraint(equalToConstant: 72).isActive = true
         label.textAlignment = .center
-        label.text = "These roles are a perfect match for you!"
+        label.text = "These roles might be a great match for you!"
         label.translatesAutoresizingMaskIntoConstraints = false
         let underline = UIView()
         underline.backgroundColor = UIColor.init(white: 200/255, alpha: 1)
@@ -34,18 +34,8 @@ class RecommendationsViewController: UIViewController {
         view.separatorStyle = .none
         view.backgroundColor = UIColor.white
         view.register(RecommendationTileView.self, forCellReuseIdentifier: "recommendation")
+        view.register(OpportunityTileView.self, forCellReuseIdentifier: "opportunity")
         return view
-    }()
-    
-    lazy var noRecommendationsYet:UILabel = {
-        let label = UILabel()
-        label.text = "Please make your first application to start receiving recommendations"
-        label.font = WorkfinderFonts.title2
-        label.textColor = WorkfinderColors.textLight
-        label.backgroundColor = WorkfinderColors.white
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
     }()
     
     init(presenter: RecommendationsPresenter) {
@@ -64,6 +54,7 @@ class RecommendationsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        guard isMovingToParent else { return }
         loadData()
     }
     
@@ -85,18 +76,6 @@ class RecommendationsViewController: UIViewController {
     
     func refresh() {
         tableview.reloadData()
-        updateDisplayOfNoRecommendationsYet()
-    }
-    
-    func updateDisplayOfNoRecommendationsYet() {
-        titleLabel.isHidden = presenter.noRecommendationsYet
-        noRecommendationsYet.removeFromSuperview()
-        guard presenter.noRecommendationsYet else { return }
-        view.addSubview(noRecommendationsYet)
-        noRecommendationsYet.translatesAutoresizingMaskIntoConstraints = false
-        noRecommendationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        noRecommendationsYet.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        noRecommendationsYet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
     }
     
     func loadData() {
@@ -131,12 +110,31 @@ extension RecommendationsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "recommendation") as? RecommendationTileView
+        switch indexPath.section {
+        case 0: return recommendationCellForRow(row: indexPath.row, in: tableview)
+        case 1: return opportunitiesCellForRow(row: indexPath.row, in: tableview)
+        default: return UITableViewCell()
+        }
+    }
+    
+    private func recommendationCellForRow(row: Int, in table: UITableView) -> UITableViewCell {
+        guard let cell = table.dequeueReusableCell(withIdentifier: "recommendation") as? RecommendationTileView
             else { return UITableViewCell()
         }
-        let tilePresenter = presenter.recommendationTilePresenterForIndexPath(indexPath)
+        let tilePresenter = presenter.recommendationTilePresenterForIndexPath(row)
         cell.presenter = tilePresenter
-        if indexPath.row >= presenter.pager.triggerRow { presenter.loadNextPage(tableView: tableview) }
+        if row >= presenter.pager.triggerRow { presenter.loadNextPage(tableView: tableview) }
         return cell
     }
+    
+    private func opportunitiesCellForRow(row: Int, in table: UITableView) -> UITableViewCell {
+        guard let cell = table.dequeueReusableCell(withIdentifier: "opportunity") as? OpportunityTileView
+            else { return UITableViewCell()
+        }
+        let tilePresenter = presenter.opportunityTilePresenterForIndexPath(row)
+        cell.presenter = tilePresenter
+        if row >= presenter.pager.triggerRow { presenter.loadNextPage(tableView: tableview) }
+        return cell
+    }
+
 }

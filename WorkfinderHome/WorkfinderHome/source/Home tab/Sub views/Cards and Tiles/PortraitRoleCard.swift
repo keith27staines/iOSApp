@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderCommon
 import WorkfinderUI
 
 class PortraitRoleCard: UIView {
