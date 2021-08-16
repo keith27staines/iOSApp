@@ -112,7 +112,11 @@ public enum TrackingEventType: Equatable {
     case application_page_dismiss(AppSource)                                    // ok
     case offer_page_view(AppSource)                                             // ok
     case offer_page_dismiss(AppSource)                                          // ok
- 
+
+    case students_dashboard_start(AppSource)
+    case students_dashboard_cancel(AppSource)
+    case students_dashboard_convert(AppSource)
+
     public var name: String {
    
         switch self {
@@ -228,6 +232,9 @@ public enum TrackingEventType: Equatable {
         case .application_page_dismiss: return "ios_application_page_dismiss"
         case .offer_page_view: return "ios_offer_page_view"
         case .offer_page_dismiss: return "ios_offer_page_dismiss"
+            
+        // MARK:- Object viewing
+        case .students_dashboard_start
 
         }
     }

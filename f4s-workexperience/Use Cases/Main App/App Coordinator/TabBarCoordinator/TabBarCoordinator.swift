@@ -115,6 +115,10 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         }
     }
     
+    func routeStudentsDashboard(appSource: AppSource) {
+        tabBarViewController.selectedIndex = TabIndex.home.rawValue
+    }
+    
     func routeLiveProjects(appSource: AppSource) {
         tabBarViewController.selectedIndex = TabIndex.home.rawValue
     }
