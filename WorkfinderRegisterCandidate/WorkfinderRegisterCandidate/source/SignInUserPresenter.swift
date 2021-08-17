@@ -14,4 +14,11 @@ class SignInUserPresenter: RegisterAndSignInUserBasePresenter {
             isValid == emailValidityState &&
             isValid == passwordValidityState
     }
+    
+    override var passwordValidityState: UnderlineView.State {
+        switch password?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0 {
+        case 0: return .empty
+        default: return .good
+        }
+    }
 }

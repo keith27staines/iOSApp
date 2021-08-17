@@ -30,6 +30,7 @@ class SignInViewController: RegisterAndSignInBaseViewController {
         presenter.password = trim(password1Stack.textfield.text)
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
+        password1Stack.state = presenter.passwordValidityState
     }
     
     private func trim(_ string:  String?) -> String? {

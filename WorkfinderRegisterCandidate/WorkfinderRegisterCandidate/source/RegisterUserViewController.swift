@@ -18,21 +18,12 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
         navigationItem.hidesBackButton = hidesBackButton
     }
     
-    //override var confirmPasswordTextField: UnderlinedNextResponderTextFieldStack
-    
     override func configureViews() {
         super.configureViews()
         fieldStack.addArrangedSubview(email)
-//        fieldStack.addArrangedSubview(firstname)
-//        fieldStack.addArrangedSubview(lastname)
         fieldStack.addArrangedSubview(passwordStack)
         email.textChanged?(self.presenter.email)
-//        firstname.textChanged?(self.presenter.firstname)
-//        lastname.textChanged?(self.presenter.lastname)
         password1Stack.textChanged?(self.presenter.password)
-//        email.textfield.nextResponderField = firstname.textfield
-//        firstname.textfield.nextResponderField = lastname.textfield
-        //lastname.textfield.nextResponderField = password1Stack.textfield
         bottomStack.addArrangedSubview(switchesStack)
         bottomStack.addArrangedSubview(primaryButton)
         password2Stack.isHidden = false
@@ -52,16 +43,12 @@ class RegisterUserViewController: RegisterAndSignInBaseViewController {
     }
     
     override func updatePresenter()  {
-//        presenter.firstname = trim(firstname.textfield.text)
-//        presenter.lastname = trim(lastname.textfield.text)
         presenter.email = trim(email.textfield.text)
         presenter.password = trim(password1Stack.textfield.text)
         presenter.password2 = trim(password2Stack.textfield.text)
         presenter.isTermsAndConditionsAgreed = termsAgreedSwitch.isOn
         primaryButton.isEnabled = presenter.isPrimaryButtonEnabled
         email.state = presenter.emailValidityState
-//        firstname.state = presenter.firstnameValidityState
-//        lastname.state = presenter.lastnameValidityState
         password1Stack.state = presenter.passwordValidityState
         password2Stack.state = presenter.password2ValidityState
     }

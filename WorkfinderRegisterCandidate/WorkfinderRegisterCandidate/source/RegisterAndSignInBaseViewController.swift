@@ -152,36 +152,6 @@ class RegisterAndSignInBaseViewController: UIViewController, WorkfinderViewContr
         textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
         return stack
     }()
-    
-//    lazy var firstname: UnderlinedNextResponderTextFieldStack = {
-//        let fieldName = NSLocalizedString("First name", comment: "")
-//        let stack = self.makeTextStack(fieldName: fieldName)
-//        let textField = stack.textfield
-//        textField.textColor = UIColor.darkText
-//        textField.returnKeyType = .next
-//        textField.keyboardType = .alphabet
-//        textField.autocapitalizationType = .words
-//        textField.autocorrectionType = .no
-//        textField.textContentType = .givenName
-//        textField.placeholder = fieldName
-//        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
-//        return stack
-//    }()
-//    
-//    lazy var lastname: UnderlinedNextResponderTextFieldStack = {
-//        let fieldName = NSLocalizedString("Last name", comment: "")
-//        let stack = self.makeTextStack(fieldName: fieldName)
-//        let textField = stack.textfield
-//        textField.textColor = UIColor.darkText
-//        textField.returnKeyType = .done
-//        textField.keyboardType = .alphabet
-//        textField.autocapitalizationType = .words
-//        textField.autocorrectionType = .no
-//        textField.textContentType = .familyName
-//        textField.placeholder = fieldName
-//        textField.inputAccessoryView = makeKeyboardInputAccessoryView(textField: textField)
-//        return stack
-//    }()
         
     lazy var password1Stack: UnderlinedNextResponderTextFieldStack = {
         let fieldName = NSLocalizedString("password", comment: "")
