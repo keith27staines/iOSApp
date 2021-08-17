@@ -17,49 +17,26 @@ class OpportunityTileView: UITableViewCell {
         }
     }
     
+    var companyLogoWidthConstraint: NSLayoutConstraint?
+    
     func refreshFromPresenter(presenter: OpportunityTilePresenterProtocol?) {
         companyNameLabel.text = presenter?.companyName
-        companyLogo.image = presenter?.companyImage
-        projectHeaderLabel.text = presenter?.projectHeader
-        projectTitle.text = presenter?.projectTitle
-        allTextStack.arrangedSubviews[0].isHidden = !(presenter?.isProject ?? false)
+        companyLogo.image = presenter?.companyImage?.aspectFitToSize(CGSize(width: CGFloat.infinity, height: 46))
+        roleLabel.text = presenter?.projectTitle
+        skillsLabel.text = presenter?.skills
     }
     
-    lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 70)
-    
-    lazy var companyLogoStack: UIStackView = {
-        let padding = UIView()
-        let stack = UIStackView(arrangedSubviews: [
-            companyLogo,
-            padding
-        ])
-        stack.axis = .vertical
-        return stack
+    lazy var companyLogo: UIImageView = {
+        let view = UIImageView.companyLogoImageView(height: 46)
+        view.setContentHuggingPriority(.required, for: .horizontal)
+        return view
     }()
     
-    lazy var projectStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-            projectHeaderLabel,
-            projectTitle,
-        ])
-        stack.axis = .vertical
-        stack.spacing = 10
-        return stack
-    }()
-    
-    lazy var projectHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        label.textColor = UIColor(red: 72, green: 39, blue: 128)
-        label.text = "PROJECT HEADER"
-        return label
-    }()
-    
-    lazy var projectTitle: UILabel = {
+    lazy var roleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.textColor = UIColor.black
-        label.text = "Project Title"
+        label.text = "Role label"
         return label
     }()
     
@@ -72,48 +49,121 @@ class OpportunityTileView: UITableViewCell {
         return label
     }()
     
-    lazy var companyTextStack: UIStackView = {
-        let textStack = UIStackView(arrangedSubviews: [
-            self.companyNameLabel,
-            UIView()
+    lazy var topStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            roleLabel,
+            companyNameLabel
         ])
-        textStack.axis = .vertical
-        textStack.spacing = 4
-        return textStack
-    }()
-        
-    lazy var allTextStack: UIStackView = {
-        var views = [projectStack, companyTextStack, UIView()]
-        let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .vertical
-        stack.spacing = 4
-        stack.alignment = .leading
+        stack.spacing = 10
         return stack
     }()
     
+    lazy var skillsLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.textColor = UIColor.black
+        label.numberOfLines = 0
+        return label
+    }()
+
+    lazy var middleStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            skillsLabel
+        ])
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
+    }()
+    
+    lazy var locationTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Location"
+        return label
+    }()
+
+    lazy var locationName: UILabel = {
+        let label = UILabel()
+        label.text = "Manchester"
+        return label
+    }()
+
+    lazy var compensationTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Compensation"
+        return label
+    }()
+
+    lazy var compensationName: UILabel = {
+        let label = UILabel()
+        label.text = "Paid"
+        return label
+    }()
+
+    lazy var locationStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            locationTitle,
+            locationName
+        ])
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
+    }()
+
+    lazy var compensationStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            compensationTitle,
+            compensationName
+        ])
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
+    }()
+    
+    lazy var primaryButton: WorkfinderPrimaryGradientButton = {
+        let button = WorkfinderPrimaryGradientButton()
+        button.setTitle("Apply", for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func buttonTapped() {
+        
+    }
+    
+    lazy var bottomStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            locationStack,
+            compensationStack
+        ])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 12
+        return stack
+    }()
+                
     lazy var fullStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            companyLogoStack,
-            allTextStack,
-            UIView()
+            topStack,
+            middleStack,
+            bottomStack,
+            primaryButton
         ])
         stack.spacing = 20
-        stack.alignment = .leading
-        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.axis = .vertical
         return stack
-    }()
-    
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: .gray)
-        spinner.hidesWhenStopped = true
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        return spinner
     }()
     
     lazy var tileView: UIView = {
         let view = UIView()
+        view.addSubview(companyLogo)
         view.addSubview(fullStack)
-        fullStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        companyLogo.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 0))
+        fullStack.anchor(top: companyLogo.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 16
+        view.layer.borderColor = WorkfinderColors.lightGrey.cgColor
         return view
     }()
     
@@ -126,16 +176,8 @@ class OpportunityTileView: UITableViewCell {
     func configureViews() {
         contentView.addSubview(tileView)
         contentView.backgroundColor = UIColor.white
-        tileView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0))
+        tileView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-        let underline = UIView()
-        underline.backgroundColor = UIColor.init(white: 200/255, alpha: 1)
-        underline.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        contentView.addSubview(underline)
-        underline.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
-        contentView.addSubview(activityIndicator)
-        activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
     @objc func handleTap() { presenter?.onTileTapped() }

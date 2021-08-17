@@ -25,6 +25,46 @@ public class WorkfinderPrimaryButton: UIButton {
     }
 }
 
+public class WorkfinderPrimaryGradientButton: UIButton {
+    
+    let radius = CGFloat(20)
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+        layer.cornerRadius = radius
+        layer.masksToBounds = true
+//        setBackgroundColor(color: UIColor(red: 229, green: 229, blue: 229), forUIControlState: .normal)
+        setBackgroundColor(color: UIColor(red: 229, green: 229, blue: 229), forUIControlState: .disabled)
+        setBackgroundColor(color: WorkfinderColors.greenColorBright, forUIControlState: .highlighted)
+        setTitleColor(UIColor.white, for: UIControl.State.normal)
+        setTitleColor(UIColor(red: 74, green: 74, blue: 74), for: .disabled)
+        titleLabel?.font = primaryButtonFont
+        heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    private lazy var gradientLayer: CAGradientLayer = {
+        let startColor = UIColor(red:5, green:134, blue:41).cgColor
+        let endColor = UIColor(red:14, green:190, blue:64).cgColor
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [startColor, endColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientLayer.cornerRadius = radius
+        layer.insertSublayer(gradientLayer, at: 0)
+        return gradientLayer
+    }()
+        
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bounds
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 public class WorkfinderSecondaryButton: UIButton {
     
     public init() {

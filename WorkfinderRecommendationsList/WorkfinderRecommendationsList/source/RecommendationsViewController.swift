@@ -17,7 +17,7 @@ class RecommendationsViewController: UIViewController {
         label.textColor = UIColor.black
         label.heightAnchor.constraint(equalToConstant: 72).isActive = true
         label.textAlignment = .center
-        label.text = "These roles might be a great match for you!"
+        label.text = "We recommend that you apply to these roles!"
         label.translatesAutoresizingMaskIntoConstraints = false
         let underline = UIView()
         underline.backgroundColor = UIColor.init(white: 200/255, alpha: 1)
@@ -44,7 +44,9 @@ class RecommendationsViewController: UIViewController {
     }
     
     func reloadRow(_ indexPaths: [IndexPath]) {
+        tableview.beginUpdates()
         tableview.reloadRows(at: indexPaths, with: .automatic)
+        tableview.endUpdates()
     }
     
     override func viewDidLoad() {

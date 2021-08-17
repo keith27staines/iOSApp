@@ -10,6 +10,7 @@ protocol OpportunityTilePresenterProtocol {
     var isProject: Bool { get }
     var projectHeader: String? { get }
     var projectTitle: String? { get }
+    var skills: String? { get }
     func onTileTapped()
 }
 
@@ -27,6 +28,15 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
     var isProject = true
     var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
     var projectTitle: String?  { project.name }
+    var skills: String? {
+        var skillsList = project.skillsAcquired?.prefix(3).reduce("", { result, skill in
+            result + "\n* \(skill)"
+        }) ?? ""
+        if project.skillsAcquired?.count ?? 0 > 3 {
+           skillsList += ", and more"
+        }
+        return skillsList
+    }
     
     var defaultImage: UIImage? {
         UIImage.imageWithFirstLetter(

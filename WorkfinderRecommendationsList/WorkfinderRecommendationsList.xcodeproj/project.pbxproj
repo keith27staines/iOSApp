@@ -144,8 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				FC3C701524ADB621004869D0 /* RecommendationTileView.swift */,
-				53B7C67226C67464005131DA /* OpportunityTileView.swift */,
 				FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */,
+				53B7C67226C67464005131DA /* OpportunityTileView.swift */,
 				53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */,
 			);
 			path = "Recommendation tile";

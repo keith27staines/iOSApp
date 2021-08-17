@@ -1,5 +1,4 @@
 
-import WorkfinderCommon
 
 public struct RoleData: Codable {
     public var id: String?
