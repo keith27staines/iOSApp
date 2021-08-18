@@ -128,7 +128,7 @@ class OpportunityTileView: UITableViewCell {
     }()
     
     @objc func buttonTapped() {
-        
+        print("Button tapped!!!")
     }
     
     lazy var bottomStack: UIStackView = {

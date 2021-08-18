@@ -27,37 +27,64 @@ public class WorkfinderPrimaryButton: UIButton {
 
 public class WorkfinderPrimaryGradientButton: UIButton {
     
-    let radius = CGFloat(20)
+    let animationLength = TimeInterval(0.3)
+    
+    var radius: CGFloat { frame.size.height / 2 }
     
     public init() {
         super.init(frame: CGRect.zero)
         layer.cornerRadius = radius
         layer.masksToBounds = true
-//        setBackgroundColor(color: UIColor(red: 229, green: 229, blue: 229), forUIControlState: .normal)
         setBackgroundColor(color: UIColor(red: 229, green: 229, blue: 229), forUIControlState: .disabled)
-        setBackgroundColor(color: WorkfinderColors.greenColorBright, forUIControlState: .highlighted)
         setTitleColor(UIColor.white, for: UIControl.State.normal)
         setTitleColor(UIColor(red: 74, green: 74, blue: 74), for: .disabled)
         titleLabel?.font = primaryButtonFont
         heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-    private lazy var gradientLayer: CAGradientLayer = {
-        let startColor = UIColor(red:5, green:134, blue:41).cgColor
-        let endColor = UIColor(red:14, green:190, blue:64).cgColor
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.bounds
-        gradientLayer.colors = [startColor, endColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        gradientLayer.cornerRadius = radius
+    private lazy var normalGradientLayer: CAGradientLayer = {
+        let startColor = UIColor(red:5, green:134, blue:41)
+        let endColor = UIColor(red:14, green:190, blue:64)
+        let gradientLayer = makeGradientLayer(startColor: startColor, endColor: endColor, isHidden: false)
         layer.insertSublayer(gradientLayer, at: 0)
         return gradientLayer
     }()
+    
+    private lazy var selectedGradientLayer: CAGradientLayer = {
+        let startColor = UIColor(netHex: 0x50AA6A)
+        let endColor = UIColor(netHex: 0x56CD78)
+        let gradientLayer = makeGradientLayer(startColor: startColor, endColor: endColor, isHidden: true)
+        layer.insertSublayer(gradientLayer, at: 1)
+        return gradientLayer
+    }()
+    
+    private func makeGradientLayer(startColor: UIColor, endColor: UIColor, isHidden: Bool) -> CAGradientLayer {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientLayer.cornerRadius = radius
+        gradientLayer.opacity = isHidden ? 0 : 1
+        return gradientLayer
+    }
         
     public override func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer.frame = bounds
+        normalGradientLayer.frame = bounds
+        selectedGradientLayer.frame = bounds
+        normalGradientLayer.cornerRadius = radius
+        selectedGradientLayer.cornerRadius = radius
+    }
+  
+    public override var isHighlighted: Bool {
+        didSet {
+            let isHighlighted = self.isHighlighted
+            UIView.animate(withDuration: 0.3) {
+                self.selectedGradientLayer.opacity = isHighlighted ? 1 : 0
+                self.normalGradientLayer.opacity = isHighlighted ? 0 : 1
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
