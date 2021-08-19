@@ -4,21 +4,47 @@ import WorkfinderServices
 import WorkfinderUI
 
 protocol OpportunityTilePresenterProtocol {
-    var view: RecommendationTileViewProtocol? { get set }
     var companyName: String? { get }
     var companyImage: UIImage? { get }
     var isProject: Bool { get }
     var projectHeader: String? { get }
     var projectTitle: String? { get }
-    var skillsAttributedString: NSAttributedString { get }
     var shouldHideSkills: Bool { get }
     var locationValue: String { get }
     var compensationValue: String { get }
+    var isRemote: Bool? { get }
+    var isPaid: Bool? { get }
+    var skills: [String] { get }
+    var skillsText: String { get}
+    var skillsAttributedString: NSAttributedString { get }
     func onTileTapped()
+    func onApplyTapped()
+}
+
+extension OpportunityTilePresenterProtocol {
+    var locationValue: String { isRemote ?? false ? "Remote" : "On-site" }
+    var compensationValue: String { isPaid ?? true ? "Paid" : "Voluntary" }
+    var shouldHideSkills: Bool { skillsText.count == 0 }
+    var skillsText: String {
+        var skillsList = skills.prefix(3).reduce("", { result, skill in
+            let result = result ?? ""
+            let bulletPointWithSkill = " •  \(skill)"
+            return result.count == 0 ? bulletPointWithSkill : result + "\n\(bulletPointWithSkill)"
+        }) ?? ""
+        if skills.count > 3 {
+           skillsList += ", and more"
+        }
+        return skillsList
+    }
+    
+    var skillsAttributedString: NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.16
+        return NSMutableAttributedString(string: "\(skillsText)", attributes: [NSAttributedString.Key.kern: -0.08, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+    }
 }
 
 class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
-    weak var view: RecommendationTileViewProtocol?
     let row: Int
     weak var parentPresenter: RecommendationsPresenter?
     let project: ProjectJson
@@ -32,25 +58,7 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
     var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
     var projectTitle: String?  { project.name }
     
-    var shouldHideSkills: Bool { skillsText.count == 0 }
-    
-    var skillsText: String {
-        var skillsList = project.skillsAcquired?.prefix(3).reduce("", { result, skill in
-            let result = result ?? ""
-            let bulletPointWithSkill = " •  \(skill)"
-            return result.count == 0 ? bulletPointWithSkill : result + "\n\(bulletPointWithSkill)"
-        }) ?? ""
-        if project.skillsAcquired?.count ?? 0 > 3 {
-           skillsList += ", and more"
-        }
-        return skillsList
-    }
-    
-    var skillsAttributedString: NSAttributedString {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.16
-        return NSMutableAttributedString(string: "\(skillsText)", attributes: [NSAttributedString.Key.kern: -0.08, NSAttributedString.Key.paragraphStyle: paragraphStyle])
-    }
+    var skills: [String] { project.skillsAcquired ?? [] }
         
     var defaultImage: UIImage? {
         UIImage.imageWithFirstLetter(
@@ -74,8 +82,12 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
         parentPresenter?.onTileTapped(self)
     }
     
-    var locationValue: String { (project.isRemote ?? false) ? "Remote" : "On-site" }
-    var compensationValue: String { (project.isPaid ?? true) ? "Paid" : "Voluntary" }
+    func onApplyTapped() {
+        parentPresenter?.onApplyButtonTapped(self)
+    }
+    
+    var isRemote: Bool? { project.isRemote }
+    var isPaid: Bool? { project.isPaid }
 
     init(parent: RecommendationsPresenter,
          project: ProjectJson,

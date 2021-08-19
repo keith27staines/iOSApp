@@ -51,6 +51,21 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         projectApplyCoordinator.start()
     }
     
+    public func processQuickApplyRequest(_ projectUuid: F4SUUID?, appSource: AppSource) {
+        guard let projectUuid = projectUuid else { return }
+        let projectApplyCoordinator = ProjectApplyCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            inject: injected,
+            projectUuid: projectUuid,
+            appSource: appSource,
+            switchToTab: switchToTab
+        )
+        addChildCoordinator(projectApplyCoordinator)
+        self.projectApplyCoordinator = projectApplyCoordinator
+        projectApplyCoordinator.start()
+    }
+    
     var switchToTab: ((TabIndex) -> Void)?
     
     public init(

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		539C433626CE8E2100B11A22 /* RecommendationTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C433526CE8E2100B11A22 /* RecommendationTileView.swift */; };
+		539C433626CE8E2100B11A22 /* RefreshableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C433526CE8E2100B11A22 /* RefreshableProtocol.swift */; };
 		53B7C66F26C65B8B005131DA /* ProjectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C66E26C65B8B005131DA /* ProjectsService.swift */; };
 		53B7C67326C67464005131DA /* OpportunityTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C67226C67464005131DA /* OpportunityTileView.swift */; };
 		53B7C67526C6747E005131DA /* OpportunityTilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */; };
@@ -35,7 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		539C433526CE8E2100B11A22 /* RecommendationTileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationTileView.swift; sourceTree = "<group>"; };
+		539C433526CE8E2100B11A22 /* RefreshableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshableProtocol.swift; sourceTree = "<group>"; };
 		53B7C66E26C65B8B005131DA /* ProjectsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsService.swift; sourceTree = "<group>"; };
 		53B7C67226C67464005131DA /* OpportunityTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTileView.swift; sourceTree = "<group>"; };
 		53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTilePresenter.swift; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 		FC3C701924ADB6D3004869D0 /* Recommendation tile */ = {
 			isa = PBXGroup;
 			children = (
+				539C433526CE8E2100B11A22 /* RefreshableProtocol.swift */,
 				FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */,
-				539C433526CE8E2100B11A22 /* RecommendationTileView.swift */,
 				53B7C67226C67464005131DA /* OpportunityTileView.swift */,
 				53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */,
 			);
@@ -266,7 +266,7 @@
 				FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */,
 				FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */,
 				53B7C67526C6747E005131DA /* OpportunityTilePresenter.swift in Sources */,
-				539C433626CE8E2100B11A22 /* RecommendationTileView.swift in Sources */,
+				539C433626CE8E2100B11A22 /* RefreshableProtocol.swift in Sources */,
 				53B7C66F26C65B8B005131DA /* ProjectsService.swift in Sources */,
 				FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */,
 			);
