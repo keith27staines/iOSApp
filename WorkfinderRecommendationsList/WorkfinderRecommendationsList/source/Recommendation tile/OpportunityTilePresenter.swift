@@ -10,7 +10,8 @@ protocol OpportunityTilePresenterProtocol {
     var isProject: Bool { get }
     var projectHeader: String? { get }
     var projectTitle: String? { get }
-    var skills: String? { get }
+    var skillsAttributedString: NSAttributedString { get }
+    var shouldHideSkills: Bool { get }
     func onTileTapped()
 }
 
@@ -28,9 +29,14 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
     var isProject = true
     var projectHeader: String? { isProject ? "WORK PLACEMENT" : nil }
     var projectTitle: String?  { project.name }
-    var skills: String? {
+    
+    var shouldHideSkills: Bool { skillsText.count == 0 }
+    
+    var skillsText: String {
         var skillsList = project.skillsAcquired?.prefix(3).reduce("", { result, skill in
-            result + "\n* \(skill)"
+            let result = result ?? ""
+            let bulletPointWithSkill = " •  \(skill)"
+            return result.count == 0 ? bulletPointWithSkill : result + "\n\(bulletPointWithSkill)"
         }) ?? ""
         if project.skillsAcquired?.count ?? 0 > 3 {
            skillsList += ", and more"
@@ -38,6 +44,12 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
         return skillsList
     }
     
+    var skillsAttributedString: NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.16
+        return NSMutableAttributedString(string: "\(skillsText)", attributes: [NSAttributedString.Key.kern: -0.08, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+    }
+        
     var defaultImage: UIImage? {
         UIImage.imageWithFirstLetter(
             string: companyName,

@@ -38,7 +38,7 @@ public class WorkfinderPrimaryGradientButton: UIButton {
         setBackgroundColor(color: UIColor(red: 229, green: 229, blue: 229), forUIControlState: .disabled)
         setTitleColor(UIColor.white, for: UIControl.State.normal)
         setTitleColor(UIColor(red: 74, green: 74, blue: 74), for: .disabled)
-        titleLabel?.font = primaryButtonFont
+        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     

@@ -38,7 +38,7 @@ public struct FactorySkins {
         ghostButtonSkin.borderColor = RGBA.white
         ghostButtonSkin.borderWidth = 1
         
-        var navigationBarSkin = NavigationBarSkin(statusbarMode: .dark, barTintColor: RGBA.workfinderGreen, itemTintColor: RGBA.white, titleTintColor: RGBA.white, hasDropShadow: false)
+        var navigationBarSkin = NavigationBarSkin(statusbarMode: .dark, barTintColor: RGBA.workfinderNavigationBarBackground, itemTintColor: RGBA.white, titleTintColor: RGBA.white, hasDropShadow: false)
         navigationBarSkin.statusbarMode = .light
         
         var tabBarSkin = TabBarSkin()

@@ -23,7 +23,9 @@ class OpportunityTileView: UITableViewCell {
         companyNameLabel.text = presenter?.companyName
         companyLogo.image = presenter?.companyImage?.aspectFitToSize(CGSize(width: CGFloat.infinity, height: 46))
         roleLabel.text = presenter?.projectTitle
-        skillsLabel.text = presenter?.skills
+        skillsLabel.attributedText = presenter?.skillsAttributedString
+        skillsLabel.sizeToFit()
+        skillsStack.isHidden = presenter?.shouldHideSkills ?? true
     }
     
     lazy var companyLogo: UIImageView = {
@@ -34,7 +36,8 @@ class OpportunityTileView: UITableViewCell {
     
     lazy var roleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.textColor = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
         label.textColor = UIColor.black
         label.text = "Role label"
         return label
@@ -42,7 +45,8 @@ class OpportunityTileView: UITableViewCell {
     
     lazy var companyNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.constrainToMaxlinesOrFewer(maxLines: 2)
@@ -52,52 +56,77 @@ class OpportunityTileView: UITableViewCell {
     lazy var topStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             roleLabel,
-            companyNameLabel
+            companyNameLabel,
+            makeSeparatorLine(insets: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
         ])
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 8
         return stack
+    }()
+    
+    lazy var skillsTitle: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
+        label.text = "You will gain skills in:"
+        label.numberOfLines = 1
+        return label
     }()
     
     lazy var skillsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         label.numberOfLines = 0
         return label
     }()
 
-    lazy var middleStack: UIStackView = {
+    lazy var skillsStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            skillsLabel
+            makeSpacer(height: 16),
+            skillsTitle,
+            makeSpacer(height: 12),
+            skillsLabel,
+            makeSpacer(height: 16),
+            makeSeparatorLine()
         ])
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 0
         return stack
     }()
     
     lazy var locationTitle: UILabel = {
         let label = UILabel()
-        label.text = "Location"
-        return label
-    }()
-
-    lazy var locationName: UILabel = {
-        let label = UILabel()
-        label.text = "Manchester"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
+        label.text = "Location title"
         return label
     }()
 
     lazy var compensationTitle: UILabel = {
         let label = UILabel()
-        label.text = "Compensation"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
+        label.text = "Compensation Title"
         return label
     }()
+    
+    lazy var locationName: UILabel = {
+        let view = UILabel()
+        view.textColor = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
+        view.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        view.text = "Loction name"
+        return view
+    }()
+
 
     lazy var compensationName: UILabel = {
-        let label = UILabel()
-        label.text = "Paid"
-        return label
+        let view = UILabel()
+        view.textColor = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
+        view.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        view.text = "Compensation name"
+        return view
     }()
 
     lazy var locationStack: UIStackView = {
@@ -138,18 +167,19 @@ class OpportunityTileView: UITableViewCell {
         ])
         stack.axis = .horizontal
         stack.distribution = .fillEqually
-        stack.spacing = 12
         return stack
     }()
                 
     lazy var fullStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             topStack,
-            middleStack,
+            skillsStack,
+            makeSpacer(height: 16),
             bottomStack,
+            makeSpacer(height: 16),
             primaryButton
         ])
-        stack.spacing = 20
+        stack.spacing = 0
         stack.alignment = .fill
         stack.axis = .vertical
         return stack
@@ -163,7 +193,7 @@ class OpportunityTileView: UITableViewCell {
         fullStack.anchor(top: companyLogo.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 16
-        view.layer.borderColor = WorkfinderColors.lightGrey.cgColor
+        view.layer.borderColor = lineColor.cgColor
         return view
     }()
     
@@ -183,4 +213,33 @@ class OpportunityTileView: UITableViewCell {
     @objc func handleTap() { presenter?.onTileTapped() }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    private let lineColor: UIColor = UIColor(red: 0.762, green: 0.792, blue: 0.77, alpha: 1)
+    
+    private func makeSeparatorLine(insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UIView {
+        let view = UIView()
+        let line = UIView()
+        line.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        line.backgroundColor = lineColor
+        view.addSubview(line)
+        line.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: insets)
+        view.heightAnchor.constraint(equalTo: line.heightAnchor, constant: insets.top + insets.bottom).isActive = true
+        return view
+    }
+    
+    private func makeSpacer(height: CGFloat) -> UIView {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: height).isActive = true
+        return  view
+    }
+
+    private func makeSpacer(width: CGFloat) -> UIView {
+        let view = UIView()
+        view.widthAnchor.constraint(equalToConstant: width).isActive = true
+        return  view
+    }
+
 }
+
+
+

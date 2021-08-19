@@ -19,6 +19,7 @@ public struct RGBA : Codable {
     public static let gray: RGBA = RGBA(color: UIColor.gray)
     public static let lightGray: RGBA = RGBA(color: UIColor.lightGray)
     public static let darkGray: RGBA = RGBA(color: UIColor.darkGray)
+    public static let workfinderNavigationBarBackground: RGBA = RGBA(color: UIColor(red:71, green:201, blue:108))
     public static let workfinderGreen: RGBA = RGBA(color: UIColor(red: 26, green: 168, blue: 76))
     public static let workfinderPurple: RGBA = RGBA(color: UIColor(red: 72, green: 38, blue: 127))
     public static let workfinderPink: RGBA = RGBA(color: UIColor(red:226, green:16, blue: 79))
