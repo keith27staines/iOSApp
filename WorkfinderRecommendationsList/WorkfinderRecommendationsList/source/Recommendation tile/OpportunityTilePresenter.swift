@@ -12,6 +12,8 @@ protocol OpportunityTilePresenterProtocol {
     var projectTitle: String? { get }
     var skillsAttributedString: NSAttributedString { get }
     var shouldHideSkills: Bool { get }
+    var locationValue: String { get }
+    var compensationValue: String { get }
     func onTileTapped()
 }
 
@@ -71,6 +73,9 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
     func onTileTapped() {
         parentPresenter?.onTileTapped(self)
     }
+    
+    var locationValue: String { (project.isRemote ?? false) ? "Remote" : "On-site" }
+    var compensationValue: String { (project.isPaid ?? true) ? "Paid" : "Voluntary" }
 
     init(parent: RecommendationsPresenter,
          project: ProjectJson,

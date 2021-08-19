@@ -26,6 +26,8 @@ class OpportunityTileView: UITableViewCell {
         skillsLabel.attributedText = presenter?.skillsAttributedString
         skillsLabel.sizeToFit()
         skillsStack.isHidden = presenter?.shouldHideSkills ?? true
+        locationValue.text = presenter?.locationValue
+        compensationValue.text = presenter?.compensationValue
     }
     
     lazy var companyLogo: UIImageView = {
@@ -100,7 +102,7 @@ class OpportunityTileView: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
-        label.text = "Location title"
+        label.text = "Location"
         return label
     }()
 
@@ -108,31 +110,31 @@ class OpportunityTileView: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
-        label.text = "Compensation Title"
+        label.text = "Compensation"
         return label
     }()
     
-    lazy var locationName: UILabel = {
+    lazy var locationValue: UILabel = {
         let view = UILabel()
         view.textColor = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
         view.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        view.text = "Loction name"
+        view.text = "Location"
         return view
     }()
 
 
-    lazy var compensationName: UILabel = {
+    lazy var compensationValue: UILabel = {
         let view = UILabel()
         view.textColor = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
         view.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        view.text = "Compensation name"
+        view.text = "Compensation"
         return view
     }()
 
     lazy var locationStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             locationTitle,
-            locationName
+            locationValue
         ])
         stack.axis = .vertical
         stack.spacing = 10
@@ -142,7 +144,7 @@ class OpportunityTileView: UITableViewCell {
     lazy var compensationStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             compensationTitle,
-            compensationName
+            compensationValue
         ])
         stack.axis = .vertical
         stack.spacing = 10
