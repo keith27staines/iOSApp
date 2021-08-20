@@ -43,7 +43,7 @@ class RecommendationsPresenter {
     }
     
     func refreshRow(_ indexPath: IndexPath) {
-        view?.reloadRow([indexPath])
+        view?.reloadRow(indexPath)
     }
     
     private var numberLeftToFill: Int {
@@ -89,7 +89,9 @@ class RecommendationsPresenter {
             guard let self = self else { return }
             switch result {
             case .success(let serverList):
-                let projects = [ProjectJson](serverList.results.prefix(self.numberLeftToFill))
+                let projects = [ProjectJson](serverList.results.filter({
+                    $0.hasApplied ?? false == false
+                }).prefix(self.numberLeftToFill))
                 self.opportunities.append(contentsOf: projects)
                 completion(nil)
             case .failure(let error):
@@ -161,9 +163,7 @@ class RecommendationsPresenter {
             case .success(let hostJson):
                 projectInfo.hostUuid = hostJson.uuid ?? ""
                 let name = hostJson.fullName ?? ""
-                if name.isEmpty {
-                    projectInfo.hostName = "Sir/Madam"
-                }
+                projectInfo.hostName = name.isEmpty ? "Sir/Madam" : name
                 self.coordinator?.processQuickApplyRequest(projectInfo, appSource: .recommendationsTab)
             case .failure(let error):
                 self.view?.messageHandler?.displayOptionalErrorIfNotNil(error, retryHandler: {

@@ -59,7 +59,7 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
         let projectApplyCoordinator = ProjectQuickApplyCoordinator(
             parent: self,
             navigationRouter: navigationRouter,
-            userMessageHandlingVC: rootViewController,
+            presentingViewController: rootViewController,
             inject: injected,
             projectInfoPresenter: projectInfo,
             appSource: appSource,

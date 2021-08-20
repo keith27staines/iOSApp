@@ -39,7 +39,7 @@ public struct ProjectInfoPresenter {
         self.projectUuid = json.uuid ?? Self.missing
         self.associationUuid = json.association?.uuid ?? Self.missing
         self.companyName = json.association?.location?.company?.name ?? Self.missing
-        self.hostName = json.association?.host?.fullName ?? Self.missing
+        self.hostName = json.association?.host?.fullName ?? ""
         self.projectName = json.name ?? Self.missing
         self.requiresCandidateLocation = json.isCandidateLocationRequired ?? true
     }
@@ -51,7 +51,7 @@ public struct ProjectInfoPresenter {
         self.projectUuid = project?.uuid ?? Self.missing
         self.associationUuid = association?.uuid ?? Self.missing
         self.companyName = association?.location?.company?.name ?? Self.missing
-        self.hostName = association?.host?.fullName ?? Self.missing
+        self.hostName = association?.host?.fullName ?? ""
         self.projectName = project?.name ?? Self.missing
         self.requiresCandidateLocation = true
     }

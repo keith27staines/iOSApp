@@ -56,9 +56,12 @@ class RecommendationsViewController: UIViewController, UserMessageHandlingProtoc
         super.init(nibName: nil, bundle: nil)
     }
     
-    func reloadRow(_ indexPaths: [IndexPath]) {
+    func reloadRow(_ indexPath: IndexPath) {
+        let row = indexPath.row
+        let section = indexPath.section
+        guard row < presenter.numberOfRowsForSection(section) else { return }
         tableview.beginUpdates()
-        tableview.reloadRows(at: indexPaths, with: .automatic)
+        tableview.reloadRows(at: [indexPath], with: .automatic)
         tableview.endUpdates()
     }
     

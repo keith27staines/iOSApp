@@ -63,7 +63,7 @@ class SuccessView: UIView {
     lazy var subheadingLabel: UILabel = {
         let label = UILabel()
         label.font = WorkfinderFonts.body
-        label.text = "Tap Applications to monitor progress or\ntap Search to find more opportunities"
+        label.text = "Tap Applications to monitor progress\nTap Search to find more opportunities"
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.textAlignment = .center
         label.numberOfLines = 2

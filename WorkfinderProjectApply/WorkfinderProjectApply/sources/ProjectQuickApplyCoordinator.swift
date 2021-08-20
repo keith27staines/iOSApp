@@ -30,7 +30,8 @@ public class ProjectQuickApplyCoordinator: CoreInjectionNavigationCoordinator {
     let appSource: AppSource
     var coverLetterText: String = ""
     var picklistsDictionary = PicklistsDictionary()
-    var userMessageHandlingVC: UIViewController & UserMessageHandlingProtocol
+    weak var messageHandler: UserMessageHandler?
+    weak var presentingViewController: UIViewController?
     
     lazy public var errorHandler: ErrorHandlerProtocol = {
         ErrorHandler(
@@ -42,7 +43,7 @@ public class ProjectQuickApplyCoordinator: CoreInjectionNavigationCoordinator {
     public init(
         parent: ProjectApplyCoordinatorDelegate?,
         navigationRouter: NavigationRoutingProtocol,
-        userMessageHandlingVC: UIViewController & UserMessageHandlingProtocol,
+        presentingViewController: UIViewController,
         inject: CoreInjectionProtocol,
         projectInfoPresenter: ProjectInfoPresenter,
         appSource: AppSource,
@@ -52,7 +53,7 @@ public class ProjectQuickApplyCoordinator: CoreInjectionNavigationCoordinator {
         self.appSource = appSource
         self.switchToTab = switchToTab
         self.projectInfoPresenter = projectInfoPresenter
-        self.userMessageHandlingVC = userMessageHandlingVC
+        self.presentingViewController = presentingViewController
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
@@ -72,6 +73,7 @@ public class ProjectQuickApplyCoordinator: CoreInjectionNavigationCoordinator {
             hostName: projectInfoPresenter.hostName)
         addChildCoordinator(coordinator)
         coordinator.start()
+        messageHandler = coordinator.messageHandler
     }
     
     func showAlert(title: String, message: String, buttonTitle: String) {
@@ -92,7 +94,8 @@ extension ProjectQuickApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
     
     func onModalFinished() {
-        // originalVC?.dismiss(animated: true, completion: nil)
+        guard let presentingViewController = presentingViewController else { return }
+        navigationRouter.popToViewController(presentingViewController, animated: true)
         delegate?.onProjectApplyDidFinish()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
@@ -184,8 +187,7 @@ extension ProjectQuickApplyCoordinator: ProjectApplyCoordinatorProtocol {
         var picklistsDictionary = self.picklistsDictionary
         picklistsDictionary[.availabilityPeriod] = nil
         picklistsDictionary[.duration] = nil
-        let messageHandler = userMessageHandlingVC.messageHandler
-        messageHandler?.showLoadingOverlay(userMessageHandlingVC.view)
+        messageHandler?.showLoadingOverlay()
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         let builder = DraftPlacementPreparer()
         builder.update(candidateUuid: UserRepository().loadCandidate().uuid)
@@ -196,13 +198,13 @@ extension ProjectQuickApplyCoordinator: ProjectApplyCoordinatorProtocol {
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         placementService?.postPlacement(draftPlacement: builder.draft) { [weak self] (result) in
             guard let self = self else { return }
-            messageHandler?.hideLoadingOverlay()
+            self.messageHandler?.hideLoadingOverlay()
             switch result {
             case .success(let placement):
                 self.log.track(.project_apply_convert(self.appSource))
                 self.onApplicationSubmitted(placement: placement)
             case .failure(let error):
-                messageHandler?.displayOptionalErrorIfNotNil(error, cancelHandler: {
+                self.messageHandler?.displayOptionalErrorIfNotNil(error, cancelHandler: {
                     // just dismiss
                 }, retryHandler: {
                     self.submitApplication()

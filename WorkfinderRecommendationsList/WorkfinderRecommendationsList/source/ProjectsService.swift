@@ -41,7 +41,7 @@ public class OpportuntiesService: WorkfinderService, OpportunitiesServiceProtoco
     
     public func fetchRecentOpportunities(completion: @escaping (Result<ServerListJson<ProjectJson>, Error>) -> Void) {
         do {
-            let verbose = false
+            let verbose = true
             let query = [URLQueryItem(name: "promote_on_home_page", value: "false"), URLQueryItem(name: "status", value: "open")]
             let request = try buildRequest(relativePath: "projects/", queryItems: query, verb: .get)
             performTask(with: request, verbose: verbose, completion: completion, attempting: #function)
