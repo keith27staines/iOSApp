@@ -69,7 +69,6 @@ class RecommendationsViewController: UIViewController, UserMessageHandlingProtoc
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        guard isMovingToParent else { return }
         loadData()
     }
     
@@ -94,7 +93,6 @@ class RecommendationsViewController: UIViewController, UserMessageHandlingProtoc
     }
     
     func loadData() {
-        refresh()
         messageHandler?.showLoadingOverlay(self.view)
         presenter.loadFirstPage(table: tableview) { [weak self] (optionalError) in
             guard let self = self else { return }

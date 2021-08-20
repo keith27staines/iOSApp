@@ -92,9 +92,6 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
 
     init(parent: RecommendationsPresenter,
          project: ProjectJson,
-         workplaceService: ApplicationContextService?,
-         projectService: ProjectServiceProtocol?,
-         hostService: HostsProviderProtocol?,
          row: Int) {
         self.parentPresenter = parent
         self.project = project

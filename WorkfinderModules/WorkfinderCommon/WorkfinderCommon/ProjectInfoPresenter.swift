@@ -7,6 +7,8 @@
 //
 
 public struct ProjectInfoPresenter {
+    private static let missing = "-"
+    public var hostUuid: F4SUUID
     public var projectUuid: F4SUUID
     public var associationUuid: F4SUUID
     public var companyName: String
@@ -15,6 +17,7 @@ public struct ProjectInfoPresenter {
     public var requiresCandidateLocation: Bool
     
     public init(
+        hostUuid: F4SUUID,
         projectUuid: F4SUUID,
         associationUuid: F4SUUID,
         companyName: String,
@@ -22,6 +25,7 @@ public struct ProjectInfoPresenter {
         projectName: String,
         requiresCandidateLocation: Bool
     ) {
+        self.hostUuid = hostUuid
         self.projectUuid = projectUuid
         self.associationUuid = associationUuid
         self.companyName = companyName
@@ -31,24 +35,24 @@ public struct ProjectInfoPresenter {
     }
     
     public init(json: ProjectJson) {
-        let missing = "missing information"
-        self.projectUuid = json.uuid ?? ""
-        self.associationUuid = json.association?.uuid ?? missing
-        self.companyName = json.association?.location?.company?.name ?? missing
-        self.hostName = json.association?.host?.fullName ?? missing
-        self.projectName = json.name ?? missing
+        self.hostUuid = json.association?.host?.uuid ?? Self.missing
+        self.projectUuid = json.uuid ?? Self.missing
+        self.associationUuid = json.association?.uuid ?? Self.missing
+        self.companyName = json.association?.location?.company?.name ?? Self.missing
+        self.hostName = json.association?.host?.fullName ?? Self.missing
+        self.projectName = json.name ?? Self.missing
         self.requiresCandidateLocation = json.isCandidateLocationRequired ?? true
     }
-    
+
     public init(item: RecommendationsListItem) {
-        let missing = "missing information"
         let project = item.project
         let association = item.association
-        self.projectUuid = project?.uuid ?? missing
-        self.associationUuid = association?.uuid ?? missing
-        self.companyName = association?.location?.company?.name ?? missing
-        self.hostName = association?.host?.fullName ?? missing
-        self.projectName = project?.name ?? missing
+        self.hostUuid = item.association?.host?.uuid ?? Self.missing
+        self.projectUuid = project?.uuid ?? Self.missing
+        self.associationUuid = association?.uuid ?? Self.missing
+        self.companyName = association?.location?.company?.name ?? Self.missing
+        self.hostName = association?.host?.fullName ?? Self.missing
+        self.projectName = project?.name ?? Self.missing
         self.requiresCandidateLocation = true
     }
 }

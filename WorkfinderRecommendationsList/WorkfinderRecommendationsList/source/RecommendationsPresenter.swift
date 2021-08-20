@@ -50,9 +50,16 @@ class RecommendationsPresenter {
         6 - recommendations.count - opportunities.count
     }
     
-    func loadFirstPage(table: UITableView, completion: @escaping (Error?) -> Void) {
+    private func clearData(table: UITableView) {
         recommendations = []
         opportunities = []
+        recommendationTilePresenters = []
+        opportunityTilePresenters = []
+        table.reloadData()
+    }
+    
+    func loadFirstPage(table: UITableView, completion: @escaping (Error?) -> Void) {
+        clearData(table: table)
         guard let _ = userRepo.loadAccessToken()
         else {
             loadOpportunities(completion: completion)
@@ -126,15 +133,9 @@ class RecommendationsPresenter {
         if row < opportunityTilePresenters.count {
             return opportunityTilePresenters[row]
         }
-        let workplaceService = workplaceServiceFactory?()
-        let projectService = projectServiceFactory?()
-        let hostService = hostServiceFactory?()
         let presenter = OpportunityTilePresenter(
             parent: self,
             project: opportunity,
-            workplaceService: workplaceService,
-            projectService: projectService,
-            hostService: hostService,
             row: row
         )
         opportunityTilePresenters.append(presenter)
@@ -146,8 +147,30 @@ class RecommendationsPresenter {
         coordinator?.processProjectViewRequest(uuid, appSource: .recommendationsTab)
     }
     
+    lazy var projectService: ProjectServiceProtocol? = {
+        projectServiceFactory?()
+    }()
+    
     func onApplyButtonTapped(_ projectInfo: ProjectInfoPresenter) {
-        coordinator?.processQuickApplyRequest(projectInfo, appSource: .recommendationsTab)
+        var projectInfo = projectInfo
+        view?.messageHandler?.showLoadingOverlay()
+        projectService?.fetchHost(uuid: projectInfo.hostUuid, completion: { [weak self] result in
+            guard let self = self else { return }
+            self.view?.messageHandler?.hideLoadingOverlay()
+            switch result {
+            case .success(let hostJson):
+                projectInfo.hostUuid = hostJson.uuid ?? ""
+                let name = hostJson.fullName ?? ""
+                if name.isEmpty {
+                    projectInfo.hostName = "Sir/Madam"
+                }
+                self.coordinator?.processQuickApplyRequest(projectInfo, appSource: .recommendationsTab)
+            case .failure(let error):
+                self.view?.messageHandler?.displayOptionalErrorIfNotNil(error, retryHandler: {
+                    self.onApplyButtonTapped(projectInfo)
+                })
+            }
+        })
     }
 
 }
