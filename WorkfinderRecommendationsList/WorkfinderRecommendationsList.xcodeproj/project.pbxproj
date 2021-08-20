@@ -144,9 +144,9 @@
 			isa = PBXGroup;
 			children = (
 				539C433526CE8E2100B11A22 /* RefreshableProtocol.swift */,
-				FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */,
 				53B7C67226C67464005131DA /* OpportunityTileView.swift */,
 				53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */,
+				FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */,
 			);
 			path = "Recommendation tile";
 			sourceTree = "<group>";

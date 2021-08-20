@@ -2,9 +2,9 @@
 import UIKit
 import WorkfinderUI
 
-class RecommendationsViewController: UIViewController {
+class RecommendationsViewController: UIViewController, UserMessageHandlingProtocol {
     
-    lazy var messageHandler = UserMessageHandler(presenter: self)
+    lazy var messageHandler: UserMessageHandler? = UserMessageHandler(presenter: self)
     let presenter: RecommendationsPresenter
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -95,11 +95,11 @@ class RecommendationsViewController: UIViewController {
     
     func loadData() {
         refresh()
-        messageHandler.showLoadingOverlay(self.view)
+        messageHandler?.showLoadingOverlay(self.view)
         presenter.loadFirstPage(table: tableview) { [weak self] (optionalError) in
             guard let self = self else { return }
-            self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+            self.messageHandler?.hideLoadingOverlay()
+            self.messageHandler?.displayOptionalErrorIfNotNil(optionalError) {
                 self.loadData()
             }
             self.refresh()

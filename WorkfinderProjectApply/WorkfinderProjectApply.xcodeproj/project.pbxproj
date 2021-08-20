@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53131C87261CB4AB00799629 /* WorkfinderCandidateProfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53131C86261CB4AB00799629 /* WorkfinderCandidateProfile.framework */; };
+		5329096C26CF86E6003AE67E /* ProjectQuickApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5329096B26CF86E6003AE67E /* ProjectQuickApplyCoordinator.swift */; };
 		537637912590857600F563B5 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537637902590857600F563B5 /* WorkfinderRegisterCandidate.framework */; };
 		5397E0E8253B8C510009EFAC /* CapsuleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */; };
 		5397E0E9253B8C510009EFAC /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0E7253B8C500009EFAC /* CapsuleView.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		53131C86261CB4AB00799629 /* WorkfinderCandidateProfile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCandidateProfile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5329096B26CF86E6003AE67E /* ProjectQuickApplyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectQuickApplyCoordinator.swift; sourceTree = "<group>"; };
 		537637902590857600F563B5 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5397E0E6253B8C500009EFAC /* CapsuleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleCollectionView.swift; sourceTree = "<group>"; };
 		5397E0E7253B8C500009EFAC /* CapsuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		FC0A7CE624BC8E0C00E02199 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				5329096B26CF86E6003AE67E /* ProjectQuickApplyCoordinator.swift */,
 				FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */,
 				FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */,
 				FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */,
@@ -417,6 +420,7 @@
 				FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */,
 				FC9B677224C4648E0091A556 /* ProjectContactCell.swift in Sources */,
 				FC15D79324C45CA300543E6F /* AboutPresenter.swift in Sources */,
+				5329096C26CF86E6003AE67E /* ProjectQuickApplyCoordinator.swift in Sources */,
 				5397E0F1253B8E0F0009EFAC /* CapsuleCollectionCell.swift in Sources */,
 				5397E0E9253B8C510009EFAC /* CapsuleView.swift in Sources */,
 				FC15D78F24C45C2A00543E6F /* ProjectBulletPointPresenter.swift in Sources */,

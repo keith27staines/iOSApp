@@ -55,7 +55,8 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     }
     
     func onApplyTapped() {
-        parentPresenter?.onApplyButtonTapped(self)
+        let projectInfo = ProjectInfoPresenter(item: recommendation)
+        parentPresenter?.onApplyButtonTapped(projectInfo)
     }
 
     init(parent: RecommendationsPresenter,

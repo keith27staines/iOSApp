@@ -146,8 +146,8 @@ class RecommendationsPresenter {
         coordinator?.processProjectViewRequest(uuid, appSource: .recommendationsTab)
     }
     
-    func onApplyButtonTapped(_ tile: ProjectPointer) {
-        guard let uuid = tile.projectUuid else { return }
-        coordinator?.processQuickApplyRequest(uuid, appSource: .recommendationsTab)
-    }    
+    func onApplyButtonTapped(_ projectInfo: ProjectInfoPresenter) {
+        coordinator?.processQuickApplyRequest(projectInfo, appSource: .recommendationsTab)
+    }
+
 }

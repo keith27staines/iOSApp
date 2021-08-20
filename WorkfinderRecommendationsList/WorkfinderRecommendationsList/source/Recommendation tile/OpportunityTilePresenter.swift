@@ -83,7 +83,8 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
     }
     
     func onApplyTapped() {
-        parentPresenter?.onApplyButtonTapped(self)
+        let projectInfo = ProjectInfoPresenter(json: project)
+        parentPresenter?.onApplyButtonTapped(projectInfo)
     }
     
     var isRemote: Bool? { project.isRemote }
