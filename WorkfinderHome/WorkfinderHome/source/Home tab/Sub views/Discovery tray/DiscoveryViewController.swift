@@ -122,7 +122,7 @@ class DiscoveryTrayController: NSObject {
         tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.register(SectionFooterView.self, forHeaderFooterViewReuseIdentifier: SectionFooterView.identifier)
         tableView.tableFooterView = UIView()
-        tableView.refreshControl = refreshControl
+        tableView.refreshControl = nil // refreshControl
     }
     
     lazy var refreshControl: UIRefreshControl = {

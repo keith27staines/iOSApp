@@ -13,6 +13,8 @@ class DiscoveryTrayView : UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.white
+        tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
+        tableView.scrollIndicatorInsets = tableView.contentInset
         return tableView
     }()
     
