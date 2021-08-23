@@ -1,3 +1,10 @@
+//
+//  ProjectQuickApplyCoordinator.swift
+//  WorkfinderProjectApply
+//
+//  Created by Keith on 20/08/2021.
+//  Copyright © 2021 Workfinder. All rights reserved.
+//
 
 import WorkfinderCommon
 import WorkfinderCoordinators
@@ -11,23 +18,9 @@ import WorkfinderRegisterCandidate
 import WorkfinderCandidateProfile
 import StoreKit
 
-protocol ProjectApplyCoordinatorProtocol: AnyObject, ErrorHandlerProviderProtocol {
-    func onCoverLetterWorkflowCancelled()
-    func onModalFinished()
-    func onTapApply()
-}
-
-public protocol ProjectApplyCoordinatorDelegate: Coordinating {
-    func onProjectApplyDidFinish()
-}
-
-public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
+public class ProjectQuickApplyCoordinator: CoreInjectionNavigationCoordinator {
     
-    let projectUuid: F4SUUID
-    weak var modalVC: ProjectViewController?
-    weak var originalVC: UIViewController?
-    var projectPresenter: ProjectPresenter?
-    var newNavigationRouter:NavigationRouter!
+    var projectInfoPresenter: ProjectInfoPresenter
     var switchToTab: ((TabIndex) -> Void)?
     weak var successViewController: UIViewController?
     var placementService: PostPlacementServiceProtocol?
@@ -37,10 +30,12 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     let appSource: AppSource
     var coverLetterText: String = ""
     var picklistsDictionary = PicklistsDictionary()
+    weak var messageHandler: UserMessageHandler?
+    weak var presentingViewController: UIViewController?
     
     lazy public var errorHandler: ErrorHandlerProtocol = {
         ErrorHandler(
-            navigationRouter: self.newNavigationRouter,
+            navigationRouter: navigationRouter,
             coreInjection: self.injected,
             parentCoordinator: self)
     }()
@@ -48,87 +43,37 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     public init(
         parent: ProjectApplyCoordinatorDelegate?,
         navigationRouter: NavigationRoutingProtocol,
+        presentingViewController: UIViewController,
         inject: CoreInjectionProtocol,
-        projectUuid: F4SUUID,
+        projectInfoPresenter: ProjectInfoPresenter,
         appSource: AppSource,
         switchToTab: ((TabIndex) -> Void)?
     ) {
         self.delegate = parent
         self.appSource = appSource
         self.switchToTab = switchToTab
-        self.projectUuid = projectUuid
+        self.projectInfoPresenter = projectInfoPresenter
+        self.presentingViewController = presentingViewController
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
     
-    public func startAtCoveringLetter() {
-        let user = UserRepository().loadUser()
-        let candidate = UserRepository().loadCandidate()
-        let association = projectPresenter?.association
-        let projectTitle = projectPresenter?.project.name
-        
-        let companyName = association?.location?.company?.name ?? "your company"
-        let hostName = projectPresenter?.host?.fullName ?? "Sir/Madam"
-    
-        let coordinator = CoverLetterFlowFactory.makeFlow(
-            type: .projectApplication,
-            parent: self,
-            navigationRouter: newNavigationRouter,
-            inject: injected,
-            candidateAge: candidate.age() ?? 18,
-            candidateName: user.fullname,
-            isProject: true,
-            projectTitle: projectTitle,
-            companyName: companyName,
-            hostName: hostName)
-        addChildCoordinator(coordinator)
-        coordinator.start()
-    }
-    
     public override func start() {
-        originalVC = navigationRouter.navigationController.topViewController
-        let presenter = ProjectPresenter(
-            coordinator: self,
-            projectUuid: projectUuid,
-            projectService: ProjectService(networkConfig: injected.networkConfig),
-            source: appSource,
-            log: injected.log
-        )
-        self.projectPresenter = presenter
-        let vc = ProjectViewController(
-            coordinator: self,
-            presenter: presenter,
-            appSource: appSource,
-            log: log
-        )
-        let newNav = UINavigationController(rootViewController: vc)
-        newNav.modalPresentationStyle = .fullScreen
-        originalVC?.present(newNav, animated: true, completion: nil)
-        modalVC = vc
-        newNavigationRouter = NavigationRouter(navigationController: newNav)
-    }
-    
-    func startCoverLetterFlow() {
         let user = UserRepository().loadUser()
         let candidate = UserRepository().loadCandidate()
-        let association = projectPresenter?.association
-        let projectTitle = projectPresenter?.project.name
-        
-        let companyName = association?.location?.company?.name ?? "your company"
-        let hostName = projectPresenter?.host?.fullName ?? "Sir/Madam"
-    
         let coordinator = CoverLetterFlowFactory.makeFlow(
             type: .projectApplication,
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: navigationRouter,
             inject: injected,
             candidateAge: candidate.age() ?? 18,
             candidateName: user.fullname,
             isProject: true,
-            projectTitle: projectTitle,
-            companyName: companyName,
-            hostName: hostName)
+            projectTitle: projectInfoPresenter.projectName,
+            companyName: projectInfoPresenter.companyName,
+            hostName: projectInfoPresenter.hostName)
         addChildCoordinator(coordinator)
         coordinator.start()
+        messageHandler = coordinator.messageHandler
     }
     
     func showAlert(title: String, message: String, buttonTitle: String) {
@@ -142,16 +87,15 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
     }
 }
 
-extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
+extension ProjectQuickApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func onTapApply() {
-        log.track(.project_apply_start(appSource))
-        log.track(.placement_funnel_start(appSource))
-        startCoverLetterFlow()
+        // Nothing to do here because unlike ProjectApplyCoordinator in we aren't showing the project page and the apply process has already been initiated
     }
     
     func onModalFinished() {
-        originalVC?.dismiss(animated: true, completion: nil)
+        guard let presentingViewController = presentingViewController else { return }
+        navigationRouter.popToViewController(presentingViewController, animated: true)
         delegate?.onProjectApplyDidFinish()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
@@ -183,7 +127,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         }
         let coordinator = NameCaptureCoordinator(
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: navigationRouter,
             inject: injected
         ) { [weak self] in
             self?.onNameCaptureComplete()
@@ -196,14 +140,14 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         let postcode = UserRepository().loadCandidate().postcode ?? ""
         guard
             postcode.isEmpty,
-            projectPresenter?.project.isCandidateLocationRequired == true else {
+            projectInfoPresenter.requiresCandidateLocation == true else {
             onPostcodeCaptureComplete()
             return
         }
         
         let coordinator = AddressCaptureCoordinator(
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: navigationRouter,
             inject: injected,
             hidesBackButton: true
         ) { [weak self] in
@@ -217,7 +161,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         let updateCandidateService = UpdateCandidateService(networkConfig: injected.networkConfig)
         let dobCoordinator = DOBCaptureCoordinator(
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: navigationRouter,
             inject: injected,
             updateCandidateService: updateCandidateService
         ) { [weak self] in
@@ -230,7 +174,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     func startLogin() {
         let coordinator = RegisterAndSignInCoordinator(
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: navigationRouter,
             inject: injected,
             firstScreenHidesBackButton: true)
         addChildCoordinator(coordinator)
@@ -239,29 +183,28 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     
     func submitApplication() {
         self.log.track(.placement_funnel_convert(self.appSource))
-        guard let vc = modalVC, let view = vc.view else { return }
+        // guard let vc = modalVC, let view = vc.view else { return }
         var picklistsDictionary = self.picklistsDictionary
         picklistsDictionary[.availabilityPeriod] = nil
         picklistsDictionary[.duration] = nil
-        let messageHandler = vc.messageHandler
-        messageHandler.showLoadingOverlay(view)
+        messageHandler?.showLoadingOverlay()
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         let builder = DraftPlacementPreparer()
         builder.update(candidateUuid: UserRepository().loadCandidate().uuid)
         builder.update(picklists: picklistsDictionary)
-        builder.update(associationUuid: projectPresenter?.association?.uuid)
-        builder.update(associatedProject: projectPresenter?.project.uuid)
+        builder.update(associationUuid: projectInfoPresenter.associationUuid)
+        builder.update(associatedProject: projectInfoPresenter.projectUuid)
         builder.update(coverletter: coverLetterText)
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         placementService?.postPlacement(draftPlacement: builder.draft) { [weak self] (result) in
             guard let self = self else { return }
-            messageHandler.hideLoadingOverlay()
+            self.messageHandler?.hideLoadingOverlay()
             switch result {
             case .success(let placement):
                 self.log.track(.project_apply_convert(self.appSource))
                 self.onApplicationSubmitted(placement: placement)
             case .failure(let error):
-                messageHandler.displayOptionalErrorIfNotNil(error, cancelHandler: {
+                self.messageHandler?.displayOptionalErrorIfNotNil(error, cancelHandler: {
                     // just dismiss
                 }, retryHandler: {
                     self.submitApplication()
@@ -274,7 +217,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         guard let placementUuid = placement.uuid else { return }
         let coordinator = DocumentUploadCoordinator(
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: navigationRouter,
             inject: injected, delegate: self,
             appModel: .placement,
             objectUuid: placementUuid,
@@ -293,7 +236,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
                 self?.dismissSuccessSwitchingTo(.home)
         })
         vc.modalPresentationStyle = .overCurrentContext
-        modalVC?.present(vc, animated: false, completion: nil)
+        navigationRouter.navigationController.topViewController?.present(vc, animated: false, completion: nil)
         successViewController = vc
     }
     
@@ -305,7 +248,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
     }
 }
 
-extension ProjectApplyCoordinator: CoverLetterParentCoordinatorProtocol {
+extension ProjectQuickApplyCoordinator: CoverLetterParentCoordinatorProtocol {
     public var coverLetterPrimaryButtonText: String { "Apply now!" }
     public func coverLetterDidCancel() {
         onCoverLetterWorkflowCancelled()
@@ -317,7 +260,7 @@ extension ProjectApplyCoordinator: CoverLetterParentCoordinatorProtocol {
     }
 }
 
-extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
+extension ProjectQuickApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
     public func onSkipDocumentUpload() {
         showSuccess()
     }
@@ -327,14 +270,13 @@ extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
     }
 }
 
-extension ProjectApplyCoordinator: RegisterAndSignInCoordinatorParent {
+extension ProjectQuickApplyCoordinator: RegisterAndSignInCoordinatorParent {
     public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
         capturePostcodeIfNecessary()
     }
     
     public func onRegisterAndSignInCancelled() {
-        newNavigationRouter.pop(animated: true)
+        navigationRouter.pop(animated: true)
     }
-    
-    
+
 }

@@ -46,19 +46,6 @@ public extension Skin {
         let skins = FactorySkins.skins
         Skin.writeSkinsToDocumentDirectory(skins: skins)
         return FactorySkins.skins
-        
-//        var skins = Skin.readSkinsFromPlist()
-//            if let skins = skins {
-//                Skin.writeSkinsToDocumentDirectory(skins: skins)
-//            }
-//        }
-//        if skins == nil {
-//            skins = FactorySkins.skins
-//            if let skins = skins {
-//                Skin.writeSkinsToDocumentDirectory(skins: skins)
-//            }
-//        }
-//        return skins ?? [:]
     }
     
     static func readSkinsFromPlist() -> Skins? {

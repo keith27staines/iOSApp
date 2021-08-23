@@ -4,7 +4,6 @@ import WorkfinderServices
 import WorkfinderUI
 
 protocol RecommendationTilePresenterProtocol {
-    var view: RecommendationTileViewProtocol? { get set }
     var companyName: String? { get }
     var companyImage: UIImage? { get }
     var hostName: String? { get }
@@ -17,7 +16,6 @@ protocol RecommendationTilePresenterProtocol {
 
 class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     
-    weak var view: RecommendationTileViewProtocol?
     let row: Int
     weak var parentPresenter: RecommendationsPresenter?
     let recommendation: RecommendationsListItem
@@ -55,6 +53,11 @@ class RecommendationTilePresenter: RecommendationTilePresenterProtocol {
     func onTileTapped() {
         parentPresenter?.onTileTapped(self)
     }
+    
+    func onApplyTapped() {
+        let projectInfo = ProjectInfoPresenter(item: recommendation)
+        parentPresenter?.onApplyButtonTapped(projectInfo)
+    }
 
     init(parent: RecommendationsPresenter,
          recommendation: RecommendationsListItem,
@@ -74,3 +77,30 @@ protocol ProjectPointer {
 }
 
 extension RecommendationTilePresenter: ProjectPointer {}
+
+extension RecommendationTilePresenter: OpportunityTilePresenterProtocol {
+    var isRemote: Bool? {
+        recommendation.project?.isRemote
+    }
+    
+    var isPaid: Bool? {
+        recommendation.project?.isPaid
+    }
+    
+    var skills: [String] {
+        recommendation.project?.skillsAcquired ?? []
+    }
+    
+    var shouldHideSkills: Bool {
+        false
+    }
+    
+    var locationValue: String {
+        (recommendation.project?.isRemote ?? false) ? "Remote" : "On-site"
+    }
+    
+    var compensationValue: String {
+        (recommendation.project?.isPaid ?? true) ? "Paid" : "Voluntary"
+    }
+    
+}

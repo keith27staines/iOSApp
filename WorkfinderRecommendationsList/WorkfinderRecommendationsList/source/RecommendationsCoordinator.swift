@@ -3,8 +3,12 @@ import WorkfinderCommon
 import WorkfinderServices
 import WorkfinderCoordinators
 import WorkfinderProjectApply
+import WorkfinderUI
 
 public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
+    
+    weak var rootViewController: (UIViewController & UserMessageHandlingProtocol)?
+    //weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
     public override func start() {
         let recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)
@@ -18,8 +22,9 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
             projectServiceFactory: projectServiceFactory,
             opportunitiesService: opportunitiesService,
             hostServiceFactory: hostServiceFactory)
-        let vc = RecommendationsViewController(presenter: presenter)
-        navigationRouter.push(viewController: vc, animated: true)
+        let rootViewController = RecommendationsViewController(presenter: presenter)
+        navigationRouter.push(viewController: rootViewController, animated: true)
+        self.rootViewController = rootViewController
     }
     
     func workplaceServiceFactory() -> ApplicationContextService {
@@ -33,8 +38,6 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     func hostServiceFactory() -> HostsProviderProtocol {
         HostsProvider(networkConfig: injected.networkConfig)
     }
-        
-    weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
     public func processProjectViewRequest(_ projectUuid: F4SUUID?, appSource: AppSource) {
         guard let projectUuid = projectUuid else { return }
@@ -47,7 +50,23 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
             switchToTab: switchToTab
         )
         addChildCoordinator(projectApplyCoordinator)
-        self.projectApplyCoordinator = projectApplyCoordinator
+        // self.projectApplyCoordinator = projectApplyCoordinator
+        projectApplyCoordinator.start()
+    }
+    
+    public func processQuickApplyRequest(_ projectInfo: ProjectInfoPresenter, appSource: AppSource) {
+        guard let rootViewController = rootViewController else { return }
+        let projectApplyCoordinator = ProjectQuickApplyCoordinator(
+            parent: self,
+            navigationRouter: navigationRouter,
+            presentingViewController: rootViewController,
+            inject: injected,
+            projectInfoPresenter: projectInfo,
+            appSource: appSource,
+            switchToTab: switchToTab
+        )
+        addChildCoordinator(projectApplyCoordinator)
+        // self.projectApplyCoordinator = projectApplyCoordinator
         projectApplyCoordinator.start()
     }
     
@@ -66,7 +85,7 @@ public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
 
 extension RecommendationsCoordinator: ProjectApplyCoordinatorDelegate {
     public func onProjectApplyDidFinish() {
-        self.projectApplyCoordinator = nil
+        // self.projectApplyCoordinator = nil
     }
 }
 

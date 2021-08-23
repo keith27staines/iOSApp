@@ -2,9 +2,9 @@
 import UIKit
 import WorkfinderUI
 
-class RecommendationsViewController: UIViewController {
+class RecommendationsViewController: UIViewController, UserMessageHandlingProtocol {
     
-    lazy var messageHandler = UserMessageHandler(presenter: self)
+    lazy var messageHandler: UserMessageHandler? = UserMessageHandler(presenter: self)
     let presenter: RecommendationsPresenter
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -15,16 +15,28 @@ class RecommendationsViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         label.textColor = UIColor.black
-        label.heightAnchor.constraint(equalToConstant: 72).isActive = true
-        label.textAlignment = .center
-        label.text = "These roles might be a great match for you!"
+        label.textAlignment = .left
+        label.text = "We recommend you apply to these roles!"
         label.translatesAutoresizingMaskIntoConstraints = false
-        let underline = UIView()
-        underline.backgroundColor = UIColor.init(white: 200/255, alpha: 1)
-        underline.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        label.addSubview(underline)
-        underline.anchor(top: nil, leading: label.leadingAnchor, bottom: label.bottomAnchor, trailing: label.trailingAnchor)
         return label
+    }()
+    
+    lazy var learnMoreLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Tap the cards to learn more"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
+        return label
+    }()
+    
+    lazy var headerStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            titleLabel,
+            learnMoreLabel
+        ])
+        stack.axis = .vertical
+        stack.spacing = 8
+        return stack
     }()
     
     lazy var tableview: UITableView = {
@@ -33,8 +45,9 @@ class RecommendationsViewController: UIViewController {
         view.delegate = self
         view.separatorStyle = .none
         view.backgroundColor = UIColor.white
-        view.register(RecommendationTileView.self, forCellReuseIdentifier: "recommendation")
         view.register(OpportunityTileView.self, forCellReuseIdentifier: "opportunity")
+        view.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
+        view.scrollIndicatorInsets = view.contentInset
         return view
     }()
     
@@ -43,8 +56,13 @@ class RecommendationsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    func reloadRow(_ indexPaths: [IndexPath]) {
-        tableview.reloadRows(at: indexPaths, with: .automatic)
+    func reloadRow(_ indexPath: IndexPath) {
+        let row = indexPath.row
+        let section = indexPath.section
+        guard row < presenter.numberOfRowsForSection(section) else { return }
+        tableview.beginUpdates()
+        tableview.reloadRows(at: [indexPath], with: .automatic)
+        tableview.endUpdates()
     }
     
     override func viewDidLoad() {
@@ -54,7 +72,6 @@ class RecommendationsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        guard isMovingToParent else { return }
         loadData()
     }
     
@@ -68,10 +85,10 @@ class RecommendationsViewController: UIViewController {
     func configureViews() {
         view.backgroundColor = UIColor.white
         let guide = view.safeAreaLayoutGuide
-        view.addSubview(titleLabel)
+        view.addSubview(headerStack)
         view.addSubview(tableview)
-        titleLabel.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
-        tableview.anchor(top: titleLabel.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20))
+        headerStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 24, left: 20, bottom: 0, right: 20))
+        tableview.anchor(top: headerStack.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 20, bottom: 20, right: 20))
     }
     
     func refresh() {
@@ -79,12 +96,11 @@ class RecommendationsViewController: UIViewController {
     }
     
     func loadData() {
-        refresh()
-        messageHandler.showLoadingOverlay(self.view)
+        messageHandler?.showLoadingOverlay(self.view)
         presenter.loadFirstPage(table: tableview) { [weak self] (optionalError) in
             guard let self = self else { return }
-            self.messageHandler.hideLoadingOverlay()
-            self.messageHandler.displayOptionalErrorIfNotNil(optionalError) {
+            self.messageHandler?.hideLoadingOverlay()
+            self.messageHandler?.displayOptionalErrorIfNotNil(optionalError) {
                 self.loadData()
             }
             self.refresh()
@@ -118,12 +134,11 @@ extension RecommendationsViewController: UITableViewDataSource {
     }
     
     private func recommendationCellForRow(row: Int, in table: UITableView) -> UITableViewCell {
-        guard let cell = table.dequeueReusableCell(withIdentifier: "recommendation") as? RecommendationTileView
+        guard let cell = table.dequeueReusableCell(withIdentifier: "opportunity") as? OpportunityTileView
             else { return UITableViewCell()
         }
         let tilePresenter = presenter.recommendationTilePresenterForIndexPath(row)
         cell.presenter = tilePresenter
-        if row >= presenter.pager.triggerRow { presenter.loadNextPage(tableView: tableview) }
         return cell
     }
     
@@ -133,7 +148,6 @@ extension RecommendationsViewController: UITableViewDataSource {
         }
         let tilePresenter = presenter.opportunityTilePresenterForIndexPath(row)
         cell.presenter = tilePresenter
-        if row >= presenter.pager.triggerRow { presenter.loadNextPage(tableView: tableview) }
         return cell
     }
 

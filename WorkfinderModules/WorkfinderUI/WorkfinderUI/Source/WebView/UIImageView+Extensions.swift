@@ -14,4 +14,12 @@ public extension UIImageView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
+    
+    static func companyLogoImageView(height: CGFloat) -> UIImageView {
+        let view = UIImageView()
+        view.heightAnchor.constraint(equalToConstant: height).isActive = true
+        view.contentMode = .scaleAspectFit
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
 }

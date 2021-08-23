@@ -69,7 +69,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
         }
     }
     var reuseIdentifierForCollapsedRow: String { "collapsed" }
-    weak var coordinator: ProjectApplyCoordinator?
+    weak var coordinator: ProjectApplyCoordinatorProtocol?
     weak var view: ProjectViewProtocol?
     let projectUuid: F4SUUID
     let service: ProjectServiceProtocol
@@ -94,7 +94,7 @@ class ProjectPresenter: ProjectPresenterProtocol {
     }
     var status: String? { project.status }
     
-    init(coordinator: ProjectApplyCoordinator,
+    init(coordinator: ProjectApplyCoordinatorProtocol,
          projectUuid: F4SUUID,
          projectService: ProjectServiceProtocol,
          source: AppSource,

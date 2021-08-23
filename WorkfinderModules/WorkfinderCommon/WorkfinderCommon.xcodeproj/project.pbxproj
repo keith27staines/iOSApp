@@ -17,6 +17,7 @@
 		531D46E1265F7C4A00B34453 /* NullEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */; };
 		5323F621268C84EA00DD5875 /* SocialMediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F620268C84E900DD5875 /* SocialMediaData.swift */; };
 		5323F623268DC90000DD5875 /* LinkedinDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323F622268DC90000DD5875 /* LinkedinDataTests.swift */; };
+		5329097026CF9D08003AE67E /* ProjectInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5329096F26CF9D08003AE67E /* ProjectInfoPresenter.swift */; };
 		534CF7A426A1CBA3007DF848 /* CalendarEventWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A326A1CBA3007DF848 /* CalendarEventWriter.swift */; };
 		53659CA62620C81700CFF49E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659CA52620C81700CFF49E /* Account.swift */; };
 		53724B6126273BAA00908D50 /* AccountPicklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53724B6026273BAA00908D50 /* AccountPicklist.swift */; };
@@ -154,6 +155,7 @@
 		531D46E0265F7C4A00B34453 /* NullEncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullEncodableTests.swift; sourceTree = "<group>"; };
 		5323F620268C84E900DD5875 /* SocialMediaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaData.swift; sourceTree = "<group>"; };
 		5323F622268DC90000DD5875 /* LinkedinDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinDataTests.swift; sourceTree = "<group>"; };
+		5329096F26CF9D08003AE67E /* ProjectInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoPresenter.swift; sourceTree = "<group>"; };
 		534CF7A326A1CBA3007DF848 /* CalendarEventWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventWriter.swift; sourceTree = "<group>"; };
 		53659CA52620C81700CFF49E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		53724B6026273BAA00908D50 /* AccountPicklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPicklist.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				5383D53625CABF790058D02C /* ServerListPager.swift */,
 				530C4DD325D6273F0032CFC8 /* SemanticVersion.swift */,
 				5386A461267CA28100E8ED33 /* PreferredNextScreen.swift */,
+				5329096F26CF9D08003AE67E /* ProjectInfoPresenter.swift */,
 			);
 			path = WorkfinderCommon;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				53B7C67126C65E9F005131DA /* RoleData.swift in Sources */,
 				FCE51936224948E400B550C9 /* F4SDaysAndHoursModel.swift in Sources */,
 				FCC85DC624517EA500BC600E /* PicklistItemJson.swift in Sources */,
+				5329097026CF9D08003AE67E /* ProjectInfoPresenter.swift in Sources */,
 				FCDB073C2286F8B00053347F /* Analytics and debugging.swift in Sources */,
 				FC8F9580233BA6710027BE02 /* MockDatabaseDownload.swift in Sources */,
 				5307B2F9259468150080F2EF /* TrackingEventType.swift in Sources */,

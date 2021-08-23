@@ -62,7 +62,6 @@
 		FCD1B62F24C00368005A65BB /* LetterEditorPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B62E24C00368005A65BB /* LetterEditorPresenterProtocol.swift */; };
 		FCD1B63124C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63024C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift */; };
 		FCD1B63324C00433005A65BB /* CoverletterCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63224C00433005A65BB /* CoverletterCoordinatorProtocol.swift */; };
-		FCD1B63524C00A0D005A65BB /* UserMessageHandlingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63424C00A0D005A65BB /* UserMessageHandlingProtocol.swift */; };
 		FCD1B63724C0113D005A65BB /* CoverLetterFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */; };
 		FCDF63D424C028170008EFB0 /* CoverLetterFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */; };
 		FCDF63D624C028790008EFB0 /* CoverLetterFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */; };
@@ -137,7 +136,6 @@
 		FCD1B62E24C00368005A65BB /* LetterEditorPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorPresenterProtocol.swift; sourceTree = "<group>"; };
 		FCD1B63024C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterParentCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		FCD1B63224C00433005A65BB /* CoverletterCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverletterCoordinatorProtocol.swift; sourceTree = "<group>"; };
-		FCD1B63424C00A0D005A65BB /* UserMessageHandlingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessageHandlingProtocol.swift; sourceTree = "<group>"; };
 		FCD1B63624C0113D005A65BB /* CoverLetterFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlow.swift; sourceTree = "<group>"; };
 		FCDF63D324C028170008EFB0 /* CoverLetterFlowFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlowFactory.swift; sourceTree = "<group>"; };
 		FCDF63D524C028790008EFB0 /* CoverLetterFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverLetterFlowType.swift; sourceTree = "<group>"; };
@@ -349,7 +347,6 @@
 				FCD1B62E24C00368005A65BB /* LetterEditorPresenterProtocol.swift */,
 				FCD1B63024C003CD005A65BB /* CoverLetterParentCoordinatorProtocol.swift */,
 				FCD1B63224C00433005A65BB /* CoverletterCoordinatorProtocol.swift */,
-				FCD1B63424C00A0D005A65BB /* UserMessageHandlingProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -486,7 +483,6 @@
 				FC9B339A24BEBD2700C075CE /* SearchlistViewController.swift in Sources */,
 				FC9B33A324BEBE4400C075CE /* F4SCalendarColors.swift in Sources */,
 				FCD1B63724C0113D005A65BB /* CoverLetterFlow.swift in Sources */,
-				FCD1B63524C00A0D005A65BB /* UserMessageHandlingProtocol.swift in Sources */,
 				FC9B336D24BEB62A00C075CE /* TextblockPicklist.swift in Sources */,
 				FC04D06F24BF17BC00FF44E6 /* EditorThenLetterFlow.swift in Sources */,
 				FC04D07324BF17FD00FF44E6 /* LetterEditorPresenter.swift in Sources */,

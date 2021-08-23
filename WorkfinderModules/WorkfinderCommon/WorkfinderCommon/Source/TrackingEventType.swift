@@ -546,12 +546,6 @@ extension TrackingEventType: Codable {
         case .offer_page_dismiss:
             let source = try container.decode(AppSource.self, forKey: .offer_page_dismiss)
             self = .offer_page_dismiss(source)
-        case .students_dashboard_deeplink_start:
-            let source = try container.decode(AppSource.self, forKey: .students_dashboard_deeplink_start)
-            self = .students_dashboard_deeplink_start
-        case .students_dashboard_deeplink_cancel:
-            let source = try container.decode(AppSource.self, forKey: .students_dashboard_deeplink_cancel)
-            self = .students_dashboard_deeplink_cancel
         }
     }
     
