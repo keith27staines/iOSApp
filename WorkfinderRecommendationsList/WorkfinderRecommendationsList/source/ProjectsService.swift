@@ -42,7 +42,12 @@ public class OpportuntiesService: WorkfinderService, OpportunitiesServiceProtoco
     public func fetchRecentOpportunities(completion: @escaping (Result<ServerListJson<ProjectJson>, Error>) -> Void) {
         do {
             let verbose = true
-            let query = [URLQueryItem(name: "promote_on_home_page", value: "false"), URLQueryItem(name: "status", value: "open")]
+            let query = [
+                URLQueryItem(name: "promote_on_home_page", value: "false"),
+                URLQueryItem(name: "status", value: "open"),
+                URLQueryItem(name: "already_applied", value: "false"),
+//                URLQueryItem(name: "exclude_applied", value: "true")
+            ]
             let request = try buildRequest(relativePath: "projects/", queryItems: query, verb: .get)
             performTask(with: request, verbose: verbose, completion: completion, attempting: #function)
         } catch {
