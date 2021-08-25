@@ -1,7 +1,15 @@
+//
+//  FeaturedOnWorkfinderPresenter.swift
+//  WorkfinderHome
+//
+//  Created by Keith on 25/08/2021.
+//  Copyright © 2021 Workfinder. All rights reserved.
+//
+
 import WorkfinderCommon
 import WorkfinderUI
 
-class TopRolesPresenter: CellPresenter {
+class FeaturedOnWorkfinderPresenter: CellPresenter {
     weak var messageHandler: HSUserMessageHandler?
     let rolesService: RolesServiceProtocol
     

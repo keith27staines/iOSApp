@@ -16,6 +16,7 @@ public struct RoleData: Codable {
     public var appSource: AppSource = .unspecified
     public var isPaid: Bool?
     public var salary: Double?
+    public var skillsAcquired = [String]()
     
     public var paidAmount: String {
         guard let isPaid = isPaid, isPaid == true else { return "Voluntary"}
@@ -34,6 +35,7 @@ public struct RoleData: Codable {
         case workingHours
         case locationHeader
         case location
+        case skillsAcquired
     }
     
     public func settingAppSource(_ source: AppSource) -> RoleData {
@@ -60,7 +62,7 @@ public extension RoleData {
         workingHours = project?.employmentType 
         actionButtonText = "Apply now"
         recommendationUuid = recommendation.uuid
-
+        skillsAcquired = recommendation.project?.skillsAcquired ?? []
     }
     
     init(project: ProjectJson) {
@@ -75,6 +77,7 @@ public extension RoleData {
         location = project.isRemote == false ?  "On site" : "Remote"
         workingHours = project.employmentType
         actionButtonText = "Apply now"
+        skillsAcquired = project.skillsAcquired ?? []
     }
 }
 
