@@ -45,6 +45,7 @@
 		538C1DDA257F8EE800E34F95 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538C1DD9257F8EE800E34F95 /* SearchResultsController.swift */; };
 		53AED55126D6305800B5B31C /* FeaturedOnWorkfinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55026D6305800B5B31C /* FeaturedOnWorkfinderPresenter.swift */; };
 		53AED55326D6306E00B5B31C /* FeaturedOnWorkfinderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55226D6306E00B5B31C /* FeaturedOnWorkfinderCell.swift */; };
+		53AED55526D6449500B5B31C /* RecentRolesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55426D6449500B5B31C /* RecentRolesDataSource.swift */; };
 		53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */; };
 		53C4472B25810012008CE52E /* RoleSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4472A25810012008CE52E /* RoleSearchResultCell.swift */; };
 		53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */; };
@@ -121,6 +122,7 @@
 		538C1DD9257F8EE800E34F95 /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
 		53AED55026D6305800B5B31C /* FeaturedOnWorkfinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedOnWorkfinderPresenter.swift; sourceTree = "<group>"; };
 		53AED55226D6306E00B5B31C /* FeaturedOnWorkfinderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedOnWorkfinderCell.swift; sourceTree = "<group>"; };
+		53AED55426D6449500B5B31C /* RecentRolesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRolesDataSource.swift; sourceTree = "<group>"; };
 		53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinderPresenter.swift; sourceTree = "<group>"; };
 		53C4472A25810012008CE52E /* RoleSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSearchResultCell.swift; sourceTree = "<group>"; };
 		53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooter.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			children = (
 				53AED55026D6305800B5B31C /* FeaturedOnWorkfinderPresenter.swift */,
 				53AED55226D6306E00B5B31C /* FeaturedOnWorkfinderCell.swift */,
+				53AED55426D6449500B5B31C /* RecentRolesDataSource.swift */,
 			);
 			path = "Featured on Workfinder section";
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				5355B0DA257CE08800B751C7 /* Filter.swift in Sources */,
 				538C1DDA257F8EE800E34F95 /* SearchResultsController.swift in Sources */,
 				5348EB5125835EC30048D7EB /* Datasource.swift in Sources */,
+				53AED55526D6449500B5B31C /* RecentRolesDataSource.swift in Sources */,
 				5355B0CC257CDF9300B751C7 /* FilterType.swift in Sources */,
 				5348EB6325837B5E0048D7EB /* TypeAheadItemsDatasource.swift in Sources */,
 				5337EBE62577BEF300762F2A /* KSSearchBar.swift in Sources */,
