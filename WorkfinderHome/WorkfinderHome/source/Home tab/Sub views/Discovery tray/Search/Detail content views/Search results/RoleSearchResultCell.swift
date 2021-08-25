@@ -71,7 +71,7 @@ class RoleSearchResultCell: UITableViewCell {
     
     lazy var payIconLabel: IconLabel = { IconLabel(iconImage: UIImage(named:"dt_hourly_rate")) }()
     lazy var hoursIconLabel: IconLabel = { IconLabel(iconImage: UIImage(named:"dt_placement_type")) }()
-    lazy var locationIconLabel:IconLabel = { IconLabel(iconImage: UIImage(named:"dt_location")) }()
+    lazy var locationIconLabel: IconLabel = { IconLabel(iconImage: UIImage(named:"dt_location")) }()
     
     lazy var payAndHoursStack: UIStackView = {
         let stack = UIStackView()
