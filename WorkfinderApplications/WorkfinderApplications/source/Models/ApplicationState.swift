@@ -108,7 +108,7 @@ enum ApplicationState: String, Codable {
         case .viewed, .saved:
             return NSLocalizedString("The host has viewed your application", comment: "")
         case .declined:
-            return NSLocalizedString("The host has rejected your application", comment: "")
+            return NSLocalizedString("Sorry, your application was not selected for progression by the host. Why not take this time to apply to other featured opportunities?", comment: "")
         case .offered:
             return NSLocalizedString("Congratulations! You have been offered a placement", comment: "")
         case .accepted:
