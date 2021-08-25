@@ -20,7 +20,7 @@ class FeaturedOnWorkfinderPresenter: CellPresenter {
             self.messageHandler?.hideLoadingOverlay()
             switch result {
             case .success(let roles):
-                let maxRoles = min(10, roles.count)
+                let maxRoles = min(6, roles.count)
                 self.roles = ([RoleData](roles[0..<maxRoles])).map({ (roleData) -> RoleData in
                     var adaptedData = roleData
                     adaptedData.actionButtonText = roleData.actionButtonText

@@ -173,7 +173,7 @@ class HomeViewController: UIViewController {
         homeView.refresh()
         trayController.messageHandler = messageHandler
         DispatchQueue.main.async { [weak self] in
-            self?.trayController.loadData(completion: <#T##(Error?) -> Void#>)
+            self?.trayController.loadData()
         }
     }
     

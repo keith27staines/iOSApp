@@ -68,7 +68,7 @@ class DiscoveryTrayController: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
     }
     
-    @objc func loadData(completion: (Error?) -> Void) {
+    @objc func loadData() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
