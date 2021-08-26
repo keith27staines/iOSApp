@@ -142,7 +142,6 @@ extension DiscoveryTrayController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = sectionManager.sectionForSectionIndex(indexPath.section)
-        let gutter = gutterMargin(fullWidth: tableView.frame.width - 40, cardWidth: 158)
         let cell: UITableViewCell?
         switch section {
         case .popularOnWorkfinder:
@@ -151,17 +150,6 @@ extension DiscoveryTrayController: UITableViewDataSource {
         case .featuredOnWorkfinder:
             cell = tableView.dequeueReusableCell(withIdentifier: FeaturedOnWorkfinderCell.identifier)
             cell?.backgroundColor = UIColor.white
-//        case .topRoles:
-//            cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier)
-//            cell?.backgroundColor = topRolesBackgroundColor
-//            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
-//        case .recentRoles:
-//            cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
-//            cell?.backgroundColor = UIColor.white
-//            (cell as? LandscapeRoleCell)?.row = indexPath.row
-//            if indexPath.row >= recentRolesPresenter.numberOfRows - recentRolesPresenter.pageSize / 2 {
-//                recentRolesPresenter.loadNextPage()
-//            }
         }
         let presentable = cell as? PresentableProtocol
         let presenter = cellPresenter(indexPath)
@@ -179,7 +167,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
         if presenter == nil {
             switch section {
             case .popularOnWorkfinder: presenter = popularOnWorkfinderPresenter
-            case .featuredOnWorkfinder: presenter = featuredOnWorkfinderPresenter
+            case .featuredOnWorkfinder: presenter = featuredOnWorkfinderPresenter.roles[indexPath.row]
             }
         }
         sectionPresenters[section] = presenter

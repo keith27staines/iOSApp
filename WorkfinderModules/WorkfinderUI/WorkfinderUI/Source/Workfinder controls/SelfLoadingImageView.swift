@@ -23,6 +23,18 @@ public class ImageLoader: UIImage {
     }
 }
 
+extension UIImage {
+    public static func makeImageFromFirstCharacter(_ string: String, size: CGSize) -> UIImage {
+        let backgroundColor = WorkfinderColors.primaryColor
+        let firstCharacter: Character = string.first ?? "?"
+        let image: UIImage = UIImage.from(
+            size: CGSize(width: size.width, height: size.height),
+            string: String(firstCharacter),
+            backgroundColor: backgroundColor)
+        return image
+    }
+}
+
 public class SelfloadingImageView: UIView {
     
     let widthPoints: CGFloat
@@ -61,13 +73,7 @@ public class SelfloadingImageView: UIView {
     }()
     
     func makeImageFromFirstCharacter(_ string: String) -> UIImage {
-        let backgroundColor = WorkfinderColors.primaryColor
-        let firstCharacter: Character = string.first ?? "?"
-        let image: UIImage = UIImage.from(
-            size: CGSize(width: widthPoints, height: widthPoints),
-            string: String(firstCharacter),
-            backgroundColor: backgroundColor)
-        return image
+        UIImage.makeImageFromFirstCharacter(string, size: CGSize(width: widthPoints, height: widthPoints))
     }
     
     public func load(

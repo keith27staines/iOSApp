@@ -67,7 +67,7 @@ public extension RoleData {
     
     init(project: ProjectJson) {
         id = project.uuid
-        projectTitle = project.name
+        projectTitle = project.type
         companyName = project.association?.location?.company?.name
         companyLogoUrlString = project.association?.location?.company?.logo
         paidHeader = "Paid?"

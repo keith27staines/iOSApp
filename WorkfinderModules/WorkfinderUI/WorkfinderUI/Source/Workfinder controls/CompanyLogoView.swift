@@ -3,6 +3,8 @@ import UIKit
 
 public class CompanyLogoView: SelfloadingImageView {
     
+    public var urlString: String? { logoView.fetchedUrlString }
+    
     public func load(companyName: String,
                      urlString: String?,
                      fetcher: ImageFetching = ImageFetcher(),
