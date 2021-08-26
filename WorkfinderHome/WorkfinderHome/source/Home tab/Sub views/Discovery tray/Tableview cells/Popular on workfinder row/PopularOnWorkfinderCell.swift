@@ -2,11 +2,11 @@
 import UIKit
 import WorkfinderUI
 
-class PopularOnWorkfinderCell: HorizontallyScrollingCell, Presentable {
+class PopularOnWorkfinderCell: HorizontallyScrollingCell, PresentableProtocol {
 
     static let identifier = "PopularOnWorkfinderCell"
     
-    func presentWith(_ presenter: CellPresenter?) {
+    func presentWith(_ presenter: CellPresenterProtocol?) {
         guard let presenter = presenter as? PopularOnWorkfinderPresenter else { return }
         clear()
         presenter.capsulesData.forEach { (data) in

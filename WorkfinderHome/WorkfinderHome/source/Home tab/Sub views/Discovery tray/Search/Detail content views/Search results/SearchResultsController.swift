@@ -97,7 +97,7 @@ class SearchResultsController {
     
 }
 
-class RolePresenter: CellPresenter {
+class RolePresenter: CellPresenterProtocol {
     let roleData: RoleData
     init(roleData: RoleData) {
         self.roleData = roleData

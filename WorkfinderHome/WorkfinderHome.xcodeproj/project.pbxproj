@@ -47,6 +47,8 @@
 		53AED55326D6306E00B5B31C /* FeaturedOnWorkfinderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55226D6306E00B5B31C /* FeaturedOnWorkfinderCell.swift */; };
 		53AED55526D6449500B5B31C /* RecentRolesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55426D6449500B5B31C /* RecentRolesDataSource.swift */; };
 		53AED55726D6457F00B5B31C /* IconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55626D6457F00B5B31C /* IconLabel.swift */; };
+		53AED55926D7895C00B5B31C /* CellPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55826D7895C00B5B31C /* CellPresenterProtocol.swift */; };
+		53AED55B26D789A200B5B31C /* PresentableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AED55A26D789A200B5B31C /* PresentableProtocol.swift */; };
 		53BCD7D5256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */; };
 		53C4472B25810012008CE52E /* RoleSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4472A25810012008CE52E /* RoleSearchResultCell.swift */; };
 		53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */; };
@@ -125,6 +127,8 @@
 		53AED55226D6306E00B5B31C /* FeaturedOnWorkfinderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedOnWorkfinderCell.swift; sourceTree = "<group>"; };
 		53AED55426D6449500B5B31C /* RecentRolesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRolesDataSource.swift; sourceTree = "<group>"; };
 		53AED55626D6457F00B5B31C /* IconLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLabel.swift; sourceTree = "<group>"; };
+		53AED55826D7895C00B5B31C /* CellPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPresenterProtocol.swift; sourceTree = "<group>"; };
+		53AED55A26D789A200B5B31C /* PresentableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableProtocol.swift; sourceTree = "<group>"; };
 		53BCD7D4256D226A00CC8FF4 /* PopularOnWorkfinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularOnWorkfinderPresenter.swift; sourceTree = "<group>"; };
 		53C4472A25810012008CE52E /* RoleSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSearchResultCell.swift; sourceTree = "<group>"; };
 		53C5CB45256D1DF000176A2E /* SectionHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooter.swift; sourceTree = "<group>"; };
@@ -431,6 +435,8 @@
 		53D94BC8256A433400A2127C /* Discovery tray */ = {
 			isa = PBXGroup;
 			children = (
+				53AED55A26D789A200B5B31C /* PresentableProtocol.swift */,
+				53AED55826D7895C00B5B31C /* CellPresenterProtocol.swift */,
 				53C9CB10256BC4B400F567B2 /* DiscoveryViewController.swift */,
 				5337EB962574F7A600762F2A /* DiscoveryTraySections.swift */,
 				53D94BAC256A39A200A2127C /* DiscoveryTrayView.swift */,
@@ -586,6 +592,7 @@
 				53C9CB11256BC4B400F567B2 /* DiscoveryViewController.swift in Sources */,
 				532DD109256FA8B900CFD525 /* PortraitRoleCard.swift in Sources */,
 				533D544F25794F3C006B6F0C /* FiltersSectionHeaderCell.swift in Sources */,
+				53AED55926D7895C00B5B31C /* CellPresenterProtocol.swift in Sources */,
 				53C5CB46256D1DF000176A2E /* SectionHeaderFooter.swift in Sources */,
 				53D94BD0256A501600A2127C /* BackgroundView.swift in Sources */,
 				53D94BB9256A3A0900A2127C /* HomeCoordinator.swift in Sources */,
@@ -602,6 +609,7 @@
 				53D94BCC256A438F00A2127C /* HeaderView.swift in Sources */,
 				53E4BA1B258355AC00252348 /* TypeAheadItem.swift in Sources */,
 				536976B2256FF03800196E12 /* PortraitLastCard.swift in Sources */,
+				53AED55B26D789A200B5B31C /* PresentableProtocol.swift in Sources */,
 				53692521256E9BCA00E21083 /* UIImage+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

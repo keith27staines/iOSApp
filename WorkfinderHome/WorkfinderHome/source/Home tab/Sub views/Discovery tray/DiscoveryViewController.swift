@@ -13,7 +13,7 @@ class DiscoveryTrayController: NSObject {
     
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBarStack: searchBarStack, searchDetail: searchDetail)
     var tableView: UITableView { tray.tableView }
-    var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenter]()
+    var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenterProtocol]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
     let sectionManager = DiscoverTraySectionManager()
     weak var messageHandler: HSUserMessageHandler?
@@ -69,11 +69,15 @@ class DiscoveryTrayController: NSObject {
     }
     
     @objc func loadData() {
+        messageHandler?.showLoadingOverlay(style: .transparent)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
-        featuredOnWorkfinderPresenter.load { optionalError in
-            guard let sectionIndex = self.sectionManager.sectionIndexForSection(.featuredOnWorkfinder) else { return }
+        featuredOnWorkfinderPresenter.load { [weak self] optionalError in
+            guard let self = self else { return }
+            self.messageHandler?.hideLoadingOverlay()
+            self.messageHandler?.displayOptionalErrorIfNotNil(optionalError, retryHandler: self.loadData)
+            self.tableView.reloadData()
         }
     }
     
@@ -159,7 +163,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
 //                recentRolesPresenter.loadNextPage()
 //            }
         }
-        let presentable = cell as? Presentable
+        let presentable = cell as? PresentableProtocol
         let presenter = cellPresenter(indexPath)
         presentable?.presentWith(presenter)
         return cell ?? UITableViewCell()
@@ -169,7 +173,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
         return (fullWidth - 2 * cardWidth) / 2
     }
     
-    func cellPresenter(_ indexPath: IndexPath) -> CellPresenter? {
+    func cellPresenter(_ indexPath: IndexPath) -> CellPresenterProtocol? {
         let section = sectionManager.sectionForSectionIndex(indexPath.section)
         var presenter = sectionPresenters[section]
         if presenter == nil {
@@ -214,10 +218,5 @@ extension DiscoveryTrayController: UITableViewDelegate {
 
 }
 
-protocol CellPresenter {}
-
-protocol Presentable {
-    func presentWith(_ presenter: CellPresenter?)
-}
 
 

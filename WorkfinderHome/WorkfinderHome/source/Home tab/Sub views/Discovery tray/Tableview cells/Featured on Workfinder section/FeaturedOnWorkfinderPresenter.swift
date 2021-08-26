@@ -9,15 +9,13 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-class FeaturedOnWorkfinderPresenter: CellPresenter {
+class FeaturedOnWorkfinderPresenter: CellPresenterProtocol {
     weak var messageHandler: HSUserMessageHandler?
     let rolesService: RolesServiceProtocol
     
     func load(completion: @escaping (Error?) -> Void) {
-        messageHandler?.showLoadingOverlay(style: .transparent)
         rolesService.fetchTopRoles { [weak self] (result) in
             guard let self = self else { return }
-            self.messageHandler?.hideLoadingOverlay()
             switch result {
             case .success(let roles):
                 let maxRoles = min(6, roles.count)

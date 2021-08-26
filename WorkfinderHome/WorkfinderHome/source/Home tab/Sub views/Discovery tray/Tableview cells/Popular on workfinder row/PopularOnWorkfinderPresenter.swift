@@ -2,7 +2,7 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-class PopularOnWorkfinderPresenter: CellPresenter {
+class PopularOnWorkfinderPresenter: CellPresenterProtocol {
     weak var userMessageHandler: HSUserMessageHandler?
     var capsulesData: [CapsuleData] = [
         CapsuleData(id: UUID().uuidString, title: "Marketing"),

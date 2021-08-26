@@ -9,11 +9,11 @@
 import UIKit
 import WorkfinderUI
 
-class FeaturedOnWorkfinderCell: UITableViewCell, Presentable {
+class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
     static let identifier = "FeaturedOnWorkfinderCell"
     
     var row: Int = 0
-    func presentWith(_ presenter: CellPresenter?) {
+    func presentWith(_ presenter: CellPresenterProtocol?) {
 
     }
 }
