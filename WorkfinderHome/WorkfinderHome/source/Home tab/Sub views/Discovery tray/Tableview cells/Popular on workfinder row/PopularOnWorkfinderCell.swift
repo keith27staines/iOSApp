@@ -7,9 +7,9 @@ class PopularOnWorkfinderCell: HorizontallyScrollingCell, PresentableProtocol {
     static let identifier = "PopularOnWorkfinderCell"
     
     func presentWith(_ presenter: CellPresenterProtocol?) {
-        guard let presenter = presenter as? PopularOnWorkfinderPresenter else { return }
+        guard let capsulesData = presenter as? [CapsuleData] else { return }
         clear()
-        presenter.capsulesData.forEach { (data) in
+        capsulesData.forEach { (data) in
             addCapsule(data: data)
         }
     }

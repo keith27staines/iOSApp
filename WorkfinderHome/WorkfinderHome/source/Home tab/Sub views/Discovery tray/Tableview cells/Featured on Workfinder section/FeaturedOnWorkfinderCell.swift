@@ -20,9 +20,9 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
     let imageService = SmallImageService()
     
     func presentWith(_ presenter: CellPresenterProtocol?) {
-        guard var roleData = presenter as? RoleData else { return }
-        roleData.skillsAcquired = ["short", "medium-ish", "very very very very long"]
         self.presenter = presenter
+        self.roleData = presenter as? RoleData ?? RoleData()
+        print(roleData)
         companyName.text = roleData.companyName
         projectTitle.text = roleData.projectTitle
         imageUrlString = roleData.companyLogoUrlString
@@ -31,7 +31,7 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
             guard let self = self, self.imageUrlString == self.imageService.urlString else { return }
             self.companyLogo.image = image
         }
-        skillsStack.isHidden = true // = roleData.skillsAcquired.count == 0
+        skillsStack.isHidden = roleData.skillsAcquired.count == 0
     }
 
     lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 87)

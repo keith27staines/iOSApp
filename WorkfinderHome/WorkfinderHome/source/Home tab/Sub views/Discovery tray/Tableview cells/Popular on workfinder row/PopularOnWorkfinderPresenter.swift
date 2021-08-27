@@ -2,7 +2,11 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-class PopularOnWorkfinderPresenter: CellPresenterProtocol {
+protocol SectionPresenterProtocol {
+    func cellPresenterForRow(_ row: Int) -> CellPresenterProtocol
+}
+
+class PopularOnWorkfinderPresenter: SectionPresenterProtocol {
     weak var userMessageHandler: HSUserMessageHandler?
     var capsulesData: [CapsuleData] = [
         CapsuleData(id: UUID().uuidString, title: "Marketing"),
@@ -14,10 +18,16 @@ class PopularOnWorkfinderPresenter: CellPresenterProtocol {
         CapsuleData(id: UUID().uuidString, title: "Product")
     ]
     
+    func cellPresenterForRow(_ row: Int) -> CellPresenterProtocol {
+        capsulesData
+    }
+    
     init(messageHandler: HSUserMessageHandler?) {
         self.userMessageHandler = messageHandler
     }
 }
+
+extension Array: CellPresenterProtocol where Element == CapsuleData {}
 
 struct CapsuleData {
     var id: F4SUUID

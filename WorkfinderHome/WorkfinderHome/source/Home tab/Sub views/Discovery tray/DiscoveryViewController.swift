@@ -13,7 +13,7 @@ class DiscoveryTrayController: NSObject {
     
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBarStack: searchBarStack, searchDetail: searchDetail)
     var tableView: UITableView { tray.tableView }
-    var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenterProtocol]()
+    var sectionPresenters = [DiscoverTraySectionManager.Section: SectionPresenterProtocol]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
     let sectionManager = DiscoverTraySectionManager()
     weak var messageHandler: HSUserMessageHandler?
@@ -163,15 +163,17 @@ extension DiscoveryTrayController: UITableViewDataSource {
     
     func cellPresenter(_ indexPath: IndexPath) -> CellPresenterProtocol? {
         let section = sectionManager.sectionForSectionIndex(indexPath.section)
-        var presenter = sectionPresenters[section]
-        if presenter == nil {
+        var sectionPresenter = sectionPresenters[section]
+        if sectionPresenter == nil {
             switch section {
-            case .popularOnWorkfinder: presenter = popularOnWorkfinderPresenter
-            case .featuredOnWorkfinder: presenter = featuredOnWorkfinderPresenter.roles[indexPath.row]
+            case .popularOnWorkfinder: sectionPresenter = popularOnWorkfinderPresenter
+            case .featuredOnWorkfinder:
+                sectionPresenter = featuredOnWorkfinderPresenter
             }
+            sectionPresenters[section] = sectionPresenter
+            sectionPresenter = sectionPresenters[section]
         }
-        sectionPresenters[section] = presenter
-        return presenter
+        return sectionPresenter?.cellPresenterForRow(indexPath.row)
     }
 
 }

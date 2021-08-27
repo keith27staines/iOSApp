@@ -9,10 +9,12 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-class FeaturedOnWorkfinderPresenter {
+class FeaturedOnWorkfinderPresenter: SectionPresenterProtocol {
     weak var messageHandler: HSUserMessageHandler?
     let rolesService: RolesServiceProtocol
     var roles: [RoleData] = []
+    
+    func cellPresenterForRow(_ row: Int) -> CellPresenterProtocol { roles[row] }
     
     func load(completion: @escaping (Error?) -> Void) {
         rolesService.fetchTopRoles { [weak self] (result) in
