@@ -8,7 +8,7 @@ class SectionHeaderView: UITableViewHeaderFooterView {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         contentView.addSubview(label)
-        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
         label.numberOfLines = 0
         label.textColor = UIColor.darkText
         return label
@@ -37,7 +37,7 @@ class SectionFooterView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         //contentView.backgroundColor = UIColor.white
         contentView.addSubview(separator)
-        separator.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        separator.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
         isLineHidden = false
     }
     

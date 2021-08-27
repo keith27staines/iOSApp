@@ -194,16 +194,17 @@ extension DiscoveryTrayController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let section = sectionManager.sectionForSectionIndex(section)
-        var view: UIView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
-        switch section {
-        case .popularOnWorkfinder:
-            (view as? SectionFooterView)?.isLineHidden = true
-        case .featuredOnWorkfinder:
-            view = UIView()
-            view?.backgroundColor = UIColor.white
-        }
-        return view
+        return nil
+//        let section = sectionManager.sectionForSectionIndex(section)
+//        var view: UIView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
+//        switch section {
+//        case .popularOnWorkfinder:
+//            (view as? SectionFooterView)?.isLineHidden = true
+//        case .featuredOnWorkfinder:
+//            view = UIView()
+//            view?.backgroundColor = UIColor.white
+//        }
+//        return view
     }
 
 }

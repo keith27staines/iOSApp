@@ -31,7 +31,9 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
             guard let self = self, self.imageUrlString == self.imageService.urlString else { return }
             self.companyLogo.image = image
         }
-        skillsStack.isHidden = roleData.skillsAcquired.count == 0
+        let skills = [String](roleData.skillsAcquired.prefix(3))
+        skillsStack.isHidden = skills.count == 0
+        skillsContainer.reloadSkills(skills)
     }
 
     lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 87)
@@ -71,17 +73,6 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
         return label
     }()
     
-    lazy var skillsTitle: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 11)
-        label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
-        label.text = "You will gain skills in"
-        label.lineBreakMode = .byTruncatingTail
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.numberOfLines = 0
-        return label
-    }()
-    
     lazy var titleStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             UIView.verticalSpaceView(height: 4),
@@ -94,6 +85,33 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
         return stack
     }()
     
+    lazy var skillsTitle: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
+        label.text = "You will gain skills in"
+        label.lineBreakMode = .byTruncatingTail
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var skillsContainer: SkillsCollectionContainer = {
+        let skillsContainer = SkillsCollectionContainer(frame: .zero)
+        skillsContainer.setContentCompressionResistancePriority(.required, for: .vertical)
+        return skillsContainer
+    }()
+    
+    lazy var skillsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.addArrangedSubview(skillsTitle)
+        stack.addArrangedSubview(skillsContainer)
+        stack.spacing = 8
+        stack.axis = .vertical
+        stack.distribution = .fill
+        return stack
+    }()
+    
     lazy var rightStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             titleStack,
@@ -102,15 +120,6 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
         ])
         stack.axis = .vertical
         stack.spacing = 8
-        return stack
-    }()
-    
-    lazy var skillsStack: UIStackView = {
-        let stack = UIStackView()
-        stack.addArrangedSubview(skillsTitle)
-        stack.spacing = 8
-        stack.axis = .vertical
-        stack.distribution = .fill
         return stack
     }()
     
@@ -153,4 +162,33 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+
+class SkillsCollectionContainer: UIView {
+    
+    var skills = [String]()
+    
+    lazy var skillsCapsules: CapsuleCollectionView = {
+        let view = CapsuleCollectionView(capsuleRadius: 12, minimumHorizontalSpacing: 8, minimumVerticalSpacing: 8)
+        addSubview(view)
+        return view
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        skillsCapsules.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+    }
+    
+    func reloadSkills(_ skills: [String]) {
+        self.skills = skills
+        setNeedsLayout()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        skillsCapsules.reload(strings: skills, width: frame.width)
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

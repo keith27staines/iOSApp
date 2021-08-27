@@ -15,7 +15,10 @@ protocol RolesServiceProtocol {
 
 class RolesService: WorkfinderService, RolesServiceProtocol {
 
-    let rolesEndpoint = "projects/"
+    var rolesEndpoint: String  {
+        UserRepository().isCandidateLoggedIn ? "projects/candidate_projects" : "projects/"
+        //"projects/"
+    }
     
     fileprivate lazy var topRolesWorkerService: FetchRolesWorkerService = {
         FetchRolesWorkerService(networkConfig: networkConfig)
