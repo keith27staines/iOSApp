@@ -37,7 +37,13 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
             guard let self = self, self.imageUrlString == self.imageService.urlString else { return }
             self.companyLogo.image = image
         }
-        let skills = [String](roleData.skillsAcquired.prefix(3))
+        
+        var skills = roleData.skillsAcquired
+        if skills.count > 3 {
+            skills = [String](roleData.skillsAcquired.prefix(3))
+            skills.append("... and more")
+        }
+        
         skillsStack.isHidden = skills.count == 0
         let widthForSkills = width - imageWidth - 2 * margin - gutterSpace
         skillsCapsules.reload(strings: skills, width: widthForSkills)
