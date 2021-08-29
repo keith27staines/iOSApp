@@ -13,30 +13,37 @@ import WorkfinderServices
 
 class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
     static let identifier = "FeaturedOnWorkfinderCell"
+    
+    let standardSpace: CGFloat = 8
+    let imageWidth: CGFloat = 87
+    let margin: CGFloat = 16
+    let gutterSpace: CGFloat = 20
+    
     var presenter: CellPresenterProtocol?
     var row: Int = 0
     var roleData: RoleData = RoleData()
     var imageUrlString: String?
     let imageService = SmallImageService()
     
-    func presentWith(_ presenter: CellPresenterProtocol?) {
+    func presentWith(_ presenter: CellPresenterProtocol?, width: CGFloat) {
         self.presenter = presenter
         self.roleData = presenter as? RoleData ?? RoleData()
         print(roleData)
         companyName.text = roleData.companyName
         projectTitle.text = roleData.projectTitle
         imageUrlString = roleData.companyLogoUrlString
-        let defaultImage = UIImage.makeImageFromFirstCharacter(roleData.companyName ?? "?", size: CGSize(width: 70, height: 70))
+        let defaultImage = UIImage.makeImageFromFirstCharacter(roleData.companyName ?? "?", size: CGSize(width: imageWidth, height: imageWidth))
         imageService.fetchImage(urlString: roleData.companyLogoUrlString, defaultImage: defaultImage) { [weak self] image in
             guard let self = self, self.imageUrlString == self.imageService.urlString else { return }
             self.companyLogo.image = image
         }
         let skills = [String](roleData.skillsAcquired.prefix(3))
         skillsStack.isHidden = skills.count == 0
-        skillsContainer.reloadSkills(skills)
+        let widthForSkills = width - imageWidth - 2 * margin - gutterSpace
+        skillsCapsules.reload(strings: skills, width: widthForSkills)
     }
 
-    lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: 87)
+    lazy var companyLogo: UIImageView = UIImageView.companyLogoImageView(width: imageWidth)
     
     lazy var companyLogoStack: UIStackView = {
         let spacer1 = UIView()
@@ -75,7 +82,7 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
     
     lazy var titleStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            UIView.verticalSpaceView(height: 4),
+            UIView.verticalSpaceView(height: standardSpace/2),
             projectTitle,
             companyName
         ])
@@ -96,17 +103,26 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
         return label
     }()
     
-    lazy var skillsContainer: SkillsCollectionContainer = {
-        let skillsContainer = SkillsCollectionContainer(frame: .zero)
-        skillsContainer.setContentCompressionResistancePriority(.required, for: .vertical)
-        return skillsContainer
+    lazy var skillsCapsules: CapsuleCollectionView = {
+        let view = CapsuleCollectionView(capsuleRadius: 12, minimumHorizontalSpacing: 8, minimumVerticalSpacing: 8)
+        addSubview(view)
+        return view
+    }()
+    
+    lazy var skillsCapsulesStack: UIStackView = {
+        let stack = UIStackView()
+        stack.addArrangedSubview(skillsCapsules)
+        stack.addArrangedSubview(UIView())
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        return stack
     }()
     
     lazy var skillsStack: UIStackView = {
         let stack = UIStackView()
         stack.addArrangedSubview(skillsTitle)
-        stack.addArrangedSubview(skillsContainer)
-        stack.spacing = 8
+        stack.addArrangedSubview(skillsCapsulesStack)
+        stack.spacing = standardSpace
         stack.axis = .vertical
         stack.distribution = .fill
         return stack
@@ -119,7 +135,7 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
             UIView()
         ])
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = standardSpace
         return stack
     }()
     
@@ -127,21 +143,21 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
         let stack = UIStackView()
         stack.addArrangedSubview(companyLogoStack)
         stack.addArrangedSubview(rightStack)
-        stack.spacing = 20
+        stack.spacing = gutterSpace
         stack.axis = .horizontal
-        stack.alignment = .fill
+        stack.alignment = .center
         return stack
     }()
     
     lazy var cardView: UIView = {
         let view = UIView()
         view.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = margin
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(red: 0.762, green: 0.792, blue: 0.77, alpha: 1).cgColor
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cellTapped)))
         view.addSubview(mainStack)
-        mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
+        mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin))
         return view
     }()
     
@@ -152,7 +168,7 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
     
     func configureViews() {
         contentView.addSubview(cardView)
-        cardView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+        cardView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: margin, bottom: standardSpace, right: margin))
     }
     
     @objc func cellTapped() {
@@ -162,33 +178,4 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-
-class SkillsCollectionContainer: UIView {
-    
-    var skills = [String]()
-    
-    lazy var skillsCapsules: CapsuleCollectionView = {
-        let view = CapsuleCollectionView(capsuleRadius: 12, minimumHorizontalSpacing: 8, minimumVerticalSpacing: 8)
-        addSubview(view)
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        skillsCapsules.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
-    }
-    
-    func reloadSkills(_ skills: [String]) {
-        self.skills = skills
-        setNeedsLayout()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        skillsCapsules.reload(strings: skills, width: frame.width)
-    }
-    
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

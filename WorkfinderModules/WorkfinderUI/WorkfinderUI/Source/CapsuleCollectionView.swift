@@ -9,7 +9,7 @@ public class CapsuleCollectionView: UIView {
     private var capsules: [CapsuleView] = []
     private var arrangedCapsules: [CapsuleView] = []
     private var addedConstraints = [NSLayoutConstraint]()
-    private var frameWidth: CGFloat = 300
+    private var frameWidth: CGFloat = 600
     private var currentLineLength: CGFloat = 0
     private var widthConstraint: NSLayoutConstraint?
     

@@ -153,7 +153,7 @@ extension DiscoveryTrayController: UITableViewDataSource {
         }
         let presentable = cell as? PresentableProtocol
         let presenter = cellPresenter(indexPath)
-        presentable?.presentWith(presenter)
+        presentable?.presentWith(presenter, width: tableView.frame.width)
         return cell ?? UITableViewCell()
     }
     
