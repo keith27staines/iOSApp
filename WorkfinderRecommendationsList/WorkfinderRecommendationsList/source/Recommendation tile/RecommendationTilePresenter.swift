@@ -96,7 +96,12 @@ extension RecommendationTilePresenter: OpportunityTilePresenterProtocol {
     }
     
     var locationValue: String {
-        (recommendation.project?.isRemote ?? false) ? "Remote" : "On-site"
+        switch recommendation.project?.isRemote ?? false {
+        case true: return "Remote"
+        case false:
+            let town = recommendation.project?.association?.location?.addressCity ?? ""
+            return town.isEmpty ? "On-site" : town
+        }
     }
     
     var compensationValue: String {

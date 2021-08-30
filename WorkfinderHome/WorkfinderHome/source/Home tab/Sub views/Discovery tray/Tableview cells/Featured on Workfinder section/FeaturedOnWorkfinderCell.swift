@@ -102,7 +102,7 @@ class FeaturedOnWorkfinderCell: UITableViewCell, PresentableProtocol {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 11)
         label.textColor = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
-        label.text = "You will gain skills in"
+        label.text = "You will gain skills in:"
         label.lineBreakMode = .byTruncatingTail
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.numberOfLines = 0

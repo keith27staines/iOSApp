@@ -89,9 +89,7 @@ class RecommendationsPresenter {
             guard let self = self else { return }
             switch result {
             case .success(let serverList):
-                let projects = [ProjectJson](serverList.results.filter({
-                    $0.hasApplied ?? false == false
-                }).prefix(self.numberLeftToFill))
+                let projects = [ProjectJson](serverList.results.prefix(self.numberLeftToFill))
                 self.opportunities.append(contentsOf: projects)
                 completion(nil)
             case .failure(let error):

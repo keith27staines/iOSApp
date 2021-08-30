@@ -16,8 +16,7 @@ protocol RolesServiceProtocol {
 class RolesService: WorkfinderService, RolesServiceProtocol {
 
     var rolesEndpoint: String  {
-        UserRepository().isCandidateLoggedIn ? "projects/candidate_projects" : "projects/"
-        //"projects/"
+        UserRepository().isCandidateLoggedIn ? "projects/candidate_projects/" : "projects/"
     }
     
     fileprivate lazy var topRolesWorkerService: FetchRolesWorkerService = {
@@ -61,7 +60,7 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     }
 
     public func fetchTopRoles(completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "promote_on_home_page", value: "True"), URLQueryItem(name: "status", value: "open")]
+        let queryItems = [URLQueryItem(name: "promote_on_home_page", value: "true"), URLQueryItem(name: "status", value: "open")]
         topRolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: queryItems) { (result) in
            completion(result)
         }
