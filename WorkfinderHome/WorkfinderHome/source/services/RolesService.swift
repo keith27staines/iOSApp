@@ -3,6 +3,7 @@ import WorkfinderServices
 import WorkfinderCommon
 
 protocol RolesServiceProtocol {
+    func fetchFeturedRolesAndRecentRoles(urlString: String?, completion: @escaping (Result<[RoleData], Error>) -> Void)
     func fetchTopRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
     func fetchRecommendedRoles(completion: @escaping (Result<[RoleData],Error>) -> Void)
     func fetchRolesWithQueryItems(
@@ -35,8 +36,32 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
         RecommendationsService(networkConfig: networkConfig)
     }()
     
+    func fetchFeturedRolesAndRecentRoles(urlString: String?, completion: @escaping (Result<[RoleData], Error>) -> Void) {
+        fetchTopRoles { [weak self] result in
+            switch result {
+            case .success(let featuredRolesList):
+                guard let self = self else { return }
+                self.fetchRecentRoles(urlString: urlString) { result in
+                    switch result {
+                    case .success(let recentRolesServerList):
+                        let combined = featuredRolesList + recentRolesServerList.results
+                        completion(.success(combined))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func fetchRecentRoles(urlString: String?, completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "status", value: "open"), URLQueryItem(name: "limit", value: "40")]
+        let queryItems = [
+            URLQueryItem(name: "promote_on_home_page", value: "false"),
+            URLQueryItem(name: "status", value: "open"),
+            URLQueryItem(name: "ordering", value: "-created_at")
+        ]
         let urlString = urlString?.replacingOccurrences(of: "http:", with: "https:") ?? rolesEndpoint
         recentRolesWorkerService.fetchRoles(endpoint: urlString, queryItems: queryItems) { (result) in
             completion(result)
@@ -60,7 +85,11 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
     }
 
     public func fetchTopRoles(completion: @escaping (Result<[RoleData], Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "promote_on_home_page", value: "true"), URLQueryItem(name: "status", value: "open")]
+        let queryItems = [
+            URLQueryItem(name: "promote_on_home_page", value: "true"),
+            URLQueryItem(name: "status", value: "open"),
+            URLQueryItem(name: "ordering", value: "-created_at")
+        ]
         topRolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: queryItems) { (result) in
            completion(result)
         }

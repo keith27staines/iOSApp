@@ -39,9 +39,11 @@ public class CapsuleView: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        label.font = UIFont.systemFont(ofSize: 17/23 * radius)
+        label.font = UIFont.systemFont(ofSize: fontSize)
         layer.cornerRadius = radius
     }
+    
+    var fontSize: CGFloat { max(12, 17/23 * radius) }
     
     public override var intrinsicContentSize: CGSize {
         CGSize(width: label.intrinsicContentSize.width + 2 * radius, height: 2 * radius)

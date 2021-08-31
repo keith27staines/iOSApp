@@ -1,6 +1,6 @@
 
 
-public struct RoleData: Codable {
+public struct RoleData: Codable, Hashable {
     public var id: String?
     public var recommendationUuid: String?
     public var roleLogoUrlString: String?

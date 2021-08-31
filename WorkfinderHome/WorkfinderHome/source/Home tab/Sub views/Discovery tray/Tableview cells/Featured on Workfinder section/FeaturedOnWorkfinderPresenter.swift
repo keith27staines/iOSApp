@@ -17,7 +17,7 @@ class FeaturedOnWorkfinderPresenter: SectionPresenterProtocol {
     func cellPresenterForRow(_ row: Int) -> CellPresenterProtocol { roles[row] }
     
     func load(completion: @escaping (Error?) -> Void) {
-        rolesService.fetchTopRoles { [weak self] (result) in
+        rolesService.fetchFeturedRolesAndRecentRoles(urlString: nil) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let roles):
