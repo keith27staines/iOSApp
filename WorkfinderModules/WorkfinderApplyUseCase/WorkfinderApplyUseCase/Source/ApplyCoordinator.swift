@@ -141,7 +141,7 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
             onCandidateIsSignedIn(preferredNextScreen: .noOpinion)
             return
         }
-        let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: true)
+        let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: true, suppressDestinationAlertOnCompletion: true)
         addChildCoordinator(coordinator)
         coordinator.start()
     }

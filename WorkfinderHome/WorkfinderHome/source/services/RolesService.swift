@@ -72,7 +72,11 @@ class RolesService: WorkfinderService, RolesServiceProtocol {
         _ queryItems: [URLQueryItem],
         completion: @escaping (Result<ServerListJson<RoleData>, Error>) -> Void
     ) {
-        let queryItems = [URLQueryItem(name: "status", value: "open")] + queryItems
+        let queryItems = [
+            URLQueryItem(name: "promote_on_home_page", value: "true"),
+            URLQueryItem(name: "status", value: "open"),
+            URLQueryItem(name: "ordering", value: "-created_at")
+        ] + queryItems
         rolesWorkerService.fetchRoles(endpoint: rolesEndpoint, queryItems: queryItems) { (result) in
            completion(result)
         }

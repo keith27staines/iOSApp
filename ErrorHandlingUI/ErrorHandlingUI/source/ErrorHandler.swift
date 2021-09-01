@@ -52,7 +52,8 @@ public class ErrorHandler: ErrorHandlerProtocol, Coordinating {
             parent: self,
             navigationRouter: navigationRouter,
             inject: coreInjection,
-            firstScreenHidesBackButton: false)
+            firstScreenHidesBackButton: false,
+            suppressDestinationAlertOnCompletion: true)
         addChildCoordinator(register)
         if UserRepository().isCandidateLoggedIn {
             register.startLoginFirst()

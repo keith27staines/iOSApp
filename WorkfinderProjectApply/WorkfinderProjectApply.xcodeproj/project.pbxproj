@@ -12,6 +12,9 @@
 		537637912590857600F563B5 /* WorkfinderRegisterCandidate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537637902590857600F563B5 /* WorkfinderRegisterCandidate.framework */; };
 		5397E0F1253B8E0F0009EFAC /* CapsuleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */; };
 		53E63EB1254BE38300E9601C /* ZeroHeightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E63EB0254BE38300E9601C /* ZeroHeightTableViewCell.swift */; };
+		53E7865926DF5271005915DB /* ProjectApplyBaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E7865826DF5271005915DB /* ProjectApplyBaseCoordinator.swift */; };
+		53E7865B26DF5426005915DB /* ProjectApplyCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E7865A26DF5426005915DB /* ProjectApplyCoordinatorProtocol.swift */; };
+		53E7865D26DF5508005915DB /* ProjectApplyCoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E7865C26DF5508005915DB /* ProjectApplyCoordinatorDelegate.swift */; };
 		FC0A7CE824BC8E5300E02199 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */; };
 		FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */; };
 		FC0A7CEC24BC8EFC00E02199 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */; };
@@ -64,6 +67,9 @@
 		537637902590857600F563B5 /* WorkfinderRegisterCandidate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderRegisterCandidate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5397E0F0253B8E0F0009EFAC /* CapsuleCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCollectionCell.swift; sourceTree = "<group>"; };
 		53E63EB0254BE38300E9601C /* ZeroHeightTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeroHeightTableViewCell.swift; sourceTree = "<group>"; };
+		53E7865826DF5271005915DB /* ProjectApplyBaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyBaseCoordinator.swift; sourceTree = "<group>"; };
+		53E7865A26DF5426005915DB /* ProjectApplyCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		53E7865C26DF5508005915DB /* ProjectApplyCoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyCoordinatorDelegate.swift; sourceTree = "<group>"; };
 		FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectApplyCoordinator.swift; sourceTree = "<group>"; };
 		FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 			children = (
 				5329096B26CF86E6003AE67E /* ProjectQuickApplyCoordinator.swift */,
 				FC0A7CE924BC8E8500E02199 /* ProjectApplyCoordinator.swift */,
+				53E7865826DF5271005915DB /* ProjectApplyBaseCoordinator.swift */,
 				FC0A7CEB24BC8EFC00E02199 /* ProjectPresenter.swift */,
 				FC0A7CE724BC8E5300E02199 /* ProjectViewController.swift */,
 				53E63EB0254BE38300E9601C /* ZeroHeightTableViewCell.swift */,
@@ -145,6 +152,8 @@
 				FC15D78224C4597000543E6F /* Cells and cell presenters */,
 				FC48066924C8091000018C10 /* success screen */,
 				FC15D78324C459AB00543E6F /* Logic */,
+				53E7865A26DF5426005915DB /* ProjectApplyCoordinatorProtocol.swift */,
+				53E7865C26DF5508005915DB /* ProjectApplyCoordinatorDelegate.swift */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -428,7 +437,10 @@
 				FC9B677624C478ED0091A556 /* SectionHeadingCell.swift in Sources */,
 				FC9B677B24C47CE80091A556 /* SkillsSectionHeaderCell.swift in Sources */,
 				FC9B677424C464AE0091A556 /* ProjectContactPresenter.swift in Sources */,
+				53E7865926DF5271005915DB /* ProjectApplyBaseCoordinator.swift in Sources */,
 				FCADF0E724BDDA2A0040F79D /* AssociationFullDetailService.swift in Sources */,
+				53E7865D26DF5508005915DB /* ProjectApplyCoordinatorDelegate.swift in Sources */,
+				53E7865B26DF5426005915DB /* ProjectApplyCoordinatorProtocol.swift in Sources */,
 				FC42486D24C608CB00831D9F /* Styling.swift in Sources */,
 				FC15D79124C45C9300543E6F /* AboutCell.swift in Sources */,
 				FC0A7CEA24BC8E8500E02199 /* ProjectApplyCoordinator.swift in Sources */,
