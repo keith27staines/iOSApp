@@ -45,6 +45,7 @@ class AddressCaptureViewController: UIViewController {
         let view = UnderlinedNextResponderTextFieldStack(fieldName: "postcode", goodUnderlineColor: WorkfinderColors.goodValueNormal, badUnderlineColor: WorkfinderColors.badValueNormal, state: .empty, nextResponderField: nil)
         view.textfield.autocapitalizationType = .allCharacters
         view.textfield.textContentType = .postalCode
+        view.state = .empty
         view.textChanged = { text in
             guard let text = text else {
                 view.state = .empty

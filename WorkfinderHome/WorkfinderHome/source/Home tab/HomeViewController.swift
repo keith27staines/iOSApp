@@ -135,8 +135,11 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSearchIsActive), name: .wfHomeScreenSearchIsActive, object: nil)
-        refresh()
         isSearchActive = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        refresh()
     }
     
     @objc func handleSearchIsActive(notification: Notification) {
@@ -173,7 +176,7 @@ class HomeViewController: UIViewController {
         homeView.refresh()
         trayController.messageHandler = messageHandler
         DispatchQueue.main.async { [weak self] in
-            self?.trayController.loadFirstPage()
+            self?.trayController.loadData()
         }
     }
     

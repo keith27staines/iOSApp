@@ -31,7 +31,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y5G-c6-CtJ">
-                                <rect key="frame" x="20" y="426" width="335" height="191"/>
+                                <rect key="frame" x="20" y="397.5" width="335" height="219.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rHw-Zm-LmS">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="110"/>
@@ -67,7 +67,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="62a-Gl-GNl">
-                                        <rect key="frame" x="0.0" y="118" width="335" height="73"/>
+                                        <rect key="frame" x="0.0" y="146.5" width="335" height="73"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TS2-Dn-3wH">
                                                 <rect key="frame" x="0.0" y="0.0" width="163.5" height="73"/>
@@ -84,29 +84,27 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Helping you find work" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b61-9y-s8U">
-                                <rect key="frame" x="87.5" y="285" width="200" height="91"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="1os-gc-Pel"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="38"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find flexible work opportunities with fast growing companies" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b61-9y-s8U">
+                                <rect key="frame" x="20" y="285" width="343" height="62.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6nq-bb-BTe" secondAttribute="bottom" id="0ac-vc-S9P"/>
                             <constraint firstAttribute="trailing" secondItem="6nq-bb-BTe" secondAttribute="trailing" id="DG0-xB-s4k"/>
                             <constraint firstItem="6nq-bb-BTe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="MsY-Tq-ycG"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S2d-6B-Ejd"/>
+                            <constraint firstItem="b61-9y-s8U" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="Tw4-4s-RfJ"/>
                             <constraint firstItem="6nq-bb-BTe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WQk-no-de8"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="aPk-fn-7pz"/>
-                            <constraint firstItem="b61-9y-s8U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eQu-gf-pdo"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="top" secondItem="b61-9y-s8U" secondAttribute="bottom" constant="50" id="ezE-gZ-aBX"/>
                             <constraint firstItem="b61-9y-s8U" firstAttribute="top" secondItem="lQB-tZ-QZi" secondAttribute="bottom" constant="25" id="m3I-kr-oNf"/>
                             <constraint firstItem="lQB-tZ-QZi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="mNS-l8-omf"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pzb-6G-cUc"/>
+                            <constraint firstItem="b61-9y-s8U" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="4" id="r0x-qm-JTP"/>
                             <constraint firstItem="Y5G-c6-CtJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vC7-jm-bjk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Y5G-c6-CtJ" secondAttribute="bottom" constant="50" id="yEi-bK-qkh"/>
                         </constraints>

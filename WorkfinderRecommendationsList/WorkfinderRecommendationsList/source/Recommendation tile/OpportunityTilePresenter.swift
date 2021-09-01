@@ -22,7 +22,7 @@ protocol OpportunityTilePresenterProtocol {
 }
 
 extension OpportunityTilePresenterProtocol {
-    var locationValue: String { isRemote ?? false ? "Remote" : "On-site" }
+    //var locationValue: String { isRemote ?? false ? "Remote" : "On-site" }
     var compensationValue: String { isPaid ?? true ? "Paid" : "Voluntary" }
     var shouldHideSkills: Bool { skillsText.count == 0 }
     var skillsText: String {
@@ -59,7 +59,14 @@ class OpportunityTilePresenter: OpportunityTilePresenterProtocol {
     var projectTitle: String?  { project.name }
     
     var skills: [String] { project.skillsAcquired ?? [] }
-        
+    var locationValue: String {
+        switch project.isRemote ?? false {
+        case true: return "Remote"
+        case false:
+            let town = (project.association?.location?.addressCity ?? "").capitalized
+            return town.isEmpty ? "On-site" : town
+        }
+    }
     var defaultImage: UIImage? {
         UIImage.imageWithFirstLetter(
             string: companyName,

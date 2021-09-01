@@ -20,29 +20,30 @@ class BackgroundView: UIImageView {
     
     lazy var heading: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 28,weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 24,weight: .regular)
         label.textColor = UIColor.white
-        label.text = "Welcome to Workfinder"
+        label.text = "Find flexible work opportunities with fast growing companies"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.textAlignment = .center
         return label
     }()
     
-    lazy var subheading: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
-        label.font = UIFont.systemFont(ofSize: 18,weight: .light)
-        label.textColor = UIColor.white
-        label.text = "Let's get work done"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
-        return label
-    }()
+//    lazy var subheading: UILabel = {
+//        let label = UILabel()
+//        label.numberOfLines = 1
+//        label.adjustsFontSizeToFitWidth = true
+//        label.minimumScaleFactor = 0.5
+//        label.font = UIFont.systemFont(ofSize: 18,weight: .light)
+//        label.textColor = UIColor.white
+//        label.text = "Let's get work done"
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.setContentCompressionResistancePriority(.required, for: .vertical)
+//        return label
+//    }()
     
     lazy var upArrow: UIImageView = {
         let image = UIImage(named: "up_icon")
@@ -78,7 +79,7 @@ class BackgroundView: UIImageView {
         let guide = safeAreaLayoutGuide
         content.addSubview(wfImageView)
         content.addSubview(heading)
-        content.addSubview(subheading)
+//        content.addSubview(subheading)
         content.addSubview(upArrow)
         let wfImageHeight = wfImageView.heightAnchor.constraint(equalTo: content.heightAnchor, multiplier: imageHeightScale)
         wfImageHeight.priority = .defaultHigh
@@ -89,15 +90,15 @@ class BackgroundView: UIImageView {
         top.isActive = true
         wfImageView.topAnchor.constraint(greaterThanOrEqualTo: guide.topAnchor, constant: 10).isActive = true
         wfImageView.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
-        heading.anchor(top: wfImageView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 28, left: 0, bottom: 0, right: 0))
+        heading.anchor(top: wfImageView.bottomAnchor, leading: guide.leadingAnchor, bottom: nil, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 100, left: 20, bottom: 0, right: 20))
         heading.centerXAnchor.constraint(equalTo: wfImageView.centerXAnchor).isActive = true
-        subheading.anchor(top: heading.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0))
-        subheading.centerXAnchor.constraint(equalTo: heading.centerXAnchor).isActive = true
-       let upArrowTopPadding = upArrow.topAnchor.constraint(equalTo: subheading.bottomAnchor, constant: 56)
+//        subheading.anchor(top: heading.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0))
+//        subheading.centerXAnchor.constraint(equalTo: heading.centerXAnchor).isActive = true
+       let upArrowTopPadding = upArrow.topAnchor.constraint(equalTo: heading.bottomAnchor, constant: 56)
         upArrowTopPadding.priority = .defaultLow
         upArrowTopPadding.isActive = true
-        upArrow.topAnchor.constraint(greaterThanOrEqualTo: subheading.bottomAnchor, constant: 20).isActive = true
-        upArrow.centerXAnchor.constraint(equalTo: subheading.centerXAnchor).isActive = true
+        upArrow.topAnchor.constraint(greaterThanOrEqualTo: heading.bottomAnchor, constant: 20).isActive = true
+        upArrow.centerXAnchor.constraint(equalTo: heading.centerXAnchor).isActive = true
         upArrow.bottomAnchor.constraint(lessThanOrEqualTo: content.bottomAnchor, constant: -40).isActive = true
     }
     

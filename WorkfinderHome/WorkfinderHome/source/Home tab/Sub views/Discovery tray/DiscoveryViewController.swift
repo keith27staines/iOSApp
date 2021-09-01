@@ -13,7 +13,7 @@ class DiscoveryTrayController: NSObject {
     
     lazy var tray: DiscoveryTrayView = DiscoveryTrayView(searchBarStack: searchBarStack, searchDetail: searchDetail)
     var tableView: UITableView { tray.tableView }
-    var sectionPresenters = [DiscoverTraySectionManager.Section: CellPresenter]()
+    var sectionPresenters = [DiscoverTraySectionManager.Section: SectionPresenterProtocol]()
     let topRolesBackgroundColor = UIColor.init(white: 247/255, alpha: 1)
     let sectionManager = DiscoverTraySectionManager()
     weak var messageHandler: HSUserMessageHandler?
@@ -35,20 +35,12 @@ class DiscoveryTrayController: NSObject {
         return controller
     }()
     
-    lazy var recentRolesPresenter: RecentRolesDataSource = {
-        RecentRolesDataSource(rolesService: rolesService, messageHandler: messageHandler)
-    }()
-    
-    lazy var topRolesPresenter: TopRolesPresenter = {
-        TopRolesPresenter(rolesService: rolesService, messageHandler: messageHandler)
+    lazy var featuredOnWorkfinderPresenter: FeaturedOnWorkfinderPresenter = {
+        FeaturedOnWorkfinderPresenter(rolesService: rolesService, messageHandler: messageHandler)
     }()
     
     lazy var popularOnWorkfinderPresenter: PopularOnWorkfinderPresenter = {
         PopularOnWorkfinderPresenter(messageHandler: messageHandler)
-    }()
-    
-    lazy var recommendationsPresenter: RecommendationsPresenter = {
-        RecommendationsPresenter(rolesService: rolesService, messageHandler: messageHandler)
     }()
     
     var searchBarStack: UIStackView { searchController.searchBarStack }
@@ -76,24 +68,17 @@ class DiscoveryTrayController: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
     }
     
-    @objc func loadFirstPage() {
-        recentRolesPresenter.clear()
+    @objc func loadData() {
+        messageHandler?.showLoadingOverlay(style: .transparent)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
-//        recentRolesPresenter.resultHandler = { optionalError in
-//            guard let sectionIndex = self.sectionManager.sectionIndexForSection(.recentRoles) else { return }
-//            let indexSet = self.recentRolesPresenter.lastIndexChangeSet.map { (row) -> IndexPath in
-//                IndexPath(row: row, section: sectionIndex)
-//            }
-//            self.tableView.beginUpdates()
-//            self.tableView.insertRows(at: indexSet, with: .automatic)
-//            self.tableView.endUpdates()
-//        }
-//        recentRolesPresenter.loadFirstPage { [weak self] in
-//            self?.refreshControl.endRefreshing()
-//            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-//        }
+        featuredOnWorkfinderPresenter.load { [weak self] optionalError in
+            guard let self = self else { return }
+            self.messageHandler?.hideLoadingOverlay()
+            self.messageHandler?.displayOptionalErrorIfNotNil(optionalError, retryHandler: self.loadData)
+            self.tableView.reloadData()
+        }
     }
     
     @objc func handleCandidateSignedIn() {
@@ -116,9 +101,7 @@ class DiscoveryTrayController: NSObject {
     func configureTableView() {
         tableView.allowsSelection = false
         tableView.register(PopularOnWorkfinderCell.self, forCellReuseIdentifier: PopularOnWorkfinderCell.identifier)
-        tableView.register(RecommendationsCell.self, forCellReuseIdentifier: RecommendationsCell.identifier)
-        tableView.register(TopRolesCell.self, forCellReuseIdentifier: TopRolesCell.identifier)
-        tableView.register(LandscapeRoleCell.self, forCellReuseIdentifier: LandscapeRoleCell.identifer)
+        tableView.register(FeaturedOnWorkfinderCell.self, forCellReuseIdentifier: FeaturedOnWorkfinderCell.identifier)
         tableView.register(SectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.register(SectionFooterView.self, forHeaderFooterViewReuseIdentifier: SectionFooterView.identifier)
         tableView.tableFooterView = UIView()
@@ -152,42 +135,25 @@ extension DiscoveryTrayController: UITableViewDataSource {
         switch section {
         case .popularOnWorkfinder:
             return 1
-//        case .recommendations:
-//            return 1
-        case .topRoles:
-            return 1
-//        case .recentRoles:
-//            return recentRolesPresenter.numberOfRows
+        case .featuredOnWorkfinder:
+            return featuredOnWorkfinderPresenter.roles.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = sectionManager.sectionForSectionIndex(indexPath.section)
-        let gutter = gutterMargin(fullWidth: tableView.frame.width - 40, cardWidth: 158)
         let cell: UITableViewCell?
         switch section {
         case .popularOnWorkfinder:
             cell = tableView.dequeueReusableCell(withIdentifier: PopularOnWorkfinderCell.identifier)
             cell?.backgroundColor = UIColor.white
-//        case .recommendations:
-//            cell = tableView.dequeueReusableCell(withIdentifier: RecommendationsCell.identifier)
-//            cell?.backgroundColor = UIColor.white
-//            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
-        case .topRoles:
-            cell = tableView.dequeueReusableCell(withIdentifier: TopRolesCell.identifier)
-            cell?.backgroundColor = topRolesBackgroundColor
-            (cell as? HorizontallyScrollingCell)?.adjustMarginsAndGutter(verticalMargin: 20, scrollViewHeight: 262, gutter: gutter)
-//        case .recentRoles:
-//            cell = tableView.dequeueReusableCell(withIdentifier: LandscapeRoleCell.identifer)
-//            cell?.backgroundColor = UIColor.white
-//            (cell as? LandscapeRoleCell)?.row = indexPath.row
-//            if indexPath.row >= recentRolesPresenter.numberOfRows - recentRolesPresenter.pageSize / 2 {
-//                recentRolesPresenter.loadNextPage()
-//            }
+        case .featuredOnWorkfinder:
+            cell = tableView.dequeueReusableCell(withIdentifier: FeaturedOnWorkfinderCell.identifier)
+            cell?.backgroundColor = UIColor.white
         }
-        let presentable = cell as? Presentable
+        let presentable = cell as? PresentableProtocol
         let presenter = cellPresenter(indexPath)
-        presentable?.presentWith(presenter)
+        presentable?.presentWith(presenter, width: tableView.frame.width)
         return cell ?? UITableViewCell()
     }
     
@@ -195,19 +161,19 @@ extension DiscoveryTrayController: UITableViewDataSource {
         return (fullWidth - 2 * cardWidth) / 2
     }
     
-    func cellPresenter(_ indexPath: IndexPath) -> CellPresenter? {
+    func cellPresenter(_ indexPath: IndexPath) -> CellPresenterProtocol? {
         let section = sectionManager.sectionForSectionIndex(indexPath.section)
-        var presenter = sectionPresenters[section]
-        if presenter == nil {
+        var sectionPresenter = sectionPresenters[section]
+        if sectionPresenter == nil {
             switch section {
-            case .popularOnWorkfinder: presenter = popularOnWorkfinderPresenter
-//            case .recommendations: presenter = recommendationsPresenter
-            case .topRoles: presenter = topRolesPresenter
-//            case .recentRoles: presenter = recentRolesPresenter
+            case .popularOnWorkfinder: sectionPresenter = popularOnWorkfinderPresenter
+            case .featuredOnWorkfinder:
+                sectionPresenter = featuredOnWorkfinderPresenter
             }
+            sectionPresenters[section] = sectionPresenter
+            sectionPresenter = sectionPresenters[section]
         }
-        sectionPresenters[section] = presenter
-        return presenter
+        return sectionPresenter?.cellPresenterForRow(indexPath.row)
     }
 
 }
@@ -221,40 +187,17 @@ extension DiscoveryTrayController: UITableViewDelegate {
         var text: String = ""
         switch section {
         case .popularOnWorkfinder: text = "Popular on Workfinder"
-//        case .recommendations: text = "Recommendations"
-        case .topRoles:
-            text = "Featured Opportunities"
-            cell?.contentView.backgroundColor = topRolesBackgroundColor
-//        case .recentRoles: text = "Recent roles"
+        case .featuredOnWorkfinder: text = "Featured Opportunities"
         }
         (cell as? SectionHeaderView)?.sectionTitle.text = text
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let section = sectionManager.sectionForSectionIndex(section)
-        var view: UIView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionFooterView.identifier)
-        switch section {
-//        case .recommendations:
-//            (view as? SectionFooterView)?.isLineHidden = true
-        case .popularOnWorkfinder:
-            (view as? SectionFooterView)?.isLineHidden = true
-        case .topRoles:
-            view = UIView()
-            view?.backgroundColor = topRolesBackgroundColor
-//        case .recentRoles:
-//            view = UIView()
-//            view?.backgroundColor = UIColor.white
-        }
-        return view
+        return nil
     }
 
 }
 
-protocol CellPresenter {}
-
-protocol Presentable {
-    func presentWith(_ presenter: CellPresenter?)
-}
 
 

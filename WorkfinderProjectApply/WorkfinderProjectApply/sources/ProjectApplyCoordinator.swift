@@ -11,39 +11,12 @@ import WorkfinderRegisterCandidate
 import WorkfinderCandidateProfile
 import StoreKit
 
-protocol ProjectApplyCoordinatorProtocol: AnyObject, ErrorHandlerProviderProtocol {
-    func onCoverLetterWorkflowCancelled()
-    func onModalFinished()
-    func onTapApply()
-}
-
-public protocol ProjectApplyCoordinatorDelegate: Coordinating {
-    func onProjectApplyDidFinish()
-}
-
-public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
+public class ProjectApplyCoordinator: ProjectApplyBaseCoordinator, ProjectApplyCoordinatorProtocol {
     
     let projectUuid: F4SUUID
     weak var modalVC: ProjectViewController?
     weak var originalVC: UIViewController?
     var projectPresenter: ProjectPresenter?
-    var newNavigationRouter:NavigationRouter!
-    var switchToTab: ((TabIndex) -> Void)?
-    weak var successViewController: UIViewController?
-    var placementService: PostPlacementServiceProtocol?
-    var delegate: ProjectApplyCoordinatorDelegate?
-    var projectType: String = ""
-    var log: F4SAnalyticsAndDebugging { injected.log }
-    let appSource: AppSource
-    var coverLetterText: String = ""
-    var picklistsDictionary = PicklistsDictionary()
-    
-    lazy public var errorHandler: ErrorHandlerProtocol = {
-        ErrorHandler(
-            navigationRouter: self.newNavigationRouter,
-            coreInjection: self.injected,
-            parentCoordinator: self)
-    }()
     
     public init(
         parent: ProjectApplyCoordinatorDelegate?,
@@ -53,35 +26,13 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         appSource: AppSource,
         switchToTab: ((TabIndex) -> Void)?
     ) {
-        self.delegate = parent
-        self.appSource = appSource
-        self.switchToTab = switchToTab
         self.projectUuid = projectUuid
-        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
-    }
-    
-    public func startAtCoveringLetter() {
-        let user = UserRepository().loadUser()
-        let candidate = UserRepository().loadCandidate()
-        let association = projectPresenter?.association
-        let projectTitle = projectPresenter?.project.name
-        
-        let companyName = association?.location?.company?.name ?? "your company"
-        let hostName = projectPresenter?.host?.fullName ?? "Sir/Madam"
-    
-        let coordinator = CoverLetterFlowFactory.makeFlow(
-            type: .projectApplication,
-            parent: self,
-            navigationRouter: newNavigationRouter,
-            inject: injected,
-            candidateAge: candidate.age() ?? 18,
-            candidateName: user.fullname,
-            isProject: true,
-            projectTitle: projectTitle,
-            companyName: companyName,
-            hostName: hostName)
-        addChildCoordinator(coordinator)
-        coordinator.start()
+        super.init(
+            parent: parent,
+            navigationRouter: navigationRouter,
+            inject: inject,
+            appSource: appSource,
+            switchToTab: switchToTab)
     }
     
     public override func start() {
@@ -104,7 +55,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         newNav.modalPresentationStyle = .fullScreen
         originalVC?.present(newNav, animated: true, completion: nil)
         modalVC = vc
-        newNavigationRouter = NavigationRouter(navigationController: newNav)
+        activeNavigationRouter = NavigationRouter(navigationController: newNav)
     }
     
     func startCoverLetterFlow() {
@@ -119,7 +70,7 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         let coordinator = CoverLetterFlowFactory.makeFlow(
             type: .projectApplication,
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: activeNavigationRouter,
             inject: injected,
             candidateAge: candidate.age() ?? 18,
             candidateName: user.fullname,
@@ -130,114 +81,20 @@ public class ProjectApplyCoordinator: CoreInjectionNavigationCoordinator {
         addChildCoordinator(coordinator)
         coordinator.start()
     }
-    
-    func showAlert(title: String, message: String, buttonTitle: String) {
-        guard
-            let topVC = navigationRouter.navigationController.topViewController
-            else { return }
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: buttonTitle, style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        topVC.present(alert, animated: true, completion: nil)
-    }
-}
 
-extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
-    
-    func onTapApply() {
+    override func onTapApply() {
         log.track(.project_apply_start(appSource))
         log.track(.placement_funnel_start(appSource))
         startCoverLetterFlow()
     }
     
-    func onModalFinished() {
+    override func onModalFinished() {
         originalVC?.dismiss(animated: true, completion: nil)
         delegate?.onProjectApplyDidFinish()
         parentCoordinator?.childCoordinatorDidFinish(self)
     }
     
-    func onCoverLetterWorkflowCancelled() {
-        log.track(.placement_funnel_cancel(appSource))
-        log.track(.project_apply_cancel(appSource))
-    }
-    
-    func onCoverLetterDidComplete() {
-        switch UserRepository().isCandidateLoggedIn {
-        case true: captureNameIfNeccessary()
-        case false: startLogin()
-        }
-    }
-    
-    func onNameCaptureComplete() {
-        capturePostcodeIfNecessary()
-    }
-    
-    func onPostcodeCaptureComplete() {
-        captureDOBIfNecessary()
-    }
-    
-    func captureNameIfNeccessary() {
-        guard NameCaptureCoordinator.isNameCaptureRequired else {
-            onNameCaptureComplete()
-            return
-        }
-        let coordinator = NameCaptureCoordinator(
-            parent: self,
-            navigationRouter: newNavigationRouter,
-            inject: injected
-        ) { [weak self] in
-            self?.onNameCaptureComplete()
-        }
-        addChildCoordinator(coordinator)
-        coordinator.start()
-    }
-    
-    func capturePostcodeIfNecessary() {
-        let postcode = UserRepository().loadCandidate().postcode ?? ""
-        guard
-            postcode.isEmpty,
-            projectPresenter?.project.isCandidateLocationRequired == true else {
-            onPostcodeCaptureComplete()
-            return
-        }
-        
-        let coordinator = AddressCaptureCoordinator(
-            parent: self,
-            navigationRouter: newNavigationRouter,
-            inject: injected,
-            hidesBackButton: true
-        ) { [weak self] in
-            self?.onPostcodeCaptureComplete()
-        }
-        addChildCoordinator(coordinator)
-        coordinator.start()
-    }
-    
-    func captureDOBIfNecessary() {
-        let updateCandidateService = UpdateCandidateService(networkConfig: injected.networkConfig)
-        let dobCoordinator = DOBCaptureCoordinator(
-            parent: self,
-            navigationRouter: newNavigationRouter,
-            inject: injected,
-            updateCandidateService: updateCandidateService
-        ) { [weak self] in
-            self?.submitApplication()
-        }
-        addChildCoordinator(dobCoordinator)
-        dobCoordinator.start()
-    }
-    
-    func startLogin() {
-        let coordinator = RegisterAndSignInCoordinator(
-            parent: self,
-            navigationRouter: newNavigationRouter,
-            inject: injected,
-            firstScreenHidesBackButton: true)
-        addChildCoordinator(coordinator)
-        coordinator.startLoginFirst()
-    }
-    
-    func submitApplication() {
+    override func submitApplication() {
         self.log.track(.placement_funnel_convert(self.appSource))
         guard let vc = modalVC, let view = vc.view else { return }
         var picklistsDictionary = self.picklistsDictionary
@@ -274,7 +131,7 @@ extension ProjectApplyCoordinator: ProjectApplyCoordinatorProtocol {
         guard let placementUuid = placement.uuid else { return }
         let coordinator = DocumentUploadCoordinator(
             parent: self,
-            navigationRouter: newNavigationRouter,
+            navigationRouter: activeNavigationRouter,
             inject: injected, delegate: self,
             appModel: .placement,
             objectUuid: placementUuid,
@@ -325,16 +182,4 @@ extension ProjectApplyCoordinator: DocumentUploadCoordinatorParentProtocol {
     public func onUploadComplete() {
         showSuccess()
     }
-}
-
-extension ProjectApplyCoordinator: RegisterAndSignInCoordinatorParent {
-    public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
-        capturePostcodeIfNecessary()
-    }
-    
-    public func onRegisterAndSignInCancelled() {
-        newNavigationRouter.pop(animated: true)
-    }
-    
-    
 }

@@ -14,7 +14,7 @@ class OnboardingViewController: UIViewController {
     var hideOnboardingControls: Bool = true {
         didSet {
             _ = view
-            viewsToFadeIn.forEach { $0.isHidden = hideOnboardingControls }
+            onboardingControls.forEach { $0.isHidden = hideOnboardingControls }
         }
     }
     
@@ -22,15 +22,20 @@ class OnboardingViewController: UIViewController {
         didSet { signinButton.isHidden = isLoggedIn }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        viewsToFadeIn.forEach { $0.isHidden = true }
+    var onboardingControls: [UIView] {
+        [signinButton, justGetStartedButton]
     }
     
-    lazy var viewsToFadeIn: [UIView] = [
-        signinButton,
-        justGetStartedButton
-    ]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        onboardingControls.forEach { $0.isHidden = true }
+    }
+    
+    var viewsToFadeIn: [UIView] {
+        var views = onboardingControls
+        views.append(descriptionLabel)
+        return views
+    }
     
     func fadeInViews() {
         viewsToFadeIn.forEach { $0.alpha = 0 }
@@ -42,10 +47,15 @@ class OnboardingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         adjustNavigationBar()
+        setupAppearance()
+        print(descriptionLabel.frame)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupAppearance()
+        descriptionLabel.isHidden = false
+        descriptionLabel.alpha = 0
+        signinButton.alpha = 0
+        justGetStartedButton.alpha = 0
         fadeInViews()
     }
 }

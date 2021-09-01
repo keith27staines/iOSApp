@@ -153,7 +153,7 @@ class OpportunityTileView: UITableViewCell, RefreshableProtocol {
     
     lazy var primaryButton: WorkfinderPrimaryGradientButton = {
         let button = WorkfinderPrimaryGradientButton()
-        button.setTitle("Apply", for: .normal)
+        button.setTitle("Easy Apply", for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()

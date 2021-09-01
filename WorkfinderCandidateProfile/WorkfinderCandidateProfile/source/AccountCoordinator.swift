@@ -104,7 +104,7 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
     
     func showRegisterAndSignin() {
         guard !UserRepository().isCandidateLoggedIn else { return }
-        let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: false)
+        let coordinator = RegisterAndSignInCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected, firstScreenHidesBackButton: false, suppressDestinationAlertOnCompletion: true)
         addChildCoordinator(coordinator)
         coordinator.startLoginFirst()
     }

@@ -16,17 +16,20 @@ public class SmallImageService: SmallImageServiceProtocol {
     }()
     
     var session: URLSession { SmallImageService.session }
+    var task: URLSessionTask?
     
     public init() {}
-    
+    public var urlString: String?
     public func fetchImage(urlString: String?, defaultImage: UIImage?, completion: @escaping (UIImage?) -> Void) {
+        task?.cancel()
         guard
             let urlString = urlString,
             let url = URL(string: urlString) else {
             completion(defaultImage)
             return
         }
-        let task = session.dataTask(with: url) { (data, response, error) in
+        self.urlString = urlString
+        task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                             guard
                     let data = data,
@@ -38,7 +41,6 @@ public class SmallImageService: SmallImageServiceProtocol {
                 completion(image)
             }
         }
-        task.resume()
+        task?.resume()
     }
-    
 }

@@ -1,5 +1,6 @@
 
 import UIKit
+import WorkfinderUI
 
 class CapsuleCollectionCell: PresentableCell {
     

@@ -28,17 +28,17 @@ class AppCoordinatorBackgroundViewController : UIViewController {
         return imageView
     }()
     
-    var label: UILabel = {
-        let label = UILabel()
-        label.text = "Helping you find work"
-        label.numberOfLines = 2
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        label.font = UIFont.systemFont(ofSize: 38, weight: .thin)
-        label.textColor = UIColor.white
-        label.textAlignment = .center
-        return label
-    }()
+//    var label: UILabel = {
+//        let label = UILabel()
+//        label.text = "Find flexible work opportunities with fast growing companies"
+//        label.numberOfLines = 0
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//        label.font = UIFont.systemFont(ofSize: 30, weight: .thin)
+//        label.textColor = UIColor.white
+//        label.textAlignment = .center
+//        return label
+//    }()
     
     override func viewDidLoad() {
         configureViews()
@@ -48,12 +48,12 @@ class AppCoordinatorBackgroundViewController : UIViewController {
         view.backgroundColor = UIColor.black
         view.addSubview(backgroundImage)
         view.addSubview(logo)
-        view.addSubview(label)
+        //view.addSubview(label)
         backgroundImage.fillSuperview()
         logo.topAnchor.constraint(equalTo: backgroundImage.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 25).isActive = true
-        label.centerXAnchor.constraint(equalTo: logo.centerXAnchor).isActive = true
+//        label.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 25).isActive = true
+//        label.centerXAnchor.constraint(equalTo: logo.centerXAnchor).isActive = true
     }
     
 }

@@ -23,11 +23,14 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     let firstScreenHidesBackButton: Bool
     var firstViewController:UIViewController?
     var screenOrder: SignInScreenOrder = .registerThenLogin
+    let suppressDestinationAlertOnCompletion: Bool
 
     public init(parent: RegisterAndSignInCoordinatorParent?,
                 navigationRouter: NavigationRoutingProtocol,
                 inject: CoreInjectionProtocol,
-                firstScreenHidesBackButton: Bool) {
+                firstScreenHidesBackButton: Bool,
+                suppressDestinationAlertOnCompletion: Bool) {
+        self.suppressDestinationAlertOnCompletion = suppressDestinationAlertOnCompletion
         self.firstScreenHidesBackButton = firstScreenHidesBackButton
         super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
     }
@@ -72,11 +75,13 @@ public class RegisterAndSignInCoordinator: CoreInjectionNavigationCoordinator, R
     
     func syncLinkedInDataDidComplete(coordinator: SynchLinkedinCoordinator) {
         removeChildCoordinator(coordinator)
-        guard let registerVC = navigationRouter.navigationController.topViewController as? RegisterUserViewController else {
-            onRegisterComplete(nextScreen: .explore)
+        guard
+            let registerVC = navigationRouter.navigationController.topViewController as? RegisterUserViewController,
+            !suppressDestinationAlertOnCompletion else {
+            onRegisterComplete(nextScreen: .noOpinion)
             return
         }
-
+        
         let alert = UIAlertController(title: "Your profile is ready!", message: "You can complete your profile in Account Settings", preferredStyle: .alert)
         let accountAction = UIAlertAction(title: "Account Settings", style: .default) { [weak self] action in
             self?.onRegisterComplete(nextScreen: .account)

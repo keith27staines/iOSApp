@@ -1,10 +1,17 @@
+//
+//  RecentRolesDataSource.swift
+//  WorkfinderHome
+//
+//  Created by Keith on 25/08/2021.
+//  Copyright © 2021 Workfinder. All rights reserved.
+//
 
 import UIKit
 import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderServices
 
-class RecentRolesDataSource: CellPresenter {
+class RecentRolesDataSource: CellPresenterProtocol {
     
     private var roles = [RoleData]()
     private var images = [UIImage]()
@@ -52,13 +59,13 @@ class RecentRolesDataSource: CellPresenter {
     
     func loadFirstPage(completion: @escaping () -> Void) {
         clear()
-        rolesService.fetchRecentRoles(urlString: nil) { (result) in
+        rolesService.fetchFeturedRolesAndRecentRoles(urlString: nil) { (result) in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.messageHandler?.hideLoadingOverlay()
                 switch result {
-                case .success(_):
-                    self.result = result
+                case .success(let roles):
+                    self.roles = roles
                 case .failure(let error):
                     self.handleError(error: error, retry: {self.loadFirstPage(completion: completion)})
                 }

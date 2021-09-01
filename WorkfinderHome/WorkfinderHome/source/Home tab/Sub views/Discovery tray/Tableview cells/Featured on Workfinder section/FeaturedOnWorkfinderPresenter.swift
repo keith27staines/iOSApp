@@ -1,18 +1,27 @@
+//
+//  FeaturedOnWorkfinderPresenter.swift
+//  WorkfinderHome
+//
+//  Created by Keith on 25/08/2021.
+//  Copyright © 2021 Workfinder. All rights reserved.
+//
+
 import WorkfinderCommon
 import WorkfinderUI
 
-class TopRolesPresenter: CellPresenter {
+class FeaturedOnWorkfinderPresenter: SectionPresenterProtocol {
     weak var messageHandler: HSUserMessageHandler?
     let rolesService: RolesServiceProtocol
+    var roles: [RoleData] = []
+    
+    func cellPresenterForRow(_ row: Int) -> CellPresenterProtocol { roles[row] }
     
     func load(completion: @escaping (Error?) -> Void) {
-        messageHandler?.showLoadingOverlay(style: .transparent)
-        rolesService.fetchTopRoles { [weak self] (result) in
+        rolesService.fetchFeturedRolesAndRecentRoles(urlString: nil) { [weak self] (result) in
             guard let self = self else { return }
-            self.messageHandler?.hideLoadingOverlay()
             switch result {
             case .success(let roles):
-                let maxRoles = min(10, roles.count)
+                let maxRoles = min(6, roles.count)
                 self.roles = ([RoleData](roles[0..<maxRoles])).map({ (roleData) -> RoleData in
                     var adaptedData = roleData
                     adaptedData.actionButtonText = roleData.actionButtonText
@@ -24,8 +33,6 @@ class TopRolesPresenter: CellPresenter {
             }
         }
     }
-    
-    var roles: [RoleData] = []
     
     func roleTapped(roleData: RoleData) {
         NotificationCenter.default.post(name: .wfHomeScreenRoleTapped, object: roleData)

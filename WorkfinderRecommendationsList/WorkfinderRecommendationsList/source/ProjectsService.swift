@@ -32,23 +32,24 @@ public class OpportuntiesService: WorkfinderService, OpportunitiesServiceProtoco
         do {
             let verbose = false
             let query = [URLQueryItem(name: "promote_on_home_page", value: "true"), URLQueryItem(name: "status", value: "open")]
-            let request = try buildRequest(relativePath: "projects/", queryItems: query, verb: .get)
+            let request = try buildRequest(relativePath: projectsPath, queryItems: query, verb: .get)
             performTask(with: request, verbose: verbose, completion: completion, attempting: #function)
         } catch {
             completion(.failure(error))
         }
     }
     
+    var projectsPath = UserRepository().isCandidateLoggedIn ? "projects/candidate_projects/" : "projects/"
+    
     public func fetchRecentOpportunities(completion: @escaping (Result<ServerListJson<ProjectJson>, Error>) -> Void) {
         do {
             let verbose = true
             let query = [
                 URLQueryItem(name: "promote_on_home_page", value: "false"),
-                URLQueryItem(name: "status", value: "open"),
-                URLQueryItem(name: "already_applied", value: "false"),
-//                URLQueryItem(name: "exclude_applied", value: "true")
+                URLQueryItem(name: "status", value: "open")
             ]
-            let request = try buildRequest(relativePath: "projects/", queryItems: query, verb: .get)
+            let path = projectsPath
+            let request = try buildRequest(relativePath: path, queryItems: query, verb: .get)
             performTask(with: request, verbose: verbose, completion: completion, attempting: #function)
         } catch {
             completion(.failure(error))
