@@ -10,23 +10,25 @@ import WorkfinderCommon
 
 public protocol InterviewServiceProtocol {
     func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>,Error>) -> Void)
-    func fetchInterview(uuid: String, completion: @escaping (Result<InterviewJson,Error>) -> Void)
+    func fetchInterview(id: Int, completion: @escaping (Result<InterviewJson,Error>) -> Void)
 }
 
 public class InterviewService: WorkfinderService, InterviewServiceProtocol {
     
+    let relativePath = "candidate-interviews/"
+    
     public func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>, Error>) -> Void) {
         do {
-            let request = try buildRequest(relativePath: "interviews/", queryItems: nil, verb: .get)
+            let request = try buildRequest(relativePath: relativePath, queryItems: nil, verb: .get)
             performTask(with: request, verbose: true ,completion: completion, attempting: #function)
         } catch {
             completion(.failure(error))
         }
     }
     
-    public func fetchInterview(uuid: String, completion: @escaping (Result<InterviewJson, Error>) -> Void) {
+    public func fetchInterview(id: Int, completion: @escaping (Result<InterviewJson, Error>) -> Void) {
         do {
-            let request = try buildRequest(relativePath: "interviews/\(uuid)", queryItems: nil, verb: .get)
+            let request = try buildRequest(relativePath: "\(relativePath)\(id)/", queryItems: nil, verb: .get)
             performTask(with: request, verbose: true ,completion: completion, attempting: #function)
         } catch {
             completion(.failure(error))
