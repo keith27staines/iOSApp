@@ -7,6 +7,7 @@
 //
 
 import WorkfinderCommon
+import WorkfinderServices
 
 public protocol InterviewServiceProtocol {
     func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>,Error>) -> Void)

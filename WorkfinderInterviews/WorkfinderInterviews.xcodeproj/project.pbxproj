@@ -18,12 +18,13 @@
 		532E49F0269EE5BF00AC6E41 /* AcceptInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49EF269EE5BF00AC6E41 /* AcceptInviteViewController.swift */; };
 		532E49F3269EE93700AC6E41 /* AcceptInvitePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49F2269EE93700AC6E41 /* AcceptInvitePresenter.swift */; };
 		532E49F5269EE95D00AC6E41 /* AcceptInviteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49F4269EE95D00AC6E41 /* AcceptInviteService.swift */; };
-		532E49F826A0299000AC6E41 /* InterviewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49F726A0299000AC6E41 /* InterviewContext.swift */; };
-		532E49FA26A02A3100AC6E41 /* InterviewInvite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49F926A02A3100AC6E41 /* InterviewInvite.swift */; };
 		534CF7A626A1D43C007DF848 /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A526A1D43C007DF848 /* DateSelectorViewController.swift */; };
 		534CF7A926A1D473007DF848 /* DateSelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A826A1D473007DF848 /* DateSelectorPresenter.swift */; };
 		53CFEB7226A6D59100E8F855 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFEB7126A6D59100E8F855 /* ProjectViewController.swift */; };
 		53CFEB7426A6D5A200E8F855 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFEB7326A6D5A200E8F855 /* ProjectPresenter.swift */; };
+		53FA1FAD26E60B0400CF4CA2 /* InterviewJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA1FAC26E60B0400CF4CA2 /* InterviewJson.swift */; };
+		53FA1FAF26E60B0C00CF4CA2 /* InterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA1FAE26E60B0C00CF4CA2 /* InterviewService.swift */; };
+		53FA1FB126E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA1FB026E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,12 +52,13 @@
 		532E49EF269EE5BF00AC6E41 /* AcceptInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInviteViewController.swift; sourceTree = "<group>"; };
 		532E49F2269EE93700AC6E41 /* AcceptInvitePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInvitePresenter.swift; sourceTree = "<group>"; };
 		532E49F4269EE95D00AC6E41 /* AcceptInviteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInviteService.swift; sourceTree = "<group>"; };
-		532E49F726A0299000AC6E41 /* InterviewContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewContext.swift; sourceTree = "<group>"; };
-		532E49F926A02A3100AC6E41 /* InterviewInvite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewInvite.swift; sourceTree = "<group>"; };
 		534CF7A526A1D43C007DF848 /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
 		534CF7A826A1D473007DF848 /* DateSelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorPresenter.swift; sourceTree = "<group>"; };
 		53CFEB7126A6D59100E8F855 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		53CFEB7326A6D5A200E8F855 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
+		53FA1FAC26E60B0400CF4CA2 /* InterviewJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewJson.swift; sourceTree = "<group>"; };
+		53FA1FAE26E60B0C00CF4CA2 /* InterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewService.swift; sourceTree = "<group>"; };
+		53FA1FB026E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInviteCoordinatorProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		532E49EC269EE47A00AC6E41 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				53FA1FB026E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift */,
 				532E49ED269EE4C400AC6E41 /* WorkfinderInterviewsCoordinator.swift */,
 				53CFEB7026A6D56100E8F855 /* Project view controller */,
 				532E49FB26A033A900AC6E41 /* services */,
@@ -156,8 +159,7 @@
 		532E49F626A0294E00AC6E41 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				532E49F726A0299000AC6E41 /* InterviewContext.swift */,
-				532E49F926A02A3100AC6E41 /* InterviewInvite.swift */,
+				53FA1FAC26E60B0400CF4CA2 /* InterviewJson.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -165,6 +167,7 @@
 		532E49FB26A033A900AC6E41 /* services */ = {
 			isa = PBXGroup;
 			children = (
+				53FA1FAE26E60B0C00CF4CA2 /* InterviewService.swift */,
 				532E49F4269EE95D00AC6E41 /* AcceptInviteService.swift */,
 			);
 			path = services;
@@ -301,12 +304,13 @@
 				534CF7A626A1D43C007DF848 /* DateSelectorViewController.swift in Sources */,
 				53CFEB7226A6D59100E8F855 /* ProjectViewController.swift in Sources */,
 				532E49F3269EE93700AC6E41 /* AcceptInvitePresenter.swift in Sources */,
+				53FA1FB126E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift in Sources */,
 				53CFEB7426A6D5A200E8F855 /* ProjectPresenter.swift in Sources */,
-				532E49FA26A02A3100AC6E41 /* InterviewInvite.swift in Sources */,
+				53FA1FAD26E60B0400CF4CA2 /* InterviewJson.swift in Sources */,
 				532E49F0269EE5BF00AC6E41 /* AcceptInviteViewController.swift in Sources */,
 				534CF7A926A1D473007DF848 /* DateSelectorPresenter.swift in Sources */,
-				532E49F826A0299000AC6E41 /* InterviewContext.swift in Sources */,
 				532E49EE269EE4C400AC6E41 /* WorkfinderInterviewsCoordinator.swift in Sources */,
+				53FA1FAF26E60B0C00CF4CA2 /* InterviewService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,14 +13,9 @@ class DateSelectorPresenter: NSObject {
     
     weak var table: UITableView?
     weak var coordinator: AcceptInviteCoordinatorProtocol?
-    var invite: InterviewInvite? {
-        get {
-            coordinator?.interviewInvite
-        }
-        set {
-            coordinator?.interviewInvite = newValue
-        }
-    }
+    
+    var invite: InterviewJson? { coordinator?.interview }
+    var interviewDates: [InterviewJson.InterviewDateJson] { invite?.interviewDates ?? [] }
     
     init(coordinator: AcceptInviteCoordinatorProtocol) {
         self.coordinator = coordinator
@@ -38,39 +33,42 @@ class DateSelectorPresenter: NSObject {
 }
 
 extension DateSelectorPresenter: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        invite?.possibleDates?.count ?? 0
+        interviewDates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DateCell.reuseIdentifier) as? DateCell else {
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: DateCell.reuseIdentifier) as? DateCell,
+            let interviewDate = invite?.interviewDates?[indexPath.row] else {
             return UITableViewCell()
         }
-        let datestring = invite?.possibleDates?[indexPath.row] ?? ""
-        cell.configureWithDateString(datestring)
-        cell.accessoryType = (indexPath.row == invite?.selectedDateIndex ?? 0) ? .checkmark : .none
+        let datestring = interviewDate.dateTime ?? ""
+        let timestring = interviewDate.timeString ?? ""
+        cell.configureWithDateString(datestring, timeString: timestring)
+        let currentlySelectedDate = coordinator?.selectedInterviewDate
+        let isCurrentlySelected = interviewDate == currentlySelectedDate
+        cell.accessoryType = isCurrentlySelected ? .checkmark : .none
         return cell
     }
 }
 
 extension DateSelectorPresenter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if invite?.selectedDateIndex != indexPath.row {
-            invite?.selectedDateIndex = indexPath.row
-            tableView.reloadData()
-        }
+        guard let interviewDate = invite?.interviewDates?[indexPath.row] else { return }
+        let currentlySelectedDate = coordinator?.selectedInterviewDate
+        let isCurrentlySelected = interviewDate == currentlySelectedDate
+        coordinator?.selectedInterviewDate = isCurrentlySelected ? nil : interviewDate
+        tableView.reloadData()
     }
 }
 
 class DateCell: UITableViewCell {
     static let reuseIdentifier = "DateCell"
     
-    func configureWithDateString(_ dateString: String) {
+    func configureWithDateString(_ dateString: String, timeString: String) {
         guard let date = Date.dateFromRfc3339(string: dateString) else {
             clear()
             return

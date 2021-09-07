@@ -15,7 +15,8 @@ public class WorkfinderInterviewsCoordinator: CoreInjectionNavigationCoordinator
     var newNavigationRouter: NavigationRouter?
     var rootOfNewNavigation: UIViewController?
     var parentVC: UIViewController?
-    var interviewInvite: InterviewInvite?
+    var interview: InterviewJson?
+    var selectedInterviewDate: InterviewJson.InterviewDateJson?
     
     public override func start() {
         

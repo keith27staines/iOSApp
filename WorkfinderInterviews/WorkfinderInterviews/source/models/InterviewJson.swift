@@ -37,9 +37,10 @@ public struct InterviewJson: Codable {
         case interviewDates = "interview_dates"
     }
     
-    public struct InterviewDateJson: Codable {
+    public struct InterviewDateJson: Codable, Equatable {
         public var id: Int?
         public var dateTime: String?
+        public var timeString: String?
         public var interview: Int?
         public var status: String?
         public var duration: Int?
@@ -50,6 +51,7 @@ public struct InterviewJson: Codable {
             case interview
             case status
             case duration
+            case timeString = "time_str"
         }
     }
     

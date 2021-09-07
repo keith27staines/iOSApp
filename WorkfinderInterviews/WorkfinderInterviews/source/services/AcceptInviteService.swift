@@ -22,17 +22,12 @@ class InviteService: WorkfinderService {
         _projectService.fetchProject(uuid: uuid, completion: completion)
     }
     
-    func loadInvite(id: String, completion: @escaping (Result<InterviewInvite,Error>) -> Void) {
-        let date1 = Date().addingTimeInterval(24*3600*7).workfinderDateString
-        let date2 = Date().addingTimeInterval(24*3600*14).workfinderDateString
-        let date3 = Date().addingTimeInterval(24*3600*21).workfinderDateString
-        let dates = [date1, date2, date3]
-        let invite = InterviewInvite(id: id, projectId: "projectId", possibleDates: dates, selectedDateIndex: 0)
-        completion(Result.success(invite))
+    func loadInterview(id: String, completion: @escaping (Result<InterviewJson,Error>) -> Void) {
+        let interview = InterviewJson()
+        completion(Result.success(interview))
     }
     
-    func acceptInvite(_ interview: InterviewInvite, completion: @escaping (Error?) -> Void) {
+    func accept(_ interviewDate: InterviewJson.InterviewDateJson, completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
-    
 }

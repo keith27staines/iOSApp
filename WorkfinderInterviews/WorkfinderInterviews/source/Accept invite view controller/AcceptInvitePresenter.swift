@@ -7,20 +7,12 @@
 
 import UIKit
 
-protocol AcceptInviteCoordinatorProtocol: AnyObject {
-    var interviewInvite: InterviewInvite? { get set }
-    func acceptViewControllerDidCancel(_ vc: AcceptInviteViewController)
-    func interviewWasAccepted(from vc: UIViewController?)
-    func showDateSelector()
-    func showProjectDetails()
-}
-
 class AcceptInvitePresenter {
     
     private let service: InviteService
     private let coordinator: AcceptInviteCoordinatorProtocol
     let interviewId: String
-    var invite: InterviewInvite? { coordinator.interviewInvite }
+    var interview: InterviewJson? { coordinator.interview }
     weak var viewController: UIViewController?
     
     init(service: InviteService, coordinator: AcceptInviteCoordinatorProtocol, interviewId: String) {
@@ -34,14 +26,14 @@ class AcceptInvitePresenter {
     }
     
     func load(completion: @escaping (Error?) -> Void) {
-        guard invite == nil else {
+        guard interview == nil else {
             completion(nil)
             return
         }
-        service.loadInvite(id: interviewId) { result in
+        service.loadInterview(id: interviewId) { result in
             switch result {
             case .success(let invite):
-                self.coordinator.interviewInvite = invite
+                self.coordinator.interview = invite
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -49,29 +41,32 @@ class AcceptInvitePresenter {
         }
     }
     
+    private var _selectedInterviewDateId: Int?
+    
+    private var selectedInterviewDate: InterviewJson.InterviewDateJson? {
+        get {
+            interview?.interviewDates?.first { $0.id == _selectedInterviewDateId }
+        }
+        set {
+            _selectedInterviewDateId = newValue?.id
+        }
+    }
+    
     var dateString: String? {
-        guard let date = selectedDate else { return "" }
+        guard let dateString = selectedInterviewDate?.dateTime, let date = Date.dateFromRfc3339(string: dateString)
+        else { return nil }
         let df = DateFormatter()
         df.timeStyle = .none
         df.dateStyle = .medium
         return df.string(from: date)
     }
     
-    var timeString: String? {
-        guard let date = selectedDate else { return "" }
-        let df = DateFormatter()
-        df.timeStyle = .short
-        df.dateStyle = .none
-        return df.string(from: date)
-    }
+    var timeString: String? { selectedInterviewDate?.timeString }
     
-    var selectedDate: Date? {
-        Date.dateFromRfc3339(string: invite?.selectedDate ?? "")
-    }
     
     func onDidTapAccept(completion: @escaping (Error?) -> Void) {
-        guard let invite = invite else { return }
-        service.acceptInvite(invite) { [weak self] error in
+        guard let interviewDate = selectedInterviewDate else { return }
+        service.accept(interviewDate) { [weak self] error in
             guard let self = self else { return }
             if let error = error {
                 completion(error)
