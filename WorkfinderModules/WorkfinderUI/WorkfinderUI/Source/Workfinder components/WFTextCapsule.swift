@@ -11,6 +11,7 @@ import UIKit
 public class WFTextCapsule: UIView {
     
     var heightClass: WFComponentsHeightClass
+    var radius: CGFloat { height / 2.0 }
     
     public var text: String? {
         get { label.text }
@@ -59,6 +60,7 @@ public class WFTextCapsule: UIView {
     ) {
         self.heightClass = heightClass
         super.init(frame: CGRect.zero)
+        configureViews()
         self.text = text
         styleControl(
             borderWidth: borderWidth,
@@ -68,19 +70,38 @@ public class WFTextCapsule: UIView {
         )
     }
     
+    var labelLeadingConstraint: NSLayoutConstraint?
+    
+    func configureViews() {
+        addSubview(label)
+        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        let labelLeadingConstraint = label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: radius)
+        NSLayoutConstraint.activate([labelLeadingConstraint])
+        self.labelLeadingConstraint = labelLeadingConstraint
+    }
+    
+    public func setColors(backgroundColor: UIColor, borderColor: UIColor, textColor: UIColor) {
+        label.textColor = textColor
+        layer.backgroundColor = backgroundColor.cgColor
+        layer.borderColor = borderColor.cgColor
+    }
+    
     func styleControl(
         borderWidth: CGFloat,
         borderColor: UIColor,
         backgroundColor: UIColor,
         textStyle: WFTextStyle
     ) {
-        self.layer.borderWidth = borderWidth
-        self.layer.borderColor = borderColor.cgColor
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
+        layer.masksToBounds = true
         label.applyStyle(textStyle)
     }
     
     public override func layoutSubviews() {
-        layer.cornerRadius = frame.height / 2.0
+        layer.cornerRadius = radius
     }
     
     required init?(coder: NSCoder) {

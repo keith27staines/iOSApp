@@ -10,16 +10,16 @@ import UIKit
 
 public struct WFComponentsFactory {
     
-    private let defaultBorderWidth: CGFloat = 1
-    private let defaultBackgroundColor = WFColorPalette.white
-    private let defaultBorderColor = WFColorPalette.gray4
-    private let defaultTextColor = WFColorPalette.gray4
+    static private let defaultBorderWidth: CGFloat = 1
+    static private let defaultBackgroundColor = WFColorPalette.white
+    static private let defaultBorderColor = WFColorPalette.gray4
+    static private let defaultTextColor = WFColorPalette.gray4
     
-    public func makeSmallTag() -> WFTextCapsule {
+    static public func makeSmallTag() -> WFTextCapsule {
         makeTextCapsule(heightClass: .small)
     }
     
-    public func makeTextCapsule(
+    static public func makeTextCapsule(
         heightClass: WFComponentsHeightClass,
         textColor: UIColor? = nil,
         backgroundColor: UIColor? = nil,

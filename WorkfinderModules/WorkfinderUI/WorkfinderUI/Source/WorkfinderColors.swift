@@ -23,6 +23,8 @@ public struct WFColorPalette {
     public static var gray2 = UIColor(red: 0.636, green: 0.667, blue: 0.645, alpha: 1)
     public static var gray3 = UIColor(red: 0.37, green: 0.387, blue: 0.375, alpha: 1)
     public static var gray4 = UIColor(red: 0.191, green: 0.204, blue: 0.194, alpha: 1)
+    public static var grayLight = UIColor(red: 0.557, green: 0.557, blue: 0.576, alpha: 1)
+    public static var grayBorder = gray1
 }
 
 public struct WFColorGradient {

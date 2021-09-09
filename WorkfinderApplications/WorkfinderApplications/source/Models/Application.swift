@@ -2,18 +2,19 @@ import Foundation
 import WorkfinderCommon
 
 struct Application : Codable {
-    let placementUuid: String
-    let companyUuid: String?
-    let hostUuid: String?
-    let associationUuid: String?
-    let state: ApplicationState
-    let hostName: String
-    let hostRole: String
-    let companyName: String
-    let industry: String?
-    let logoUrl: String?
-    let appliedDate: String
-    let coverLetterString: String
+    var placementUuid: String
+    var companyUuid: String?
+    var hostUuid: String?
+    var associationUuid: String?
+    var state: ApplicationState
+    var hostName: String
+    var hostRole: String
+    var roleName: String = ""
+    var companyName: String
+    var industry: String?
+    var logoUrl: String?
+    var appliedDate: String
+    var coverLetterString: String
     
     init(
         placementUuid: F4SUUID,
@@ -40,6 +41,7 @@ struct Application : Codable {
         self.logoUrl = logoUrl
         self.appliedDate = appliedDate
         self.coverLetterString = coverLetterString
+        self.roleName = ""
     }
 
     init(json: ApplicationJson) {
@@ -55,5 +57,6 @@ struct Application : Codable {
         self.logoUrl = json.association?.location?.company?.logo
         self.appliedDate = json.created_at ?? "1700-01-01"
         self.coverLetterString = json.cover_letter ?? ""
+        self.roleName = "role name"
     }
 }
