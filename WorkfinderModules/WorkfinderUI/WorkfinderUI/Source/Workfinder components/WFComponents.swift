@@ -20,7 +20,7 @@ public struct WFComponentsFactory {
     }
     
     static public func makeTextCapsule(
-        heightClass: WFComponentsHeightClass,
+        heightClass: WFCapsuleHeightClass,
         textColor: UIColor? = nil,
         backgroundColor: UIColor? = nil,
         borderColor: UIColor? = nil
@@ -37,15 +37,5 @@ public struct WFComponentsFactory {
         )
     }
     
-}
-
-fileprivate extension WFComponentsHeightClass {
-    var fontSize: CGFloat {
-        switch self {
-        case .small: return 12
-        case .larger: return 14
-        case .clickable: return 16
-        }
-    }
 }
 

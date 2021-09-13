@@ -8,7 +8,7 @@ class F4SSelfLoadingImageViewTests: XCTestCase {
         let defaultImage = createImage()
         let imageToFetch = createImage()
         let mockFetcher = MockImageFetcher(imageToFetch: imageToFetch)
-        let sut = F4SSelfLoadingImageView()
+        let sut = WFSelfLoadingImageView()
         let expectation = XCTestExpectation(description: "")
         sut.load(urlString: nil, defaultImage: defaultImage, fetcher: mockFetcher) {
             XCTAssertEqual(sut.image, defaultImage)
@@ -22,7 +22,7 @@ class F4SSelfLoadingImageViewTests: XCTestCase {
         let defaultImage = createImage()
         let imageToFetch = createImage()
         let mockFetcher = MockImageFetcher(imageToFetch: imageToFetch)
-        let sut = F4SSelfLoadingImageView()
+        let sut = WFSelfLoadingImageView()
         sut.load(urlString: "url/url", defaultImage: defaultImage, fetcher: mockFetcher)
         XCTAssertEqual(sut.image, defaultImage)
     }
@@ -31,7 +31,7 @@ class F4SSelfLoadingImageViewTests: XCTestCase {
         let defaultImage = createImage()
         let imageToFetch = createImage()
         let mockFetcher = MockImageFetcher(imageToFetch: imageToFetch)
-        let sut = F4SSelfLoadingImageView()
+        let sut = WFSelfLoadingImageView()
         let expectation = XCTestExpectation(description: "")
         sut.load(urlString: "url/url", defaultImage: defaultImage, fetcher: mockFetcher) {
             XCTAssertEqual(sut.image, imageToFetch)
@@ -45,7 +45,7 @@ class F4SSelfLoadingImageViewTests: XCTestCase {
         let imageToFetch = createImage()
         let originalFetcher = MockImageFetcher(imageToFetch: nil)
         let mockFetcher = MockImageFetcher(imageToFetch: imageToFetch)
-        let sut = F4SSelfLoadingImageView()
+        let sut = WFSelfLoadingImageView()
         sut.fetcher = originalFetcher
         let expectation = XCTestExpectation(description: "")
         sut.load(urlString: "url/url", defaultImage: defaultImage, fetcher: mockFetcher) {
@@ -59,7 +59,7 @@ class F4SSelfLoadingImageViewTests: XCTestCase {
         let defaultImage = createImage()
         let imageToFetch: UIImage? = nil
         let mockFetcher = MockImageFetcher(imageToFetch: imageToFetch)
-        let sut = F4SSelfLoadingImageView()
+        let sut = WFSelfLoadingImageView()
         let expectation = XCTestExpectation(description: "")
         sut.load(urlString: "url/url", defaultImage: defaultImage, fetcher: mockFetcher) {
             XCTAssertEqual(sut.image, defaultImage)

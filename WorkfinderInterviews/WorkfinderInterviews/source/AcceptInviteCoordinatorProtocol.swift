@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WorkfinderServices
 
 protocol AcceptInviteCoordinatorProtocol: AnyObject {
     var interview: InterviewJson? { get set }

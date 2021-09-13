@@ -10,8 +10,8 @@ import UIKit
 
 public class WFTextCapsule: UIView {
     
-    var heightClass: WFComponentsHeightClass
-    var radius: CGFloat { height / 2.0 }
+    var heightClass: WFCapsuleHeightClass
+    var radius: CGFloat { heightClass.height / 2.0 }
     
     public var text: String? {
         get { label.text }
@@ -19,16 +19,8 @@ public class WFTextCapsule: UIView {
     }
     
     lazy var heightConstraint: NSLayoutConstraint = {
-        heightAnchor.constraint(equalToConstant: height)
+        heightAnchor.constraint(equalToConstant: heightClass.height)
     }()
-    
-    var height: CGFloat {
-        switch heightClass {
-        case .small: return 24
-        case .larger: return 32
-        case .clickable: return 44
-        }
-    }
 
     lazy var label: UILabel = {
         let label = UILabel()
@@ -51,7 +43,7 @@ public class WFTextCapsule: UIView {
     }()
 
     public init(
-        heightClass: WFComponentsHeightClass,
+        heightClass: WFCapsuleHeightClass,
         borderWidth: CGFloat,
         borderColor: UIColor,
         backgroundColor: UIColor,

@@ -55,7 +55,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     func refreshFromPresenter() {
         tableView.reloadData()
         noApplicationsYet.removeFromSuperview()
-        if presenter.numberOfRows(section: 0) == 0 {
+        if presenter.numberOfRows(sectionIndex: 0) == 0 {
             view.addSubview(noApplicationsYet)
             noApplicationsYet.translatesAutoresizingMaskIntoConstraints = false
             noApplicationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -94,7 +94,7 @@ extension ApplicationsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfRows(section: section)
+        return presenter.numberOfRows(sectionIndex: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

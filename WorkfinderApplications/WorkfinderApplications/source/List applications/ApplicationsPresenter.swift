@@ -1,25 +1,92 @@
 import Foundation
 import WorkfinderUI
 import WorkfinderCommon
+import WorkfinderServices
 
-class ApplicationsPresenter {
+
+
+class ApplicationsPresenter: NSObject {
     weak var coordinator: ApplicationsCoordinatorProtocol?
-    let numberOfSections: Int = 1
+    private var table: UITableView?
+    
+    var numberOfSections: Int { Section.allCases.count }
     let service: ApplicationsServiceProtocol
-    var applications: [Application] { pager.items }
     weak var view: WorkfinderViewControllerProtocol?
     var isCandidateSignedIn: () -> Bool
     
+    enum Section: Int, CaseIterable {
+        case upcomingInterviews
+        case offersAndInterviews
+        case applications
+    }
+
+    var myInterviews = [InterviewJson]() {
+        didSet {
+            
+        }
+    }
+    
+    private var offeredInterviews: [InterviewJson] {
+        myInterviews.filter { interview in
+            interview.status == "offered"
+        }
+    }
+
+    private var upcomingInterviews: [InterviewJson] {
+        myInterviews.filter { interview in
+            interview.status == "confirmed" || interview.status == "interview meeting link added"
+        }
+    }
+
+    private var applications = [Application]() {
+        didSet {
+            table?.reloadSections(IndexSet(integer: Section.applications.rawValue), with: .automatic)
+        }
+    }
+    
+    private var offeredApplications = [Application]()
+    
+    private lazy var upcomingInterviewsTableViewCell: UITableViewCell = {
+        let cell = UITableViewCell()
+        let content = cell.contentView
+        cell.contentView.addSubview(upcomingInterviewsCarousel)
+        upcomingInterviewsCarousel.anchor(top: content.topAnchor, leading: content.leadingAnchor, bottom: content.bottomAnchor, trailing: content.trailingAnchor)
+        return cell
+    }()
+    
+    private lazy var upcomingInterviewsCarousel: CarouselView<OfferCell> = {
+        let cellSize = CGSize(width: 255, height: 291)
+        return CarouselView<OfferCell>(cellSize: cellSize)
+    }()
+
+    private lazy var offersAndInterviewsTableViewCell: UITableViewCell = {
+        let cell = UITableViewCell()
+        let content = cell.contentView
+        cell.contentView.addSubview(upcomingInterviewsCarousel)
+        offersAndInterviewsCarousel.anchor(top: content.topAnchor, leading: content.leadingAnchor, bottom: content.bottomAnchor, trailing: content.trailingAnchor)
+        return cell
+    }()
+
+    private var offersAndInterviewsCarousel: CarouselView<InterviewInviteCell> = {
+        let cellSize = CGSize(width: 255, height: 186)
+        return CarouselView<InterviewInviteCell>(cellSize: cellSize)
+    }()
+    
     init(coordinator: ApplicationsCoordinatorProtocol,
          service: ApplicationsService,
-         isCandidateSignedIn: @escaping () -> Bool) {
+         isCandidateSignedIn: @escaping () -> Bool
+    ) {
         self.service = service
         self.coordinator = coordinator
         self.isCandidateSignedIn = isCandidateSignedIn
     }
     
-    func numberOfRows(section: Int) -> Int {
-        return pager.items.count
+    func numberOfRows(sectionIndex: Int) -> Int {
+        guard let section = Section(rawValue: sectionIndex) else { return 0 }
+        switch section {
+        case .upcomingInterviews, .offersAndInterviews: return 1
+        case .applications: return pager.items.count
+        }
     }
     
     func applicationTilePresenterForIndexPath(_ indexPath: IndexPath) -> ApplicationTilePresenter {
@@ -36,18 +103,67 @@ class ApplicationsPresenter {
     }
     
     func loadFirstPage(table: UITableView, completion: @escaping (Error?) -> Void) {
+        table.dataSource = self
+        self.table = table
         guard isCandidateSignedIn() else {
             completion(nil)
             return
         }
-        service.fetchApplications { [weak self] result in
+        loadOfferedApplications { [weak self] optionalError in
             guard let self = self else { return }
-            self.pager.loadFirstPage(table: table, with: result) { error in
+            if let error = optionalError {
+                completion(error)
+            } else {
+                self.loadInterviews { [weak self] optionalError in
+                    guard let self = self else { return }
+                    if let error = optionalError {
+                        completion(error)
+                    } else {
+                        self.loadApplicationsList(completion: completion)
+                    }
+                }
+            }
+        }
+    }
+    
+    func loadOfferedApplications(completion: @escaping (Error?) -> Void) {
+        service.fetchApplicationsWithOpenOffer { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let serverlistJson):
+                self.offeredApplications = serverlistJson.results
+            case .failure(let error):
+                completion(error)
+                break
+            }
+        }
+    }
+    
+    func loadApplicationsList(completion: @escaping (Error?) -> Void) {
+        self.service.fetchAllApplications { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let list):
+                self.applications = list.results
+                completion(nil)
+            case .failure(let error):
                 completion(error)
             }
         }
     }
     
+    func loadInterviews(completion: @escaping (Error?) -> Void) {
+        service.fetchInterviews { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let serverlistJson):
+                self.myInterviews = serverlistJson.results
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
+
     func loadNextPage(tableView: UITableView) {
         guard let nextPage = pager.nextPage else { return }
         pager.isLoading = true
@@ -82,5 +198,36 @@ class ApplicationsPresenter {
         case .unroutable: action = .viewApplication
         }
         coordinator?.performAction(action, for: application, appSource: .applicationsTab)
+    }
+}
+
+extension ApplicationsPresenter: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let section = Section(rawValue: section) else { return 0 }
+        switch section {
+        case .upcomingInterviews:
+            return upcomingInterviews.count
+        case .offersAndInterviews:
+            return offeredInterviews.count
+        case .applications:
+            return applications.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
+        switch section {
+        case .upcomingInterviews:
+            return upcomingInterviewsTableViewCell
+        case .offersAndInterviews:
+            return offersAndInterviewsTableViewCell
+        case .applications:
+            guard let tile = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile
+            else { return UITableViewCell() }
+            let application = applications[indexPath.row]
+            let presenter = ApplicationTilePresenter(application: application)
+            tile.configureWithApplication(presenter)
+            return tile
+        }
     }
 }

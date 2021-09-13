@@ -166,8 +166,8 @@ public class HostLocationAssociationView : UIView {
         return button
     }()
     
-    lazy var image: F4SSelfLoadingImageView = {
-        let view = F4SSelfLoadingImageView()
+    lazy var image: WFSelfLoadingImageView = {
+        let view = WFSelfLoadingImageView()
         view.layer.cornerRadius = 6
         view.layer.masksToBounds = true
         let height = view.heightAnchor.constraint(equalToConstant: 64)

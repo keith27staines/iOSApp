@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WorkfinderServices
 
 class AcceptInvitePresenter {
     

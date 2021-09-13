@@ -9,6 +9,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderUI
 import WorkfinderCoordinators
+import WorkfinderServices
 
 public class WorkfinderInterviewsCoordinator: CoreInjectionNavigationCoordinator {
     

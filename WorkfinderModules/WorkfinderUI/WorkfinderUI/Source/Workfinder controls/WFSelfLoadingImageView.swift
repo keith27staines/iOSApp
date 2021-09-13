@@ -7,7 +7,7 @@ public protocol ImageFetching: AnyObject {
     func cancel()
 }
 
-public class F4SSelfLoadingImageView : UIImageView {
+public class WFSelfLoadingImageView : UIImageView {
     var urlString: String?
     var fetcher: ImageFetching?
     var fetchedImage: UIImage?

@@ -2,14 +2,37 @@ import WorkfinderCommon
 import WorkfinderServices
 
 protocol ApplicationsServiceProtocol: AnyObject {
-    func fetchApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
+    func fetchAllApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
     func fetchNextPage(urlString: String, completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void )
+    func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
+    func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>,Error>) -> Void)
 }
 
 class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
-
-    func fetchApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void) {
-        performNetworkRequest { [weak self] (networkResult) in
+        
+    override init(networkConfig: NetworkConfig) {
+        super.init(networkConfig: networkConfig)
+    }
+    
+    private lazy var interviewService: InterviewServiceProtocol = {
+        InterviewService(networkConfig: networkConfig)
+    }()
+        
+    func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>, Error>) -> Void) {
+        interviewService.fetchInterviews(completion: completion)
+    }
+    
+    func fetchAllApplications(completion: @escaping (Result<ServerListJson<Application>, Error>) -> Void) {
+        fetchApplications(queryItems: [], completion: completion)
+    }
+    
+    func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>, Error>) -> Void) {
+        let offerQueryItems = [URLQueryItem(name: "status", value: "offered"),URLQueryItem(name: "status", value: "interview offered")]
+        fetchApplications(queryItems: offerQueryItems, completion: completion)
+    }
+    
+    private func fetchApplications(queryItems: [URLQueryItem], completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void) {
+        performfetchApplications(queryItems: queryItems) { [weak self] (networkResult) in
             guard let self = self else { return }
             let applicationsResult = self.buildApplicationsResult(networkResult: networkResult)
             completion(applicationsResult)
@@ -20,10 +43,10 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         
     }
 
-    private func performNetworkRequest(completion: @escaping (Result<ServerListJson<ApplicationJson>,Error>) -> Void) {
+    private func performfetchApplications(queryItems: [URLQueryItem] = [], completion: @escaping (Result<ServerListJson<ApplicationJson>,Error>) -> Void) {
         do {
             let relativePath = "placements/"
-            let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
+            let queryItems = [URLQueryItem(name: "expand-association", value: "1")] + queryItems
             let request = try buildRequest(relativePath: relativePath, queryItems: queryItems, verb: .get)
             performTask(
                 with: request,
