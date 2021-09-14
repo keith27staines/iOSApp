@@ -31,7 +31,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     func loadData() {
         messageHandler.showLoadingOverlay(view)
-        presenter.loadFirstPage(table: tableView) { [weak self] optionalError in
+        presenter.loadData(table: tableView) { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.refreshFromPresenter()

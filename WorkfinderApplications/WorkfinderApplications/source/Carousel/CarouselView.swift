@@ -18,7 +18,11 @@ protocol CarouselCellProtocol: UICollectionViewCell {
 class CarouselView<CarouselCell: CarouselCellProtocol>: UIView {
     
     var cellSize: CGSize
-    var cellData = [[CarouselCell.CellData]]()
+    var cellData = [[CarouselCell.CellData]]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     var currentPage: Int = 0
     
     private lazy var collectionView: UICollectionView = {
@@ -40,11 +44,6 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView {
     
     func registerCell(cellClass: AnyClass, withIdentifier identifier: String) {
         collectionView.register(cellClass, forCellWithReuseIdentifier: identifier)
-    }
-    
-    func loadData(_ data: [[CarouselCell.CellData]]) {
-        cellData = data
-        collectionView.reloadData()
     }
     
     override func layoutSubviews() {

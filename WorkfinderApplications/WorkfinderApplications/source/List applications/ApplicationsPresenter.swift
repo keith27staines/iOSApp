@@ -124,7 +124,7 @@ class ApplicationsPresenter: NSObject {
         self.view = view
     }
     
-    func loadFirstPage(table: UITableView, completion: @escaping (Error?) -> Void) {
+    func loadData(table: UITableView, completion: @escaping (Error?) -> Void) {
         table.dataSource = self
         self.table = table
         guard isCandidateSignedIn() else {
