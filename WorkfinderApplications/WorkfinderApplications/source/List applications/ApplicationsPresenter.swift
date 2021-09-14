@@ -20,21 +20,45 @@ class ApplicationsPresenter: NSObject {
         case applications
     }
 
-    var myInterviews = [InterviewJson]() {
-        didSet {
-            
+    var allInterviews = [InterviewJson]()
+    
+    private var offeredInterviews = [InterviewJson]()
+    private var upcomingInterviews = [InterviewJson]()
+    private var offeredApplications = [Application]()
+    
+    private var offersAndInterviews: [[OfferData]] {
+        let data = _offeredApplicationData + _offeredInterviewData
+        return [data]
+    }
+    
+    private var _offeredApplicationData: [OfferData] {
+        offeredApplications.map { application in
+            OfferData(
+                offerType: .placement(uuid: application.placementUuid),
+                imageUrlString: application.logoUrl,
+                defaultImageText: application.companyName,
+                buttonState: .normal,
+                hostName: application.hostName,
+                companyName: application.companyName
+            ) { [weak self] offerData in
+                guard let self = self else { return }
+                
+            }
         }
     }
     
-    private var offeredInterviews: [InterviewJson] {
-        myInterviews.filter { interview in
-            interview.status == "offered"
-        }
-    }
-
-    private var upcomingInterviews: [InterviewJson] {
-        myInterviews.filter { interview in
-            interview.status == "confirmed" || interview.status == "interview meeting link added"
+    private var _offeredInterviewData: [OfferData] {
+        offeredInterviews.map { interview in
+            OfferData(
+                offerType: .interview(id: interview.id ?? -1),
+                imageUrlString: interview.placement?.association?.host?.photo,
+                defaultImageText: interview.placement?.association?.host?.fullname,
+                buttonState: .normal,
+                hostName: interview.placement?.association?.host?.fullname,
+                companyName: interview.placement?.association?.location?.company?.name
+            ) { [weak self] offerData in
+                guard let self = self else { return }
+            }
         }
     }
 
@@ -43,8 +67,6 @@ class ApplicationsPresenter: NSObject {
             table?.reloadSections(IndexSet(integer: Section.applications.rawValue), with: .automatic)
         }
     }
-    
-    private var offeredApplications = [Application]()
     
     private lazy var upcomingInterviewsTableViewCell: UITableViewCell = {
         let cell = UITableViewCell()
@@ -132,12 +154,28 @@ class ApplicationsPresenter: NSObject {
             switch result {
             case .success(let serverlistJson):
                 self.offeredApplications = serverlistJson.results
+                self.offersAndInterviewsCarousel.loadData(<#T##data: [[InterviewInviteData]]##[[InterviewInviteData]]#>)()
+                self.table?.reloadSections(IndexSet[], with: <#T##UITableView.RowAnimation#>)
             case .failure(let error):
                 completion(error)
                 break
             }
         }
     }
+    
+    /*
+     
+     offered
+     myInterviews.filter { interview in
+         interview.status == "offered"
+     }
+     
+     upcoming interviews
+     allInterviews.filter { interview in
+         interview.status == "confirmed" || interview.status == "interview meeting link added"
+     }
+     
+     */
     
     func loadApplicationsList(completion: @escaping (Error?) -> Void) {
         self.service.fetchAllApplications { [weak self] result in
@@ -157,7 +195,7 @@ class ApplicationsPresenter: NSObject {
             guard let self = self else { return }
             switch result {
             case .success(let serverlistJson):
-                self.myInterviews = serverlistJson.results
+                self.allInterviews = serverlistJson.results
             case .failure(let error):
                 completion(error)
             }

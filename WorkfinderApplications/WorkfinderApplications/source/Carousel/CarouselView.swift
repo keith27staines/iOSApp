@@ -42,7 +42,8 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView {
         collectionView.register(cellClass, forCellWithReuseIdentifier: identifier)
     }
     
-    func reloadData() {
+    func loadData(_ data: [[CarouselCell.CellData]]) {
+        cellData = data
         collectionView.reloadData()
     }
     
