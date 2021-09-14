@@ -31,6 +31,10 @@ class ApplicationsPresenter: NSObject {
         return [data]
     }
     
+    private var _upcomingInterviewsData: [InterviewInviteData] {
+        upcomingInterviews.map { interview in InterviewInviteData(interview: interview) }
+    }
+    
     private var _offeredApplicationData: [OfferData] {
         offeredApplications.map { application in
             OfferData(
@@ -76,9 +80,9 @@ class ApplicationsPresenter: NSObject {
         return cell
     }()
     
-    private lazy var upcomingInterviewsCarousel: CarouselView<OfferCell> = {
+    private lazy var upcomingInterviewsCarousel: CarouselView<InterviewInviteCell> = {
         let cellSize = CGSize(width: 255, height: 291)
-        return CarouselView<OfferCell>(cellSize: cellSize)
+        return CarouselView<InterviewInviteCell>(cellSize: cellSize)
     }()
 
     private lazy var offersAndInterviewsTableViewCell: UITableViewCell = {
@@ -89,9 +93,9 @@ class ApplicationsPresenter: NSObject {
         return cell
     }()
 
-    private var offersAndInterviewsCarousel: CarouselView<InterviewInviteCell> = {
+    private var offersAndInterviewsCarousel: CarouselView<OfferCell> = {
         let cellSize = CGSize(width: 255, height: 186)
-        return CarouselView<InterviewInviteCell>(cellSize: cellSize)
+        return CarouselView<OfferCell>(cellSize: cellSize)
     }()
     
     init(coordinator: ApplicationsCoordinatorProtocol,
@@ -142,10 +146,17 @@ class ApplicationsPresenter: NSObject {
                         completion(error)
                     } else {
                         self.loadApplicationsList(completion: completion)
+                        
                     }
                 }
             }
         }
+    }
+    
+    func reloadViews() {
+        offersAndInterviewsCarousel.cellData = [_offeredApplicationData + _offeredInterviewData]
+        upcomingInterviewsCarousel.cellData = []
+        table?.reloadData()
     }
     
     func loadOfferedApplications(completion: @escaping (Error?) -> Void) {
@@ -154,38 +165,10 @@ class ApplicationsPresenter: NSObject {
             switch result {
             case .success(let serverlistJson):
                 self.offeredApplications = serverlistJson.results
-                self.offersAndInterviewsCarousel.loadData(<#T##data: [[InterviewInviteData]]##[[InterviewInviteData]]#>)()
-                self.table?.reloadSections(IndexSet[], with: <#T##UITableView.RowAnimation#>)
-            case .failure(let error):
-                completion(error)
-                break
-            }
-        }
-    }
-    
-    /*
-     
-     offered
-     myInterviews.filter { interview in
-         interview.status == "offered"
-     }
-     
-     upcoming interviews
-     allInterviews.filter { interview in
-         interview.status == "confirmed" || interview.status == "interview meeting link added"
-     }
-     
-     */
-    
-    func loadApplicationsList(completion: @escaping (Error?) -> Void) {
-        self.service.fetchAllApplications { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let list):
-                self.applications = list.results
                 completion(nil)
             case .failure(let error):
                 completion(error)
+                break
             }
         }
     }
@@ -196,6 +179,20 @@ class ApplicationsPresenter: NSObject {
             switch result {
             case .success(let serverlistJson):
                 self.allInterviews = serverlistJson.results
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
+    }
+    
+    func loadApplicationsList(completion: @escaping (Error?) -> Void) {
+        self.service.fetchAllApplications { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let list):
+                self.applications = list.results
+                completion(nil)
             case .failure(let error):
                 completion(error)
             }

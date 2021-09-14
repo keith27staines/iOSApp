@@ -36,7 +36,7 @@ struct OfferData {
     var offerType: OfferType
     var imageUrlString: String?
     var defaultImageText: String?
-    var buttonAction: (() -> Void)?
+    var buttonAction: ((OfferData) -> Void)?
     
     var buttonState: WFButton.State
     private var hostName: String?
@@ -65,9 +65,15 @@ struct OfferData {
          buttonState: WFButton.State = .normal,
          hostName: String?,
          companyName: String?,
-         buttonAction: (OfferData) -> Void
+         buttonAction: @escaping (OfferData) -> Void
     ) {
-        
+        self.offerType = offerType
+        self.imageUrlString = imageUrlString
+        self.defaultImageText = defaultImageText
+        self.buttonState = buttonState
+        self.hostName = hostName
+        self.companyName = companyName
+        self.buttonAction = buttonAction
     }
 }
 

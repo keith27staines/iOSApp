@@ -38,6 +38,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
             self.messageHandler.displayOptionalErrorIfNotNil(
                     optionalError,
                     retryHandler: self.loadData)
+            
         }
     }
     

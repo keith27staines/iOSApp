@@ -57,7 +57,6 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView {
         carouselLayout.minimumLineSpacing = frame.width - cellWidth
         collectionView.collectionViewLayout = carouselLayout
         collectionView.layoutSubviews()
-        reloadData()
     }
     
     private func configureViews() {

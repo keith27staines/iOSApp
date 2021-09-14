@@ -10,15 +10,69 @@ import Foundation
 
 
 import UIKit
+import WorkfinderServices
 import WorkfinderUI
 
 struct InterviewInviteData {
-    var imageUrlString: String?
-    var defaultImageText: String?
+    static var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.timeStyle = .none
+        df.dateFormat = "dd MMM yyyy"
+        return df
+    }()
+    
+    static var timeFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm"
+        return df
+    }()
+    
+    var interviewId: Int
+    var cardTitle: String
+    var inviteText: String
+    var dateText: String
+    var timeText: String
+    var hostNotes: String?
+    var offerMessage: String?
     var buttonAction: (() -> Void)?
     var buttonText: String
     var buttonState: WFButton.State = .normal
-    var text: String?
+    var isButtonHidden: Bool { meetingLink == nil ? true : false }
+    var waitingForLinkText: String?
+    private var interviewJson: InterviewJson?
+    var meetingLink: URL?
+    
+    init(interview: InterviewJson) {
+        interviewJson = interview
+        let host = interview.placement?.association?.host?.fullname ?? ""
+        let inviteTextEnding = host.isEmpty ? "" : " with \(host)"
+        var startTimeText = ""
+        var endTimeText = ""
+        if let startDate = Date.dateFromRfc3339(string: interview.offerStartDate ?? "") {
+            dateText = Self.dateFormatter.string(from: startDate)
+            startTimeText = Self.timeFormatter.string(from: startDate)
+        } else {
+            dateText = ""
+        }
+        if let endDate = Date.dateFromRfc3339(string: interview.offerEndDate ?? "") {
+            endTimeText = Self.timeFormatter.string(from: endDate)
+        }
+        timeText = "\(startTimeText) \(endTimeText)"
+        interviewId = interview.id ?? -1
+        cardTitle = "Interview"
+        inviteText = "You have an upcoming interview\(inviteTextEnding)"
+        hostNotes = interview.additionalOfferNote
+        offerMessage = interview.offerMessage
+        meetingLink = URL(string: interview.meetingLink ?? "")
+        buttonAction = {
+            if let link = URL(string: interview.meetingLink ?? "") {
+                UIApplication.shared.open(link, options: [:], completionHandler: nil)
+            }
+        }
+        buttonText = "Join Video Interview"
+        buttonState = .normal
+        waitingForLinkText = "We will share the meeting link with you when the host submits it to us"
+    }
 }
 
 class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
@@ -27,11 +81,7 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
     static var identifier = "InterviewInviteCell"
     
     func configure(with data: InterviewInviteData) {
-        let defaultImage = UIImage.makeImageFromFirstCharacter(data.defaultImageText ?? "?", size: CGSize(width: imageHeight, height: imageHeight))
-        imageView.load(urlString: data.imageUrlString, defaultImage: defaultImage)
-        button.text = data.buttonText
-        button.state = data.buttonState
-        textLabel.text = data.text
+
     }
 
     var imageHeight: CGFloat = 46
