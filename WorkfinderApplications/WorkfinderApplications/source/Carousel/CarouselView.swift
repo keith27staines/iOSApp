@@ -22,10 +22,56 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     var cellData = [[CarouselCell.CellData]]() {
         didSet {
             collectionView.reloadData()
+            stepper.pageCount = cellData[0].count
         }
     }
-    var currentPage: Int = 0
+    var currentPage: Int {
+        get { stepper.currentPage }
+        set { stepper.currentPage = newValue }
+    }
     let cellPadding = CGFloat(8)
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Carousel title"
+        var style = WFTextStyle.sectionTitle
+        style.color = WFColorPalette.offBlack
+        label.applyStyle(style)
+        return label
+    }()
+    
+    private lazy var stepper:WFPageControl = {
+        let view = WFPageControl( height: 36) {
+            
+        } rightAction: {
+            
+        }
+
+        var style = WFTextStyle.smallLabelTextRegular
+        style.color = WFColorPalette.offBlack
+        view.applyStyle(style)
+        return view
+    }()
+    
+    lazy var headerStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            titleLabel,
+            UIView(),
+            stepper
+        ])
+        stack.axis = .horizontal
+        return stack
+    }()
+    
+    lazy var mainStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            headerStack,
+            collectionView
+        ])
+        stack.axis = .vertical
+        stack.spacing = WFMetrics.standardSpace
+        return stack
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = Layout(cellPadding: cellPadding, cellSize: cellSize)
@@ -48,15 +94,16 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     }
     
     private func configureViews() {
-        addSubview(collectionView)
-        collectionView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        addSubview(mainStack)
+        mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
     }
     
-    init(cellSize: CGSize) {
+    init(cellSize: CGSize, title: String) {
         self.cellSize = cellSize
         super.init(frame: .zero)
         configureViews()
-        heightAnchor.constraint(equalToConstant: cellSize.height).isActive = true
+        titleLabel.text = title
+        collectionView.heightAnchor.constraint(equalToConstant: cellSize.height).isActive = true
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
