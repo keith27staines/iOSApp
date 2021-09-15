@@ -79,9 +79,11 @@ struct OfferData {
 
 class OfferCell: UICollectionViewCell, CarouselCellProtocol {
     typealias CellData = OfferData
-    static var identifier = "OffersCell"
+    static var identifier = "OfferCell"
+    private var _size = CGSize(width: 0, height: 0)
     
-    func configure(with data: OfferData) {
+    func configure(with data: OfferData, size: CGSize) {
+        _size = size
         let defaultImage = UIImage.makeImageFromFirstCharacter(data.defaultImageText ?? "?", size: CGSize(width: imageHeight, height: imageHeight))
         imageView.load(urlString: data.imageUrlString, defaultImage: defaultImage)
         button.text = data.buttonText
@@ -95,8 +97,18 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
     let space = WFMetrics.standardSpace
     let halfspace = WFMetrics.halfSpace
     
+    private lazy var imageStack: UIStackView = {
+        let variableSpace = UIView()
+        variableSpace.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        let stack = UIStackView(arrangedSubviews: [imageView, variableSpace])
+        stack.axis = .horizontal
+        return stack
+    }()
+    
     private lazy var imageView: WFSelfLoadingImageView = {
         let view = WFSelfLoadingImageView()
+        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        view.contentMode = .scaleAspectFit
         view.heightAnchor.constraint(equalToConstant: 46).isActive = true
         return view
     }()
@@ -115,10 +127,14 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
         return button
     }()
     
+    override var intrinsicContentSize: CGSize {
+        _size
+    }
+    
     private lazy var mainStack: UIStackView = {
         let variableSpace = UIView()
         let stack = UIStackView(arrangedSubviews: [
-                imageView,
+                imageStack,
                 textLabel,
                 variableSpace,
                 button
@@ -133,17 +149,20 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
         let view = UIView()
         view.addSubview(mainStack)
         mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: space, left: space, bottom: space, right: space))
-
+        view.layer.borderWidth = 1
+        view.layer.borderColor = WFColorPalette.grayBorder.cgColor
+        view.layer.cornerRadius = space
+        view.layer.masksToBounds = true
         return view
     }()
     
     func configureViews() {
-        contentView.addSubview(mainStack)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        contentView.addSubview(tile)
+        tile.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
     }
 
-    init(frameHeight: CGFloat, imageHeight: CGFloat, buttonHeight: CGFloat) {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureViews()
     }
     

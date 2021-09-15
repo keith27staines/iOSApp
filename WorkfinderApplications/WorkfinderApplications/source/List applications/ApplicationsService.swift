@@ -5,7 +5,7 @@ protocol ApplicationsServiceProtocol: AnyObject {
     func fetchAllApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
     func fetchNextPage(urlString: String, completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void )
     func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
-    func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>,Error>) -> Void)
+    func fetchInterviews(completion: @escaping (Result<[InterviewJson],Error>) -> Void)
 }
 
 class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
@@ -18,7 +18,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         InterviewService(networkConfig: networkConfig)
     }()
         
-    func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>, Error>) -> Void) {
+    func fetchInterviews(completion: @escaping (Result<[InterviewJson], Error>) -> Void) {
         interviewService.fetchInterviews(completion: completion)
     }
     
@@ -50,6 +50,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
             let request = try buildRequest(relativePath: relativePath, queryItems: queryItems, verb: .get)
             performTask(
                 with: request,
+                verbose: true,
                 completion: completion,
                 attempting: #function)
         } catch {
@@ -115,5 +116,6 @@ struct ApplicationJson: Codable {
     var salary: String?
     var supporting_link: String?
     var associated_project: F4SUUID?
+    var associated_project_name: String?
 }
 

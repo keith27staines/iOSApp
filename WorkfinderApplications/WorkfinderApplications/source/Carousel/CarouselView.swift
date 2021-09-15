@@ -12,61 +12,51 @@ import WorkfinderUI
 protocol CarouselCellProtocol: UICollectionViewCell {
     associatedtype CellData
     static var identifier: String { get }
-    func configure(with data: CellData)
+    func configure(with data: CellData, size: CGSize)
 }
 
-class CarouselView<CarouselCell: CarouselCellProtocol>: UIView {
+class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var cellSize: CGSize
+    
     var cellData = [[CarouselCell.CellData]]() {
         didSet {
             collectionView.reloadData()
         }
     }
     var currentPage: Int = 0
+    let cellPadding = CGFloat(8)
     
     private lazy var collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        addSubview(collection)
-        collection.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        let layout = Layout(cellPadding: cellPadding, cellSize: cellSize)
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.showsHorizontalScrollIndicator = false
-        collection.isPagingEnabled = true
         collection.backgroundColor = .clear
-        collection.dataSource = self as? UICollectionViewDataSource
-        collection.delegate = self as? UICollectionViewDelegate
+        collection.dataSource = self
+        collection.delegate = self
+        collection.decelerationRate = .fast
         return collection
     }()
     
     func configure(_ cell: CarouselCell, withDataForIndexPath indexPath: IndexPath) {
         let data = cellData[indexPath.section][indexPath.row]
-        cell.configure(with: data)
+        cell.configure(with: data, size: cellSize)
     }
     
     func registerCell(cellClass: AnyClass, withIdentifier identifier: String) {
         collectionView.register(cellClass, forCellWithReuseIdentifier: identifier)
     }
     
-    override func layoutSubviews() {
-        let cellWidth = cellSize.width
-        let cellHeight = cellSize.height
-        let cellPadding = (frame.width - cellWidth) / 2
-        let carouselLayout = UICollectionViewFlowLayout()
-        carouselLayout.scrollDirection = .horizontal
-        carouselLayout.itemSize = .init(width: cellWidth, height: cellHeight)
-        carouselLayout.sectionInset = .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
-        carouselLayout.minimumLineSpacing = frame.width - cellWidth
-        collectionView.collectionViewLayout = carouselLayout
-        collectionView.layoutSubviews()
-    }
-    
     private func configureViews() {
-
+        addSubview(collectionView)
+        collectionView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
     }
     
     init(cellSize: CGSize) {
         self.cellSize = cellSize
         super.init(frame: .zero)
         configureViews()
+        heightAnchor.constraint(equalToConstant: cellSize.height).isActive = true
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -77,13 +67,15 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView {
         cellData.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { cellData[section].count }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        cellData[section].count
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let data = cellData[indexPath.section][indexPath.row]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.identifier, for: indexPath) as? CarouselCell
         else { return UICollectionViewCell() }
-        cell.configure(with: data)
+        cell.configure(with: data, size: cellSize)
         return cell
     }
     
@@ -110,5 +102,39 @@ private extension CarouselView {
             return visibleIndexPath.row
         }
         return currentPage
+    }
+}
+
+class Layout: UICollectionViewFlowLayout {
+    
+    let cellPadding: CGFloat
+    
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        guard let collectionView = collectionView else { return CGPoint.zero }
+        var offsetAdjustment = CGFloat.greatestFiniteMagnitude
+        let horizontalOffset = proposedContentOffset.x
+        let targetRect = CGRect(origin: CGPoint(x: proposedContentOffset.x, y: 0), size: collectionView.bounds.size)
+
+        for layoutAttributes in super.layoutAttributesForElements(in: targetRect)! {
+            let itemOffset = layoutAttributes.frame.origin.x
+            if (abs(itemOffset - horizontalOffset) < abs(offsetAdjustment)) {
+                offsetAdjustment = itemOffset - horizontalOffset
+            }
+        }
+        return CGPoint(x: proposedContentOffset.x + offsetAdjustment, y: proposedContentOffset.y)
+    }
+    
+    init(cellPadding: CGFloat, cellSize: CGSize) {
+        self.cellPadding = cellPadding
+        super.init()
+        self.itemSize = cellSize
+        self.minimumInteritemSpacing = cellPadding;
+        self.minimumLineSpacing = cellPadding;
+        self.scrollDirection = .horizontal
+        self.sectionInset = UIEdgeInsets(top: 0, left: cellPadding, bottom: 0, right: cellPadding + cellSize.width/2)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

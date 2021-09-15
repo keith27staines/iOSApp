@@ -90,7 +90,6 @@ public struct InterviewJson: Codable {
         }
         
         public struct ProjectJson: Codable {
-            public var id: Int
             public var uuid: String?
             public var aboutCandidate: String?
             public var additionalComments: String?
@@ -119,7 +118,6 @@ public struct InterviewJson: Codable {
             public var isCandidateLocationRequired: Bool?
             
             private enum CodingKeys: String, CodingKey {
-                case id
                 case uuid
                 case aboutCandidate = "about_candidate"
                 case additionalComments = "additional_comments"
@@ -175,8 +173,13 @@ public struct InterviewJson: Codable {
             public var addressStreet: String?
             public var addressCity: String?
             public var addressRegion: String?
-            public var addressCountry: String?
+            public var addressCountry: Country?
             public var addressPostcode: String?
+            
+            public struct Country: Codable {
+                var name: String?
+                var code: String?
+            }
             
             private enum CodingKeys: String, CodingKey {
                 case uuid

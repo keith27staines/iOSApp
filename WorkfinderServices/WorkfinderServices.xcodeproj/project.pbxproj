@@ -11,6 +11,7 @@
 		53A0F7E826EC95F1007F6D35 /* InterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7E726EC95F1007F6D35 /* InterviewService.swift */; };
 		53A0F7EA26EC963D007F6D35 /* InterviewJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7E926EC963D007F6D35 /* InterviewJson.swift */; };
 		53A0F7EC26EC964F007F6D35 /* AcceptInviteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7EB26EC964F007F6D35 /* AcceptInviteService.swift */; };
+		53A0F7F226F0DD0D007F6D35 /* InterviewJsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7F126F0DD0D007F6D35 /* InterviewJsonTests.swift */; };
 		FC0100B4248A0789007D8020 /* CompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0100B3248A0789007D8020 /* CompanyService.swift */; };
 		FC0100B6248A15B9007D8020 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0100B5248A15B9007D8020 /* LocationService.swift */; };
 		FC02D9F922EC70FD003C8148 /* WorkfinderServices.h in Headers */ = {isa = PBXBuildFile; fileRef = FC02D9EB22EC70FD003C8148 /* WorkfinderServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,6 +49,8 @@
 		53A0F7E726EC95F1007F6D35 /* InterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewService.swift; sourceTree = "<group>"; };
 		53A0F7E926EC963D007F6D35 /* InterviewJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewJson.swift; sourceTree = "<group>"; };
 		53A0F7EB26EC964F007F6D35 /* AcceptInviteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInviteService.swift; sourceTree = "<group>"; };
+		53A0F7F026F0DD0D007F6D35 /* WorkfinderServicesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WorkfinderServicesTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		53A0F7F126F0DD0D007F6D35 /* InterviewJsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewJsonTests.swift; sourceTree = "<group>"; };
 		FC0100B3248A0789007D8020 /* CompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyService.swift; sourceTree = "<group>"; };
 		FC0100B5248A15B9007D8020 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		FC02D9E822EC70FD003C8148 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				FCCAAEC0249B41F500EA13BD /* Info.plist */,
+				53A0F7F126F0DD0D007F6D35 /* InterviewJsonTests.swift */,
+				53A0F7F026F0DD0D007F6D35 /* WorkfinderServicesTests-Bridging-Header.h */,
 			);
 			path = WorkfinderServicesTests;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 					};
 					FCCAAEBB249B41F500EA13BD = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -345,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53A0F7F226F0DD0D007F6D35 /* InterviewJsonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,6 +818,7 @@
 		FCCAAEC4249B41F500EA13BD /* DebugDevelop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderServicesTests/Info.plist;
@@ -822,6 +830,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServicesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WorkfinderServicesTests/WorkfinderServicesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -830,6 +840,7 @@
 		FCCAAEC5249B41F500EA13BD /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderServicesTests/Info.plist;
@@ -841,6 +852,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServicesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WorkfinderServicesTests/WorkfinderServicesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -849,6 +862,7 @@
 		FCCAAEC6249B41F500EA13BD /* DebugLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderServicesTests/Info.plist;
@@ -860,6 +874,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServicesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WorkfinderServicesTests/WorkfinderServicesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -868,6 +884,7 @@
 		FCCAAEC8249B41F500EA13BD /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderServicesTests/Info.plist;
@@ -879,6 +896,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServicesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WorkfinderServicesTests/WorkfinderServicesTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -887,6 +905,7 @@
 		FCCAAEC9249B41F500EA13BD /* ReleaseLive */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YB7C23CK6Q;
 				INFOPLIST_FILE = WorkfinderServicesTests/Info.plist;
@@ -898,6 +917,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.workfinder.WorkfinderServicesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WorkfinderServicesTests/WorkfinderServicesTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

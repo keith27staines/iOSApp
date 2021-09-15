@@ -45,10 +45,10 @@ public protocol TabNavigating: AnyObject {
 }
 
 public enum TabIndex : Int, CaseIterable {
-    // The order of the cases will determine the order of the tabs on the tab bar
-    case applications
-    case home
+    // The order of the cases will determine the order of the tabs on the tab bar    
     case recommendations
+    case home
+    case applications
     case account
 }
 

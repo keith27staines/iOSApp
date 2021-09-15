@@ -79,9 +79,10 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
 
     typealias CellData = InterviewInviteData
     static var identifier = "InterviewInviteCell"
+    private var _size = CGSize.zero
     
-    func configure(with data: InterviewInviteData) {
-
+    func configure(with data: InterviewInviteData, size: CGSize) {
+        _size = size
     }
 
     var imageHeight: CGFloat = 46
@@ -95,6 +96,10 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
         view.heightAnchor.constraint(equalToConstant: 46).isActive = true
         return view
     }()
+    
+    override var intrinsicContentSize: CGSize {
+        _size
+    }
     
     private lazy var textLabel: UILabel = {
         let label = UILabel()
@@ -137,8 +142,8 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
         mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
     }
 
-    init(frameHeight: CGFloat, imageHeight: CGFloat, buttonHeight: CGFloat) {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureViews()
     }
     

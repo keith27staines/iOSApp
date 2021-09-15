@@ -25,7 +25,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        refreshFromPresenter()
         loadData()
     }
     
@@ -44,7 +43,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     lazy var noApplicationsYet:UILabel = {
         let label = UILabel()
-        label.text = "You haven't made an application yet.\n\nWhy not search for companies and make an application now?"
+        label.text = noApplicationsMessage
         label.font = WorkfinderFonts.title2
         label.textColor = WorkfinderColors.textLight
         label.backgroundColor = WorkfinderColors.white
@@ -53,11 +52,21 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         return label
     }()
     
+    var noApplicationsMessage: String {
+        switch presenter.isCandidateSignedIn() {
+        case true:
+            return presenter.isDataShown ? "" : "You don't appear to have made any applications yet.\n\nWhy not search for companies and make an application now?"
+        case false:
+            return "If you are signed-in and you have made applications, they will appear here"
+        }
+    }
+    
     func refreshFromPresenter() {
         tableView.reloadData()
         noApplicationsYet.removeFromSuperview()
-        if presenter.numberOfRows(sectionIndex: 0) == 0 {
+        if !presenter.isDataShown {
             view.addSubview(noApplicationsYet)
+            noApplicationsYet.text = noApplicationsMessage
             noApplicationsYet.translatesAutoresizingMaskIntoConstraints = false
             noApplicationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
             noApplicationsYet.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -85,26 +94,11 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         tableView.register(ApplicationTile.self, forCellReuseIdentifier: ApplicationTile.reuseIdentifier)
         tableView.separatorStyle = .none
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = presenter
         return tableView
     }()
  
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-}
-extension ApplicationsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { 1 }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numberOfRows(sectionIndex: section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile else { return UITableViewCell() }
-        let application = presenter.applicationTilePresenterForIndexPath(indexPath)
-        cell.configureWithApplication(application)
-        if indexPath.row >= presenter.pager.triggerRow { presenter.loadNextPage(tableView: tableView) }
-        return cell
-    }
 }
 
 extension ApplicationsViewController: UITableViewDelegate {
@@ -113,6 +107,11 @@ extension ApplicationsViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter.onTapApplication(at: indexPath)
+        guard indexPath.section == 2 else { return }
+        presenter.onTapApplication(at: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        indexPath.section == 2 ? indexPath : nil
     }
 }

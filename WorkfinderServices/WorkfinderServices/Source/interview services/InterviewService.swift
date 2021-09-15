@@ -9,7 +9,7 @@
 import WorkfinderCommon
 
 public protocol InterviewServiceProtocol {
-    func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>,Error>) -> Void)
+    func fetchInterviews(completion: @escaping (Result<[InterviewJson],Error>) -> Void)
     func fetchInterview(id: Int, completion: @escaping (Result<InterviewJson,Error>) -> Void)
 }
 
@@ -17,7 +17,7 @@ public class InterviewService: WorkfinderService, InterviewServiceProtocol {
     
     let relativePath = "candidate-interviews/"
     
-    public func fetchInterviews(completion: @escaping (Result<ServerListJson<InterviewJson>, Error>) -> Void) {
+    public func fetchInterviews(completion: @escaping (Result<[InterviewJson], Error>) -> Void) {
         do {
             let request = try buildRequest(relativePath: relativePath, queryItems: nil, verb: .get)
             performTask(with: request, verbose: true ,completion: completion, attempting: #function)

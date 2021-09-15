@@ -70,22 +70,24 @@ public class WFButton: UIView {
         self.heightClass = heightClass
         self.state = .normal
         super.init(frame: CGRect.zero)
-        heightAnchor.constraint(equalToConstant: heightClass.height).isActive = true
         layer.cornerRadius = isCapsule ? heightClass.height / 2.0 : 0
         layer.masksToBounds = true
+        configureViews()
     }
     
     func configureViews() {
+        heightAnchor.constraint(equalToConstant: heightClass.height).isActive = true
         addSubview(label)
         label.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(_tapped)))
+        //addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(_tapped)))
     }
     
     @objc func _tapped(sender: UITapGestureRecognizer)  {
         guard state != .disabled else { return }
         switch sender.state {
         case .began, .changed: state = .highlighted
+            print("here!")
         case .ended:
             state = .normal
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -95,14 +97,25 @@ public class WFButton: UIView {
         }
     }
     
-//    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard state != .disabled else { return }
-//        state = .highlighted
-//    }
-//
-//    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        <#code#>
-//    }
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard state != .disabled else { return }
+        state = .highlighted
+        super.touchesBegan(touches, with: event)
+    }
+
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
+            self.state = .normal
+            self.buttonTapped?()
+        }
+        super.touchesEnded(touches, with: event)
+    }
+    
+    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        state = .normal
+        super.touchesCancelled(touches, with: event)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

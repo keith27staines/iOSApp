@@ -15,6 +15,7 @@ struct Application : Codable {
     var logoUrl: String?
     var appliedDate: String
     var coverLetterString: String
+    var projectName: String
     
     init(
         placementUuid: F4SUUID,
@@ -28,7 +29,9 @@ struct Application : Codable {
         industry: String,
         logoUrl: String,
         appliedDate: String,
-        coverLetterString: String) {
+        coverLetterString: String,
+        projectName: String
+    ) {
         self.placementUuid = placementUuid
         self.companyUuid = companyUuid
         self.hostUuid = hostUuid
@@ -41,7 +44,7 @@ struct Application : Codable {
         self.logoUrl = logoUrl
         self.appliedDate = appliedDate
         self.coverLetterString = coverLetterString
-        self.roleName = ""
+        self.projectName = projectName
     }
 
     init(json: ApplicationJson) {
@@ -57,6 +60,6 @@ struct Application : Codable {
         self.logoUrl = json.association?.location?.company?.logo
         self.appliedDate = json.created_at ?? "1700-01-01"
         self.coverLetterString = json.cover_letter ?? ""
-        self.roleName = "role name"
+        self.projectName = json.associated_project_name ?? ""
     }
 }
