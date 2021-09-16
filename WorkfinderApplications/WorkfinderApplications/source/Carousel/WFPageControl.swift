@@ -63,8 +63,8 @@ class WFPageControl: UIView {
         return view
     }()
     
-    private lazy var leftButton: UIButton = {
-        let button = UIButton()
+    private lazy var leftButton: FloatingRoundButton = {
+        let button = FloatingRoundButton()
         button.setTitle("<", for: .normal)
         button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
         button.setTitleColor(WFColorPalette.gray1, for: .disabled)
@@ -72,8 +72,8 @@ class WFPageControl: UIView {
         return button
     }()
     
-    private lazy var rightButton: UIButton = {
-        let button = UIButton()
+    private lazy var rightButton: FloatingRoundButton = {
+        let button = FloatingRoundButton()
         button.setTitle(">", for: .normal)
         button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
         button.setTitleColor(WFColorPalette.gray1, for: .disabled)
@@ -121,38 +121,31 @@ class WFPageControl: UIView {
         rightButtonContainer.widthAnchor.constraint(equalTo: leftButtonContainer.widthAnchor).isActive = true
 
     }
-    var buttonsLaidOut: Bool = false
-    override func layoutSubviews() {
-        guard buttonsLaidOut == false else { return }
-        buttonsLaidOut = true
-        leftButton.makeRoundedAndShadowed(cornerRadius: cornerRadius, shadowRadius: shadowRadius)
-        rightButton.makeRoundedAndShadowed(cornerRadius: cornerRadius, shadowRadius: shadowRadius)
-    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension UIView {
-    
-    func makeRoundedAndShadowed(cornerRadius: CGFloat, shadowRadius: CGFloat) {
-        backgroundColor = UIColor.blue
-        layer.cornerRadius = cornerRadius
-        layer.borderWidth = 0.5
-        layer.shadowColor = UIColor.black.cgColor
-        layer.opacity = 0.5
-        layer.shadowRadius = 50
-        layer.borderColor = WFColorPalette.offWhite.cgColor
-        //layer.masksToBounds = true
-//        let shadowLayer = CAShapeLayer()
-//        layer.masksToBounds = true
-//        shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-//        shadowLayer.fillColor = UIColor.clear.cgColor
-//        shadowLayer.shadowColor = UIColor.black.cgColor
-//        shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-//        shadowLayer.shadowOpacity = 0.85
-//        shadowLayer.shadowRadius = shadowRadius
-//        layer.insertSublayer(shadowLayer, at: 0)
+
+final class FloatingRoundButton: UIButton {
+
+    private var shadowLayer: CAShapeLayer?
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if shadowLayer == nil {
+            let shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: frame.height/2).cgPath
+            shadowLayer.fillColor = UIColor.white.cgColor
+            shadowLayer.shadowColor = UIColor.darkGray.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+            shadowLayer.shadowOpacity = 0.15
+            shadowLayer.shadowRadius = 2
+            layer.insertSublayer(shadowLayer, at: 0)
+            self.shadowLayer = shadowLayer
+        }
     }
+
 }
