@@ -23,13 +23,28 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
         didSet {
             collectionView.reloadData()
             stepper.pageCount = cellData[0].count
+            stepper.currentPageIndex = 0
         }
     }
-    var currentPage: Int {
-        get { stepper.currentPage }
-        set { stepper.currentPage = newValue }
+    var currentPageIndex: Int {
+        get { stepper.currentPageIndex }
+        set {
+            stepper.currentPageIndex = newValue
+            highlightPage(newValue)
+        }
     }
     let cellPadding = CGFloat(8)
+    
+    func highlightPage(_ pageIndex: Int) {
+        guard cellData[0].count > 0 else { return }
+        collectionView.visibleCells.forEach { cell in
+            cell.contentView.alpha = 0.5
+        }
+        let highlightCell = collectionView(collectionView, cellForItemAt: IndexPath(row: pageIndex, section: 0))
+        print("highlighting \(pageIndex), current alpha = \(highlightCell.contentView.alpha)")
+        highlightCell.contentView.alpha = 1
+        collectionView.reloadItems(at: [IndexPath(row: pageIndex, section: 0)])
+    }
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -41,17 +56,24 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     }()
     
     private lazy var stepper:WFPageControl = {
-        let view = WFPageControl( height: 36) {
-            
-        } rightAction: {
-            
+        let stepper = WFPageControl( height: 36) { [weak self] in
+            self?.scrollToStepper(forwards: false)
+        } rightAction: { [weak self] in
+            self?.scrollToStepper(forwards: true)
         }
-
         var style = WFTextStyle.smallLabelTextRegular
         style.color = WFColorPalette.offBlack
-        view.applyStyle(style)
-        return view
+        stepper.applyStyle(style)
+        return stepper
     }()
+    
+    private func scrollToStepper(forwards: Bool) {
+        let target = stepper.currentPageIndex + 1 * (forwards == true ? 1 : -1)
+        guard (0..<stepper.pageCount).contains(target) else {
+            return
+        }
+        collectionView.scrollToItem(at: IndexPath(row: target, section: 0), at: .left, animated: true)
+    }
     
     lazy var headerStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -62,6 +84,11 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
         stack.axis = .horizontal
         return stack
     }()
+    
+    override func layoutSubviews() {
+        collectionView.reloadData()
+        currentPageIndex = stepper.currentPageIndex
+    }
     
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
@@ -123,20 +150,21 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.identifier, for: indexPath) as? CarouselCell
         else { return UICollectionViewCell() }
         cell.configure(with: data, size: cellSize)
+        cell.contentView.alpha = indexPath.row == stepper.currentPageIndex ? 1 : 0.5
         return cell
     }
     
     // MARK:- UICollectionViewDelegate
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        currentPage = getCurrentPage()
+        currentPageIndex = getCurrentPage()
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        currentPage = getCurrentPage()
+        currentPageIndex = getCurrentPage()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        currentPage = getCurrentPage()
+        currentPageIndex = getCurrentPage()
     }
 }
 
@@ -148,7 +176,7 @@ private extension CarouselView {
         if let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) {
             return visibleIndexPath.row
         }
-        return currentPage
+        return currentPageIndex
     }
 }
 

@@ -22,21 +22,21 @@ class WFPageControl: UIView {
     
     var pageCount: Int = 5 {
         didSet {
-            currentPage = 0
+            currentPageIndex = 0
             setText()
         }
     }
     
-    var currentPage = 0 {
+    var currentPageIndex = 0 {
         didSet {
             setText()
         }
     }
     
     private func setText() {
-        leftButton.isEnabled = currentPage > 0
-        rightButton.isEnabled = currentPage < pageCount - 1
-        label.text = "\(currentPage+1)/\(pageCount)"
+        leftButton.isEnabled = currentPageIndex > 0
+        rightButton.isEnabled = currentPageIndex < pageCount - 1
+        label.text = "\(currentPageIndex+1)/\(pageCount)"
     }
 
     private lazy var leftButtonContainer: UIView = {
@@ -119,6 +119,12 @@ class WFPageControl: UIView {
         widthAnchor.constraint(equalToConstant: 3 * height).isActive = true
         leftButtonContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3).isActive = true
         rightButtonContainer.widthAnchor.constraint(equalTo: leftButtonContainer.widthAnchor).isActive = true
+
+    }
+    var buttonsLaidOut: Bool = false
+    override func layoutSubviews() {
+        guard buttonsLaidOut == false else { return }
+        buttonsLaidOut = true
         leftButton.makeRoundedAndShadowed(cornerRadius: cornerRadius, shadowRadius: shadowRadius)
         rightButton.makeRoundedAndShadowed(cornerRadius: cornerRadius, shadowRadius: shadowRadius)
     }
@@ -131,17 +137,22 @@ class WFPageControl: UIView {
 extension UIView {
     
     func makeRoundedAndShadowed(cornerRadius: CGFloat, shadowRadius: CGFloat) {
-        let shadowLayer = CAShapeLayer()
+        backgroundColor = UIColor.blue
         layer.cornerRadius = cornerRadius
         layer.borderWidth = 0.5
+        layer.shadowColor = UIColor.black.cgColor
+        layer.opacity = 0.5
+        layer.shadowRadius = 50
         layer.borderColor = WFColorPalette.offWhite.cgColor
-        layer.masksToBounds = true
-        shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-        shadowLayer.fillColor = UIColor.clear.cgColor
-        shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        shadowLayer.shadowOpacity = 0.85
-        shadowLayer.shadowRadius = shadowRadius
-        layer.insertSublayer(shadowLayer, at: 0)
+        //layer.masksToBounds = true
+//        let shadowLayer = CAShapeLayer()
+//        layer.masksToBounds = true
+//        shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+//        shadowLayer.fillColor = UIColor.clear.cgColor
+//        shadowLayer.shadowColor = UIColor.black.cgColor
+//        shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+//        shadowLayer.shadowOpacity = 0.85
+//        shadowLayer.shadowRadius = shadowRadius
+//        layer.insertSublayer(shadowLayer, at: 0)
     }
 }
