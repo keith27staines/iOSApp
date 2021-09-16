@@ -115,16 +115,24 @@ extension ApplicationsViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section == 2 else { return }
+        guard let section = ApplicationsPresenter.Section(rawValue: indexPath.section), section == .applications else {
+            return 
+        }
         presenter.onTapApplication(at: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        indexPath.section == 2 ? indexPath : nil
+        guard let section = ApplicationsPresenter.Section(rawValue: indexPath.section), section == .applications else {
+            return nil
+        }
+        return indexPath
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        indexPath.section == 2 ? true : false
+        guard let section = ApplicationsPresenter.Section(rawValue: indexPath.section), section == .applications else {
+            return false
+        }
+        return section == .applications
     }
 
 }

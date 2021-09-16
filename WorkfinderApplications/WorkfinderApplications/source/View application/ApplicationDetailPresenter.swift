@@ -36,33 +36,32 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
             return ApplicationDetailCellInfo(heading: self.companyName, subheading: self.companyCaption)
         case 1:
             return ApplicationDetailCellInfo(heading: self.hostName, subheading: self.hostCaption)
-//        case 2:
-//            return ApplicationDetailCellInfo(heading: "Documents", subheading: "0 files")
         default: return ApplicationDetailCellInfo()
         }
     }
     
-    var companyCaption: String? { applicationDetail?.industry}
-    var hostName: String? { applicationDetail?.hostName }
-    var hostCaption: String? { applicationDetail?.hostRole }
-    var coverLetterText: String? { applicationDetail?.coverLetterString }
-    var companyName: String? { applicationDetail?.companyName }
+    var companyCaption: String? { application?.industry}
+    var hostName: String? { application?.hostName }
+    var hostCaption: String? { application?.hostRole }
+    var coverLetterText: String? { application?.coverLetterString }
+    var companyName: String? { application?.companyName }
     
+    let placementUuid: F4SUUID
     let applicationService: PlacementDetailServiceProtocol
     let coordinator: ApplicationsCoordinatorProtocol
-    let application: Application
-    var applicationDetail: Application?
+    var application: Application?
     
-    var screenTitle: String { application.state.screenTitle }
-    var stateDescription: String { application.state.description }
-    var logoUrl: String? { application.logoUrl }
+    var screenTitle: String { application?.state.screenTitle ?? "" }
+    var stateDescription: String { application?.state.description ?? "" }
+    var logoUrl: String? { application?.state.description ?? "" }
     
     init(coordinator: ApplicationsCoordinatorProtocol,
          applicationService: ApplicationDetailService,
-         application: Application) {
+         placementUuid: F4SUUID
+    ) {
         self.applicationService = applicationService
         self.coordinator = coordinator
-        self.application = application
+        self.placementUuid = placementUuid
     }
     
     func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
@@ -70,11 +69,11 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        applicationService.fetchApplication(placementUuid: application.placementUuid) { [weak self] (result) in
+        applicationService.fetchApplication(placementUuid: placementUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let applicationDetail):
-                self.applicationDetail = applicationDetail
+                self.application = applicationDetail
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -83,9 +82,10 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     }
     
     func onTapDetail(indexPath: IndexPath) {
+        guard let applicationDetail = application else { return }
         switch indexPath.row {
-        case 0: coordinator.showCompany(application: application)
-        case 1: coordinator.showCompanyHost(application: application)
+        case 0: coordinator.showCompany(application: applicationDetail)
+        case 1: coordinator.showCompanyHost(application: applicationDetail)
         default: break
         }
     }

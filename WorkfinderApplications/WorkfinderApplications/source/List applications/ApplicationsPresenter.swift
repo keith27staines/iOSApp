@@ -48,7 +48,7 @@ class ApplicationsPresenter: NSObject {
                 companyName: application.companyName
             ) { [weak self] offerData in
                 guard let self = self else { return }
-                
+                self.coordinator?.performAction(.viewOffer, for: application.placementUuid, appSource: .applicationsTab)
             }
         }
     }
@@ -157,7 +157,9 @@ class ApplicationsPresenter: NSObject {
             guard let self = self else { return }
             switch result {
             case .success(let serverlistJson):
-                self.offeredApplications = serverlistJson.results
+                self.offeredApplications = serverlistJson.results.filter({ application in
+                    application.state == .offered
+                })
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -191,17 +193,6 @@ class ApplicationsPresenter: NSObject {
             }
         }
     }
-
-//    func loadNextPage(tableView: UITableView) {
-//        guard let nextPage = pager.nextPage else { return }
-//        pager.isLoading = true
-//        service.fetchNextPage(urlString: nextPage) { [weak self] (result) in
-//            guard let self = self else { return }
-//            self.pager.loadNextPage(table: tableView, with: result)
-//        }
-//    }
-    
-    // var pager = ServerListPager<Application>()
     
     func onTapApplication(at row: Int) {
         let application = applicationForRow(row)
@@ -225,7 +216,7 @@ class ApplicationsPresenter: NSObject {
         case .interviewDeclined: action = .viewApplication
         case .unroutable: action = .viewApplication
         }
-        coordinator?.performAction(action, for: application, appSource: .applicationsTab)
+        coordinator?.performAction(action, for: application.placementUuid, appSource: .applicationsTab)
     }
 }
 

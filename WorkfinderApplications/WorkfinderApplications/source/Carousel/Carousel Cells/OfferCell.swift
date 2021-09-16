@@ -36,7 +36,7 @@ struct OfferData {
     var offerType: OfferType
     var imageUrlString: String?
     var defaultImageText: String?
-    var buttonAction: ((OfferData) -> Void)?
+    var tapAction: ((OfferData) -> Void)?
     
     var buttonState: WFButton.State
     private var hostName: String?
@@ -65,7 +65,7 @@ struct OfferData {
          buttonState: WFButton.State = .normal,
          hostName: String?,
          companyName: String?,
-         buttonAction: @escaping (OfferData) -> Void
+         tapAction: @escaping (OfferData) -> Void
     ) {
         self.offerType = offerType
         self.imageUrlString = imageUrlString
@@ -73,7 +73,7 @@ struct OfferData {
         self.buttonState = buttonState
         self.hostName = hostName
         self.companyName = companyName
-        self.buttonAction = buttonAction
+        self.tapAction = tapAction
     }
 }
 
@@ -88,6 +88,9 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
         imageView.load(urlString: data.imageUrlString, defaultImage: defaultImage)
         button.text = data.buttonText
         button.state = data.buttonState
+        button.buttonTapped = {
+            data.tapAction?(data)
+        }
         textLabel.text = data.text
     }
 

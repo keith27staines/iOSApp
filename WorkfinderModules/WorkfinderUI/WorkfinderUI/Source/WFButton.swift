@@ -10,7 +10,7 @@ import UIKit
 
 public class WFButton: UIView {
     
-    var buttonTapped: (() -> Void)?
+    public var buttonTapped: (() -> Void)?
     
     public enum State {
         case normal

@@ -2,7 +2,7 @@ import WorkfinderCommon
 import WorkfinderServices
 
 protocol OfferServiceProtocol: AnyObject {
-    func fetchOffer(application: Application, completion: @escaping (Result<Offer,Error>) -> Void)
+    func fetchOffer(placementUuid: F4SUUID, completion: @escaping (Result<Offer,Error>) -> Void)
     func accept(offer: Offer, completion: @escaping (Result<Offer, Error>) -> Void)
     func withdraw(declining offer: Offer, reason: WithdrawReason, otherText: String?, completion: @escaping (Result<Offer, Error>) -> Void)
 }
@@ -19,16 +19,15 @@ class OfferService: OfferServiceProtocol{
         withdrawService = WithdrawService(networkConfig: networkConfig)
     }
     
-    func fetchOffer(application: Application, completion: @escaping (Result<Offer,Error>) -> Void) {
-        fetchOfferService.fetchOffer(
-        uuid: application.placementUuid) { [weak self] (networkResult) in
+    func fetchOffer(placementUuid: F4SUUID, completion: @escaping (Result<Offer,Error>) -> Void) {
+        fetchOfferService.fetchOffer(uuid: placementUuid) { [weak self] (networkResult) in
             guard let self = self else { return }
             switch networkResult {
             case .success(let json):
                 let state = ApplicationState(string: json.status)
                 let offerState = OfferState(applicationState: state)
                 let offer = Offer(
-                    placementUuid: application.placementUuid,
+                    placementUuid: json.uuid ?? "",
                     offerState: offerState,
                     startDateString: json.start_date,
                     endDateString: json.end_date,

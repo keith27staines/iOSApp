@@ -6,7 +6,7 @@ import WorkfinderServices
 
 protocol ApplicationsCoordinatorProtocol: AnyObject {
     func applicationsDidLoad(_ applications: [Application])
-    func performAction(_ action: ApplicationAction?, for application: Application, appSource: AppSource)
+    func performAction(_ action: ApplicationAction?, for placementUuid: F4SUUID, appSource: AppSource)
     func showCompanyHost(application: Application)
     func showCompany(application: Application)
     func routeToApplication(_ uuid: F4SUUID, appSource: AppSource)
@@ -48,10 +48,9 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
             case .success(let application):
                 switch application.state {
                 case .offered, .accepted, .withdrawn:
-                    self.showOfferViewer(for: application, appSource: appSource)
-
+                    self.showOfferViewer(placementUuid: uuid, appSource: appSource)
                 default:
-                    self.showApplicationDetailViewer(for: application, appSource: appSource)
+                    self.showApplicationDetailViewer(for: uuid, appSource: appSource)
                 }
             case .failure(_):
                 break
@@ -61,21 +60,21 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     func performAction(
         _ action: ApplicationAction?,
-        for application: Application,
+        for placementUuid: F4SUUID,
         appSource: AppSource
     ) {
         guard let action = action else { return }
         switch action {
-        case .viewApplication: showApplicationDetailViewer(for: application, appSource: appSource)
-        case .viewOffer: showOfferViewer(for: application, appSource: appSource)
+        case .viewApplication: showApplicationDetailViewer(for: placementUuid, appSource: appSource)
+        case .viewOffer: showOfferViewer(placementUuid: placementUuid, appSource: appSource)
         case .acceptOffer: break
         case .declineOffer: break
         }
     }
     
-    func showOfferViewer(for application: Application, appSource: AppSource) {
+    func showOfferViewer(placementUuid: F4SUUID, appSource: AppSource) {
         let offerService = OfferService(networkConfig: networkConfig)
-        let presenter = OfferPresenter(coordinator: self, application: application, offerService: offerService)
+        let presenter = OfferPresenter(coordinator: self, placementUuid: placementUuid, offerService: offerService)
         let vc = OfferViewController(coordinator: self, presenter: presenter, log: log, appSource: appSource)
         navigationRouter.push(viewController: vc, animated: true)
     }
@@ -95,12 +94,13 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         //
     }
     
-    func showApplicationDetailViewer(for application: Application, appSource: AppSource) {
+    func showApplicationDetailViewer(for placementUuid: F4SUUID, appSource: AppSource) {
         let applicationService = ApplicationDetailService(networkConfig: networkConfig)
         let presenter = ApplicationDetailPresenter(
             coordinator: self,
             applicationService: applicationService,
-            application: application)
+            placementUuid: placementUuid
+        )
         let vc = ApplicationDetailViewController(
             coordinator: self,
             presenter: presenter,
