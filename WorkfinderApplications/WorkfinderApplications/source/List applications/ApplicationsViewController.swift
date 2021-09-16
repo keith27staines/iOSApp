@@ -92,6 +92,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ApplicationTile.self, forCellReuseIdentifier: ApplicationTile.reuseIdentifier)
+        tableView.register(TableSectionHeaderCell.self, forCellReuseIdentifier: "TableSectionHeaderCell")
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = presenter
@@ -103,7 +104,14 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
 
 extension ApplicationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        guard let section = ApplicationsPresenter.Section(rawValue: section) else { return nil }
+        let view = UIView()
+        switch section {
+        case .applicationsHeader:
+            view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+            return view
+        default: return view
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -114,4 +122,9 @@ extension ApplicationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         indexPath.section == 2 ? indexPath : nil
     }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        indexPath.section == 2 ? true : false
+    }
+
 }

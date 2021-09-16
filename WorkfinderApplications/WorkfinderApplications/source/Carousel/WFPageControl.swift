@@ -63,8 +63,8 @@ class WFPageControl: UIView {
         return view
     }()
     
-    private lazy var leftButton: FloatingRoundButton = {
-        let button = FloatingRoundButton()
+    private lazy var leftButton: WFFloatingButton = {
+        let button = WFFloatingButton()
         button.setTitle("<", for: .normal)
         button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
         button.setTitleColor(WFColorPalette.gray1, for: .disabled)
@@ -72,8 +72,8 @@ class WFPageControl: UIView {
         return button
     }()
     
-    private lazy var rightButton: FloatingRoundButton = {
-        let button = FloatingRoundButton()
+    private lazy var rightButton: WFFloatingButton = {
+        let button = WFFloatingButton()
         button.setTitle(">", for: .normal)
         button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
         button.setTitleColor(WFColorPalette.gray1, for: .disabled)
@@ -128,24 +128,4 @@ class WFPageControl: UIView {
 }
 
 
-final class FloatingRoundButton: UIButton {
 
-    private var shadowLayer: CAShapeLayer?
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if shadowLayer == nil {
-            let shadowLayer = CAShapeLayer()
-            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: frame.height/2).cgPath
-            shadowLayer.fillColor = UIColor.white.cgColor
-            shadowLayer.shadowColor = UIColor.darkGray.cgColor
-            shadowLayer.shadowPath = shadowLayer.path
-            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            shadowLayer.shadowOpacity = 0.15
-            shadowLayer.shadowRadius = 2
-            layer.insertSublayer(shadowLayer, at: 0)
-            self.shadowLayer = shadowLayer
-        }
-    }
-
-}

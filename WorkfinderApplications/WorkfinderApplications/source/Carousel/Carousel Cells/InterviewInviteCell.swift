@@ -109,6 +109,27 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
         label.numberOfLines = 0
         return label
     }()
+
+    private lazy var waitingForLinkLabel: UILabel = {
+        let label = UILabel()
+        var style = WFTextStyle.labelTextRegular
+        style.color = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
+        label.applyStyle(style)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var buttonContainer: UIView = {
+        let view = UIView()
+        view.addSubview(waitingForLinkLabel)
+        view.addSubview(button)
+        view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        waitingForLinkLabel.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
+        return view
+    }()
     
     private lazy var button: WFButton = {
         let button = WFButton(heightClass: .larger)
@@ -121,7 +142,7 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
                 imageView,
                 textLabel,
                 variableSpace,
-                button
+                buttonContainer
             ]
         )
         stack.axis = .vertical

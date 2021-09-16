@@ -63,7 +63,7 @@ public extension WFTextStyle {
     static var headlineTitleFont = UIFont(name: helveticaFontBoldName, size: 32) ?? UIFont.systemFont(ofSize: 32, weight: .bold)
     static let headlineTitle = WFTextStyle(font: headlineTitleFont, color: headlineTitleColor)
     
-    static var sectionTitleColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var sectionTitleColor = WFColorPalette.offBlack
     static var sectionTitleFont = UIFont(name: helveticaFontBoldName, size: 18) ?? UIFont.systemFont(ofSize: 18, weight: .bold)
     static let sectionTitle = WFTextStyle(font: sectionTitleFont, color: sectionTitleColor)
     

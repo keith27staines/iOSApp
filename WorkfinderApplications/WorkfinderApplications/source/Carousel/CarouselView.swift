@@ -166,6 +166,10 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         currentPageIndex = getCurrentPage()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        false
+    }
 }
 
 // MARK: - Helpers

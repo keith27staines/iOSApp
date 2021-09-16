@@ -16,6 +16,7 @@ class ApplicationsPresenter: NSObject {
     enum Section: Int, CaseIterable {
         case upcomingInterviews
         case offersAndInterviews
+        case applicationsHeader
         case applications
     }
     
@@ -108,18 +109,6 @@ class ApplicationsPresenter: NSObject {
         self.service = service
         self.coordinator = coordinator
         self.isCandidateSignedIn = isCandidateSignedIn
-    }
-    
-    func numberOfRows(sectionIndex: Int) -> Int {
-        guard let section = Section(rawValue: sectionIndex) else { return 0 }
-        switch section {
-        case .upcomingInterviews:
-            return upcomingInterviewsData[0].count > 0 ? 1 : 0
-        case .offersAndInterviews:
-            return offersAndInterviewsData[0].count > 0 ? 1 : 0
-        case .applications:
-            return applications.count
-        }
     }
     
     func applicationForRow(_ row: Int) -> Application {
@@ -253,6 +242,8 @@ extension ApplicationsPresenter: UITableViewDataSource {
             return upcomingInterviewsData.count
         case .offersAndInterviews:
             return offeredInterviewData.count
+        case .applicationsHeader:
+            return 1
         case .applications:
             return applications.count
         }
@@ -262,11 +253,19 @@ extension ApplicationsPresenter: UITableViewDataSource {
         guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
         switch section {
         case .upcomingInterviews:
-            upcomingInterviewsCarousel.cellData = upcomingInterviewsData
-            return upcomingInterviewsTableViewCell
+            if upcomingInterviewsData[0].count > 0 {
+                upcomingInterviewsCarousel.cellData = upcomingInterviewsData
+                return upcomingInterviewsTableViewCell
+            } else {
+                return ZeroHeightTableViewCell()
+            }
         case .offersAndInterviews:
             offersAndInterviewsCarousel.cellData = offersAndInterviewsData
             return offersAndInterviewsTableViewCell
+        case .applicationsHeader:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableSectionHeaderCell.reuseIdentifier) as? TableSectionHeaderCell else { return UITableViewCell() }
+            cell.label.text = "Applications"
+            return cell
         case .applications:
             guard let tile = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile
             else { return UITableViewCell() }
@@ -275,5 +274,33 @@ extension ApplicationsPresenter: UITableViewDataSource {
             tile.configureWithApplication(presenter)
             return tile
         }
+    }
+}
+
+class TableSectionHeaderCell: UITableViewCell {
+    
+    static var reuseIdentifier: String = "TableSectionHeaderCell"
+    
+    lazy var label: UILabel = {
+        let label = UILabel()
+        contentView.addSubview(label)
+        let style = WFTextStyle.sectionTitle
+        label.applyStyle(style)
+        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        return label
+    }()
+}
+
+class ZeroHeightTableViewCell: UITableViewCell {
+    init() {
+        super.init(style: .default, reuseIdentifier: "zeroHeightCell")
+        let content = UIView()
+        content.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        contentView.addSubview(content)
+        content.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
