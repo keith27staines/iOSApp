@@ -79,7 +79,17 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         navigationItem.title = "Applications"
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
-        styleNavigationController()
+        styleWFNavigationController()
+    }
+    
+    func styleWFNavigationController() {
+        guard let navigationBar = navigationController?.navigationBar else {
+            return
+        }
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = WFColorPalette.white
+        navigationBar.tintColor = WFColorPalette.readingGreen
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: WFColorPalette.readingGreen]
     }
     
     func configureViews() {
@@ -116,7 +126,7 @@ extension ApplicationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let section = ApplicationsPresenter.Section(rawValue: indexPath.section), section == .applications else {
-            return 
+            return
         }
         presenter.onTapApplication(at: indexPath.row)
     }

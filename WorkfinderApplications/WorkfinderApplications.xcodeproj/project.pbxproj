@@ -11,6 +11,7 @@
 		53A0F7E126EB8E67007F6D35 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7E026EB8E67007F6D35 /* CarouselView.swift */; };
 		53A0F7EF26EF701B007F6D35 /* InterviewInviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7EE26EF701B007F6D35 /* InterviewInviteCell.swift */; };
 		53A0F7F426F22D2C007F6D35 /* WFPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7F326F22D2C007F6D35 /* WFPageControl.swift */; };
+		53C7539F26F4B55400B2399C /* WorkfinderInterviews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */; };
 		FC06A18C24641ACA0023DE99 /* WorkfinderApplications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */; };
 		FC06A19124641ACA0023DE99 /* WorkfinderApplicationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06A19024641ACA0023DE99 /* WorkfinderApplicationsTests.swift */; };
 		FC06A19324641ACA0023DE99 /* WorkfinderApplications.h in Headers */ = {isa = PBXBuildFile; fileRef = FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 		53A0F7E026EB8E67007F6D35 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		53A0F7EE26EF701B007F6D35 /* InterviewInviteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewInviteCell.swift; sourceTree = "<group>"; };
 		53A0F7F326F22D2C007F6D35 /* WFPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFPageControl.swift; sourceTree = "<group>"; };
+		53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderInterviews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplications.h; sourceTree = "<group>"; };
 		FC06A18624641ACA0023DE99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C7539F26F4B55400B2399C /* WorkfinderInterviews.framework in Frameworks */,
 				FC06A1AC24641D210023DE99 /* WorkfinderCoordinators.framework in Frameworks */,
 				FC06A1A924641D150023DE99 /* WorkfinderUI.framework in Frameworks */,
 				FC06A1A124641CEB0023DE99 /* WorkfinderCommon.framework in Frameworks */,
@@ -187,6 +190,7 @@
 		FC06A19F24641CEB0023DE99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */,
 				FCD4DCB2248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework */,
 				FC06A1AB24641D210023DE99 /* WorkfinderCoordinators.framework */,
 				FC06A1A824641D150023DE99 /* WorkfinderUI.framework */,

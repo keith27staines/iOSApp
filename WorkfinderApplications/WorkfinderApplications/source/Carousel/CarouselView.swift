@@ -41,7 +41,6 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
             cell.contentView.alpha = 0.5
         }
         let highlightCell = collectionView(collectionView, cellForItemAt: IndexPath(row: pageIndex, section: 0))
-        print("highlighting \(pageIndex), current alpha = \(highlightCell.contentView.alpha)")
         highlightCell.contentView.alpha = 1
         collectionView.reloadItems(at: [IndexPath(row: pageIndex, section: 0)])
     }

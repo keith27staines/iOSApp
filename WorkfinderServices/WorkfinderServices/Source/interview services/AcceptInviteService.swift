@@ -21,7 +21,7 @@ public class InviteService: WorkfinderService {
         _projectService.fetchProject(uuid: uuid, completion: completion)
     }
     
-    public func loadInterview(id: String, completion: @escaping (Result<InterviewJson,Error>) -> Void) {
+    public func loadInterview(id: Int, completion: @escaping (Result<InterviewJson,Error>) -> Void) {
         let interview = InterviewJson()
         completion(Result.success(interview))
     }

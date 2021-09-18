@@ -11,8 +11,13 @@ import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderServices
 
-public class WorkfinderInterviewsCoordinator: CoreInjectionNavigationCoordinator {
-    
+public protocol WorkfinderInterviewCoordinatorDelegate: AnyObject {
+    func coordinatorMadeChanges()
+}
+
+
+public class WorkfinderInterviewCoordinator: CoreInjectionNavigationCoordinator {
+    weak var delegate: WorkfinderInterviewCoordinatorDelegate?
     var newNavigationRouter: NavigationRouter?
     var rootOfNewNavigation: UIViewController?
     var parentVC: UIViewController?
@@ -23,20 +28,58 @@ public class WorkfinderInterviewsCoordinator: CoreInjectionNavigationCoordinator
         
     }
     
-    public func startFromAcceptInviteScreen(parentVC: UIViewController, inviteId: String) {
+    lazy var overlay: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.init(white: 0, alpha: 0.5)
+        return view
+    }()
+    
+    public func startFromAcceptInviteScreen(parentVC: UIViewController, inviteId: Int) {
         self.parentVC = parentVC
         let service = InviteService(networkConfig: injected.networkConfig)
-        let presenter = AcceptInvitePresenter(service: service, coordinator: self, interviewId: inviteId)
-        let rootOfNewNavigation = AcceptInviteViewController(coordinator: self, presenter: presenter)
-        rootOfNewNavigation.modalPresentationStyle = .overFullScreen
+        let presenter = InterviewPresenter(service: service, coordinator: self, interviewId: inviteId)
+        let rootOfNewNavigation = InterviewViewController(coordinator: self, presenter: presenter)
         let newNavigationController = UINavigationController(rootViewController: rootOfNewNavigation)
         newNavigationController.modalPresentationStyle = .overFullScreen
+        addOverlayToParentView()
         newNavigationRouter = NavigationRouter(navigationController: newNavigationController)
         parentVC.present(newNavigationController, animated: true, completion: nil)
     }
+    
+    public init(
+        parent: Coordinating?,
+        delegate: WorkfinderInterviewCoordinatorDelegate? = nil,
+        navigationRouter: NavigationRoutingProtocol,
+        inject: CoreInjectionProtocol
+    ) {
+        self.delegate = delegate
+        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
+    }
+    
+    private func addOverlayToParentView() {
+        guard let presentingView = parentVC?.view else { return }
+        presentingView.addSubview(overlay)
+        presentingView.bringSubviewToFront(overlay)
+        overlay.frame = CGRect(x: 0, y: -1000, width: 2000, height: 2000)
+        parentVC?.navigationController?.navigationBar.layer.zPosition = -1
+    }
+    
+    private func removeOverlay() {
+        overlay.removeFromSuperview()
+        parentVC?.navigationController?.navigationBar.layer.zPosition = 0
+    }
 }
 
-extension WorkfinderInterviewsCoordinator: AcceptInviteCoordinatorProtocol {
+extension WorkfinderInterviewCoordinator: AcceptInviteCoordinatorProtocol {
+    
+    func didComplete(with changes: Bool) {
+        removeOverlay()
+        parentCoordinator?.childCoordinatorDidFinish(self)
+        if changes {
+            delegate?.coordinatorMadeChanges()
+        }
+    }
+    
     func interviewWasAccepted(from vc: UIViewController?) {
         switch CalendarAccess.calendarAccessStatus() {
         case .authorized:
@@ -93,7 +136,7 @@ extension WorkfinderInterviewsCoordinator: AcceptInviteCoordinatorProtocol {
         newNavigationRouter?.push(viewController: vc, animated: true)
     }
     
-    func acceptViewControllerDidCancel(_ vc: AcceptInviteViewController) {
+    func acceptViewControllerDidCancel(_ vc: InterviewViewController) {
         navigationRouter.pop(animated: true)
         parentCoordinator?.childCoordinatorDidFinish(self)
         parentVC?.dismiss(animated: true, completion: nil)

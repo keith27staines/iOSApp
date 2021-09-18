@@ -14,11 +14,16 @@
 		532E49D9269EE2AA00AC6E41 /* WorkfinderCoordinators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532E49D4269EE2AA00AC6E41 /* WorkfinderCoordinators.framework */; };
 		532E49DB269EE2AA00AC6E41 /* WorkfinderServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532E49D5269EE2AA00AC6E41 /* WorkfinderServices.framework */; };
 		532E49DD269EE2AA00AC6E41 /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532E49D6269EE2AA00AC6E41 /* WorkfinderUI.framework */; };
-		532E49EE269EE4C400AC6E41 /* WorkfinderInterviewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49ED269EE4C400AC6E41 /* WorkfinderInterviewsCoordinator.swift */; };
-		532E49F0269EE5BF00AC6E41 /* AcceptInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49EF269EE5BF00AC6E41 /* AcceptInviteViewController.swift */; };
-		532E49F3269EE93700AC6E41 /* AcceptInvitePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49F2269EE93700AC6E41 /* AcceptInvitePresenter.swift */; };
+		532E49EE269EE4C400AC6E41 /* WorkfinderInterviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49ED269EE4C400AC6E41 /* WorkfinderInterviewCoordinator.swift */; };
+		532E49F0269EE5BF00AC6E41 /* InterviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49EF269EE5BF00AC6E41 /* InterviewViewController.swift */; };
+		532E49F3269EE93700AC6E41 /* InterviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49F2269EE93700AC6E41 /* InterviewPresenter.swift */; };
 		534CF7A626A1D43C007DF848 /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A526A1D43C007DF848 /* DateSelectorViewController.swift */; };
 		534CF7A926A1D473007DF848 /* DateSelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A826A1D473007DF848 /* DateSelectorPresenter.swift */; };
+		53C753A326F6162A00B2399C /* DateSelectionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753A226F6162A00B2399C /* DateSelectionContentView.swift */; };
+		53C753A726F61C6E00B2399C /* InterviewPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753A626F61C6E00B2399C /* InterviewPresenting.swift */; };
+		53C753AA26F61D4200B2399C /* AcceptedContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753A926F61D4200B2399C /* AcceptedContentView.swift */; };
+		53C753AC26F61D5100B2399C /* DecliningContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753AB26F61D5100B2399C /* DecliningContentView.swift */; };
+		53C753AE26F61D5E00B2399C /* DeclinedContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753AD26F61D5E00B2399C /* DeclinedContentView.swift */; };
 		53CFEB7226A6D59100E8F855 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFEB7126A6D59100E8F855 /* ProjectViewController.swift */; };
 		53CFEB7426A6D5A200E8F855 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFEB7326A6D5A200E8F855 /* ProjectPresenter.swift */; };
 		53FA1FB126E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA1FB026E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift */; };
@@ -45,11 +50,16 @@
 		532E49D4269EE2AA00AC6E41 /* WorkfinderCoordinators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderCoordinators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532E49D5269EE2AA00AC6E41 /* WorkfinderServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532E49D6269EE2AA00AC6E41 /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		532E49ED269EE4C400AC6E41 /* WorkfinderInterviewsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderInterviewsCoordinator.swift; sourceTree = "<group>"; };
-		532E49EF269EE5BF00AC6E41 /* AcceptInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInviteViewController.swift; sourceTree = "<group>"; };
-		532E49F2269EE93700AC6E41 /* AcceptInvitePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInvitePresenter.swift; sourceTree = "<group>"; };
+		532E49ED269EE4C400AC6E41 /* WorkfinderInterviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkfinderInterviewCoordinator.swift; sourceTree = "<group>"; };
+		532E49EF269EE5BF00AC6E41 /* InterviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewViewController.swift; sourceTree = "<group>"; };
+		532E49F2269EE93700AC6E41 /* InterviewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewPresenter.swift; sourceTree = "<group>"; };
 		534CF7A526A1D43C007DF848 /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
 		534CF7A826A1D473007DF848 /* DateSelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorPresenter.swift; sourceTree = "<group>"; };
+		53C753A226F6162A00B2399C /* DateSelectionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionContentView.swift; sourceTree = "<group>"; };
+		53C753A626F61C6E00B2399C /* InterviewPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewPresenting.swift; sourceTree = "<group>"; };
+		53C753A926F61D4200B2399C /* AcceptedContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedContentView.swift; sourceTree = "<group>"; };
+		53C753AB26F61D5100B2399C /* DecliningContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecliningContentView.swift; sourceTree = "<group>"; };
+		53C753AD26F61D5E00B2399C /* DeclinedContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclinedContentView.swift; sourceTree = "<group>"; };
 		53CFEB7126A6D59100E8F855 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		53CFEB7326A6D5A200E8F855 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
 		53FA1FB026E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInviteCoordinatorProtocol.swift; sourceTree = "<group>"; };
@@ -131,23 +141,24 @@
 			isa = PBXGroup;
 			children = (
 				53FA1FB026E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift */,
-				532E49ED269EE4C400AC6E41 /* WorkfinderInterviewsCoordinator.swift */,
+				532E49ED269EE4C400AC6E41 /* WorkfinderInterviewCoordinator.swift */,
 				53CFEB7026A6D56100E8F855 /* Project view controller */,
-				532E49FB26A033A900AC6E41 /* services */,
 				532E49F626A0294E00AC6E41 /* models */,
-				532E49F1269EE90000AC6E41 /* Accept invite view controller */,
+				532E49F1269EE90000AC6E41 /* Interview view controller */,
 				534CF7A726A1D444007DF848 /* Date Selector View Controller */,
 			);
 			path = source;
 			sourceTree = "<group>";
 		};
-		532E49F1269EE90000AC6E41 /* Accept invite view controller */ = {
+		532E49F1269EE90000AC6E41 /* Interview view controller */ = {
 			isa = PBXGroup;
 			children = (
-				532E49EF269EE5BF00AC6E41 /* AcceptInviteViewController.swift */,
-				532E49F2269EE93700AC6E41 /* AcceptInvitePresenter.swift */,
+				532E49EF269EE5BF00AC6E41 /* InterviewViewController.swift */,
+				532E49F2269EE93700AC6E41 /* InterviewPresenter.swift */,
+				53C753A826F61D2D00B2399C /* Content views */,
+				53C753A626F61C6E00B2399C /* InterviewPresenting.swift */,
 			);
-			path = "Accept invite view controller";
+			path = "Interview view controller";
 			sourceTree = "<group>";
 		};
 		532E49F626A0294E00AC6E41 /* models */ = {
@@ -157,13 +168,6 @@
 			path = models;
 			sourceTree = "<group>";
 		};
-		532E49FB26A033A900AC6E41 /* services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = services;
-			sourceTree = "<group>";
-		};
 		534CF7A726A1D444007DF848 /* Date Selector View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +175,17 @@
 				534CF7A826A1D473007DF848 /* DateSelectorPresenter.swift */,
 			);
 			path = "Date Selector View Controller";
+			sourceTree = "<group>";
+		};
+		53C753A826F61D2D00B2399C /* Content views */ = {
+			isa = PBXGroup;
+			children = (
+				53C753A226F6162A00B2399C /* DateSelectionContentView.swift */,
+				53C753A926F61D4200B2399C /* AcceptedContentView.swift */,
+				53C753AB26F61D5100B2399C /* DecliningContentView.swift */,
+				53C753AD26F61D5E00B2399C /* DeclinedContentView.swift */,
+			);
+			path = "Content views";
 			sourceTree = "<group>";
 		};
 		53CFEB7026A6D56100E8F855 /* Project view controller */ = {
@@ -292,13 +307,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				534CF7A626A1D43C007DF848 /* DateSelectorViewController.swift in Sources */,
+				53C753AA26F61D4200B2399C /* AcceptedContentView.swift in Sources */,
 				53CFEB7226A6D59100E8F855 /* ProjectViewController.swift in Sources */,
-				532E49F3269EE93700AC6E41 /* AcceptInvitePresenter.swift in Sources */,
+				532E49F3269EE93700AC6E41 /* InterviewPresenter.swift in Sources */,
 				53FA1FB126E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift in Sources */,
+				53C753AE26F61D5E00B2399C /* DeclinedContentView.swift in Sources */,
 				53CFEB7426A6D5A200E8F855 /* ProjectPresenter.swift in Sources */,
-				532E49F0269EE5BF00AC6E41 /* AcceptInviteViewController.swift in Sources */,
+				532E49F0269EE5BF00AC6E41 /* InterviewViewController.swift in Sources */,
 				534CF7A926A1D473007DF848 /* DateSelectorPresenter.swift in Sources */,
-				532E49EE269EE4C400AC6E41 /* WorkfinderInterviewsCoordinator.swift in Sources */,
+				53C753AC26F61D5100B2399C /* DecliningContentView.swift in Sources */,
+				532E49EE269EE4C400AC6E41 /* WorkfinderInterviewCoordinator.swift in Sources */,
+				53C753A726F61C6E00B2399C /* InterviewPresenting.swift in Sources */,
+				53C753A326F6162A00B2399C /* DateSelectionContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

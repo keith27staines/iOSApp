@@ -3,10 +3,11 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderUI
 import WorkfinderServices
+import WorkfinderInterviews
 
 protocol ApplicationsCoordinatorProtocol: AnyObject {
     func applicationsDidLoad(_ applications: [Application])
-    func performAction(_ action: ApplicationAction?, for placementUuid: F4SUUID, appSource: AppSource)
+    func performAction(_ action: ApplicationAction?, appSource: AppSource)
     func showCompanyHost(application: Application)
     func showCompany(application: Application)
     func routeToApplication(_ uuid: F4SUUID, appSource: AppSource)
@@ -60,16 +61,27 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     func performAction(
         _ action: ApplicationAction?,
-        for placementUuid: F4SUUID,
         appSource: AppSource
     ) {
         guard let action = action else { return }
         switch action {
-        case .viewApplication: showApplicationDetailViewer(for: placementUuid, appSource: appSource)
-        case .viewOffer: showOfferViewer(placementUuid: placementUuid, appSource: appSource)
-        case .acceptOffer: break
-        case .declineOffer: break
+        case .viewApplication(let placementUuid): showApplicationDetailViewer(for: placementUuid, appSource: appSource)
+        case .viewOffer(let placementUuid): showOfferViewer(placementUuid: placementUuid, appSource: appSource)
+        case .viewInterview(let interviewId): showInterview(id: interviewId)
+        case .joinInterview(let link): joinInterview(link: link)
         }
+    }
+    
+    func joinInterview(link: String) {
+        if let linkUrl = URL(string: link) {
+            UIApplication.shared.open(linkUrl, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func showInterview(id: Int) {
+        guard let presentingVC = navigationRouter.navigationController.topViewController else { return }
+        let coordinator = WorkfinderInterviewCoordinator(parent: self, delegate: self, navigationRouter: navigationRouter, inject: injected)
+        coordinator.startFromAcceptInviteScreen(parentVC: presentingVC, inviteId: id)
     }
     
     func showOfferViewer(placementUuid: F4SUUID, appSource: AppSource) {
@@ -133,6 +145,12 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
             associationUuid: associationUuid)
         let vc = HostViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
+    }
+}
+
+extension ApplicationsCoordinator: WorkfinderInterviewCoordinatorDelegate {
+    public func coordinatorMadeChanges() {
+        
     }
 }
 

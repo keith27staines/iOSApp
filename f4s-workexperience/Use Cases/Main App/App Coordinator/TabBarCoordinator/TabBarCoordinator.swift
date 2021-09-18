@@ -67,10 +67,10 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
         tabBarViewController.selectedIndex = tab.rawValue
     }
     
-    public func routeInterviewInvite(inviteUuid: F4SUUID, appSource: AppSource) {
+    public func routeInterviewInvite(inviteUuid: Int, appSource: AppSource) {
         guard let vc = tabBarViewController.selectedViewController else { return }
         switchToTab(.applications)
-        let coordinator = WorkfinderInterviewsCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        let coordinator = WorkfinderInterviewCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
         addChildCoordinator(coordinator)
         coordinator.startFromAcceptInviteScreen(parentVC: vc, inviteId: inviteUuid)
     }

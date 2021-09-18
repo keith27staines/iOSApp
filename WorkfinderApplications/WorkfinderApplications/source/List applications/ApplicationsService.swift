@@ -4,7 +4,7 @@ import WorkfinderServices
 protocol ApplicationsServiceProtocol: AnyObject {
     func fetchAllApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
     func fetchNextPage(urlString: String, completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void )
-    func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
+    //func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
     func fetchInterviews(completion: @escaping (Result<[InterviewJson],Error>) -> Void)
 }
 
@@ -26,10 +26,10 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         fetchApplications(queryItems: [], completion: completion)
     }
     
-    func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>, Error>) -> Void) {
-        let offerQueryItems = [URLQueryItem(name: "status", value: "offered"),URLQueryItem(name: "status", value: "interview offered")]
-        fetchApplications(queryItems: offerQueryItems, completion: completion)
-    }
+//    func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>, Error>) -> Void) {
+//        let offerQueryItems = [URLQueryItem(name: "status", value: "offered"),URLQueryItem(name: "status", value: "interview offered")]
+//        fetchApplications(queryItems: offerQueryItems, completion: completion)
+//    }
     
     private func fetchApplications(queryItems: [URLQueryItem], completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void) {
         performfetchApplications(queryItems: queryItems) { [weak self] (networkResult) in

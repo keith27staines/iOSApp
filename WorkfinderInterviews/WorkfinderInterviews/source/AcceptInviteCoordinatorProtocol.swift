@@ -11,8 +11,9 @@ import WorkfinderServices
 protocol AcceptInviteCoordinatorProtocol: AnyObject {
     var interview: InterviewJson? { get set }
     var selectedInterviewDate: InterviewJson.InterviewDateJson? { get set }
-    func acceptViewControllerDidCancel(_ vc: AcceptInviteViewController)
+    func acceptViewControllerDidCancel(_ vc: InterviewViewController)
     func interviewWasAccepted(from vc: UIViewController?)
     func showDateSelector()
     func showProjectDetails()
+    func didComplete(with changes: Bool) 
 }

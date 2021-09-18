@@ -48,7 +48,7 @@ class ApplicationsPresenter: NSObject {
                 companyName: application.companyName
             ) { [weak self] offerData in
                 guard let self = self else { return }
-                self.coordinator?.performAction(.viewOffer, for: application.placementUuid, appSource: .applicationsTab)
+                self.coordinator?.performAction(.viewOffer(placementUuid: application.placementUuid), appSource: .applicationsTab)
             }
         }
     }
@@ -64,6 +64,7 @@ class ApplicationsPresenter: NSObject {
                 companyName: interview.placement?.association?.location?.company?.name
             ) { [weak self] offerData in
                 guard let self = self else { return }
+                self.coordinator?.performAction(.viewInterview(interviewId: interview.id ?? -1), appSource: .applicationsTab)
             }
         }
     }
@@ -153,12 +154,12 @@ class ApplicationsPresenter: NSObject {
     }
     
     func loadOfferedApplications(completion: @escaping (Error?) -> Void) {
-        service.fetchApplicationsWithOpenOffer { [weak self] result in
+        service.fetchAllApplications { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let serverlistJson):
                 self.offeredApplications = serverlistJson.results.filter({ application in
-                    application.state == .offered
+                    application.state == .offered || application.state == .interviewOffered
                 })
                 completion(nil)
             case .failure(let error):
@@ -198,25 +199,25 @@ class ApplicationsPresenter: NSObject {
         let application = applicationForRow(row)
         let action: ApplicationAction
         switch application.state {
-        case .pending: action = .viewApplication
-        case .contacting: action = .viewApplication
-        case .viewed: action = .viewApplication
-        case .saved: action = .viewApplication
-        case .declined: action = .viewApplication
-        case .offered: action = .viewOffer
-        case .accepted: action = .viewOffer
-        case .withdrawn: action = .viewOffer
-        case .expired: action = .viewApplication
-        case .cancelled: action = .viewOffer
-        case .unknown: action = .viewApplication
-        case .interviewOffered:  action = .viewApplication
-        case .interviewConfirmed: action = .viewApplication
-        case .interviewMeetingLinkAdded: action = .viewApplication
-        case .interviewCompleted: action = .viewApplication
-        case .interviewDeclined: action = .viewApplication
-        case .unroutable: action = .viewApplication
+        case .pending: action = .viewApplication(placementUuid: application.placementUuid)
+        case .contacting: action = .viewApplication(placementUuid: application.placementUuid)
+        case .viewed: action = .viewApplication(placementUuid: application.placementUuid)
+        case .saved: action = .viewApplication(placementUuid: application.placementUuid)
+        case .declined: action = .viewApplication(placementUuid: application.placementUuid)
+        case .offered: action = .viewOffer(placementUuid: application.placementUuid)
+        case .accepted: action = .viewOffer(placementUuid: application.placementUuid)
+        case .withdrawn: action = .viewOffer(placementUuid: application.placementUuid)
+        case .expired: action = .viewApplication(placementUuid: application.placementUuid)
+        case .cancelled: action = .viewOffer(placementUuid: application.placementUuid)
+        case .unknown: action = .viewApplication(placementUuid: application.placementUuid)
+        case .interviewOffered:  action = .viewApplication(placementUuid: application.placementUuid)
+        case .interviewConfirmed: action = .viewApplication(placementUuid: application.placementUuid)
+        case .interviewMeetingLinkAdded: action = .viewApplication(placementUuid: application.placementUuid)
+        case .interviewCompleted: action = .viewApplication(placementUuid: application.placementUuid)
+        case .interviewDeclined: action = .viewApplication(placementUuid: application.placementUuid)
+        case .unroutable: action = .viewApplication(placementUuid: application.placementUuid)
         }
-        coordinator?.performAction(action, for: application.placementUuid, appSource: .applicationsTab)
+        coordinator?.performAction(action, appSource: .applicationsTab)
     }
 }
 

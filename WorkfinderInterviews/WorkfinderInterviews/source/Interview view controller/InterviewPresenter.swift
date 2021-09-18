@@ -8,19 +8,29 @@
 import UIKit
 import WorkfinderServices
 
-class AcceptInvitePresenter {
+class InterviewPresenter {
     
     private let service: InviteService
     private let coordinator: AcceptInviteCoordinatorProtocol
-    let interviewId: String
+    let interviewId: Int
     var interview: InterviewJson? { coordinator.interview }
     weak var viewController: UIViewController?
     
-    init(service: InviteService, coordinator: AcceptInviteCoordinatorProtocol, interviewId: String) {
+    init(service: InviteService, coordinator: AcceptInviteCoordinatorProtocol, interviewId: Int) {
         self.service = service
         self.coordinator = coordinator
         self.interviewId =  interviewId
+        self.contentState = .dateSelecting
     }
+    
+    enum ContentState {
+        case dateSelecting
+        case accepted
+        case declining
+        case declined
+    }
+    
+    var contentState: ContentState 
     
     func onViewDidLoad(_ vc: UIViewController) {
         self.viewController = vc

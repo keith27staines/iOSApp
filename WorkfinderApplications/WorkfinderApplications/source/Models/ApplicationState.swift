@@ -2,25 +2,6 @@
 import UIKit
 import WorkfinderUI
 
-/*
- "pending"
- "expired"
- "viewed"
- "declined"
- "saved"
- "contacting"
- "offered"
- "accepted"
- "interview offered"
- "interview confirmed"
- "interview meeting linkadded"
- "interview completed"
- "interview decline"
- "withdrawn"
- "cancelled"
- "unrouteable"
- */
-
 enum ApplicationState: String, Codable {
     case pending
     case expired
@@ -93,37 +74,6 @@ enum ApplicationState: String, Codable {
         case .cancelled: return "Offer Cancelled"
         case .unroutable: return "Unroutable"
         case .unknown: return "Unexpected State"
-        }
-    }
-    
-    var allowedActions: [ApplicationAction] {
-        switch self {
-        case
-            .pending,
-            .unknown,
-            .unroutable,
-            .declined,
-            .expired,
-            .viewed,
-            .saved,
-            .cancelled,
-            .interviewCompleted,
-            .interviewDeclined:
-            return [.viewApplication]
-        case .offered:
-            return [.viewApplication, .viewOffer, .acceptOffer, .declineOffer]
-        case .accepted:
-            return [.viewApplication, .viewOffer]
-        case .withdrawn:
-            return [.viewApplication, .viewOffer]
-        case .contacting:
-            return [.viewApplication, .viewOffer]
-        case .interviewOffered:
-            return [.viewApplication]
-        case .interviewConfirmed:
-            return [.viewApplication]
-        case .interviewMeetingLinkAdded:
-            return [.viewApplication]
         }
     }
     
