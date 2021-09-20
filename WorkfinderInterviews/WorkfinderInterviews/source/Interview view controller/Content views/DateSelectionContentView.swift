@@ -8,92 +8,70 @@
 import UIKit
 import WorkfinderUI
 
-class DateSelectionContentView: UIView, InterviewPresenting {
-    
-    var presenter: InterviewPresenter?
-    weak var messageHandler: UserMessageHandler?
-    
-    func updateFromPresenter() {
-        dateLabel.text = presenter?.dateString
-        timeLabel.text = presenter?.timeString
+class DateSelectionContentView: BaseContentView {
+
+    override func updateFromPresenter() {
+        guard let presenter = presenter else { return }
+        super.updateFromPresenter()
+        hostNoteHeader.text = presenter.hostNoteHeader
+        hostNoteBody.text = presenter.hostNoteBody
+        table.dataSource = presenter.dateSelectorDatasource
+        table.delegate = presenter.dateSelectorDatasource
     }
     
-    lazy var titleLabel: UILabel = {
+    lazy var hostNoteHeader: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        label.textColor = WorkfinderColors.gray3
-        label.text = "title"
+        let style = WFTextStyle.labelTextBold
+        label.applyStyle(style)
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var hostNoteBody: UILabel = {
+        let label = UILabel()
+        let style = WFTextStyle.labelTextRegular
+        label.applyStyle(style)
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.textAlignment = .left
         return label
     }()
     
-    lazy var dateStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.addArrangedSubview(dateLabel)
-        stack.addArrangedSubview(timeLabel)
-        stack.spacing = 12
-        return stack
+    lazy var table: UITableView = {
+        let table = UITableView()
+        table.register(DateCell.self, forCellReuseIdentifier: DateCell.reuseIdentifier)
+        table.heightAnchor.constraint(equalToConstant: 3*44 + 2*16).isActive = true
+        table.tableFooterView = UIView()
+        table.alwaysBounceVertical = false
+        table.rowHeight = 44
+        return table
     }()
     
-    lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        label.textColor = WorkfinderColors.gray3
-        label.textAlignment = .center
-        label.numberOfLines = 2
-        return label
-    }()
-    
-    lazy var timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        label.textColor = WorkfinderColors.gray3
-        label.textAlignment = .center
-        label.numberOfLines = 2
-        return label
-    }()
-
-
-    lazy var acceptButton: UIButton = {
-        let button = WorkfinderPrimaryButton()
-        button.setTitle("Accept", for: .normal)
-        button.addTarget(self, action: #selector(didTapAcceptButton), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func didTapAcceptButton() {
-        messageHandler?.showLoadingOverlay()
-        presenter?.onDidTapAccept { [weak self] optionalError in
-            guard let self = self else { return }
-            self.messageHandler?.hideLoadingOverlay()
-            self.messageHandler?.displayOptionalErrorIfNotNil(optionalError) {
-                
-            } retryHandler: {
-                self.didTapAcceptButton()
-            }
-        }
-    }
-    
-    lazy var mainStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 20
-        stack.addArrangedSubview(titleLabel)
-        stack.addArrangedSubview(dateStack)
-        stack.addArrangedSubview(acceptButton)
-        return stack
-    }()
-    
-    init() {
-        super.init(frame: .zero)
-        addSubview(mainStack)
+    override func configureMainStack() {
         mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        mainStack.addArrangedSubview(titleLabel)
+        mainStack.addArrangedSubview(makeVerticalSpace(height: 16))
+        mainStack.addArrangedSubview(introText)
+        mainStack.addArrangedSubview(makeVerticalSpace(height: 24))
+        mainStack.addArrangedSubview(hostNoteHeader)
+        mainStack.addArrangedSubview(makeVerticalSpace(height: 8))
+        mainStack.addArrangedSubview(hostNoteBody)
+        mainStack.addArrangedSubview(makeVerticalSpace(height: 24))
+        mainStack.addArrangedSubview(table)
+        mainStack.addArrangedSubview(makeVerticalSpaceWithPreferredHeight(300))
+        mainStack.addArrangedSubview(primaryButton)
+        mainStack.addArrangedSubview(secondaryButton)
+        mainStack.addArrangedSubview(makeVerticalSpace(height: 24))
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func makeVerticalSpaceWithPreferredHeight(_ height: CGFloat) -> UIView {
+        let view = UIView()
+        let height = view.heightAnchor.constraint(equalToConstant: height)
+        height.priority = .defaultLow
+        height.isActive = true
+        view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        return view
     }
     
 }

@@ -12,7 +12,7 @@ public protocol AppCoordinatorProtocol : Coordinating {
     var window: UIWindow { get }
     var log: F4SAnalyticsAndDebugging { get }
     func signIn(screenOrder: SignInScreenOrder, completion: @escaping (Bool, PreferredNextScreen) -> Void)
-    func routeInterviewInvite(id: Int?, appSource: AppSource)
+    func routeInterviewInvite(uuid: F4SUUID?, appSource: AppSource)
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID?, appSource: AppSource)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
@@ -55,7 +55,7 @@ public enum TabIndex : Int, CaseIterable {
 public protocol TabBarCoordinatorProtocol : CoreInjectionNavigationCoordinatorProtocol, TabNavigating {
     func start(preferredScreen: PreferredNextScreen)
     func switchToTab(_ tab: TabIndex)
-    func routeInterviewInvite(inviteUuid: Int, appSource: AppSource)
+    func routeInterviewInvite(interviewUuid: F4SUUID?, appSource: AppSource)
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource)
     func routeRecommendationForAssociation(recommendationUuid: F4SUUID, appSource: AppSource)
     func routeProject(projectUuid: F4SUUID, appSource: AppSource)

@@ -59,7 +59,7 @@ public extension WFTextStyle {
     static var pageTitleFont = UIFont(name: helveticaFontBoldName, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
     static let pageTitle = WFTextStyle(font: pageTitleFont, color: pageTitleColor)
     
-    static var headlineTitleColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var headlineTitleColor = WFColorPalette.offBlack
     static var headlineTitleFont = UIFont(name: helveticaFontBoldName, size: 32) ?? UIFont.systemFont(ofSize: 32, weight: .bold)
     static let headlineTitle = WFTextStyle(font: headlineTitleFont, color: headlineTitleColor)
     
@@ -67,31 +67,31 @@ public extension WFTextStyle {
     static var sectionTitleFont = UIFont(name: helveticaFontBoldName, size: 18) ?? UIFont.systemFont(ofSize: 18, weight: .bold)
     static let sectionTitle = WFTextStyle(font: sectionTitleFont, color: sectionTitleColor)
     
-    static var subtitleTitleColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var subtitleTitleColor = WFColorPalette.offBlack
     static var subtitleTitleFont = UIFont(name: helveticaFontBoldName, size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .bold)
     static let subtitleTitle = WFTextStyle(font: subtitleTitleFont, color: subtitleTitleColor)
     
-    static var bodyTextRegularColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var bodyTextRegularColor = WFColorPalette.offBlack
     static var bodyTextRegularFont = UIFont(name: helveticaFontRegularName, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .regular)
     static let bodyTextRegular = WFTextStyle(font: bodyTextRegularFont, color: bodyTextRegularColor)
     
-    static var bodyTextBoldColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var bodyTextBoldColor = WFColorPalette.offBlack
     static var bodyTextBoldFont = UIFont(name: helveticaFontBoldName, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
     static let bodyTextBold = WFTextStyle(font: bodyTextBoldFont, color: bodyTextBoldColor)
     
-    static var labelTextRegularColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var labelTextRegularColor = WFColorPalette.offBlack
     static var labelTextRegularFont = UIFont(name: helveticaFontRegularName, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
     static let labelTextRegular = WFTextStyle(font: labelTextRegularFont, color: labelTextRegularColor)
     
-    static var labelTextBoldColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var labelTextBoldColor = WFColorPalette.offBlack
     static var labelTextBoldFont = UIFont(name: helveticaFontBoldName, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
     static let labelTextBold = WFTextStyle(font: labelTextBoldFont, color: labelTextBoldColor)
     
-    static var smallLabelTextRegularColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var smallLabelTextRegularColor = WFColorPalette.offBlack
     static var smallLabelTextRegularFont = UIFont(name: helveticaFontRegularName, size: 12) ?? UIFont.systemFont(ofSize: 12, weight: .regular)
     static let smallLabelTextRegular = WFTextStyle(font: smallLabelTextRegularFont, color: smallLabelTextRegularColor)
     
-    static var smallLabelTextBoldColor = UIColor(red: 0.126, green: 0.671, blue: 0.282, alpha: 1)
+    static var smallLabelTextBoldColor = WFColorPalette.offBlack
     static var smallLabelTextBoldFont = UIFont(name: helveticaFontBoldName, size: 12) ?? UIFont.systemFont(ofSize: 12, weight: .bold)
     static let smallLabelTextBold = WFTextStyle(font: smallLabelTextBoldFont, color: smallLabelTextBoldColor)
 }

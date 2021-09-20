@@ -10,7 +10,7 @@ import WorkfinderUI
 
 class DateSelectorViewController: UIViewController {
     
-    let presenter: DateSelectorPresenter
+    let presenter: DateSelectorDatasource
     
     lazy var introLabel: UILabel = {
         let label = UILabel()
@@ -45,12 +45,11 @@ class DateSelectorViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        presenter.onViewDidLoad(table: table)
         navigationItem.title = "Interview dates"
         configureViews()
     }
     
-    init(presenter: DateSelectorPresenter) {
+    init(presenter: DateSelectorDatasource) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }

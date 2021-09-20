@@ -22,11 +22,25 @@ public class InviteService: WorkfinderService {
     }
     
     public func loadInterview(id: Int, completion: @escaping (Result<InterviewJson,Error>) -> Void) {
-        let interview = InterviewJson()
-        completion(Result.success(interview))
+        do {
+            let request = try buildRequest(path: "candidate-interviews/\(id)/", queryItems: [], verb: .get)
+            performTask(with: request, verbose: true, completion: completion, attempting: "loadInterview")
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     public func accept(_ interviewDate: InterviewJson.InterviewDateJson, completion: @escaping (Error?) -> Void) {
         completion(nil)
+    }
+    
+    public func declineInterview(uuid: F4SUUID, completion: @escaping (Result<InterviewJson, Error>) -> Void) {
+        do {
+            let patch = ["status": "interview_declined"]
+            let request = try buildRequest(relativePath: "interviews/\(uuid)/", verb: .patch, body: patch)
+            performTask(with: request,verbose: true, completion: completion, attempting: "loadInterview")
+        } catch {
+            completion(.failure(error))
+        }
     }
 }

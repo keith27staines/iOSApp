@@ -67,7 +67,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         switch action {
         case .viewApplication(let placementUuid): showApplicationDetailViewer(for: placementUuid, appSource: appSource)
         case .viewOffer(let placementUuid): showOfferViewer(placementUuid: placementUuid, appSource: appSource)
-        case .viewInterview(let interviewId): showInterview(id: interviewId)
+        case .viewInterview(let interviewUuid): showInterview(id: interviewUuid)
         case .joinInterview(let link): joinInterview(link: link)
         }
     }
@@ -81,7 +81,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     func showInterview(id: Int) {
         guard let presentingVC = navigationRouter.navigationController.topViewController else { return }
         let coordinator = WorkfinderInterviewCoordinator(parent: self, delegate: self, navigationRouter: navigationRouter, inject: injected)
-        coordinator.startFromAcceptInviteScreen(parentVC: presentingVC, inviteId: id)
+        coordinator.startFromAcceptInviteScreen(parentVC: presentingVC, interviewId: id)
     }
     
     func showOfferViewer(placementUuid: F4SUUID, appSource: AppSource) {

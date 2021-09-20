@@ -8,14 +8,7 @@
 import UIKit
 import WorkfinderUI
 
-class AcceptedContentView: UIView, InterviewPresenting {
-    
-    var presenter: InterviewPresenter?
-    weak var messageHandler: UserMessageHandler?
-    
-    func updateFromPresenter() {
-        
-    }
-    
+class AcceptedContentView: BaseContentView  {
     
 }
+

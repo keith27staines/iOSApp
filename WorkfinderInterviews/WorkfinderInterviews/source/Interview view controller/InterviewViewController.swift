@@ -11,32 +11,43 @@ import WorkfinderServices
 import WorkfinderUI
 
 class InterviewViewController: UIViewController, InterviewPresenting {
-    
+
     weak var coordinator: AcceptInviteCoordinatorProtocol?
     var messageHandler: UserMessageHandler?
     var presenter: InterviewPresenter?
     
     var currentContent: (UIView & InterviewPresenting)?
 
-    private func setContentState() {
+    func setContentState() {
         guard let presenter = presenter else { return }
         removeContent()
+        let contentForState: BaseContentView
         switch presenter.contentState {
         case .dateSelecting:
-            setContent(content: dateSelectionContentView)
+            contentForState = dateSelectionContentView
         case .accepted:
-            setContent(content: acceptedContentView)
+            contentForState = acceptedContentView
         case .declining:
-            setContent(content: decliningContentView)
+            contentForState = decliningContentView
         case .declined:
-            setContent(content: declinedContentView)
+            contentForState = declinedContentView
         }
+        setContent(contentForState)
+        thumb.alpha = presenter.isCancelPermitted == true ? 1 : 0
     }
     
-    func setContent(content: UIView & InterviewPresenting) {
+    func setContent(_ content: UIView & InterviewPresenting) {
         contentContainer.addSubview(content)
         content.anchor(top: contentContainer.topAnchor, leading: contentContainer.leadingAnchor, bottom: contentContainer.bottomAnchor, trailing: contentContainer.trailingAnchor)
         content.updateFromPresenter()
+        content.alpha = 0
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.solidBackgroundView.layoutIfNeeded()
+        } completion: { _ in
+            UIView.animate(withDuration: 0.1) {
+                content.alpha = 1
+            }
+        }
         self.currentContent = content
     }
     
@@ -48,7 +59,7 @@ class InterviewViewController: UIViewController, InterviewPresenting {
         self.coordinator = coordinator
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        presenter.viewController = self
+        presenter.interviewViewController = self
         self.messageHandler = UserMessageHandler(presenter: self)
         configureViews()
     }
@@ -108,7 +119,7 @@ class InterviewViewController: UIViewController, InterviewPresenting {
             guard let self = self else { return }
             self.messageHandler?.hideLoadingOverlay()
             self.messageHandler?.displayOptionalErrorIfNotNil(optionalError) {
-                self.coordinator?.acceptViewControllerDidCancel(self)
+                self.coordinator?.didComplete(withChanges: false)
             } retryHandler: {
                 self.load()
             }
@@ -133,29 +144,26 @@ class InterviewViewController: UIViewController, InterviewPresenting {
         let view = self.view!
         self.view.addSubview(solid)
         solid.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
-        height = solid.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8, constant: 0)
         bottom = solid.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         height?.isActive = true
         bottom?.isActive = true
         solid.clipsToBounds = true
-        solid.layer.cornerRadius = 10
+        solid.layer.cornerRadius = 16
         solid.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         solid.layer.borderWidth = 1
         solid.layer.borderColor = WFColorPalette.grayBorder.cgColor
         solid.addSubview(thumb)
         thumb.topAnchor.constraint(equalTo: solid.topAnchor, constant: WFMetrics.standardSpace).isActive = true
         thumb.centerXAnchor.constraint(equalTo: solid.centerXAnchor).isActive = true
-        solid.addSubview(contentContainer)
-        contentContainer.anchor(top: thumb.bottomAnchor, leading: solid.leadingAnchor, bottom: solid.bottomAnchor, trailing: solid.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         return solid
     }()
     
     func configureViews() {
         view.backgroundColor = UIColor.clear
-        let guide = solidBackgroundView.safeAreaLayoutGuide
         view.addSubview(solidBackgroundView)
         solidBackgroundView.addSubview(contentContainer)
-        contentContainer.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+        let guide = solidBackgroundView.safeAreaLayoutGuide
+        contentContainer.anchor(top: thumb.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(didPan(gesture:)))
         view.addGestureRecognizer(pan)
@@ -164,10 +172,11 @@ class InterviewViewController: UIViewController, InterviewPresenting {
     @objc func didPan(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view).y
         if translation > 0 {
-            self.bottom?.constant = translation
-            if translation > 100 {
-                dismiss(animated: true, completion: nil)
-                coordinator?.didComplete(with: false)
+            if solidBackgroundView.frame.height - translation > 100 {
+                self.bottom?.constant = translation
+            }
+            if translation > 150 && presenter?.isCancelPermitted == true {
+                coordinator?.didComplete(withChanges: false)
             } else {
                 if gesture.state == .ended {
                     self.bottom?.constant = 0

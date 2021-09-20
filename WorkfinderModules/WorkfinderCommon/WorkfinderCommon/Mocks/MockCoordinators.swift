@@ -3,7 +3,7 @@ import Foundation
 
 public class MockTabBarCoordinator : MockCoreInjectionNavigationCoordinator, TabBarCoordinatorProtocol {
     
-    public func routeInterviewInvite(inviteUuid: Int, appSource: AppSource) {
+    public func routeInterviewInvite(interviewUuid: F4SUUID?, appSource: AppSource) {
         
     }
     

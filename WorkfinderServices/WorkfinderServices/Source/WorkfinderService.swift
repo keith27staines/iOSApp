@@ -35,6 +35,7 @@ open class WorkfinderService {
         attempting: String
     ) {
         task?.cancel()
+        print(request.cURL())
         task = buildTask(
             request: request,
             completion: completion,

@@ -155,14 +155,14 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
         tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
     }
     
-    func routeInterviewInvite(id: Int?, appSource: AppSource) {
-        guard let id = id else { return }
+    func routeInterviewInvite(uuid: F4SUUID?, appSource: AppSource) {
+        guard let uuid = uuid else { return }
         if let tabBarCoordinator = self.tabBarCoordinator {
-            tabBarCoordinator.routeInterviewInvite(inviteUuid: id, appSource: appSource)
+            tabBarCoordinator.routeInterviewInvite(interviewUuid: uuid, appSource: appSource)
             return
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-            self?.routeInterviewInvite(id: id, appSource: appSource)
+            self?.routeInterviewInvite(uuid: uuid, appSource: appSource)
         }
     }
     

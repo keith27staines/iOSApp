@@ -3,7 +3,7 @@ import UIKit
 
 fileprivate let primaryButtonHeight = CGFloat(50)
 fileprivate let primaryButtonFont = UIFont.boldSystemFont(ofSize: 17)
-fileprivate let primaryButtonCornerRadius = CGFloat(8)
+fileprivate let primaryButtonCornerRadius = CGFloat(25)
 
 public class WorkfinderPrimaryButton: UIButton {
     

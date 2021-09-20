@@ -10,6 +10,7 @@ public enum WFCapsuleHeightClass {
     case small
     case larger
     case clickable
+    case large
 }
 
 public extension WFCapsuleHeightClass {
@@ -18,6 +19,7 @@ public extension WFCapsuleHeightClass {
         case .small: return 24
         case .larger: return 32
         case .clickable: return 44
+        case .large: return 50
         }
     }
 
@@ -26,6 +28,7 @@ public extension WFCapsuleHeightClass {
         case .small: return 12
         case .larger: return 14
         case .clickable: return 16
+        case .large: return 20
         }
     }
 }
