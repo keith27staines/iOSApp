@@ -20,7 +20,6 @@ class InterviewViewController: UIViewController, InterviewPresenting {
 
     func setContentState() {
         guard let presenter = presenter else { return }
-        removeContent()
         let contentForState: BaseContentView
         switch presenter.contentState {
         case .dateSelecting:
@@ -37,6 +36,7 @@ class InterviewViewController: UIViewController, InterviewPresenting {
     }
     
     func setContent(_ content: UIView & InterviewPresenting) {
+        removeContent()
         contentContainer.addSubview(content)
         content.anchor(top: contentContainer.topAnchor, leading: contentContainer.leadingAnchor, bottom: contentContainer.bottomAnchor, trailing: contentContainer.trailingAnchor)
         content.updateFromPresenter()

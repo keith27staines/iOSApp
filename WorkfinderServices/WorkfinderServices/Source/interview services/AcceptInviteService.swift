@@ -30,13 +30,24 @@ public class InviteService: WorkfinderService {
         }
     }
     
-    public func accept(_ interviewDate: InterviewJson.InterviewDateJson, completion: @escaping (Error?) -> Void) {
-        completion(nil)
+    public struct StatusJson: Codable {
+        public var status: String?
     }
     
-    public func declineInterview(uuid: F4SUUID, completion: @escaping (Result<InterviewJson, Error>) -> Void) {
+    public func accept(_ interviewDate: InterviewJson.InterviewDateJson, completion: @escaping (Result<StatusJson,Error>) -> Void) {
         do {
-            let patch = ["status": "interview_declined"]
+            let id = interviewDate.id ?? -1
+            let patch = StatusJson(status: "selected")
+            let request = try buildRequest(relativePath: "interview-date/\(id)/", verb: .patch, body: patch)
+            performTask(with: request,verbose: true, completion: completion, attempting: "acceptInterviewDate")
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    public func declineInterview(uuid: F4SUUID, completion: @escaping (Result<StatusJson, Error>) -> Void) {
+        do {
+            let patch = StatusJson(status: "interview_declined")
             let request = try buildRequest(relativePath: "interviews/\(uuid)/", verb: .patch, body: patch)
             performTask(with: request,verbose: true, completion: completion, attempting: "loadInterview")
         } catch {

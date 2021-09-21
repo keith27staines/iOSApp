@@ -162,10 +162,12 @@ class InterviewPresenter {
         switch contentState {
         case .accepted, .declined:
             coordinator.didComplete(withChanges: true)
+            completion(nil)
         case .dateSelecting:
             acceptInterview(completion: completion)
         case .declining:
-            declineInterview(completion: completion)
+            contentState = .dateSelecting
+            completion(nil)
         }
     }
     
@@ -182,14 +184,16 @@ class InterviewPresenter {
     
     func acceptInterview(completion: @escaping (Error?) -> Void) {
         guard let interviewDate = dateSelectorDatasource?.selectedInterviewDate else { return }
-        service.accept(interviewDate) { [weak self] error in
+        service.accept(interviewDate) { [weak self] result in
             guard let self = self else { return }
-            if let error = error {
+            switch result {
+            case .success(let statusJson):
+                print(statusJson)
+                self.contentState = .accepted
+                completion(nil)
+            case .failure(let error):
                 completion(error)
-                return
             }
-            self.contentState = .accepted
-            completion(nil)
         }
     }
     

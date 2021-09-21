@@ -31,7 +31,7 @@ class ApplicationsPresenter: NSObject {
     
     private var upcomingInterviewsData: [[InterviewInviteData]] {
         let upcomingInterviews = allInterviews.filter { interview in
-            interview.status == "interview_confirmed" || interview.status == "interview_meeting_link_added"
+            interview.status == "interview_accepted" || interview.status == "interview_meeting_link_added"
         }
         let data = upcomingInterviews.map { interview in InterviewInviteData(interview: interview) }
         return [data]
@@ -54,7 +54,9 @@ class ApplicationsPresenter: NSObject {
     }
     
     private var offeredInterviewData: [OfferData] {
-        allInterviews.map { interview in
+        allInterviews.filter({
+            $0.status == "open"
+        }).map { interview in
             OfferData(
                 offerType: .interview(id: interview.id ?? -1),
                 imageUrlString: interview.placement?.association?.host?.photo,
@@ -159,7 +161,7 @@ class ApplicationsPresenter: NSObject {
             switch result {
             case .success(let serverlistJson):
                 self.offeredApplications = serverlistJson.results.filter({ application in
-                    application.state == .offered || application.state == .interviewOffered
+                    application.state == .offered
                 })
                 completion(nil)
             case .failure(let error):

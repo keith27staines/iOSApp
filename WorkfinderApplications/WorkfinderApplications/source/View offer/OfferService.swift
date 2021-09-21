@@ -149,7 +149,7 @@ fileprivate class FetchOfferService: WorkfinderService {
             let relativePath = "offers/\(uuid)"
             let queryItems = [URLQueryItem(name: "expand-association", value: "1")]
             let request = try buildRequest(relativePath: relativePath, queryItems: queryItems, verb: .get)
-            performTask(with: request, completion: completion, attempting: #function)
+            performTask(with: request, verbose: true, completion: completion, attempting: #function)
         } catch {
             completion(Result<PlacementJson,Error>.failure(error))
         }
