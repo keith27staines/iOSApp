@@ -44,7 +44,8 @@ class DateSelectionContentView: BaseContentView {
         table.heightAnchor.constraint(equalToConstant: 3*44 + 2*16).isActive = true
         table.tableFooterView = UIView()
         table.alwaysBounceVertical = false
-        table.rowHeight = 44
+        table.rowHeight = 44 + 16
+        table.separatorStyle = .none
         return table
     }()
     

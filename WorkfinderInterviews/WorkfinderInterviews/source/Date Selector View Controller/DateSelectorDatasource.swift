@@ -49,9 +49,10 @@ extension DateSelectorDatasource: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        let dateString = "date string"
+        let dateString = interviewDates[indexPath.row].localDateTimeDurationString
         let isSelected = selectedRowIndexPath == indexPath
         cell.configure(dateString, isSelected: isSelected)
+        cell.selectionStyle = .none
         return cell
     }
 }
@@ -70,6 +71,5 @@ extension DateSelectorDatasource: UITableViewDelegate {
         tableView.reloadRows(at: affectedIndexPaths, with: .automatic)
         selectionDidChange?()
     }
-
 }
 

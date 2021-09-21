@@ -38,6 +38,38 @@ public struct InterviewJson: Codable {
     }
     
     public struct InterviewDateJson: Codable, Equatable {
+        private static var dateFormatter: DateFormatter = {
+            let df = DateFormatter()
+            df.timeStyle = .none
+            df.dateFormat = "dd MMM yyyy"
+            return df
+        }()
+        
+        private static var timeFormatter: DateFormatter = {
+            let df = DateFormatter()
+            df.dateFormat = "HH:mm"
+            return df
+        }()
+        
+        public var localDateString: String {
+            guard let localDate = localDate else { return ""}
+            return Self.dateFormatter.string(from: localDate)
+        }
+        
+        public var localStartToEndTimeString: String {
+            guard let startDate = localDate, let duration = duration else { return ""}
+            let endDate = startDate.addingTimeInterval(Double(60 * duration))
+            let startString = Self.timeFormatter.string(from: startDate)
+            let endString = Self.timeFormatter.string(from: endDate)
+            return "\(startString) - \(endString)"
+        }
+        
+        public var localDateTimeDurationString: String {
+            "\(localDateString), \(localStartToEndTimeString)"
+        }
+
+        public var localDate: Date? { Date.dateFromRfc3339(string: dateTime ?? "") }
+        
         public var id: Int?
         public var dateTime: String?
         public var timeString: String?
