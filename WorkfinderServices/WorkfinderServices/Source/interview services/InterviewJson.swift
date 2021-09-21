@@ -22,6 +22,10 @@ public struct InterviewJson: Codable {
     public var offerEndDate: String?
     public var interviewDates: [InterviewDateJson]?
     
+    public var selectedInterviewDate: InterviewDateJson? {
+        interviewDates?.first { $0.status == "accepted" }
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case uuid

@@ -100,19 +100,11 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
     let space = WFMetrics.standardSpace
     let halfspace = WFMetrics.halfSpace
     
-    private lazy var imageStack: UIStackView = {
-        let variableSpace = UIView()
-        variableSpace.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        let stack = UIStackView(arrangedSubviews: [imageView, variableSpace])
-        stack.axis = .horizontal
-        return stack
-    }()
-    
     private lazy var imageView: WFSelfLoadingImageView = {
-        let view = WFSelfLoadingImageView()
-        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let view = WFSelfLoadingImageViewWithHeight(height: 46)
+        view.setContentHuggingPriority(.required, for: .horizontal)
+        view.setContentCompressionResistancePriority(.required, for: .horizontal)
         view.contentMode = .scaleAspectFit
-        view.heightAnchor.constraint(equalToConstant: 46).isActive = true
         return view
     }()
     
@@ -137,7 +129,6 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
     private lazy var mainStack: UIStackView = {
         let variableSpace = UIView()
         let stack = UIStackView(arrangedSubviews: [
-                imageStack,
                 textLabel,
                 variableSpace,
                 button
@@ -150,8 +141,10 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
     
     private lazy var tile: UIView = {
         let view = UIView()
+        view.addSubview(imageView)
+        imageView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: space, left: space, bottom: 0, right: 0))
         view.addSubview(mainStack)
-        mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: space, left: space, bottom: space, right: space))
+        mainStack.anchor(top: imageView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: space, left: space, bottom: space, right: space))
         view.layer.borderWidth = 1
         view.layer.borderColor = WFColorPalette.grayBorder.cgColor
         view.layer.cornerRadius = space

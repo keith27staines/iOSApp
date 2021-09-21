@@ -44,20 +44,10 @@ struct InterviewInviteData {
     
     init(interview: InterviewJson) {
         interviewJson = interview
-        let host = interview.placement?.association?.host?.fullname ?? ""
-        let inviteTextEnding = host.isEmpty ? "" : " with \(host)"
-        var startTimeText = ""
-        var endTimeText = ""
-        if let startDate = Date.dateFromRfc3339(string: interview.offerStartDate ?? "") {
-            dateText = Self.dateFormatter.string(from: startDate)
-            startTimeText = Self.timeFormatter.string(from: startDate)
-        } else {
-            dateText = ""
-        }
-        if let endDate = Date.dateFromRfc3339(string: interview.offerEndDate ?? "") {
-            endTimeText = Self.timeFormatter.string(from: endDate)
-        }
-        timeText = "\(startTimeText) \(endTimeText)"
+        let hostFirstName = interview.placement?.association?.host?.fullname?.split(separator: " ").first ?? ""
+        let inviteTextEnding = hostFirstName.isEmpty ? "" : " with \(hostFirstName)"
+        dateText = interview.selectedInterviewDate?.localDateString ?? ""
+        timeText = interview.selectedInterviewDate?.localStartToEndTimeString ?? ""
         interviewId = interview.id ?? -1
         cardTitle = "Interview"
         inviteText = "You have an upcoming interview\(inviteTextEnding)"
