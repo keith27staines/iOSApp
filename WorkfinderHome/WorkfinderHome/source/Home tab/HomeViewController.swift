@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
     }
     
     func configureNavigationBar() {
+        navigationItem.title = "Discover"
         styleNavigationController()
     }
     
@@ -136,6 +137,7 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSearchIsActive), name: .wfHomeScreenSearchIsActive, object: nil)
         isSearchActive = false
+        configureNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {

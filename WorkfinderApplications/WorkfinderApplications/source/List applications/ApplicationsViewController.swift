@@ -79,7 +79,8 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         navigationItem.title = "Applications"
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
-        styleWFNavigationController()
+        // styleWFNavigationController()
+        styleNavigationController()
     }
     
     func styleWFNavigationController() {

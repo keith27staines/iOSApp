@@ -43,6 +43,32 @@ class TabBarViewController: UITabBarController {
         Skinner().apply(tabBarSkin: skin?.tabBarSkin, to: self)
         tabBar.unselectedItemTintColor = UIColor.lightGray
         tabBar.tintColor = WorkfinderColors.primaryColor
+        if #available(iOS 15.0, *) {
+            updateTabBarAppearance()
+        }
+    }
+    
+    @available(iOS 15.0, *)
+    private func updateTabBarAppearance() {
+        let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        
+        let barTintColor: UIColor = .white
+        tabBarAppearance.backgroundColor = barTintColor
+        
+        updateTabBarItemAppearance(appearance: tabBarAppearance.compactInlineLayoutAppearance)
+        updateTabBarItemAppearance(appearance: tabBarAppearance.inlineLayoutAppearance)
+        updateTabBarItemAppearance(appearance: tabBarAppearance.stackedLayoutAppearance)
+        
+        self.tabBar.standardAppearance = tabBarAppearance
+        self.tabBar.scrollEdgeAppearance = tabBarAppearance
+    }
+
+    @available(iOS 13.0, *)
+    private func updateTabBarItemAppearance(appearance: UITabBarItemAppearance) {
+        let unselectedItemTintColor: UIColor = .lightGray
+        appearance.selected.iconColor = WorkfinderColors.primaryColor
+        appearance.normal.iconColor = unselectedItemTintColor
     }
 
 

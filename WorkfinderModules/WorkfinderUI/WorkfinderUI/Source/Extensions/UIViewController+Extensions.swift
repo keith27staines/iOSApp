@@ -14,6 +14,22 @@ public extension UIViewController {
     func styleNavigationController() {
         Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
         setNeedsStatusBarAppearanceUpdate()
+        if #available(iOS 15.0, *) {
+            updateNavigationStyle()
+        }
+    }
+    
+    @available(iOS 15.0, *)
+    private func updateNavigationStyle() {
+        guard let navigationBar = navigationController?.navigationBar
+        else { return }
+        navigationBar.isHidden = false
+        let barAppearance = UINavigationBarAppearance()
+        barAppearance.backgroundColor = .white
+        barAppearance.titleTextAttributes = [.foregroundColor:WorkfinderColors.primaryColor]
+        navigationBar.tintColor = WFColorPalette.graphicsGreen
+        navigationBar.standardAppearance = barAppearance
+        navigationBar.scrollEdgeAppearance = barAppearance
     }
 }
 
