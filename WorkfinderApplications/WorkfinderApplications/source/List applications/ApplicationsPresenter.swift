@@ -55,7 +55,7 @@ class ApplicationsPresenter: NSObject {
     
     private var offeredInterviewData: [OfferData] {
         allInterviews.filter({
-            $0.status == "open"
+            $0.status == "interview_offered"
         }).map { interview in
             OfferData(
                 offerType: .interview(id: interview.id ?? -1),
