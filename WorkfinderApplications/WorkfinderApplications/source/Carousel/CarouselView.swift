@@ -110,13 +110,11 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
         return collection
     }()
     
-    func configure(_ cell: CarouselCell, withDataForIndexPath indexPath: IndexPath) {
-        let data = cellData[indexPath.section][indexPath.row]
-        cell.configure(with: data, size: cellSize)
-    }
-    
+    var cellIdentifier: String = ""
+        
     func registerCell(cellClass: AnyClass, withIdentifier identifier: String) {
         collectionView.register(cellClass, forCellWithReuseIdentifier: identifier)
+        cellIdentifier = identifier
     }
     
     private func configureViews() {
@@ -146,8 +144,9 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let data = cellData[indexPath.section][indexPath.row]
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.identifier, for: indexPath) as? CarouselCell
-        else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CarouselCell else {
+            return UICollectionViewCell()
+        }
         cell.configure(with: data, size: cellSize)
         cell.contentView.alpha = indexPath.row == stepper.currentPageIndex ? 1 : 0.5
         return cell

@@ -14,24 +14,12 @@ import WorkfinderServices
 import WorkfinderUI
 
 struct InterviewInviteData {
-    static var dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.timeStyle = .none
-        df.dateFormat = "dd MMM yyyy"
-        return df
-    }()
-    
-    static var timeFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = "HH:mm"
-        return df
-    }()
-    
     var interviewId: Int
-    var cardTitle: String
+    var tileTitle: String
     var inviteText: String
     var dateText: String
     var timeText: String
+    var hostNotesHeading: String?
     var hostNotes: String?
     var offerMessage: String?
     var buttonAction: (() -> Void)?
@@ -44,13 +32,14 @@ struct InterviewInviteData {
     
     init(interview: InterviewJson) {
         interviewJson = interview
-        let hostFirstName = interview.placement?.association?.host?.fullname?.split(separator: " ").first ?? ""
+        let hostFirstName = interview.placement?.association?.host?.fullname?.split(separator: " ").first ?? "The host"
         let inviteTextEnding = hostFirstName.isEmpty ? "" : " with \(hostFirstName)"
+        interviewId = interview.id ?? -1
+        tileTitle = "Interview"
+        inviteText = "You have an upcoming interview\(inviteTextEnding)"
         dateText = interview.selectedInterviewDate?.localDateString ?? ""
         timeText = interview.selectedInterviewDate?.localStartToEndTimeString ?? ""
-        interviewId = interview.id ?? -1
-        cardTitle = "Interview"
-        inviteText = "You have an upcoming interview\(inviteTextEnding)"
+        hostNotesHeading = "\(hostFirstName)'s notes"
         hostNotes = interview.additionalOfferNote
         offerMessage = interview.offerMessage
         meetingLink = URL(string: interview.meetingLink ?? "")
@@ -73,40 +62,155 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
     
     func configure(with data: InterviewInviteData, size: CGSize) {
         _size = size
+        tileTitle.text = data.tileTitle
+        inviteText.text = data.inviteText
+        dateText.text = data.dateText
+        timeText.text = data.timeText
+        hostNoteHeading.text = data.hostNotesHeading
+        offerMessage.text = data.offerMessage?.replacingOccurrences(of: "\n", with: " ")
+        button.text = data.buttonText
+        waitingForLinkLabel.text = data.waitingForLinkText
+        button.isHidden = data.isButtonHidden
+        waitingForLinkLabel.isHidden = !data.isButtonHidden
     }
 
-    var imageHeight: CGFloat = 46
     var buttonHeight: NSLayoutConstraint?
     var frameHeight: CGFloat = 100
     let space = WFMetrics.standardSpace
     let halfspace = WFMetrics.halfSpace
-    
-    private lazy var imageView: WFSelfLoadingImageView = {
-        let view = WFSelfLoadingImageView()
-        view.heightAnchor.constraint(equalToConstant: 46).isActive = true
-        return view
-    }()
-    
+        
     override var intrinsicContentSize: CGSize {
         _size
     }
     
-    private lazy var textLabel: UILabel = {
+    private lazy var tileTitle: UILabel = {
+        let label = UILabel()
+        label.applyStyle(smallHeadingStyle)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    var smallHeadingStyle: WFTextStyle {
+        var style = WFTextStyle.smallLabelTextBold
+        style.color = WFColorPalette.gray2
+        return style
+    }
+    
+    private lazy var inviteText: UILabel = {
         let label = UILabel()
         var style = WFTextStyle.labelTextRegular
-        style.color = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
+        style.color = WFColorPalette.gray2
         label.applyStyle(style)
         label.numberOfLines = 0
         return label
     }()
+    
+    lazy var line: UIView = {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = WFColorPalette.gray2
+        return view
+    }()
+    
+    lazy var topStack: UIStackView = {
+        let stack = UIStackView()
+        stack.addArrangedSubview(tileTitle)
+        stack.addArrangedSubview(inviteText)
+        stack.addArrangedSubview(line)
+        stack.axis = .vertical
+        stack.spacing = WFMetrics.standardSpace
+        return stack
+    }()
+    
+    private lazy var dateHeading: UILabel = {
+        let label = UILabel()
+        label.applyStyle(smallHeadingStyle)
+        label.numberOfLines = 1
+        label.text = "Date"
+        return label
+    }()
+    
+    private lazy var timeHeading: UILabel = {
+        let label = UILabel()
+        label.applyStyle(smallHeadingStyle)
+        label.numberOfLines = 1
+        label.text = "Time"
+        return label
+    }()
+    
+    private lazy var dateText: UILabel = {
+        let label = UILabel()
+        label.applyStyle(WFTextStyle.labelTextRegular)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    private lazy var timeText: UILabel = {
+        let label = UILabel()
+        label.applyStyle(WFTextStyle.labelTextRegular)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    lazy var dateStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.addArrangedSubview(dateHeading)
+        stack.addArrangedSubview(dateText)
+        stack.spacing = WFMetrics.halfSpace
+        return stack
+    }()
 
-    private lazy var waitingForLinkLabel: UILabel = {
+    lazy var timeStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.addArrangedSubview(timeHeading)
+        stack.addArrangedSubview(timeText)
+        stack.spacing = WFMetrics.halfSpace
+        return stack
+    }()
+    
+    lazy var dateTimeStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.addArrangedSubview(dateStack)
+        stack.addArrangedSubview(timeStack)
+        stack.distribution = .fillEqually
+        return stack
+    }()
+
+    private lazy var hostNoteHeading: UILabel = {
+        let label = UILabel()
+        label.applyStyle(smallHeadingStyle)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    private lazy var offerMessage: UILabel = {
         let label = UILabel()
         var style = WFTextStyle.labelTextRegular
-        style.color = UIColor(red: 0.008, green: 0.188, blue: 0.161, alpha: 1)
+        style.color = WFColorPalette.gray2
         label.applyStyle(style)
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
+    }()
+    
+    lazy var hostStack: UIStackView = {
+        let stack = UIStackView()
+        stack.addArrangedSubview(hostNoteHeading)
+        stack.addArrangedSubview(offerMessage)
+        stack.axis = .vertical
+        stack.spacing = 8
+        return stack
+    }()
+    
+    lazy var buttonStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.addArrangedSubview(button)
+        stack.addArrangedSubview(waitingForLinkLabel)
+        return stack
     }()
     
     private lazy var buttonContainer: UIView = {
@@ -125,32 +229,44 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
         let button = WFButton(heightClass: .larger)
         return button
     }()
+
+    private lazy var waitingForLinkLabel: UILabel = {
+        let label = UILabel()
+        var style = WFTextStyle.labelTextRegular
+        style.color = WFColorPalette.gray2
+        label.applyStyle(style)
+        label.numberOfLines = 2
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        return label
+    }()
     
     private lazy var mainStack: UIStackView = {
         let variableSpace = UIView()
         let stack = UIStackView(arrangedSubviews: [
-                imageView,
-                textLabel,
-                variableSpace,
-                buttonContainer
-            ]
-        )
+            topStack,
+            dateTimeStack,
+            hostStack,
+            UIView(),
+            buttonStack
+        ])
         stack.axis = .vertical
-        stack.spacing = halfspace
+        stack.spacing = WFMetrics.standardSpace - 2
         return stack
     }()
     
     private lazy var tile: UIView = {
         let view = UIView()
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 8
+        view.layer.borderColor = WFColorPalette.grayBorder.cgColor
         view.addSubview(mainStack)
         mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: space, left: space, bottom: space, right: space))
-
         return view
     }()
     
     func configureViews() {
-        contentView.addSubview(mainStack)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        contentView.addSubview(tile)
+        tile.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
     }
 
     override init(frame: CGRect) {

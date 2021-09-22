@@ -23,7 +23,7 @@ public struct InterviewJson: Codable {
     public var interviewDates: [InterviewDateJson]?
     
     public var selectedInterviewDate: InterviewDateJson? {
-        interviewDates?.first { $0.status == "accepted" }
+        interviewDates?.first { $0.status == "selected" }
     }
     
     private enum CodingKeys: String, CodingKey {

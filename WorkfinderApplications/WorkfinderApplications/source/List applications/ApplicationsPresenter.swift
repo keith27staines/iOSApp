@@ -94,7 +94,7 @@ class ApplicationsPresenter: NSObject {
         return cell
     }()
 
-    private var offersAndInterviewsCarousel: CarouselView<OfferCell> = {
+    private lazy var offersAndInterviewsCarousel: CarouselView<OfferCell> = {
         let cellSize = CGSize(width: 255, height: 186)
         let carousel = CarouselView<OfferCell>(cellSize: cellSize, title: "Offers and Interviews")
         carousel.registerCell(cellClass: OfferCell.self, withIdentifier: OfferCell.identifier)

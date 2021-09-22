@@ -81,7 +81,7 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
     typealias CellData = OfferData
     static var identifier = "OfferCell"
     private var _size = CGSize(width: 0, height: 0)
-    
+        
     func configure(with data: OfferData, size: CGSize) {
         _size = size
         let defaultImage = UIImage.makeImageFromFirstCharacter(data.defaultImageText ?? "?", size: CGSize(width: imageHeight, height: imageHeight))

@@ -30,7 +30,6 @@ class HomeViewController: UIViewController {
         trayTopConstraintConstant = 0
         animateTrayToFinalPosition()
         backgroundView.backgroundColor = UIColor.white
-        navigationItem.title = "Discover"
     }
     
     lazy var trayTopConstraint: NSLayoutConstraint = {
@@ -44,8 +43,8 @@ class HomeViewController: UIViewController {
     }
     
     func configureNavigationBar() {
-        navigationItem.title = "Discover"
         styleNavigationController()
+        updateNavigationBar()
     }
     
     var trayTopConstraintConstant: CGFloat = 0 {
@@ -80,6 +79,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    var isTrayExpanded: Bool = false {
+        didSet {
+            updateNavigationBar()
+        }
+    }
+    
     func animateTrayToFinalPosition() {
         if trayTopConstraintConstant < backgroundView.frame.height/3 {
             trayTopConstraintConstant = 0
@@ -99,8 +104,9 @@ class HomeViewController: UIViewController {
                 tray.layer.shadowColor = UIColor.clear.cgColor
                 self.homeView.layoutIfNeeded()
             },
-            completion: {_ in
-                if self.trayTopConstraintConstant == 0 {}
+            completion: { [weak self] _ in
+                if self?.trayTopConstraintConstant == 0 {}
+                self?.isTrayExpanded = true
             }
         )
     }
@@ -136,8 +142,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin), name: .wfDidLoginCandidate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSearchIsActive), name: .wfHomeScreenSearchIsActive, object: nil)
-        isSearchActive = false
-        configureNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -155,8 +159,16 @@ class HomeViewController: UIViewController {
     }
     
     func updateNavigationBar() {
-        navigationController?.navigationBar.barTintColor = isSearchActive ? UIColor.white : WorkfinderColors.primaryColor
-        self.navigationController?.setNavigationBarHidden(self.isSearchActive, animated: true)
+        let navigationBar = navigationController?.navigationBar
+        switch isTrayExpanded {
+        case true:
+            navigationBar?.barTintColor = isSearchActive ? UIColor.white : WorkfinderColors.primaryColor
+            self.navigationController?.setNavigationBarHidden(self.isSearchActive, animated: true)
+            self.navigationItem.title = "Discover"
+        case false:
+            navigationBar?.barTintColor = WorkfinderColors.primaryColor
+            self.navigationItem.title = ""
+        }
     }
     
     @objc func handleLogin() {
@@ -166,7 +178,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureViews()
-        updateNavigationBar()
+        configureNavigationBar()
     }
     
     @objc func animateTrayToTop() {
@@ -185,7 +197,6 @@ class HomeViewController: UIViewController {
     var isConfigured = false
     func configureViews() {
         guard !isConfigured else { return }
-        configureNavigationBar()
         isConfigured = true
         configureHomeView()
         configureTray()
