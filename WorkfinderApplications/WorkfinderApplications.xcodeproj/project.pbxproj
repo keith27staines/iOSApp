@@ -161,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				53A0F7EE26EF701B007F6D35 /* InterviewInviteCell.swift */,
-				53E4804C26FB1F1000FB5A89 /* InterviewInviteTile.swift */,
 				53E4804E26FB1FB600FB5A89 /* InterviewInviteData.swift */,
+				53E4804C26FB1F1000FB5A89 /* InterviewInviteTile.swift */,
 			);
 			path = InterviewInviteCell;
 			sourceTree = "<group>";
