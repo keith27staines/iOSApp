@@ -1,67 +1,17 @@
 //
-//  InterviewInviteCell.swift
+//  InterviewInviteTile.swift
 //  WorkfinderApplications
 //
-//  Created by Keith on 13/09/2021.
+//  Created by Keith on 22/09/2021.
 //  Copyright © 2021 Workfinder. All rights reserved.
 //
 
-import Foundation
-
-
 import UIKit
-import WorkfinderServices
 import WorkfinderUI
 
-struct InterviewInviteData {
-    var interviewId: Int
-    var tileTitle: String
-    var inviteText: String
-    var dateText: String
-    var timeText: String
-    var hostNotesHeading: String?
-    var hostNotes: String?
-    var offerMessage: String?
-    var buttonAction: (() -> Void)?
-    var buttonText: String
-    var buttonState: WFButton.State = .normal
-    var isButtonHidden: Bool { meetingLink == nil ? true : false }
-    var waitingForLinkText: String?
-    private var interviewJson: InterviewJson?
-    var meetingLink: URL?
+class InterviewInviteTile: UIView {
     
-    init(interview: InterviewJson) {
-        interviewJson = interview
-        let hostFirstName = interview.placement?.association?.host?.fullname?.split(separator: " ").first ?? "The host"
-        let inviteTextEnding = hostFirstName.isEmpty ? "" : " with \(hostFirstName)"
-        interviewId = interview.id ?? -1
-        tileTitle = "Interview"
-        inviteText = "You have an upcoming interview\(inviteTextEnding)"
-        dateText = interview.selectedInterviewDate?.localDateString ?? ""
-        timeText = interview.selectedInterviewDate?.localStartToEndTimeString ?? ""
-        hostNotesHeading = "\(hostFirstName)'s notes"
-        hostNotes = interview.additionalOfferNote
-        offerMessage = interview.offerMessage
-        meetingLink = URL(string: interview.meetingLink ?? "")
-        buttonAction = {
-            if let link = URL(string: interview.meetingLink ?? "") {
-                UIApplication.shared.open(link, options: [:], completionHandler: nil)
-            }
-        }
-        buttonText = "Join Video Interview"
-        buttonState = .normal
-        waitingForLinkText = "We will share the meeting link with you when the host submits it to us"
-    }
-}
-
-class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
-
-    typealias CellData = InterviewInviteData
-    static var identifier = "InterviewInviteCell"
-    private var _size = CGSize.zero
-    
-    func configure(with data: InterviewInviteData, size: CGSize) {
-        _size = size
+    func configure(with data: InterviewInviteData) {
         tileTitle.text = data.tileTitle
         inviteText.text = data.inviteText
         dateText.text = data.dateText
@@ -78,11 +28,7 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
     var frameHeight: CGFloat = 100
     let space = WFMetrics.standardSpace
     let halfspace = WFMetrics.halfSpace
-        
-    override var intrinsicContentSize: CGSize {
-        _size
-    }
-    
+            
     private lazy var tileTitle: UILabel = {
         let label = UILabel()
         label.applyStyle(smallHeadingStyle)
@@ -253,20 +199,14 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
         stack.spacing = WFMetrics.standardSpace - 2
         return stack
     }()
-    
-    private lazy var tile: UIView = {
-        let view = UIView()
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 8
-        view.layer.borderColor = WFColorPalette.grayBorder.cgColor
-        view.addSubview(mainStack)
-        mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: space, left: space, bottom: space, right: space))
-        return view
-    }()
-    
+
     func configureViews() {
-        contentView.addSubview(tile)
-        tile.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        let pad = WFMetrics.standardSpace
+        layer.borderWidth = 1
+        layer.cornerRadius = pad/2
+        layer.borderColor = WFColorPalette.grayBorder.cgColor
+        addSubview(mainStack)
+        mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: pad, left: pad, bottom: pad, right: pad))
     }
 
     override init(frame: CGRect) {
@@ -278,5 +218,3 @@ class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
