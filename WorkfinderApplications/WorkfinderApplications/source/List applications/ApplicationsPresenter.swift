@@ -31,7 +31,7 @@ class ApplicationsPresenter: NSObject {
     
     private var upcomingInterviewsData: [[InterviewInviteData]] {
         let upcomingInterviews = allInterviews.filter { interview in
-            interview.status == "interview_accepted" || interview.status == "interview_meeting_link_added"
+            interview.status == "interview_accepted" || interview.status == "meeting_link_added"
         }
         let data = upcomingInterviews.map { interview in InterviewInviteData(interview: interview) }
         return [data]

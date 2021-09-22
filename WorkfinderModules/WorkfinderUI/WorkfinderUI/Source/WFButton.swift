@@ -46,7 +46,7 @@ public class WFButton: UIView {
     
     private lazy var label: UILabel = {
         let label = UILabel()
-        let font = WFTextStyle.standardFont(size: heightClass.fontSize, weight: .regular)
+        let font = WFTextStyle.standardFont(size: heightClass.fontSize, weight: .bold)
         let style = WFTextStyle(font: font, color: WFColorPalette.white)
         label.applyStyle(style)
         label.textAlignment = .center
@@ -80,14 +80,13 @@ public class WFButton: UIView {
         addSubview(label)
         label.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        //addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(_tapped)))
     }
     
     @objc func _tapped(sender: UITapGestureRecognizer)  {
         guard state != .disabled else { return }
         switch sender.state {
         case .began, .changed: state = .highlighted
-            print("here!")
+            
         case .ended:
             state = .normal
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

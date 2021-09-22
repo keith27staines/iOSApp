@@ -19,8 +19,10 @@ class InterviewInviteTile: UIView {
         hostNoteHeading.text = data.hostNotesHeading
         offerMessage.text = data.offerMessage?.replacingOccurrences(of: "\n", with: " ")
         button.text = data.buttonText
+        button.buttonTapped = data.buttonAction
         waitingForLinkLabel.text = data.waitingForLinkText
         button.isHidden = data.isButtonHidden
+        button.state = .normal
         waitingForLinkLabel.isHidden = !data.isButtonHidden
     }
 
@@ -64,7 +66,7 @@ class InterviewInviteTile: UIView {
         stack.addArrangedSubview(inviteText)
         stack.addArrangedSubview(line)
         stack.axis = .vertical
-        stack.spacing = WFMetrics.standardSpace
+        stack.spacing = WFMetrics.standardSpace - 3
         return stack
     }()
     
@@ -151,14 +153,6 @@ class InterviewInviteTile: UIView {
         return stack
     }()
     
-    lazy var buttonStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.addArrangedSubview(button)
-        stack.addArrangedSubview(waitingForLinkLabel)
-        return stack
-    }()
-    
     private lazy var buttonContainer: UIView = {
         let view = UIView()
         view.addSubview(waitingForLinkLabel)
@@ -166,13 +160,14 @@ class InterviewInviteTile: UIView {
         view.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
         button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         waitingForLinkLabel.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
         return view
     }()
     
     private lazy var button: WFButton = {
-        let button = WFButton(heightClass: .larger)
+        let button = WFButton(heightClass: .larger, isCapsule: true)
         return button
     }()
 
@@ -193,7 +188,7 @@ class InterviewInviteTile: UIView {
             dateTimeStack,
             hostStack,
             UIView(),
-            buttonStack
+            buttonContainer
         ])
         stack.axis = .vertical
         stack.spacing = WFMetrics.standardSpace - 2
