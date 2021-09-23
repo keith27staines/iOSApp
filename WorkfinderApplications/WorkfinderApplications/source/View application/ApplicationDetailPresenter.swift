@@ -29,6 +29,9 @@ class ApplicationDetailPresenter {
     var hostCaption: String? { application?.hostRole }
     var coverLetterText: String? { application?.coverLetterString }
     var companyName: String? { application?.companyName }
+    var headerData: ApplicationDetailHeaderData? {
+        ApplicationDetailHeaderData(application: application)
+    }
     
     let placementUuid: F4SUUID
     let applicationService: PlacementDetailServiceProtocol
@@ -41,6 +44,9 @@ class ApplicationDetailPresenter {
 
     var interviewInviteTileIsHidden: Bool { interviewInviteData == nil }
     var interviewOfferTileIsHidden: Bool { interviewOfferData == nil }
+    var statusLabelIsHidden: Bool {
+        !(interviewInviteTileIsHidden && interviewOfferTileIsHidden)
+    }
     
     lazy var interviewInviteData: InterviewInviteTileData? = {
         guard

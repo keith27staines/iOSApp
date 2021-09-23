@@ -27,6 +27,7 @@ public class WFSelfLoadingImageViewWithHeight: WFSelfLoadingImageView {
     public init(height: CGFloat) {
         self.height = height
         super.init()
+        contentMode = .scaleAspectFit
     }
     
     required init?(coder: NSCoder) {

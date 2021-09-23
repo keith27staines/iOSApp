@@ -198,7 +198,7 @@ class InterviewInviteTile: UIView {
         let pad = WFMetrics.standardSpace
         layer.borderWidth = 1
         layer.cornerRadius = pad/2
-        layer.borderColor = WFColorPalette.grayBorder.cgColor
+        layer.borderColor = WFColorPalette.border.cgColor
         addSubview(mainStack)
         mainStack.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: pad, left: pad, bottom: pad, right: pad))
     }

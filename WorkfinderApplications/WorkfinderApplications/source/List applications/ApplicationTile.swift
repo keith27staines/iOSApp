@@ -89,7 +89,7 @@ class ApplicationTile: UITableViewCell {
     lazy var tile: UIView = {
         let view = UIView()
         view.layer.cornerRadius = spacing
-        view.layer.borderColor = WFColorPalette.grayBorder.cgColor
+        view.layer.borderColor = WFColorPalette.border.cgColor
         view.layer.borderWidth = WFMetrics.borderWidth
         view.addSubview(mainStack)
         mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing))

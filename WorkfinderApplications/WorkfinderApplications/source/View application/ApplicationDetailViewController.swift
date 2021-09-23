@@ -20,17 +20,27 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         return tile
     }()
     
+    lazy var headerView = ApplicationDetailHeaderView()
+    
+    lazy var separator: UIView = {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = WFColorPalette.border
+        return view
+    }()
+    
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            self.logo,
-            self.stateDescriptionLabel,
+            headerView,
+            separator,
+            stateDescriptionLabel,
             interviewOfferTile,
             interviewInviteTile,
-            self.tableView,
-            self.coverLetterTextView
+            tableView,
+            coverLetterTextView
         ])
         stack.axis = .vertical
-        stack.spacing = 20
+        stack.spacing = WFMetrics.standardSpace
         stack.distribution = .fill
         return stack
     }()
@@ -53,17 +63,15 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         return tableView
     }()
     
-    lazy var logo: CompanyLogoView = {
-        let logo = CompanyLogoView(widthPoints: 64)
-        logo.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        return logo
-    }()
-    
     lazy var stateDescriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
+        label.layer.cornerRadius = 8
+        label.layer.borderWidth = 1
+        label.layer.borderColor = WFColorPalette.border.cgColor
+        label.heightAnchor.constraint(equalToConstant: 72).isActive = true
         return label
     }()
     
@@ -109,14 +117,12 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         tableView.reloadData()
         stateDescriptionLabel.text = presenter.stateDescription
         coverLetterTextView.text = presenter.coverLetterText
+        stateDescriptionLabel.isHidden = presenter.statusLabelIsHidden
         interviewOfferTile.isHidden = presenter.interviewOfferTileIsHidden
         interviewInviteTile.isHidden = presenter.interviewInviteTileIsHidden
         interviewOfferTile.configure(with: presenter.interviewOfferData)
         interviewInviteTile.configure(with: presenter.interviewInviteData, offerMessageLines: 6)
-        logo.load(
-            companyName: presenter.companyName ?? "?",
-            urlString: self.presenter.logoUrl,
-            completion: nil)
+        headerView.configureWith(presenter.headerData)
     }
     
     func configureNavigationBar() {
@@ -188,6 +194,7 @@ class ApplicationDetailCell: UITableViewCell {
         label.font = WorkfinderFonts.subHeading
         label.textColor = WorkfinderColors.textMedium
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        label.isUserInteractionEnabled = true
         return label
     }()
     lazy var stack: UIStackView = {

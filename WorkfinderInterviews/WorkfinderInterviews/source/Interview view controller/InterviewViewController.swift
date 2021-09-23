@@ -151,7 +151,7 @@ class InterviewViewController: UIViewController, InterviewPresenting {
         solid.layer.cornerRadius = 16
         solid.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         solid.layer.borderWidth = 1
-        solid.layer.borderColor = WFColorPalette.grayBorder.cgColor
+        solid.layer.borderColor = WFColorPalette.border.cgColor
         solid.addSubview(thumb)
         thumb.topAnchor.constraint(equalTo: solid.topAnchor, constant: WFMetrics.standardSpace).isActive = true
         thumb.centerXAnchor.constraint(equalTo: solid.centerXAnchor).isActive = true

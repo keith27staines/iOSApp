@@ -70,7 +70,7 @@ class OfferTile: UIView {
         addSubview(mainStack)
         mainStack.anchor(top: imageView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: space, left: space, bottom: space, right: space))
         layer.borderWidth = 1
-        layer.borderColor = WFColorPalette.grayBorder.cgColor
+        layer.borderColor = WFColorPalette.border.cgColor
         layer.cornerRadius = space
         layer.masksToBounds = true
     }
