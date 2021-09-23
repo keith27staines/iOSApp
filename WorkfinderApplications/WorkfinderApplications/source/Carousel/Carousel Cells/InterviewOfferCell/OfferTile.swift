@@ -9,22 +9,7 @@
 import UIKit
 import WorkfinderUI
 
-class OfferTileCell: UIView {
-    typealias CellData = OfferData
-    static var identifier = "OfferCell"
-    private var _size = CGSize(width: 0, height: 0)
-        
-    func configure(with data: OfferData, size: CGSize) {
-        _size = size
-        let defaultImage = UIImage.makeImageFromFirstCharacter(data.defaultImageText ?? "?", size: CGSize(width: imageHeight, height: imageHeight))
-        imageView.load(urlString: data.imageUrlString, defaultImage: defaultImage)
-        button.text = data.buttonText
-        button.state = data.buttonState
-        button.buttonTapped = {
-            data.tapAction?(data)
-        }
-        textLabel.text = data.text
-    }
+class OfferTile: UIView {
 
     var imageHeight: CGFloat = 46
     var buttonHeight: NSLayoutConstraint?
@@ -32,17 +17,18 @@ class OfferTileCell: UIView {
     let space = WFMetrics.standardSpace
     let halfspace = WFMetrics.halfSpace
     
-    func configure(with data: OfferData) {
-        let defaultImage = UIImage.makeImageFromFirstCharacter(data.defaultImageText ?? "?", size: CGSize(width: imageHeight, height: imageHeight))
-        imageView.load(urlString: data.imageUrlString, defaultImage: defaultImage)
-        button.text = data.buttonText
-        button.state = data.buttonState
+    func configure(with data: OfferTileData?) {
+        let defaultImage = UIImage.makeImageFromFirstCharacter(data?.defaultImageText ?? "?", size: CGSize(width: imageHeight, height: imageHeight))
+        imageView.load(urlString: data?.imageUrlString, defaultImage: defaultImage)
+        button.text = data?.buttonText
+        button.state = data?.buttonState ?? .disabled
         button.buttonTapped = {
+            guard let data = data else { return }
             data.tapAction?(data)
         }
-        textLabel.text = data.text
+        textLabel.text = data?.text
     }
-    
+        
     private lazy var imageView: WFSelfLoadingImageView = {
         let view = WFSelfLoadingImageViewWithHeight(height: 46)
         view.setContentHuggingPriority(.required, for: .horizontal)

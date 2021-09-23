@@ -9,7 +9,7 @@
 import WorkfinderUI
 import WorkfinderServices
 
-struct InterviewInviteData {
+struct InterviewInviteTileData {
     var interviewId: Int
     var tileTitle: String
     var inviteText: String

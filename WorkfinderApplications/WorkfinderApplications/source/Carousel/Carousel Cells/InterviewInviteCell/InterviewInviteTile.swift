@@ -11,21 +11,22 @@ import WorkfinderUI
 
 class InterviewInviteTile: UIView {
     
-    func configure(with data: InterviewInviteData) {
-        tileTitle.text = data.tileTitle
-        inviteText.text = data.inviteText
-        dateText.text = data.dateText
-        timeText.text = data.timeText
-        hostNoteHeading.text = data.hostNotesHeading
-        offerMessage.text = data.offerMessage?.replacingOccurrences(of: "\n", with: " ")
-        button.text = data.buttonText
-        button.buttonTapped = data.buttonAction
-        waitingForLinkLabel.text = data.waitingForLinkText
-        button.isHidden = data.isButtonHidden
+    func configure(with data: InterviewInviteTileData?, offerMessageLines: Int = 2) {
+        tileTitle.text = data?.tileTitle
+        inviteText.text = data?.inviteText
+        dateText.text = data?.dateText
+        timeText.text = data?.timeText
+        hostNoteHeading.text = data?.hostNotesHeading
+        offerMessage.text = data?.offerMessage?.replacingOccurrences(of: "\n", with: " ")
+        button.text = data?.buttonText
+        button.buttonTapped = data?.buttonAction
+        waitingForLinkLabel.text = data?.waitingForLinkText
+        button.isHidden = data?.isButtonHidden ?? true
         button.state = .normal
-        waitingForLinkLabel.isHidden = !data.isButtonHidden
+        waitingForLinkLabel.isHidden = !(data?.isButtonHidden ?? false)
+        offerMessage.numberOfLines = offerMessageLines
     }
-
+    
     var buttonHeight: NSLayoutConstraint?
     var frameHeight: CGFloat = 100
     let space = WFMetrics.standardSpace
@@ -46,8 +47,7 @@ class InterviewInviteTile: UIView {
     
     private lazy var inviteText: UILabel = {
         let label = UILabel()
-        var style = WFTextStyle.labelTextRegular
-        style.color = WFColorPalette.gray2
+        let style = WFTextStyle.labelTextRegular
         label.applyStyle(style)
         label.numberOfLines = 0
         return label
@@ -137,7 +137,6 @@ class InterviewInviteTile: UIView {
     private lazy var offerMessage: UILabel = {
         let label = UILabel()
         var style = WFTextStyle.labelTextRegular
-        style.color = WFColorPalette.gray2
         label.applyStyle(style)
         label.numberOfLines = 2
         label.setContentCompressionResistancePriority(.required, for: .vertical)

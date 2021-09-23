@@ -1,5 +1,6 @@
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 
 struct Application : Codable {
     var placementUuid: String
@@ -11,11 +12,12 @@ struct Application : Codable {
     var hostRole: String
     var roleName: String = ""
     var companyName: String
+    var projectName: String
     var industry: String?
     var logoUrl: String?
     var appliedDate: String
     var coverLetterString: String
-    var projectName: String
+    var interviewJson: InterviewJson?
     
     init(
         placementUuid: F4SUUID,
@@ -26,11 +28,11 @@ struct Application : Codable {
         hostName: String,
         hostRole: String,
         companyName: String,
+        projectName: String,
         industry: String,
         logoUrl: String,
         appliedDate: String,
-        coverLetterString: String,
-        projectName: String
+        coverLetterString: String
     ) {
         self.placementUuid = placementUuid
         self.companyUuid = companyUuid

@@ -10,11 +10,11 @@ import UIKit
 import WorkfinderUI
 
 class OfferCell: UICollectionViewCell, CarouselCellProtocol {
-    typealias CellData = OfferData
-    static var identifier = "OfferCell"
+    typealias CellData = OfferTileData
+    static var identifier = "InterviewOfferCell"
     private var _size = CGSize(width: 0, height: 0)
         
-    func configure(with data: OfferData, size: CGSize) {
+    func configure(with data: OfferTileData, size: CGSize) {
         _size = size
         tile.configure(with: data)
     }
@@ -26,7 +26,7 @@ class OfferCell: UICollectionViewCell, CarouselCellProtocol {
         _size
     }
     
-    private lazy var tile: OfferTileCell = OfferTileCell()
+    private lazy var tile: OfferTile = OfferTile()
     
     func configureViews() {
         contentView.addSubview(tile)

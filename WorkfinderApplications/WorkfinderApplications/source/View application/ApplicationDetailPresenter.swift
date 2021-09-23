@@ -2,30 +2,13 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol ApplicationDetailPresenterProtocol {
-    var screenTitle: String { get }
-    var logoUrl: String? { get }
-    var stateDescription: String { get }
-    var coverLetterText: String? { get }
-    var companyName: String? { get }
-    var companyCaption: String? { get }
-    var hostName: String? { get }
-    var hostCaption: String? { get }
-    func onViewDidLoad(view: WorkfinderViewControllerProtocol)
-    func loadData(completion: @escaping (Error?) -> Void)
-    func numberOfSections() -> Int
-    func numberOfRowsInSection(_ section: Int) -> Int
-    func cellInfoForIndexPath(_ indexPath: IndexPath) -> ApplicationDetailCellInfo
-    func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool
-    func onTapDetail(indexPath: IndexPath)
-}
-
 struct ApplicationDetailCellInfo {
     var heading: String?
     var subheading: String?
 }
 
-class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
+class ApplicationDetailPresenter {
+    
     weak var view: WorkfinderViewControllerProtocol?
     
     func numberOfSections() -> Int { 1 }
@@ -42,6 +25,7 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     
     var companyCaption: String? { application?.industry}
     var hostName: String? { application?.hostName }
+    var projectName: String? { application?.projectName }
     var hostCaption: String? { application?.hostRole }
     var coverLetterText: String? { application?.coverLetterString }
     var companyName: String? { application?.companyName }
@@ -54,6 +38,26 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     var screenTitle: String { application?.state.screenTitle ?? "" }
     var stateDescription: String { application?.state.description ?? "" }
     var logoUrl: String? { application?.state.description ?? "" }
+
+    var interviewInviteTileIsHidden: Bool { interviewInviteData == nil }
+    var interviewOfferTileIsHidden: Bool { interviewOfferData == nil }
+    
+    lazy var interviewInviteData: InterviewInviteTileData? = {
+        guard
+            let interview = application?.interviewJson,
+            interview.status == "interview_accepted" ||
+            interview.status == "meeting_link_added"
+        else { return nil }
+        return InterviewInviteTileData(interview: interview)
+    }()
+    
+    var interviewOfferData: OfferTileData? {
+        guard
+            let interview = application?.interviewJson //, interview.status == "offered"
+        else { return nil }
+        return OfferTileData(interview: interview) { offerTileData in
+        }
+    }
     
     init(coordinator: ApplicationsCoordinatorProtocol,
          applicationService: ApplicationDetailService,
@@ -72,8 +76,8 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
         applicationService.fetchApplication(placementUuid: placementUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let applicationDetail):
-                self.application = applicationDetail
+            case .success(let application):
+                self.application = application
                 completion(nil)
             case .failure(let error):
                 completion(error)

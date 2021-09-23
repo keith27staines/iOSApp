@@ -3,8 +3,6 @@ import WorkfinderUI
 import WorkfinderCommon
 import WorkfinderServices
 
-
-
 class ApplicationsPresenter: NSObject {
     weak var coordinator: ApplicationsCoordinatorProtocol?
     private var table: UITableView?
@@ -24,40 +22,33 @@ class ApplicationsPresenter: NSObject {
     private var allInterviews = [InterviewJson]()
     private var offeredApplications = [Application]()
     
-    private var offersAndInterviewsData: [[OfferData]] {
+    private var offersAndInterviewsData: [[OfferTileData]] {
         let data = offeredApplicationData + offeredInterviewData
         return [data]
     }
     
-    private var upcomingInterviewsData: [[InterviewInviteData]] {
+    private var upcomingInterviewsData: [[InterviewInviteTileData]] {
         let upcomingInterviews = allInterviews.filter { interview in
             interview.status == "interview_accepted" || interview.status == "meeting_link_added"
         }
-        let data = upcomingInterviews.map { interview in InterviewInviteData(interview: interview) }
+        let data = upcomingInterviews.map { interview in InterviewInviteTileData(interview: interview) }
         return [data]
     }
     
-    private var offeredApplicationData: [OfferData] {
+    private var offeredApplicationData: [OfferTileData] {
         offeredApplications.map { application in
-            OfferData(
-                offerType: .placement(uuid: application.placementUuid),
-                imageUrlString: application.logoUrl,
-                defaultImageText: application.companyName,
-                buttonState: .normal,
-                hostName: application.hostName,
-                companyName: application.companyName
-            ) { [weak self] offerData in
+            OfferTileData(application: application) { [weak self] offerData in
                 guard let self = self else { return }
                 self.coordinator?.performAction(.viewOffer(placementUuid: application.placementUuid), appSource: .applicationsTab)
             }
         }
     }
     
-    private var offeredInterviewData: [OfferData] {
+    private var offeredInterviewData: [OfferTileData] {
         allInterviews.filter({
             $0.status == "interview_offered"
         }).map { interview in
-            OfferData(
+            OfferTileData(
                 offerType: .interview(id: interview.id ?? -1),
                 imageUrlString: interview.placement?.association?.host?.photo,
                 defaultImageText: interview.placement?.association?.host?.fullname,
@@ -220,6 +211,12 @@ class ApplicationsPresenter: NSObject {
         case .unroutable: action = .viewApplication(placementUuid: application.placementUuid)
         }
         coordinator?.performAction(action, appSource: .applicationsTab)
+    }
+    
+    func interviewForPlacement(placementUuid: F4SUUID) -> F4SUUID? {
+        allInterviews.first { interview in
+            interview.placement?.uuid == placementUuid
+        }?.uuid
     }
 }
 

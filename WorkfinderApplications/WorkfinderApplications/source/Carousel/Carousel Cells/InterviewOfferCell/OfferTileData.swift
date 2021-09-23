@@ -8,8 +8,9 @@
 
 import UIKit
 import WorkfinderUI
+import WorkfinderServices
 
-struct OfferData {
+struct OfferTileData {
     
     enum OfferType {
         
@@ -36,7 +37,7 @@ struct OfferData {
     var offerType: OfferType
     var imageUrlString: String?
     var defaultImageText: String?
-    var tapAction: ((OfferData) -> Void)?
+    var tapAction: ((OfferTileData) -> Void)?
     
     var buttonState: WFButton.State
     private var hostName: String?
@@ -65,7 +66,7 @@ struct OfferData {
          buttonState: WFButton.State = .normal,
          hostName: String?,
          companyName: String?,
-         tapAction: @escaping (OfferData) -> Void
+         tapAction: @escaping (OfferTileData) -> Void
     ) {
         self.offerType = offerType
         self.imageUrlString = imageUrlString
@@ -74,5 +75,29 @@ struct OfferData {
         self.hostName = hostName
         self.companyName = companyName
         self.tapAction = tapAction
+    }
+    
+    init(application: Application, tapAction: @escaping (OfferTileData) -> Void ) {
+        self.init(
+            offerType: .placement(uuid: application.placementUuid),
+            imageUrlString: application.logoUrl,
+            defaultImageText: application.companyName,
+            buttonState: .normal,
+            hostName: application.hostName,
+            companyName: application.companyName,
+            tapAction: tapAction
+        )
+    }
+    
+    init(interview: InterviewJson, tapAction: @escaping (OfferTileData) -> Void ) {
+        self = OfferTileData(
+            offerType: .interview(id: interview.id ?? -1),
+            imageUrlString: interview.placement?.association?.host?.photo,
+            defaultImageText: interview.placement?.association?.host?.fullname,
+            buttonState: .normal,
+            hostName: interview.placement?.association?.host?.fullname,
+            companyName: interview.placement?.association?.location?.company?.name,
+            tapAction: tapAction
+        )
     }
 }

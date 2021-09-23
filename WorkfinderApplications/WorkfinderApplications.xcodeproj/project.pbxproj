@@ -14,8 +14,8 @@
 		53C7539F26F4B55400B2399C /* WorkfinderInterviews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */; };
 		53E4804D26FB1F1000FB5A89 /* InterviewInviteTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4804C26FB1F1000FB5A89 /* InterviewInviteTile.swift */; };
 		53E4804F26FB1FB600FB5A89 /* InterviewInviteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4804E26FB1FB600FB5A89 /* InterviewInviteData.swift */; };
-		53E4805326FB206A00FB5A89 /* OfferData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4805226FB206A00FB5A89 /* OfferData.swift */; };
-		53E4805526FB210300FB5A89 /* OfferCellTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4805426FB210300FB5A89 /* OfferCellTile.swift */; };
+		53E4805326FB206A00FB5A89 /* OfferTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4805226FB206A00FB5A89 /* OfferTileData.swift */; };
+		53E4805526FB210300FB5A89 /* OfferTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4805426FB210300FB5A89 /* OfferTile.swift */; };
 		FC06A18C24641ACA0023DE99 /* WorkfinderApplications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */; };
 		FC06A19124641ACA0023DE99 /* WorkfinderApplicationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06A19024641ACA0023DE99 /* WorkfinderApplicationsTests.swift */; };
 		FC06A19324641ACA0023DE99 /* WorkfinderApplications.h in Headers */ = {isa = PBXBuildFile; fileRef = FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -71,8 +71,8 @@
 		53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderInterviews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E4804C26FB1F1000FB5A89 /* InterviewInviteTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewInviteTile.swift; sourceTree = "<group>"; };
 		53E4804E26FB1FB600FB5A89 /* InterviewInviteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewInviteData.swift; sourceTree = "<group>"; };
-		53E4805226FB206A00FB5A89 /* OfferData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferData.swift; sourceTree = "<group>"; };
-		53E4805426FB210300FB5A89 /* OfferCellTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferCellTile.swift; sourceTree = "<group>"; };
+		53E4805226FB206A00FB5A89 /* OfferTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferTileData.swift; sourceTree = "<group>"; };
+		53E4805426FB210300FB5A89 /* OfferTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferTile.swift; sourceTree = "<group>"; };
 		FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplications.h; sourceTree = "<group>"; };
 		FC06A18624641ACA0023DE99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		53A0F7E426EB8ECB007F6D35 /* Carousel Cells */ = {
 			isa = PBXGroup;
 			children = (
-				53E4805126FB205200FB5A89 /* OfferCell */,
+				53E4805126FB205200FB5A89 /* InterviewOfferCell */,
 				53E4805026FB202700FB5A89 /* InterviewInviteCell */,
 			);
 			path = "Carousel Cells";
@@ -167,14 +167,14 @@
 			path = InterviewInviteCell;
 			sourceTree = "<group>";
 		};
-		53E4805126FB205200FB5A89 /* OfferCell */ = {
+		53E4805126FB205200FB5A89 /* InterviewOfferCell */ = {
 			isa = PBXGroup;
 			children = (
 				53A0F7DC26EB46C7007F6D35 /* OfferCell.swift */,
-				53E4805226FB206A00FB5A89 /* OfferData.swift */,
-				53E4805426FB210300FB5A89 /* OfferCellTile.swift */,
+				53E4805226FB206A00FB5A89 /* OfferTileData.swift */,
+				53E4805426FB210300FB5A89 /* OfferTile.swift */,
 			);
-			path = OfferCell;
+			path = InterviewOfferCell;
 			sourceTree = "<group>";
 		};
 		FC06A17824641ACA0023DE99 = {
@@ -424,7 +424,7 @@
 			files = (
 				53A0F7EF26EF701B007F6D35 /* InterviewInviteCell.swift in Sources */,
 				FC751760246BB89000ECBA84 /* Application.swift in Sources */,
-				53E4805326FB206A00FB5A89 /* OfferData.swift in Sources */,
+				53E4805326FB206A00FB5A89 /* OfferTileData.swift in Sources */,
 				53E4804F26FB1FB600FB5A89 /* InterviewInviteData.swift in Sources */,
 				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
 				FCD4DCBC24877F1D005CB380 /* HostViewController.swift in Sources */,
@@ -456,7 +456,7 @@
 				FC751762246BBFAF00ECBA84 /* ApplicationsService.swift in Sources */,
 				FCC5CDB7248945840095F2A5 /* CompanySummarySectionPresenter.swift in Sources */,
 				FC06A1BC24641EC40023DE99 /* ApplicationsCoordinator.swift in Sources */,
-				53E4805526FB210300FB5A89 /* OfferCellTile.swift in Sources */,
+				53E4805526FB210300FB5A89 /* OfferTile.swift in Sources */,
 				FC751766246BDCED00ECBA84 /* ApplicationDetailPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

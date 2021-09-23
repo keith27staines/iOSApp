@@ -11,11 +11,11 @@ import WorkfinderUI
 
 class InterviewInviteCell: UICollectionViewCell, CarouselCellProtocol {
 
-    typealias CellData = InterviewInviteData
+    typealias CellData = InterviewInviteTileData
     static var identifier = "InterviewInviteCell"
     private var _size = CGSize.zero
     
-    func configure(with data: InterviewInviteData, size: CGSize) {
+    func configure(with data: InterviewInviteTileData, size: CGSize) {
         _size = size
         tile.configure(with: data)
     }

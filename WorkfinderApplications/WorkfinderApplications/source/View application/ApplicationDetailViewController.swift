@@ -3,15 +3,29 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class ApplicationDetailViewController: UIViewController, WorkfinderViewControllerProtocol {
-    let presenter: ApplicationDetailPresenterProtocol
+    let presenter: ApplicationDetailPresenter
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let appSource: AppSource
     let log: F4SAnalytics
     
+    lazy var interviewOfferTile: OfferTile = {
+        let offerTile = OfferTile()
+        offerTile.heightAnchor.constraint(equalToConstant: 186).isActive = true
+        return offerTile
+    }()
+    
+    lazy var interviewInviteTile: InterviewInviteTile = {
+        let tile = InterviewInviteTile()
+        tile.heightAnchor.constraint(equalToConstant: 330).isActive = true
+        return tile
+    }()
+    
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             self.logo,
-            self.messageLabel,
+            self.stateDescriptionLabel,
+            interviewOfferTile,
+            interviewInviteTile,
             self.tableView,
             self.coverLetterTextView
         ])
@@ -45,7 +59,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         return logo
     }()
     
-    lazy var messageLabel: UILabel = {
+    lazy var stateDescriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -54,7 +68,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     }()
     
     init(coordinator: ApplicationsCoordinatorProtocol,
-         presenter: ApplicationDetailPresenterProtocol,
+         presenter: ApplicationDetailPresenter,
          appSource: AppSource,
          log: F4SAnalyticsAndDebugging
     ) {
@@ -84,7 +98,8 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
-                retryHandler: self.loadData)
+                retryHandler: self.loadData
+            )
             self.refreshFromPresenter()
         }
     }
@@ -92,8 +107,12 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     func refreshFromPresenter() {
         messageHandler.hideLoadingOverlay()
         tableView.reloadData()
-        messageLabel.text = self.presenter.stateDescription
-        coverLetterTextView.text = self.presenter.coverLetterText
+        stateDescriptionLabel.text = presenter.stateDescription
+        coverLetterTextView.text = presenter.coverLetterText
+        interviewOfferTile.isHidden = presenter.interviewOfferTileIsHidden
+        interviewInviteTile.isHidden = presenter.interviewInviteTileIsHidden
+        interviewOfferTile.configure(with: presenter.interviewOfferData)
+        interviewInviteTile.configure(with: presenter.interviewInviteData, offerMessageLines: 6)
         logo.load(
             companyName: presenter.companyName ?? "?",
             urlString: self.presenter.logoUrl,
