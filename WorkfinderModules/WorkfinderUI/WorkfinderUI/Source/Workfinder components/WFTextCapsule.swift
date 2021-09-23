@@ -11,7 +11,7 @@ import UIKit
 public class WFTextCapsule: UIView {
     
     var heightClass: WFCapsuleHeightClass
-    var radius: CGFloat { heightClass.height / 2.0 }
+    //var radius: CGFloat { heightClass.height / 2.0 }
     
     public var text: String? {
         get { label.text }
@@ -24,6 +24,7 @@ public class WFTextCapsule: UIView {
 
     lazy var label: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         return label
     }()
     
@@ -44,10 +45,10 @@ public class WFTextCapsule: UIView {
 
     public init(
         heightClass: WFCapsuleHeightClass,
-        borderWidth: CGFloat,
-        borderColor: UIColor,
-        backgroundColor: UIColor,
-        textStyle: WFTextStyle,
+        borderWidth: CGFloat = 0,
+        borderColor: UIColor = UIColor.clear,
+        backgroundColor: UIColor = UIColor.white,
+        textStyle: WFTextStyle = WFTextStyle.smallLabelTextRegular,
         text: String? = nil
     ) {
         self.heightClass = heightClass
@@ -63,6 +64,7 @@ public class WFTextCapsule: UIView {
     }
     
     var labelLeadingConstraint: NSLayoutConstraint?
+    var radius: CGFloat { frame.height / 2 }
     
     func configureViews() {
         addSubview(label)
@@ -80,6 +82,20 @@ public class WFTextCapsule: UIView {
         layer.borderColor = borderColor.cgColor
     }
     
+    public struct Style {
+        var borderWidth: CGFloat
+        var borderColor: UIColor
+        var backgroundColor: UIColor
+        var textStyle: WFTextStyle
+    }
+    
+    public func applyStyle(_ style: WFTextCapsule.Style) {
+        layer.borderWidth = style.borderWidth
+        layer.borderColor = style.borderColor.cgColor
+        layer.masksToBounds = true
+        label.applyStyle(style.textStyle)
+    }
+    
     func styleControl(
         borderWidth: CGFloat,
         borderColor: UIColor,
@@ -94,6 +110,7 @@ public class WFTextCapsule: UIView {
     
     public override func layoutSubviews() {
         layer.cornerRadius = radius
+        labelLeadingConstraint?.constant = radius
     }
     
     required init?(coder: NSCoder) {

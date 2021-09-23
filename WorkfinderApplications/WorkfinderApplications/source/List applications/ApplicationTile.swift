@@ -67,7 +67,8 @@ class ApplicationTile: UITableViewCell {
         let stack = UIStackView(arrangedSubviews: [
             companyName,
             roleName,
-            applicationDate
+            applicationDate,
+            statusTag
         ])
         stack.axis = .vertical
         stack.spacing = 5

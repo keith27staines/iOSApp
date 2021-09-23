@@ -9,7 +9,7 @@ public struct WFColorPalette {
     public static var pink = UIColor(red: 1, green: 0.482, blue: 0.694, alpha: 1)
     public static var blue = UIColor(red: 0.267, green: 0.796, blue: 0.918, alpha: 1)
     public static var yellow = UIColor(red: 1, green: 0.878, blue: 0.173, alpha: 1)
-    public static var dimmedYellow = UIColor(red: 1, green: 0.878, blue: 0.173, alpha: 1)
+    public static var dimmedYellow = UIColor(red: 0.843, green: 0.718, blue: 0, alpha: 1)
     public static var greenTint = UIColor(red: 0.68, green: 0.92, blue: 0.748, alpha: 1)
     
     // black and white

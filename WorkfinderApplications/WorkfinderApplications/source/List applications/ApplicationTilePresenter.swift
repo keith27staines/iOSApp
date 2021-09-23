@@ -3,7 +3,7 @@ import WorkfinderCommon
 class ApplicationTilePresenter {
     private let application: Application
     var companyName: String { application.companyName }
-    var roleName: String { application.roleName }
+    var roleName: String { application.projectName }
     var hostInformation: String { application.hostName + " | " + application.hostRole }
     var industry: String { application.industry ?? "" }
     var state: ApplicationState { application.state }

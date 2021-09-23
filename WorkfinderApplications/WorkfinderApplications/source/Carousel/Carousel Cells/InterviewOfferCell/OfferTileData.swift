@@ -27,9 +27,9 @@ struct OfferTileData {
         var actionButtonText: String {
             switch self {
             case .interview:
-                return "Respond to Offer"
-            case .placement:
                 return "Respond to Invitation"
+            case .placement:
+                return "Respond to Offer"
             }
         }
     }
