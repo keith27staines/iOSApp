@@ -8,6 +8,14 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     let appSource: AppSource
     let log: F4SAnalytics
     
+    lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.addSubview(mainStack)
+        mainStack.anchor(top: scroll.topAnchor, leading: scroll.leadingAnchor, bottom: scroll.bottomAnchor, trailing: scroll.trailingAnchor)
+        mainStack.widthAnchor.constraint(equalTo: scroll.widthAnchor).isActive = true
+        return scroll
+    }()
+    
     lazy var interviewOfferTile: OfferTile = {
         let offerTile = OfferTile()
         offerTile.heightAnchor.constraint(equalToConstant: 186).isActive = true
@@ -36,8 +44,8 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
             stateDescriptionLabel,
             interviewOfferTile,
             interviewInviteTile,
-            tableView,
-            coverLetterTextView
+            //tableView,
+            coverLetter
         ])
         stack.axis = .vertical
         stack.spacing = WFMetrics.standardSpace
@@ -45,10 +53,10 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         return stack
     }()
     
-    lazy var coverLetterTextView: UITextView = {
-        let text = UITextView()
-        text.isEditable = false
-        text.font = WorkfinderFonts.body
+    lazy var coverLetter: UILabel = {
+        let text = UILabel()
+        text.numberOfLines = 0
+        text.applyStyle(WFTextStyle.bodyTextRegular)
         return text
     }()
     
@@ -116,7 +124,7 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         messageHandler.hideLoadingOverlay()
         tableView.reloadData()
         stateDescriptionLabel.text = presenter.stateDescription
-        coverLetterTextView.text = presenter.coverLetterText
+        coverLetter.text = presenter.coverLetterText
         stateDescriptionLabel.isHidden = presenter.statusLabelIsHidden
         interviewOfferTile.isHidden = presenter.interviewOfferTileIsHidden
         interviewInviteTile.isHidden = presenter.interviewInviteTileIsHidden
@@ -134,10 +142,10 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     
     func configureViews() {
         view.backgroundColor = UIColor.white
-        view.addSubview(mainStack)
+        view.addSubview(scrollView)
         let guide = view.safeAreaLayoutGuide
-        mainStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-        tableView.heightAnchor.constraint(equalToConstant: 2 * 60).isActive = true
+        scrollView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+//        tableView.heightAnchor.constraint(equalToConstant: 2 * 60).isActive = true
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

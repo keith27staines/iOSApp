@@ -16,8 +16,10 @@ class OfferTile: UIView {
     var frameHeight: CGFloat = 100
     let space = WFMetrics.standardSpace
     let halfspace = WFMetrics.halfSpace
+    private var data: OfferTileData?
     
     func configure(with data: OfferTileData?) {
+        self.data = data
         let defaultImage = UIImage.makeImageFromFirstCharacter(data?.defaultImageText ?? "?", size: CGSize(width: imageHeight, height: imageHeight))
         imageView.load(urlString: data?.imageUrlString, defaultImage: defaultImage)
         button.text = data?.buttonText

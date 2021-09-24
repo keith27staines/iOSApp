@@ -59,9 +59,12 @@ class ApplicationDetailPresenter {
     
     var interviewOfferData: OfferTileData? {
         guard
-            let interview = application?.interviewJson //, interview.status == "offered"
+            let interview = application?.interviewJson, interview.status == "interview_offered"
         else { return nil }
-        return OfferTileData(interview: interview) { offerTileData in
+        return OfferTileData(interview: interview) { [weak self] offerTileData in
+            guard let self = self else { return }
+            self.coordinator.performAction(.viewInterview(interviewId: interview.id ?? -1), appSource: .applicationsTab)
+            print("offer tile tapped")
         }
     }
     
