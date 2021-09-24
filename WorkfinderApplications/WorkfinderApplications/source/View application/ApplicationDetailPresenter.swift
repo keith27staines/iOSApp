@@ -42,20 +42,26 @@ class ApplicationDetailPresenter {
     var stateDescription: String { application?.state.description ?? "" }
     var logoUrl: String? { application?.state.description ?? "" }
 
-    var interviewInviteTileIsHidden: Bool { interviewInviteData == nil }
-    var interviewOfferTileIsHidden: Bool { interviewOfferData == nil }
+    var interviewInviteTileIsHidden: Bool {
+        interviewInviteData == nil
+    }
+    
+    var interviewOfferTileIsHidden: Bool {
+        interviewOfferData == nil
+    }
+    
     var statusLabelIsHidden: Bool {
         !(interviewInviteTileIsHidden && interviewOfferTileIsHidden)
     }
     
-    lazy var interviewInviteData: InterviewInviteTileData? = {
+    var interviewInviteData: InterviewInviteTileData? {
         guard
             let interview = application?.interviewJson,
             interview.status == "interview_accepted" ||
             interview.status == "meeting_link_added"
         else { return nil }
         return InterviewInviteTileData(interview: interview)
-    }()
+    }
     
     var interviewOfferData: OfferTileData? {
         guard
