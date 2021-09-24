@@ -38,6 +38,7 @@ class InterviewViewController: UIViewController, InterviewPresenting {
     func setContent(_ content: UIView & InterviewPresenting) {
         removeContent()
         contentContainer.addSubview(content)
+        content.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.8).isActive = true
         content.anchor(top: contentContainer.topAnchor, leading: contentContainer.leadingAnchor, bottom: contentContainer.bottomAnchor, trailing: contentContainer.trailingAnchor)
         content.updateFromPresenter()
         content.alpha = 0

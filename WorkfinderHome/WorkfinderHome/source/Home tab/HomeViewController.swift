@@ -162,12 +162,17 @@ class HomeViewController: UIViewController {
         let navigationBar = navigationController?.navigationBar
         switch isTrayExpanded {
         case true:
-            navigationBar?.barTintColor = isSearchActive ? UIColor.white : WorkfinderColors.primaryColor
+            navigationBar?.barTintColor = isSearchActive ? UIColor.white : WorkfinderColors.white
             self.navigationController?.setNavigationBarHidden(self.isSearchActive, animated: true)
             self.navigationItem.title = "Discover"
+            navigationBar?.shadowImage = nil
+            navigationBar?.setBackgroundImage(nil, for: UIBarMetrics.compact)
         case false:
+            //self.navigationController?.setNavigationBarHidden(true, animated: false)
             navigationBar?.barTintColor = WorkfinderColors.primaryColor
             self.navigationItem.title = ""
+            navigationBar?.shadowImage = UIImage()
+            navigationBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.compact)
         }
     }
     

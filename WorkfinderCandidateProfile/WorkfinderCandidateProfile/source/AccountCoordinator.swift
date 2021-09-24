@@ -137,11 +137,6 @@ public class AccountCoordinator: CoreInjectionNavigationCoordinator {
 extension AccountCoordinator: RegisterAndSignInCoordinatorParent {
     public func onCandidateIsSignedIn(preferredNextScreen: PreferredNextScreen) {
         removeRegisterCoordinator()
-        guard let action = actionRequiringSignin else { return }
-        switch action {
-        case .showDetails: showDetails()
-        case .showPreferences: showPreferences()
-        }
     }
     
     public func onRegisterAndSignInCancelled() {

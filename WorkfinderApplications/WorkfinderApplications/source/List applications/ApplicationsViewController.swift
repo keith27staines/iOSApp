@@ -41,6 +41,17 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         }
     }
     
+    lazy var noApplicationsYetContainer: UIView = {
+        let container = UIView()
+        container.backgroundColor = UIColor.white
+        container.addSubview(noApplicationsYet)
+        noApplicationsYet.translatesAutoresizingMaskIntoConstraints = false
+        noApplicationsYet.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        noApplicationsYet.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+        noApplicationsYet.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 30).isActive = true
+        return container
+    }()
+    
     lazy var noApplicationsYet:UILabel = {
         let label = UILabel()
         label.text = noApplicationsMessage
@@ -63,15 +74,16 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     func refreshFromPresenter() {
         tableView.reloadData()
-        noApplicationsYet.removeFromSuperview()
+        noApplicationsYetContainer.removeFromSuperview()
         if !presenter.isDataShown {
-            view.addSubview(noApplicationsYet)
+            let guide = view.safeAreaLayoutGuide
+            view.addSubview(noApplicationsYetContainer)
             noApplicationsYet.text = noApplicationsMessage
-            noApplicationsYet.translatesAutoresizingMaskIntoConstraints = false
-            noApplicationsYet.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-            noApplicationsYet.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            noApplicationsYet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30).isActive = true
-            noApplicationsYet.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
+            noApplicationsYetContainer.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor)
+            noApplicationsYetContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            noApplicationsYetContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            noApplicationsYetContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            noApplicationsYetContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         }
     }
     

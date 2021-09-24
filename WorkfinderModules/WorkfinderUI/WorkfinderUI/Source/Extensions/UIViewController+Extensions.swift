@@ -12,11 +12,17 @@ public extension UIViewController {
     }
     
     func styleNavigationController() {
-        Skinner().apply(navigationBarSkin: skin?.navigationBarSkin, to: self)
-        setNeedsStatusBarAppearanceUpdate()
+        guard let navigationBar =  navigationController?.navigationBar else { return }
+        navigationBar.isHidden = false
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = UIColor.white
+        navigationBar.tintColor = WFColorPalette.readingGreen
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:WFColorPalette.readingGreen]
+        //navigationBar.barStyle = UIBarStyle.black
         if #available(iOS 15.0, *) {
             updateNavigationStyle()
         }
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     @available(iOS 15.0, *)
@@ -26,8 +32,8 @@ public extension UIViewController {
         navigationBar.isHidden = false
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .white
-        barAppearance.titleTextAttributes = [.foregroundColor:WorkfinderColors.primaryColor]
-        navigationBar.tintColor = WFColorPalette.graphicsGreen
+        barAppearance.titleTextAttributes = [.foregroundColor: WFColorPalette.readingGreen]
+        navigationBar.tintColor = WFColorPalette.readingGreen
         navigationBar.standardAppearance = barAppearance
         navigationBar.scrollEdgeAppearance = barAppearance
     }

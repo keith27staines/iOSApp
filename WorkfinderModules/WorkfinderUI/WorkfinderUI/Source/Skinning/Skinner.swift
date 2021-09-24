@@ -16,29 +16,11 @@ public struct Skinner : Skinning {
             return
         }
         navigationBar.isHidden = false
-        guard let skin = navigationBarSkin else {
-            navigationBar.isTranslucent = false
-            navigationBar.barTintColor = RGBA.white.uiColor
-            navigationBar.tintColor = RGBA.black.uiColor
-            navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:RGBA.black.uiColor]
-            let image = UIImage()
-            navigationBar.setBackgroundImage(image, for: .default)
-            navigationBar.shadowImage = image
-            return
-        }
-        
         navigationBar.isTranslucent = false
-        navigationBar.barTintColor = skin.barTintColor.uiColor
-        navigationBar.tintColor = skin.itemTintColor.uiColor
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:skin.titleTintColor.uiColor]
-        if skin.hasDropShadow {
-            navigationBar.setBackgroundImage(nil, for: .default)
-            navigationBar.shadowImage = nil
-        } else {
-            navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationBar.shadowImage = UIImage()
-        }
-        navigationBar.barStyle = (skin.statusbarMode == .light) ? UIBarStyle.black : .default
+        navigationBar.barTintColor = UIColor.white
+        navigationBar.tintColor = WFColorPalette.readingGreen
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:WFColorPalette.readingGreen]
+        navigationBar.barStyle = UIBarStyle.black
     }
     
     public func apply(tabBarSkin: TabBarSkin?, to controller: UITabBarController) {
