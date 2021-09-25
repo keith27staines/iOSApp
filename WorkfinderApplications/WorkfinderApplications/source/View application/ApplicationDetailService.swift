@@ -29,8 +29,9 @@ class ApplicationDetailService: WorkfinderService, PlacementDetailServiceProtoco
         performNetworkRequest(placementUuid: placementUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let placement):
-                var application = Application(json: placement)
+            case .success(let applicationJson):
+                let placementJson = PlacementJson(json: applicationJson)
+                var application = Application(json: placementJson)
                 self.fetchInterviewForPlacement(placementUuid: placementUuid) { result in
                     switch result {
                     case.success(let interviewJson):

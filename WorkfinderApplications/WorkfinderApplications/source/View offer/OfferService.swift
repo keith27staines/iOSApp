@@ -20,27 +20,10 @@ class OfferService: OfferServiceProtocol{
     }
     
     func fetchOffer(placementUuid: F4SUUID, completion: @escaping (Result<Offer,Error>) -> Void) {
-        fetchOfferService.fetchOffer(uuid: placementUuid) { [weak self] (networkResult) in
-            guard let self = self else { return }
+        fetchOfferService.fetchOffer(uuid: placementUuid) { (networkResult) in
             switch networkResult {
             case .success(let json):
-                let state = ApplicationState(string: json.status)
-                let offerState = OfferState(applicationState: state)
-                let offer = Offer(
-                    placementUuid: json.uuid ?? "",
-                    offerState: offerState,
-                    startDateString: json.start_date,
-                    endDateString: json.end_date,
-                    duration: json.offered_duration,
-                    hostCompany: json.association?.location?.company?.name,
-                    hostContact: json.association?.host?.fullName,
-                    email: json.association?.host?.emails?.first,
-                    location: self.locationTextFromPlacement(from: json),
-                    logoUrl: json.association?.location?.company?.logo,
-                    reasonWithdrawn: nil,
-                    offerNotes: json.offer_notes,
-                    isRemote: json.associated_project?.isRemote,
-                    salary: json.salary)
+                let offer = Offer(json: json)
                 completion(Result<Offer,Error>.success(offer))
             case .failure(let error):
                 completion(Result<Offer,Error>.failure(error))

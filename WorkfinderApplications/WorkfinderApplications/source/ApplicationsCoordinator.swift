@@ -8,8 +8,8 @@ import WorkfinderInterviews
 protocol ApplicationsCoordinatorProtocol: AnyObject {
     func applicationsDidLoad(_ applications: [Application])
     func performAction(_ action: ApplicationAction?, appSource: AppSource)
-    func showCompanyHost(application: Application)
-    func showCompany(application: Application)
+    func showCompanyHost(application: Application?)
+    func showCompany(application: Application?)
     func routeToApplication(_ uuid: F4SUUID, appSource: AppSource)
 }
 
@@ -122,7 +122,10 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func showCompany(application: Application) {
+    func showCompany(application: Application?) {
+        guard let application = application else {
+            return
+        }
         let companyService = CompanyService(networkConfig: networkConfig)
         let associationsService = AssociationsService(networkConfig: networkConfig)
         let presenter = CompanyViewPresenter(
@@ -134,7 +137,10 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func showCompanyHost(application: Application) {
+    func showCompanyHost(application: Application?) {
+        guard let application = application else {
+            return
+        }
         guard let associationUuid = application.associationUuid else { return }
         let hostService = HostsProvider(networkConfig: networkConfig)
         let locationService = AssociationsService(networkConfig: networkConfig)

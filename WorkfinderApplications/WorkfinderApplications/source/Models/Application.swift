@@ -3,6 +3,7 @@ import WorkfinderCommon
 import WorkfinderServices
 
 struct Application : Codable {
+    var _placementJson: PlacementJson
     var placementUuid: String
     var companyUuid: String?
     var hostUuid: String?
@@ -19,38 +20,9 @@ struct Application : Codable {
     var coverLetterString: String
     var interviewJson: InterviewJson?
     
-    init(
-        placementUuid: F4SUUID,
-        companyUuid: String,
-        hostUuid: String,
-        associationUuid: String,
-        state: ApplicationState,
-        hostName: String,
-        hostRole: String,
-        companyName: String,
-        projectName: String,
-        industry: String,
-        logoUrl: String,
-        appliedDate: String,
-        coverLetterString: String
-    ) {
-        self.placementUuid = placementUuid
-        self.companyUuid = companyUuid
-        self.hostUuid = hostUuid
-        self.associationUuid = associationUuid
-        self.state = state
-        self.hostName = hostName
-        self.hostRole = hostRole
-        self.companyName = companyName
-        self.industry = industry
-        self.logoUrl = logoUrl
-        self.appliedDate = appliedDate
-        self.coverLetterString = coverLetterString
-        self.projectName = projectName
-    }
-
-    init(json: ApplicationJson) {
-        self.placementUuid = json.uuid ?? "unknown uuid"
+    init(json: PlacementJson) {
+        self._placementJson = json
+        self.placementUuid = json.uuid ?? ""
         self.companyUuid = json.association?.location?.company?.uuid
         self.hostUuid = json.association?.host?.uuid
         self.associationUuid = json.association?.uuid

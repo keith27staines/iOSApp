@@ -26,11 +26,6 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         fetchApplications(queryItems: [], completion: completion)
     }
     
-//    func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>, Error>) -> Void) {
-//        let offerQueryItems = [URLQueryItem(name: "status", value: "offered"),URLQueryItem(name: "status", value: "interview offered")]
-//        fetchApplications(queryItems: offerQueryItems, completion: completion)
-//    }
-    
     private func fetchApplications(queryItems: [URLQueryItem], completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void) {
         performfetchApplications(queryItems: queryItems) { [weak self] (networkResult) in
             guard let self = self else { return }
@@ -43,7 +38,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         
     }
 
-    private func performfetchApplications(queryItems: [URLQueryItem] = [], completion: @escaping (Result<ServerListJson<ApplicationJson>,Error>) -> Void) {
+    private func performfetchApplications(queryItems: [URLQueryItem] = [], completion: @escaping (Result<ServerListJson<PlacementJson>,Error>) -> Void) {
         do {
             let relativePath = "placements/"
             let queryItems = [URLQueryItem(name: "expand-association", value: "1")] + queryItems
@@ -58,7 +53,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
         }
     }
     
-    private func buildApplicationsResult(networkResult: Result<ServerListJson<ApplicationJson>,Error>)
+    private func buildApplicationsResult(networkResult: Result<ServerListJson<PlacementJson>,Error>)
         -> Result<ServerListJson<Application>, Error> {
             switch networkResult {
             case .success(let serverList):
@@ -74,6 +69,24 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
     }
 }
 
+/*
+ struct ApplicationJson: Codable {
+     var uuid: F4SUUID?
+     var status: String?
+     var created_at: String?
+     var cover_letter: String?
+     var association: ExpandedAssociation?
+     var start_date: String?
+     var end_date: String?
+     var offered_duration: Int?
+     var offer_notes: String?
+     var salary: String?
+     var supporting_link: String?
+     var associated_project: F4SUUID?
+     var associated_project_name: String?
+ }
+ */
+
 struct PlacementJson: Codable {
     var uuid: F4SUUID?
     var status: String?
@@ -87,6 +100,7 @@ struct PlacementJson: Codable {
     var salary: String?
     var supporting_link: String?
     var associated_project: AssociatedProject?
+    var associated_project_name: String?
 }
 
 struct AssociatedProject: Codable {
@@ -119,3 +133,20 @@ struct ApplicationJson: Codable {
     var associated_project_name: String?
 }
 
+
+extension PlacementJson {
+    init(json: ApplicationJson) {
+        self.uuid = json.uuid
+        self.status = json.status
+        self.created_at = json.created_at
+        self.cover_letter = json.cover_letter
+        self.association = json.association
+        self.start_date = json.start_date
+        self.end_date = json.end_date
+        self.offered_duration = json.offered_duration
+        self.salary = json.salary
+        self.supporting_link = json.supporting_link
+        self.associated_project_name = json.associated_project_name
+        self.associated_project = nil
+    }
+}

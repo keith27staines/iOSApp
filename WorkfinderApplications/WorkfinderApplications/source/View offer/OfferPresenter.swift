@@ -49,6 +49,11 @@ class OfferPresenter: OfferPresenterProtocol {
         return false
     }
     
+    var application: Application? {
+        guard let offer = offer, let json = offer._placementJson else { return nil }
+        return Application(json: json)
+    }
+    
     init(coordinator: ApplicationsCoordinator,
          placementUuid: F4SUUID,
          offerService: OfferServiceProtocol) {
@@ -132,8 +137,10 @@ class OfferPresenter: OfferPresenterProtocol {
         switch rowType {
         case .startDate: break
         case .endDate: break
-        case .company: break // coordinator?.showCompany(application: application)
-        case .host: break // coordinator?.showCompanyHost(application: application)
+        case .company:
+            break // coordinator?.showCompany(application: application)
+        case .host:
+            break // coordinator?.showCompanyHost(application: application)
         case .email: break
         case .salary: break
         case .location: break
@@ -146,8 +153,8 @@ class OfferPresenter: OfferPresenterProtocol {
         switch rowType {
         case .startDate: return .none
         case .endDate: return .none
-        case .company: return .disclosureIndicator
-        case .host: return .disclosureIndicator
+        case .company: return .none //.disclosureIndicator
+        case .host: return .none // .disclosureIndicator
         case .email: return .none
         case .salary: return .none
         case .location: return .none
