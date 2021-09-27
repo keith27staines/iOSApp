@@ -152,17 +152,23 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     func switchToTab(_ tab: TabIndex) { tabBarCoordinator?.switchToTab(tab) }
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
-        tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
-    }
-    
-    func routeInterviewInvite(id: F4SUUID?, appSource: AppSource) {
-        guard let id = id else { return }
         if let tabBarCoordinator = self.tabBarCoordinator {
-            tabBarCoordinator.routeInterviewInvite(inviteUuid: id, appSource: appSource)
+            tabBarCoordinator.routeApplication(placementUuid: placementUuid, appSource: appSource)
             return
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
-            self?.routeInterviewInvite(id: id, appSource: appSource)
+            self?.tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
+        }
+    }
+    
+    func routeInterviewInvite(uuid: F4SUUID?, appSource: AppSource) {
+        guard let uuid = uuid else { return }
+        if let tabBarCoordinator = self.tabBarCoordinator {
+            tabBarCoordinator.routeInterviewInvite(interviewUuid: uuid, appSource: appSource)
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
+            self?.routeInterviewInvite(uuid: uuid, appSource: appSource)
         }
     }
     
@@ -198,7 +204,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func routeStudentsDashboard(appSource: AppSource) {
-        routeLiveProjects(appSource: appSource)
+        routeApplication(placementUuid: nil, appSource: .deeplink)
     }
     
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource) {

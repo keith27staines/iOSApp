@@ -7,7 +7,36 @@ public protocol ImageFetching: AnyObject {
     func cancel()
 }
 
-public class F4SSelfLoadingImageView : UIImageView {
+public class WFSelfLoadingImageViewWithHeight: WFSelfLoadingImageView {
+    
+    var height: CGFloat {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+    
+    private var heightToWidthRatio: CGFloat {
+        guard let image = image, image.size.width > 0 else { return 1 }
+        return image.size.height / image.size.width
+    }
+    
+    public override var intrinsicContentSize: CGSize {
+        return CGSize(width: height / heightToWidthRatio, height: height)
+    }
+    
+    public init(height: CGFloat) {
+        self.height = height
+        super.init()
+        contentMode = .scaleAspectFit
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+public class WFSelfLoadingImageView : UIImageView {
     var urlString: String?
     var fetcher: ImageFetching?
     var fetchedImage: UIImage?
@@ -40,16 +69,17 @@ public class F4SSelfLoadingImageView : UIImageView {
         prepareForNewFetch()
         self.fetcher?.getImage(url: url, completion: { [weak self] (image) in
             DispatchQueue.main.async {
-                guard let strongSelf = self, urlString == self?.urlString else {
+                guard let self = self, urlString == self.urlString else {
                     completion?()
                     return
                 }
                 if image != nil {
-                    strongSelf.fetchedUrlString = urlString
-                    strongSelf.fetchedImage = image
+                    self.fetchedUrlString = urlString
+                    self.fetchedImage = image
                 }
-                strongSelf.urlString = urlString
-                strongSelf.image = strongSelf.fetchedImage ?? defaultImage
+                self.urlString = urlString
+                self.image = self.fetchedImage ?? defaultImage
+                self.invalidateIntrinsicContentSize()
                 completion?()
             }
         })
@@ -59,6 +89,14 @@ public class F4SSelfLoadingImageView : UIImageView {
         self.image = defaultImage
         self.fetchedUrlString = nil
         self.fetchedImage = nil
+    }
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

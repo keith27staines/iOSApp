@@ -3,12 +3,13 @@ import WorkfinderCommon
 import WorkfinderCoordinators
 import WorkfinderUI
 import WorkfinderServices
+import WorkfinderInterviews
 
 protocol ApplicationsCoordinatorProtocol: AnyObject {
     func applicationsDidLoad(_ applications: [Application])
-    func performAction(_ action: ApplicationAction?, for application: Application, appSource: AppSource)
-    func showCompanyHost(application: Application)
-    func showCompany(application: Application)
+    func performAction(_ action: ApplicationAction?, appSource: AppSource)
+    func showCompanyHost(application: Application?)
+    func showCompany(application: Application?)
     func routeToApplication(_ uuid: F4SUUID, appSource: AppSource)
 }
 
@@ -48,10 +49,9 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
             case .success(let application):
                 switch application.state {
                 case .offered, .accepted, .withdrawn:
-                    self.showOfferViewer(for: application, appSource: appSource)
-
+                    self.showOfferViewer(placementUuid: uuid, appSource: appSource)
                 default:
-                    self.showApplicationDetailViewer(for: application, appSource: appSource)
+                    self.showApplicationDetailViewer(for: uuid, appSource: appSource)
                 }
             case .failure(_):
                 break
@@ -61,21 +61,32 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     func performAction(
         _ action: ApplicationAction?,
-        for application: Application,
         appSource: AppSource
     ) {
         guard let action = action else { return }
         switch action {
-        case .viewApplication: showApplicationDetailViewer(for: application, appSource: appSource)
-        case .viewOffer: showOfferViewer(for: application, appSource: appSource)
-        case .acceptOffer: break
-        case .declineOffer: break
+        case .viewApplication(let placementUuid): showApplicationDetailViewer(for: placementUuid, appSource: appSource)
+        case .viewOffer(let placementUuid): showOfferViewer(placementUuid: placementUuid, appSource: appSource)
+        case .viewInterview(let interviewUuid): showInterview(id: interviewUuid)
+        case .joinInterview(let link): joinInterview(link: link)
         }
     }
     
-    func showOfferViewer(for application: Application, appSource: AppSource) {
+    func joinInterview(link: String) {
+        if let linkUrl = URL(string: link) {
+            UIApplication.shared.open(linkUrl, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func showInterview(id: Int) {
+        guard let presentingVC = navigationRouter.navigationController.topViewController else { return }
+        let coordinator = WorkfinderInterviewCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+        coordinator.startFromAcceptInviteScreen(parentVC: presentingVC, interviewId: id)
+    }
+    
+    func showOfferViewer(placementUuid: F4SUUID, appSource: AppSource) {
         let offerService = OfferService(networkConfig: networkConfig)
-        let presenter = OfferPresenter(coordinator: self, application: application, offerService: offerService)
+        let presenter = OfferPresenter(coordinator: self, placementUuid: placementUuid, offerService: offerService)
         let vc = OfferViewController(coordinator: self, presenter: presenter, log: log, appSource: appSource)
         navigationRouter.push(viewController: vc, animated: true)
     }
@@ -95,12 +106,13 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         //
     }
     
-    func showApplicationDetailViewer(for application: Application, appSource: AppSource) {
+    func showApplicationDetailViewer(for placementUuid: F4SUUID, appSource: AppSource) {
         let applicationService = ApplicationDetailService(networkConfig: networkConfig)
         let presenter = ApplicationDetailPresenter(
             coordinator: self,
             applicationService: applicationService,
-            application: application)
+            placementUuid: placementUuid
+        )
         let vc = ApplicationDetailViewController(
             coordinator: self,
             presenter: presenter,
@@ -110,7 +122,10 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func showCompany(application: Application) {
+    func showCompany(application: Application?) {
+        guard let application = application else {
+            return
+        }
         let companyService = CompanyService(networkConfig: networkConfig)
         let associationsService = AssociationsService(networkConfig: networkConfig)
         let presenter = CompanyViewPresenter(
@@ -122,7 +137,10 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
         navigationRouter.push(viewController: vc, animated: true)
     }
     
-    func showCompanyHost(application: Application) {
+    func showCompanyHost(application: Application?) {
+        guard let application = application else {
+            return
+        }
         guard let associationUuid = application.associationUuid else { return }
         let hostService = HostsProvider(networkConfig: networkConfig)
         let locationService = AssociationsService(networkConfig: networkConfig)

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5361087026FCCF0F00E98C5F /* ApplicationDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361086F26FCCF0F00E98C5F /* ApplicationDetailHeaderView.swift */; };
+		5361087226FCCF2500E98C5F /* ApplicationDetailHeaderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5361087126FCCF2500E98C5F /* ApplicationDetailHeaderData.swift */; };
+		53A0F7DD26EB46C7007F6D35 /* OfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7DC26EB46C7007F6D35 /* OfferCell.swift */; };
+		53A0F7E126EB8E67007F6D35 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7E026EB8E67007F6D35 /* CarouselView.swift */; };
+		53A0F7EF26EF701B007F6D35 /* InterviewInviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7EE26EF701B007F6D35 /* InterviewInviteCell.swift */; };
+		53A0F7F426F22D2C007F6D35 /* WFPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0F7F326F22D2C007F6D35 /* WFPageControl.swift */; };
+		53C7539F26F4B55400B2399C /* WorkfinderInterviews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */; };
+		53E4804D26FB1F1000FB5A89 /* InterviewInviteTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4804C26FB1F1000FB5A89 /* InterviewInviteTile.swift */; };
+		53E4804F26FB1FB600FB5A89 /* InterviewInviteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4804E26FB1FB600FB5A89 /* InterviewInviteData.swift */; };
+		53E4805326FB206A00FB5A89 /* OfferTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4805226FB206A00FB5A89 /* OfferTileData.swift */; };
+		53E4805526FB210300FB5A89 /* OfferTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4805426FB210300FB5A89 /* OfferTile.swift */; };
 		FC06A18C24641ACA0023DE99 /* WorkfinderApplications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */; };
 		FC06A19124641ACA0023DE99 /* WorkfinderApplicationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06A19024641ACA0023DE99 /* WorkfinderApplicationsTests.swift */; };
 		FC06A19324641ACA0023DE99 /* WorkfinderApplications.h in Headers */ = {isa = PBXBuildFile; fileRef = FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -55,6 +66,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5361086F26FCCF0F00E98C5F /* ApplicationDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailHeaderView.swift; sourceTree = "<group>"; };
+		5361087126FCCF2500E98C5F /* ApplicationDetailHeaderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailHeaderData.swift; sourceTree = "<group>"; };
+		53A0F7DC26EB46C7007F6D35 /* OfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferCell.swift; sourceTree = "<group>"; };
+		53A0F7E026EB8E67007F6D35 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		53A0F7EE26EF701B007F6D35 /* InterviewInviteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewInviteCell.swift; sourceTree = "<group>"; };
+		53A0F7F326F22D2C007F6D35 /* WFPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFPageControl.swift; sourceTree = "<group>"; };
+		53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderInterviews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53E4804C26FB1F1000FB5A89 /* InterviewInviteTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewInviteTile.swift; sourceTree = "<group>"; };
+		53E4804E26FB1FB600FB5A89 /* InterviewInviteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewInviteData.swift; sourceTree = "<group>"; };
+		53E4805226FB206A00FB5A89 /* OfferTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferTileData.swift; sourceTree = "<group>"; };
+		53E4805426FB210300FB5A89 /* OfferTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferTile.swift; sourceTree = "<group>"; };
 		FC06A18224641ACA0023DE99 /* WorkfinderApplications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderApplications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC06A18524641ACA0023DE99 /* WorkfinderApplications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderApplications.h; sourceTree = "<group>"; };
 		FC06A18624641ACA0023DE99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C7539F26F4B55400B2399C /* WorkfinderInterviews.framework in Frameworks */,
 				FC06A1AC24641D210023DE99 /* WorkfinderCoordinators.framework in Frameworks */,
 				FC06A1A924641D150023DE99 /* WorkfinderUI.framework in Frameworks */,
 				FC06A1A124641CEB0023DE99 /* WorkfinderCommon.framework in Frameworks */,
@@ -119,6 +142,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5361087326FCCF2D00E98C5F /* ApplicationDetailHeader */ = {
+			isa = PBXGroup;
+			children = (
+				5361086F26FCCF0F00E98C5F /* ApplicationDetailHeaderView.swift */,
+				5361087126FCCF2500E98C5F /* ApplicationDetailHeaderData.swift */,
+			);
+			path = ApplicationDetailHeader;
+			sourceTree = "<group>";
+		};
+		53A0F7DB26EB4670007F6D35 /* Carousel */ = {
+			isa = PBXGroup;
+			children = (
+				53A0F7E026EB8E67007F6D35 /* CarouselView.swift */,
+				53A0F7E426EB8ECB007F6D35 /* Carousel Cells */,
+				53A0F7F326F22D2C007F6D35 /* WFPageControl.swift */,
+			);
+			path = Carousel;
+			sourceTree = "<group>";
+		};
+		53A0F7E426EB8ECB007F6D35 /* Carousel Cells */ = {
+			isa = PBXGroup;
+			children = (
+				53E4805126FB205200FB5A89 /* InterviewOfferCell */,
+				53E4805026FB202700FB5A89 /* InterviewInviteCell */,
+			);
+			path = "Carousel Cells";
+			sourceTree = "<group>";
+		};
+		53E4805026FB202700FB5A89 /* InterviewInviteCell */ = {
+			isa = PBXGroup;
+			children = (
+				53A0F7EE26EF701B007F6D35 /* InterviewInviteCell.swift */,
+				53E4804E26FB1FB600FB5A89 /* InterviewInviteData.swift */,
+				53E4804C26FB1F1000FB5A89 /* InterviewInviteTile.swift */,
+			);
+			path = InterviewInviteCell;
+			sourceTree = "<group>";
+		};
+		53E4805126FB205200FB5A89 /* InterviewOfferCell */ = {
+			isa = PBXGroup;
+			children = (
+				53A0F7DC26EB46C7007F6D35 /* OfferCell.swift */,
+				53E4805226FB206A00FB5A89 /* OfferTileData.swift */,
+				53E4805426FB210300FB5A89 /* OfferTile.swift */,
+			);
+			path = InterviewOfferCell;
+			sourceTree = "<group>";
+		};
 		FC06A17824641ACA0023DE99 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +231,7 @@
 		FC06A19F24641CEB0023DE99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53C7539E26F4B55400B2399C /* WorkfinderInterviews.framework */,
 				FCD4DCB2248762FF005CB380 /* WorkfinderCompanyDetailsUseCase.framework */,
 				FC06A1AB24641D210023DE99 /* WorkfinderCoordinators.framework */,
 				FC06A1A824641D150023DE99 /* WorkfinderUI.framework */,
@@ -173,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				FC06A1BB24641EC40023DE99 /* ApplicationsCoordinator.swift */,
+				53A0F7DB26EB4670007F6D35 /* Carousel */,
 				FC9C0AC5246BAA3800CF7A48 /* List applications */,
 				FC9C0AC6246BAA5200CF7A48 /* View application */,
 				FC751767246C170D00ECBA84 /* View offer */,
@@ -212,6 +285,7 @@
 				FC751763246BDC9500ECBA84 /* ApplicationDetailService.swift */,
 				FC403610246AE46700F03A5B /* ApplicationDetailViewController.swift */,
 				FC751765246BDCED00ECBA84 /* ApplicationDetailPresenter.swift */,
+				5361087326FCCF2D00E98C5F /* ApplicationDetailHeader */,
 			);
 			path = "View application";
 			sourceTree = "<group>";
@@ -362,15 +436,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53A0F7EF26EF701B007F6D35 /* InterviewInviteCell.swift in Sources */,
 				FC751760246BB89000ECBA84 /* Application.swift in Sources */,
+				53E4805326FB206A00FB5A89 /* OfferTileData.swift in Sources */,
+				53E4804F26FB1FB600FB5A89 /* InterviewInviteData.swift in Sources */,
 				FC403609246AE35900F03A5B /* ApplicationState.swift in Sources */,
 				FCD4DCBC24877F1D005CB380 /* HostViewController.swift in Sources */,
+				53A0F7E126EB8E67007F6D35 /* CarouselView.swift in Sources */,
 				FCC5CDAB24891FE80095F2A5 /* CompanyViewPresenter.swift in Sources */,
 				FC40360B246AE37C00F03A5B /* ApplicationsPresenter.swift in Sources */,
 				FC9C0AC1246BA6DE00CF7A48 /* OfferViewController.swift in Sources */,
+				5361087026FCCF0F00E98C5F /* ApplicationDetailHeaderView.swift in Sources */,
 				FCC5CDA924891FAE0095F2A5 /* CompanyViewController.swift in Sources */,
 				FC6AA523246C4EB4002CC1C7 /* OfferService.swift in Sources */,
 				FC9C0AC8246BAAF000CF7A48 /* ApplicationActions.swift in Sources */,
+				5361087226FCCF2500E98C5F /* ApplicationDetailHeaderData.swift in Sources */,
 				FCC5CDB9248946240095F2A5 /* CompanyDataSectionPresenter.swift in Sources */,
 				FC6AA527246C4F9D002CC1C7 /* Offer.swift in Sources */,
 				FCC5CDB12489422F0095F2A5 /* NameValueCell.swift in Sources */,
@@ -380,15 +460,19 @@
 				FC751769246C175900ECBA84 /* OfferPresenter.swift in Sources */,
 				FC751764246BDC9500ECBA84 /* ApplicationDetailService.swift in Sources */,
 				FC40360F246AE42700F03A5B /* ApplicationTile.swift in Sources */,
+				53A0F7F426F22D2C007F6D35 /* WFPageControl.swift in Sources */,
 				FCC5CDB5248942F00095F2A5 /* SectionHeadersAndFooters.swift in Sources */,
 				FCC5CDB3248942930095F2A5 /* CompanySummaryTextCell.swift in Sources */,
 				FC612B562487D05600C498ED /* HostViewPresenter.swift in Sources */,
 				FC6AA525246C4F1A002CC1C7 /* OfferState.swift in Sources */,
 				FCC5CDAF2489418B0095F2A5 /* CompanyTableSectionsModel.swift in Sources */,
+				53A0F7DD26EB46C7007F6D35 /* OfferCell.swift in Sources */,
 				FC4BC35F2470F8DA00299993 /* DeclineOptionsModel.swift in Sources */,
+				53E4804D26FB1F1000FB5A89 /* InterviewInviteTile.swift in Sources */,
 				FC751762246BBFAF00ECBA84 /* ApplicationsService.swift in Sources */,
 				FCC5CDB7248945840095F2A5 /* CompanySummarySectionPresenter.swift in Sources */,
 				FC06A1BC24641EC40023DE99 /* ApplicationsCoordinator.swift in Sources */,
+				53E4805526FB210300FB5A89 /* OfferTile.swift in Sources */,
 				FC751766246BDCED00ECBA84 /* ApplicationDetailPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

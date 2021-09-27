@@ -2,6 +2,9 @@ import UIKit
 import WorkfinderUI
 
 class ApplicationTile: UITableViewCell {
+    
+    let spacing = WFMetrics.standardSpace
+    
     static let reuseIdentifier = "applicationCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -9,129 +12,103 @@ class ApplicationTile: UITableViewCell {
         configureViews()
     }
     
-    let companyLogoWidth: CGFloat = 70
+    let companyLogoWidth: CGFloat = 72
     
     lazy var logo: CompanyLogoView = {
         return CompanyLogoView(widthPoints: companyLogoWidth)
     }()
-    
-    lazy var statusViewContainer: UIView = {
-        let view = UIView()
-        view.addSubview(statusView)
-        statusView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 6))
-        view.layer.cornerRadius = 15
-        view.layer.masksToBounds = true
-        view.backgroundColor = WorkfinderColors.primaryColor
-        view.widthAnchor.constraint(greaterThanOrEqualToConstant: companyLogoWidth).isActive = true
-        return view
-    }()
-    
-    lazy var statusView: UILabel = {
-       let label = UILabel()
-        label.text = ""
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textAlignment = .center
-        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        return label
-    }()
-    
+
     lazy var logoStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [logo, UIView()])
+        let topSpace = UIView()
+        let bottomSpace = UIView()
+        let stack = UIStackView(arrangedSubviews: [
+            topSpace,
+            logo,
+            bottomSpace
+        ])
         stack.axis = .vertical
-        stack.widthAnchor.constraint(equalToConstant: companyLogoWidth).isActive = true
+        topSpace.heightAnchor.constraint(equalTo: bottomSpace.heightAnchor).isActive = true
         return stack
+    }()
+
+    
+    lazy var statusTag: WFTextCapsule = {
+        WFComponentsFactory.makeSmallTag()
     }()
     
     lazy var companyName: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        var style = WFTextStyle.bodyTextBold
+        style.color = WFColorPalette.offBlack
+        label.applyStyle(style)
         label.numberOfLines = 0
         label.constrainToMaxlinesOrFewer(maxLines: 2)
         return label
     }()
     
-    lazy var hostInformation: UILabel = {
+    lazy var roleName: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = UIColor.init(white: 33/255, alpha: 1)
+        var style = WFTextStyle.smallLabelTextRegular
+        style.color = WFColorPalette.offBlack
+        label.applyStyle(style)
         label.numberOfLines = 1
         return label
     }()
     
-    lazy var dateString: UILabel = {
+    lazy var applicationDate: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = UIColor.init(white: 33/255, alpha: 1)
+        var style = WFTextStyle.smallLabelTextRegular
+        style.color = WFColorPalette.grayLight
+        label.applyStyle(style)
         return label
     }()
-    
-    func makeSeparatorView() -> UIView {
-        let view = UIView()
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.backgroundColor = UIColor.init(white: 216/255, alpha: 1)
-        return view
-    }
-    
+        
     lazy var textStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             companyName,
-            hostInformation,
-            UIView()
+            roleName,
+            applicationDate,
+            statusTag
         ])
         stack.axis = .vertical
         stack.spacing = 5
-        let separator = makeSeparatorView()
-        stack.addSubview(separator)
-        separator.anchor(top: nil, leading: stack.leadingAnchor, bottom: stack.bottomAnchor, trailing: stack.trailingAnchor)
         return stack
     }()
-    
-    lazy var topStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [logoStack, textStack])
-        stack.axis = .horizontal
-        stack.spacing = 20
-        return stack
-    }()
-    
-    lazy var bottomStack: UIStackView = {
+        
+    lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            statusViewContainer,
-            dateString,
+            logo,
+            textStack,
             UIView()
         ])
         stack.axis = .horizontal
-        stack.spacing = 20
+        stack.alignment = .center
+        stack.spacing = spacing
         return stack
     }()
     
-    lazy var mainStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [
-            topStack,
-            bottomStack
-        ])
-        stack.axis = .vertical
-        stack.alignment = .leading
-        stack.spacing = 10
-        return stack
+    lazy var tile: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = spacing
+        view.layer.borderColor = WFColorPalette.border.cgColor
+        view.layer.borderWidth = WFMetrics.borderWidth
+        view.addSubview(mainStack)
+        mainStack.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing))
+        return view
     }()
     
     func configureViews() {
-        contentView.addSubview(mainStack)
-        mainStack.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: 33, left: 0, bottom: 19, right: 0))
-        let separator = makeSeparatorView()
-        contentView.addSubview(separator)
-        separator.anchor(top: nil, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
+        contentView.addSubview(tile)
+        tile.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0))
     }
     
     func configureWithApplication(_ application: ApplicationTilePresenter) {
         companyName.text = application.companyName
-        statusView.text = application.state.rawValue
-        statusViewContainer.backgroundColor = application.state.capsuleColor
-        hostInformation.text = application.hostInformation
-        dateString.text = "Application date: \(application.appliedDateString)"
+        statusTag.text = application.state.displayName
+        let color = application.state.capsuleColor
+        statusTag.setColors(backgroundColor: WFColorPalette.white, borderColor: color, textColor: color)
+        roleName.text = application.roleName
+        applicationDate.text = application.appliedDateString
         logo.load(companyName: application.companyName, urlString: application.logoUrl, completion: nil)
     }
     

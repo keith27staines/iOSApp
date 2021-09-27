@@ -27,10 +27,10 @@ protocol OfferPresenterProtocol {
 class OfferPresenter: OfferPresenterProtocol {
     weak var coordinator: ApplicationsCoordinator?
     weak var view: WorkfinderViewControllerProtocol?
-    private let application: Application
+    private let placementUuid: F4SUUID
     let offerService: OfferServiceProtocol
     private var offer: Offer?
-    var companyName: String { application.companyName }
+    var companyName: String { offer?.hostCompany ?? "" }
     var offerState: OfferState? { offer?.offerState }
     var startDateString: String? { offer?.startDateString }
     var endDateString: String? { offer?.endDateString }
@@ -49,11 +49,16 @@ class OfferPresenter: OfferPresenterProtocol {
         return false
     }
     
+    var application: Application? {
+        guard let offer = offer, let json = offer._placementJson else { return nil }
+        return Application(json: json)
+    }
+    
     init(coordinator: ApplicationsCoordinator,
-         application: Application,
+         placementUuid: F4SUUID,
          offerService: OfferServiceProtocol) {
         self.coordinator = coordinator
-        self.application = application
+        self.placementUuid = placementUuid
         self.offerService = offerService
     }
     
@@ -67,7 +72,7 @@ class OfferPresenter: OfferPresenterProtocol {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        offerService.fetchOffer(application: application) {  [weak self] (offerResult) in
+        offerService.fetchOffer(placementUuid: placementUuid) {  [weak self] (offerResult) in
             self?.offerResultHandler(result: offerResult, completion: completion)
         }
     }
@@ -76,6 +81,7 @@ class OfferPresenter: OfferPresenterProtocol {
         guard let offer = offer else { return }
         offerService.accept(offer: offer) {  [weak self] (result) in
             self?.offerResultHandler(result: result, completion: completion)
+            NotificationCenter.default.post(name: .wfApplicationDataDidChange, object: nil, userInfo: nil)
         }
     }
     
@@ -84,6 +90,7 @@ class OfferPresenter: OfferPresenterProtocol {
         offerService.withdraw(declining: offer, reason: reason, otherText: otherText) { [weak self] (result) in
             offer.reasonWithdrawn = reason
             self?.offerResultHandler(result: result, completion: completion)
+            NotificationCenter.default.post(name: .wfApplicationDataDidChange, object: nil, userInfo: nil)
         }
     }
     
@@ -132,8 +139,10 @@ class OfferPresenter: OfferPresenterProtocol {
         switch rowType {
         case .startDate: break
         case .endDate: break
-        case .company: coordinator?.showCompany(application: application)
-        case .host: coordinator?.showCompanyHost(application: application)
+        case .company:
+            break // coordinator?.showCompany(application: application)
+        case .host:
+            break // coordinator?.showCompanyHost(application: application)
         case .email: break
         case .salary: break
         case .location: break
@@ -146,8 +155,8 @@ class OfferPresenter: OfferPresenterProtocol {
         switch rowType {
         case .startDate: return .none
         case .endDate: return .none
-        case .company: return .disclosureIndicator
-        case .host: return .disclosureIndicator
+        case .company: return .none //.disclosureIndicator
+        case .host: return .none // .disclosureIndicator
         case .email: return .none
         case .salary: return .none
         case .location: return .none

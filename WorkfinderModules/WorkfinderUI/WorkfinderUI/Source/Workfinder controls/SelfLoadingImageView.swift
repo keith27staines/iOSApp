@@ -16,7 +16,6 @@ public class ImageLoader: UIImage {
         }
         imageFetcher.getImage(url: url) { (downloadedImage) in
             DispatchQueue.main.async {
-                print("Downloaded \(url.absoluteString)")
                 completion(urlString,downloadedImage ?? defaultImage)
             }
         }
@@ -54,8 +53,8 @@ public class SelfloadingImageView: UIView {
         return view
     }()
     
-    lazy var logoView: F4SSelfLoadingImageView = {
-        let logoView = F4SSelfLoadingImageView()
+    lazy var logoView: WFSelfLoadingImageView = {
+        let logoView = WFSelfLoadingImageView()
         logoView.layer.masksToBounds = true
         logoView.layer.cornerRadius = self.imageRadius
         logoView.contentMode = .scaleAspectFit

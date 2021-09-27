@@ -20,7 +20,7 @@ public class ServerListPager<A> where A: Codable {
     public private(set) var items = [A]()
     public var triggerRow: Int { items.count - pageSize / 2}
     public var isLoading = false
-
+    var section: Int = 0
     public init() {}
 
     private func reset(table: UITableView) {
@@ -28,7 +28,8 @@ public class ServerListPager<A> where A: Codable {
         _nextPage = nil
         isLoading = false
         items = []
-        table.reloadData()
+        let indexSet = IndexSet(integer: section)
+        table.reloadSections(indexSet, with: .automatic)
     }
     
     public func loadFirstPage(
@@ -61,7 +62,7 @@ public class ServerListPager<A> where A: Codable {
             let currentItemCount = self.items.count
             let addedIndexPaths = IndexSet(integersIn:
                 currentItemCount..<currentItemCount+serverListJson.results.count).map {
-                IndexPath(row: $0, section: 0)
+                IndexPath(row: $0, section: section)
             }
             self.items += serverListJson.results
             if currentItemCount == 0 {

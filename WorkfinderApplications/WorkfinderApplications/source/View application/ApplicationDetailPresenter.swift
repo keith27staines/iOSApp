@@ -2,30 +2,13 @@
 import WorkfinderCommon
 import WorkfinderUI
 
-protocol ApplicationDetailPresenterProtocol {
-    var screenTitle: String { get }
-    var logoUrl: String? { get }
-    var stateDescription: String { get }
-    var coverLetterText: String? { get }
-    var companyName: String? { get }
-    var companyCaption: String? { get }
-    var hostName: String? { get }
-    var hostCaption: String? { get }
-    func onViewDidLoad(view: WorkfinderViewControllerProtocol)
-    func loadData(completion: @escaping (Error?) -> Void)
-    func numberOfSections() -> Int
-    func numberOfRowsInSection(_ section: Int) -> Int
-    func cellInfoForIndexPath(_ indexPath: IndexPath) -> ApplicationDetailCellInfo
-    func showDisclosureIndicatorForIndexPath(_ indexPath: IndexPath) -> Bool
-    func onTapDetail(indexPath: IndexPath)
-}
-
 struct ApplicationDetailCellInfo {
     var heading: String?
     var subheading: String?
 }
 
-class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
+class ApplicationDetailPresenter {
+    
     weak var view: WorkfinderViewControllerProtocol?
     
     func numberOfSections() -> Int { 1 }
@@ -36,33 +19,68 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
             return ApplicationDetailCellInfo(heading: self.companyName, subheading: self.companyCaption)
         case 1:
             return ApplicationDetailCellInfo(heading: self.hostName, subheading: self.hostCaption)
-//        case 2:
-//            return ApplicationDetailCellInfo(heading: "Documents", subheading: "0 files")
         default: return ApplicationDetailCellInfo()
         }
     }
     
-    var companyCaption: String? { applicationDetail?.industry}
-    var hostName: String? { applicationDetail?.hostName }
-    var hostCaption: String? { applicationDetail?.hostRole }
-    var coverLetterText: String? { applicationDetail?.coverLetterString }
-    var companyName: String? { applicationDetail?.companyName }
+    var companyCaption: String? { application?.industry}
+    var hostName: String? { application?.hostName }
+    var projectName: String? { application?.projectName }
+    var hostCaption: String? { application?.hostRole }
+    var coverLetterText: String? { application?.coverLetterString }
+    var companyName: String? { application?.companyName }
+    var headerData: ApplicationDetailHeaderData? {
+        ApplicationDetailHeaderData(application: application)
+    }
     
+    let placementUuid: F4SUUID
     let applicationService: PlacementDetailServiceProtocol
     let coordinator: ApplicationsCoordinatorProtocol
-    let application: Application
-    var applicationDetail: Application?
+    var application: Application?
     
-    var screenTitle: String { application.state.screenTitle }
-    var stateDescription: String { application.state.description }
-    var logoUrl: String? { application.logoUrl }
+    var screenTitle: String { application?.state.screenTitle ?? "" }
+    var stateDescription: String { application?.state.description ?? "" }
+    var logoUrl: String? { application?.state.description ?? "" }
+
+    var interviewInviteTileIsHidden: Bool {
+        interviewInviteData == nil
+    }
+    
+    var interviewOfferTileIsHidden: Bool {
+        interviewOfferData == nil
+    }
+    
+    var statusLabelIsHidden: Bool {
+        !(interviewInviteTileIsHidden && interviewOfferTileIsHidden)
+    }
+    
+    var interviewInviteData: InterviewInviteTileData? {
+        guard
+            let interview = application?.interviewJson,
+            interview.status == "interview_accepted" ||
+            interview.status == "meeting_link_added"
+        else { return nil }
+        return InterviewInviteTileData(interview: interview)
+    }
+    
+    var interviewOfferData: OfferTileData? {
+        guard
+            let interview = application?.interviewJson, interview.status == "interview_offered"
+        else { return nil }
+        return OfferTileData(interview: interview) { [weak self] offerTileData in
+            guard let self = self else { return }
+            self.coordinator.performAction(.viewInterview(interviewId: interview.id ?? -1), appSource: .applicationsTab)
+            print("offer tile tapped")
+        }
+    }
     
     init(coordinator: ApplicationsCoordinatorProtocol,
          applicationService: ApplicationDetailService,
-         application: Application) {
+         placementUuid: F4SUUID
+    ) {
         self.applicationService = applicationService
         self.coordinator = coordinator
-        self.application = application
+        self.placementUuid = placementUuid
     }
     
     func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
@@ -70,11 +88,11 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     }
     
     func loadData(completion: @escaping (Error?) -> Void) {
-        applicationService.fetchApplication(placementUuid: application.placementUuid) { [weak self] (result) in
+        applicationService.fetchApplication(placementUuid: placementUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let applicationDetail):
-                self.applicationDetail = applicationDetail
+            case .success(let application):
+                self.application = application
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -83,9 +101,10 @@ class ApplicationDetailPresenter: ApplicationDetailPresenterProtocol {
     }
     
     func onTapDetail(indexPath: IndexPath) {
+        guard let applicationDetail = application else { return }
         switch indexPath.row {
-        case 0: coordinator.showCompany(application: application)
-        case 1: coordinator.showCompanyHost(application: application)
+        case 0: coordinator.showCompany(application: applicationDetail)
+        case 1: coordinator.showCompanyHost(application: applicationDetail)
         default: break
         }
     }

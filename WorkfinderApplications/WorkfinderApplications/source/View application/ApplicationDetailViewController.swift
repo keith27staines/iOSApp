@@ -3,28 +3,60 @@ import WorkfinderCommon
 import WorkfinderUI
 
 class ApplicationDetailViewController: UIViewController, WorkfinderViewControllerProtocol {
-    let presenter: ApplicationDetailPresenterProtocol
+    let presenter: ApplicationDetailPresenter
     lazy var messageHandler = UserMessageHandler(presenter: self)
     let appSource: AppSource
     let log: F4SAnalytics
     
+    lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.addSubview(mainStack)
+        mainStack.anchor(top: scroll.topAnchor, leading: scroll.leadingAnchor, bottom: scroll.bottomAnchor, trailing: scroll.trailingAnchor)
+        mainStack.widthAnchor.constraint(equalTo: scroll.widthAnchor).isActive = true
+        return scroll
+    }()
+    
+    lazy var interviewOfferTile: OfferTile = {
+        let offerTile = OfferTile()
+        offerTile.heightAnchor.constraint(equalToConstant: 186).isActive = true
+        return offerTile
+    }()
+    
+    lazy var interviewInviteTile: InterviewInviteTile = {
+        let tile = InterviewInviteTile()
+        tile.heightAnchor.constraint(equalToConstant: 330).isActive = true
+        return tile
+    }()
+    
+    lazy var headerView = ApplicationDetailHeaderView()
+    
+    lazy var separator: UIView = {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = WFColorPalette.border
+        return view
+    }()
+    
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            self.logo,
-            self.messageLabel,
-            self.tableView,
-            self.coverLetterTextView
+            headerView,
+            separator,
+            stateDescriptionLabel,
+            interviewOfferTile,
+            interviewInviteTile,
+            //tableView,
+            coverLetter
         ])
         stack.axis = .vertical
-        stack.spacing = 20
+        stack.spacing = WFMetrics.standardSpace
         stack.distribution = .fill
         return stack
     }()
     
-    lazy var coverLetterTextView: UITextView = {
-        let text = UITextView()
-        text.isEditable = false
-        text.font = WorkfinderFonts.body
+    lazy var coverLetter: UILabel = {
+        let text = UILabel()
+        text.numberOfLines = 0
+        text.applyStyle(WFTextStyle.bodyTextRegular)
         return text
     }()
     
@@ -39,22 +71,20 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
         return tableView
     }()
     
-    lazy var logo: CompanyLogoView = {
-        let logo = CompanyLogoView(widthPoints: 64)
-        logo.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        return logo
-    }()
-    
-    lazy var messageLabel: UILabel = {
+    lazy var stateDescriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
+        label.layer.cornerRadius = 8
+        label.layer.borderWidth = 1
+        label.layer.borderColor = WFColorPalette.border.cgColor
+        label.heightAnchor.constraint(equalToConstant: 72).isActive = true
         return label
     }()
     
     init(coordinator: ApplicationsCoordinatorProtocol,
-         presenter: ApplicationDetailPresenterProtocol,
+         presenter: ApplicationDetailPresenter,
          appSource: AppSource,
          log: F4SAnalyticsAndDebugging
     ) {
@@ -84,7 +114,8 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
             self.messageHandler.hideLoadingOverlay()
             self.messageHandler.displayOptionalErrorIfNotNil(
                 optionalError,
-                retryHandler: self.loadData)
+                retryHandler: self.loadData
+            )
             self.refreshFromPresenter()
         }
     }
@@ -92,12 +123,14 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     func refreshFromPresenter() {
         messageHandler.hideLoadingOverlay()
         tableView.reloadData()
-        messageLabel.text = self.presenter.stateDescription
-        coverLetterTextView.text = self.presenter.coverLetterText
-        logo.load(
-            companyName: presenter.companyName ?? "?",
-            urlString: self.presenter.logoUrl,
-            completion: nil)
+        stateDescriptionLabel.text = presenter.stateDescription
+        coverLetter.text = presenter.coverLetterText
+        stateDescriptionLabel.isHidden = presenter.statusLabelIsHidden
+        interviewOfferTile.isHidden = presenter.interviewOfferTileIsHidden
+        interviewInviteTile.isHidden = presenter.interviewInviteTileIsHidden
+        interviewOfferTile.configure(with: presenter.interviewOfferData)
+        interviewInviteTile.configure(with: presenter.interviewInviteData, offerMessageLines: 6)
+        headerView.configureWith(presenter.headerData)
     }
     
     func configureNavigationBar() {
@@ -109,10 +142,10 @@ class ApplicationDetailViewController: UIViewController, WorkfinderViewControlle
     
     func configureViews() {
         view.backgroundColor = UIColor.white
-        view.addSubview(mainStack)
+        view.addSubview(scrollView)
         let guide = view.safeAreaLayoutGuide
-        mainStack.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-        tableView.heightAnchor.constraint(equalToConstant: 2 * 60).isActive = true
+        scrollView.anchor(top: guide.topAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+//        tableView.heightAnchor.constraint(equalToConstant: 2 * 60).isActive = true
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -169,6 +202,7 @@ class ApplicationDetailCell: UITableViewCell {
         label.font = WorkfinderFonts.subHeading
         label.textColor = WorkfinderColors.textMedium
         label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        label.isUserInteractionEnabled = true
         return label
     }()
     lazy var stack: UIStackView = {

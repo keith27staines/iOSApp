@@ -60,7 +60,10 @@ class CompanyViewPresenter: NSObject {
         guard
             let companyUuid = application.companyUuid,
             let associationUuid = application.associationUuid
-        else { return }
+        else {
+            completion(nil)
+            return
+        }
         companyService.fetchCompany(uuid: companyUuid) { [weak self] (result) in
             guard let self = self else { return }
             switch result {

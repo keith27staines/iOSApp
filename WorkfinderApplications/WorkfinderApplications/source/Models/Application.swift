@@ -1,49 +1,28 @@
 import Foundation
 import WorkfinderCommon
+import WorkfinderServices
 
 struct Application : Codable {
-    let placementUuid: String
-    let companyUuid: String?
-    let hostUuid: String?
-    let associationUuid: String?
-    let state: ApplicationState
-    let hostName: String
-    let hostRole: String
-    let companyName: String
-    let industry: String?
-    let logoUrl: String?
-    let appliedDate: String
-    let coverLetterString: String
+    var _placementJson: PlacementJson
+    var placementUuid: String
+    var companyUuid: String?
+    var hostUuid: String?
+    var associationUuid: String?
+    var state: ApplicationState
+    var hostName: String
+    var hostRole: String
+    var roleName: String = ""
+    var companyName: String
+    var projectName: String
+    var industry: String?
+    var logoUrl: String?
+    var appliedDate: String
+    var coverLetterString: String
+    var interviewJson: InterviewJson?
     
-    init(
-        placementUuid: F4SUUID,
-        companyUuid: String,
-        hostUuid: String,
-        associationUuid: String,
-        state: ApplicationState,
-        hostName: String,
-        hostRole: String,
-        companyName: String,
-        industry: String,
-        logoUrl: String,
-        appliedDate: String,
-        coverLetterString: String) {
-        self.placementUuid = placementUuid
-        self.companyUuid = companyUuid
-        self.hostUuid = hostUuid
-        self.associationUuid = associationUuid
-        self.state = state
-        self.hostName = hostName
-        self.hostRole = hostRole
-        self.companyName = companyName
-        self.industry = industry
-        self.logoUrl = logoUrl
-        self.appliedDate = appliedDate
-        self.coverLetterString = coverLetterString
-    }
-
-    init(json: ApplicationJson) {
-        self.placementUuid = json.uuid ?? "unknown uuid"
+    init(json: PlacementJson) {
+        self._placementJson = json
+        self.placementUuid = json.uuid ?? ""
         self.companyUuid = json.association?.location?.company?.uuid
         self.hostUuid = json.association?.host?.uuid
         self.associationUuid = json.association?.uuid
@@ -55,5 +34,6 @@ struct Application : Codable {
         self.logoUrl = json.association?.location?.company?.logo
         self.appliedDate = json.created_at ?? "1700-01-01"
         self.coverLetterString = json.cover_letter ?? ""
+        self.projectName = json.associated_project_name ?? ""
     }
 }

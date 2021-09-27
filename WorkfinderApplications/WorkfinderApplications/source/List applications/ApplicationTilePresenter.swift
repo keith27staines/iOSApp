@@ -2,20 +2,26 @@ import WorkfinderCommon
 
 class ApplicationTilePresenter {
     private let application: Application
-    let companyName: String
-    let hostInformation: String
-    let appliedDateString: String
-    let industry: String
-    let state: ApplicationState
-    let logoUrl: String?
+    var companyName: String { application.companyName }
+    var roleName: String { application.projectName }
+    var hostInformation: String { application.hostName + " | " + application.hostRole }
+    var industry: String { application.industry ?? "" }
+    var state: ApplicationState { application.state }
+    var logoUrl: String? { application.logoUrl }
+    var appliedDateString: String { "Application made on \(_formattedDate)" }
+    
+    private var _appliedDate: Date? { Date.dateFromRfc3339(string: application.appliedDate) }
+    
+    private var _formattedDate: String {
+        guard let date = _appliedDate else { return "" }
+        let df = DateFormatter()
+        df.timeStyle = .none
+        df.dateFormat = "dd MMM yyyy"
+        return df.string(from: date)
+    }
+    
     init(application: Application) {
         self.application = application
-        self.companyName = application.companyName
-        self.hostInformation = application.hostName + " | " + application.hostRole
-        self.appliedDateString = datetimeStringToDate(application.appliedDate)
-        self.industry = application.industry ?? ""
-        self.state = application.state
-        self.logoUrl = application.logoUrl
     }
 }
 
