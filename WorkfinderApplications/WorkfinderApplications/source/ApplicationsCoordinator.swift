@@ -80,7 +80,7 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
     
     func showInterview(id: Int) {
         guard let presentingVC = navigationRouter.navigationController.topViewController else { return }
-        let coordinator = WorkfinderInterviewCoordinator(parent: self, delegate: self, navigationRouter: navigationRouter, inject: injected)
+        let coordinator = WorkfinderInterviewCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
         coordinator.startFromAcceptInviteScreen(parentVC: presentingVC, interviewId: id)
     }
     
@@ -151,12 +151,6 @@ public class ApplicationsCoordinator: CoreInjectionNavigationCoordinator, Applic
             associationUuid: associationUuid)
         let vc = HostViewController(presenter: presenter)
         navigationRouter.push(viewController: vc, animated: true)
-    }
-}
-
-extension ApplicationsCoordinator: WorkfinderInterviewCoordinatorDelegate {
-    public func coordinatorMadeChanges() {
-        
     }
 }
 

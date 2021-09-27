@@ -76,8 +76,8 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
-        guard let uuid = placementUuid else { return }
         switchToTab(.applications)
+        guard let uuid = placementUuid else { return }
         applicationsCoordinator.routeToApplication(uuid, appSource: appSource)
     }
     

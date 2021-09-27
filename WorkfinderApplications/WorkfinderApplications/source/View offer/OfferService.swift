@@ -95,7 +95,7 @@ fileprivate class WithdrawService: WorkfinderService {
                  reason: WithdrawReason,
                  otherReason: String?,
                  completion: @escaping (Result<PostPlacementJson,Error>) -> Void) {
-        let relativePath = "placements/\(offer.placementUuid)/"
+        let relativePath = "placements/\(offer.placementUuid ?? "")/"
         var patch: [String: String] = ["status": OfferState.candidateWithdrew.serverState]
         if let otherReason = otherReason {
             patch["reason_withdrawn_other"] = otherReason
@@ -113,7 +113,7 @@ fileprivate class WithdrawService: WorkfinderService {
 
 fileprivate class AcceptOfferService: WorkfinderService {
     func accept(offer: Offer, completion: @escaping (Result<PostPlacementJson,Error>) -> Void) {
-        let relativePath = "placements/\(offer.placementUuid)/"
+        let relativePath = "placements/\(offer.placementUuid ?? "")/"
         let patch = ["status": OfferState.candidateAccepted.serverState]
         do {
             let request = try buildRequest(relativePath: relativePath, verb: .patch, body: patch)

@@ -11,13 +11,7 @@ import WorkfinderUI
 import WorkfinderCoordinators
 import WorkfinderServices
 
-public protocol WorkfinderInterviewCoordinatorDelegate: AnyObject {
-    func coordinatorMadeChanges()
-}
-
-
 public class WorkfinderInterviewCoordinator: CoreInjectionNavigationCoordinator {
-    weak var delegate: WorkfinderInterviewCoordinatorDelegate?
     var newNavigationRouter: NavigationRouter?
     var rootOfNewNavigation: UIViewController?
     var parentVC: UIViewController?
@@ -46,16 +40,6 @@ public class WorkfinderInterviewCoordinator: CoreInjectionNavigationCoordinator 
         parentVC.present(newNavigationController, animated: true, completion: nil)
     }
     
-    public init(
-        parent: Coordinating?,
-        delegate: WorkfinderInterviewCoordinatorDelegate? = nil,
-        navigationRouter: NavigationRoutingProtocol,
-        inject: CoreInjectionProtocol
-    ) {
-        self.delegate = delegate
-        super.init(parent: parent, navigationRouter: navigationRouter, inject: inject)
-    }
-    
     private func addOverlayToParentView() {
         guard let presentingView = parentVC?.view else { return }
         presentingView.addSubview(overlay)
@@ -76,7 +60,7 @@ extension WorkfinderInterviewCoordinator: AcceptInviteCoordinatorProtocol {
         removeOverlay()
         parentCoordinator?.childCoordinatorDidFinish(self)
         if changes {
-            delegate?.coordinatorMadeChanges()
+            NotificationCenter.default.post(name: .wfApplicationDataDidChange, object: nil, userInfo: nil)
         }
         parentVC?.dismiss(animated: true, completion: nil)
     }

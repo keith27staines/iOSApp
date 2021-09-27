@@ -104,7 +104,7 @@ class ApplicationTile: UITableViewCell {
     
     func configureWithApplication(_ application: ApplicationTilePresenter) {
         companyName.text = application.companyName
-        statusTag.text = application.state.rawValue
+        statusTag.text = application.state.displayName
         let color = application.state.capsuleColor
         statusTag.setColors(backgroundColor: WFColorPalette.white, borderColor: color, textColor: color)
         roleName.text = application.roleName

@@ -112,6 +112,7 @@ public class ProjectApplyCoordinator: ProjectApplyBaseCoordinator, ProjectApplyC
         placementService = PostPlacementService(networkConfig: injected.networkConfig)
         placementService?.postPlacement(draftPlacement: builder.draft) { [weak self] (result) in
             guard let self = self else { return }
+            NotificationCenter.default.post(name: .wfApplicationDataDidChange, object: nil, userInfo: nil)
             messageHandler.hideLoadingOverlay()
             switch result {
             case .success(let placement):

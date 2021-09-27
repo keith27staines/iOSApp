@@ -62,11 +62,12 @@ class LoadingOverlay: UIView {
     }
     
     func showOverlay() {
-        self.backgroundColor = UIColor.black
-        self.alpha = 0.75
+        self.backgroundColor = UIColor.clear
+//        self.alpha = 0.75
         self.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
+        activityIndicator.color = WFColorPalette.graphicsGreen
         guard let superview = superview else { return }
         guard !(superview is UITableView) else { return }
         fillSuperview()
@@ -74,8 +75,8 @@ class LoadingOverlay: UIView {
 
     func showLightOverlay() {
         showOverlay()
-        self.backgroundColor = UIColor.white
-        activityIndicator.color = UIColor.gray
+        self.backgroundColor = UIColor.clear
+        activityIndicator.color = WFColorPalette.graphicsGreen
     }
 
     func hideOverlay() {

@@ -152,7 +152,13 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     func switchToTab(_ tab: TabIndex) { tabBarCoordinator?.switchToTab(tab) }
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
-        tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
+        if let tabBarCoordinator = self.tabBarCoordinator {
+            tabBarCoordinator.routeApplication(placementUuid: placementUuid, appSource: appSource)
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) { [weak self] in
+            self?.tabBarCoordinator?.routeApplication(placementUuid: placementUuid, appSource: appSource)
+        }
     }
     
     func routeInterviewInvite(uuid: F4SUUID?, appSource: AppSource) {
@@ -198,7 +204,7 @@ class AppCoordinator : NavigationCoordinator, AppCoordinatorProtocol {
     }
     
     func routeStudentsDashboard(appSource: AppSource) {
-        routeLiveProjects(appSource: appSource)
+        routeApplication(placementUuid: nil, appSource: .deeplink)
     }
     
     func routeRecommendation(recommendationUuid: F4SUUID?, appSource: AppSource) {

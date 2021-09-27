@@ -7,7 +7,10 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     lazy var messageHandler = UserMessageHandler(presenter: self)
     weak var coordinator: ApplicationsCoordinatorProtocol?
     let presenter: ApplicationsPresenter
-    
+    static let maximumIntervalBetweenReloads = 3600.0
+    var isLoadRequired: Bool = false
+    var lastReloadDate: Date
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
@@ -15,6 +18,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     init(coordinator: ApplicationsCoordinatorProtocol, presenter: ApplicationsPresenter) {
         self.coordinator = coordinator
         self.presenter = presenter
+        self.lastReloadDate = Date().addingTimeInterval(-Self.maximumIntervalBetweenReloads)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,6 +26,17 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         configureNavigationBar()
         configureViews()
         presenter.onViewDidLoad(view: self)
+        NotificationCenter.default.addObserver(forName: .wfApplicationDataDidChange, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.isLoadRequired = true
+            self.loadData()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        if isLoadRequired || lastReloadDate <= Date().addingTimeInterval(-Self.maximumIntervalBetweenReloads) {
+            loadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,7 +52,8 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
             self.messageHandler.displayOptionalErrorIfNotNil(
                     optionalError,
                     retryHandler: self.loadData)
-            
+            self.isLoadRequired = false
+            self.lastReloadDate = Date()
         }
     }
     

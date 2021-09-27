@@ -65,18 +65,34 @@ class WFPageControl: UIView {
     
     private lazy var leftButton: WFFloatingButton = {
         let button = WFFloatingButton()
-        button.setTitle("<", for: .normal)
-        button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
-        button.setTitleColor(WFColorPalette.gray1, for: .disabled)
+        
+        if #available(iOS 13.0, *) {
+            let normalImage = UIImage(systemName: "chevron.left")?.withTintColor(WFColorPalette.graphicsGreen, renderingMode: .alwaysOriginal)
+            let disabledImage = UIImage(systemName: "chevron.left")?.withTintColor(WFColorPalette.offWhite, renderingMode: .alwaysOriginal)
+            button.setImage(normalImage, for: .normal)
+            button.setImage(disabledImage, for: .disabled)
+        } else {
+            button.setTitle("<", for: .normal)
+            button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
+            button.setTitleColor(WFColorPalette.gray1, for: .disabled)
+        }
         button.addTarget(self, action: #selector(leftButtonTap), for: .touchUpInside)
         return button
     }()
     
     private lazy var rightButton: WFFloatingButton = {
         let button = WFFloatingButton()
-        button.setTitle(">", for: .normal)
-        button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
-        button.setTitleColor(WFColorPalette.gray1, for: .disabled)
+        
+        if #available(iOS 13.0, *) {
+            let normalImage = UIImage(systemName: "chevron.right")?.withTintColor(WFColorPalette.graphicsGreen, renderingMode: .alwaysOriginal)
+            let disabledImage = UIImage(systemName: "chevron.right")?.withTintColor(WFColorPalette.offWhite, renderingMode: .alwaysOriginal)
+            button.setImage(normalImage, for: .normal)
+            button.setImage(disabledImage, for: .disabled)
+        } else {
+            button.setTitle(">", for: .normal)
+            button.setTitleColor(WFColorPalette.graphicsGreen, for: .normal)
+            button.setTitleColor(WFColorPalette.gray1, for: .disabled)
+        }
         button.addTarget(self, action: #selector(rightButtonTap), for: .touchUpInside)
         return button
     }()

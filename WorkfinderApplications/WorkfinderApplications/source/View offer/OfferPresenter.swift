@@ -81,6 +81,7 @@ class OfferPresenter: OfferPresenterProtocol {
         guard let offer = offer else { return }
         offerService.accept(offer: offer) {  [weak self] (result) in
             self?.offerResultHandler(result: result, completion: completion)
+            NotificationCenter.default.post(name: .wfApplicationDataDidChange, object: nil, userInfo: nil)
         }
     }
     
@@ -89,6 +90,7 @@ class OfferPresenter: OfferPresenterProtocol {
         offerService.withdraw(declining: offer, reason: reason, otherText: otherText) { [weak self] (result) in
             offer.reasonWithdrawn = reason
             self?.offerResultHandler(result: result, completion: completion)
+            NotificationCenter.default.post(name: .wfApplicationDataDidChange, object: nil, userInfo: nil)
         }
     }
     

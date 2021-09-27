@@ -23,6 +23,8 @@ enum ApplicationState: String, Codable {
     case unroutable
     case unknown
     
+    var displayName: String { screenTitle }
+    
     init(string: String?) {
         if let state = ApplicationState.init(rawValue: string ?? "") {
             self = state
