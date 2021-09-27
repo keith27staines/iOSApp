@@ -8,7 +8,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     weak var coordinator: ApplicationsCoordinatorProtocol?
     let presenter: ApplicationsPresenter
     static let maximumIntervalBetweenReloads = 3600.0
-    var isLoadRequired: Bool = false
+    var isLoadRequired: Bool = true
     var lastReloadDate: Date
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -43,7 +43,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         loadData()
     }
     
-    func loadData() {
+    @objc func loadData() {
         messageHandler.showLoadingOverlay(view)
         presenter.loadData(table: tableView) { [weak self] optionalError in
             guard let self = self else { return }
@@ -89,8 +89,8 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     }
     
     func refreshFromPresenter() {
-        tableView.reloadData()
         noApplicationsYetContainer.removeFromSuperview()
+        tableView.reloadData()
         if !presenter.isDataShown {
             let guide = view.safeAreaLayoutGuide
             view.addSubview(noApplicationsYetContainer)
@@ -107,18 +107,8 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         navigationItem.title = "Applications"
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
-        // styleWFNavigationController()
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: #selector(loadData))
         styleNavigationController()
-    }
-    
-    func styleWFNavigationController() {
-        guard let navigationBar = navigationController?.navigationBar else {
-            return
-        }
-        navigationBar.isTranslucent = false
-        navigationBar.barTintColor = WFColorPalette.white
-        navigationBar.tintColor = WFColorPalette.readingGreen
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: WFColorPalette.readingGreen]
     }
     
     func configureViews() {
