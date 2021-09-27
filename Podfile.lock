@@ -1,9 +1,9 @@
 PODS:
-  - Bugsnag (6.1.4)
+  - Bugsnag (6.12.2)
   - KeychainSwift (19.0.0)
-  - Mixpanel-swift (2.7.7):
-    - Mixpanel-swift/Complete (= 2.7.7)
-  - Mixpanel-swift/Complete (2.7.7)
+  - Mixpanel-swift (2.10.3):
+    - Mixpanel-swift/Complete (= 2.10.3)
+  - Mixpanel-swift/Complete (2.10.3)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -27,12 +27,12 @@ SPEC REPOS:
     - XCGLogger
 
 SPEC CHECKSUMS:
-  Bugsnag: 955a7d5372789b4db5964a8e131ebc20e96ddd3a
+  Bugsnag: f5b820bf103292472cf56df2b33691d481e8eab8
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
-  Mixpanel-swift: 3a8fb9ce791e9c64d556b9446aa470b469c6fa7d
+  Mixpanel-swift: 3220daad7d82ff50cf9b8c3e31efed5bad426978
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 98488956dcc9cf942267da9e3e9af04f5970bd7b
+PODFILE CHECKSUM: 15b251975b1e6204a78b885a658091cb3a12731b
 
 COCOAPODS: 1.10.1
