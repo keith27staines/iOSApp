@@ -1,5 +1,5 @@
 
-platform :ios, '12.4'
+platform :ios, '13.6'
 use_frameworks!
 
 target 'f4s-workexperience' do

@@ -13,7 +13,7 @@ import UIKit
 class LoadingOverlay: UIView {
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
         activityIndicator.color = WorkfinderColors.primaryColor
         return activityIndicator
     }()
