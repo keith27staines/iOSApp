@@ -33,7 +33,7 @@ class LoadingViewController: UIViewController {
     }()
     
     lazy var activity: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .whiteLarge)
+        let activity = UIActivityIndicatorView(style: .medium)
         activity.color = WorkfinderColors.primaryColor
         activity.hidesWhenStopped = true
         return activity

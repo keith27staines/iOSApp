@@ -1,6 +1,7 @@
 
 import UIKit
 import WorkfinderCommon
+import WorkfinderUI
 
 let __appStoreLink = "itms-apps://itunes.apple.com/app/apple-store//id1196236194?mt=8"
 
@@ -82,7 +83,10 @@ public class WorkfinderEnvironmentConsistencyChecker: WorkfinderEnvironmentConsi
         
         // The local environment and the server environment don't match
         // Therefore, we cannot let the app run
-        let window = UIApplication.shared.keyWindow!
+        guard let window = UIApplication.shared.firstKeyWindow else {
+            completion()
+            return
+        }
         window.rootViewController = ForceEnvironmentSwitchViewController(
             serverEnvironment: serverEnvironmentType,
             localStoreEnvironment: localEnvironmentType)
@@ -120,7 +124,7 @@ public class WorkfinderEnvironmentConsistencyChecker: WorkfinderEnvironmentConsi
     }
     
     func forceUpdate() {
-        let window = UIApplication.shared.keyWindow!
+        guard let window = UIApplication.shared.firstKeyWindow else { return }
         window.rootViewController = ForceAppUpdateViewController(presenter: self)
         window.makeKeyAndVisible()
     }

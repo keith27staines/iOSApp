@@ -68,11 +68,11 @@ class TabBarCoordinator : NSObject, TabBarCoordinatorProtocol {
     }
     
     public func routeInterviewInvite(interviewUuid: F4SUUID?, appSource: AppSource) {
-        guard let interviewUuid = interviewUuid, let vc = tabBarViewController.selectedViewController else { return }
-        switchToTab(.applications)
-        let coordinator = WorkfinderInterviewCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
-        addChildCoordinator(coordinator)
-        //coordinator.startFromAcceptInviteScreen(parentVC: vc, interviewUuid: interviewUuid)
+//        guard let interviewUuid = interviewUuid, let vc = tabBarViewController.selectedViewController else { return }
+//        switchToTab(.applications)
+//        let coordinator = WorkfinderInterviewCoordinator(parent: self, navigationRouter: navigationRouter, inject: injected)
+//        addChildCoordinator(coordinator)
+//        coordinator.startFromAcceptInviteScreen(parentVC: vc, interviewUuid: interviewUuid)
     }
     
     func routeApplication(placementUuid: F4SUUID?, appSource: AppSource) {
