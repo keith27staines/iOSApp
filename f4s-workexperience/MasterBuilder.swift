@@ -120,10 +120,8 @@ class MasterBuilder: TabbarCoordinatorFactoryProtocol {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = rootNavigationRouter.rootViewController
         window.makeKeyAndVisible()
-        if #available(iOS 13.0, *) {
-            if window.responds(to: #selector(getter: UIView.overrideUserInterfaceStyle)) {
-                window.setValue(UIUserInterfaceStyle.light.rawValue, forKey: "overrideUserInterfaceStyle")
-            }
+        if window.responds(to: #selector(getter: UIView.overrideUserInterfaceStyle)) {
+            window.setValue(UIUserInterfaceStyle.light.rawValue, forKey: "overrideUserInterfaceStyle")
         }
         return window
     }()

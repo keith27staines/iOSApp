@@ -133,9 +133,7 @@ public class DateOfBirthCollectorViewController: UIViewController {
     
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
-        if #available(iOS 13.4, *) {
-            datePicker.preferredDatePickerStyle = .wheels
-        }
+        datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(onDateChosen), for: .valueChanged)
         return datePicker

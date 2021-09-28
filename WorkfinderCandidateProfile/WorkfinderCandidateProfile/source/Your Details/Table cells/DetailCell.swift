@@ -132,9 +132,7 @@ class DetailCell:  UITableViewCell {
     
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
-        if #available(iOS 13.4, *) {
-            datePicker.preferredDatePickerStyle = .wheels
-        }
+        datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -16, to: today) ?? today
         return datePicker
