@@ -12,7 +12,8 @@ public class WebViewController: UIViewController, WKNavigationDelegate {
     weak var delegate: WebViewControllerDelegate?
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = WFColorPalette.graphicsGreen
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.hidesWhenStopped = true
         return indicator

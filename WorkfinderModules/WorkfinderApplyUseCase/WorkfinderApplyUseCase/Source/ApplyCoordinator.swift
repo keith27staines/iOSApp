@@ -52,8 +52,8 @@ public class ApplyCoordinator : CoreInjectionNavigationCoordinator, CoverLetterP
     }()
     
     private func showApplicationSubmittedSuccessfully() {
-        guard let window = UIApplication.shared.keyWindow
-            else { return }
+        guard let window = UIApplication.shared.firstKeyWindow
+        else { return }
         let navigationController = navigationRouter.navigationController
         window.addSubview(successPopup)
         navigationController.navigationBar.layer.zPosition = -1

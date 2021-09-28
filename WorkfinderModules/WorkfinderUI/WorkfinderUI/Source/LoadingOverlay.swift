@@ -13,7 +13,7 @@ import UIKit
 class LoadingOverlay: UIView {
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.color = WorkfinderColors.primaryColor
         return activityIndicator
     }()
@@ -63,7 +63,7 @@ class LoadingOverlay: UIView {
     
     func showOverlay() {
         self.backgroundColor = UIColor.clear
-//        self.alpha = 0.75
+        self.alpha = 1
         self.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()

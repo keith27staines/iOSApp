@@ -5,7 +5,8 @@ import WorkfinderUI
 class HSLoadingOverlay: UIView {
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = UIColor.white
         return activityIndicator
     }()
     

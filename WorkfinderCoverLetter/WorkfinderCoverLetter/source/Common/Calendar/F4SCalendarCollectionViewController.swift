@@ -147,11 +147,7 @@ extension F4SCalendarCollectionViewController : UICollectionViewDelegateFlowLayo
         let minimumInteritemSpacing: CGFloat = 0.0
         let cellsPerRow: Int = 7
         let marginsAndInsets: CGFloat
-        if #available(iOS 11.0, *) {
-            marginsAndInsets = inset * 2 + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
-        } else {
-            marginsAndInsets = inset * 2 + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
-        }
+        marginsAndInsets = inset * 2 + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
         let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
         return CGSize(width: itemWidth, height: itemWidth)
     }

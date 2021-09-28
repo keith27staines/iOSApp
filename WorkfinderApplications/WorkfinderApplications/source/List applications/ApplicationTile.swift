@@ -30,7 +30,6 @@ class ApplicationTile: UITableViewCell {
         topSpace.heightAnchor.constraint(equalTo: bottomSpace.heightAnchor).isActive = true
         return stack
     }()
-
     
     lazy var statusTag: WFTextCapsule = {
         WFComponentsFactory.makeSmallTag()
