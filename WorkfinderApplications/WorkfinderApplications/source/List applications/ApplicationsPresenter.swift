@@ -92,6 +92,10 @@ class ApplicationsPresenter: NSObject {
         return carousel
     }()
     
+    var showNoApplicationsYetMessage: Bool {
+        isLoading == false && isDataShown == false
+    }
+    
     var isDataShown: Bool {
         applications.count > 0 || offersAndInterviewsData[0].count > 0 || upcomingInterviewsData[0].count > 0
     }
@@ -112,12 +116,14 @@ class ApplicationsPresenter: NSObject {
     func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
         self.view = view
     }
-    
+    private var isLoading: Bool = false
     func loadData(table: UITableView, completion: @escaping (Error?) -> Void) {
+        isLoading = true
         table.dataSource = self
         self.table = table
         table.reloadData()
         guard isCandidateSignedIn() else {
+            isLoading = false
             completion(nil)
             return
         }
@@ -133,6 +139,7 @@ class ApplicationsPresenter: NSObject {
                     } else {
                         self.loadApplicationsList { [weak self] optionalError in
                             guard let self = self else { return }
+                            self.isLoading = false
                             self.reloadViews()
                             completion(optionalError)
                         }

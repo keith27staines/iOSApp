@@ -91,7 +91,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     func refreshFromPresenter() {
         noApplicationsYetContainer.removeFromSuperview()
         tableView.reloadData()
-        if !presenter.isDataShown {
+        if presenter.showNoApplicationsYetMessage {
             let guide = view.safeAreaLayoutGuide
             view.addSubview(noApplicationsYetContainer)
             noApplicationsYet.text = noApplicationsMessage

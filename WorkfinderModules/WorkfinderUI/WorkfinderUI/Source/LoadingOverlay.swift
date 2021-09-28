@@ -63,7 +63,7 @@ class LoadingOverlay: UIView {
     
     func showOverlay() {
         self.backgroundColor = UIColor.clear
-//        self.alpha = 0.75
+        self.alpha = 1
         self.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
