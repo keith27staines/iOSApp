@@ -47,7 +47,7 @@ public class InviteService: WorkfinderService {
     
     public func declineInterview(uuid: F4SUUID, completion: @escaping (Result<StatusJson, Error>) -> Void) {
         do {
-            let patch = StatusJson(status: "interview_declined")
+            let patch = StatusJson(status: "interview_decline")
             let request = try buildRequest(relativePath: "interviews/\(uuid)/", verb: .patch, body: patch)
             performTask(with: request,verbose: true, completion: completion, attempting: "loadInterview")
         } catch {
