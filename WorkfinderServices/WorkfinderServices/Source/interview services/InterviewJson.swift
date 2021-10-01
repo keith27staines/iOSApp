@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct InterviewJson: Codable {
+public struct InterviewJson: Codable, Hashable {
     public var id: Int?
     public var uuid: String?
     public var placement: PlacementJson?
@@ -41,7 +41,7 @@ public struct InterviewJson: Codable {
         case interviewDates = "interview_dates"
     }
     
-    public struct InterviewDateJson: Codable, Equatable {
+    public struct InterviewDateJson: Codable, Equatable, Hashable {
         private static var dateFormatter: DateFormatter = {
             let df = DateFormatter()
             df.timeStyle = .none
@@ -91,7 +91,7 @@ public struct InterviewJson: Codable {
         }
     }
     
-    public struct PlacementJson: Codable {
+    public struct PlacementJson: Codable, Hashable {
         public var id: Int?
         public var uuid: String?
         public var associatedProject: ProjectJson?
@@ -125,7 +125,7 @@ public struct InterviewJson: Codable {
             case status
         }
         
-        public struct ProjectJson: Codable {
+        public struct ProjectJson: Codable, Hashable {
             public var uuid: String?
             public var aboutCandidate: String?
             public var additionalComments: String?
@@ -182,12 +182,12 @@ public struct InterviewJson: Codable {
             }
         }
         
-        public struct AssociationJson: Codable {
+        public struct AssociationJson: Codable, Hashable {
             public var host: HostJson?
             public var location: LocationJson?
         }
         
-        public struct HostJson: Codable {
+        public struct HostJson: Codable, Hashable {
             public var uuid: String?
             public var emails: [String]?
             public var fullname: String?
@@ -201,7 +201,7 @@ public struct InterviewJson: Codable {
             }
         }
         
-        public struct LocationJson: Codable {
+        public struct LocationJson: Codable, Hashable {
             public var uuid: String?
             public var company: CompanyJson?
             public var addressUnit: String?
@@ -212,7 +212,7 @@ public struct InterviewJson: Codable {
             public var addressCountry: Country?
             public var addressPostcode: String?
             
-            public struct Country: Codable {
+            public struct Country: Codable, Hashable {
                 var name: String?
                 var code: String?
             }
@@ -230,7 +230,7 @@ public struct InterviewJson: Codable {
             }
         }
         
-        public struct CompanyJson: Codable {
+        public struct CompanyJson: Codable, Hashable {
             public var uuid: String?
             public var name: String?
             public var logo: String?

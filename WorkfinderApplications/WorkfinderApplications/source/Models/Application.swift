@@ -2,7 +2,7 @@ import Foundation
 import WorkfinderCommon
 import WorkfinderServices
 
-struct Application : Codable {
+struct Application : Codable, Hashable {
     var _placementJson: PlacementJson
     var placementUuid: String
     var companyUuid: String?

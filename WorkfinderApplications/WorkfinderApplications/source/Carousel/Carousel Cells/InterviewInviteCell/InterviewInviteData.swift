@@ -9,7 +9,7 @@
 import WorkfinderUI
 import WorkfinderServices
 
-struct InterviewInviteTileData {
+struct InterviewInviteTileData: Hashable {
     var interviewId: Int
     var tileTitle: String
     var inviteText: String
@@ -25,6 +25,14 @@ struct InterviewInviteTileData {
     var waitingForLinkText: String?
     private var interviewJson: InterviewJson?
     var meetingLink: URL?
+    
+    static func == (lhs: InterviewInviteTileData, rhs: InterviewInviteTileData) -> Bool {
+        lhs.interviewJson == rhs.interviewJson
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(interviewJson)
+    }
     
     init(interview: InterviewJson) {
         interviewJson = interview

@@ -10,9 +10,32 @@ import UIKit
 import WorkfinderUI
 import WorkfinderServices
 
-struct OfferTileData {
+struct OfferTileData: Hashable {
     
-    enum OfferType {
+    var offerType: OfferType
+    var imageUrlString: String?
+    var defaultImageText: String?
+    var tapAction: ((OfferTileData) -> Void)?
+    
+    var buttonState: WFButton.State
+    private var hostName: String?
+    private var companyName: String?
+    
+    static func == (lhs: OfferTileData, rhs: OfferTileData) -> Bool {
+        guard
+            lhs.offerType == rhs.offerType,
+            lhs.imageUrlString == rhs.imageUrlString
+        else { return false }
+        return true
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(offerType)
+        hasher.combine(imageUrlString)
+        hasher.combine(defaultImageText)
+    }
+    
+    enum OfferType: Hashable {
         
         case interview(id: Int)
         case placement(uuid: String)
@@ -33,15 +56,6 @@ struct OfferTileData {
             }
         }
     }
-    
-    var offerType: OfferType
-    var imageUrlString: String?
-    var defaultImageText: String?
-    var tapAction: ((OfferTileData) -> Void)?
-    
-    var buttonState: WFButton.State
-    private var hostName: String?
-    private var companyName: String?
     
     var buttonText: String { offerType.actionButtonText }
     

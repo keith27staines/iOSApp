@@ -25,7 +25,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     override func viewDidLoad() {
         configureNavigationBar()
         configureViews()
-        presenter.onViewDidLoad(view: self)
+        presenter.onViewDidLoad(view: self, table: tableView)
         NotificationCenter.default.addObserver(forName: .wfApplicationDataDidChange, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             self.isLoadRequired = true
@@ -45,7 +45,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     @objc func loadData() {
         messageHandler.showLoadingOverlay(view)
-        presenter.loadData(table: tableView) { [weak self] optionalError in
+        presenter.loadData() { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler.hideLoadingOverlay()
             self.refreshFromPresenter()
@@ -90,7 +90,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     func refreshFromPresenter() {
         noApplicationsYetContainer.removeFromSuperview()
-        tableView.reloadData()
         if presenter.showNoApplicationsYetMessage {
             let guide = view.safeAreaLayoutGuide
             view.addSubview(noApplicationsYetContainer)
@@ -124,7 +123,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         tableView.register(TableSectionHeaderCell.self, forCellReuseIdentifier: "TableSectionHeaderCell")
         tableView.separatorStyle = .none
         tableView.delegate = self
-        tableView.dataSource = presenter
         return tableView
     }()
  
