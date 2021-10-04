@@ -24,6 +24,7 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
             collectionView.reloadData()
             stepper.pageCount = cellData[0].count
             stepper.currentPageIndex = 0
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: -cellPadding, bottom: 0, right: 0)
         }
     }
     var currentPageIndex: Int {
