@@ -69,8 +69,27 @@ class ApplicationsPresenter: NSObject {
         let upcomingInterviews = allInterviews.filter { interview in
             interview.status == "interview_accepted" || interview.status == "meeting_link_added"
         }
-        let data = upcomingInterviews.map { interview in InterviewInviteTileData(interview: interview) }
+        let data = upcomingInterviews.map { interview -> InterviewInviteTileData in
+            let tileData = InterviewInviteTileData(
+                interview: interview,
+                secondaryButtonAction: { [weak self] in
+                    guard
+                        let self = self,
+                        let application = self.application(for: interview)
+                    else { return }
+                    self.performOnTapAction(application: application)
+                },
+                secondardyButtonText: "View Application"
+            )
+            return tileData
+        }
         return [data]
+    }
+    
+    private func application(for interview: InterviewJson) -> Application? {
+        applications.first { application in
+            application.placementUuid == interview.placement?.uuid
+        }
     }
     
     private var offeredApplicationData: [OfferTileData] {
@@ -258,6 +277,10 @@ class ApplicationsPresenter: NSObject {
     
     func onTapApplication(at row: Int) {
         let application = applicationForRow(row)
+        performOnTapAction(application: application)
+    }
+    
+    func performOnTapAction(application: Application) {
         let action: ApplicationAction
         switch application.state {
         case .pending: action = .viewApplication(placementUuid: application.placementUuid)

@@ -18,13 +18,17 @@ class InterviewInviteTile: UIView {
         timeText.text = data?.timeText
         hostNoteHeading.text = data?.hostNotesHeading
         offerMessage.text = data?.offerMessage?.replacingOccurrences(of: "\n", with: " ")
-        button.text = data?.buttonText
-        button.buttonTapped = data?.buttonAction
-        waitingForLinkLabel.text = data?.waitingForLinkText
-        button.isHidden = data?.isButtonHidden ?? true
-        button.state = .normal
-        waitingForLinkLabel.isHidden = !(data?.isButtonHidden ?? false)
         offerMessage.numberOfLines = offerMessageLines
+        waitingForLinkLabel.text = data?.waitingForLinkText
+        waitingForLinkLabel.isHidden = !(data?.isJoinInterviewButtonHidden ?? false)
+        joinInterviewButton.text = data?.joinInterviewButtonText
+        joinInterviewButton.buttonTapped = data?.joinInterviewAction
+        joinInterviewButton.isHidden = data?.isJoinInterviewButtonHidden ?? true
+        joinInterviewButton.state = .normal
+        secondaryButton.isHidden = data?.isSecondaryButtonHidden ?? true
+        secondaryButton.state = .normal
+        secondaryButton.text = data?.secondaryButtonText
+        secondaryButton.buttonTapped = data?.secondaryButtonAction
     }
     
     var buttonHeight: NSLayoutConstraint?
@@ -155,18 +159,23 @@ class InterviewInviteTile: UIView {
     private lazy var buttonContainer: UIView = {
         let view = UIView()
         view.addSubview(waitingForLinkLabel)
-        view.addSubview(button)
+        view.addSubview(joinInterviewButton)
         view.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        button.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        joinInterviewButton.translatesAutoresizingMaskIntoConstraints = false
+        joinInterviewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        joinInterviewButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        joinInterviewButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         waitingForLinkLabel.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
         return view
     }()
     
-    private lazy var button: WFButton = {
+    private lazy var joinInterviewButton: WFButton = {
         let button = WFButton(heightClass: .larger, isCapsule: true)
+        return button
+    }()
+    
+    private lazy var secondaryButton: WFButton = {
+        let button = WFButton(heightClass: .larger, isCapsule: true, isSecondary: true)
         return button
     }()
 
@@ -187,7 +196,8 @@ class InterviewInviteTile: UIView {
             dateTimeStack,
             hostStack,
             UIView(),
-            buttonContainer
+            buttonContainer,
+            secondaryButton
         ])
         stack.axis = .vertical
         stack.spacing = WFMetrics.standardSpace - 2

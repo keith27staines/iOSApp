@@ -19,6 +19,10 @@ struct OfferTileData: Hashable {
     
     var buttonState: WFButton.State
     private var hostName: String?
+    private var hostFirstName: String? {
+        guard let firstname = hostName?.split(separator: " ").first else { return nil }
+        return String(firstname)
+    }
     private var companyName: String?
     
     static func == (lhs: OfferTileData, rhs: OfferTileData) -> Bool {
@@ -42,8 +46,8 @@ struct OfferTileData: Hashable {
         
         var prize: String {
             switch self {
-            case .interview: return " has invited you to an interview"
-            case .placement: return " has offered you a placement"
+            case .interview: return "has invited you to an interview"
+            case .placement: return "has offered you a placement"
             }
         }
         

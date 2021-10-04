@@ -32,7 +32,7 @@ class ApplicationTile: UITableViewCell {
     }()
     
     lazy var statusTag: WFTextCapsule = {
-        WFComponentsFactory.makeSmallTag()
+        WFComponentsFactory.makeTextCapsule(heightClass: .small)
     }()
     
     lazy var companyName: UILabel = {
