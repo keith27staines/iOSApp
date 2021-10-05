@@ -25,7 +25,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     override func viewDidLoad() {
         configureNavigationBar()
         configureViews()
-        presenter.onViewDidLoad(view: self)
+        presenter.onViewDidLoad(view: self, table: tableView)
         NotificationCenter.default.addObserver(forName: .wfApplicationDataDidChange, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             self.isLoadRequired = true
@@ -44,17 +44,44 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     }
     
     @objc func loadData() {
-        messageHandler.showLoadingOverlay(view)
-        presenter.loadData(table: tableView) { [weak self] optionalError in
+        showLoadingIndicators()
+        presenter.loadData() { [weak self] optionalError in
             guard let self = self else { return }
-            self.messageHandler.hideLoadingOverlay()
             self.refreshFromPresenter()
+            self.hideLoadingIndicators()
             self.messageHandler.displayOptionalErrorIfNotNil(
                     optionalError,
                     retryHandler: self.loadData)
             self.isLoadRequired = false
             self.lastReloadDate = Date()
         }
+    }
+    
+    private lazy var navigationBarActivityItem: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(customView: navigationBarActivityIndicator)
+        return barButton
+    }()
+    
+    private lazy var navigationBarActivityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        indicator.color = WFColorPalette.readingGreen
+        return indicator
+    }()
+    
+    private lazy var navigationBarRefreshButton: UIBarButtonItem = {
+        UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: #selector(loadData))
+    }()
+    
+    private func showLoadingIndicators() {
+        messageHandler.showLoadingOverlay(view)
+        navigationItem.setRightBarButton(navigationBarActivityItem, animated: true)
+        navigationBarActivityIndicator.startAnimating()
+    }
+    
+    private func hideLoadingIndicators() {
+        messageHandler.hideLoadingOverlay()
+        navigationBarActivityIndicator.stopAnimating()
+        navigationItem.rightBarButtonItem = navigationBarRefreshButton
     }
     
     lazy var noApplicationsYetContainer: UIView = {
@@ -90,7 +117,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     
     func refreshFromPresenter() {
         noApplicationsYetContainer.removeFromSuperview()
-        tableView.reloadData()
         if presenter.showNoApplicationsYetMessage {
             let guide = view.safeAreaLayoutGuide
             view.addSubview(noApplicationsYetContainer)
@@ -107,7 +133,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         navigationItem.title = "Applications"
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: #selector(loadData))
+        navigationItem.rightBarButtonItem = navigationBarRefreshButton
         styleNavigationController()
     }
     
@@ -124,7 +150,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         tableView.register(TableSectionHeaderCell.self, forCellReuseIdentifier: "TableSectionHeaderCell")
         tableView.separatorStyle = .none
         tableView.delegate = self
-        tableView.dataSource = presenter
         return tableView
     }()
  

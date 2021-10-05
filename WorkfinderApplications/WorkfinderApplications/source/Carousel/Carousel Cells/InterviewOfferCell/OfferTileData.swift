@@ -10,17 +10,44 @@ import UIKit
 import WorkfinderUI
 import WorkfinderServices
 
-struct OfferTileData {
+struct OfferTileData: Hashable {
     
-    enum OfferType {
+    var offerType: OfferType
+    var imageUrlString: String?
+    var defaultImageText: String?
+    var tapAction: ((OfferTileData) -> Void)?
+    
+    var buttonState: WFButton.State
+    private var hostName: String?
+    private var hostFirstName: String? {
+        guard let firstname = hostName?.split(separator: " ").first else { return nil }
+        return String(firstname)
+    }
+    private var companyName: String?
+    
+    static func == (lhs: OfferTileData, rhs: OfferTileData) -> Bool {
+        guard
+            lhs.offerType == rhs.offerType,
+            lhs.imageUrlString == rhs.imageUrlString
+        else { return false }
+        return true
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(offerType)
+        hasher.combine(imageUrlString)
+        hasher.combine(defaultImageText)
+    }
+    
+    enum OfferType: Hashable {
         
         case interview(id: Int)
         case placement(uuid: String)
         
         var prize: String {
             switch self {
-            case .interview: return " has invited you to an interview"
-            case .placement: return " has offered you a placement"
+            case .interview: return "has invited you to an interview"
+            case .placement: return "has offered you a placement"
             }
         }
         
@@ -34,19 +61,10 @@ struct OfferTileData {
         }
     }
     
-    var offerType: OfferType
-    var imageUrlString: String?
-    var defaultImageText: String?
-    var tapAction: ((OfferTileData) -> Void)?
-    
-    var buttonState: WFButton.State
-    private var hostName: String?
-    private var companyName: String?
-    
     var buttonText: String { offerType.actionButtonText }
     
     var text: String? {
-        let host = hostName ?? ""
+        let host = hostFirstName ?? ""
         let company = companyName ?? ""
         if host.isEmpty && company.isEmpty {
             return "This company has \(offerType.prize)"

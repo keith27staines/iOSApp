@@ -11,39 +11,52 @@ import UIKit
 public class WFButton: UIView {
     
     public var buttonTapped: (() -> Void)?
+    public let isSecondary: Bool
+    public let isCapsule: Bool
     
     public enum State {
         case normal
         case disabled
         case highlighted
-        
-        var backgroundColor: UIColor {
-            switch self {
-            case .normal: return WFColorPalette.readingGreen
-            case .disabled: return WFColorPalette.gray2
-            case .highlighted: return WFColorPalette.greenTint
-            }
-        }
     }
     
     var heightClass: WFCapsuleHeightClass
     
     public var state: State {
         didSet {
-            switch state {
-            case .normal:
-                backgroundColor = WFColorPalette.readingGreen
-                label.textColor = WFColorPalette.white
-            case .disabled:
-                backgroundColor = WFColorPalette.gray2
-                label.textColor = WFColorPalette.gray4
-            case .highlighted:
-                backgroundColor = WFColorPalette.greenTint
-                label.textColor = WFColorPalette.white
+            switch isSecondary {
+            case true:
+                switch state {
+                case .normal:
+                    backgroundColor = WFColorPalette.white
+                    label.textColor = WFColorPalette.readingGreen
+                    layer.borderColor = WFColorPalette.readingGreen.cgColor
+                case .disabled:
+                    backgroundColor = WFColorPalette.gray2
+                    label.textColor = WFColorPalette.gray4
+                    layer.borderColor = WFColorPalette.readingGreen.cgColor
+                case .highlighted:
+                    backgroundColor = WFColorPalette.greenTint
+                    label.textColor = WFColorPalette.white
+                    layer.borderColor = WFColorPalette.readingGreen.cgColor
+                }
+     
+            case false:
+                switch state {
+                case .normal:
+                    backgroundColor = WFColorPalette.readingGreen
+                    label.textColor = WFColorPalette.white
+                case .disabled:
+                    backgroundColor = WFColorPalette.gray2
+                    label.textColor = WFColorPalette.gray4
+                case .highlighted:
+                    backgroundColor = WFColorPalette.greenTint
+                    label.textColor = WFColorPalette.white
+                }
             }
         }
     }
-    
+
     private lazy var label: UILabel = {
         let label = UILabel()
         let font = WFTextStyle.standardFont(size: heightClass.fontSize, weight: .bold)
@@ -66,13 +79,14 @@ public class WFButton: UIView {
         }
     }
     
-    public init(heightClass: WFCapsuleHeightClass, isCapsule: Bool = true) {
+    public init(heightClass: WFCapsuleHeightClass, isCapsule: Bool = true, isSecondary: Bool = false) {
         self.heightClass = heightClass
         self.state = .normal
+        self.isCapsule = isCapsule
+        self.isSecondary = isSecondary
         super.init(frame: CGRect.zero)
-        layer.cornerRadius = isCapsule ? heightClass.height / 2.0 : 0
-        layer.masksToBounds = true
         configureViews()
+        self.state = .normal
     }
     
     func configureViews() {
@@ -80,6 +94,9 @@ public class WFButton: UIView {
         addSubview(label)
         label.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        layer.cornerRadius = isCapsule ? heightClass.height / 2.0 : 0
+        layer.masksToBounds = true
+        layer.borderWidth = isSecondary ? 1 : 0
     }
     
     @objc func _tapped(sender: UITapGestureRecognizer)  {

@@ -4,12 +4,19 @@ import WorkfinderCommon
 import WorkfinderServices
 
 class ApplicationsPresenter: NSObject {
+    
+    typealias DataSource = UITableViewDiffableDataSource<Section, ItemWrapper>
+    typealias Snapshot =  NSDiffableDataSourceSnapshot<Section, ItemWrapper>
+    
     weak var coordinator: ApplicationsCoordinatorProtocol?
+    
     private var table: UITableView?
     
     let service: ApplicationsServiceProtocol
     weak var view: WorkfinderViewControllerProtocol?
     var isCandidateSignedIn: () -> Bool
+    
+    private var snapshot: Snapshot?
     
     enum Section: Int, CaseIterable {
         case upcomingInterviews
@@ -22,6 +29,37 @@ class ApplicationsPresenter: NSObject {
     private var allInterviews = [InterviewJson]()
     private var offeredApplications = [Application]()
     
+    private var datasource: DataSource?
+    
+    func updateSnapshot() {
+        let animated = snapshot != nil
+        let snapshot = makeSnapshot()
+        datasource?.apply(snapshot, animatingDifferences: animated, completion: nil)
+        self.snapshot = snapshot
+    }
+    
+    func makeSnapshot() -> Snapshot {
+        var snapshot = Snapshot()
+        snapshot.appendSections(Section.allCases)
+        Section.allCases.forEach { section in
+            var items = [ItemWrapper]()
+            switch section {
+            case .upcomingInterviews:
+                items.append(ItemWrapper.interviewList(data: upcomingInterviewsData))
+            case .offersAndInterviews:
+                items.append(ItemWrapper.offerList(data: offersAndInterviewsData))
+            case .applicationsHeader:
+                items.append(ItemWrapper.heading(data: "Applications"))
+            case .applications:
+                items = applications.map({ application in
+                    ItemWrapper.application(data: application)
+                })
+            }
+            snapshot.appendItems(items, toSection: section)
+        }
+        return snapshot
+    }
+    
     private var offersAndInterviewsData: [[OfferTileData]] {
         let data = offeredApplicationData + offeredInterviewData
         return [data]
@@ -31,8 +69,27 @@ class ApplicationsPresenter: NSObject {
         let upcomingInterviews = allInterviews.filter { interview in
             interview.status == "interview_accepted" || interview.status == "meeting_link_added"
         }
-        let data = upcomingInterviews.map { interview in InterviewInviteTileData(interview: interview) }
+        let data = upcomingInterviews.map { interview -> InterviewInviteTileData in
+            let tileData = InterviewInviteTileData(
+                interview: interview,
+                secondaryButtonAction: { [weak self] in
+                    guard
+                        let self = self,
+                        let application = self.application(for: interview)
+                    else { return }
+                    self.performOnTapAction(application: application)
+                },
+                secondardyButtonText: "View Application"
+            )
+            return tileData
+        }
         return [data]
+    }
+    
+    private func application(for interview: InterviewJson) -> Application? {
+        applications.first { application in
+            application.placementUuid == interview.placement?.uuid
+        }
     }
     
     private var offeredApplicationData: [OfferTileData] {
@@ -71,7 +128,7 @@ class ApplicationsPresenter: NSObject {
     }()
     
     private lazy var upcomingInterviewsCarousel: CarouselView<InterviewInviteCell> = {
-        let cellSize = CGSize(width: 255, height: 291)
+        let cellSize = CGSize(width: 255, height: 320)
         let carousel = CarouselView<InterviewInviteCell>(cellSize: cellSize, title: "Upcoming Interviews")
         carousel.registerCell(cellClass: InterviewInviteCell.self, withIdentifier: InterviewInviteCell.identifier)
         return carousel
@@ -86,7 +143,7 @@ class ApplicationsPresenter: NSObject {
     }()
 
     private lazy var offersAndInterviewsCarousel: CarouselView<OfferCell> = {
-        let cellSize = CGSize(width: 255, height: 186)
+        let cellSize = CGSize(width: 255, height: 200)
         let carousel = CarouselView<OfferCell>(cellSize: cellSize, title: "Offers and Interviews")
         carousel.registerCell(cellClass: OfferCell.self, withIdentifier: OfferCell.identifier)
         return carousel
@@ -113,15 +170,42 @@ class ApplicationsPresenter: NSObject {
         return applications[row]
     }
     
-    func onViewDidLoad(view: WorkfinderViewControllerProtocol) {
+    func onViewDidLoad(view: WorkfinderViewControllerProtocol, table: UITableView) {
         self.view = view
+        self.table = table
+        datasource = DataSource(tableView: table) { [weak self] tableView, indexPath, itemIdentifier in
+            guard let self = self else { return UITableViewCell() }
+            switch itemIdentifier {
+            case .interviewList(let interviewData):
+                if interviewData[0].count > 0 {
+                    self.upcomingInterviewsCarousel.cellData = interviewData
+                    return self.upcomingInterviewsTableViewCell
+                } else {
+                    return ZeroHeightTableViewCell()
+                }
+            case .offerList(let offersData):
+                if offersData[0].count > 0 {
+                    self.offersAndInterviewsCarousel.cellData = offersData
+                    return self.offersAndInterviewsTableViewCell
+                } else {
+                    return ZeroHeightTableViewCell()
+                }
+            case .heading(let text):
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TableSectionHeaderCell.reuseIdentifier) as? TableSectionHeaderCell else { return UITableViewCell() }
+                cell.label.text = text
+                return cell
+            case .application(let applicationData):
+                guard let tile = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile
+                else { return UITableViewCell() }
+                let presenter = ApplicationTilePresenter(application: applicationData)
+                tile.configureWithApplication(presenter)
+                return tile
+            }
+        }
     }
     private var isLoading: Bool = false
-    func loadData(table: UITableView, completion: @escaping (Error?) -> Void) {
+    func loadData(completion: @escaping (Error?) -> Void) {
         isLoading = true
-        table.dataSource = self
-        self.table = table
-        table.reloadData()
         guard isCandidateSignedIn() else {
             isLoading = false
             completion(nil)
@@ -140,17 +224,13 @@ class ApplicationsPresenter: NSObject {
                         self.loadApplicationsList { [weak self] optionalError in
                             guard let self = self else { return }
                             self.isLoading = false
-                            self.reloadViews()
+                            self.updateSnapshot()
                             completion(optionalError)
                         }
                     }
                 }
             }
         }
-    }
-    
-    func reloadViews() {
-        table?.reloadData()
     }
     
     func loadOfferedApplications(completion: @escaping (Error?) -> Void) {
@@ -197,6 +277,10 @@ class ApplicationsPresenter: NSObject {
     
     func onTapApplication(at row: Int) {
         let application = applicationForRow(row)
+        performOnTapAction(application: application)
+    }
+    
+    func performOnTapAction(application: Application) {
         let action: ApplicationAction
         switch application.state {
         case .pending: action = .viewApplication(placementUuid: application.placementUuid)
@@ -227,54 +311,6 @@ class ApplicationsPresenter: NSObject {
     }
 }
 
-extension ApplicationsPresenter: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.allCases.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = Section(rawValue: section) else { return 0 }
-        switch section {
-        case .upcomingInterviews:
-            return upcomingInterviewsData.count
-        case .offersAndInterviews:
-            return offeredInterviewData.count
-        case .applicationsHeader:
-            return 1
-        case .applications:
-            return applications.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
-        switch section {
-        case .upcomingInterviews:
-            if upcomingInterviewsData[0].count > 0 {
-                upcomingInterviewsCarousel.cellData = upcomingInterviewsData
-                return upcomingInterviewsTableViewCell
-            } else {
-                return ZeroHeightTableViewCell()
-            }
-        case .offersAndInterviews:
-            offersAndInterviewsCarousel.cellData = offersAndInterviewsData
-            return offersAndInterviewsTableViewCell
-        case .applicationsHeader:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableSectionHeaderCell.reuseIdentifier) as? TableSectionHeaderCell else { return UITableViewCell() }
-            cell.label.text = "Applications"
-            return cell
-        case .applications:
-            guard let tile = tableView.dequeueReusableCell(withIdentifier: ApplicationTile.reuseIdentifier) as? ApplicationTile
-            else { return UITableViewCell() }
-            let application = applications[indexPath.row]
-            let presenter = ApplicationTilePresenter(application: application)
-            tile.configureWithApplication(presenter)
-            return tile
-        }
-    }
-}
-
 class TableSectionHeaderCell: UITableViewCell {
     
     static var reuseIdentifier: String = "TableSectionHeaderCell"
@@ -301,4 +337,11 @@ class ZeroHeightTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+enum ItemWrapper: Hashable {
+    case offerList(data: [[OfferTileData]])
+    case interviewList(data: [[InterviewInviteTileData]])
+    case application(data: Application)
+    case heading(data: String)
 }

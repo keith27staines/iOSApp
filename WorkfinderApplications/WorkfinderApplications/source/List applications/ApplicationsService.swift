@@ -87,7 +87,7 @@ class ApplicationsService: WorkfinderService, ApplicationsServiceProtocol {
  }
  */
 
-struct PlacementJson: Codable {
+struct PlacementJson: Codable, Hashable {
     var uuid: F4SUUID?
     var status: String?
     var created_at: String?
@@ -103,7 +103,7 @@ struct PlacementJson: Codable {
     var associated_project_name: String?
 }
 
-struct AssociatedProject: Codable {
+struct AssociatedProject: Codable, Hashable {
     var uuid: F4SUUID?
     var employmentType: String?
     var isPaid: Bool?

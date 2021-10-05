@@ -22,7 +22,7 @@ class WFPageControl: UIView {
     
     var pageCount: Int = 5 {
         didSet {
-            currentPageIndex = 0
+            // currentPageIndex = 0
             setText()
         }
     }

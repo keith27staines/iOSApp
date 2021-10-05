@@ -21,7 +21,7 @@ class InterviewPresenter {
     var interviewDateSelectionDidChange: (() -> Void)?
     
     private var hostFirstName: String {
-        guard let first = (interview?.placement?.association?.host?.fullname ?? "").first else { return "" }
+        guard let first = (interview?.placement?.association?.host?.fullname ?? "").split(separator: " ").first else { return "" }
         return String(first)
     }
     

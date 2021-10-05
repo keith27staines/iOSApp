@@ -74,6 +74,7 @@ public class WFTextCapsule: UIView {
         let labelLeadingConstraint = label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: radius)
         NSLayoutConstraint.activate([labelLeadingConstraint])
         self.labelLeadingConstraint = labelLeadingConstraint
+        heightConstraint.isActive = true
     }
     
     public func setColors(backgroundColor: UIColor, borderColor: UIColor, textColor: UIColor) {

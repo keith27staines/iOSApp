@@ -9,7 +9,7 @@
 import WorkfinderUI
 import WorkfinderServices
 
-struct InterviewInviteTileData {
+struct InterviewInviteTileData: Hashable {
     var interviewId: Int
     var tileTitle: String
     var inviteText: String
@@ -18,15 +18,28 @@ struct InterviewInviteTileData {
     var hostNotesHeading: String?
     var hostNotes: String?
     var offerMessage: String?
-    var buttonAction: (() -> Void)?
-    var buttonText: String
-    var buttonState: WFButton.State = .normal
-    var isButtonHidden: Bool { meetingLink == nil ? true : false }
+    var joinInterviewAction: (() -> Void)?
+    var joinInterviewButtonText: String
+    var joinInterviewButtonState: WFButton.State = .normal
+    var isJoinInterviewButtonHidden: Bool { meetingLink == nil ? true : false }
+    var secondaryButtonAction: (() -> Void)?
+    var secondaryButtonText: String?
+    var secondaryButtonState: WFButton.State = .normal
+    var isSecondaryButtonHidden: Bool = true
     var waitingForLinkText: String?
     private var interviewJson: InterviewJson?
     var meetingLink: URL?
+    var placementUuid: String? { interviewJson?.placement?.uuid }
+
+    static func == (lhs: InterviewInviteTileData, rhs: InterviewInviteTileData) -> Bool {
+        lhs.interviewJson == rhs.interviewJson
+    }
     
-    init(interview: InterviewJson) {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(interviewJson)
+    }
+    
+    init(interview: InterviewJson, secondaryButtonAction: (() -> Void)? = nil, secondardyButtonText: String? = nil) {
         interviewJson = interview
         let hostFirstName = interview.placement?.association?.host?.fullname?.split(separator: " ").first ?? "The host"
         let inviteTextEnding = hostFirstName.isEmpty ? "" : " with \(hostFirstName)"
@@ -39,13 +52,16 @@ struct InterviewInviteTileData {
         hostNotes = interview.additionalOfferNote
         offerMessage = interview.offerMessage
         meetingLink = URL(string: interview.meetingLink ?? "")
-        buttonAction = {
+        joinInterviewAction = {
             if let link = URL(string: interview.meetingLink ?? "") {
                 UIApplication.shared.open(link, options: [:], completionHandler: nil)
             }
         }
-        buttonText = "Join Video Interview"
-        buttonState = .normal
+        joinInterviewButtonText = "Join Video Interview"
+        joinInterviewButtonState = .normal
         waitingForLinkText = "We will share the meeting link with you when the host submits it to us"
+        self.secondaryButtonAction = secondaryButtonAction
+        self.secondaryButtonText = secondardyButtonText
+        isSecondaryButtonHidden = secondaryButtonAction == nil
     }
 }
