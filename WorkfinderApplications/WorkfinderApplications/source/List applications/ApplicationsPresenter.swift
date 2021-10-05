@@ -128,7 +128,7 @@ class ApplicationsPresenter: NSObject {
     }()
     
     private lazy var upcomingInterviewsCarousel: CarouselView<InterviewInviteCell> = {
-        let cellSize = CGSize(width: 255, height: 291)
+        let cellSize = CGSize(width: 255, height: 320)
         let carousel = CarouselView<InterviewInviteCell>(cellSize: cellSize, title: "Upcoming Interviews")
         carousel.registerCell(cellClass: InterviewInviteCell.self, withIdentifier: InterviewInviteCell.identifier)
         return carousel
@@ -143,7 +143,7 @@ class ApplicationsPresenter: NSObject {
     }()
 
     private lazy var offersAndInterviewsCarousel: CarouselView<OfferCell> = {
-        let cellSize = CGSize(width: 255, height: 186)
+        let cellSize = CGSize(width: 255, height: 200)
         let carousel = CarouselView<OfferCell>(cellSize: cellSize, title: "Offers and Interviews")
         carousel.registerCell(cellClass: OfferCell.self, withIdentifier: OfferCell.identifier)
         return carousel

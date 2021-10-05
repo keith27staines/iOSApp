@@ -64,7 +64,7 @@ struct OfferTileData: Hashable {
     var buttonText: String { offerType.actionButtonText }
     
     var text: String? {
-        let host = hostName ?? ""
+        let host = hostFirstName ?? ""
         let company = companyName ?? ""
         if host.isEmpty && company.isEmpty {
             return "This company has \(offerType.prize)"

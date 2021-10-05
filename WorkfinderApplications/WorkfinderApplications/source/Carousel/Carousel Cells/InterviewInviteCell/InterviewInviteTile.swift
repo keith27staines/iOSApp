@@ -40,6 +40,7 @@ class InterviewInviteTile: UIView {
         let label = UILabel()
         label.applyStyle(smallHeadingStyle)
         label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -54,6 +55,7 @@ class InterviewInviteTile: UIView {
         let style = WFTextStyle.labelTextRegular
         label.applyStyle(style)
         label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -79,6 +81,7 @@ class InterviewInviteTile: UIView {
         label.applyStyle(smallHeadingStyle)
         label.numberOfLines = 1
         label.text = "Date"
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -87,6 +90,7 @@ class InterviewInviteTile: UIView {
         label.applyStyle(smallHeadingStyle)
         label.numberOfLines = 1
         label.text = "Time"
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -94,6 +98,7 @@ class InterviewInviteTile: UIView {
         let label = UILabel()
         label.applyStyle(WFTextStyle.labelTextRegular)
         label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -101,6 +106,7 @@ class InterviewInviteTile: UIView {
         let label = UILabel()
         label.applyStyle(WFTextStyle.labelTextRegular)
         label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -135,6 +141,7 @@ class InterviewInviteTile: UIView {
         let label = UILabel()
         label.applyStyle(smallHeadingStyle)
         label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -156,7 +163,7 @@ class InterviewInviteTile: UIView {
         return stack
     }()
     
-    private lazy var buttonContainer: UIView = {
+    private lazy var joinInterviewButtonContainer: UIView = {
         let view = UIView()
         view.addSubview(waitingForLinkLabel)
         view.addSubview(joinInterviewButton)
@@ -167,6 +174,16 @@ class InterviewInviteTile: UIView {
         joinInterviewButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         waitingForLinkLabel.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
         return view
+    }()
+    
+    lazy var buttonStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            joinInterviewButtonContainer,
+            secondaryButton
+        ])
+        stack.axis = .vertical
+        stack.spacing = 4
+        return stack
     }()
     
     private lazy var joinInterviewButton: WFButton = {
@@ -196,8 +213,7 @@ class InterviewInviteTile: UIView {
             dateTimeStack,
             hostStack,
             UIView(),
-            buttonContainer,
-            secondaryButton
+            buttonStack
         ])
         stack.axis = .vertical
         stack.spacing = WFMetrics.standardSpace - 2

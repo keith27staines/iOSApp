@@ -23,8 +23,9 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
         didSet {
             collectionView.reloadData()
             stepper.pageCount = cellData[0].count
-            stepper.currentPageIndex = 0
-            collectionView.contentInset = UIEdgeInsets(top: 0, left: -cellPadding, bottom: 0, right: 0)
+            if stepper.pageCount - 1 < getCurrentPage() {
+                stepper.currentPageIndex = 0
+            }
         }
     }
     var currentPageIndex: Int {
@@ -103,6 +104,7 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     private lazy var collectionView: UICollectionView = {
         let layout = Layout(cellPadding: cellPadding, cellSize: cellSize)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.contentInset = UIEdgeInsets(top: 0, left: -cellPadding, bottom: 0, right: 0)
         collection.showsHorizontalScrollIndicator = false
         collection.backgroundColor = .clear
         collection.dataSource = self
