@@ -47,8 +47,8 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         showLoadingIndicators()
         presenter.loadData() { [weak self] optionalError in
             guard let self = self else { return }
-            self.hideLoadingIndicators()
             self.refreshFromPresenter()
+            self.hideLoadingIndicators()
             self.messageHandler.displayOptionalErrorIfNotNil(
                     optionalError,
                     retryHandler: self.loadData)
