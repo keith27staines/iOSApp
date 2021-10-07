@@ -132,7 +132,6 @@ public struct InterviewJson: Codable, Hashable {
             public var applicationCount: Int?
             public var association: String?
             public var candidateActivities: [String]?
-            public var candidatesRequested: String?
             public var createdAt: String?
             public var description: String?
             public var duration: String?
@@ -160,7 +159,6 @@ public struct InterviewJson: Codable, Hashable {
                 case applicationCount = "application_count"
                 case association
                 case candidateActivities = "candidate_activities"
-                case candidatesRequested = "candidates_requested"
                 case createdAt = "created_at"
                 case description
                 case duration
