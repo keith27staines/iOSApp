@@ -7,7 +7,7 @@ public protocol ImageFetching: AnyObject {
     func cancel()
 }
 
-public class WFSelfLoadingImageViewWithHeight: WFSelfLoadingImageView {
+public class WFSelfLoadingImageViewWithFixedHeight: WFSelfLoadingImageView {
     
     var height: CGFloat {
         didSet {
@@ -24,7 +24,7 @@ public class WFSelfLoadingImageViewWithHeight: WFSelfLoadingImageView {
         return CGSize(width: height / heightToWidthRatio, height: height)
     }
     
-    public init(height: CGFloat) {
+    public init(_ height: CGFloat) {
         self.height = height
         super.init()
         contentMode = .scaleAspectFit

@@ -32,7 +32,7 @@ class OfferTile: UIView {
     }
         
     private lazy var imageView: WFSelfLoadingImageView = {
-        let view = WFSelfLoadingImageViewWithHeight(height: 46)
+        let view = WFSelfLoadingImageViewWithFixedHeight(46)
         view.setContentHuggingPriority(.required, for: .horizontal)
         view.setContentCompressionResistancePriority(.required, for: .horizontal)
         view.contentMode = .scaleAspectFit

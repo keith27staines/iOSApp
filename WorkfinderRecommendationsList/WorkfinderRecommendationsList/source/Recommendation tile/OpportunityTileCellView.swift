@@ -9,29 +9,31 @@
 import UIKit
 import WorkfinderUI
 
-class OpportunityTileView: UITableViewCell, RefreshableProtocol {
+class OpportunityTileCellView: UITableViewCell, RefreshableProtocol {
+    static let reuseIdentifier: String = "OpportunityTileViewCell"
     
-    var presenter: OpportunityTilePresenterProtocol? {
+    var data: OpportunityTileData? {
         didSet {
-            refreshFromPresenter(presenter: presenter)
+            refreshFromData(data)
         }
     }
     
     var companyLogoWidthConstraint: NSLayoutConstraint?
     
-    func refreshFromPresenter(presenter: OpportunityTilePresenterProtocol?) {
-        companyNameLabel.text = presenter?.companyName
-        companyLogo.image = presenter?.companyImage?.aspectFitToSize(CGSize(width: CGFloat.infinity, height: 46))
-        roleLabel.text = presenter?.projectTitle
-        skillsLabel.attributedText = presenter?.skillsAttributedString
+    func refreshFromData(_ data: OpportunityTileData?) {
+        companyNameLabel.text = data?.companyName
+        companyLogo.image = data?.companyImage?.aspectFitToSize(CGSize(width: CGFloat.infinity, height: 46))
+        roleLabel.text = data?.projectTitle
+        skillsLabel.attributedText = data?.skillsAttributedString
         skillsLabel.sizeToFit()
-        skillsStack.isHidden = presenter?.shouldHideSkills ?? true
-        locationValue.text = presenter?.locationValue
-        compensationValue.text = presenter?.compensationValue
+        skillsStack.isHidden = data?.shouldHideSkills ?? true
+        locationValue.text = data?.locationValue
+        compensationValue.text = data?.compensationValue
+        companyLogo.load(urlString: data?.companyLogoUrlString, defaultImage: data?.defaultImage)
     }
     
-    lazy var companyLogo: UIImageView = {
-        let view = UIImageView.companyLogoImageView(height: 46)
+    lazy var companyLogo: WFSelfLoadingImageViewWithFixedHeight = {
+        let view = WFSelfLoadingImageViewWithFixedHeight(46)
         view.setContentHuggingPriority(.required, for: .horizontal)
         return view
     }()
@@ -159,7 +161,7 @@ class OpportunityTileView: UITableViewCell, RefreshableProtocol {
     }()
     
     @objc func buttonTapped() {
-        presenter?.onApplyTapped()
+        data?.onApplyTapped()
     }
     
     lazy var bottomStack: UIStackView = {
@@ -212,7 +214,7 @@ class OpportunityTileView: UITableViewCell, RefreshableProtocol {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
-    @objc func handleTap() { presenter?.onTileTapped() }
+    @objc func handleTap() { data?.onTileTapped() }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 

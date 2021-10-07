@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		539C433626CE8E2100B11A22 /* RefreshableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C433526CE8E2100B11A22 /* RefreshableProtocol.swift */; };
 		53B7C66F26C65B8B005131DA /* ProjectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C66E26C65B8B005131DA /* ProjectsService.swift */; };
-		53B7C67326C67464005131DA /* OpportunityTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C67226C67464005131DA /* OpportunityTileView.swift */; };
-		53B7C67526C6747E005131DA /* OpportunityTilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */; };
+		53B7C67326C67464005131DA /* OpportunityTileCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C67226C67464005131DA /* OpportunityTileCellView.swift */; };
+		53B7C67526C6747E005131DA /* OpportunityTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7C67426C6747E005131DA /* OpportunityTileData.swift */; };
 		FC1B0A1D24AC6A3E0008F5CF /* WorkfinderRecommendationsList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A1324AC6A3E0008F5CF /* WorkfinderRecommendationsList.framework */; };
 		FC1B0A2424AC6A3E0008F5CF /* WorkfinderRecommendationsList.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1B0A1624AC6A3E0008F5CF /* WorkfinderRecommendationsList.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A3A24AC6B3C0008F5CF /* RecommendationsCoordinator.swift */; };
@@ -20,7 +20,6 @@
 		FC1B0A4724AC6B940008F5CF /* WorkfinderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */; };
 		FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */; };
 		FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */; };
-		FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */; };
 		FCADF0ED24BDFCE30040F79D /* WorkfinderProjectApply.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCADF0EC24BDFCE30040F79D /* WorkfinderProjectApply.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,8 +36,8 @@
 /* Begin PBXFileReference section */
 		539C433526CE8E2100B11A22 /* RefreshableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshableProtocol.swift; sourceTree = "<group>"; };
 		53B7C66E26C65B8B005131DA /* ProjectsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsService.swift; sourceTree = "<group>"; };
-		53B7C67226C67464005131DA /* OpportunityTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTileView.swift; sourceTree = "<group>"; };
-		53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTilePresenter.swift; sourceTree = "<group>"; };
+		53B7C67226C67464005131DA /* OpportunityTileCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTileCellView.swift; sourceTree = "<group>"; };
+		53B7C67426C6747E005131DA /* OpportunityTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTileData.swift; sourceTree = "<group>"; };
 		FC1B0A1324AC6A3E0008F5CF /* WorkfinderRecommendationsList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WorkfinderRecommendationsList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1B0A1624AC6A3E0008F5CF /* WorkfinderRecommendationsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkfinderRecommendationsList.h; sourceTree = "<group>"; };
 		FC1B0A1724AC6A3E0008F5CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,7 +50,6 @@
 		FC1B0A4024AC6B940008F5CF /* WorkfinderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1B0A4A24AC6CD80008F5CF /* RecommendationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		FC1B0A4C24AC6D350008F5CF /* RecommendationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsPresenter.swift; sourceTree = "<group>"; };
-		FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTilePresenter.swift; sourceTree = "<group>"; };
 		FCADF0EC24BDFCE30040F79D /* WorkfinderProjectApply.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WorkfinderProjectApply.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -144,9 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				539C433526CE8E2100B11A22 /* RefreshableProtocol.swift */,
-				53B7C67226C67464005131DA /* OpportunityTileView.swift */,
-				53B7C67426C6747E005131DA /* OpportunityTilePresenter.swift */,
-				FC3C701724ADB661004869D0 /* RecommendationTilePresenter.swift */,
+				53B7C67226C67464005131DA /* OpportunityTileCellView.swift */,
+				53B7C67426C6747E005131DA /* OpportunityTileData.swift */,
 			);
 			path = "Recommendation tile";
 			sourceTree = "<group>";
@@ -261,11 +258,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53B7C67326C67464005131DA /* OpportunityTileView.swift in Sources */,
+				53B7C67326C67464005131DA /* OpportunityTileCellView.swift in Sources */,
 				FC1B0A4D24AC6D350008F5CF /* RecommendationsPresenter.swift in Sources */,
 				FC1B0A3B24AC6B3C0008F5CF /* RecommendationsCoordinator.swift in Sources */,
-				FC3C701824ADB661004869D0 /* RecommendationTilePresenter.swift in Sources */,
-				53B7C67526C6747E005131DA /* OpportunityTilePresenter.swift in Sources */,
+				53B7C67526C6747E005131DA /* OpportunityTileData.swift in Sources */,
 				539C433626CE8E2100B11A22 /* RefreshableProtocol.swift in Sources */,
 				53B7C66F26C65B8B005131DA /* ProjectsService.swift in Sources */,
 				FC1B0A4B24AC6CD80008F5CF /* RecommendationsViewController.swift in Sources */,

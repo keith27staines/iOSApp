@@ -26,8 +26,8 @@ class ApplicationDetailHeaderView: UIView {
         return stack
     }()
     
-    private lazy var companyLogo: WFSelfLoadingImageViewWithHeight = {
-        let view = WFSelfLoadingImageViewWithHeight(height: defaultLogoSize.height)
+    private lazy var companyLogo: WFSelfLoadingImageViewWithFixedHeight = {
+        let view = WFSelfLoadingImageViewWithFixedHeight(defaultLogoSize.height)
         view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return view
     }()
