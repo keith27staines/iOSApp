@@ -41,12 +41,11 @@ class RecommendationsViewController: UIViewController, UserMessageHandlingProtoc
     
     lazy var tableview: UITableView = {
         let view = UITableView()
-        view.dataSource = self
         view.delegate = self
         view.separatorStyle = .none
         view.backgroundColor = UIColor.white
-        view.register(OpportunityTileView.self, forCellReuseIdentifier: "opportunity")
-        view.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
+        view.register(OpportunityTileCellView.self, forCellReuseIdentifier: OpportunityTileCellView.reuseIdentifier)
+        view.contentInset = UIEdgeInsets(top: -10, left: 0, bottom: 0, right: 0)
         view.scrollIndicatorInsets = view.contentInset
         return view
     }()
@@ -56,17 +55,8 @@ class RecommendationsViewController: UIViewController, UserMessageHandlingProtoc
         super.init(nibName: nil, bundle: nil)
     }
     
-    func reloadRow(_ indexPath: IndexPath) {
-        let row = indexPath.row
-        let section = indexPath.section
-        guard row < presenter.numberOfRowsForSection(section) else { return }
-        tableview.beginUpdates()
-        tableview.reloadRows(at: [indexPath], with: .automatic)
-        tableview.endUpdates()
-    }
-    
     override func viewDidLoad() {
-        presenter.onViewDidLoad(view: self)
+        presenter.onViewDidLoad(view: self, table: tableview)
         configureNavigationBar()
         configureViews()
     }
@@ -79,6 +69,7 @@ class RecommendationsViewController: UIViewController, UserMessageHandlingProtoc
         navigationItem.title = "Recommendations"
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = navigationBarRefreshButton
         styleNavigationController()
     }
     
@@ -91,21 +82,45 @@ class RecommendationsViewController: UIViewController, UserMessageHandlingProtoc
         tableview.anchor(top: headerStack.bottomAnchor, leading: guide.leadingAnchor, bottom: guide.bottomAnchor, trailing: guide.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 20, bottom: 20, right: 20))
     }
     
-    func refresh() {
-        tableview.reloadData()
-    }
-    
-    func loadData() {
-        messageHandler?.showLoadingOverlay(self.view)
-        presenter.loadFirstPage(table: tableview) { [weak self] (optionalError) in
+    @objc func loadData() {
+        showLoadingIndicators()
+        presenter.loadData() { [weak self] (optionalError) in
             guard let self = self else { return }
-            self.messageHandler?.hideLoadingOverlay()
+            self.hideLoadingIndicators()
             self.messageHandler?.displayOptionalErrorIfNotNil(optionalError) {
                 self.loadData()
             }
-            self.refresh()
+            self.presenter.applySnapshot()
         }
     }
+    
+    private lazy var navigationBarActivityItem: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(customView: navigationBarActivityIndicator)
+        return barButton
+    }()
+    
+    private lazy var navigationBarActivityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        indicator.color = WFColorPalette.readingGreen
+        return indicator
+    }()
+    
+    private lazy var navigationBarRefreshButton: UIBarButtonItem = {
+        UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: #selector(loadData))
+    }()
+    
+    private func showLoadingIndicators() {
+        messageHandler?.showLoadingOverlay(view)
+        navigationItem.setRightBarButton(navigationBarActivityItem, animated: true)
+        navigationBarActivityIndicator.startAnimating()
+    }
+    
+    private func hideLoadingIndicators() {
+        messageHandler?.hideLoadingOverlay()
+        navigationBarActivityIndicator.stopAnimating()
+        navigationItem.rightBarButtonItem = navigationBarRefreshButton
+    }
+
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
@@ -114,41 +129,4 @@ extension RecommendationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         UIView()
     }
-}
-
-extension RecommendationsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        presenter.numberOfSections()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.numberOfRowsForSection(section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0: return recommendationCellForRow(row: indexPath.row, in: tableview)
-        case 1: return opportunitiesCellForRow(row: indexPath.row, in: tableview)
-        default: return UITableViewCell()
-        }
-    }
-    
-    private func recommendationCellForRow(row: Int, in table: UITableView) -> UITableViewCell {
-        guard let cell = table.dequeueReusableCell(withIdentifier: "opportunity") as? OpportunityTileView
-            else { return UITableViewCell()
-        }
-        let tilePresenter = presenter.recommendationTilePresenterForIndexPath(row)
-        cell.presenter = tilePresenter
-        return cell
-    }
-    
-    private func opportunitiesCellForRow(row: Int, in table: UITableView) -> UITableViewCell {
-        guard let cell = table.dequeueReusableCell(withIdentifier: "opportunity") as? OpportunityTileView
-            else { return UITableViewCell()
-        }
-        let tilePresenter = presenter.opportunityTilePresenterForIndexPath(row)
-        cell.presenter = tilePresenter
-        return cell
-    }
-
 }

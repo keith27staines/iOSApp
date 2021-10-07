@@ -8,7 +8,6 @@ import WorkfinderUI
 public class RecommendationsCoordinator: CoreInjectionNavigationCoordinator {
     
     weak var rootViewController: (UIViewController & UserMessageHandlingProtocol)?
-    //weak var projectApplyCoordinator: ProjectApplyCoordinator?
     
     public override func start() {
         let recommendationsService = RecommendationsService(networkConfig: injected.networkConfig)

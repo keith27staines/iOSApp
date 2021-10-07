@@ -34,17 +34,17 @@ public struct ProjectInfoPresenter {
         self.requiresCandidateLocation = requiresCandidateLocation
     }
     
-    public init(json: ProjectJson) {
-        self.hostUuid = json.association?.host?.uuid ?? Self.missing
-        self.projectUuid = json.uuid ?? Self.missing
-        self.associationUuid = json.association?.uuid ?? Self.missing
-        self.companyName = json.association?.location?.company?.name ?? Self.missing
-        self.hostName = json.association?.host?.fullName ?? ""
-        self.projectName = json.name ?? Self.missing
-        self.requiresCandidateLocation = json.isCandidateLocationRequired ?? true
+    public init(projectJson project: ProjectJson) {
+        self.hostUuid = project.association?.host?.uuid ?? Self.missing
+        self.projectUuid = project.uuid ?? Self.missing
+        self.associationUuid = project.association?.uuid ?? Self.missing
+        self.companyName = project.association?.location?.company?.name ?? Self.missing
+        self.hostName = project.association?.host?.fullName ?? ""
+        self.projectName = project.name ?? Self.missing
+        self.requiresCandidateLocation = project.isCandidateLocationRequired ?? true
     }
 
-    public init(item: RecommendationsListItem) {
+    public init(recommendationListItem item: RecommendationsListItem) {
         let project = item.project
         let association = item.association
         self.hostUuid = item.association?.host?.uuid ?? Self.missing
