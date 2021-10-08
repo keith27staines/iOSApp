@@ -68,7 +68,7 @@ class DiscoveryTrayController: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(handleCandidateSignedIn), name: NSNotification.Name.wfDidLoginCandidate, object: nil)
     }
     
-    @objc func loadData() {
+    @objc func loadData(completion: @escaping () -> Void) {
         messageHandler?.showLoadingOverlay(style: .transparent)
         tableView.dataSource = self
         tableView.delegate = self
@@ -76,7 +76,10 @@ class DiscoveryTrayController: NSObject {
         featuredOnWorkfinderPresenter.load { [weak self] optionalError in
             guard let self = self else { return }
             self.messageHandler?.hideLoadingOverlay()
-            self.messageHandler?.displayOptionalErrorIfNotNil(optionalError, retryHandler: self.loadData)
+            self.messageHandler?.displayOptionalErrorIfNotNil(optionalError, retryHandler: {
+                self.loadData(completion: completion)
+            })
+            completion()
             self.tableView.reloadData()
         }
     }

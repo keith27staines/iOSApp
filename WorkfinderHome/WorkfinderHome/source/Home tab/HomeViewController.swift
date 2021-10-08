@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return isSearchActive ? .default : .lightContent
     }
-    
+
     func configureNavigationBar() {
         styleNavigationController()
         updateNavigationBar()
@@ -79,13 +79,38 @@ class HomeViewController: UIViewController {
         }
     }
     
-    var isTrayExpanded: Bool = false {
+    private lazy var navigationBarActivityItem: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(customView: navigationBarActivityIndicator)
+        return barButton
+    }()
+    
+    private lazy var navigationBarActivityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        indicator.color = WFColorPalette.readingGreen
+        return indicator
+    }()
+    
+    private lazy var navigationBarRefreshButton: UIBarButtonItem = {
+        UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
+    }()
+    
+    private func showLoadingIndicators() {
+        navigationItem.setRightBarButton(navigationBarActivityItem, animated: true)
+        navigationBarActivityIndicator.startAnimating()
+    }
+    
+    private func hideLoadingIndicators() {
+        navigationBarActivityIndicator.stopAnimating()
+        navigationItem.rightBarButtonItem = navigationBarRefreshButton
+    }
+    
+    private var isTrayExpanded: Bool = false {
         didSet {
             updateNavigationBar()
         }
     }
     
-    func animateTrayToFinalPosition() {
+    private func animateTrayToFinalPosition() {
         if trayTopConstraintConstant < backgroundView.frame.height/3 {
             trayTopConstraintConstant = 0
         } else if trayTopConstraintConstant < 2*backgroundView.frame.height/3 {
@@ -111,8 +136,8 @@ class HomeViewController: UIViewController {
         )
     }
     
-    var isShowingError = false
-    @objc func handleErrorNotification(_ notification: Notification) {
+    private var isShowingError = false
+    @objc private func handleErrorNotification(_ notification: Notification) {
         guard let wfError = notification.object as? WorkfinderError else { return }
         guard !isShowingError else {
             DispatchQueue.main.asyncAfter(deadline: .now()+1) {
@@ -148,7 +173,7 @@ class HomeViewController: UIViewController {
         refresh()
     }
     
-    @objc func handleSearchIsActive(notification: Notification) {
+    @objc private func handleSearchIsActive(notification: Notification) {
         isSearchActive = (notification.userInfo?["isSearchActive"] as? Bool) ?? false
     }
     
@@ -158,22 +183,34 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func updateNavigationBar() {
-        let navigationBar = navigationController?.navigationBar
+    private func updateNavigationBar() {
         switch isTrayExpanded {
-        case true:
-            navigationBar?.barTintColor = isSearchActive ? UIColor.white : WorkfinderColors.white
-            self.navigationController?.setNavigationBarHidden(self.isSearchActive, animated: true)
-            self.navigationItem.title = "Discover"
-            navigationBar?.shadowImage = nil
-            navigationBar?.setBackgroundImage(nil, for: UIBarMetrics.compact)
-        case false:
-            //self.navigationController?.setNavigationBarHidden(true, animated: false)
-            navigationBar?.barTintColor = WorkfinderColors.primaryColor
-            self.navigationItem.title = ""
-            navigationBar?.shadowImage = UIImage()
-            navigationBar?.setBackgroundImage(UIImage(), for: UIBarMetrics.compact)
+        case true: updateNavigationBarWithTrayExpanded()
+        case false: updateNavigationBarWithTrayNotExpanded()
         }
+    }
+        
+    private func updateNavigationBarWithTrayExpanded() {
+        navigationItem.title = "Discover"
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        navigationBar.barTintColor = self.isSearchActive ? UIColor.white : WorkfinderColors.white
+        self.navigationController?.setNavigationBarHidden(self.isSearchActive, animated: true)
+        navigationBar.scrollEdgeAppearance?.backgroundColor = WFColorPalette.white
+        navigationBar.scrollEdgeAppearance?.shadowColor = WFColorPalette.border
+        navigationBar.shadowImage = nil
+        navigationItem.rightBarButtonItem = navigationBarRefreshButton
+    }
+    
+    private func updateNavigationBarWithTrayNotExpanded() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        navigationItem.title = ""
+        navigationBar.barTintColor = WFColorPalette.readingGreen
+        self.navigationItem.title = ""
+        navigationBar.shadowImage = UIImage()
+        navigationBar.alpha = 1
+        navigationBar.scrollEdgeAppearance?.shadowColor = UIColor.clear
+        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.compact)
+        navigationBar.scrollEdgeAppearance?.backgroundColor = WFColorPalette.readingGreen
     }
     
     @objc func handleLogin() {
@@ -182,8 +219,8 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureViews()
         configureNavigationBar()
+        configureViews()
     }
     
     @objc func animateTrayToTop() {
@@ -191,11 +228,14 @@ class HomeViewController: UIViewController {
         animateTrayToFinalPosition()
     }
     
-    func refresh() {
+    @objc func refresh() {
         homeView.refresh()
         trayController.messageHandler = messageHandler
+        showLoadingIndicators()
         DispatchQueue.main.async { [weak self] in
-            self?.trayController.loadData()
+            self?.trayController.loadData() {
+                self?.hideLoadingIndicators()
+            }
         }
     }
     
