@@ -34,28 +34,37 @@ class ApplicationsPresenter: NSObject {
     func updateSnapshot() {
         let animated = snapshot != nil
         let snapshot = makeSnapshot()
-        datasource?.apply(snapshot, animatingDifferences: animated, completion: nil)
+        self.upcomingInterviewsCarousel.cellData = self.upcomingInterviewsData
+        self.offersAndInterviewsCarousel.cellData = self.offersAndInterviewsData
+        datasource?.apply(snapshot, animatingDifferences: animated)
+        
         self.snapshot = snapshot
     }
     
     func makeSnapshot() -> Snapshot {
         var snapshot = Snapshot()
-        snapshot.appendSections(Section.allCases)
         Section.allCases.forEach { section in
-            var items = [ItemWrapper]()
             switch section {
             case .upcomingInterviews:
-                items.append(ItemWrapper.interviewList(data: upcomingInterviewsData))
+                if upcomingInterviewsData.count > 0 {
+                    snapshot.appendSections([.upcomingInterviews])
+                    snapshot.appendItems([ItemWrapper.interviewList(data: upcomingInterviewsData)], toSection: .upcomingInterviews)
+                }
             case .offersAndInterviews:
-                items.append(ItemWrapper.offerList(data: offersAndInterviewsData))
+                if offersAndInterviewsData.count > 0 {
+                    snapshot.appendSections([.offersAndInterviews])
+                    snapshot.appendItems([ItemWrapper.offerList(data: offersAndInterviewsData)], toSection: .offersAndInterviews)
+                }
             case .applicationsHeader:
-                items.append(ItemWrapper.heading(data: "Applications"))
+                snapshot.appendSections([.applicationsHeader])
+                snapshot.appendItems([ItemWrapper.heading(data: "Applications")], toSection: .applicationsHeader)
             case .applications:
-                items = applications.map({ application in
+                snapshot.appendSections([.applications])
+                let items = applications.map({ application in
                     ItemWrapper.application(data: application)
                 })
+                snapshot.appendItems(items, toSection: .applications)
             }
-            snapshot.appendItems(items, toSection: section)
         }
         return snapshot
     }
@@ -82,7 +91,7 @@ class ApplicationsPresenter: NSObject {
                 secondardyButtonText: "View Application"
             )
             return tileData
-        }
+        }.sorted(by: <)
         return [data]
     }
     
@@ -178,14 +187,12 @@ class ApplicationsPresenter: NSObject {
             switch itemIdentifier {
             case .interviewList(let interviewData):
                 if interviewData[0].count > 0 {
-                    self.upcomingInterviewsCarousel.cellData = interviewData
                     return self.upcomingInterviewsTableViewCell
                 } else {
                     return ZeroHeightTableViewCell()
                 }
             case .offerList(let offersData):
                 if offersData[0].count > 0 {
-                    self.offersAndInterviewsCarousel.cellData = offersData
                     return self.offersAndInterviewsTableViewCell
                 } else {
                     return ZeroHeightTableViewCell()
@@ -267,7 +274,7 @@ class ApplicationsPresenter: NSObject {
             guard let self = self else { return }
             switch result {
             case .success(let list):
-                self.applications = list.results
+                self.applications = list.results.sorted(by: >)
                 completion(nil)
             case .failure(let error):
                 completion(error)

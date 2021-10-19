@@ -9,7 +9,8 @@
 import WorkfinderUI
 import WorkfinderServices
 
-struct InterviewInviteTileData: Hashable {
+struct InterviewInviteTileData: Hashable, Comparable {
+    
     var interviewId: Int
     var tileTitle: String
     var inviteText: String
@@ -30,6 +31,16 @@ struct InterviewInviteTileData: Hashable {
     private var interviewJson: InterviewJson?
     var meetingLink: URL?
     var placementUuid: String? { interviewJson?.placement?.uuid }
+    var orderingDate: Date? {
+        guard let dateString = interviewJson?.placement?.createdAt, let date = Date.dateFromRfc3339(string: dateString)
+        else { return nil }
+        return date
+    }
+    
+    static func < (lhs: InterviewInviteTileData, rhs: InterviewInviteTileData) -> Bool {
+        guard let lhsDate = lhs.orderingDate, let rhsDate = rhs.orderingDate else { return false }
+        return lhsDate < rhsDate
+    }
 
     static func == (lhs: InterviewInviteTileData, rhs: InterviewInviteTileData) -> Bool {
         lhs.interviewJson == rhs.interviewJson

@@ -37,3 +37,17 @@ struct Application : Codable, Hashable {
         self.projectName = json.associated_project_name ?? ""
     }
 }
+
+extension Application: Comparable {
+    static func < (lhs: Application, rhs: Application) -> Bool {
+        if lhs.state.orderingImportance == rhs.state.orderingImportance {
+            guard
+                let lhsAppliedDate = Date.dateFromRfc3339(string: lhs.appliedDate),
+                let rhsAppliedDate = Date.dateFromRfc3339(string: rhs.appliedDate)
+            else { return false }
+            return lhsAppliedDate < rhsAppliedDate
+        } else {
+            return lhs.state.orderingImportance < rhs.state.orderingImportance
+        }
+    }
+}

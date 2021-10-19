@@ -21,11 +21,11 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     
     var cellData = [[CarouselCell.CellData]]() {
         didSet {
-            collectionView.reloadData()
-            stepper.pageCount = cellData[0].count
+            stepper.pageCount = cellData.isEmpty ? 0 : cellData[0].count
             if stepper.pageCount - 1 < getCurrentPage() {
                 stepper.currentPageIndex = 0
             }
+            collectionView.reloadData()
         }
     }
     var currentPageIndex: Int {
@@ -38,7 +38,7 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
     let cellPadding = CGFloat(8)
     
     func highlightPage(_ pageIndex: Int) {
-        guard cellData[0].count > 0 else { return }
+        guard cellData.count > 0 && cellData[0].count > 0 else { return }
         collectionView.visibleCells.forEach { cell in
             cell.contentView.alpha = 0.5
         }
@@ -137,7 +137,7 @@ class CarouselView<CarouselCell: CarouselCellProtocol>: UIView, UICollectionView
 
     // MARK: - UICollectionViewDataSource
     
-    func numberOfSections() -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         cellData.count
     }
     

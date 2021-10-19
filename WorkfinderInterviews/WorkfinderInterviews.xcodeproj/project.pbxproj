@@ -19,6 +19,7 @@
 		532E49F3269EE93700AC6E41 /* InterviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E49F2269EE93700AC6E41 /* InterviewPresenter.swift */; };
 		534CF7A626A1D43C007DF848 /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A526A1D43C007DF848 /* DateSelectorViewController.swift */; };
 		534CF7A926A1D473007DF848 /* DateSelectorDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CF7A826A1D473007DF848 /* DateSelectorDatasource.swift */; };
+		53663AAB271703E6003733AA /* SwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53663AAA271703E6003733AA /* SwiftView.swift */; };
 		53C753A326F6162A00B2399C /* DateSelectionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753A226F6162A00B2399C /* DateSelectionContentView.swift */; };
 		53C753A726F61C6E00B2399C /* InterviewPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753A626F61C6E00B2399C /* InterviewPresenting.swift */; };
 		53C753AA26F61D4200B2399C /* AcceptedContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C753A926F61D4200B2399C /* AcceptedContentView.swift */; };
@@ -55,6 +56,7 @@
 		532E49F2269EE93700AC6E41 /* InterviewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewPresenter.swift; sourceTree = "<group>"; };
 		534CF7A526A1D43C007DF848 /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
 		534CF7A826A1D473007DF848 /* DateSelectorDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorDatasource.swift; sourceTree = "<group>"; };
+		53663AAA271703E6003733AA /* SwiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftView.swift; sourceTree = "<group>"; };
 		53C753A226F6162A00B2399C /* DateSelectionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionContentView.swift; sourceTree = "<group>"; };
 		53C753A626F61C6E00B2399C /* InterviewPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewPresenting.swift; sourceTree = "<group>"; };
 		53C753A926F61D4200B2399C /* AcceptedContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedContentView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				532E49F626A0294E00AC6E41 /* models */,
 				532E49F1269EE90000AC6E41 /* Interview view controller */,
 				534CF7A726A1D444007DF848 /* Date Selector View Controller */,
+				53663AAA271703E6003733AA /* SwiftView.swift */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				53FA1FB126E765BD00CF4CA2 /* AcceptInviteCoordinatorProtocol.swift in Sources */,
 				53C753AE26F61D5E00B2399C /* DeclinedContentView.swift in Sources */,
 				532E49F0269EE5BF00AC6E41 /* InterviewViewController.swift in Sources */,
+				53663AAB271703E6003733AA /* SwiftView.swift in Sources */,
 				534CF7A926A1D473007DF848 /* DateSelectorDatasource.swift in Sources */,
 				53C753B226F77FE900B2399C /* DateCell.swift in Sources */,
 				53C753AC26F61D5100B2399C /* DecliningContentView.swift in Sources */,

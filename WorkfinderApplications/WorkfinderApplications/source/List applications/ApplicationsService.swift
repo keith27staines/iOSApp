@@ -4,7 +4,6 @@ import WorkfinderServices
 protocol ApplicationsServiceProtocol: AnyObject {
     func fetchAllApplications(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
     func fetchNextPage(urlString: String, completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void )
-    //func fetchApplicationsWithOpenOffer(completion: @escaping (Result<ServerListJson<Application>,Error>) -> Void)
     func fetchInterviews(completion: @escaping (Result<[InterviewJson],Error>) -> Void)
 }
 

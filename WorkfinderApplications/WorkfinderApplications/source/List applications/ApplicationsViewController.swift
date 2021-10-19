@@ -7,9 +7,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     lazy var messageHandler = UserMessageHandler(presenter: self)
     weak var coordinator: ApplicationsCoordinatorProtocol?
     let presenter: ApplicationsPresenter
-    static let maximumIntervalBetweenReloads = 3600.0
-    var isLoadRequired: Bool = true
-    var lastReloadDate: Date
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -18,7 +15,6 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
     init(coordinator: ApplicationsCoordinatorProtocol, presenter: ApplicationsPresenter) {
         self.coordinator = coordinator
         self.presenter = presenter
-        self.lastReloadDate = Date().addingTimeInterval(-Self.maximumIntervalBetweenReloads)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,14 +24,7 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
         presenter.onViewDidLoad(view: self, table: tableView)
         NotificationCenter.default.addObserver(forName: .wfApplicationDataDidChange, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
-            self.isLoadRequired = true
             self.loadData()
-        }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        if isLoadRequired || lastReloadDate <= Date().addingTimeInterval(-Self.maximumIntervalBetweenReloads) {
-            loadData()
         }
     }
     
@@ -49,11 +38,12 @@ class ApplicationsViewController: UIViewController, WorkfinderViewControllerProt
             guard let self = self else { return }
             self.refreshFromPresenter()
             self.hideLoadingIndicators()
+            DispatchQueue.main.async { [weak self] in
+                self?.presenter.updateSnapshot()
+            }
             self.messageHandler.displayOptionalErrorIfNotNil(
                     optionalError,
                     retryHandler: self.loadData)
-            self.isLoadRequired = false
-            self.lastReloadDate = Date()
         }
     }
     

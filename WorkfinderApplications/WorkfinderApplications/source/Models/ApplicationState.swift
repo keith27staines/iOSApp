@@ -79,6 +79,31 @@ enum ApplicationState: String, Codable {
         }
     }
     
+    var orderingImportance: Int {
+        switch self {
+        case .expired, .withdrawn, .cancelled, .unroutable, .declined, .interviewDeclined:
+            return 0
+        case .viewed, .saved, .pending:
+            return 1
+        case .contacting:
+            return 2
+        case .offered:
+            return 5
+        case .accepted:
+            return 3
+        case .interviewOffered:
+            return 5
+        case .interviewConfirmed:
+            return 4
+        case .interviewMeetingLinkAdded:
+            return 6
+        case .interviewCompleted:
+            return 4
+        case .unknown:
+            return 4
+        }
+    }
+    
     var description: String {
         switch self {
         case .expired:
@@ -114,5 +139,11 @@ enum ApplicationState: String, Codable {
         case .unroutable:
             return NSLocalizedString("We haven't been able to contact the host", comment: "")
         }
+    }
+}
+
+extension ApplicationState: Comparable {
+    static func < (lhs: ApplicationState, rhs: ApplicationState) -> Bool {
+        lhs.orderingImportance < rhs.orderingImportance
     }
 }
